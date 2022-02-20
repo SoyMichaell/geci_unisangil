@@ -11,15 +11,20 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
+    protected $table = "persona";
+
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+            'per_tipo_documento',
+            'per_numero_documento',
+            'per_nombre',
+            'per_apellido',
+            'per_telefono',
+            'per_correo',
+            'password',
+            'per_departamento',
+            'per_ciudad',
+            'per_tipo_usuario',
+            'per_id_estado'
     ];
 
     /**
@@ -40,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function tiposusuario(){
+        return $this->belongsTo(TipoUsuario::class, 'per_tipo_usuario');
+    }
+
 }

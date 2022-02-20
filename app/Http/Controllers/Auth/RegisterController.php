@@ -50,9 +50,12 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'per_numero_documento' => 'required',
+            'per_nombre' => 'required',
+            'per_apellido' => 'required',
+            'per_telefono' => 'required',
+            'per_correo' => ['required','unique:persona'],
+            'per_contrasena' => 'required'
         ]);
     }
 
@@ -65,9 +68,17 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
+            'per_tipo_documento' => $data['per_tipo_documento'],
+            'per_numero_documento' => $data['per_numero_documento'],
+            'per_nombre' => $data['per_nombre'],
+            'per_apellido' => $data['per_apellido'],
+            'per_telefono' => $data['per_telefono'],
+            'per_correo' => $data['per_correo'],
+            'password' => Hash::make($data['per_contrasena']),
+            'per_departamento' => $data['per_departamento'],
+            'per_ciudad' => $data['per_ciudad'],
+            'per_tipo_usuario' => $data['per_tipo_usuario'],
+            'per_id_estado' => $data['per_id_estado'],
         ]);
     }
 }

@@ -59,9 +59,9 @@
         <div class="app-sidebar__user">
             <div>
                 <p class="app-sidebar__user-name">
-                    nombre
+                    {{auth()->user()->per_nombre.' '.auth()->user()->per_apellido}}
                 </p>
-                <p class="app-sidebar__user-designation">rol</p>
+                <p class="app-sidebar__user-designation">{{auth()->user()->tiposusuario->tip_nombre}}</p>
             </div>
         </div>
         <ul class="app-menu">
@@ -77,9 +77,6 @@
                             class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Configuración</span><i
                             class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="{{ url('estadoprograma') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Estado de los programas</a></li>
                         <li><a class="treeview-item" href="{{ url('departamento') }}"><i
                                     class="icon fa fa-circle-o"></i>
                                 Departamentos</a></li>

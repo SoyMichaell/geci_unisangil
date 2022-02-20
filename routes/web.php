@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (Auth::check()) {
+        $personas = User::all();
+        return view('home')->with('personas', $personas);
+    } else {
+        return view('auth/login');
+    }
 });
 
 Auth::routes();
@@ -23,3 +30,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
+
+Route::get('/docente/directorcompletar', [App\Http\Controllers\DocenteController::class, 'directorcompletar']);
+
+Route::put('/docente/{docente}/directordocente', [App\Http\Controllers\DocenteController::class, 'directordocente']);
+
+Route::resource('/docente', App\Http\Controllers\DocenteController::class);
