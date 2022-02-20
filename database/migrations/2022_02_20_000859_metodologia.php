@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Departamento extends Migration
+class Metodologia extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class Departamento extends Migration
      */
     public function up()
     {
-        Schema::create('departamento', function (Blueprint $table) {
+        Schema::create('metodologia', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('dep_nombre');
-            
+            $table->string('met_nombre');
+
             $table->timestamps();
         });
     }
