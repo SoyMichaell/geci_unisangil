@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DepartamentoExports;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DepartamentoController extends Controller
 {
@@ -34,7 +38,7 @@ class DepartamentoController extends Controller
         $departamento->save();
 
         Alert::success('Registro exitoso');
-        
+
 
         return redirect('/departamento');
 
@@ -46,7 +50,7 @@ class DepartamentoController extends Controller
         return view('configuracion/departamento.show')->with('departamento', $departamento);
     }
 
-    public function edit($id) 
+    public function edit($id)
     {
         $departamento = Departamento::find($id);
         return view('configuracion/departamento.edit')->with('departamento', $departamento);
@@ -66,7 +70,7 @@ class DepartamentoController extends Controller
         $departamento->save();
 
         Alert::success('Registro Actualizado');
-        
+
 
         return redirect('/departamento');
     }
@@ -77,8 +81,47 @@ class DepartamentoController extends Controller
         $departamento->delete();
 
         Alert::success('Registro Eliminado');
-        
+
         return redirect('/departamento');
 
+    }
+
+    public function pdf(Request $request)
+    {
+        $departamentos = Departamento::all();
+        if ($departamentos->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/departamento');
+        } else {
+            $view = \view('configuracion/departamento.pdf', compact('departamentos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'pdf',
+                'modulo' => 'departamentos'
+            ]);*/
+
+            return $pdf->stream('departamentos.pdf');
+        }
+    }
+
+    public function export(){
+        $departamentos = Departamento::all();
+        if($departamentos->count()<=0){
+            Alert::warning('No hay registros');
+            return redirect('/departamento');
+        }else{
+
+           /* DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'excel',
+                'modulo' => 'departamentos'
+            ]);*/
+
+            return Excel::download(new DepartamentoExports, 'departamentos.xlsx');
+        }
     }
 }

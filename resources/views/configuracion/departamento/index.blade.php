@@ -12,9 +12,9 @@
             <div class="row">
                 <div class="col-md-7">
                     <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
-                    <a class="btn btn-outline-danger btn-radius" href="#"
+                    <a class="btn btn-outline-danger btn-radius" href="{{ url('departamento/pdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o" ></i></a>
-                    <a class="btn btn-outline-primary btn-radius" href="#" title="Generar reporte excel" target="_blank"><i
+                    <a class="btn btn-outline-primary btn-radius" href="{{ url('departamento/export') }}" title="Generar reporte excel" target="_blank"><i
                     class="fa fa-file-excel-o"></i></a>
                 </div>
                 <div class="col-md-5 d-flex justify-content-end align-items-start">

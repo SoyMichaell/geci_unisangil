@@ -72,7 +72,6 @@ class DocenteController extends Controller
         $this->validate($request,$rules,$message);
 
         $directord = Docente::find($id);
-        $directord->
 
 
     }
@@ -98,7 +97,7 @@ class DocenteController extends Controller
     }
 
     public function exportPDF(){
-        
+
     }
 
 }

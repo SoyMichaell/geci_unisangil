@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MunicipioExports;
 use Illuminate\Http\Request;
 use App\Models\Municipio;
 use App\Models\Departamento;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MunicipioController extends Controller
@@ -20,11 +24,11 @@ class MunicipioController extends Controller
     public function create()
     {
         $departamentos = Departamento::all();
-        
+
         return view('configuracion/municipio.create')->with("departamentos",$departamentos);
     }
 
-    
+
     public function store(Request $request)
     {
         $rules = ['mun_nombre' => 'required'];
@@ -41,7 +45,7 @@ class MunicipioController extends Controller
         $municipio = new Municipio();
         $municipio->mun_nombre = $request->get('mun_nombre');
         $municipio->mun_departamento = $request->get('mun_departamento');
-        
+
         $municipio->save();
 
         Alert::success('Registro exitoso');
@@ -111,10 +115,49 @@ class MunicipioController extends Controller
     public function destroy($id)
     {
         $municipio = Municipio::find($id);
-        $municipio->delete(); 
+        $municipio->delete();
 
         Alert::success('Registro Eliminado');
         return redirect('/municipio');
 
+    }
+    public function pdf(Request $request)
+    {
+        $municipios = Municipio::all();
+        if ($municipios->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/municipio');
+        } else {
+            $view = \view('configuracion/municipio.pdf', compact('municipios'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'pdf',
+                'modulo' => 'municipios'
+            ]);*/
+
+            return $pdf->stream('municipios.pdf');
+        }
+    }
+
+    public function export()
+    {
+        $municipios = Municipio::all();
+        if ($municipios->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/municipio');
+        } else {
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'excel',
+                'modulo' => 'municipios'
+            ]);*/
+
+            return Excel::download(new MunicipioExports, 'municipios.xlsx');
+        }
     }
 }
