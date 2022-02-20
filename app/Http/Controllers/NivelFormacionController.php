@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\NivelFormacionExports;
 use Illuminate\Http\Request;
 use App\Models\NivelFormacion;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -119,5 +123,44 @@ class NivelFormacionController extends Controller
         Alert::success('Registro Eliminado');
 
         return redirect('/nivelformacion');
+    }
+    public function pdf(Request $request)
+    {
+        $nivelformacions = NivelFormacion::all();
+        if ($nivelformacions->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/nivelformacion');
+        } else {
+            $view = \view('configuracion/nivelformacion.pdf', compact('nivelformacions'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'pdf',
+                'modulo' => 'nivelformacion'
+            ]);*/
+
+            return $pdf->stream('nivelformacion-reporte.pdf');
+        }
+    }
+
+    public function export()
+    {
+        $nivelformacions = NivelFormacion::all();
+        if ($nivelformacions->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/nivelformacion');
+        } else {
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'excel',
+                'modulo' => 'nivelformacion'
+            ]);*/
+
+            return Excel::download(new NivelFormacionExports, 'nivelformacion.xlsx');
+        }
     }
 }

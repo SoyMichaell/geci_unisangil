@@ -30,6 +30,21 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+Route::get('/departamento/pdf',[App\Http\Controllers\DepartamentoController::class, 'pdf']);
+Route::get('/departamento/export',[App\Http\Controllers\DepartamentoController::class, 'export']);
+
+Route::get('/municipio/pdf',[App\Http\Controllers\MunicipioController::class, 'pdf']);
+Route::get('/municipio/export',[App\Http\Controllers\MunicipioController::class, 'export']);
+
+Route::get('/facultad/pdf',[App\Http\Controllers\FacultadController::class, 'pdf']);
+Route::get('/facultad/export',[App\Http\Controllers\FacultadController::class, 'export']);
+
+Route::get('/nivelformacion/pdf',[App\Http\Controllers\NivelformacionController::class, 'pdf']);
+Route::get('/nivelformacion/export',[App\Http\Controllers\NivelformacionController::class, 'export']);
+
+Route::get('/metodologia/pdf',[App\Http\Controllers\MetodologiaController::class, 'pdf']);
+Route::get('/metodologia/export',[App\Http\Controllers\MetodologiaController::class, 'export']);
+
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
 
 /*Rutas docentes*/

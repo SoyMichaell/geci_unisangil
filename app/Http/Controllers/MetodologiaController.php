@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MetodologiaExports;
 use Illuminate\Http\Request;
 use App\Models\Metodologia;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MetodologiaController extends Controller
@@ -118,5 +122,44 @@ class MetodologiaController extends Controller
         Alert::success('Registro Eliminado');
 
         return redirect('/metodologia');
+    }
+    public function pdf(Request $request)
+    {
+        $metodologias = Metodologia::all();
+        if ($metodologias->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/metodologia');
+        } else {
+            $view = \view('configuracion/metodologia.pdf', compact('metodologias'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+           /* DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'pdf',
+                'modulo' => 'metodologia'
+            ]);*/
+
+            return $pdf->stream('metodologia.pdf');
+        }
+    }
+
+    public function export()
+    {
+        $metodologias = Metodologia::all();
+        if ($metodologias->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/metodologia');
+        } else {
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'excel',
+                'modulo' => 'metodologia'
+            ]);*/
+
+            return Excel::download(new MetodologiaExports, 'metodologias.xlsx');
+        }
     }
 }

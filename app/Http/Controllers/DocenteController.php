@@ -99,6 +99,7 @@ class DocenteController extends Controller
         Alert::success('Registro exitos');
         return redirect('docente/'.$request->get('id').'/directorcompletar');
 
+
     }
 
     public function directordocente(Request $request, $id)
@@ -126,7 +127,7 @@ class DocenteController extends Controller
     }
 
     public function exportPDF(){
-        
+
     }
 
 }
