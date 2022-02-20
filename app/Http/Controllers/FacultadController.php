@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\FacultadExports;
 use Illuminate\Http\Request;
 use App\Models\Facultad;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class FacultadController extends Controller
@@ -108,5 +110,43 @@ class FacultadController extends Controller
         Alert::success('Registro Eliminado');
 
         return redirect('/facultad');
+    }
+    public function pdf(Request $request)
+    {
+        $facultades = Facultad::all();
+        if ($facultades->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/facultad');
+        } else {
+            $view = \view('configuracion/facultad.pdf', compact('facultades'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->loadHTML($view);
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'pdf',
+                'modulo' => 'facultades'
+            ]);*/
+
+            return $pdf->stream('facultades.pdf');
+        }
+    }
+
+    public function export()
+    {
+        $facultades = Facultad::all();
+        if ($facultades->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/facultad');
+        } else {
+
+            /*DB::table('acciones_plataforma')->insert([
+                'usuario' => Auth::user()->id,
+                'accion' => 'excel',
+                'modulo' => 'facultades'
+            ]);*/
+
+            return Excel::download(new FacultadExports, 'facultades.xlsx');
+        }
     }
 }

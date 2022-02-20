@@ -35,6 +35,10 @@ Route::get('/departamento/export',[App\Http\Controllers\DepartamentoController::
 
 Route::get('/municipio/pdf',[App\Http\Controllers\MunicipioController::class, 'pdf']);
 Route::get('/municipio/export',[App\Http\Controllers\MunicipioController::class, 'export']);
+
+Route::get('/facultad/pdf',[App\Http\Controllers\FacultadController::class, 'pdf']);
+Route::get('/facultad/export',[App\Http\Controllers\FacultadController::class, 'export']);
+
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
 
 
