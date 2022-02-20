@@ -120,6 +120,7 @@ class FacultadController extends Controller
         } else {
             $view = \view('configuracion/facultad.pdf', compact('facultades'))->render();
             $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
             $pdf->loadHTML($view);
 
             /*DB::table('acciones_plataforma')->insert([

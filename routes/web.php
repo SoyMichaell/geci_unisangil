@@ -39,6 +39,9 @@ Route::get('/municipio/export',[App\Http\Controllers\MunicipioController::class,
 Route::get('/facultad/pdf',[App\Http\Controllers\FacultadController::class, 'pdf']);
 Route::get('/facultad/export',[App\Http\Controllers\FacultadController::class, 'export']);
 
+Route::get('/nivelformacion/pdf',[App\Http\Controllers\NivelformacionController::class, 'pdf']);
+Route::get('/nivelformacion/export',[App\Http\Controllers\NivelformacionController::class, 'export']);
+
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
 
 
