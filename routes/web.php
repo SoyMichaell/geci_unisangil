@@ -42,6 +42,9 @@ Route::get('/facultad/export',[App\Http\Controllers\FacultadController::class, '
 Route::get('/nivelformacion/pdf',[App\Http\Controllers\NivelformacionController::class, 'pdf']);
 Route::get('/nivelformacion/export',[App\Http\Controllers\NivelformacionController::class, 'export']);
 
+Route::get('/metodologia/pdf',[App\Http\Controllers\MetodologiaController::class, 'pdf']);
+Route::get('/metodologia/export',[App\Http\Controllers\MetodologiaController::class, 'export']);
+
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
 
 
