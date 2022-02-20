@@ -36,7 +36,7 @@
         @endif
         @if (Auth::user()->per_tipo_usuario == 2)
             <div class="alert alert-primary" role="alert">
-                <strong>Complementar información docente <a href="{{url('docente/directorcompletar')}}">Completar</a></strong>
+                <strong>Complementar información docente <a href="{{url('docente/'.auth()->user()->id.'/directorcompletar')}}">Completar</a></strong>
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 1)

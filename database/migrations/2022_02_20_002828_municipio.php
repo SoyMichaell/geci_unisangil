@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Departamento extends Migration
+class Municipio extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,10 @@ class Departamento extends Migration
      */
     public function up()
     {
-        Schema::create('departamento', function (Blueprint $table) {
+        Schema::create('municipio', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('dep_nombre');
+            $table->string('mun_nombre');
+            $table->integer('mun_departamento');
             
             $table->timestamps();
         });

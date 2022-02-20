@@ -31,8 +31,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
 
-Route::get('/docente/directorcompletar', [App\Http\Controllers\DocenteController::class, 'directorcompletar']);
 
+Route::get('/docente/{docente}/directorcompletar', [App\Http\Controllers\DocenteController::class, 'directorcompletar']);
 Route::put('/docente/{docente}/directordocente', [App\Http\Controllers\DocenteController::class, 'directordocente']);
-
 Route::resource('/docente', App\Http\Controllers\DocenteController::class);
+
+Route::resource('/municipio', App\Http\Controllers\MunicipioController::class);
+Route::resource('/facultad', App\Http\Controllers\FacultadController::class);
+Route::resource('/nivelformacion', App\Http\Controllers\NivelFormacionController::class);
+Route::resource('/metodologia', App\Http\Controllers\MetodologiaController::class);
+

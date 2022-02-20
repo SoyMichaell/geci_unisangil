@@ -14,6 +14,7 @@ class User extends Authenticatable
     protected $table = "persona";
 
     protected $fillable = [
+            'id',
             'per_tipo_documento',
             'per_numero_documento',
             'per_nombre',

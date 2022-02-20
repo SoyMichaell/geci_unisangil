@@ -13,4 +13,8 @@ class Departamento extends Model
 
     protected $fillable = ['id','dep_nombre'];
 
+    public function municipio(){
+        return $this->hasMany(Municipio::class, 'id');
+    }
+
 }

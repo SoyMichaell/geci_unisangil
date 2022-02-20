@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DocenteController extends Controller
 {
@@ -13,7 +14,6 @@ class DocenteController extends Controller
 
     public function create()
     {
-        
     }
 
     public function store(Request $request)
@@ -21,25 +21,31 @@ class DocenteController extends Controller
         //
     }
 
-    public function directorcompletar(){
-        $dedicacions = collect(['Tiempo completo', 'Tiempo catedra', 'Medio tiempo']);
-        $dedicacions = $dedicacions->all();
+    public function directorcompletar($id)
+    {
+        if (auth()->user()->per_tipo_usuario == 2) {
 
-        $tiposcontratacions = collect(['Contrato indefinido','Contrato a término fijo']);
-        $tiposcontratacions = $tiposcontratacions->all();
+            $dedicacions = collect(['Tiempo completo', 'Tiempo catedra', 'Medio tiempo']);
+            $dedicacions = $dedicacions->all();
 
-        $estados = collect(['Activo','Inactivo']);
-        $estados->all();
+            $tiposcontratacions = collect(['Contrato indefinido', 'Contrato a término fijo']);
+            $tiposcontratacions = $tiposcontratacions->all();
 
-        return view('docente.created')
-            ->with('dedicacions', $dedicacions)
-            ->with('tiposcontratacions', $tiposcontratacions)
-            ->with('estados', $estados);
+            $estados = collect(['Activo', 'Inactivo']);
+            $estados->all();
+
+            $persona = DB::table('persona')->select('id')->where('per_tipo_usuario','=',2,'and','id','=',$id)->get();
+
+            return view('docente.created')
+                ->with('dedicacions', $dedicacions)
+                ->with('tiposcontratacions', $tiposcontratacions)
+                ->with('estados', $estados)
+                ->with('persona', $persona);
+        }
     }
 
-    public function directordocente(Request $request, $id){
-
-
+    public function directordocente(Request $request, $id)
+    {
     }
 
     public function show($id)
