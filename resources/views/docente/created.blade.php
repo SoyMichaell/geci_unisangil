@@ -29,7 +29,7 @@
                 <form action="" method="post">
                     @csrf
                     @foreach ($persona as $p)
-                     <input type="number" value="{{$p->id}}" name="id" id="id" readonly>
+                     <input type="hidden" value="{{$p->id}}" name="id" id="id" readonly>
                     @endforeach
                     <div class="row mb-3">
                         <div class="col-md-6">
