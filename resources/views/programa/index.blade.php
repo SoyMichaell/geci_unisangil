@@ -57,7 +57,7 @@
                                 <td>{{ $programa->pro_titulo }}</td>
                                 <td>{{ $programa->pro_codigosnies }}</td>
                                 <td>{{ $programa->niveles->niv_nombre }}</td>
-                                <td>{{ $programa->directorprograma->doc_nombre . ' ' . $programa->directorprograma->doc_apellido }}
+                                <td>{{ Str::ucfirst($programa->directorprograma->per_nombre).' '.Str::ucfirst($programa->directorprograma->per_apellido)}}
                                 </td>
                                 <td style="width: 10%">
                                     <a class="btn btn-info btn-sm"

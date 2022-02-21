@@ -14,4 +14,9 @@ class NivelFormacion extends Model
         'id',
         'niv_nombre',
     ];
+
+    public function programas(){
+        return $this->hasMany(Programa::class, 'id');
+    }
+
 }

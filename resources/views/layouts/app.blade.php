@@ -20,7 +20,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
     
     <!--DataTables -->
     <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}">
@@ -68,13 +68,8 @@
             <li><a class="app-menu__item active" href="{{ url('home') }}"><i class="app-menu__icon fa fa-dashboard"
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
-
-                <li><a class="app-menu__item" href=""><i
-                            class="app-menu__icon fa fa-user-plus"></i><span class="app-menu__label">Registrar
-                            usuarios</span></a>
-                </li>
                 <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
-                            class="app-menu__icon fa fa-cogs"></i><span class="app-menu__label">Configuración</span><i
+                            class="app-menu__icon"></i><span class="app-menu__label">Configuración</span><i
                             class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="{{ url('departamento') }}"><i

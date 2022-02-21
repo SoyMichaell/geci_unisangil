@@ -9,7 +9,7 @@
         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
             <div class="row mb-3">
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa fa-users fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa-regular fa-user-tie fa-3x"></i>
                         <div class="info">
                             <h4>Estudiantes</h4>
                             <p><b></b></p>

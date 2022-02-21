@@ -48,9 +48,12 @@ Route::get('/metodologia/export',[App\Http\Controllers\MetodologiaController::cl
 Route::resource('/departamento', App\Http\Controllers\DepartamentoController::class);
 
 /*Rutas docentes*/
+Route::get('/docente/mostrardocente', [App\Http\Controllers\DocenteController::class, 'mostrardocente']);
+Route::post('/docente/registrodocente', [App\Http\Controllers\DocenteController::class, 'registrodocente']);
 Route::get('/docente/{docente}/directorcompletar', [App\Http\Controllers\DocenteController::class, 'directorcompletar']);
 Route::post('/docente/directorinformacion', [App\Http\Controllers\DocenteController::class, 'directorinformacion']);
-Route::put('/docente/{docente}/directordocente', [App\Http\Controllers\DocenteController::class, 'directordocente']);
+Route::put('/docente/{docente}/actualizarinformacion', [App\Http\Controllers\DocenteController::class, 'actualizarinformacion']);
+Route::put('/docente/{docente}/directorestudios', [App\Http\Controllers\DocenteController::class, 'directorestudios']);
 Route::resource('/docente', App\Http\Controllers\DocenteController::class);
 
 
