@@ -10,24 +10,27 @@
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="d-flex justify-content-start">
-            <a class="btn btn-success" href="{{ url('externo') }}">Director externo</a>
+        <div class="row mb-3">
+            <div class="col-md-12 d-flex justify-content-end align-items-center">
+                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                    <a class="btn btn-success " href="{{ url('docente/mostrardocente') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
+                @endif
+            </div>
         </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
-                <div class="col-md-7">
+                <div class="col-md-6">
                     <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
-                    <a class="btn btn-outline-danger btn-radius" href="{{ url('docente/pdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-primary btn-radius" href="{{ url('docente/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                 </div>
-                <div class="col-md-5 d-flex justify-content-end align-items-center">
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-success " href="{{ url('/register') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('docente/pdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa-solid fa-file-pdf"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('docente/export') }}" title="Generar reporte excel" target="_blank"><i
+                            class="fa-solid fa-file-excel"></i></a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -59,17 +62,27 @@
                                 <td>{{ $persona->tip_nombre }}</td>
                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                     <td>
-                                        <form action="{{ route('docente.destroy', $persona->id) }}" method="POST">
+                                        <form
+                                            action="/docente/{{ $persona->id }}/{{ $persona->per_id_estado }}/estado"
+                                            method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/docente/{{ $persona->id }}"><i
-                                                        class="fa fa-folder-open-o"></i></a>
-                                                <a class="btn btn-outline-info btn-sm   "
-                                                    href="/docente/{{ $persona->id }}/edit"><i
-                                                        class="fa fa-refresh"></i></a>
+                                                <a class="btn btn-sm" href="/docente/{{ $persona->id }}" title="Ver registro"><i
+                                                        class="fa-solid fa-folder-open"></i></a>
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="{{ url('docente/' . $persona->id . '/directorcompletar') }}" title="Editar registro"><i
+                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                <a class="btn btn-outline-primary btn-sm"
+                                                    href="{{ url('docente/' . $persona->id . '/mostrarasignatura') }}" title="Agregar asignaturas"><i
+                                                        class="fa-solid fa-circle-plus"></i></a>
                                                 @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa fa-trash"></i></button>
+                                                @method('PUT')
+                                                @if ($persona->per_id_estado == 'activo')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa-solid fa-ban"></i></button>
+                                                @else
+                                                    <button type="submit" class="btn btn-success btn-sm"><i
+                                                            class="fa-solid fa-circle-check"></i></button>
+                                                @endif
                                             </div>
                                         </form>
                                     </td>
@@ -78,7 +91,6 @@
                         @endforeach
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>

@@ -69,25 +69,25 @@
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
                 <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
-                            class="app-menu__icon"></i><span class="app-menu__label">Configuración</span><i
+                            class="app-menu__icon fa-solid fa-gears"></i><span class="app-menu__label">Configuración</span><i
                             class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="{{ url('departamento') }}"><i
-                                    class="icon fa fa-circle-o"></i>
+                                    class="icon fa-solid fa-circle-notch"></i>
                                 Departamentos</a></li>
                         <li><a class="treeview-item" href="{{ url('municipio') }}"><i
-                                    class="icon fa fa-circle-o"></i>
+                                    class="icon fa-solid fa-circle-notch"></i>
                                 Municipios</a>
                         </li>
                         <li><a class="treeview-item" href="{{ url('facultad') }}"><i
-                                    class="icon fa fa-circle-o"></i>
+                                    class="icon fa-solid fa-circle-notch"></i>
                                 Facultades</a>
                         </li>
                         <li><a class="treeview-item" href="{{ url('nivelformacion') }}"><i
-                                    class="icon fa fa-circle-o"></i> Nivel de formación</a>
+                                    class="icon fa-solid fa-circle-notch"></i> Nivel de formación</a>
                         </li>
                         <li><a class="treeview-item" href="{{ url('metodologia') }}"><i
-                                    class="icon fa fa-circle-o"></i>
+                                    class="icon fa-solid fa-circle-notch"></i>
                                 Metodologia</a>
                         </li>
                     </ul>
@@ -97,47 +97,10 @@
                             class="treeview-indicator fa fa-angle-right"></i></a>
                     <ul class="treeview-menu">
                         <li><a class="treeview-item" href="{{ url('programa') }}"><i
-                                    class="icon fa fa-circle-o"></i>
+                                    class="icon fa-solid fa-circle-notch"></i>
                                 Programas</a></li>
-                        <li><a class="treeview-item" href="{{ url('estudiante') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Estudiantes</a></li>
-                        <li><a class="treeview-item" href="{{ url('trabajo') }}"><i class="icon fa fa-circle-o"></i>
-                                Trabajo de grado</a></li>
-                        <li><a class="treeview-item" href="{{ url('docente') }}"><i class="icon fa fa-circle-o"></i>
+                        <li><a class="treeview-item" href="{{ url('docente') }}"><i class="icon fa-solid fa-circle-notch"></i>
                                 Docentes</a></li>
-                        <li><a class="treeview-item" href="{{ url('externo') }}"><i class="icon fa fa-circle-o"></i>
-                                Director externo</a></li>
-                        <li><a class="treeview-item" href="{{ url('prueba') }}"><i class="icon fa fa-circle-o"></i>
-                                Pruebas Saber Pro</a></li>
-                        <li><a class="treeview-item" href="{{ url('software') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Tic's</a></li>
-                        <li><a class="treeview-item" href="{{ url('extension') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Extensión e Internacionalización</a></li>
-                        <li><a class="treeview-item" href="{{ url('practica') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Practicas de grado</a></li>
-                        <li><a class="treeview-item" href="{{ url('laboratorio') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Laboratorios</a></li>
-                        <li><a class="treeview-item" href="{{ url('convenio') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Convenios</a></li>
-                        <li><a class="treeview-item" href="{{ url('red') }}"><i class="icon fa fa-circle-o"></i>
-                                Redes
-                                Academicas</a></li>
-                        <li><a class="treeview-item" href="{{ url('movilidad') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Movilidad</a></li>
-                        <li><a class="treeview-item" href="{{ url('investigacion') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Investigación</a></li>
-                        <li><a class="treeview-item" href="{{ url('egresado') }}"><i
-                                    class="icon fa fa-circle-o"></i>
-                                Egresados</a></li>
-
                     </ul>
                 </li>
         </ul>
@@ -151,7 +114,7 @@
             </div>
             <ul class="app-breadcrumb breadcrumb">
                 <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="#">@yield('navegar')</a></li>
             </ul>
         </div>
         @yield('content')

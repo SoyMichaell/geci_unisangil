@@ -12,19 +12,16 @@
     <div class="container-fluid">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link {{ $cuenta > 0 ? ($docente->id_proceso == 1 ? 'active' : '') : 'active' }}"
-                    id="informacion-tab" data-bs-toggle="tab" data-bs-target="#informacion" type="button" role="tab"
-                    aria-controls="home" aria-selected="true">Información</button>
+                <button class="nav-link {{ $cuenta > 0 ? ($docente->id_proceso == 1 ? 'active' : '') : 'active' }}" id="informacion-tab" data-bs-toggle="tab" data-bs-target="#informacion" type="button" role="tab"
+                    aria-controls="informacion" aria-selected="true">Información</button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link {{ $cuenta > 0 ? ($docente->id_proceso == 2 ? 'active' : '') : 'active' }}"
-                    id="estudio-tab" data-bs-toggle="tab" data-bs-target="#estudio" type="button" role="tab"
-                    aria-controls="estudio" aria-selected="false">Estudios</button>
+                <button class="nav-link {{ $cuenta > 0 ? ($docente->id_proceso == 2 ? 'active' : '') : 'active' }}" id="estudio-tab" data-bs-toggle="tab" data-bs-target="#estudio" type="button" role="tab"
+                    aria-controls="estudio" aria-selected="true">Estudios</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
-            <div class="tab-pane {{ $cuenta > 0 ? ($docente->id_proceso == "" ? 'show active' : '') : 'show active' }} tile p-3"
-                id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
+            <div class="tab-pane {{ $cuenta > 0 ? ($docente->id_proceso == 1 ? 'show active' : '') : 'show active' }} tile p-3" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
                 <form
                     action="{{$cuenta > 0 ? ($docente->id_persona_docente == $persona->id ? '/docente'.'/'.$persona->id.'/actualizarinformacion' : '/docente/directorinformacion') : '/docente/directorinformacion'}}"
                     method="post">
@@ -190,8 +187,7 @@
                     </div>
                 </form>
             </div>
-            <div class="tab-pane fade {{ $cuenta > 0 ? ($docente->id_proceso == 2 ? 'show active' : '') : 'show active' }} tile p-3" id="estudio"
-                role="tabpanel" aria-labelledby="estudio-tab">
+            <div class="tab-pane fade {{ $cuenta > 0 ? ($docente->id_proceso == 2 ? 'show active' : '') : 'show active' }} tile p-3" id="estudio" role="tabpanel" aria-labelledby="estudio-tab">
                 <form action="/docente/{{ $persona->id }}/directorestudios" method="post"
                     enctype="multipart/form-data">
                     @csrf @method('PUT')
@@ -449,5 +445,6 @@
                 </form>
             </div>
         </div>
+    </div>
     @endsection
 @endif

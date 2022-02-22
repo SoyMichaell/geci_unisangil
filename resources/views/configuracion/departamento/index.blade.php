@@ -1,6 +1,9 @@
 @extends('layouts.app')
+@section('navegar')
+    <a href="/departamento">Departamento</a>
+@endsection
 @section('title')
-<h1 class="titulo"><i class="fa fa-cog" ></i> Configuración / departamentos</h1>
+    <h1 class="titulo"><i class="fa fa-cog"></i> Configuración / departamentos</h1>
 @section('message')
     <p>Departamentos: Listado departamentos registrados</p>
 @endsection
@@ -12,20 +15,23 @@
             <div class="row">
                 <div class="col-md-7">
                     <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
-                    <a class="btn btn-outline-danger btn-radius" href="{{ url('departamento/pdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o" ></i></a>
-                    <a class="btn btn-outline-primary btn-radius" href="{{ url('departamento/export') }}" title="Generar reporte excel" target="_blank"><i
-                    class="fa fa-file-excel-o"></i></a>
+
                 </div>
                 <div class="col-md-5 d-flex justify-content-end align-items-start">
-                    <a class="btn btn-outline-success" href="{{ url('departamento/create') }}"><i
-                    class="fa fa-plus-circle"></i>
+                    <a class="btn btn-outline-danger btn-radius" style="border-radius:100%"
+                        href="{{ url('departamento/pdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa-solid fa-file-pdf"></i></a>
+                    <a class="btn btn-outline-success btn-radius" style="border-radius:100%"
+                        href="{{ url('departamento/export') }}" title="Generar reporte excel" target="_blank"><i
+                            class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-success" href="{{ url('departamento/create') }}"><i
+                            class="fa fa-plus-circle"></i>
                         Nuevo</a>
                 </div>
             </div>
             <br>
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="tables">
+                <table class="table table-bordered" id="tables">
                     <thead>
                         <tr>
                             <th>N°</th>
@@ -42,16 +48,15 @@
                                 <td>
                                     <form action="{{ url("departamento/{$departamento->id}") }}" method="POST">
                                         <div class="d-flex">
-                                            <a class="btn btn-sm"
-                                                href="/departamento/{{$departamento->id }}"><i
-                                                class="fa fa-folder-open-o"></i></a>
+                                            <a class="btn btn-sm" href="/departamento/{{ $departamento->id }}" title="Ver registro"><i
+                                                    class="fa-solid fa-folder-open"></i></a>
                                             <a class="btn btn-outline-info btn-sm"
-                                                href="departamento/{{ $departamento->id }}/edit"><i
-                                                class="fa fa-refresh"></i></a>
+                                                href="departamento/{{ $departamento->id }}/edit" title="Editar registro"><i
+                                                    class="fa-solid fa-refresh"></i></a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"><i
-                                            class="fa fa-trash"></i></button>
+                                                    class="fa-solid fa-trash"></i></button>
                                         </div>
                                     </form>
                                 </td>

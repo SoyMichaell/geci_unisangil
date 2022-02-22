@@ -26,5 +26,8 @@ class Programa extends Model
         return $this->belongsTo(NivelFormacion::class, 'pro_nivel_formacion');
     }
 
+    public function asignatura(){
+        return $this->hasMany(ProgramaAsignatura::class, 'id');
+    }
 
 }

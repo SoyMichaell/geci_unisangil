@@ -46,5 +46,4 @@ class Docente extends Model
         'soporte_hoja_vida',
         'id_proceso'
     ];
-
 }

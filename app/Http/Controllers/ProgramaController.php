@@ -9,33 +9,41 @@ use App\Models\Metodologia;
 use App\Models\Municipio;
 use App\Models\NivelFormacion;
 use App\Models\Programa;
+use App\Models\ProgramaAsignatura;
+use App\Models\ProgramaPlan;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramaController extends Controller
 {
-    public function index()
-    {
+    public function index(){
         $programas = Programa::all();
         $facultades = Facultad::all();
-        $nivels = NivelFormacion::all();
-        $metodologias = Metodologia::all();
-        $docentes = Docente::all();
+        $municipios = Municipio::all();
+        $plans = ProgramaPlan::all();
         $users = DB::table('users')->where('per_tipo_usuario', 2);
-
-        return view('programa.index', compact('programas'));
+        return view('programa.index')
+            ->with('programas', $programas)
+            ->with('facultades', $facultades)
+            ->with('municipios', $municipios)
+            ->with('plans', $plans)
+            ->with('users', $users);
     }
 
-    public function create()
-    {
+    public function create(){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
         $niveles = NivelFormacion::all();
         $metodologias = Metodologia::all();
-        $docentes = DB::table('persona')->where('per_tipo_usuario','=',2,'or','per_tipo_usuario','=',5)->get();
+
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario',2)
+            ->where('per_id_estado', '=', 'activo')
+            ->orWhere('per_tipo_usuario',5)
+            ->where('per_id_estado', '=', 'activo')
+            ->get();
 
         /*collect*/
         $estadoprogramas = collect(['Activo','Inactivo']);
@@ -60,8 +68,7 @@ class ProgramaController extends Controller
             ->with('periodoAdmision', $periodoAdmision);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request){
 
         $rules = [
             'pro_nombre' => 'required',
@@ -122,8 +129,7 @@ class ProgramaController extends Controller
         return redirect('/programa');
     }
 
-    public function show($id)
-    {
+    public function show($id){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
@@ -140,8 +146,7 @@ class ProgramaController extends Controller
             ->with('docentes', $docentes);
     }
 
-    public function edit($id)
-    {
+    public function edit($id){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
@@ -158,8 +163,7 @@ class ProgramaController extends Controller
             ->with('docentes', $docentes);
     }
 
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id){
         $programa = Programa::find($id);
         $programa->pro_estado = $request->get('pro_estado_programa');
         $programa->pro_departamento = $request->get('pro_departamento');
@@ -186,14 +190,7 @@ class ProgramaController extends Controller
         return redirect('/programa');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
+    public function destroy($id){
         $programa = Programa::find($id);
 
         /*$veriEstu = DB::table('estudiantes')->where('estu_programa', $id);
@@ -222,4 +219,107 @@ class ProgramaController extends Controller
 
         return redirect('/programa');
     }
+
+    public function mostrarplan($id){
+        $programa = Programa::find($id);
+        $plans = DB::table('programa_plan_estudio')
+        ->select('programa_plan_estudio.id','pp_nombre','pp_creditos','pp_asignaturas','pp_estado')
+        ->where('pp_id_programa',$id)->get();
+        return view('programa/plan.index')
+        ->with('plans', $plans)
+        ->with('programa', $programa);
+    }
+
+    public function crearplan($id){
+        $programa = Programa::find($id);
+        return view('programa/plan.create')
+        ->with('programa', $programa);
+    }
+
+    public function registroplan(Request $request){
+        $plan = new ProgramaPlan();
+        $plan->pp_id_programa = $request->get('id');
+        $plan->pp_nombre = $request->get('pp_nombre');
+        $plan->pp_creditos = $request->get('pp_creditos');
+        $plan->pp_asignaturas = $request->get('pp_asignaturas');
+        $plan->pp_estado = $request->get('pp_estado');
+
+        $rules = [
+            'pp_nombre' => 'required',
+            'pp_creditos' => 'required',
+            'pp_asignaturas' => 'required'
+        ];
+
+        $messages = [
+            'pp_nombre.required' => 'El campo plan de estudio es requiredo',
+            'pp_creditos.required' => 'El campo número de creditos es requerido',
+            'pp_asignaturas.required' => 'El campo número de asignaturas es requerido'
+        ];
+
+        $this->validate($request,$rules,$messages);
+
+        $plan->save();
+        Alert::success('Registro exitoso');
+        return redirect('programa/'.$request->get('id').'/mostrarplan');
+    }
+
+    public function editarplan($idprograma, $idplan){
+        $programa = Programa::find($idprograma);
+        $plan = ProgramaPlan::find($idplan);
+        return view('programa/plan.edit')
+        ->with('programa', $programa)
+        ->with('plan', $plan);
+    }
+
+    public function actualizarplan(Request $request, $id){
+        $plans = ProgramaPlan::find($id);
+        
+        $plans->pp_nombre = $request->get('pp_nombre');
+        $plans->pp_creditos = $request->get('pp_creditos');
+        $plans->pp_asignaturas = $request->get('pp_asignaturas');
+        $plans->pp_estado = $request->get('pp_estado');
+
+        $rules = [
+            'pp_nombre' => 'required',
+            'pp_creditos' => 'required',
+            'pp_asignaturas' => 'required'
+        ];
+
+        $messages = [
+            'pp_nombre.required' => 'El campo plan de estudio es requiredo',
+            'pp_creditos.required' => 'El campo número de creditos es requerido',
+            'pp_asignaturas.required' => 'El campo número de asignaturas es requerido'
+        ];
+
+        $this->validate($request,$rules,$messages);
+
+        $plans->save();
+
+        Alert::success('Registro Actualizado');
+        return redirect('programa/'.$request->get('id').'/mostrarplan');
+    }
+
+    public function estado($id,$estado){
+        
+        if($estado == 'activo'){
+            DB::table('programa_plan_estudio')
+                ->where('programa_plan_estudio.id',$id)
+                ->update([
+                    'pp_estado' => 'inactivo'
+                ]);
+
+            Alert::success('Estado','El estado ha sido actualizado');
+            return redirect('programa/'.$id.'/mostrarplan');
+        }else if($estado == 'inactivo'){
+            DB::table('programa_plan_estudio')
+                ->where('programa_plan_estudio.id',$id)
+                ->update([
+                    'pp_estado' => 'activo'
+                ]);
+
+                Alert::success('Estado','El estado ha sido actualizado');
+            return redirect('programa/'.$id.'/mostrarplan');
+        }
+    }
+    
 }

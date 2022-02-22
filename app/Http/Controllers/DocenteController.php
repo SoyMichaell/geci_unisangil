@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Departamento;
 use App\Models\Docente;
+use App\Models\DocenteAsignatura;
 use App\Models\Municipio;
+use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -13,16 +15,17 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DocenteController extends Controller
 {
-    public function index()
-    {
+
+    public function index(){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $tiposusuario = TipoUsuario::all();
 
         $personas = DB::table('persona')
-            ->join('docente', 'persona.id', '=', 'docente.id_persona_docente')
+            ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido','per_correo','tip_nombre','per_id_estado')
             ->join('tipo_usuario', 'persona.per_tipo_usuario', '=', 'tipo_usuario.id')
-            ->where('per_tipo_usuario','=',2,'or','per_tipo_usuario','=',5)
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 5)
             ->get();
         return view('docente.index')
             ->with('departamentos', $departamentos)
@@ -31,70 +34,110 @@ class DocenteController extends Controller
             ->with('personas', $personas);
     }
 
-    public function mostrardocente()
-    {
+    public function mostrardocente(){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
-        $tiposusuario = TipoUsuario::all();
 
         return view('docente.create')
             ->with('departamentos', $departamentos)
-            ->with('municipios', $municipios)
-            ->with('tiposusuario', $tiposusuario);
+            ->with('municipios', $municipios);
     }
 
-    public function registrodocente(Request $request){
-        $persona = new User();
-        $persona->per_tipo_documento = $request->get('per_tipo_documento');
-        $persona->per_numero_documento = $request->get('per_numero_documento');
-        $persona->per_nombre = $request->get('per_nombre');
-        $persona->per_apellido = $request->get('per_apellido');
-        $persona->per_telefono = $request->get('per_telefono');
-        $persona->per_correo = $request->get('per_correo');
-        $persona->per_departamento = $request->get('per_departamento');
-        $persona->per_ciudad = $request->get('per_ciudad');
-        $persona->per_tipo_usuario = $request->get('per_tipo_usuario');
-        $persona->per_id_estado = $request->get('per_id_estado');
+    public function registrodocente(Request $request){   
+        //Validación campos
+        $rules = [
+            'per_tipo_documento' => 'required|in:Tarjeta de identidad,Cédula de ciudadania,Cédula de extranjeria',
+            'per_numero_documento' => 'required',
+            'per_nombre' => 'required',
+            'per_apellido' => 'required',
+            'per_telefono' => 'required|max:10',
+            'per_correo' => 'required|email|',
+            'per_departamento' => 'required|not_in:0',
+            'per_ciudad' => 'required|not_in:0'
+        ];
 
-        $persona->save();
+        $message = [
+            'per_tipo_documento.required' => 'El campo tipo de documento es requerido',
+            'per_numero_documento.required' => 'El campo número de documento es requerido',
+            'per_nombre.required' => 'El campo nombre es requerido',
+            'per_apellido.required' => 'El campo apellido es requerido',
+            'per_telefono.required' => 'El campo telefono es requerido',
+            'per_correo.required' => 'El campo correo es requerido',
+            'per_departamento.required' => 'El campo departamento es requerido',
+            'per_ciudad.required' => 'El campo ciudad es requerido',
+        ];
 
-        Alert::success('Registro fase 1 exitoso');
-        return redirect('/docente/mostrardocente');
+        $this->validate($request,$rules,$message);
 
-
-    }   
-
-    public function directorcompletar($id)
-    {
-        if (auth()->user()->per_tipo_usuario == 2) {
-
-            /*$dedicacions = collect(['Tiempo completo', 'Tiempo catedra', 'Medio tiempo']);
-            $dedicacions = $dedicacions->all();
-            $tiposcontratacions = collect(['Contrato indefinido', 'Contrato a término fijo']);
-            $tiposcontratacions = $tiposcontratacions->all();
-            $estados = collect(['Activo', 'Inactivo']);
-            $estados->all();*/
-
-            $persona = DB::table('persona')->select('id')->where('per_tipo_usuario', '=', 2, 'and', 'id', '=', $id)->first();
-
-            $modalidadprograma = collect(['Presencial', 'Virtual']);
-            $modalidadprograma->all();
-
-            $docente = DB::table('docente')->where('id_persona_docente', $id)->first();
-
-            $d = Docente::all();
-            $cuenta = $d->count();
-
-            return view('docente.created')
-                ->with('docente', $docente)
-                ->with('persona', $persona)
-                ->with('modalidadprograma', $modalidadprograma)
-                ->with('cuenta', $cuenta);
+        //Validación número de documento
+        $personaExiste = DB::table('persona')
+            ->where('per_numero_documento', $request->get('per_numero_documento'))
+            ->get();
+        if($personaExiste->count()>0){
+            Alert::warning('Registro existente','El número de documento que intenta registrar ya existe');
+            return back()->withInput();
         }
+        //Validación correo
+        $correoExiste = DB::table('persona')
+            ->where('per_correo', $request->get('per_correo'))
+            ->get();
+        if($correoExiste->count()>0){
+            Alert::warning('Correo encontrado','El correo electronico que intenta registrar ya existe');
+            return back()->withInput();
+        }
+
+        DB::table('persona')->insert(
+            [
+                'per_tipo_documento' => $request->get('per_tipo_documento'),
+                'per_numero_documento' =>  $request->get('per_numero_documento'),
+                'per_nombre' => $request->get('per_nombre'),
+                'per_apellido' => $request->get('per_apellido'),
+                'per_telefono' => $request->get('per_telefono'),
+                'per_correo' => $request->get('per_correo'),
+                'per_departamento' => $request->get('per_departamento'),
+                'per_ciudad' => $request->get('per_ciudad'),
+                'per_tipo_usuario' => $request->get('per_tipo_usuario'),
+                'per_id_estado' => $request->get('per_id_estado'),
+            ]
+        );
+
+        $id = DB::getPdo()->lastInsertId();
+
+        DB::table('docente')->insert(
+            [
+                'id_persona_docente' => $id,
+                'id_proceso' => 1,
+            ]
+        );
+
+        Alert::success('Registro exitoso','Recuerde completar la información del docente desde la tabla principal');
+        return redirect('/docente');
     }
 
-    public function directorinformacion(Request $request)
-    {
+    public function directorcompletar($id){
+        $persona = DB::table('persona')->select('persona.id')
+            ->where('per_tipo_usuario',2)
+            ->where('persona.id',$id)
+            ->orWhere('per_tipo_usuario',5)
+            ->where('persona.id', $id)
+            ->first();
+
+        $modalidadprograma = collect(['Presencial', 'Virtual']);
+        $modalidadprograma->all();
+
+        $docente = DB::table('docente')->where('id_persona_docente', $id)->first();
+
+        $d = Docente::all();
+        $cuenta = $d->count();
+
+        return view('docente.created')
+            ->with('docente', $docente)
+            ->with('persona', $persona)
+            ->with('modalidadprograma', $modalidadprograma)
+            ->with('cuenta', $cuenta);
+    }
+
+    public function directorinformacion(Request $request){
 
         $rules = [
             'ciudad_procedencia' => 'required',
@@ -144,8 +187,7 @@ class DocenteController extends Controller
         return redirect('docente/' . $request->get('id') . '/directorcompletar');
     }
 
-    public function actualizarinformacion(Request $request, $id)
-    {
+    public function actualizarinformacion(Request $request, $id){
 
         $rules = [
             'ciudad_procedencia' => 'required',
@@ -187,6 +229,7 @@ class DocenteController extends Controller
                 'no_cuenta' => $request->get('no_cuenta'),
                 'pension' => $request->get('pension'),
                 'estado' => $request->get('estado'),
+                'id_proceso' => 2,
             ]
         );
 
@@ -194,8 +237,7 @@ class DocenteController extends Controller
         return redirect('docente/' . $id . '/directorcompletar');
     }
 
-    public function directorestudios(Request $request, $id)
-    {
+    public function directorestudios(Request $request, $id){
 
         $persona = User::find($id);
 
@@ -278,25 +320,206 @@ class DocenteController extends Controller
         return redirect('docente/' . $id . '/directorcompletar');
     }
 
-    public function show($id)
-    {
-        //
+    public function show($id){
+        $persona = DB::table('persona')->select('persona.id')
+            ->where('per_tipo_usuario',2)
+            ->where('persona.id',$id)
+            ->orWhere('per_tipo_usuario',5)
+            ->where('persona.id', $id)
+            ->first();
+
+        $modalidadprograma = collect(['Presencial', 'Virtual']);
+        $modalidadprograma->all();
+
+        $docente = DB::table('docente')->where('id_persona_docente', $id)->first();
+
+        $d = Docente::all();
+        $cuenta = $d->count();
+
+        return view('docente.show')
+            ->with('docente', $docente)
+            ->with('persona', $persona)
+            ->with('modalidadprograma', $modalidadprograma)
+            ->with('cuenta', $cuenta);
     }
 
-    public function edit($id)
-    {
-        //
+    public function estado($id,$estado){
+        
+        if($estado == 'activo'){
+            DB::table('persona')
+                ->where('persona.id',$id)
+                ->update([
+                    'per_id_estado' => 'inactivo'
+                ]);
+
+            Alert::success('Estado','El estado ha sido actualizado');
+            return redirect('/docente');
+        }else if($estado == 'inactivo'){
+            DB::table('persona')
+                ->where('persona.id',$id)
+                ->update([
+                    'per_id_estado' => 'activo'
+                ]);
+
+                Alert::success('Estado','El estado ha sido actualizado');
+            return redirect('/docente');
+        }
     }
 
-    public function update(Request $request, $id)
-    {
-        //
+    public function mostrarasignatura($id){
+        $persona = User::find($id);
+        $asignaturas = DB::table('persona')
+            ->select('docente_asignatura.id','doa_year','doa_semestre','pas_nombre','doa_grupo','mun_nombre','doa_unidad','doa_horas_semana_doc',
+                'doa_horas_semana_inv','doa_horas_extension','doa_horas_admin')
+            ->join('docente_asignatura','persona.id','=','docente_asignatura.doa_id_docente')
+            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura','=','programa_asignatura.id')
+            ->join('municipio','programa_asignatura.pas_id_municipio','=','municipio.id')
+            ->where('persona.id', $id)
+            ->where('docente_asignatura.doa_id_docente', $id)
+            ->get();
+        $municipios = Municipio::all();
+        return view('docente/asignacion.index')
+            ->with('asignaturas', $asignaturas)
+            ->with('municipios', $municipios)
+            ->with('persona', $persona);
     }
 
-    public function destroy($id)
-    {
-        //
+    public function crearasignatura($id){
+        $persona = User::find($id);
+        $asignaturas = DB::table('persona')
+            ->join('docente_asignatura','persona.id','=','docente_asignatura.doa_id_docente')
+            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura','=','programa_asignatura.id')
+            ->join('municipio','programa_asignatura.pas_id_municipio','=','municipio.id')
+            ->where('persona.id', $id)
+            ->where('docente_asignatura.doa_id_docente', $id)
+            ->get();
+        $municipios = Municipio::all();
+        return view('docente/asignacion.create')
+            ->with('asignaturas', $asignaturas)
+            ->with('municipios', $municipios)
+            ->with('persona', $persona);
     }
+
+    public function registroasignatura(Request $request){
+        $rules = [
+            'doa_year' => 'required',
+            'doa_semestre' => 'required',
+            'doa_id_asignatura' => 'required',
+            'doa_grupo' => 'required',
+            'doa_id_municipio' => 'required',
+            'doa_unidad' => 'required',
+            'doa_horas_semana_doc' => 'required',
+            'doa_horas_semana_inv' => 'required',
+            'doa_horas_extension' => 'required',
+            'doa_horas_admin' => 'required',
+        ];
+
+        $message = [
+            'doa_year.required' => 'El campo año es requerido',
+            'doa_semestre.required' => 'El campo semestre es requerido',
+            'doa_id_asignatura.required' => 'El campo asignatura es requerido',
+            'doa_grupo.required' => 'El campo grupo es requerido',
+            'doa_id_municipio.required' => 'El campo sede es requerido',
+            'doa_unidad.required' => 'El campo unidad es requerido',
+            'doa_horas_semana_doc.required' => 'El campo horas semana docencia es requerido',
+            'doa_horas_semana_inv.required' => 'El campo horas semana investigación es requerido',
+            'doa_horas_extension.required' => 'El campo horas semana extensión es requerido',
+            'doa_horas_admin.required' => 'El campo horas semana labores administrativas es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        /*Validación asignatura docente*/
+        $asignaturaExiste = DB::table('docente_asignatura')
+            ->where('doa_id_asignatura', $request->get('doa_id_asignatura'))
+            ->where('doa_id_docente', $request->get('doa_id_docente'))
+            ->where('doa_year', $request->get('doa_year'));
+        if($asignaturaExiste->count()>0){
+            Alert::warning('El docente ya registra la asignatura', 'Revisar historial');
+            return back()->withInput();
+        }
+
+        $docenteasignatura = new DocenteAsignatura();
+        $docenteasignatura->doa_id_docente = $request->get('doa_id_docente');
+        $docenteasignatura->doa_year = $request->get('doa_year');
+        $docenteasignatura->doa_semestre = $request->get('doa_semestre');
+        $docenteasignatura->doa_id_asignatura = $request->get('doa_id_asignatura');
+        $docenteasignatura->doa_grupo = $request->get('doa_grupo');
+        $docenteasignatura->doa_id_municipio = $request->get('doa_id_municipio');
+        $docenteasignatura->doa_unidad = $request->get('doa_unidad');
+        $docenteasignatura->doa_horas_semana_doc = $request->get('doa_horas_semana_doc');
+        $docenteasignatura->doa_horas_semana_inv = $request->get('doa_horas_semana_inv');
+        $docenteasignatura->doa_horas_extension = $request->get('doa_horas_extension');
+        $docenteasignatura->doa_horas_admin = $request->get('doa_horas_admin');
+
+        $docenteasignatura->save();
+
+        Alert::success('Registro Exitoso');
+        return redirect('/docente'.'/'.$request->get('doa_id_docente').'/mostrarasignatura');
+    }
+
+    public function editarasignatura($id,$asignatura){
+        $persona = User::find($id);
+        $asignaturas = ProgramaAsignatura::all();
+        $asignatura = DB::table('docente_asignatura')
+            ->where('id', $asignatura)
+            ->first();
+        $municipios = Municipio::all();
+        return view('docente/asignacion.edit')
+            ->with('asignatura', $asignatura)
+            ->with('municipios', $municipios)
+            ->with('persona', $persona)
+            ->with('asignaturas', $asignaturas);
+    }
+
+    public function actualizarasignatura(Request $request,$asignatura){
+        $rules = [
+            'doa_year' => 'required',
+            'doa_semestre' => 'required',
+            'doa_id_asignatura' => 'required',
+            'doa_grupo' => 'required',
+            'doa_id_municipio' => 'required',
+            'doa_unidad' => 'required',
+            'doa_horas_semana_doc' => 'required',
+            'doa_horas_semana_inv' => 'required',
+            'doa_horas_extension' => 'required',
+            'doa_horas_admin' => 'required',
+        ];
+
+        $message = [
+            'doa_year.required' => 'El campo año es requerido',
+            'doa_semestre.required' => 'El campo semestre es requerido',
+            'doa_id_asignatura.required' => 'El campo asignatura es requerido',
+            'doa_grupo.required' => 'El campo grupo es requerido',
+            'doa_id_municipio.required' => 'El campo sede es requerido',
+            'doa_unidad.required' => 'El campo unidad es requerido',
+            'doa_horas_semana_doc.required' => 'El campo horas semana docencia es requerido',
+            'doa_horas_semana_inv.required' => 'El campo horas semana investigación es requerido',
+            'doa_horas_extension.required' => 'El campo horas semana extensión es requerido',
+            'doa_horas_admin.required' => 'El campo horas semana labores administrativas es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        $docenteasignatura = DocenteAsignatura::find($asignatura);
+        $docenteasignatura->doa_id_docente = $request->get('doa_id_docente');
+        $docenteasignatura->doa_year = $request->get('doa_year');
+        $docenteasignatura->doa_semestre = $request->get('doa_semestre');
+        $docenteasignatura->doa_id_asignatura = $request->get('doa_id_asignatura');
+        $docenteasignatura->doa_grupo = $request->get('doa_grupo');
+        $docenteasignatura->doa_id_municipio = $request->get('doa_id_municipio');
+        $docenteasignatura->doa_unidad = $request->get('doa_unidad');
+        $docenteasignatura->doa_horas_semana_doc = $request->get('doa_horas_semana_doc');
+        $docenteasignatura->doa_horas_semana_inv = $request->get('doa_horas_semana_inv');
+        $docenteasignatura->doa_horas_extension = $request->get('doa_horas_extension');
+        $docenteasignatura->doa_horas_admin = $request->get('doa_horas_admin');
+
+        $docenteasignatura->save();
+
+        Alert::success('Registro Actualizado');
+        return redirect('/docente'.'/'.$request->get('doa_id_docente').'/mostrarasignatura');
+    }
+    
 
     public function exportPDF()
     {
