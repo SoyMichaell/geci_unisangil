@@ -158,7 +158,6 @@
                         @enderror
                     </div>
                 </div>
-
                 <div class="row mb-0 mt-2">
                     <div class="col-md-12 offset-md-12">
                         <button type="submit" class="btn btn-success">
@@ -166,9 +165,8 @@
                         </button>
                     </div>
                 </div>
+            </form>
         </div>
-        </form>
     </div>
-</div>
 </div>
 @endsection

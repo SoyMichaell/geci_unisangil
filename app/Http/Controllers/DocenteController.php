@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Departamento;
 use App\Models\Docente;
 use App\Models\DocenteAsignatura;
+use App\Models\DocenteContrato;
+use App\Models\DocenteEvaluacion;
 use App\Models\Municipio;
 use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
@@ -520,6 +522,325 @@ class DocenteController extends Controller
         return redirect('/docente'.'/'.$request->get('doa_id_docente').'/mostrarasignatura');
     }
     
+    public function mostrarevaluacion($id){
+        $persona = User::find($id);
+        $evaluacions = DocenteEvaluacion::all();
+        return view('docente/evaluacion.index')
+            ->with('persona', $persona)
+            ->with('evaluacions', $evaluacions);
+    }
+
+    public function crearevaluacion($id){
+        $persona = User::find($id);
+        return view('docente/evaluacion.create')
+            ->with('persona', $persona);
+    }
+
+    public function registroevaluacion(Request $request){
+        $rules = [
+            'doe_year' => 'required|max:4',
+            'doe_semestre' => 'required',
+            'doe_cal_auto' => 'required',
+            'doe_cal_hete' => 'required',
+            'doe_cal_coe' => 'required',
+            'doe_total_pro' => 'required',
+            'doe_observacion' => 'required',
+            'doe_url_evaluacion' => 'required',
+        ];
+
+        $message = [
+            'doe_year.required' => 'El campo año es requerido',
+            'doe_semestre.required' => 'El campo semestre es requerido',
+            'doe_cal_auto.required' => 'El campo calificación autoevaluacón es requerido',
+            'doe_cal_hete.required' => 'El campo calificación heteroevaluación es requerido',
+            'doe_cal_coe.required' => 'El campo calificación coevaluación es requerido',
+            'doe_total_pro.required' => 'El campo total promedio es requerido',
+            'doe_observacion.required' => 'El campo observación es requerido',
+            'doe_url_evaluacion.required' => 'El campo soporte evaluación docente es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        $EvaluacionExiste = DB::table('docente_evaluacion')
+            ->where('doe_persona_docente', $request->get('doe_persona_docente'))
+            ->where('doe_year', $request->get('doe_year'))
+            ->where('doe_semestre', $request->get('doe_semestre'))
+            ->get();
+
+        if($EvaluacionExiste->count()>0){
+            Alert::warning('Advertencia','El docente ya registra evaluación para el periodo que intenta registrar');
+            return back()->withInput();
+        }
+
+        /*Tomar id docente*/
+        $persona = DB::table('persona')
+            ->where('id', $request->get('doe_persona_docente'))
+            ->first();
+
+        if ($request->file('doe_url_evaluacion')) {
+            $file = $request->file('doe_url_evaluacion');
+            $name_evaluacion = $request->get('doe_year').'_'.$request->get('doe_semestre').'_'.$persona->per_nombre.'_'.$persona->per_apellido.'_evaluacion'. '.'.$file->extension();
+
+            $ruta = public_path('datos/evaluacion/'.$name_evaluacion);
+
+            if ($file->extension() == 'pdf') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('El formato del documento no es .PDF');
+                return back()->withInput();
+            }
+        }
+
+        $evaluacion = new DocenteEvaluacion();
+        $evaluacion->doe_persona_docente = $request->get('doe_persona_docente');
+        $evaluacion->doe_year = $request->get('doe_year');
+        $evaluacion->doe_semestre = $request->get('doe_semestre');
+        $evaluacion->doe_cal_auto = $request->get('doe_cal_auto');
+        $evaluacion->doe_cal_hete = $request->get('doe_cal_hete');
+        $evaluacion->doe_cal_coe = $request->get('doe_cal_coe');
+        $evaluacion->doe_total_pro = $request->get('doe_total_pro');
+        $evaluacion->doe_observacion = $request->get('doe_observacion');
+        $evaluacion->doe_url_evaluacion = $name_evaluacion;
+
+        $evaluacion->save();
+
+        Alert::success('Registro Exitoso','La evaluación ha sido registrada');
+        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarevaluacion');
+    }
+
+    public function editarevaluacion($persona,$evaluacionid){
+        $persona = User::find($persona);
+        $evaluacion = DocenteEvaluacion::find($evaluacionid);
+        return view('docente/evaluacion.edit')
+            ->with('persona', $persona)
+            ->with('evaluacion', $evaluacion);
+    }
+
+    public function actualizarevaluacion(Request $request, $evaluacion){
+        $rules = [
+            'doe_year' => 'required|max:4',
+            'doe_semestre' => 'required',
+            'doe_cal_auto' => 'required',
+            'doe_cal_hete' => 'required',
+            'doe_cal_coe' => 'required',
+            'doe_total_pro' => 'required',
+            'doe_observacion' => 'required',
+        ];
+
+        $message = [
+            'doe_year.required' => 'El campo año es requerido',
+            'doe_semestre.required' => 'El campo semestre es requerido',
+            'doe_cal_auto.required' => 'El campo calificación autoevaluacón es requerido',
+            'doe_cal_hete.required' => 'El campo calificación heteroevaluación es requerido',
+            'doe_cal_coe.required' => 'El campo calificación coevaluación es requerido',
+            'doe_total_pro.required' => 'El campo total promedio es requerido',
+            'doe_observacion.required' => 'El campo observación es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        /*Tomar id docente*/
+        $personax = DB::table('persona')
+            ->where('id', $request->get('doe_persona_docente'))
+            ->first();
+        
+        $nombreEvaluacion = DB::table('docente_evaluacion')
+            ->where('id', $evaluacion)
+            ->first();
+
+        if ($request->file('doe_url_evaluacion')) {
+            $file = $request->file('doe_url_evaluacion');
+            $name_evaluacion = $request->get('doe_year').'_'.$request->get('doe_semestre').'_'.$personax->per_nombre.'_'.$personax->per_apellido.'_evaluacion'. '.'.$file->extension();
+
+            $ruta = public_path('datos/evaluacion/'.$name_evaluacion);
+
+            if ($file->extension() == 'pdf') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('El formato del documento no es .PDF');
+                return back()->withInput();
+            }
+        }else{
+            $name_evaluacion = $nombreEvaluacion->doe_url_evaluacion; 
+        }
+
+        $evaluacion = DocenteEvaluacion::find($evaluacion);
+        $evaluacion->doe_year = $request->get('doe_year');
+        $evaluacion->doe_semestre = $request->get('doe_semestre');
+        $evaluacion->doe_cal_auto = $request->get('doe_cal_auto');
+        $evaluacion->doe_cal_hete = $request->get('doe_cal_hete');
+        $evaluacion->doe_cal_coe = $request->get('doe_cal_coe');
+        $evaluacion->doe_total_pro = $request->get('doe_total_pro');
+        $evaluacion->doe_observacion = $request->get('doe_observacion');
+        $evaluacion->doe_url_evaluacion = $name_evaluacion;
+
+        $evaluacion->save();
+
+        Alert::success('Registro Actualizado','La evaluación ha sido actualizada');
+        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarevaluacion');
+    }
+
+    public function eliminarevaluacion($evaluacion){
+        $evaluacion = DocenteEvaluacion::find($evaluacion);
+        $evaluacion->delete();
+        Alert::success('Exito','La evaluación se elimino con exito');
+        return redirect('/docente');
+    }
+
+    public function mostrarcontrato($id){
+        $persona = User::find($id);
+        $contratos = DocenteContrato::all();
+
+        $contratos = DB::table('docente_contrato')
+            ->where('doco_persona_docente', $id)
+            ->get();
+
+        return view('docente/contrato.index')
+            ->with('persona', $persona)
+            ->with('contratos', $contratos);
+    }
+
+    public function crearcontrato($id){
+        $persona = User::find($id);
+        return view('docente/contrato.create')
+            ->with('persona', $persona);
+    }
+
+    public function registrocontrato(Request $request){
+        $rules = [
+            'doco_numero_contrato' => 'required',
+            'doco_objeto_contrato' => 'required',
+            'doco_tipo_contrato' => 'required',
+            'doco_fecha_inicio' => 'required',
+            'doco_fecha_fin' => 'required',
+            'doco_rol' => 'required',
+            'doco_url_soporte' => 'required',
+        ];
+
+        $message = [
+            'doco_numero_contrato.required' => 'El campo número de contrato es requerido',
+            'doco_objeto_contrato.required' => 'El campo objeto contrato es requerido',
+            'doco_tipo_contrato.required' => 'El campo tipo de contrato es requerido',
+            'doco_fecha_inicio.required' => 'El campo fecha de inicio de contrato es requerido',
+            'doco_fecha_fin.required' => 'El campo fecha fin contrato es requerido',
+            'doco_rol.required' => 'El campo rol es requerido',
+            'doco_url_soporte.required' => 'El campo cargue contrato es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        /*Docente*/
+        $persona = DB::table('persona')
+            ->where('id', $request->get('doe_persona_docente'))
+            ->first();
+
+        if ($request->file('doco_url_soporte')) {
+            $file = $request->file('doco_url_soporte');
+            $name_contrato = $request->get('doco_fecha_inicio').'_'.$request->get('doco_numero_contrato'). '_' . $persona->per_nombre.'_'.$persona->per_apellido.'_soporte_hoja_vida' . '.' . $file->extension();
+
+            $ruta = public_path('datos/contrato/' . $name_contrato);
+
+            if ($file->extension() == 'pdf') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('El formato del documento no es .PDF');
+                return back()->withInput();
+            }
+        }
+
+        $contrato = new DocenteContrato();
+        $contrato->doco_persona_docente = $request->get('doe_persona_docente');
+        $contrato->doco_numero_contrato = $request->get('doco_numero_contrato');
+        $contrato->doco_objeto_contrato = $request->get('doco_objeto_contrato');
+        $contrato->doco_tipo_contrato = $request->get('doco_tipo_contrato');
+        $contrato->doco_fecha_inicio = $request->get('doco_fecha_inicio');
+        $contrato->doco_fecha_fin = $request->get('doco_fecha_fin');
+        $contrato->doco_rol = $request->get('doco_rol');
+        $contrato->doco_url_soporte = $name_contrato;
+
+        $contrato->save();
+
+        Alert::success('Registro Exitoso','Contrato registrado');
+        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarcontrato');
+
+    }
+
+    public function editarcontrato($persona, $contratoid){
+        $persona = User::find($persona);
+        $contrato = DocenteContrato::find($contratoid);
+        return view('docente/contrato.edit')
+            ->with('persona', $persona)
+            ->with('contrato', $contrato);
+    }
+
+    public function actualizarcontrato(Request $request, $contrato){
+        $rules = [
+            'doco_numero_contrato' => 'required',
+            'doco_objeto_contrato' => 'required',
+            'doco_tipo_contrato' => 'required',
+            'doco_fecha_inicio' => 'required',
+            'doco_fecha_fin' => 'required',
+            'doco_rol' => 'required',
+        ];
+
+        $message = [
+            'doco_numero_contrato.required' => 'El campo número de contrato es requerido',
+            'doco_objeto_contrato.required' => 'El campo objeto contrato es requerido',
+            'doco_tipo_contrato.required' => 'El campo tipo de contrato es requerido',
+            'doco_fecha_inicio.required' => 'El campo fecha de inicio de contrato es requerido',
+            'doco_fecha_fin.required' => 'El campo fecha fin contrato es requerido',
+            'doco_rol.required' => 'El campo rol es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        //Name contrato
+        $contratox = DB::table('docente_contrato')
+            ->where('id', $contrato)
+            ->first();
+
+        //Persona contrato
+        $persona = DB::table('persona')
+            ->where('id', $request->get('doe_persona_docente'))
+            ->first();            
+
+        if ($request->file('doco_url_soporte')) {
+            $file = $request->file('doco_url_soporte');
+            $name_contrato = $request->get('doco_fecha_inicio').'_'.$request->get('doco_numero_contrato'). '_' . $persona->per_nombre.'_'.$persona->per_apellido.'contrato' . '.' . $file->extension();
+
+            $ruta = public_path('datos/contrato/' . $name_contrato);
+
+            if ($file->extension() == 'pdf') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('El formato del documento no es .PDF');
+                return back()->withInput();
+            }
+        }else{
+            $name_contrato = $contratox->doco_url_soporte;
+        }
+
+        $contrato = DocenteContrato::find($contrato);
+        $contrato->doco_numero_contrato = $request->get('doco_numero_contrato');
+        $contrato->doco_objeto_contrato = $request->get('doco_objeto_contrato');
+        $contrato->doco_tipo_contrato = $request->get('doco_tipo_contrato');
+        $contrato->doco_fecha_inicio = $request->get('doco_fecha_inicio');
+        $contrato->doco_fecha_fin = $request->get('doco_fecha_fin');
+        $contrato->doco_rol = $request->get('doco_rol');
+        $contrato->doco_url_soporte = $name_contrato;
+
+        $contrato->save();
+
+        Alert::success('Registro Actualizado','Contrato actualizado');
+        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarcontrato');
+    }
+
+    public function eliminarcontrato($contrato){
+        $contratof = DocenteContrato::find($contrato);
+        $contratof->delete();
+        Alert::success('Registro Eliminado');
+        return redirect('/docente');
+    }
 
     public function exportPDF()
     {

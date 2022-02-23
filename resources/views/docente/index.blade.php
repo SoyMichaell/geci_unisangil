@@ -25,12 +25,10 @@
                     <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%"
-                        href="{{ url('docente/pdf') }}" title="Generar reporte pdf" target="_blank"><i
-                            class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%"
-                        href="{{ url('docente/export') }}" title="Generar reporte excel" target="_blank"><i
-                            class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('docente/pdf') }}"
+                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('docente/export') }}"
+                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -66,14 +64,23 @@
                                             action="/docente/{{ $persona->id }}/{{ $persona->per_id_estado }}/estado"
                                             method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/docente/{{ $persona->id }}" title="Ver registro"><i
-                                                        class="fa-solid fa-folder-open"></i></a>
+                                                <a class="btn btn-sm" href="/docente/{{ $persona->id }}"
+                                                    title="Ver registro"><i class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
-                                                    href="{{ url('docente/' . $persona->id . '/directorcompletar') }}" title="Editar registro"><i
+                                                    href="{{ url('docente/' . $persona->id . '/directorcompletar') }}"
+                                                    title="Editar registro"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="{{ url('docente/' . $persona->id . '/mostrarcontrato') }}"
+                                                    title="Agregar contrato"><i class="fa-solid fa-folder-tree"></i></a>
                                                 <a class="btn btn-outline-primary btn-sm"
-                                                    href="{{ url('docente/' . $persona->id . '/mostrarasignatura') }}" title="Agregar asignaturas"><i
+                                                    href="{{ url('docente/' . $persona->id . '/mostrarasignatura') }}"
+                                                    title="Agregar asignaturas"><i
                                                         class="fa-solid fa-circle-plus"></i></a>
+                                                <a class="btn btn-outline-primary btn-sm"
+                                                    href="{{ url('docente/' . $persona->id . '/mostrarevaluacion') }}"
+                                                    title="Agregar evaluación docente"><i
+                                                        class="fa-solid fa-chalkboard-user"></i></a>
                                                 @csrf
                                                 @method('PUT')
                                                 @if ($persona->per_id_estado == 'activo')
