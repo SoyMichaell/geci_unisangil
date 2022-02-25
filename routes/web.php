@@ -61,3 +61,7 @@ Route::resource('/municipio', App\Http\Controllers\MunicipioController::class);
 Route::resource('/facultad', App\Http\Controllers\FacultadController::class);
 Route::resource('/nivelformacion', App\Http\Controllers\NivelFormacionController::class);
 Route::resource('/metodologia', App\Http\Controllers\MetodologiaController::class);
+
+
+/*Rutas estudiante*/
+Route::resource('estudiante', App\Http\Controllers\EstudianteController::class);
