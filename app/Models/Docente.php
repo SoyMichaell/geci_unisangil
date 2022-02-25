@@ -44,6 +44,7 @@ class Docente extends Model
         'no_cuenta',
         'estado',
         'soporte_hoja_vida',
+        'documentos_compl',
         'id_proceso'
     ];
 }

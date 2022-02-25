@@ -322,6 +322,46 @@ class DocenteController extends Controller
         return redirect('docente/' . $id . '/directorcompletar');
     }
 
+    public function zip(Request $request, $id){
+
+        $rules = ['documentos_compl' => 'required'];
+
+        $message = ['documentos_compl.required' => 'El campo documentos .zip es requerido'];
+
+        $this->validate($request,$rules,$message);
+
+        $persona = User::find($id);
+
+        $docente = DB::table('docente')->select('documentos_compl')->where('id_persona_docente', $id)->first();
+
+        if ($request->file('documentos_compl')) {
+            $file = $request->file('documentos_compl');
+            $name_documentos_compl = $persona->id . '_' . $persona->per_nombre . '_comprimido' . '.' . $file->extension();
+
+            $ruta = public_path('datos/zip/' . $name_documentos_compl);
+
+            if ($file->extension() == 'zip') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('El formato del documento no es .ZIP');
+                return back()->withInput();
+            }
+        } else {
+            $name_documentos_compl = $docente->documentos_compl;
+        }
+
+        DB::table('docente')->where('id_persona_docente', $id)->update(
+            [
+                'documentos_compl' => $name_documentos_compl,
+                'id_proceso' => 3,
+            ]
+
+        );
+
+        Alert::success('Registro Actualizado');
+        return redirect('docente/' . $id . '/directorcompletar');
+    }
+
     public function show($id){
         $persona = DB::table('persona')->select('persona.id')
             ->where('per_tipo_usuario',2)
@@ -736,7 +776,7 @@ class DocenteController extends Controller
 
         if ($request->file('doco_url_soporte')) {
             $file = $request->file('doco_url_soporte');
-            $name_contrato = $request->get('doco_fecha_inicio').'_'.$request->get('doco_numero_contrato'). '_' . $persona->per_nombre.'_'.$persona->per_apellido.'_soporte_hoja_vida' . '.' . $file->extension();
+            $name_contrato = $request->get('doco_fecha_inicio').'_'.$request->get('doco_numero_contrato'). '_' . $persona->per_nombre.'_'.$persona->per_apellido.'_contrato' . '.' . $file->extension();
 
             $ruta = public_path('datos/contrato/' . $name_contrato);
 

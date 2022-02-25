@@ -93,8 +93,7 @@
                                         <option value="">---- SELECCIONE ----</option>
                                         @foreach ($tiposdocumento as $tipodocumento)
                                             <option value="{{$tipodocumento}}">{{$tipodocumento}}</option>
-                                        @endforeach
-                                        
+                                        @endforeach  
                                     </select>
                                     @error('per_tipo_documento')
                                         <span class="invalid-feedback" role="alert">

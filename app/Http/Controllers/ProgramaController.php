@@ -299,6 +299,25 @@ class ProgramaController extends Controller
         return redirect('programa/'.$request->get('id').'/mostrarplan');
     }
 
+    public function eliminar_plan($id){
+
+        $plan = ProgramaPlan::find($id);
+
+        $plan->delete();
+
+        Alert::success('Registro eliminado');
+        return redirect('/programa');
+
+    }
+
+    public function selectivoplan($id){
+        return DB::table('programa_plan_estudio')->where('pp_id_programa', $id)->get();
+    }
+
+    public function selectivomunicipio($id){
+        return DB::table('municipio')->where('mun_departamento', $id)->get();
+    }
+
     public function estado($id,$estado){
         
         if($estado == 'activo'){

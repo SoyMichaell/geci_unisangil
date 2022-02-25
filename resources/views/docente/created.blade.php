@@ -19,6 +19,10 @@
                 <button class="nav-link {{ $cuenta > 0 ? ($docente->id_proceso == 2 ? 'active' : '') : 'active' }}" id="estudio-tab" data-bs-toggle="tab" data-bs-target="#estudio" type="button" role="tab"
                     aria-controls="estudio" aria-selected="true">Estudios</button>
             </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link {{ $cuenta > 0 ? ($docente->id_proceso == 3 ? 'active' : '') : 'active' }}" id="zip-tab" data-bs-toggle="tab" data-bs-target="#zip" type="button" role="tab"
+                    aria-controls="zip" aria-selected="true">.Zip</button>
+            </li>
         </ul>
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane {{ $cuenta > 0 ? ($docente->id_proceso == 1 ? 'show active' : '') : 'show active' }} tile p-3" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
@@ -437,6 +441,34 @@
                     </div>
                     <div class="row mb-0">
                         <div class="col-md-12 offset-md-12">
+                            <button type="submit" class="btn btn-success">
+                                {{ __('Siguiente') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade {{ $cuenta > 0 ? ($docente->id_proceso == 3 ? 'show active' : '') : 'show active' }} tile p-3" id="zip" role="tabpanel" aria-labelledby="zip-tab">
+                <form action="/docente/{{ $persona->id }}/zip" method="post"
+                    enctype="multipart/form-data">
+                    @csrf @method('PUT')
+                    <input type="hidden" value="{{ $persona->id }}" name="id" id="id" readonly>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label
+                                for="documentos_compl">{{ __('Cargar archivo comprimido .zip (Documento de identidad, RUT etc..)') }}</label>
+                            <input id="documentos_compl" type="file"
+                                class="form-control @error('documentos_compl') is-invalid @enderror"
+                                name="documentos_compl" value="{{$cuenta > 0 ? ($docente->documentos_compl == "" ? old('documentos_compl') : $docente->documentos_compl) : old('documentos_compl')}}"
+                                autocomplete="documentos_compl" autofocus>
+                            @error('documentos_compl')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                    <div class="row mb-0">
+                        <div class="col-md-12 offset-md-12 mt-2">
                             <button type="submit" class="btn btn-success">
                                 {{ __('Finalizar') }}
                             </button>

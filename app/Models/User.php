@@ -55,4 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Programa::class, 'id');
     }
 
+    public function trabajos(){
+        return $this->hasMany(Trabajo::class, 'id');
+    }
+
 }

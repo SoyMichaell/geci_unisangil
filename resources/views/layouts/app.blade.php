@@ -21,7 +21,7 @@
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-    
+
     <!--DataTables -->
     <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}">
 
@@ -39,8 +39,7 @@
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
                     aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href=""><i
-                                class="fa fa-user fa-lg"></i>
+                    <li><a class="dropdown-item" href=""><i class="fa fa-user fa-lg"></i>
                             Perfil</a>
                     </li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -59,50 +58,58 @@
         <div class="app-sidebar__user">
             <div>
                 <p class="app-sidebar__user-name">
-                    {{auth()->user()->per_nombre.' '.auth()->user()->per_apellido}}
+                    {{ auth()->user()->per_nombre . ' ' . auth()->user()->per_apellido }}
                 </p>
-                <p class="app-sidebar__user-designation">{{auth()->user()->tiposusuario->tip_nombre}}</p>
+                <p class="app-sidebar__user-designation">{{ auth()->user()->tiposusuario->tip_nombre }}</p>
             </div>
         </div>
         <ul class="app-menu">
             <li><a class="app-menu__item active" href="{{ url('home') }}"><i class="app-menu__icon fa fa-dashboard"
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
-                <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
-                            class="app-menu__icon fa-solid fa-gears"></i><span class="app-menu__label">Configuración</span><i
-                            class="treeview-indicator fa fa-angle-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="{{ url('departamento') }}"><i
-                                    class="icon fa-solid fa-circle-notch"></i>
-                                Departamentos</a></li>
-                        <li><a class="treeview-item" href="{{ url('municipio') }}"><i
-                                    class="icon fa-solid fa-circle-notch"></i>
-                                Municipios</a>
-                        </li>
-                        <li><a class="treeview-item" href="{{ url('facultad') }}"><i
-                                    class="icon fa-solid fa-circle-notch"></i>
-                                Facultades</a>
-                        </li>
-                        <li><a class="treeview-item" href="{{ url('nivelformacion') }}"><i
-                                    class="icon fa-solid fa-circle-notch"></i> Nivel de formación</a>
-                        </li>
-                        <li><a class="treeview-item" href="{{ url('metodologia') }}"><i
-                                    class="icon fa-solid fa-circle-notch"></i>
-                                Metodologia</a>
-                        </li>
-                    </ul>
-                </li>
-                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
-                            class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Módulos</span><i
-                            class="treeview-indicator fa fa-angle-right"></i></a>
-                    <ul class="treeview-menu">
-                        <li><a class="treeview-item" href="{{ url('programa') }}"><i
-                                    class="icon fa-solid fa-circle-notch"></i>
-                                Programas</a></li>
-                        <li><a class="treeview-item" href="{{ url('docente') }}"><i class="icon fa-solid fa-circle-notch"></i>
-                                Docentes</a></li>
-                    </ul>
-                </li>
+            <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
+                        class="app-menu__icon fa-solid fa-gears"></i><span
+                        class="app-menu__label">Configuración</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ url('departamento') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Departamentos</a></li>
+                    <li><a class="treeview-item" href="{{ url('municipio') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Municipios</a>
+                    </li>
+                    <li><a class="treeview-item" href="{{ url('facultad') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Facultades</a>
+                    </li>
+                    <li><a class="treeview-item" href="{{ url('nivelformacion') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i> Nivel de formación</a>
+                    </li>
+                    <li><a class="treeview-item" href="{{ url('metodologia') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Metodologia</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Módulos</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ url('programa') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Programas</a></li>
+                    <li><a class="treeview-item" href="{{ url('estudiante') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Estudiantes</a></li>
+                    <li><a class="treeview-item" href="{{ url('docente') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Docentes</a></li>
+                    <li><a class="treeview-item" href="{{ url('trabajo') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Trabajo de grado</a></li>
+                </ul>
+            </li>
         </ul>
     </aside>
 

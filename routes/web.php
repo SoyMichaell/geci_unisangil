@@ -50,6 +50,17 @@ Route::resource('departamento', App\Http\Controllers\DepartamentoController::cla
 
 
 
+/*Rutas Estudiantes*/
+
+
+Route::get('/estudiante/pdf', [App\Http\Controllers\EstudianteController::class, 'pdf']);
+Route::get('/estudiante/export', [App\Http\Controllers\EstudianteController::class, 'export']);
+Route::get('/estudiante/listadobeca', [App\Http\Controllers\EstudianteController::class, 'listadobeca']);
+Route::get('/estudiante/listadocontado', [App\Http\Controllers\EstudianteController::class, 'listadocontado']);
+Route::get('/estudiante/listadoprestamo', [App\Http\Controllers\EstudianteController::class, 'listadoprestamo']);
+Route::post('/estudiante/listadoingreso', [App\Http\Controllers\EstudianteController::class, 'listadoingreso']);
+Route::resource('estudiante', App\Http\Controllers\EstudianteController::class);
+
 
 /*Rutas docentes*/
 Route::get('docente/mostrardocente', [App\Http\Controllers\DocenteController::class, 'mostrardocente']);
@@ -58,6 +69,7 @@ Route::get('docente/{docente}/directorcompletar', [App\Http\Controllers\DocenteC
 Route::post('docente/directorinformacion', [App\Http\Controllers\DocenteController::class, 'directorinformacion']);
 Route::put('docente/{docente}/actualizarinformacion', [App\Http\Controllers\DocenteController::class, 'actualizarinformacion']);
 Route::put('docente/{docente}/directorestudios', [App\Http\Controllers\DocenteController::class, 'directorestudios']);
+Route::put('docente/{docente}/zip', [App\Http\Controllers\DocenteController::class, 'zip']);
 Route::put('docente/{docente}/{estado}/estado', [App\Http\Controllers\DocenteController::class, 'estado']);
 Route::get('docente/{docente}/mostrarcontrato', [App\Http\Controllers\DocenteController::class, 'mostrarcontrato']);
 Route::get('docente/{docente}/crearcontrato', [App\Http\Controllers\DocenteController::class, 'crearcontrato']);
@@ -85,6 +97,8 @@ Route::get('programa/{programa}/crearplan', [App\Http\Controllers\ProgramaContro
 Route::get('programa/{programa}/{plan}/editarplan', [App\Http\Controllers\ProgramaController::class, 'editarplan']);
 Route::post('programa/registroplan', [App\Http\Controllers\ProgramaController::class, 'registroplan']);
 Route::put('programa/{programa}/actualizarplan', [App\Http\Controllers\ProgramaController::class, 'actualizarplan']);
+Route::get('/programa/{programa}/selectivoplan', [App\Http\Controllers\ProgramaController::class, 'selectivoplan']);
+Route::get('/programa/{programa}/selectivomunicipio', [App\Http\Controllers\ProgramaController::class, 'selectivomunicipio']);
 Route::put('programa/{programa}/{estado}/estado', [App\Http\Controllers\ProgramaController::class, 'estado']);
 Route::resource('programa', App\Http\Controllers\ProgramaController::class);
 
@@ -95,3 +109,10 @@ Route::resource('metodologia', App\Http\Controllers\MetodologiaController::class
 
 /*Rutas asignatura*/
 Route::resource('asignatura', App\Http\Controllers\AsignaturaController::class);
+
+
+/*Rutas trabajo de grado*/
+Route::put('trabajo/{trabajo}/faseestado', [App\Http\Controllers\TrabajoController::class, 'faseestado']);
+Route::put('trabajo/{trabajo}/fasejurado', [App\Http\Controllers\TrabajoController::class, 'fasejurado']);
+Route::resource('trabajo', App\Http\Controllers\TrabajoController::class);
+Route::resource('modalidad', App\Http\Controllers\ModalidadGradoController::class);
