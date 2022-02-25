@@ -755,6 +755,7 @@ class DocenteController extends Controller
             'doco_fecha_fin' => 'required',
             'doco_rol' => 'required',
             'doco_url_soporte' => 'required',
+            'doco_estado' => 'required',
         ];
 
         $message = [
@@ -765,6 +766,7 @@ class DocenteController extends Controller
             'doco_fecha_fin.required' => 'El campo fecha fin contrato es requerido',
             'doco_rol.required' => 'El campo rol es requerido',
             'doco_url_soporte.required' => 'El campo cargue contrato es requerido',
+            'doco_estado.required' => 'El campo estado de pago es requerido',
         ];
 
         $this->validate($request,$rules,$message);
@@ -797,10 +799,11 @@ class DocenteController extends Controller
         $contrato->doco_fecha_fin = $request->get('doco_fecha_fin');
         $contrato->doco_rol = $request->get('doco_rol');
         $contrato->doco_url_soporte = $name_contrato;
+        $contrato->doco_estado = $request->get('doco_estado');
 
         $contrato->save();
 
-        Alert::success('Registro Exitoso','Contrato registrado');
+        Alert::success('Exitoso','Contrato registrado');
         return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarcontrato');
 
     }
@@ -821,6 +824,7 @@ class DocenteController extends Controller
             'doco_fecha_inicio' => 'required',
             'doco_fecha_fin' => 'required',
             'doco_rol' => 'required',
+            'doco_estado' => 'required',
         ];
 
         $message = [
@@ -830,6 +834,7 @@ class DocenteController extends Controller
             'doco_fecha_inicio.required' => 'El campo fecha de inicio de contrato es requerido',
             'doco_fecha_fin.required' => 'El campo fecha fin contrato es requerido',
             'doco_rol.required' => 'El campo rol es requerido',
+            'doco_estado.required' => 'El campo estado de pago es requerido',
         ];
 
         $this->validate($request,$rules,$message);
@@ -868,6 +873,7 @@ class DocenteController extends Controller
         $contrato->doco_fecha_fin = $request->get('doco_fecha_fin');
         $contrato->doco_rol = $request->get('doco_rol');
         $contrato->doco_url_soporte = $name_contrato;
+        $contrato->doco_estado = $request->get('doco_estado');
 
         $contrato->save();
 

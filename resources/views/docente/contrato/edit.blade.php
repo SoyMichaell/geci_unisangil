@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="doco_rol">{{ __('Rol *') }}</label>
                         <select class="form-select" name="doco_rol" id="doco_rol">
                             <option value="">---- SELECCIONE ----</option>
@@ -88,11 +88,24 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="doco_url_soporte">{{ __('Cargar contrato .pdf ') }}</label>
                         <input id="doco_url_soporte" type="file" class="form-control @error('doco_url_soporte') is-invalid @enderror"
                             name="doco_url_soporte" value="{{ old('doco_url_soporte') }}" autocomplete="doco_url_soporte">
                         <p><small>{{$contrato->doco_url_soporte}}</small></p>
+                    </div>
+                    <div class="col-md-4">
+                        <label for="doco_estado">{{__('Estado de pago *')}}</label>
+                        <select class="form-select" name="doco_estado" id="doco_estado">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="cancelado" {{$contrato->doco_estado == 'cancelado' ? 'selected' : ''}}>Cancelado</option>
+                            <option value="no-cancelado" {{$contrato->doco_estado == 'no-cancelado' ? 'selected' : ''}}>No cancelado</option>
+                        </select>
+                        @error('doco_estado')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                 </div>
                 <div class="row mb-0 mt-2">

@@ -45,6 +45,7 @@
                                 <th>Fecha final</th>
                                 <th>Rol</th>
                                 <th>Soporte</th>
+                                <th>Estado de pago</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -61,6 +62,7 @@
                                         <a href="{{ asset('/datos/contrato/' . $contrato->doco_url_soporte) }}"
                                             target="_blank">{{ $contrato->doco_url_soporte }}</a>
                                     </td>
+                                    <td><span class="badge badge-{{ $contrato->doco_estado == 'cancelado' ? 'success' : 'danger' }}">{{$contrato->doco_estado}}</span></td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <td>
                                             <form action="{{ url("docente/{$contrato->id}/eliminarcontrato") }}"

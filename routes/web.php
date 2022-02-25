@@ -119,6 +119,7 @@ Route::resource('asignatura', App\Http\Controllers\AsignaturaController::class);
 /*Rutas trabajo de grado*/
 Route::put('trabajo/{trabajo}/faseestado', [App\Http\Controllers\TrabajoController::class, 'faseestado']);
 Route::put('trabajo/{trabajo}/fasejurado', [App\Http\Controllers\TrabajoController::class, 'fasejurado']);
+Route::put('trabajo/{trabajo}/faseacta', [App\Http\Controllers\TrabajoController::class, 'faseacta']);
 Route::resource('trabajo', App\Http\Controllers\TrabajoController::class);
 Route::resource('modalidad', App\Http\Controllers\ModalidadGradoController::class);
 
