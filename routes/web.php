@@ -32,20 +32,26 @@ Route::get('home', [App\Http\Controllers\HomeController::class, 'index'])->name(
 
 Route::get('departamento/pdf',[App\Http\Controllers\DepartamentoController::class, 'pdf']);
 Route::get('departamento/export',[App\Http\Controllers\DepartamentoController::class, 'export']);
+Route::resource('departamento', App\Http\Controllers\DepartamentoController::class);
 
 Route::get('municipio/pdf',[App\Http\Controllers\MunicipioController::class, 'pdf']);
 Route::get('municipio/export',[App\Http\Controllers\MunicipioController::class, 'export']);
+Route::resource('/municipio', App\Http\Controllers\MunicipioController::class);
 
 Route::get('facultad/pdf',[App\Http\Controllers\FacultadController::class, 'pdf']);
 Route::get('facultad/export',[App\Http\Controllers\FacultadController::class, 'export']);
 
+
 Route::get('nivelformacion/pdf',[App\Http\Controllers\NivelformacionController::class, 'pdf']);
 Route::get('nivelformacion/export',[App\Http\Controllers\NivelformacionController::class, 'export']);
+Route::resource('/nivelformacion', App\Http\Controllers\NivelFormacionController::class);
 
 Route::get('metodologia/pdf',[App\Http\Controllers\MetodologiaController::class, 'pdf']);
 Route::get('metodologia/export',[App\Http\Controllers\MetodologiaController::class, 'export']);
+Route::resource('/metodologia', App\Http\Controllers\MetodologiaController::class);
 
-Route::resource('departamento', App\Http\Controllers\DepartamentoController::class);
+
+
 
 
 
@@ -102,17 +108,16 @@ Route::get('/programa/{programa}/selectivomunicipio', [App\Http\Controllers\Prog
 Route::put('programa/{programa}/{estado}/estado', [App\Http\Controllers\ProgramaController::class, 'estado']);
 Route::resource('programa', App\Http\Controllers\ProgramaController::class);
 
-Route::resource('municipio', App\Http\Controllers\MunicipioController::class);
-Route::resource('facultad', App\Http\Controllers\FacultadController::class);
-Route::resource('nivelformacion', App\Http\Controllers\NivelFormacionController::class);
-Route::resource('metodologia', App\Http\Controllers\MetodologiaController::class);
+
+
+
 
 /*Rutas asignatura*/
 Route::resource('asignatura', App\Http\Controllers\AsignaturaController::class);
-
 
 /*Rutas trabajo de grado*/
 Route::put('trabajo/{trabajo}/faseestado', [App\Http\Controllers\TrabajoController::class, 'faseestado']);
 Route::put('trabajo/{trabajo}/fasejurado', [App\Http\Controllers\TrabajoController::class, 'fasejurado']);
 Route::resource('trabajo', App\Http\Controllers\TrabajoController::class);
 Route::resource('modalidad', App\Http\Controllers\ModalidadGradoController::class);
+

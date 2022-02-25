@@ -3,25 +3,28 @@
 namespace App\Http\Controllers;
 
 use App\Models\Departamento;
-
 use App\Models\Municipio;
 use App\Models\Programa;
 use App\Models\Estudiante;
-use RealRashid\SweetAlert\Facades\Alert;
+use App\Exports\EstudiantesExports;
+use App\Exports\ListadoEstudiantes\BecasExport;
+use App\Exports\ListadoEstudiantes\ContadosExport;
+use App\Exports\ListadoEstudiantes\PrestamosExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 
 class EstudianteController extends Controller
 {
+
     public function index(){
         $estudiantes = Estudiante::all();
         $programas = Programa::all();
 
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->get();
-
         $programas = DB::table('programa')
         ->select('pro_nombre','pp_nombre')
         ->join('programa_plan_estudio','programa.id','=','programa_plan_estudio.pp_id_programa')
@@ -40,30 +43,38 @@ class EstudianteController extends Controller
     }
 
     public function create(){
-        $programasPlan = DB::table('programa')
-        ->select('programa_plan_estudio.id','pro_nombre','pp_nombre')
-        ->join('programa_plan_estudio','programa.id','=','programa_plan_estudio.pp_id_programa')
+        $programasPlan = DB::table('programas')
+        ->select('programas_plan_estudio.id','pro_nombre','pp_nombre')
+        ->join('programas_plan_estudio','programas.id','=','programas_plan_estudio.pp_id_programa')
         ->get();
-
-        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
-        $tiposdocumento->all();
 
         $programas = Programa::all();
         $departamentos = Departamento::all();
-        
+        $municipios = Municipio::all();
+
+        $tipos=collect(['Tarjeta de identidad','Cédula de ciudadania','Cédula de extranjeria']);
+        $tipos->all();
+
+        $semestres=collect([1,2,3,4,5,6,7,8,9,10]);
+        $semestres->all();
+
+        $estadoprogramas=collect(['Activo','Inactivo']);
+        $estadoprogramas->all();
+
+
         return view('estudiante.create')
-            ->with('tiposdocumento', $tiposdocumento)
             ->with('programas', $programas)
             ->with('programasPlan', $programasPlan)
-            ->with('departamentos', $departamentos);
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios)
+            ->with('semestres', $semestres)
+            ->with('estadoprogramas', $estadoprogramas)
+            ->with('tipos', $tipos);
     }
 
     public function store(Request $request){
 
         $rules = [
-            'estu_programa' => 'required',
-            'estu_programa_plan' => 'required',
-            'estu_tipo_documento' => 'required',
             'estu_numero_documento' => 'required',
             'estu_nombre' => 'required',
             'estu_apellido' => 'required',
@@ -79,6 +90,12 @@ class EstudianteController extends Controller
             'estu_semestre' => 'required',
             'estu_financiamiento' => 'required',
             'estu_entidad' => 'required',
+            'estu_correo' => 'required',
+            'estu_estrato' => 'required',
+            'estu_fecha_nacimiento' => 'required',
+            'estu_ingreso' => 'required',
+            'estu_ult_periodo' => 'required',
+            'estu_financiamiento' => 'required',
             'estu_estado' => 'required',
             'estu_matricula' => 'required'
         ];
@@ -103,11 +120,20 @@ class EstudianteController extends Controller
             'estu_financiamiento.required' => 'El campo tipo de financiamiento es requerido',
             'estu_entidad.required' => 'El campo entidad es requerido',
             'estu_estado.required' => 'El campo estado es requerido',
+            'estu_numero_documento.required' => 'El campo número de documento es requerido',
+            'estu_nombre.required' => 'El campo nombre(s) es requerido',
+            'estu_apellido.required' => 'El campo apellido(s) es requerido',
+            'estu_telefono1.required' => 'El campo telefono 1 es requerido',
+            'estu_correo.required' => 'El campo correo electronico es requerido',
+            'estu_estrato.required' => 'El campo estrato es requerido',
+            'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
+            'estu_ingreso.required' => 'El campo año de ingreso es requerido',
+            'estu_ult_periodo.required' => 'El campo ultimo peridoo es requerido',
+            'estu_financiamiento.required' => 'El campo financiamiento es requerido',
             'estu_matricula.required' => 'El campo matricula es requerido'
         ];
 
         $this->validate($request, $rules, $messages);
-
 
         $estudiantes = new Estudiante();
         $estudiantes->estu_programa = $request->get('estu_programa');
@@ -135,7 +161,7 @@ class EstudianteController extends Controller
         $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
         $estudiantes->estu_egresado = $request->get('estu_egresado');
         $estudiantes->estu_grado = $request->get('estu_grado');
-        
+
         $ExistEstu = DB::table('estudiante')->where('estu_numero_documento', $request->get('estu_numero_documento'));
 
         if ($ExistEstu->count() > 0) {
@@ -151,9 +177,6 @@ class EstudianteController extends Controller
     }
 
     public function show($id){
-        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
-        $tiposdocumento->all();
-
         $programas = Programa::all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
@@ -167,18 +190,26 @@ class EstudianteController extends Controller
 
     public function edit($id){
 
-        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
-        $tiposdocumento->all();
-
+        $estudiante = Estudiante::find($id);
         $programas = Programa::all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
-        $estudiante = Estudiante::find($id);
-        return view('estudiante.edit')->with('estudiante', $estudiante)
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
+        $tiposdocumento->all();
+
+        $tipos=collect(['Tarjeta de identidad','Cédula de ciudadania','Cédula de extranjeria']);
+        $tipos->all();
+        $semestres=collect([1,2,3,4,5,6,7,8,9,10]);
+        $semestres->all();
+        $estadoprogramas=collect(['Activo','Inactivo']);
+        $estadoprogramas->all();
+        return view('estudiante.show')->with('estudiante', $estudiante)
             ->with('programas', $programas)
+            ->with('tipos', $tipos)
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios)
-            ->with('tiposdocumento', $tiposdocumento);
+            ->with('semestres', $semestres)
+            ->with('estadoprogramas', $estadoprogramas);
     }
 
     public function update(Request $request, $id){
@@ -260,41 +291,31 @@ class EstudianteController extends Controller
 
         $estudiantes->save();
         
-        Alert::success('Registro Actualizado');
-
-        return redirect('/estudiante');
+        $tipos=collect(['Tarjeta de identidad','Cédula de ciudadania','Cédula de extranjeria']);
+        $tipos->all();
+        $semestres=collect([1,2,3,4,5,6,7,8,9,10]);
+        $semestres->all();
+        $estadoprogramas=collect(['Activo','Inactivo']);
+        $estadoprogramas->all();
+        return view('estudiante.edit')->with('estudiante', $estudiante)
+            ->with('programas', $programas)
+            ->with('tipos', $tipos)
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios)
+            ->with('semestres', $semestres)
+            ->with('estadoprogramas', $estadoprogramas);
     }
 
     public function destroy($id){
         $estudiante = Estudiante::find($id);
 
-        //$veriMovi = DB::table('movilidad')->where('mov_id_estudiante', $id);
-        //$veriPru = DB::table('pruebas_saber')->where('pr_id_estudiante', $id);
-        /*$veriPra = DB::table('practicas')->where('pra_id_estudiante', $id);
-
-        if ($veriMovi->count() > 0) {
-            Alert::warning('No se pude eliminar el estudiante, debido a que esta asociado a otra entidad');
-            return redirect('/estudiante');
-        } else if ($veriPru->count() > 0) {
-            Alert::warning('No se pude eliminar el estudiante, debido a que esta asociado a otra entidad');
-            return redirect('/estudiante');
-        } else if ($veriPra->count() > 0) {
-            Alert::warning('No se pude eliminar el estudiante, debido a que esta asociado a otra entidad');
-            return redirect('/estudiante');
-        } else {*/
-            $estudiante->delete();
-
-
-            Alert::success('Registro Eliminado');
-
-            return redirect('/estudiante');
-        //}
+        Alert::success('Registro Eliminado');
+        return redirect('/estudiante');
     }
 
-    /*public function pdf(){
-        $estudiantes = DB::table('estudiantes')
-        ->join('tipo_documento', 'estudiantes.estu_tipo_documento','=','tipo_documento.id')
-        ->join('programas', 'estudiantes.estu_programa','=','programas.id')
+    public function pdf(){
+        $estudiantes = DB::table('estudiante')
+        ->join('programa', 'estudiante.estu_programa','=','programa.id')
         ->get();
         if ($estudiantes->count() <= 0) {
             Alert::warning('No hay registros');
@@ -305,31 +326,17 @@ class EstudianteController extends Controller
             $pdf->setPaper('A4', 'landscape');
             $pdf->loadHTML($view);
 
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'pdf',
-                'modulo' => 'estudiantes'
-            ]);
-
             return $pdf->stream('estudiantes-reporte.pdf');
         }
     }
 
-    public function export()
-    {
+    public function export(){
         $estudiantes = Estudiante::all();
         if ($estudiantes->count() <= 0) {
             Alert::warning('No hay registros');
             return redirect('/estudiante');
         } else { 
-
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel',
-                'modulo' => 'estudiantes'
-            ]);
-
-            return Excel::download(new EstudiantesExport, 'estudiantes.xlsx');
+            return Excel::download(new EstudiantesExports, 'estudiantes.xlsx');
         }
     }
 
@@ -339,13 +346,6 @@ class EstudianteController extends Controller
             Alert::warning('No hay registros');
             return redirect('/estudiante');
         } else {
-
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel.beca',
-                'modulo' => 'estudiantes'
-            ]);
-
             return Excel::download(new BecasExport, 'estudiantes-becas.xlsx');
         }
     }
@@ -356,39 +356,24 @@ class EstudianteController extends Controller
             Alert::warning('No hay registros');
             return redirect('/estudiante');
         } else {
-
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel.contado',
-                'modulo' => 'estudiantes'
-            ]);
-
             return Excel::download(new ContadosExport, 'estudiantes-contado.xlsx');
         }
-    }*/
+    }
 
-    /*public function listadoprestamo(){
+    public function listadoprestamo(){
         $estudiantes = Estudiante::all();
         if ($estudiantes->count() <= 0) {
             Alert::warning('No hay registros');
             return redirect('/estudiante');
         } else {
-
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel.prestamo',
-                'modulo' => 'estudiantes'
-            ]);
-
             return Excel::download(new PrestamosExport, 'estudiantes-prestamo.xlsx');
         }
     }
 
     public function listadoingreso(Request $request){
         $ingreso = $request->get('estu_ingreso');
-        $estudiantes = DB::table('estudiantes')
-        ->join('tipo_documento', 'estudiantes.estu_tipo_documento','=','tipo_documento.id')
-        ->join('programas', 'estudiantes.estu_programa','=','programas.id')
+        $estudiantes = DB::table('estudiante')
+        ->join('programa', 'estudiante.estu_programa','=','programa.id')
         ->where('estu_ingreso', $ingreso)
         ->get();
         if ($estudiantes->count() <= 0) {
@@ -400,14 +385,8 @@ class EstudianteController extends Controller
             $pdf->setPaper('A4', 'landscape');
             $pdf->loadHTML($view);
 
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'pdf.ingreso',
-                'modulo' => 'estudiantes'
-            ]);
-
             return $pdf->stream('estudiantes-ingreso.pdf');
         }
-    }*/
-
+    }
 }
+  
