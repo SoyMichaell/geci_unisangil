@@ -9,15 +9,15 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-7">
-                        <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
-                        <a class="btn btn-outline-danger btn-radius" href="{{ url('municipio/pdf') }}"
-                            title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                        <a class="btn btn-outline-primary btn-radius" href="{{ url('municipio/export') }}" title="Generar reporte excel" target="_blank"><i
-                        class="fa fa-file-excel-o"></i></a>
+                        <h3>Lista de registros</h3> <!-- TODO: arreglar botones pdf y excel-->
                     </div>
                     <div class="col-md-5 d-flex justify-content-end align-items-start">
-                        <a class="btn btn-outline-success" href="{{ url('municipio/create') }}"><i
-                        class="fa fa-plus-circle"></i>
+                        <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('municipio/pdf') }}"
+                            title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                        <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('municipio/export') }}" title="Generar reporte excel" target="_blank"><i
+                        class="fa-solid fa-file-excel"></i></a>
+                        <a class="btn btn-success" href="{{ url('municipio/create') }}"><i
+                        class="fa-solid fa-plus-circle"></i>
                             Nuevo</a>
                     </div>
                 </div>
@@ -43,14 +43,14 @@
                                         <form action="{{ route('municipio.destroy', $municipio->id) }}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="municipio/{{ $municipio->id }}"
-                                                    title="Visualizar"><i class="fa fa-folder-open-o"></i></a>
+                                                    title="Visualizar"><i class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/municipio/{{ $municipio->id }}/edit" title="Editar"><i
-                                                    class="fa fa-refresh"></i></a>
+                                                    class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                class="fa fa-trash"></i></button>
+                                                class="fa-solid fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>

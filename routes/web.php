@@ -40,6 +40,7 @@ Route::resource('/municipio', App\Http\Controllers\MunicipioController::class);
 
 Route::get('facultad/pdf',[App\Http\Controllers\FacultadController::class, 'pdf']);
 Route::get('facultad/export',[App\Http\Controllers\FacultadController::class, 'export']);
+Route::resource('/facultad', App\Http\Controllers\FacultadController::class);
 
 
 Route::get('nivelformacion/pdf',[App\Http\Controllers\NivelformacionController::class, 'pdf']);
