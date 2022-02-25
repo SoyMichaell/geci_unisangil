@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('navegar') <a href="/departamento/{{$departamento->id}}">Vista registro</a> / <a href="/departamento">Departamento</a> @endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-book" ></i> Vista registro</h1> <!-- TODO: validar icono-->
 @section('message')

@@ -14,4 +14,9 @@ class Facultad extends Model
         'id',
         'fac_nombre',
     ];
+
+    public function asignatura(){
+        return $this->hasMany(ProgramaAsignatura::class, 'id');
+    }
+
 }

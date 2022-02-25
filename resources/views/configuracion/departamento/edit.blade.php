@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('navegar') <a href="/departamento/{{$departamento->id}}/edit">Editar</a> / <a href="/departamento">Departamento</a> @endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición de datos</h1>
 @section('message')

@@ -51,4 +51,8 @@ class User extends Authenticatable
         return $this->belongsTo(TipoUsuario::class, 'per_tipo_usuario');
     }
 
+    public function programas(){
+        return $this->hasMany(Programa::class, 'id');
+    }
+
 }
