@@ -59,4 +59,8 @@ class User extends Authenticatable
         return $this->hasMany(Trabajo::class, 'id');
     }
 
+    public function horarios(){
+        return $this->hasMany(ProgramaHorario::class, 'id');
+    }
+
 }

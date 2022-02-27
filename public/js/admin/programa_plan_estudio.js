@@ -9,7 +9,7 @@ function onSelectProgramaEstudio() {
     $.get('/programa/' + id_programa_plan + '/selectivoplan', function(data) {
         var html_select = '<option value="">---- SELECCIONE PLAN DE ESTUDIO ----</option>';
         for (var i = 0; i < data.length; ++i)
-            html_select += '<option value="' + data[i].id + '">' + data[i].pp_nombre + '</option>';
+            html_select += '<option value="' + data[i].id + '">' + data[i].pp_plan + '</option>';
         $('#estu_programa_plan').html(html_select);
     });
 }

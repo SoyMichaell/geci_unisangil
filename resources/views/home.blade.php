@@ -9,7 +9,31 @@
         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
             <div class="row mb-3">
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa-regular fa-user-tie fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-book-open-reader fa-3x"></i>
+                        <div class="info">
+                            <h4>Plan de estudio</h4>
+                            <a href="/programa/mostrarplan">Crear</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-bookmark fa-3x"></i>
+                        <div class="info">
+                            <h4>Asignaturas</h4>
+                            <a href="/programa/mostrarasignatura">Crear</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-calendar-days fa-3x"></i>
+                        <div class="info">
+                            <h4>Asignación horarios</h4>
+                            <a href="/programa/mostrarhorario">Crear</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-school fa-3x"></i>
                         <div class="info">
                             <h4>Estudiantes</h4>
                             <p><b></b></p>
@@ -40,15 +64,17 @@
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 1)
-            <div class="row">
-                <div class="col-md-12 d-flex justify-content-start align-items-center">
-                    <a class="btn btn-success" href=""><i class="fa fa-plus-circle"></i>
-                        Nuevo</a>
-                </div>
-            </div>
             <div class="tile col-md-12 mt-2">
-                <h4 class="tile titulo">Usuarios en plataforma</h4>
-                <div class="table-responsive">
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4 class="titulo">Usuarios en plataforma</h4>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <a class="btn btn-success" href=""><i class="fa fa-plus-circle"></i>
+                            Nuevo</a>
+                    </div>
+                </div>
+                <div class="table-responsive mt-3">
                     <table class="table table-bordered" id="tables">
                         <thead>
                             <tr>
@@ -78,11 +104,11 @@
                                     <td>
                                         <form action="" method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-info btn-sm" href=""><i class="fa fa-refresh"></i></a>
+                                                <a class="btn btn-outline-info btn-sm" href=""><i class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa fa-trash"></i></button>
+                                                        class="fa-solid fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>

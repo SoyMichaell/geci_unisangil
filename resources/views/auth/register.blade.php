@@ -81,14 +81,14 @@
             </div>
             <div class="col-md-7 mx-auto">
                 <div class="form-login">
-                    <form action="{{route('register')}}" method="POST">
+                    <form action="/usuario/" method="POST">
                         @csrf
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="per_tipo_documento"
                                     class="col-md-12 col-form-label">{{ __('Tipo Documento *') }}</label>
                                 <div class="col-md-12">
-                                    <select class="js-example-placeholder-single form-control-custom @error('per_tipo_documento') is-invalid @enderror"
+                                    <select class="form-control-custom @error('per_tipo_documento') is-invalid @enderror"
                                         name="per_tipo_documento" id="per_tipo_documento">
                                         <option value="">---- SELECCIONE ----</option>
                                         @foreach ($tiposdocumento as $tipodocumento)
@@ -232,7 +232,9 @@
                                     <select class="form-control-custom @error('per_ciudad') is-invalid @enderror"
                                         name="per_ciudad" id="per_ciudad">
                                         <option value="">---- SELECCIONE ----</option> 
-                                        <option value="1">Yopal</option> 
+                                        @foreach ($municipios as $municipio)
+                                            <option value="{{$municipio->id}}">{{$municipio->mun_nombre}}</option>
+                                        @endforeach  
                                     </select>
                                     @error('per_ciudad')
                                         <span class="invalid-feedback" role="alert">
@@ -269,7 +271,7 @@
                                         name="per_id_estado" id="per_id_estado">
                                         <option value="activo">Activo</option> 
                                     </select>
-                                    @error('per_tipo_usuario')
+                                    @error('per_id_estado')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

@@ -29,5 +29,13 @@ class Municipio extends Model
         return $this->hasMany(DocenteAsignatura::class, 'id');
     }
 
+    public function programaplan(){
+        return $this->hasMany(ProgramaPlan::class, 'id');
+    }
+
+    public function programaasignatura(){
+        return $this->hasMany(ProgramaAsignatura::class, 'id');
+    }
+
     
 }

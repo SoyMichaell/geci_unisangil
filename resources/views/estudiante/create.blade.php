@@ -320,12 +320,12 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_estado">{{ __('¿Es egresado? ') }}</label>
+                        <label for="estu_egresado">{{ __('¿Es egresado? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <select class="form-select" name="estu_egresado" id="estu_estado">
-                                    <option value="1">Si</option>
-                                    <option value="0" selected>No</option>
+                                <select class="form-select" name="estu_egresado" id="estu_egresado">
+                                    <option value="Si">Si</option>
+                                    <option value="No" selected>No</option>
                                 </select>
                             </div>
                         </div>

@@ -13,14 +13,23 @@ class ProgramaPlan extends Model
 
     protected $fillable = [
         'id',
+        'pp_id_sede',
         'pp_id_programa',
-        'pp_nombre',
+        'pp_plan',
         'pp_creditos',
-        'pp_asignaturas',
-        'pp_estado'
+        'pp_no_asignaturas',
+        'pp_estado',
     ];
 
-    public function asignatura(){
+    public function programas(){
+        return $this->belongsTo(Programa::class, 'pp_id_programa');
+    }
+
+    public function sedes(){
+        return $this->belongsTo(Municipio::class, 'pp_id_sede');
+    }
+
+    public function programaasignatura(){
         return $this->hasMany(ProgramaAsignatura::class, 'id');
     }
 

@@ -26,8 +26,26 @@ class Programa extends Model
         return $this->belongsTo(NivelFormacion::class, 'pro_nivel_formacion');
     }
 
+    public function metodologias(){
+        return $this->belongsTo(Metodologia::class, 'pro_metodologia');
+    }
+
     public function asignatura(){
         return $this->hasMany(ProgramaAsignatura::class, 'id');
     }
+
+    public function programaplan(){
+        return $this->hasMany(ProgramaPlan::class, 'id');
+    }
+
+    public function programaasignatura(){
+        return $this->hasMany(ProgramaAsignatura::class, 'id');
+    }
+
+    public function software(){
+        return $this->hasMany(Software::class, 'id');
+    }
+
+    
 
 }

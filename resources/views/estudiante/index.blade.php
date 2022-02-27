@@ -10,37 +10,33 @@
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-7 d-flex justify-content-start align-items-center">
-                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                    <a class="btn btn-success " href="{{ url('estudiante/create') }}"><i class="fa fa-plus-circle"></i>
-                        Nuevo</a>
-                @endif
-                <div class="dropdown">
-                    <a class="btn btn-info" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                        aria-expanded="false">
-                        Listados .xlsx
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" href="{{ url('estudiante/listadobeca') }}">Listado SF Beca</a>
-                        <a class="dropdown-item" href="{{ url('estudiante/listadocontado') }}">Listado SF De
-                            contado</a>
-                        <a class="dropdown-item" href="{{ url('estudiante/listadoprestamo') }}">Listado SF
-                            Prestamo</a>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-8">
-                    <h3>Listado estudiantes</h3>
+                    <h4>Listado estudiantes</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('estudiante/pdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-primary" style="border-radius: 100%" href="{{ url('estudiante/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                    <div class="dropdown">
+                        <a class="btn btn-outline-success" style="border-radius: 100%" href="#" role="button"
+                            id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-file-excel"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" href="{{ url('estudiante/export') }}">Listado general</a>
+                            <a class="dropdown-item" href="{{ url('estudiante/listadobeca') }}">Listado SF Beca</a>
+                            <a class="dropdown-item" href="{{ url('estudiante/listadocontado') }}">Listado SF De
+                                contado</a>
+                            <a class="dropdown-item" href="{{ url('estudiante/listadoprestamo') }}">Listado SF
+                                Prestamo</a>
+                        </div>
+                    </div>
+                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                        <a class="btn btn-outline-success " href="{{ url('estudiante/create') }}"><i
+                                class="fa fa-plus-circle"></i>
+                            Nuevo</a>
+                    @endif
                 </div>
             </div>
             <br>

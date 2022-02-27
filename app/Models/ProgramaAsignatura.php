@@ -9,38 +9,39 @@ class ProgramaAsignatura extends Model
 {
     use HasFactory;
 
-    protected $table = "programa_asignatura";
+    protected $table = "programa_plan_estudio_asignatura";
 
     protected $fillable = [
-            'id',
-            'pas_id_facultad',
-            'pas_id_municipio',
-            'pas_id_programa',
-            'pas_id_programa_plan',
-            'pas_nombre',
-            'pas_creditos',
-            'pas_horas_semana',
-            'pas_horas_semestre',
+        'id',
+        'asig_codigo',
+        'asig_nombre',
+        'asig_id_plan_estudio',
+        'asig_no_creditos',
+        'asig_no_semanales',
+        'asig_no_semestre',
+        'asig_id_programa',
+        'asig_id_sede',
+        'asig_estado',
     ];
 
-    public function municipios(){
-        return $this->belongsTo(Municipio::class, 'pas_id_municipio');
-    }
-
-    public function facultades(){
-        return $this->belongsTo(Facultad::class, 'pas_id_facultad');
+    public function sedes(){
+        return $this->belongsTo(Municipio::class, 'asig_id_sede');
     }
 
     public function programas(){
-        return $this->belongsTo(Programa::class, 'pas_id_programa');
+        return $this->belongsTo(Programa::class, 'asig_id_programa');
     }
 
     public function planes(){
-        return $this->belongsTo(ProgramaPlan::class, 'pas_id_programa_plan');
+        return $this->belongsTo(ProgramaPlan::class, 'asig_id_plan_estudio');
     }
 
-    public function docenteasignatura(){
-        return $this->hasMany(DocenteAsignatura::class, 'id');
+    public function horarios(){
+        return $this->hasMany(ProgramaHorario::class, 'id');
+    }
+
+    public function software(){
+        return $this->hasMany(Software::class, 'id');
     }
 
 }

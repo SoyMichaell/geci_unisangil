@@ -407,161 +407,7 @@ class DocenteController extends Controller
             return redirect('/docente');
         }
     }
-
-    public function mostrarasignatura($id){
-        $persona = User::find($id);
-        $asignaturas = DB::table('persona')
-            ->select('docente_asignatura.id','doa_year','doa_semestre','pas_nombre','doa_grupo','mun_nombre','doa_unidad','doa_horas_semana_doc',
-                'doa_horas_semana_inv','doa_horas_extension','doa_horas_admin')
-            ->join('docente_asignatura','persona.id','=','docente_asignatura.doa_id_docente')
-            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura','=','programa_asignatura.id')
-            ->join('municipio','programa_asignatura.pas_id_municipio','=','municipio.id')
-            ->where('persona.id', $id)
-            ->where('docente_asignatura.doa_id_docente', $id)
-            ->get();
-        $municipios = Municipio::all();
-        return view('docente/asignacion.index')
-            ->with('asignaturas', $asignaturas)
-            ->with('municipios', $municipios)
-            ->with('persona', $persona);
-    }
-
-    public function crearasignatura($id){
-        $persona = User::find($id);
-        $asignaturas = DB::table('persona')
-            ->join('docente_asignatura','persona.id','=','docente_asignatura.doa_id_docente')
-            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura','=','programa_asignatura.id')
-            ->join('municipio','programa_asignatura.pas_id_municipio','=','municipio.id')
-            ->where('persona.id', $id)
-            ->where('docente_asignatura.doa_id_docente', $id)
-            ->get();
-        $municipios = Municipio::all();
-        return view('docente/asignacion.create')
-            ->with('asignaturas', $asignaturas)
-            ->with('municipios', $municipios)
-            ->with('persona', $persona);
-    }
-
-    public function registroasignatura(Request $request){
-        $rules = [
-            'doa_year' => 'required',
-            'doa_semestre' => 'required',
-            'doa_id_asignatura' => 'required',
-            'doa_grupo' => 'required',
-            'doa_id_municipio' => 'required',
-            'doa_unidad' => 'required',
-            'doa_horas_semana_doc' => 'required',
-            'doa_horas_semana_inv' => 'required',
-            'doa_horas_extension' => 'required',
-            'doa_horas_admin' => 'required',
-        ];
-
-        $message = [
-            'doa_year.required' => 'El campo año es requerido',
-            'doa_semestre.required' => 'El campo semestre es requerido',
-            'doa_id_asignatura.required' => 'El campo asignatura es requerido',
-            'doa_grupo.required' => 'El campo grupo es requerido',
-            'doa_id_municipio.required' => 'El campo sede es requerido',
-            'doa_unidad.required' => 'El campo unidad es requerido',
-            'doa_horas_semana_doc.required' => 'El campo horas semana docencia es requerido',
-            'doa_horas_semana_inv.required' => 'El campo horas semana investigación es requerido',
-            'doa_horas_extension.required' => 'El campo horas semana extensión es requerido',
-            'doa_horas_admin.required' => 'El campo horas semana labores administrativas es requerido',
-        ];
-
-        $this->validate($request,$rules,$message);
-
-        /*Validación asignatura docente*/
-        $asignaturaExiste = DB::table('docente_asignatura')
-            ->where('doa_id_asignatura', $request->get('doa_id_asignatura'))
-            ->where('doa_id_docente', $request->get('doa_id_docente'))
-            ->where('doa_year', $request->get('doa_year'));
-        if($asignaturaExiste->count()>0){
-            Alert::warning('El docente ya registra la asignatura', 'Revisar historial');
-            return back()->withInput();
-        }
-
-        $docenteasignatura = new DocenteAsignatura();
-        $docenteasignatura->doa_id_docente = $request->get('doa_id_docente');
-        $docenteasignatura->doa_year = $request->get('doa_year');
-        $docenteasignatura->doa_semestre = $request->get('doa_semestre');
-        $docenteasignatura->doa_id_asignatura = $request->get('doa_id_asignatura');
-        $docenteasignatura->doa_grupo = $request->get('doa_grupo');
-        $docenteasignatura->doa_id_municipio = $request->get('doa_id_municipio');
-        $docenteasignatura->doa_unidad = $request->get('doa_unidad');
-        $docenteasignatura->doa_horas_semana_doc = $request->get('doa_horas_semana_doc');
-        $docenteasignatura->doa_horas_semana_inv = $request->get('doa_horas_semana_inv');
-        $docenteasignatura->doa_horas_extension = $request->get('doa_horas_extension');
-        $docenteasignatura->doa_horas_admin = $request->get('doa_horas_admin');
-
-        $docenteasignatura->save();
-
-        Alert::success('Registro Exitoso');
-        return redirect('/docente'.'/'.$request->get('doa_id_docente').'/mostrarasignatura');
-    }
-
-    public function editarasignatura($id,$asignatura){
-        $persona = User::find($id);
-        $asignaturas = ProgramaAsignatura::all();
-        $asignatura = DB::table('docente_asignatura')
-            ->where('id', $asignatura)
-            ->first();
-        $municipios = Municipio::all();
-        return view('docente/asignacion.edit')
-            ->with('asignatura', $asignatura)
-            ->with('municipios', $municipios)
-            ->with('persona', $persona)
-            ->with('asignaturas', $asignaturas);
-    }
-
-    public function actualizarasignatura(Request $request,$asignatura){
-        $rules = [
-            'doa_year' => 'required',
-            'doa_semestre' => 'required',
-            'doa_id_asignatura' => 'required',
-            'doa_grupo' => 'required',
-            'doa_id_municipio' => 'required',
-            'doa_unidad' => 'required',
-            'doa_horas_semana_doc' => 'required',
-            'doa_horas_semana_inv' => 'required',
-            'doa_horas_extension' => 'required',
-            'doa_horas_admin' => 'required',
-        ];
-
-        $message = [
-            'doa_year.required' => 'El campo año es requerido',
-            'doa_semestre.required' => 'El campo semestre es requerido',
-            'doa_id_asignatura.required' => 'El campo asignatura es requerido',
-            'doa_grupo.required' => 'El campo grupo es requerido',
-            'doa_id_municipio.required' => 'El campo sede es requerido',
-            'doa_unidad.required' => 'El campo unidad es requerido',
-            'doa_horas_semana_doc.required' => 'El campo horas semana docencia es requerido',
-            'doa_horas_semana_inv.required' => 'El campo horas semana investigación es requerido',
-            'doa_horas_extension.required' => 'El campo horas semana extensión es requerido',
-            'doa_horas_admin.required' => 'El campo horas semana labores administrativas es requerido',
-        ];
-
-        $this->validate($request,$rules,$message);
-
-        $docenteasignatura = DocenteAsignatura::find($asignatura);
-        $docenteasignatura->doa_id_docente = $request->get('doa_id_docente');
-        $docenteasignatura->doa_year = $request->get('doa_year');
-        $docenteasignatura->doa_semestre = $request->get('doa_semestre');
-        $docenteasignatura->doa_id_asignatura = $request->get('doa_id_asignatura');
-        $docenteasignatura->doa_grupo = $request->get('doa_grupo');
-        $docenteasignatura->doa_id_municipio = $request->get('doa_id_municipio');
-        $docenteasignatura->doa_unidad = $request->get('doa_unidad');
-        $docenteasignatura->doa_horas_semana_doc = $request->get('doa_horas_semana_doc');
-        $docenteasignatura->doa_horas_semana_inv = $request->get('doa_horas_semana_inv');
-        $docenteasignatura->doa_horas_extension = $request->get('doa_horas_extension');
-        $docenteasignatura->doa_horas_admin = $request->get('doa_horas_admin');
-
-        $docenteasignatura->save();
-
-        Alert::success('Registro Actualizado');
-        return redirect('/docente'.'/'.$request->get('doa_id_docente').'/mostrarasignatura');
-    }
-    
+   
     public function mostrarevaluacion($id){
         $persona = User::find($id);
         $evaluacions = DocenteEvaluacion::all();
@@ -886,6 +732,24 @@ class DocenteController extends Controller
         $contratof->delete();
         Alert::success('Registro Eliminado');
         return redirect('/docente');
+    }
+
+    public function mostrarasignatura($id){
+        $persona = User::find($id);
+        $asignaturas = DB::table('persona')
+            ->select('docente_asignatura.id','doa_year','doa_semestre','pas_nombre','doa_grupo','mun_nombre','doa_unidad','doa_horas_semana_doc',
+                'doa_horas_semana_inv','doa_horas_extension','doa_horas_admin')
+            ->join('docente_asignatura','persona.id','=','docente_asignatura.doa_id_docente')
+            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura','=','programa_asignatura.id')
+            ->join('municipio','programa_asignatura.pas_id_municipio','=','municipio.id')
+            ->where('persona.id', $id)
+            ->where('docente_asignatura.doa_id_docente', $id)
+            ->get();
+        $municipios = Municipio::all();
+        return view('docente/asignacion.index')
+            ->with('asignaturas', $asignaturas)
+            ->with('municipios', $municipios)
+            ->with('persona', $persona);
     }
 
     public function exportPDF()
