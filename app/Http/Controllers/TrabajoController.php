@@ -92,14 +92,57 @@ class TrabajoController extends Controller
         return redirect('/trabajo');
     }
 
+
     public function show($id)
     {
+
         $estudiantes = Estudiante::all();
         $docentes = Docente::all();
+
+        $trabajon = DB::table('trabajo_grado')->get();
+
+        foreach ($trabajon as $t) {
+            $contratos = DB::table('persona')
+                ->join('docente_contrato', 'persona.id', '=', 'docente_contrato.doco_persona_docente')
+                ->where('docente_contrato.doco_rol', 'jurado-tesis')
+                ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado1)
+                ->orWhere('docente_contrato.doco_persona_docente', $t->tra_id_jurado2)
+                ->get();
+        }
+
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+
+
         $trabajo = Trabajo::find($id);
+        $modalidades = ModalidadGrado::all();
+
+        $jurado1 = DB::table('persona')
+            ->join('trabajo_grado', 'persona.id', '=', 'trabajo_grado.tra_id_jurado1')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->where('trabajo_grado.tra_id_jurado1', $trabajo->tra_id_jurado1)
+            ->first();
+
+        $jurado2 = DB::table('persona')
+            ->join('trabajo_grado', 'persona.id', '=', 'trabajo_grado.tra_id_jurado2')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->where('trabajo_grado.tra_id_jurado2', $trabajo->tra_id_jurado2)
+            ->first();
+
         return view('trabajo.show')->with('estudiantes', $estudiantes)
-            ->with('docentes', $docentes)
-            ->with('trabajo', $trabajo);
+            ->with('personas', $personas)
+            ->with('trabajo', $trabajo)
+            ->with('modalidades', $modalidades)
+            ->with('contratos', $contratos)
+            ->with('jurado1', $jurado1)
+            ->with('jurado2', $jurado2);
     }
 
     public function edit($id)

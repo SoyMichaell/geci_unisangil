@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/programa">Programa</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
     @section('message')
@@ -64,7 +67,8 @@
                                                 <a class="btn btn-outline-info btn-sm "
                                                     href="/programa/{{ $programa->id }}/edit"><i
                                                         class="fa-solid fa-refresh"></i></a>
-
+                                                @csrf
+                                                @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
                                                         class="fa-solid fa-trash"></i></button>
                                             </div>

@@ -6,29 +6,35 @@ use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Programa;
 use App\Models\Estudiante;
+use App\Exports\EstudiantesExports;
+use App\Exports\ListadoEstudiantes\BecasExport;
+use App\Exports\ListadoEstudiantes\ContadosExport;
+use App\Exports\ListadoEstudiantes\PrestamosExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
 class EstudianteController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         $estudiantes = Estudiante::all();
         $programas = Programa::all();
 
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->get();
         $programas = DB::table('programa')
-        ->join('programa_plan_estudio','programa.id','=','programa_plan_estudio.pp_id_programa')
-        ->get();
+            ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
+            ->get();
 
         if (Auth::user()->per_tipo_usuario == '3') {
-            return view('estudiante.index', compact('estudiantes','ingresos'));
+            return view('estudiante.index', compact('estudiantes', 'ingresos'));
         } else {
             if ($programas->count() > 0) {
-                return view('estudiante.index', compact('estudiantes','ingresos'));
+                return view('estudiante.index', compact('estudiantes', 'ingresos'));
             } else {
                 Alert::warning('Requisitos', 'Primero registre un programa acádemico');
                 return redirect('/home');
@@ -36,22 +42,23 @@ class EstudianteController extends Controller
         }
     }
 
-    public function create(){
+    public function create()
+    {
         $programasPlan = DB::table('programa')
-        ->join('programa_plan_estudio','programa.id','=','programa_plan_estudio.pp_id_programa')
-        ->get();
+            ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
+            ->get();
 
         $programas = Programa::all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
 
-        $tiposdocumento=collect(['Tarjeta de identidad','Cédula de ciudadania','Cédula de extranjeria']);
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
         $tiposdocumento->all();
 
-        $semestres=collect([1,2,3,4,5,6,7,8,9,10]);
+        $semestres = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         $semestres->all();
 
-        $estadoprogramas=collect(['Activo','Inactivo']);
+        $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
 
 
@@ -65,7 +72,8 @@ class EstudianteController extends Controller
             ->with('tiposdocumento', $tiposdocumento);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $rules = [
             'estu_numero_documento' => 'required',
@@ -79,18 +87,6 @@ class EstudianteController extends Controller
             'estu_ciudad' => 'required',
             'estu_fecha_nacimiento' => 'required',
             'estu_ingreso' => 'required',
-            'estu_ult_matricula' => 'required',
-            'estu_semestre' => 'required',
-            'estu_financiamiento' => 'required',
-            'estu_entidad' => 'required',
-            'estu_correo' => 'required',
-            'estu_estrato' => 'required',
-            'estu_fecha_nacimiento' => 'required',
-            'estu_ingreso' => 'required',
-            'estu_ult_periodo' => 'required',
-            'estu_financiamiento' => 'required',
-            'estu_estado' => 'required',
-            'estu_matricula' => 'required'
         ];
 
         $messages = [
@@ -108,22 +104,6 @@ class EstudianteController extends Controller
             'estu_ciudad.required' => 'El campo sede es requerido',
             'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
             'estu_ingreso.required' => 'El campo año de ingreso es requerido',
-            'estu_ult_matricula.required' => 'El campo ultimo periodo matriculado es requerido',
-            'estu_semestre.required' => 'El campo semestre es requerido',
-            'estu_financiamiento.required' => 'El campo tipo de financiamiento es requerido',
-            'estu_entidad.required' => 'El campo entidad es requerido',
-            'estu_estado.required' => 'El campo estado es requerido',
-            'estu_numero_documento.required' => 'El campo número de documento es requerido',
-            'estu_nombre.required' => 'El campo nombre(s) es requerido',
-            'estu_apellido.required' => 'El campo apellido(s) es requerido',
-            'estu_telefono1.required' => 'El campo telefono 1 es requerido',
-            'estu_correo.required' => 'El campo correo electronico es requerido',
-            'estu_estrato.required' => 'El campo estrato es requerido',
-            'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
-            'estu_ingreso.required' => 'El campo año de ingreso es requerido',
-            'estu_ult_periodo.required' => 'El campo ultimo peridoo es requerido',
-            'estu_financiamiento.required' => 'El campo financiamiento es requerido',
-            'estu_matricula.required' => 'El campo matricula es requerido'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -155,25 +135,56 @@ class EstudianteController extends Controller
         $estudiantes->estu_egresado = $request->get('estu_egresado');
         $estudiantes->estu_grado = $request->get('estu_grado');
 
-        $estudiantes->save();
 
-        Alert::success('Exitoso', 'El estudiante se ha registrado con exito');
-        return redirect('/estudiante');
-        
+        $ExisteEstudiante = DB::table('estudiante')
+            ->where('estu_numero_documento', $request->get('estu_numero_documento'))
+            ->get();
+        $ExisteCorreo = DB::table('estudiante')
+            ->where('estu_correo', $request->get('estu_correo'))
+            ->get();
+        $ExistePersona = DB::table('persona')
+            ->where('per_numero_documento', $request->get('estu_numero_documento'))
+            ->get();
+        $ExisteCorreoP = DB::table('persona')
+            ->where('per_correo', $request->get('estu_correo'))
+            ->get();
+        if ($ExisteEstudiante->count() > 0) {
+            Alert::warning('Advertencia', 'El documento de identidad, ya se encuentra registrado');
+            return back()->withInput();
+        } else if ($ExisteCorreo->count() > 0) {
+            Alert::warning('Advertencia', 'El correo electronico, ya se encuentra registrado');
+            return back()->withInput();
+        } else if ($ExistePersona->count() > 0) {
+            Alert::warning('Advertencia', 'El documento de identidad, ya se encuentra registrado');
+            return back()->withInput();
+        } else if ($ExisteCorreoP->count() > 0) {
+            Alert::warning('Advertencia', 'El correo electronico, ya se encuentra registrado');
+            return back()->withInput();
+        } else {
+            $estudiantes->save();
+
+            Alert::success('Exitoso', 'El estudiante se ha registrado con exito');
+            return redirect('/estudiante');
+        }
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $programas = Programa::all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $estudiante = Estudiante::find($id);
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
+        $tiposdocumento->all();
         return view('estudiante.show')->with('estudiante', $estudiante)
             ->with('programas', $programas)
             ->with('departamentos', $departamentos)
-            ->with('municipios', $municipios);
+            ->with('municipios', $municipios)
+            ->with('tiposdocumento', $tiposdocumento);
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
 
         $estudiante = Estudiante::find($id);
         $programas = Programa::all();
@@ -182,33 +193,36 @@ class EstudianteController extends Controller
         $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
         $tiposdocumento->all();
 
-        $tipos=collect(['Tarjeta de identidad','Cédula de ciudadania','Cédula de extranjeria']);
+        $tipos = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
         $tipos->all();
-        $semestres=collect([1,2,3,4,5,6,7,8,9,10]);
+        $semestres = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         $semestres->all();
-        $estadoprogramas=collect(['Activo','Inactivo']);
+        $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
-        return view('estudiante.show')->with('estudiante', $estudiante)
+        return view('estudiante.edit')->with('estudiante', $estudiante)
             ->with('programas', $programas)
             ->with('tipos', $tipos)
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios)
             ->with('semestres', $semestres)
-            ->with('estadoprogramas', $estadoprogramas);
+            ->with('estadoprogramas', $estadoprogramas)
+            ->with('tiposdocumento', $tiposdocumento);
     }
 
-    
-    public function destroy($id){
+
+    public function destroy($id)
+    {
         $estudiante = Estudiante::find($id);
         $estudiante->delete();
         Alert::success('Registro Eliminado');
         return redirect('/estudiante');
     }
 
-    /*public function pdf(){
+    public function pdf()
+    {
         $estudiantes = DB::table('estudiante')
-        ->join('programa', 'estudiante.estu_programa','=','programa.id')
-        ->get();
+            ->join('programa', 'estudiante.estu_programa', '=', 'programa.id')
+            ->get();
         if ($estudiantes->count() <= 0) {
             Alert::warning('No hay registros');
             return redirect('/estudiante');
@@ -220,7 +234,7 @@ class EstudianteController extends Controller
 
             return $pdf->stream('estudiantes-reporte.pdf');
         }
-    }*/
+    }
 
     /*public function export(){
         $estudiantes = Estudiante::all();
@@ -281,4 +295,3 @@ class EstudianteController extends Controller
         }
     }*/
 }
-  

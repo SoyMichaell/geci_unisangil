@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/docente/{{$persona->id}}/mostrarevaluacion">Evaluación</a> / <a href="/docente">Docente</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-user"></i> Módulo docentes</h1>
     @section('message')

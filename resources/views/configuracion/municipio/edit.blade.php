@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('navegar')
+    <a href="/municipio/edit">Editar</a> / <a href="/municipio">Municipio</a>
+@endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición de datos</h1>
     <p>Formulario de actualización de la información</p>

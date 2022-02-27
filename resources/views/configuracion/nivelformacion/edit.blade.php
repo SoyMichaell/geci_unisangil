@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('navegar')
+    <a href="/nivelformacion/edit">Editar</a> / <a href="/nivelformacion">Nivel de formación</a>
+@endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición de datos</h1>
 @section('message')

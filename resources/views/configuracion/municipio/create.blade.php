@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('navegar')
+    <a href="/municipio/create">Crear</a> / <a href="/municipio">Municipio</a>
+@endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1> <!--TODO: Validad icono-->
 @section('message')

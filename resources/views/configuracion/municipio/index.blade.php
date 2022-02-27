@@ -1,15 +1,17 @@
 @extends('layouts.app')
+@section('navegar')
+    <a href="/municipio">Municipio</a>
+@endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-cog"></i> Configuración / municipio</h1>
     <p>Municipios: Listado municipios o sedes registrados</p>
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="tile col-md-12 p-3">
-            <div class="card-body">
+        <div class="tile col-md-12">
                 <div class="row">
                     <div class="col-md-7">
-                        <h3>Lista de registros</h3> <!-- TODO: arreglar botones pdf y excel-->
+                        <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                     </div>
                     <div class="col-md-5 d-flex justify-content-end align-items-start">
                         <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('municipio/pdf') }}"
@@ -58,7 +60,6 @@
                             @endforeach
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
     </div>

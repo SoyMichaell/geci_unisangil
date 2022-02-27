@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('navegar')
+    <a href="/municipio/show">Vista</a> / <a href="/municipio">Municipio</a>
+@endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-book" ></i> Vista registro</h1>
 @section('message')

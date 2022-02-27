@@ -44,5 +44,4 @@ class Estudiante extends Model
     public function trabajos(){
         return $this->hasMany(Trabajo::class, 'id');
     }
-
 }

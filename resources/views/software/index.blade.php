@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/software">Software</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo TIC'S</h1>
     @section('message')

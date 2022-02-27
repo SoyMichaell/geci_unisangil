@@ -123,8 +123,8 @@
                 @yield('message')
             </div>
             <ul class="app-breadcrumb breadcrumb">
-                <li class="breadcrumb-item"><i class="fa fa-home fa-lg"></i></li>
                 <li class="breadcrumb-item"><a href="#">@yield('navegar')</a></li>
+                <li class="breadcrumb-item"><a href="/home"><i class="fa fa-home fa-lg"></i></a></li>
             </ul>
         </div>
         @yield('content')

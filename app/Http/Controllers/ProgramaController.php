@@ -18,7 +18,8 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $programas = Programa::all();
         $facultades = Facultad::all();
         $municipios = Municipio::all();
@@ -32,7 +33,8 @@ class ProgramaController extends Controller
             ->with('users', $users);
     }
 
-    public function create(){
+    public function create()
+    {
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
@@ -40,20 +42,20 @@ class ProgramaController extends Controller
         $metodologias = Metodologia::all();
 
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario',2)
+            ->where('per_tipo_usuario', 2)
             ->where('per_id_estado', '=', 'activo')
-            ->orWhere('per_tipo_usuario',5)
+            ->orWhere('per_tipo_usuario', 5)
             ->where('per_id_estado', '=', 'activo')
             ->get();
 
         /*collect*/
-        $estadoprogramas = collect(['Activo','Inactivo']);
+        $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
-        $programasCiclo = collect(['Si','No']);
+        $programasCiclo = collect(['Si', 'No']);
         $programasCiclo->all();
-        $duraccions = collect([1,2,3,4,5,6,7,8,9,10]);
+        $duraccions = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         $duraccions->all();
-        $periodoAdmision = collect(['Trimestral','Semestral','Anual']);
+        $periodoAdmision = collect(['Trimestral', 'Semestral', 'Anual']);
         $periodoAdmision->all();
 
         return view('programa.create')
@@ -69,7 +71,8 @@ class ProgramaController extends Controller
             ->with('periodoAdmision', $periodoAdmision);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $rules = [
             'pro_nombre' => 'required',
@@ -112,130 +115,174 @@ class ProgramaController extends Controller
         $programas->pro_tipo_norma = $request->get('pro_norma');
         $programas->pro_id_director = $request->get('pro_director_programa');
 
-        /*$valiDi = DB::table('programas')->where('pro_director_programa', $request->get('pro_director_programa'));
-        $sniesDi = DB::table('programas')->where('pro_codigosnies', $request->get('pro_codigosnies'));
+        $ExisteDirector = DB::table('programa')->where('pro_id_director', $request->get('pro_director_programa'))->get();
 
-        if ($valiDi->count() > 0) {
-            Alert::warning('El docente elegido como director de programa, ya esta asociado a un programa');
+        if ($ExisteDirector->count() > 0) {
+            Alert::warning('Advertencia', 'El docente elegido como director de programa, ya esta asociado a un programa');
             return back()->withInput();
-        } else if ($sniesDi->count() > 0) {
-            Alert::warning('El programa que esta intentando inscribir, ya se encuentra registrado');
-            return back()->withInput();
-        } else {*/
+        } else {
+            $programas->save();
+            Alert::success('Exitoso', 'El programa se ha registrado con exito');
+            return redirect('/programa');
+        }
+    }
+
+    public function show($id)
+    {
+        $departamentos = Departamento::all();
+        $municipios = Municipio::all();
+        $facultades = Facultad::all();
+        $niveles = NivelFormacion::all();
+        $metodologias = Metodologia::all();
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->where('per_id_estado', '=', 'activo')
+            ->orWhere('per_tipo_usuario', 5)
+            ->where('per_id_estado', '=', 'activo')
+            ->get();
+        $programa = Programa::find($id);
+        $estadoprogramas = collect(['Activo', 'Inactivo']);
+        $estadoprogramas->all();
+        $programasCiclo = collect(['Si', 'No']);
+        $programasCiclo->all();
+        $duraccions = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        $duraccions->all();
+        $periodoAdmision = collect(['Trimestral', 'Semestral', 'Anual']);
+        $periodoAdmision->all();
+        return view('programa.show')->with('programa', $programa)
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios)
+            ->with('facultades', $facultades)
+            ->with('estadoprogramas', $estadoprogramas)
+            ->with('niveles', $niveles)
+            ->with('metodologias', $metodologias)
+            ->with('docentes', $docentes)
+            ->with('programasCiclo', $programasCiclo)
+            ->with('duraccions', $duraccions)
+            ->with('periodoAdmision', $periodoAdmision);
+    }
+
+    public function edit($id)
+    {
+        $departamentos = Departamento::all();
+        $municipios = Municipio::all();
+        $facultades = Facultad::all();
+        $niveles = NivelFormacion::all();
+        $metodologias = Metodologia::all();
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->where('per_id_estado', '=', 'activo')
+            ->orWhere('per_tipo_usuario', 5)
+            ->where('per_id_estado', '=', 'activo')
+            ->get();
+        $programa = Programa::find($id);
+        $estadoprogramas = collect(['Activo', 'Inactivo']);
+        $estadoprogramas->all();
+        $programasCiclo = collect(['Si', 'No']);
+        $programasCiclo->all();
+        $duraccions = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        $duraccions->all();
+        $periodoAdmision = collect(['Trimestral', 'Semestral', 'Anual']);
+        $periodoAdmision->all();
+        return view('programa.edit')->with('programa', $programa)
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios)
+            ->with('facultades', $facultades)
+            ->with('estadoprogramas', $estadoprogramas)
+            ->with('niveles', $niveles)
+            ->with('metodologias', $metodologias)
+            ->with('docentes', $docentes)
+            ->with('programasCiclo', $programasCiclo)
+            ->with('duraccions', $duraccions)
+            ->with('periodoAdmision', $periodoAdmision);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $rules = [
+            'pro_nombre' => 'required',
+            'pro_titulo' => 'required',
+            'pro_codigosnies' => 'required',
+            'pro_resolucion' => 'required',
+            'pro_fecha_ult' => 'required',
+            'pro_fecha_prox' => 'required',
+            'pro_norma' => 'required'
+        ];
+
+        $messages = [
+            'pro_nombre.required' => 'El campo programa es requerido',
+            'pro_titulo.required' => 'El campo titulo es requerido',
+            'pro_codigosnies.required' => 'El campo codigo snies es requerido',
+            'pro_resolucion.required' => 'El campo resolución es requerido',
+            'pro_fecha_ult.required' => 'El campo fecha ultimo registro es requerido',
+            'pro_fecha_prox.required' => 'El campo fecha próximo registro es requerido',
+            'pro_norma.required' => 'El campo norma de creación programa es requerido'
+        ];
+
+        $this->validate($request, $rules, $messages);
+
+        $programas = Programa::find($id);
+        $programas->pro_estado = $request->get('pro_estado_programa');
+        $programas->pro_departamento = $request->get('pro_departamento');
+        $programas->pro_municipio = $request->get('pro_municipio');
+        $programas->pro_facultad = $request->get('pro_facultad');
+        $programas->pro_nombre = $request->get('pro_nombre');
+        $programas->pro_titulo = $request->get('pro_titulo');
+        $programas->pro_codigosnies = $request->get('pro_codigosnies');
+        $programas->pro_resolucion = $request->get('pro_resolucion');
+        $programas->pro_fecha_ult = $request->get('pro_fecha_ult');
+        $programas->pro_fecha_prox = $request->get('pro_fecha_prox');
+        $programas->pro_nivel_formacion = $request->get('pro_nivel_formacion');
+        $programas->pro_programa_ciclo = $request->get('pro_programa_ciclos');
+        $programas->pro_metodologia = $request->get('pro_metodologia');
+        $programas->pro_duraccion = $request->get('pro_duraccion');
+        $programas->pro_periodo_admision = $request->get('pro_periodo');
+        $programas->pro_tipo_norma = $request->get('pro_norma');
+        $programas->pro_id_director = $request->get('pro_director_programa');
+
         $programas->save();
-
-
-        Alert::success('Registro Exitoso');
-
+        Alert::success('Exitoso', 'El programa se ha actulizado con exito');
         return redirect('/programa');
     }
 
-    public function show($id){
-        $departamentos = Departamento::all();
-        $municipios = Municipio::all();
-        $facultades = Facultad::all();
-        $niveles = NivelFormacion::all();
-        $metodologias = Metodologia::all();
-        $docentes = Docente::all();
-        $programa = Programa::find($id);
-        return view('programa.show')->with('programa', $programa)
-            ->with('departamentos', $departamentos)
-            ->with('municipios', $municipios)
-            ->with('facultades', $facultades)
-            ->with('niveles', $niveles)
-            ->with('metodologias', $metodologias)
-            ->with('docentes', $docentes);
-    }
-
-    public function edit($id){
-        $departamentos = Departamento::all();
-        $municipios = Municipio::all();
-        $facultades = Facultad::all();
-        $niveles = NivelFormacion::all();
-        $metodologias = Metodologia::all();
-        $docentes = Docente::all();
-        $programa = Programa::find($id);
-        return view('programa.show')->with('programa', $programa)
-            ->with('departamentos', $departamentos)
-            ->with('municipios', $municipios)
-            ->with('facultades', $facultades)
-            ->with('niveles', $niveles)
-            ->with('metodologias', $metodologias)
-            ->with('docentes', $docentes);
-    }
-
-    public function update(Request $request, $id){
-        $programa = Programa::find($id);
-        $programa->pro_estado = $request->get('pro_estado_programa');
-        $programa->pro_departamento = $request->get('pro_departamento');
-        $programa->pro_municipio = $request->get('pro_municipio');
-        $programa->pro_facultad = $request->get('pro_facultad');
-        $programa->pro_nombre = $request->get('pro_nombre');
-        $programa->pro_titulo = $request->get('pro_titulo');
-        $programa->pro_codigosnies = $request->get('pro_codigosnies');
-        $programa->pro_resolucion = $request->get('pro_resolucion');
-        $programa->pro_fecha_ult = $request->get('pro_fecha_ult');
-        $programa->pro_fecha_prox = $request->get('pro_fecha_prox');
-        $programa->pro_nivel_formacion = $request->get('pro_nivel_formacion');
-        $programa->pro_programa_ciclos = $request->get('pro_programa_ciclos');
-        $programa->pro_metodologia = $request->get('pro_metodologia');
-        $programa->pro_duraccion = $request->get('pro_duraccion');
-        $programa->pro_periodo = $request->get('pro_periodo');
-        $programa->pro_norma = $request->get('pro_norma');
-        $programa->pro_director_programa = $request->get('pro_director_programa');
-
-        $programa->save();
-
-        Alert::success('Registro Actualizado');
-
-        return redirect('/programa');
-    }
-
-    public function destroy($id){
+    public function destroy($id)
+    {
         $programa = Programa::find($id);
 
-        /*$veriEstu = DB::table('estudiantes')->where('estu_programa', $id);
-        $veriInve = DB::table('investigacion')->where('inv_programa', $id);
-        $veriPrue = DB::table('pruebas_saber')->where('pr_id_programa', $id);
-        $veriLab = DB::table('uso_laboratorio')->where('lab_id_programa', $id);
+        $ExisteEst = DB::table('estudiante')->where('estu_programa', $id);
+        $ExistePlan = DB::table('programa_plan_estudio')->where('pp_id_programa', $id);
+        $ExisteAsig = DB::table('programa_plan_estudio_asignatura')->where('asig_id_programa', $id);
 
-        if ($veriEstu->count() > 0) {
-            Alert::warning('No se pude eliminar el programa, debido a que esta asociado a otra entidad');
+        if($ExisteEst->count()>0 || $ExistePlan->count()>0 || $ExisteAsig->count()>0){
+            Alert::warning('Advertencia', 'El programa no se puede eliminar, debio a que se encuentra en uso por otra entidad');
             return redirect('/programa');
-        } else if ($veriInve->count() > 0) {
-            Alert::warning('No se pude eliminar el programa, debido a que esta asociado a otra entidad');
-            return redirect('/programa');
-        } else if ($veriPrue->count() > 0) {
-            Alert::warning('No se pude eliminar el programa, debido a que esta asociado a otra entidad');
-            return redirect('/programa');
-        } else if ($veriLab->count() > 0) {
-            Alert::warning('No se pude eliminar el programa, debido a que esta asociado a otra entidad');
-            return redirect('/programa');
-        } else {*/
+        }
+
         $programa->delete();
 
-
-
-        Alert::success('Registro Eliminado');
+        Alert::success('Exitoso', 'El programa se ha eliminado con exito');
 
         return redirect('/programa');
     }
 
-    public function mostrarplan(){
+    public function mostrarplan()
+    {
         $plans = ProgramaPlan::all();
         return view('programa/plan.index')
-        ->with('plans', $plans);
+            ->with('plans', $plans);
     }
 
-    public function crearplan(){
+    public function crearplan()
+    {
         $programas = Programa::all();
         $municipios = Municipio::all();
         return view('programa/plan.create')
-        ->with('programas', $programas)
-        ->with('municipios', $municipios);
+            ->with('programas', $programas)
+            ->with('municipios', $municipios);
     }
 
-    public function registroplan(Request $request){
+    public function registroplan(Request $request)
+    {
         $rules = [
             'pp_id_sede' => 'required|not_in:0',
             'pp_id_programa' => 'required|not_in:0',
@@ -254,7 +301,7 @@ class ProgramaController extends Controller
             'pp_estado.required' => 'El campo estado es requerido'
         ];
 
-        $this->validate($request,$rules,$messages);
+        $this->validate($request, $rules, $messages);
 
         $plan = new ProgramaPlan();
         $plan->pp_id_sede = $request->get('pp_id_sede');
@@ -263,24 +310,26 @@ class ProgramaController extends Controller
         $plan->pp_creditos = $request->get('pp_creditos');
         $plan->pp_no_asignaturas = $request->get('pp_no_asignaturas');
         $plan->pp_estado = $request->get('pp_estado');
-        
+
         $plan->save();
-        
-        Alert::success('Exitoso','El plan de estudio se creo');
+
+        Alert::success('Exitoso', 'El plan de estudio se creo');
         return redirect('programa/mostrarplan');
     }
 
-    public function editarplan($id){
+    public function editarplan($id)
+    {
         $programas = Programa::all();
         $municipios = Municipio::all();
         $plan = ProgramaPlan::find($id);
         return view('programa/plan.edit')
-        ->with('programas', $programas)
-        ->with('municipios', $municipios)
-        ->with('plan', $plan);
+            ->with('programas', $programas)
+            ->with('municipios', $municipios)
+            ->with('plan', $plan);
     }
 
-    public function actualizarplan(Request $request, $id){
+    public function actualizarplan(Request $request, $id)
+    {
         $rules = [
             'pp_id_sede' => 'required|not_in:0',
             'pp_id_programa' => 'required|not_in:0',
@@ -299,7 +348,7 @@ class ProgramaController extends Controller
             'pp_estado.required' => 'El campo estado es requerido'
         ];
 
-        $this->validate($request,$rules,$messages);
+        $this->validate($request, $rules, $messages);
 
         $plan = ProgramaPlan::find($id);
         $plan->pp_id_sede = $request->get('pp_id_sede');
@@ -308,41 +357,43 @@ class ProgramaController extends Controller
         $plan->pp_creditos = $request->get('pp_creditos');
         $plan->pp_no_asignaturas = $request->get('pp_no_asignaturas');
         $plan->pp_estado = $request->get('pp_estado');
-        
+
         $plan->save();
-        
-        Alert::success('Exitoso','El plan de estudio se ha actualizado');
+
+        Alert::success('Exitoso', 'El plan de estudio se ha actualizado');
         return redirect('programa/mostrarplan');
     }
 
-    public function estado($id){
-        
+    public function estado($id)
+    {
+
         $estado = DB::table('programa_plan_estudio')
             ->where('id', $id)
             ->first();
 
-        if($estado->pp_estado == 'activo'){
+        if ($estado->pp_estado == 'activo') {
             DB::table('programa_plan_estudio')
-                ->where('programa_plan_estudio.id',$id)
+                ->where('programa_plan_estudio.id', $id)
                 ->update([
                     'pp_estado' => 'inactivo'
                 ]);
 
-            Alert::success('Estado','El estado ha sido actualizado');
+            Alert::success('Estado', 'El estado ha sido actualizado');
             return redirect('programa/mostrarplan');
-        }else if($estado->pp_estado == 'inactivo'){
+        } else if ($estado->pp_estado == 'inactivo') {
             DB::table('programa_plan_estudio')
-                ->where('programa_plan_estudio.id',$id)
+                ->where('programa_plan_estudio.id', $id)
                 ->update([
                     'pp_estado' => 'activo'
                 ]);
 
-                Alert::success('Estado','El estado ha sido actualizado');
+            Alert::success('Estado', 'El estado ha sido actualizado');
             return redirect('programa/mostrarplan');
         }
     }
 
-    public function mostrarasignatura(){
+    public function mostrarasignatura()
+    {
         $asignaturas = ProgramaAsignatura::all();
         $plans = ProgramaPlan::all();
         $programas = Programa::all();
@@ -354,7 +405,8 @@ class ProgramaController extends Controller
             ->with('municipios', $municipios);
     }
 
-    public function crearasignatura(){
+    public function crearasignatura()
+    {
         $municipios = Municipio::all();
         $programas = Programa::all();
         $plans = ProgramaPlan::all();
@@ -364,7 +416,8 @@ class ProgramaController extends Controller
             ->with('plans', $plans);
     }
 
-    public function registroasignatura (Request $request){
+    public function registroasignatura(Request $request)
+    {
         $rules = [
             'asig_id_sede' => 'required|not_in:0',
             'asig_id_programa' => 'required|not_in:0',
@@ -389,7 +442,7 @@ class ProgramaController extends Controller
             'asig_estado.required' => 'El campo estado es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $asignatura = new ProgramaAsignatura();
         $asignatura->asig_id_sede = $request->get('asig_id_sede');
@@ -408,7 +461,8 @@ class ProgramaController extends Controller
         return redirect('/programa/mostrarasignatura');
     }
 
-    public function editarasignatura($id,){
+    public function editarasignatura($id,)
+    {
         $municipios = Municipio::all();
         $programas = Programa::all();
         $plans = ProgramaPlan::all();
@@ -420,7 +474,8 @@ class ProgramaController extends Controller
             ->with('asignatura', $asignatura);
     }
 
-    public function actualizarasignatura(Request $request, $id){
+    public function actualizarasignatura(Request $request, $id)
+    {
         $rules = [
             'asig_id_sede' => 'required|not_in:0',
             'asig_id_programa' => 'required|not_in:0',
@@ -445,7 +500,7 @@ class ProgramaController extends Controller
             'asig_estado.required' => 'El campo estado es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $asignatura = ProgramaAsignatura::find($id);
         $asignatura->asig_id_sede = $request->get('asig_id_sede');
@@ -464,20 +519,23 @@ class ProgramaController extends Controller
         return redirect('/programa/mostrarasignatura');
     }
 
-    public function eliminarasignatura($id){
+    public function eliminarasignatura($id)
+    {
         $asignatura = ProgramaAsignatura::find($id);
         $asignatura->delete();
-        Alert::success('Exitoso','La asignatura se elimino correctamente');
+        Alert::success('Exitoso', 'La asignatura se elimino correctamente');
         return redirect('programa/mostrarasignatura');
     }
 
-    public function mostrarhorario(){
+    public function mostrarhorario()
+    {
         $horarios = ProgramaHorario::all();
         return view('programa/horario.index')
             ->with('horarios', $horarios);
     }
 
-    public function crearhorario(){
+    public function crearhorario()
+    {
         $horarios = ProgramaHorario::all();
         $asignaturas = ProgramaAsignatura::all();
         $personas = DB::table('persona')
@@ -490,7 +548,8 @@ class ProgramaController extends Controller
             ->with('horarios', $horarios);
     }
 
-    public function registrohorario(Request $request){
+    public function registrohorario(Request $request)
+    {
         $rules = [
             'pph_year' => 'required',
             'pph_semestre' => 'required|not_in:0',
@@ -505,7 +564,7 @@ class ProgramaController extends Controller
             'pph_grupo.required' => 'El campo grupo es requerido',
             'pph_id_docente.required' => 'El campo docente es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $horario = new ProgramaHorario();
         $horario->pph_year = $request->get('pph_year');
@@ -518,11 +577,12 @@ class ProgramaController extends Controller
 
         $horario->save();
 
-        Alert::success('Exitoso','Materia asignada a docente y horario');
+        Alert::success('Exitoso', 'Materia asignada a docente y horario');
         return redirect('programa/mostrarhorario');
     }
 
-    public function editarhorario($id){
+    public function editarhorario($id)
+    {
         $horario = ProgramaHorario::find($id);
         $asignaturas = ProgramaAsignatura::all();
         $personas = DB::table('persona')
@@ -535,7 +595,8 @@ class ProgramaController extends Controller
             ->with('horario', $horario);
     }
 
-    public function actualizarhorario(Request $request, $id){
+    public function actualizarhorario(Request $request, $id)
+    {
         $rules = [
             'pph_year' => 'required',
             'pph_semestre' => 'required|not_in:0',
@@ -550,7 +611,7 @@ class ProgramaController extends Controller
             'pph_grupo.required' => 'El campo grupo es requerido',
             'pph_id_docente.required' => 'El campo docente es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $horario = ProgramaHorario::find($id);
         $horario->pph_year = $request->get('pph_year');
@@ -563,22 +624,25 @@ class ProgramaController extends Controller
 
         $horario->save();
 
-        Alert::success('Exitoso','Asignación a docente y horario actualizada');
+        Alert::success('Exitoso', 'Asignación a docente y horario actualizada');
         return redirect('programa/mostrarhorario');
     }
 
-    public function eliminarhorario($id){
+    public function eliminarhorario($id)
+    {
         $horario = ProgramaHorario::find($id);
         $horario->delete();
-        Alert::success('Exitoso','Asignación docente y horario eliminada');
+        Alert::success('Exitoso', 'Asignación docente y horario eliminada');
         return redirect('programa/mostrarhorario');
     }
 
-    public function selectivoplan($id){
+    public function selectivoplan($id)
+    {
         return DB::table('programa_plan_estudio')->where('pp_id_programa', $id)->get();
     }
 
-    public function selectivomunicipio($id){
+    public function selectivomunicipio($id)
+    {
         return DB::table('municipio')->where('mun_departamento', $id)->get();
-    }  
+    }
 }

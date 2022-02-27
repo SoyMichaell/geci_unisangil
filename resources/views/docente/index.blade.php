@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/docente">Docente</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-user"></i> Módulo docentes</h1>
     @section('message')
@@ -59,24 +62,27 @@
                                         <form
                                             action="/docente/{{ $persona->id }}/{{ $persona->per_id_estado }}/estado"
                                             method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/docente/{{ $persona->id }}"
-                                                    title="Ver registro"><i class="fa-solid fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="{{ url('docente/' . $persona->id . '/directorcompletar') }}"
-                                                    title="Editar registro"><i
-                                                        class="fa-solid fa-pen-to-square"></i></a>
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="{{ url('docente/' . $persona->id . '/mostrarcontrato') }}"
-                                                    title="Agregar contrato"><i class="fa-solid fa-folder-tree"></i></a>
-                                                <a class="btn btn-outline-primary btn-sm"
-                                                    href="{{ url('docente/' . $persona->id . '/pdfasignatura') }}"
-                                                    title="Agregar asignaturas"><i
-                                                        class="fa-solid fa-file-pdf"></i></a>
-                                                <a class="btn btn-outline-primary btn-sm"
-                                                    href="{{ url('docente/' . $persona->id . '/mostrarevaluacion') }}"
-                                                    title="Agregar evaluación docente"><i
-                                                        class="fa-solid fa-chalkboard-user"></i></a>
+                                            <div class="d-flex justify-content-end">
+                                                @if ($persona->per_id_estado == 'activo')
+                                                    <a class="btn btn-sm" href="/docente/{{ $persona->id }}"
+                                                        title="Ver registro"><i class="fa-solid fa-folder-open"></i></a>
+                                                    <a class="btn btn-outline-info btn-sm"
+                                                        href="{{ url('docente/' . $persona->id . '/directorcompletar') }}"
+                                                        title="Editar registro"><i
+                                                            class="fa-solid fa-pen-to-square"></i></a>
+                                                    <a class="btn btn-outline-info btn-sm"
+                                                        href="{{ url('docente/' . $persona->id . '/mostrarcontrato') }}"
+                                                        title="Agregar contrato"><i
+                                                            class="fa-solid fa-folder-tree"></i></a>
+                                                    <a class="btn btn-outline-primary btn-sm"
+                                                        href="{{ url('docente/' . $persona->id . '/pdfasignatura') }}"
+                                                        title="Agregar asignaturas"><i
+                                                            class="fa-solid fa-file-pdf"></i></a>
+                                                    <a class="btn btn-outline-primary btn-sm"
+                                                        href="{{ url('docente/' . $persona->id . '/mostrarevaluacion') }}"
+                                                        title="Agregar evaluación docente"><i
+                                                            class="fa-solid fa-chalkboard-user"></i></a>
+                                                @endif
                                                 @csrf
                                                 @method('PUT')
                                                 @if ($persona->per_id_estado == 'activo')
