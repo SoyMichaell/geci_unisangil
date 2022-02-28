@@ -120,6 +120,7 @@ Route::resource('asignatura', App\Http\Controllers\AsignaturaController::class);
 Route::put('trabajo/{trabajo}/faseestado', [App\Http\Controllers\TrabajoController::class, 'faseestado']);
 Route::put('trabajo/{trabajo}/fasejurado', [App\Http\Controllers\TrabajoController::class, 'fasejurado']);
 Route::put('trabajo/{trabajo}/faseacta', [App\Http\Controllers\TrabajoController::class, 'faseacta']);
+Route::put('trabajo/{trabajo}/registroobservacion', [App\Http\Controllers\TrabajoController::class, 'registroobservacion']);
 Route::resource('trabajo', App\Http\Controllers\TrabajoController::class);
 Route::resource('modalidad', App\Http\Controllers\ModalidadGradoController::class);
 

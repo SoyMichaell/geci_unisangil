@@ -316,6 +316,7 @@
                             <input class="form-control col-md-5" type="file" name="tra_acta_sustentacion_soporte[]"
                                 id="tra_acta_sustentacion_soporte" multiple>
                             <span><small>{{ $trabajo->tra_acta_sustentacion_soporte }}</small></span>
+                            <span><small>Cargar los 2 soporte de actas en un archivo .zip o .rar</small></span>
                         </div>
                         <hr>
                         <div class="mb-3 form-inline">
@@ -336,6 +337,7 @@
                             <input class="form-control col-md-5" type="file" name="tra_acta_grado_soporte[]"
                                 id="tra_acta_grado_soporte" multiple>
                             <p><small>{{ $trabajo->tra_acta_grado_soporte }}</small></p>
+                            <span><small>Cargar los 2 soporte de actas en un archivo .zip o .rar</small></span>
                         </div>
                         <hr>
                         <div class="mb-3 form-inline">
@@ -355,7 +357,7 @@
                             </div>
                         </div>
                         <hr>
-                        <div class="row mb-0 mx-auto mt-4">
+                        <div class="row mb-0 mt-4">
                             <div class="col-md-12 offset-md-12">
                                 <button type="submit" class="btn btn-success">
                                     {{ __('Siguiente') }}
@@ -368,30 +370,69 @@
             <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 5 ? 'show active tile p-3' : 'tile p-3' }}"
                 id="fasecontrato" role="tabpanel" aria-labelledby="fasecontrato-tab">
                 @if ($contratos->count() > 0)
-                    <div class="row mb-3">
-                        <div class="card col-md-6">
-                            <div class="card-header">Jurado</div>
-                            <div class="card-body">
-                                <h4>{{$jurado1->per_nombre.' '.$jurado1->per_apellido}}</h4>
-                                <p>Estado de pago</p>
-                            </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>Listado contratos asociados a los jurados asignados</h4>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre completo</th>
+                                        <th>Contrato</th>
+                                        <th>Estado pago</th>
+                                        <th>---</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>{{ $jurado1->per_nombre . ' ' . $jurado1->per_apellido }}</td>
+                                        <td><a
+                                                href="/datos/contrato/{{ $jurado1->doco_url_soporte }}">{{ $jurado1->doco_url_soporte }}</a>
+                                        </td>
+                                        <td>{{ $jurado1->doco_estado }}</td>
+                                        <td><a href="/docente">Cambiar estado de pago</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>{{ $jurado2->per_nombre . ' ' . $jurado2->per_apellido }}</td>
+                                        <td><a
+                                                href="/datos/contrato/{{ $jurado2->doco_url_soporte }}">{{ $jurado2->doco_url_soporte }}</a>
+                                        </td>
+                                        <td>{{ $jurado2->doco_estado }}</td>
+                                        <td><a href="/docente">Cambiar estado de pago</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="card col-md-6">
-                            <div class="card-header">Jurado</div>
-                            <div class="card-body">
-                                <h4>{{$jurado2->per_nombre.' '.$jurado2->per_apellido}}</h4>
-                            </div>
-                        </div>
-                    @else
-                        <div class="alert alert-primary" role="alert">
-                            <strong>
-                                <h3>No registra contratos</h3>
-                            </strong>
-                        </div>
+                    </div>
+                @else
+                    <div class="alert alert-primary" role="alert">
+                        <strong>
+                            <h3>No registra contratos</h3>
+                        </strong>
+                    </div>
                 @endif
             </div>
             <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 6 ? 'show active tile p-3' : 'tile p-3' }}"
                 id="fasefinal" role="tabpanel" aria-labelledby="fasefinal-tab">
+                <form action="/trabajo/{{$trabajo->id}}/registroobservacion" method="post">
+                    @csrf
+                    @method('PUT')
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label for="tra_obsevacion">Observación</label>
+                            <textarea class="form-control" name="tra_observacion" id="tra_observacion" cols="30" rows="10">{{old('tra_obsevacion')}}</textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-0 ">
+                        <div class="col-md-12 offset-md-12">
+                            <button type="submit" class="btn btn-success">
+                                {{ __('Finalizar') }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
