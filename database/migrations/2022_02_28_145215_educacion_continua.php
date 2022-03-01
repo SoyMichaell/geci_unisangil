@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class PlanEstudioAsignaturaHorario extends Migration
+class EducacionContinua extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,13 @@ class PlanEstudioAsignaturaHorario extends Migration
      */
     public function up()
     {
-        Schema::create('programa_plan_asignatura_horario', function (Blueprint $table) {
+        Schema::create('ext_educacion_continua', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('pph_year');
-            $table->integer('pph_semestre');
-            $table->integer('pph_id_asignatura');
-            $table->string('pph_grupo');
-            $table->integer('pph_id_docente');
-            $table->text('pph_horario');
-            $table->string('pph_aula');
+            $table->string('extedu_semestre', 4);
+            $table->string('extedu_codigo_curso', 20);
+            $table->integer('extedu_numero_horas');
+            $table->integer('extedu_tipo_curso');
+            $table->integer('extedu_valor_curso');
             $table->timestamps();
         });
     }

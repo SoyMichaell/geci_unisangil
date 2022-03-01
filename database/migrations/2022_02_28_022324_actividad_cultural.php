@@ -20,15 +20,15 @@ class ActividadCultural extends Migration
             $table->string('extcul_codigo_unidad_org', 30);
             $table->string('extcul_codigo_actividad', 15);
             $table->string('extcul_descripcion_actividad', 200);
-            $table->integer('extul_tipo_actividad', 2);
+            $table->integer('extul_tipo_actividad');
             $table->date('extcul_fecha_inicio');
             $table->date('extcul_fecha_fin');
-            $table->integer('extcul_fuente_nacional', 2);
-            $table->integer('extcul_valor_financiacion_nac', 10);
+            $table->integer('extcul_fuente_nacional');
+            $table->integer('extcul_valor_financiacion_nac');
             $table->string('extcul_nombre_institucion', 200);
-            $table->integer('extcul_fuente_internacional', 2);
-            $table->integer('extcul_pais_financiador', 3);
-            $table->integer('extcul_valor_internacional', 10);
+            $table->integer('extcul_fuente_internacional');
+            $table->integer('extcul_pais_financiador');
+            $table->integer('extcul_valor_internacional');
             $table->timestamps();
         });
     }

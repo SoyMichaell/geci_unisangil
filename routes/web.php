@@ -130,3 +130,39 @@ Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
 /*Rutas usuario*/
 Route::resource('usuario', App\Http\Controllers\UserController::class);
+
+
+/*Rutas extensión*/
+//Rutas actividad
+Route::get('extension/mostraractividad', [App\Http\Controllers\ExtensionController::class, 'mostraractividad']);
+Route::get('extension/crearactividad', [App\Http\Controllers\ExtensionController::class, 'crearactividad']);
+Route::post('extension/registroactividad', [App\Http\Controllers\ExtensionController::class, 'registroactividad']);
+Route::get('extension/{actividad}/editaractividad', [App\Http\Controllers\ExtensionController::class, 'editaractividad']);
+Route::get('extension/{actividad}/veractividad', [App\Http\Controllers\ExtensionController::class, 'veractividad']);
+Route::put('extension/{actividad}/actualizaractividad', [App\Http\Controllers\ExtensionController::class, 'actualizaractividad']);
+Route::delete('extension/{actividad}/eliminaractividad', [App\Http\Controllers\ExtensionController::class, 'eliminaractividad']);
+//Rutas actividad recurso
+Route::get('extension/mostraractrecurso', [App\Http\Controllers\ExtensionController::class, 'mostraractrecurso']);
+Route::get('extension/crearactrecurso', [App\Http\Controllers\ExtensionController::class, 'crearactrecurso']);
+Route::post('extension/registroactrecurso', [App\Http\Controllers\ExtensionController::class, 'registroactrecurso']);
+Route::get('extension/{recurso}/editaractrecurso', [App\Http\Controllers\ExtensionController::class, 'editaractrecurso']);
+Route::get('extension/{recurso}/veractrecurso', [App\Http\Controllers\ExtensionController::class, 'veractrecurso']);
+Route::put('extension/{recurso}/actualizaractrecurso', [App\Http\Controllers\ExtensionController::class, 'actualizaractrecurso']);
+Route::delete('extension/{recurso}/eliminaractrecurso', [App\Http\Controllers\ExtensionController::class, 'eliminaractrecurso']);
+//Rutas consultoria
+Route::get('extension/mostrarconsultoria', [App\Http\Controllers\ExtensionController::class, 'mostrarconsultoria']);
+Route::get('extension/crearconsultoria', [App\Http\Controllers\ExtensionController::class, 'crearconsultoria']);
+Route::post('extension/registroconsultoria', [App\Http\Controllers\ExtensionController::class, 'registroconsultoria']);
+Route::get('extension/{consultoria}/editarconsultoria', [App\Http\Controllers\ExtensionController::class, 'editarconsultoria']);
+Route::get('extension/{consultoria}/verconsultoria', [App\Http\Controllers\ExtensionController::class, 'verconsultoria']);
+Route::put('extension/{consultoria}/actualizarconsultoria', [App\Http\Controllers\ExtensionController::class, 'actualizarconsultoria']);
+Route::delete('extension/{consultoria}/eliminarconsultoria', [App\Http\Controllers\ExtensionController::class, 'eliminarconsultoria']);
+//Rutas consultoria recurso
+Route::get('extension/mostrarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'mostrarconsurecurso']);
+Route::get('extension/crearconsurecurso', [App\Http\Controllers\ExtensionController::class, 'crearconsurecurso']);
+Route::post('extension/registroconsurecurso', [App\Http\Controllers\ExtensionController::class, 'registroconsurecurso']);
+Route::get('extension/{recurso}/editarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'editarconsurecurso']);
+Route::get('extension/{recurso}/verconsurecurso', [App\Http\Controllers\ExtensionController::class, 'verconsurecurso']);
+Route::put('extension/{recurso}/actualizarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'actualizarconsurecurso']);
+Route::delete('extension/{recurso}/eliminarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'eliminarconsurecurso']);
+Route::resource('extension', App\Http\Controllers\ExtensionController::class);

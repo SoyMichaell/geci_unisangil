@@ -20,7 +20,7 @@ class ConsultoriaRecursoHumano extends Migration
             $table->string('extcor_codigo_consultoria', 15);
             $table->string('extcor_tipo_documento', 2);
             $table->string('extcor_numero_documento', 30);
-            $table->integer('extcor_id_nivel_estudio', 2);
+            $table->integer('extcor_id_nivel_estudio');
             $table->timestamps();
         });
     }

@@ -111,6 +111,9 @@
                     <li><a class="treeview-item" href="{{ url('software') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             TIC'S</a></li>
+                    <li><a class="treeview-item" href="{{ url('extension') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Extensión</a></li>
                 </ul>
             </li>
         </ul>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Tipousuario extends Migration
+class Fuentenacional extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class Tipousuario extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_usuario', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('tip_nombre');
+        Schema::create('compl_fuente_nacional', function (Blueprint $table) {
+            $table->integer('id')->primary()->increment();
+            $table->string('cofuna_nombre');
             
             $table->timestamps();
         });

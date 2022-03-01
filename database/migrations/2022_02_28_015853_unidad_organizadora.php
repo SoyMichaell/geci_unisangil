@@ -17,7 +17,6 @@ class UnidadOrganizadora extends Migration
             $table->bigIncrements('id');
             $table->string('extculre_codigo_organizacional',30);
             $table->string('extculre_year', 4);
-            $table->string('extculre_codigo_organizacional', 30);
             $table->string('extculre_codigo_actividad', 15);
             $table->string('extculre_tipo_documento', 2);
             $table->string('extculre_numero_documento', 30);

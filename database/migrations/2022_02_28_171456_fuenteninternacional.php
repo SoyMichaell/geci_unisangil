@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ModalidadGrado extends Migration
+class Fuenteninternacional extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class ModalidadGrado extends Migration
      */
     public function up()
     {
-        Schema::create('modalidad_grado', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('mod_nombre');
+        Schema::create('compl_fuente_internacional', function (Blueprint $table) {
+            $table->integer('id')->primary()->increment();
+            $table->string('cofuin_nombre');
             
             $table->timestamps();
         });
