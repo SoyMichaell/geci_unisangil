@@ -540,7 +540,7 @@ CREATE TABLE IF NOT EXISTS `ext_curso` (
 
 -- Volcando estructura para tabla proyecto.ext_educacion_continua
 CREATE TABLE IF NOT EXISTS `ext_educacion_continua` (
-  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `extedu_semestre` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
   `extedu_codigo_curso` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `extedu_numero_horas` int(11) NOT NULL,
@@ -549,41 +549,40 @@ CREATE TABLE IF NOT EXISTS `ext_educacion_continua` (
   `extedu_id_docente` int(11) NOT NULL,
   `extedu_tipo_extension` int(11) NOT NULL,
   `extedu_cantidad` int(11) NOT NULL,
+  `extedu_url_soporte` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_educacion_continua: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_educacion_continua: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_educacion_continua` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_educacion_continua` (`id`, `extedu_semestre`, `extedu_codigo_curso`, `extedu_numero_horas`, `extedu_tipo_curso`, `extedu_valor_curso`, `extedu_id_docente`, `extedu_tipo_extension`, `extedu_cantidad`, `extedu_url_soporte`, `created_at`, `updated_at`) VALUES
+	(6, '2', 'EDC-Y-IS-01-21', 8, 1, 0, 33, 1, 150, 'EDC-Y-IS-01-21_1.rar', '2022-03-02 22:11:12', '2022-03-02 22:11:12');
 /*!40000 ALTER TABLE `ext_educacion_continua` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_participante
 CREATE TABLE IF NOT EXISTS `ext_participante` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `extpar_tipo_documento` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_numero_documento` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_fecha_expedicion` date NOT NULL,
-  `extpar_primer_nombre` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_segundo_nombre` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_primer_apellido` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_segundo_apellido` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_sexo` int(11) NOT NULL,
-  `extpar_estado_civil` int(11) NOT NULL,
-  `extpar_fecha_nacimiento` date NOT NULL,
-  `extpar_id_pais` int(11) NOT NULL,
-  `extpar_id_municipio` int(11) NOT NULL,
-  `extpar_telefono` varchar(12) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_correo_persona` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_correo_institucional` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extpar_direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dop_id_docente` int(11) NOT NULL,
+  `dop_fecha_expedicion` date NOT NULL,
+  `dop_sexo_biologico` int(11) NOT NULL,
+  `dop_estado_civil` int(11) NOT NULL,
+  `dop_id_pais` int(11) NOT NULL,
+  `dop_id_municipio` int(11) NOT NULL,
+  `dop_correo_personal` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `dop_direccion` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`),
+  KEY `FK_docente_participante_persona` (`dop_id_docente`),
+  CONSTRAINT `FK_docente_participante_persona` FOREIGN KEY (`dop_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.ext_participante: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_participante` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_participante` (`id`, `dop_id_docente`, `dop_fecha_expedicion`, `dop_sexo_biologico`, `dop_estado_civil`, `dop_id_pais`, `dop_id_municipio`, `dop_correo_personal`, `dop_direccion`, `created_at`, `updated_at`) VALUES
+	(1, 29, '2018-12-18', 2, 1, 170, 850001, 'yadiralexandra@gmail.com', 'Km 2 vía Matepantano campus Unisangil  - Yopal', '2022-03-02 23:03:53', '2022-03-02 23:12:33');
 /*!40000 ALTER TABLE `ext_participante` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.facultad
@@ -640,9 +639,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.migrations: ~35 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.migrations: ~38 rows (aproximadamente)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -679,7 +678,8 @@ INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(44, '2022_02_28_223510_compl_cine_detallado', 19),
 	(45, '2022_02_28_225023_sector', 20),
 	(47, '2022_03_01_012502_nivel_estudio', 21),
-	(48, '2022_02_28_145215_educacion_continua', 22);
+	(48, '2022_02_28_145215_educacion_continua', 22),
+	(49, '2022_03_02_222218_docente_participantex', 23);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.modalidad_grado
@@ -985,7 +985,7 @@ CREATE TABLE IF NOT EXISTS `trabajo_grado` (
   CONSTRAINT `FK_trabajo_grado_persona_5` FOREIGN KEY (`tra_id_jurado2`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.trabajo_grado: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.trabajo_grado: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `trabajo_grado` DISABLE KEYS */;
 INSERT IGNORE INTO `trabajo_grado` (`id`, `tra_codigo_proyecto`, `tra_titulo_proyecto`, `tra_id_estudiante`, `tra_fecha_inicio`, `tra_modalidad_grado`, `tra_id_director`, `tra_id_codirector`, `tra_id_externo`, `tra_estado_propuesta`, `tra_estado_proyecto`, `tra_id_jurado1`, `tra_id_jurado2`, `tra_numero_acta_sustentacion`, `tra_acta_sustentacion_soporte`, `tra_numero_acta_grado`, `tra_acta_grado_soporte`, `tra_fecha_finalizacion`, `tra_observacion`, `tra_id_proceso`, `created_at`, `updated_at`) VALUES
 	(9, '8638', 'La Nueva Realidad', 4, '2021-02-12', 1, 28, 29, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 2, '2022-03-02 15:52:52', '2022-03-02 15:52:52');
