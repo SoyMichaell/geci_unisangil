@@ -13,21 +13,18 @@ class ExtParticipante extends Model
 
     protected $fillable = [
         'id',
-        'extpar_tipo_documento',
-        'extpar_numero_documento',
-        'extpar_fecha_expedicion',
-        'extpar_primer_nombre',
-        'extpar_segundo_nombre',
-        'extpar_primer_apellido',
-        'extpar_segundo_apellido',
-        'extpar_sexo', //1 m - 2 f
-        'extpar_estado_civil',
-        'extpar_fecha_nacimiento',
-        'extpar_id_pais',
-        'extpar_id_municipio',
-        'extpar_telefono',
-        'extpar_correo_persona',
-        'extpar_correo_institucional',
-        'extpar_direccion',
+        'dop_id_docente',
+        'dop_fecha_expedicion',
+        'dop_sexo_biologico', //1 m - 2 f
+        'dop_estado_civil',
+        'dop_id_pais',
+        'dop_id_municipio',
+        'dop_correo_personal',
+        'dop_direccion',
     ];
+
+    public function docentes(){
+        return $this->belongsTo(User::class, 'dop_id_docente');
+    }
+
 }

@@ -63,4 +63,8 @@ class User extends Authenticatable
         return $this->hasMany(ProgramaHorario::class, 'id');
     }
 
+    public function participantes(){
+        return $this->hasMany(ExtParticipante::class, 'id');
+    }
+
 }

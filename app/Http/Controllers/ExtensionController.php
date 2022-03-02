@@ -12,6 +12,8 @@ use App\Models\ExtActividadCulturalRecursoHumano;
 use App\Models\ExtConsultoria;
 use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
+use App\Models\ExtEducacionContinua;
+use App\Models\ExtParticipante;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -661,8 +663,8 @@ class ExtensionController extends Controller
 
         if ($request->file('extcurso_url_soporte')) {
             $file = $request->file('extcurso_url_soporte');
-            $titulo_curso = str_replace(' ', '-',$request->get('extcurso_nombre'));
-            $name_curso = $request->get('extcurso_year') . '_' .$titulo_curso. '_' . $request->get('extcurso_fecha') . '.' . $file->extension();
+            $titulo_curso = str_replace(' ', '-', $request->get('extcurso_nombre'));
+            $name_curso = $request->get('extcurso_year') . '_' . $titulo_curso . '_' . $request->get('extcurso_fecha') . '.' . $file->extension();
 
             $ruta = public_path('datos/curso/' . $name_curso);
 
@@ -672,11 +674,11 @@ class ExtensionController extends Controller
                 Alert::warning('Los formatos admitidos son .zip y .rar');
                 return back()->withInput();
             }
-        }else{
+        } else {
             $name_curso = $cursoFind->extcurso_url_soporte;
         }
 
-        
+
         $curso->extcurso_year = $request->get('extcurso_year');
         $curso->extcurso_semestre = $request->get('extcurso_semestre');
         $curso->extcurso_codigo = $request->get('extcurso_codigo');
@@ -694,11 +696,309 @@ class ExtensionController extends Controller
         return redirect('extension/mostrarcurso');
     }
 
-    public function eliminarcurso($id){
+    public function eliminarcurso($id)
+    {
         $curso = ExtCurso::find($id);
         $curso->delete();
         Alert::success('Exitoso', 'El curso se ha eliminado con exito');
         return redirect('extension/mostrarcurso');
     }
 
+    public function mostrareducacion()
+    {
+        $educacions = ExtEducacionContinua::all();
+        return view('extension/educacion.index')
+            ->with('educacions', $educacions);
+    }
+
+    public function creareducacion()
+    {
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        return view('extension/educacion.create')
+            ->with('docentes', $docentes);
+    }
+
+    public function registroeducacion(Request $request)
+    {
+        $rules = [
+            'extedu_semestre' => 'required',
+            'extedu_codigo_curso' => 'required',
+            'extedu_numero_horas' => 'required',
+            'extedu_tipo_curso' => 'required|not_in:0',
+            'extedu_valor_curso' => 'required',
+            'extedu_id_docente' => 'required|not_in:0',
+            'extedu_tipo_extension' => 'required|not_in:0',
+            'extedu_cantidad' => 'required',
+        ];
+        $message = [
+            'extedu_semestre' => 'El campo semestre es requerido',
+            'extedu_codigo_curso' => 'El campo código curso es requerido',
+            'extedu_numero_horas' => 'El campo número de horas es requerido',
+            'extedu_tipo_curso' => 'El campo tipo curso es requerido',
+            'extedu_valor_curso' => 'El campo valor curso es requerido',
+            'extedu_id_docente' => 'El campo docente es requerido',
+            'extedu_tipo_extension' => 'El campo tipo extensión es requerido',
+            'extedu_cantidad' => 'El campo cantidad beneficiados es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        if ($request->file('extedu_url_soporte')) {
+            $file = $request->file('extedu_url_soporte');
+            $name_educacion = $request->get('extedu_codigo_curso') . '_' . $request->get('extedu_tipo_curso') . '.' . $file->extension();
+
+            $ruta = public_path('datos/educacion/' . $name_educacion);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }
+
+        $educacion = new ExtEducacionContinua();
+        $educacion->extedu_semestre = $request->get('extedu_semestre');
+        $educacion->extedu_codigo_curso = $request->get('extedu_codigo_curso');
+        $educacion->extedu_numero_horas = $request->get('extedu_numero_horas');
+        $educacion->extedu_tipo_curso = $request->get('extedu_tipo_curso');
+        $educacion->extedu_valor_curso = $request->get('extedu_valor_curso');
+        $educacion->extedu_id_docente = $request->get('extedu_id_docente');
+        $educacion->extedu_tipo_extension = $request->get('extedu_tipo_extension');
+        $educacion->extedu_cantidad = $request->get('extedu_cantidad');
+        $educacion->extedu_url_soporte = $name_educacion;
+        $educacion->save();
+
+        Alert::success('Exitoso', 'Educación continua registrada con exito');
+        return redirect('extension/mostrareducacion');
+    }
+
+    public function vereducacion($id)
+    {
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $educacion = ExtEducacionContinua::find($id);
+        return view('extension/educacion.show')
+            ->with('docentes', $docentes)
+            ->with('educacion', $educacion);
+    }
+
+    public function editareducacion($id)
+    {
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $educacion = ExtEducacionContinua::find($id);
+        return view('extension/educacion.edit')
+            ->with('docentes', $docentes)
+            ->with('educacion', $educacion);
+    }
+
+
+    public function actualizareducacion(Request $request, $id)
+    {
+        $rules = [
+            'extedu_semestre' => 'required',
+            'extedu_codigo_curso' => 'required',
+            'extedu_numero_horas' => 'required',
+            'extedu_tipo_curso' => 'required|not_in:0',
+            'extedu_valor_curso' => 'required',
+            'extedu_id_docente' => 'required|not_in:0',
+            'extedu_tipo_extension' => 'required|not_in:0',
+            'extedu_cantidad' => 'required',
+        ];
+        $message = [
+            'extedu_semestre' => 'El campo semestre es requerido',
+            'extedu_codigo_curso' => 'El campo código curso es requerido',
+            'extedu_numero_horas' => 'El campo número de horas es requerido',
+            'extedu_tipo_curso' => 'El campo tipo curso es requerido',
+            'extedu_valor_curso' => 'El campo valor curso es requerido',
+            'extedu_id_docente' => 'El campo docente es requerido',
+            'extedu_tipo_extension' => 'El campo tipo extensión es requerido',
+            'extedu_cantidad' => 'El campo cantidad beneficiados es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $educacionx = DB::table('ext_educacion_continua')
+            ->where('id', $id)
+            ->first();
+
+        if ($request->file('extedu_url_soporte')) {
+            $file = $request->file('extedu_url_soporte');
+            $name_educacion = $request->get('extedu_codigo_curso') . '_' . $request->get('extedu_tipo_curso') . '.' . $file->extension();
+
+            $ruta = public_path('datos/educacion/' . $name_educacion);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        } else {
+            $name_educacion = $educacionx->extedu_url_soporte;
+        }
+
+        $educacion = ExtEducacionContinua::find($id);
+        $educacion->extedu_semestre = $request->get('extedu_semestre');
+        $educacion->extedu_codigo_curso = $request->get('extedu_codigo_curso');
+        $educacion->extedu_numero_horas = $request->get('extedu_numero_horas');
+        $educacion->extedu_tipo_curso = $request->get('extedu_tipo_curso');
+        $educacion->extedu_valor_curso = $request->get('extedu_valor_curso');
+        $educacion->extedu_id_docente = $request->get('extedu_id_docente');
+        $educacion->extedu_tipo_extension = $request->get('extedu_tipo_extension');
+        $educacion->extedu_cantidad = $request->get('extedu_cantidad');
+        $educacion->extedu_url_soporte = $name_educacion;
+        $educacion->save();
+
+        Alert::success('Exitoso', 'Educación continua actualizada con exito');
+        return redirect('extension/mostrareducacion');
+    }
+
+    public function eliminareducacion($id)
+    {
+        //generar 3 tipos de excel -> educacion continua -> educacion continua docente -> educacion continua beneficiaros
+        $educacion = ExtEducacionContinua::find($id);
+        $educacion->delete();
+        Alert::success('Exitoso', 'Educación continua eliminada con exito');
+        return redirect('extension/mostrareducacion');
+    }
+
+    public function mostrarparticipante()
+    {
+        $participantes = ExtParticipante::all();
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        return view('extension/participante.index')
+            ->with('participantes', $participantes)
+            ->with('docentes', $docentes);
+    }
+
+    public function crearparticipante()
+    {
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        return view('extension/participante.create')
+            ->with('docentes', $docentes);
+    }
+
+    public function registroparticipante(Request $request)
+    {
+        $rules = [
+            'dop_id_docente' => 'required|not_in:0',
+            'dop_fecha_expedicion' => 'required',
+            'dop_sexo_biologico' => 'required|not_in:0',
+            'dop_estado_civil' => 'required',
+            'dop_id_pais' => 'required',
+            'dop_id_municipio' => 'required',
+            'dop_correo_personal' => 'required',
+            'dop_direccion' => 'required',
+        ];
+        $message = [
+            'dop_id_docente.required' => 'El campo docente es requerido',
+            'dop_fecha_expedicion.required' => 'El campo fecha de expedición es requerido',
+            'dop_sexo_biologico.required' => 'El campo sexó biologico es requerido',
+            'dop_estado_civil.required' => 'El campo estado civil es requerido',
+            'dop_id_pais.required' => 'El campo país es requerido',
+            'dop_id_municipio.required' => 'El campo municipio es requerido',
+            'dop_correo_personal.required' => 'El campo correo personal es requerido',
+            'dop_direccion.required' => 'El campo dirección es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $participante = new ExtParticipante();
+        $participante->dop_id_docente = $request->get('dop_id_docente');
+        $participante->dop_fecha_expedicion = $request->get('dop_fecha_expedicion');
+        $participante->dop_sexo_biologico = $request->get('dop_sexo_biologico');
+        $participante->dop_estado_civil = $request->get('dop_estado_civil');
+        $participante->dop_id_pais = $request->get('dop_id_pais');
+        $participante->dop_id_municipio = $request->get('dop_id_municipio');
+        $participante->dop_correo_personal = $request->get('dop_correo_personal');
+        $participante->dop_direccion = $request->get('dop_direccion');
+
+        $participante->save();
+
+        Alert::success('Exitoso', 'Participante registrado con exito');
+        return redirect('extension/mostrarparticipante');
+    }
+
+    public function editarparticipante($id)
+    {
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $participante = ExtParticipante::find($id);
+        return view('extension/participante.edit')
+            ->with('docentes', $docentes)
+            ->with('participante', $participante);
+    }
+
+    public function verparticipante($id)
+    {
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $participante = ExtParticipante::find($id);
+        return view('extension/participante.show')
+            ->with('docentes', $docentes)
+            ->with('participante', $participante);
+    }
+
+    public function actualizarparticipante(Request $request, $id)
+    {
+        $rules = [
+            'dop_id_docente' => 'required|not_in:0',
+            'dop_fecha_expedicion' => 'required',
+            'dop_sexo_biologico' => 'required|not_in:0',
+            'dop_estado_civil' => 'required',
+            'dop_id_pais' => 'required',
+            'dop_id_municipio' => 'required',
+            'dop_correo_personal' => 'required',
+            'dop_direccion' => 'required',
+        ];
+        $message = [
+            'dop_id_docente.required' => 'El campo docente es requerido',
+            'dop_fecha_expedicion.required' => 'El campo fecha de expedición es requerido',
+            'dop_sexo_biologico.required' => 'El campo sexó biologico es requerido',
+            'dop_estado_civil.required' => 'El campo estado civil es requerido',
+            'dop_id_pais.required' => 'El campo país es requerido',
+            'dop_id_municipio.required' => 'El campo municipio es requerido',
+            'dop_correo_personal.required' => 'El campo correo personal es requerido',
+            'dop_direccion.required' => 'El campo dirección es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $participante = ExtParticipante::find($id);
+        $participante->dop_id_docente = $request->get('dop_id_docente');
+        $participante->dop_fecha_expedicion = $request->get('dop_fecha_expedicion');
+        $participante->dop_sexo_biologico = $request->get('dop_sexo_biologico');
+        $participante->dop_estado_civil = $request->get('dop_estado_civil');
+        $participante->dop_id_pais = $request->get('dop_id_pais');
+        $participante->dop_id_municipio = $request->get('dop_id_municipio');
+        $participante->dop_correo_personal = $request->get('dop_correo_personal');
+        $participante->dop_direccion = $request->get('dop_direccion');
+
+        $participante->save();
+
+        Alert::success('Exitoso', 'Participante actualizado con exito');
+        return redirect('extension/mostrarparticipante');
+    }
 }

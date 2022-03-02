@@ -181,4 +181,12 @@ Route::get('extension/{educacion}/editareducacion', [App\Http\Controllers\Extens
 Route::get('extension/{educacion}/vereducacion', [App\Http\Controllers\ExtensionController::class, 'vereducacion']);
 Route::put('extension/{educacion}/actualizareducacion', [App\Http\Controllers\ExtensionController::class, 'actualizareducacion']);
 Route::delete('extension/{educacion}/eliminareducacion', [App\Http\Controllers\ExtensionController::class, 'eliminareducacion']);
+//Rutas participantes
+Route::get('extension/mostrarparticipante', [App\Http\Controllers\ExtensionController::class, 'mostrarparticipante']);
+Route::get('extension/crearparticipante', [App\Http\Controllers\ExtensionController::class, 'crearparticipante']);
+Route::post('extension/registroparticipante', [App\Http\Controllers\ExtensionController::class, 'registroparticipante']);
+Route::get('extension/{participante}/editarparticipante', [App\Http\Controllers\ExtensionController::class, 'editarparticipante']);
+Route::get('extension/{participante}/verparticipante', [App\Http\Controllers\ExtensionController::class, 'verparticipante']);
+Route::put('extension/{participante}/actualizarparticipante', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipante']);
+Route::delete('extension/{participante}/eliminarparticipante', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipante']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);

@@ -48,17 +48,17 @@
                 <i class="fa-solid fa-signature fa-4x"></i>
                 <h4 class="mt-2">Curso</h4>
             </a>
-            <a class="card__extension tile" href="">
+            <a class="card__extension tile" href="/extension/mostrareducacion">
                 <i class="fa-solid fa-chalkboard fa-4x"></i>
                 <h4 class="mt-2">Educación continua</h4>
             </a>
-            <a class="card__extension tile" href="">
+            <a class="card__extension tile" href="/extension/mostrarparticipante">
                 <i class="fa-solid fa-chalkboard-user fa-4x"></i>
-                <h4 class="mt-2">Educación continua docente</h4>
+                <h4 class="mt-2">Participante</h4>
             </a>
             <a class="card__extension tile" href="">
                 <i class="fa-solid fa-book-open-reader fa-4x"></i>
-                <h4 class="mt-2">Educación continua beneficiario</h4>
+                <h4 class="mt-2">Proyecto de extensión</h4>
             </a>
         </div>
     </div>

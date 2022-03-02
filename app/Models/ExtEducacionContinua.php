@@ -21,6 +21,7 @@ class ExtEducacionContinua extends Model
         'extedu_id_docente',
         'extedu_tipo_extension',
         'extedu_cantidad',
+        'extedu_url_soporte',
     ];
 
     public function docentes(){
