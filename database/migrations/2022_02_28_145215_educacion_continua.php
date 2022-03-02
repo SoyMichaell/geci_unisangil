@@ -20,6 +20,9 @@ class EducacionContinua extends Migration
             $table->integer('extedu_numero_horas');
             $table->integer('extedu_tipo_curso');
             $table->integer('extedu_valor_curso');
+            $table->integer('extedu_id_docente');
+            $table->integer('extedu_tipo_extension');
+            $table->integer('extedu_cantidad');
             $table->timestamps();
         });
     }

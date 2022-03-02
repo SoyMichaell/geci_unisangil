@@ -16,15 +16,16 @@
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
+                    <h4>Lista cursos</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('software/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/pdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('software/export') }}"
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/export') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
-                        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('software/create') }}"><i class="fa fa-plus-circle"></i>
+                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                        <a class="btn btn-outline-success" href="{{ url('extension/crearcurso') }}"><i
+                                class="fa fa-plus-circle"></i>
                             Nuevo</a>
                     @endif
                 </div>
@@ -34,13 +35,13 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tipo software</th>
-                            <th>Software</th>
-                            <th>Desarrollador</th>
-                            <th>Versión</th>
-                            <th>Año adquisición licencia</th>
-                            <th>Año vencimiento licencia</th>
-                            <th>Programa</th>
+                            <th>Año</th>
+                            <th>Semestre</th>
+                            <th>Código curso</th>
+                            <th>Nombre curso</th>
+                            <th>CINE</th>
+                            <th>Docente</th>
+                            <th>Estado</th>
                             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <th>Acciones</th>
                             @endif
@@ -48,27 +49,29 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($softwares as $software)
+                        @foreach ($cursos as $curso)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{$software->sof_tipo}}</td>
-                                <td>{{$software->sof_nombre}}</td>
-                                <td>{{$software->sof_desarrollador}}</td>
-                                <td>{{$software->sof_version}}</td>
-                                <td>{{$software->sof_year_ad_licencia}}</td>
-                                <td>{{$software->sof_year_ve_licencia}}</td>
-                                <td>{{$software->programas->pro_nombre}}</td>
+                                <td>{{ $curso->extcurso_year }}</td>
+                                <td>{{ $curso->extcurso_semestre }}</td>
+                                <td>{{ $curso->extcurso_codigo }}</td>
+                                <td>{{ $curso->extcurso_nombre }}</td>
+                                <td>{{ $curso->cines->cocide_nombre }}</td>
+                                <td>{{ $curso->docentes->per_nombre.' '.$curso->docentes->per_apellido }}</td>
+                                <td>{{ $curso->extcurso_estado }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="{{ route('software.destroy', $software->id) }}" method="POST">
+                                        <form action="/extension/{{ $curso->id }}/eliminarcurso"
+                                            method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/software/{{ $software->id }}"><i
+                                                <a class="btn btn-sm"
+                                                    href="/extension/{{ $curso->id }}/vercurso"><i
                                                         class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
-                                                    href="/software/{{ $software->id }}/edit"><i
+                                                    href="/extension/{{ $curso->id }}/editarcurso"><i
                                                         class="fa-solid fa-refresh"></i></a>
-                                                    @csrf
-                                                    @method('DELETE')
+                                                @csrf
+                                                @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
                                                         class="fa-solid fa-trash"></i></button>
                                             </div>

@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
                         <input id="estu_fecha_nacimiento" type="date"
                             class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
@@ -195,12 +195,23 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
                         <input id="estu_ingreso" type="text"
                             class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
                             value="{{ old('estu_ingreso') }}" autocomplete="estu_ingreso" autofocus>
                         @error('estu_ingreso')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
+                        <input id="estu_periodo_ingreso" type="text"
+                            class="form-control @error('estu_periodo_ingreso') is-invalid @enderror" name="estu_periodo_ingreso"
+                            value="{{ old('estu_periodo_ingreso') }}" autocomplete="estu_periodo_ingreso" placeholder="Ej: 2016-1" autofocus>
+                        @error('estu_periodo_ingreso')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -271,7 +282,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="estu_estado">{{ __('Estado *') }}</label>
                         <select class="form-select" name="estu_estado" id="estu_estado">
                             <option value="">---- SELECCIONE ----</option>
@@ -282,6 +293,7 @@
                             <option value="bajo-rendimiento">Bajo Rendimiento</option>
                             <option value="egresado">Egresado</option>
                             <option value="egresado-no-graduado">Egresado no Graduado</option>
+                            <option value="no-renovacion-matricula">No renovación matricula</option>
                         </select>
                         @error('estu_estado')
                             <span class="invalid-feedback" role="alert">
@@ -289,8 +301,31 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
-                        <label for="estu_matricula">{{ __('Tipo de matricula *') }}</label>
+                    <div class="col-md-4">
+                        <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
+                        <select class="form-select" name="estu_tipo_matricula" id="estu_tipo_matricula">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="movilidad-interna">Movilidad Interna</option>
+                            <option value="nuevo-transferencias-interna">Nuevo Transferencias Interna</option>
+                            <option value="nuevo-reingreso">Nuevo Reingreso</option>
+                            <option value="estudiante-movilidad-academica">Estudiante de Movilidad Académica</option>
+                            <option value="movilidad-externa">Movilidad Externa</option>
+                            <option value="nuevo-transferencia-externa">Nuevo Transferencia Externa</option>
+                            <option value="antiguo">Antiguo</option>
+                            <option value="transferencia-obligatoria">Transferencia Obligatoria</option>
+                            <option value="desertor">Desertor</option>
+                            <option value="nuevo-regular">Nuevo Regular</option>
+                            <option value="continuidad-academica">Continuidad Académica</option>
+                            <option value="egresado">Egresado</option>
+                        </select>
+                        @error('estu_tipo_matricula')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estu_matricula">{{ __('Matricula *') }}</label>
                         <select class="form-select" name="estu_matricula" id="estu_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="pendiente">Pendiente</option>

@@ -165,4 +165,20 @@ Route::get('extension/{recurso}/editarconsurecurso', [App\Http\Controllers\Exten
 Route::get('extension/{recurso}/verconsurecurso', [App\Http\Controllers\ExtensionController::class, 'verconsurecurso']);
 Route::put('extension/{recurso}/actualizarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'actualizarconsurecurso']);
 Route::delete('extension/{recurso}/eliminarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'eliminarconsurecurso']);
+//Rutas curso
+Route::get('extension/mostrarcurso', [App\Http\Controllers\ExtensionController::class, 'mostrarcurso']);
+Route::get('extension/crearcurso', [App\Http\Controllers\ExtensionController::class, 'crearcurso']);
+Route::post('extension/registrocurso', [App\Http\Controllers\ExtensionController::class, 'registrocurso']);
+Route::get('extension/{curso}/editarcurso', [App\Http\Controllers\ExtensionController::class, 'editarcurso']);
+Route::get('extension/{curso}/vercurso', [App\Http\Controllers\ExtensionController::class, 'vercurso']);
+Route::put('extension/{curso}/actualizarcurso', [App\Http\Controllers\ExtensionController::class, 'actualizarcurso']);
+Route::delete('extension/{curso}/eliminarcurso', [App\Http\Controllers\ExtensionController::class, 'eliminarcurso']);
+//Rutas educación continua
+Route::get('extension/mostrareducacion', [App\Http\Controllers\ExtensionController::class, 'mostrareducacion']);
+Route::get('extension/creareducacion', [App\Http\Controllers\ExtensionController::class, 'creareducacion']);
+Route::post('extension/registroeducacion', [App\Http\Controllers\ExtensionController::class, 'registroeducacion']);
+Route::get('extension/{educacion}/editareducacion', [App\Http\Controllers\ExtensionController::class, 'editareducacion']);
+Route::get('extension/{educacion}/vereducacion', [App\Http\Controllers\ExtensionController::class, 'vereducacion']);
+Route::put('extension/{educacion}/actualizareducacion', [App\Http\Controllers\ExtensionController::class, 'actualizareducacion']);
+Route::delete('extension/{educacion}/eliminareducacion', [App\Http\Controllers\ExtensionController::class, 'eliminareducacion']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);

@@ -11,7 +11,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="tile w-100">
-            <h4 class="tile title"><i class="fas fa-plus-square"></i> Registro estudiante</h4>
+            <h4 class="tile title"><i class="fas fa-plus-square"></i> Actualizar información</h4>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <div class="row">
@@ -34,6 +34,7 @@
                         <div class="col-md-6">
                             <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
                             <select class="form-select" name="estu_programa_plan" id="estu_programa_plan" disabled>
+                                <option value="{{$estudiante->estu_programa_plan}}">{{$estudiante->planes->pp_plan}}</option>
                             </select>
                             @error('estu_programa_plan')
                                 <span class="invalid-feedback" role="alert">
@@ -45,12 +46,12 @@
                 </div>
                 <div class="col-md-6">
                     <label for="estu_tipo_documento">{{ __('Tipo Documento *') }}</label>
-                    <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento" disabled>
+                    <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento" disabled> 
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($tiposdocumento as $tipo)
                             <option value="{{ $tipo }}"
-                                {{ $tipo == $estudiante->estu_tipo_documento ? 'selected' : '' }}>{{ $tipo }}
-                            </option>
+                                {{ $tipo == $estudiante->estu_tipo_documento ? 'selected' : '' }}>
+                                {{ $tipo }}</option>
                         @endforeach
                     </select>
                     @error('estu_tipo_documento')
@@ -76,7 +77,8 @@
                 <div class="col-md-6">
                     <label for="estu_nombre">{{ __('Nombre (s) *') }}</label>
                     <input id="estu_nombre" type="text" class="form-control @error('estu_nombre') is-invalid @enderror"
-                        name="estu_nombre" value="{{ $estudiante->estu_nombre }}" autocomplete="estu_nombre" autofocus disabled>
+                        name="estu_nombre" value="{{ $estudiante->estu_nombre }}" autocomplete="estu_nombre"
+                        autofocus disabled>
                     @error('estu_nombre')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -136,7 +138,8 @@
                 <div class="col-md-6">
                     <label for="estu_correo">{{ __('Correo electronico *') }}</label>
                     <input id="estu_correo" type="email" class="form-control @error('estu_correo') is-invalid @enderror"
-                        name="estu_correo" value="{{ $estudiante->estu_correo }}" autocomplete="estu_correo" autofocus disabled>
+                        name="estu_correo" value="{{ $estudiante->estu_correo }}" autocomplete="estu_correo"
+                        autofocus disabled>
                     @error('estu_correo')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -176,6 +179,7 @@
                 <div class="col-md-6">
                     <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
                     <select class="form-select" name="estu_ciudad" id="estu_ciudad" disabled>
+                        <option value="{{$estudiante->estu_ciudad}}">{{$estudiante->municipios->mun_nombre}}</option>
                     </select>
                     @error('estu_ciudad')
                         <span class="invalid-feedback" role="alert">
@@ -185,7 +189,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
                     <input id="estu_fecha_nacimiento" type="date"
                         class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
@@ -197,12 +201,24 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
                     <input id="estu_ingreso" type="text"
                         class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
                         value="{{ $estudiante->estu_ingreso }}" autocomplete="estu_ingreso" autofocus disabled>
                     @error('estu_ingreso')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-4">
+                    <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
+                    <input id="estu_periodo_ingreso" type="text"
+                        class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
+                        name="estu_periodo_ingreso" value="{{ $estudiante->estu_periodo_ingreso }}"
+                        autocomplete="estu_periodo_ingreso" placeholder="Ej: 2016-1" autofocus disabled>
+                    @error('estu_periodo_ingreso')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -249,13 +265,14 @@
                     <label for="estu_financiamiento">{{ __('Tipo de financiamiento *') }}</label>
                     <select class="form-select" name="estu_financiamiento" id="estu_financiamiento" disabled>
                         <option value="">---- SELECCIONE ----</option>
-                        <option value="beca" {{ $estudiante->estu_financiamiento == 'beca' ? 'selected' : '' }}>Beca
-                        </option>
+                        <option value="beca" {{ $estudiante->estu_financiamiento == 'beca' ? 'selected' : '' }}>
+                            Beca</option>
                         <option value="de-contado"
                             {{ $estudiante->estu_financiamiento == 'de-contado' ? 'selected' : '' }}>De contado
                         </option>
                         <option value="prestamo"
-                            {{ $estudiante->estu_financiamiento == 'prestamo' ? 'selected' : '' }}>Prestamo</option>
+                            {{ $estudiante->estu_financiamiento == 'prestamo' ? 'selected' : '' }}>Prestamo
+                        </option>
                     </select>
                     @error('estu_financiamiento')
                         <span class="invalid-feedback" role="alert">
@@ -277,7 +294,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <label for="estu_estado">{{ __('Estado *') }}</label>
                     <select class="form-select" name="estu_estado" id="estu_estado" disabled>
                         <option value="">---- SELECCIONE ----</option>
@@ -286,7 +303,8 @@
                         <option value="inactivo" {{ $estudiante->estu_estado == 'inactivo' ? 'selected' : '' }}>
                             Inactivo</option>
                         <option value="reserva-cupo"
-                            {{ $estudiante->estu_estado == 'reserva-cupo' ? 'selected' : '' }}>Reserva de Cupo</option>
+                            {{ $estudiante->estu_estado == 'reserva-cupo' ? 'selected' : '' }}>Reserva de Cupo
+                        </option>
                         <option value="pfu" {{ $estudiante->estu_estado == 'pfu' ? 'selected' : '' }}>PFU</option>
                         <option value="bajo-rendimiento"
                             {{ $estudiante->estu_estado == 'bajo-rendimiento' ? 'selected' : '' }}>Bajo Rendimiento
@@ -303,16 +321,63 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-6">
-                    <label for="estu_matricula">{{ __('Tipo de matricula *') }}</label>
+                <div class="col-md-4">
+                    <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
+                    <select class="form-select" name="estu_tipo_matricula" id="estu_tipo_matricula" disabled>
+                        <option value="">---- SELECCIONE ----</option>
+                        <option value="movilidad-interna"
+                            {{ $estudiante->estu_tipo_matricula == 'movilidad-interna' ? 'selected' : '' }}>
+                            Movilidad Interna</option>
+                        <option value="nuevo-transferencias-interna"
+                            {{ $estudiante->estu_tipo_matricula == 'nuevo-transferencias-interna' ? 'selected' : '' }}>
+                            Nuevo Transferencias Interna</option>
+                        <option value="nuevo-reingreso"
+                            {{ $estudiante->estu_tipo_matricula == 'nuevo-reingreso' ? 'selected' : '' }}>Nuevo
+                            Reingreso</option>
+                        <option value="estudiante-movilidad-academica"
+                            {{ $estudiante->estu_tipo_matricula == 'estudiante-movilidad-academica' ? 'selected' : '' }}>
+                            Estudiante de Movilidad Académica</option>
+                        <option value="movilidad-externa"
+                            {{ $estudiante->estu_tipo_matricula == 'movilidad-externa' ? 'selected' : '' }}>
+                            Movilidad Externa</option>
+                        <option value="nuevo-transferencia-externa"
+                            {{ $estudiante->estu_tipo_matricula == 'nuevo-transferencia-externa' ? 'selected' : '' }}>
+                            Nuevo Transferencia Externa</option>
+                        <option value="antiguo"
+                            {{ $estudiante->estu_tipo_matricula == 'antiguo' ? 'selected' : '' }}>Antiguo</option>
+                        <option value="transferencia-obligatoria"
+                            {{ $estudiante->estu_tipo_matricula == 'transferencia-obligatoria' ? 'selected' : '' }}>
+                            Transferencia Obligatoria</option>
+                        <option value="desertor"
+                            {{ $estudiante->estu_tipo_matricula == 'desertor' ? 'selected' : '' }}>Desertor
+                        </option>
+                        <option value="nuevo-regular"
+                            {{ $estudiante->estu_tipo_matricula == 'nuevo-regular' ? 'selected' : '' }}>Nuevo
+                            Regular</option>
+                        <option value="continuidad-academica"
+                            {{ $estudiante->estu_tipo_matricula == 'continuidad-academica' ? 'selected' : '' }}>
+                            Continuidad Académica</option>
+                        <option value="egresado"
+                            {{ $estudiante->estu_tipo_matricula == 'egresado' ? 'selected' : '' }}>Egresado
+                        </option>
+                    </select>
+                    @error('estu_tipo_matricula')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-4">
+                    <label for="estu_matricula">{{ __('Matricula *') }}</label>
                     <select class="form-select" name="estu_matricula" id="estu_matricula" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="pendiente" {{ $estudiante->estu_matricula == 'pendiente' ? 'selected' : '' }}>
                             Pendiente</option>
-                        <option value="pagado" {{ $estudiante->estu_matricula == 'pagado' ? 'selected' : '' }}>Pagado
-                        </option>
+                        <option value="pagado" {{ $estudiante->estu_matricula == 'pagado' ? 'selected' : '' }}>
+                            Pagado</option>
                         <option value="sin-liquidar"
-                            {{ $estudiante->estu_matricula == 'sin-liquidar' ? 'selected' : '' }}>Sin liquidar</option>
+                            {{ $estudiante->estu_matricula == 'sin-liquidar' ? 'selected' : '' }}>Sin liquidar
+                        </option>
                     </select>
                     @error('estu_matricula')
                         <span class="invalid-feedback" role="alert">
@@ -341,8 +406,10 @@
                     <div class="row">
                         <div class="col-md-12">
                             <select class="form-select" name="estu_egresado" id="estu_estado" disabled>
-                                <option value="1" {{ $estudiante->estu_egresado == '1' ? 'selected' : '' }}>Si</option>
-                                <option value="0" {{ $estudiante->estu_egresado == '0' ? 'selected' : '' }}>No</option>
+                                <option value="1" {{ $estudiante->estu_egresado == '1' ? 'selected' : '' }}>Si
+                                </option>
+                                <option value="0" {{ $estudiante->estu_egresado == '0' ? 'selected' : '' }}>No
+                                </option>
                             </select>
                         </div>
                     </div>
@@ -358,12 +425,5 @@
                     @enderror
                 </div>
             </div>
-        </div>
-    </div>
-    <br>
-@endsection
+        @endsection
 @endif
-
-@section('scripts')
-<script src="/js/admin/programa_plan_estudio.js"></script>
-@endsection

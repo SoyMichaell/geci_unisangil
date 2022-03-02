@@ -28,11 +28,13 @@ class Estudiante extends Model
             'estu_ciudad',
             'estu_fecha_nacimiento',
             'estu_ingreso',
+            'estu_periodo_ingreso',
             'estu_ult_matricula',
             'estu_semestre',
             'estu_financiamiento',
             'estu_entidad',
             'estu_estado',
+            'estu_tipo_matricula',
             'estu_matricula',
             'estu_pga',
             'estu_reconocimiento',
@@ -44,4 +46,13 @@ class Estudiante extends Model
     public function trabajos(){
         return $this->hasMany(Trabajo::class, 'id');
     }
+
+    public function planes(){
+        return $this->belongsTo(ProgramaPlan::class, 'estu_programa_plan');
+    }
+
+    public function municipios(){
+        return $this->belongsTo(Municipio::class, 'estu_ciudad');
+    }
+
 }

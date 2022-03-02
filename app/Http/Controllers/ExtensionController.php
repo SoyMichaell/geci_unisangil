@@ -11,7 +11,9 @@ use App\Models\complemento\Sector;
 use App\Models\ExtActividadCulturalRecursoHumano;
 use App\Models\ExtConsultoria;
 use App\Models\ExtConsultoriaRecursoHumano;
+use App\Models\ExtCurso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ExtensionController extends Controller
@@ -266,13 +268,15 @@ class ExtensionController extends Controller
         return redirect('/extension/mostraractrecurso');
     }
 
-    public function mostrarconsultoria(){
+    public function mostrarconsultoria()
+    {
         $consultorias = ExtConsultoria::all();
         return view('extension/consultoria.index')
             ->with('consultorias', $consultorias);
     }
 
-    public function crearconsultoria(){
+    public function crearconsultoria()
+    {
         $cinedetallados = CineDetallado::all();
         $sectores = Sector::all();
         $fuentenacionales = FuenteNacional::all();
@@ -284,7 +288,8 @@ class ExtensionController extends Controller
             ->with('fuenteinternacionales', $fuenteinternacionales);
     }
 
-    public function registroconsultoria(Request $request){
+    public function registroconsultoria(Request $request)
+    {
         $rules = [
             'extcon_year' => 'required',
             'extcon_semestre' => 'required',
@@ -305,7 +310,7 @@ class ExtensionController extends Controller
             'extcon_valor.required' => 'El campo valor consultoria es requerido',
             'extcon_fecha_inicio.required' => 'El campo fecha de inicio es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $consultoria = new ExtConsultoria();
         $consultoria->extcon_year = $request->get('extcon_year');
@@ -326,11 +331,12 @@ class ExtensionController extends Controller
         $consultoria->extcon_valor_internacional = $request->get('extcon_valor_internacional');
         $consultoria->save();
 
-        Alert::success('Exitoso','La consultoria se ha registrado con exito');
+        Alert::success('Exitoso', 'La consultoria se ha registrado con exito');
         return redirect('/extension/mostrarconsultoria');
     }
 
-    public function editarconsultoria($id){
+    public function editarconsultoria($id)
+    {
         $cinedetallados = CineDetallado::all();
         $sectores = ComplementoSector::all();
         $fuentenacionales = FuenteNacional::all();
@@ -344,7 +350,8 @@ class ExtensionController extends Controller
             ->with('consultoria', $consultoria);
     }
 
-    public function verconsultoria($id){
+    public function verconsultoria($id)
+    {
         $cinedetallados = CineDetallado::all();
         $sectores = ComplementoSector::all();
         $fuentenacionales = FuenteNacional::all();
@@ -358,7 +365,8 @@ class ExtensionController extends Controller
             ->with('consultoria', $consultoria);
     }
 
-    public function actualizarconsultoria(Request $request, $id){
+    public function actualizarconsultoria(Request $request, $id)
+    {
         $rules = [
             'extcon_year' => 'required',
             'extcon_semestre' => 'required',
@@ -379,7 +387,7 @@ class ExtensionController extends Controller
             'extcon_valor.required' => 'El campo valor consultoria es requerido',
             'extcon_fecha_inicio.required' => 'El campo fecha de inicio es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $consultoria = ExtConsultoria::find($id);
         $consultoria->extcon_year = $request->get('extcon_year');
@@ -400,25 +408,28 @@ class ExtensionController extends Controller
         $consultoria->extcon_valor_internacional = $request->get('extcon_valor_internacional');
         $consultoria->save();
 
-        Alert::success('Exitoso','La consultoria se ha actualizado con exito');
+        Alert::success('Exitoso', 'La consultoria se ha actualizado con exito');
         return redirect('/extension/mostrarconsultoria');
     }
 
     //falta eliminar consultoria
 
-    public function mostrarconsurecurso(){
+    public function mostrarconsurecurso()
+    {
         $consulrecursos  = ExtConsultoriaRecursoHumano::all();
         return view('extension/consultoriarecurso.index')
             ->with('consulrecursos', $consulrecursos);
     }
 
-    public function crearconsurecurso(){
+    public function crearconsurecurso()
+    {
         $nivelestudios = NivelEstudio::all();
         return view('extension/consultoriarecurso.create')
             ->with('nivelestudios', $nivelestudios);
     }
 
-    public function registroconsurecurso(Request $request){
+    public function registroconsurecurso(Request $request)
+    {
         $rules = [
             'extcor_year' => 'required',
             'extcor_semestre' => 'required',
@@ -435,7 +446,7 @@ class ExtensionController extends Controller
             'extcor_numero_documento.required' => 'El campo número de documento es requerido',
             'extcor_id_nivel_estudio.required' => 'El campo máximo nivel de estudio es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
         $consulrecurso = new ExtConsultoriaRecursoHumano();
         $consulrecurso->extcor_year = $request->get('extcor_year');
         $consulrecurso->extcor_semestre = $request->get('extcor_semestre');
@@ -447,10 +458,10 @@ class ExtensionController extends Controller
 
         Alert::success('Exitoso', 'La consultoria de recurso humano ha sido registrada con exito');
         return redirect('extension/mostrarconsurecurso');
-
     }
 
-    public function verconsurecurso($id){
+    public function verconsurecurso($id)
+    {
         $nivelestudios = NivelEstudio::all();
         $consurecurso = ExtConsultoriaRecursoHumano::find($id);
         return view('extension/consultoriarecurso.show')
@@ -458,7 +469,8 @@ class ExtensionController extends Controller
             ->with('consurecurso', $consurecurso);
     }
 
-    public function editarconsurecurso($id){
+    public function editarconsurecurso($id)
+    {
         $nivelestudios = NivelEstudio::all();
         $consurecurso = ExtConsultoriaRecursoHumano::find($id);
         return view('extension/consultoriarecurso.edit')
@@ -466,7 +478,8 @@ class ExtensionController extends Controller
             ->with('consurecurso', $consurecurso);
     }
 
-    public function actualizarconsurecurso(Request $request, $id){
+    public function actualizarconsurecurso(Request $request, $id)
+    {
         $rules = [
             'extcor_year' => 'required',
             'extcor_semestre' => 'required',
@@ -483,7 +496,7 @@ class ExtensionController extends Controller
             'extcor_numero_documento.required' => 'El campo número de documento es requerido',
             'extcor_id_nivel_estudio.required' => 'El campo máximo nivel de estudio es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
         $consulrecurso = ExtConsultoriaRecursoHumano::find($id);
         $consulrecurso->extcor_year = $request->get('extcor_year');
         $consulrecurso->extcor_semestre = $request->get('extcor_semestre');
@@ -497,11 +510,195 @@ class ExtensionController extends Controller
         return redirect('extension/mostrarconsurecurso');
     }
 
-    public function eliminarconsurecurso($id){
+    public function eliminarconsurecurso($id)
+    {
         $consurecurso = ExtConsultoriaRecursoHumano::find($id);
         $consurecurso->delete();
         Alert::success('Exitoso', 'La consultoria de recurso humano ha sido eliminada con exito');
         return redirect('extension/mostrarconsurecurso');
+    }
+
+    public function mostrarcurso()
+    {
+        $cursos = ExtCurso::all();
+        return view('extension/curso.index')
+            ->with('cursos', $cursos);
+    }
+
+    public function crearcurso()
+    {
+        $cines = CineDetallado::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        return view('extension/curso.create')
+            ->with('cines', $cines)
+            ->with('personas', $personas);
+    }
+
+    public function registrocurso(Request $request)
+    {
+        $rules = [
+            'extcurso_year' => 'required',
+            'extcurso_semestre' => 'required',
+            'extcurso_codigo' => 'required',
+            'extcurso_nombre' => 'required',
+            'extcurso_id_cine' => 'required|not_in:0',
+            'extcurso_extension' => 'required',
+            'extcurso_estado' => 'required',
+            'extcurso_fecha' => 'required',
+            'extcurso_id_docente' => 'required|not_in:0',
+            'extcurso_url_soporte' => 'required',
+        ];
+        $message = [
+            'extcurso_year.required' => 'El campo año es requerido',
+            'extcurso_semestre.required' => 'El campo semestre es requerido',
+            'extcurso_codigo.required' => 'El campo código curso es requerido',
+            'extcurso_nombre.required' => 'El campo nombre curso es requerido',
+            'extcurso_id_cine.required' => 'El campo CINE Detallado es requerido',
+            'extcurso_extension.required' => 'El campo es requerido',
+            'extcurso_estado.required' => 'El campo estado activo es requerido',
+            'extcurso_fecha.required' => 'El campo fecha curso es requerido',
+            'extcurso_id_docente.required' => 'El campo docente es requerido',
+            'extcurso_url_soporte.required' => 'El campo url soporte es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        if ($request->file('extcurso_url_soporte')) {
+            $file = $request->file('extcurso_url_soporte');
+            $name_curso = $request->get('extcurso_year') . '_' . $request->get('extcurso_nombre') . '_' . $request->get('extcurso_fecha') . '.' . $file->extension();
+
+            $ruta = public_path('datos/curso/' . $name_curso);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }
+
+        $curso = new ExtCurso();
+        $curso->extcurso_year = $request->get('extcurso_year');
+        $curso->extcurso_semestre = $request->get('extcurso_semestre');
+        $curso->extcurso_codigo = $request->get('extcurso_codigo');
+        $curso->extcurso_nombre = $request->get('extcurso_nombre');
+        $curso->extcurso_id_cine = $request->get('extcurso_id_cine');
+        $curso->extcurso_extension = $request->get('extcurso_extension');
+        $curso->extcurso_estado = $request->get('extcurso_estado');
+        $curso->extcurso_fecha = $request->get('extcurso_fecha');
+        $curso->extcurso_id_docente = $request->get('extcurso_id_docente');
+        $curso->extcurso_url_soporte = $name_curso;
+
+        $curso->save();
+
+        Alert::success('Exitoso', 'El curso se ha registrado con exito');
+        return redirect('extension/mostrarcurso');
+    }
+
+    public function editarcurso($id)
+    {
+        $cines = CineDetallado::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $curso = ExtCurso::find($id);
+        return view('extension/curso.edit')
+            ->with('cines', $cines)
+            ->with('personas', $personas)
+            ->with('curso', $curso);
+    }
+
+    public function vercurso($id)
+    {
+        $cines = CineDetallado::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $curso = ExtCurso::find($id);
+        return view('extension/curso.show')
+            ->with('cines', $cines)
+            ->with('personas', $personas)
+            ->with('curso', $curso);
+    }
+
+    public function actualizarcurso(Request $request, $id)
+    {
+        $rules = [
+            'extcurso_year' => 'required',
+            'extcurso_semestre' => 'required',
+            'extcurso_codigo' => 'required',
+            'extcurso_nombre' => 'required',
+            'extcurso_id_cine' => 'required|not_in:0',
+            'extcurso_extension' => 'required',
+            'extcurso_estado' => 'required',
+            'extcurso_fecha' => 'required',
+            'extcurso_id_docente' => 'required|not_in:0',
+        ];
+        $message = [
+            'extcurso_year.required' => 'El campo año es requerido',
+            'extcurso_semestre.required' => 'El campo semestre es requerido',
+            'extcurso_codigo.required' => 'El campo código curso es requerido',
+            'extcurso_nombre.required' => 'El campo nombre curso es requerido',
+            'extcurso_id_cine.required' => 'El campo CINE Detallado es requerido',
+            'extcurso_extension.required' => 'El campo es requerido',
+            'extcurso_estado.required' => 'El campo estado activo es requerido',
+            'extcurso_fecha.required' => 'El campo fecha curso es requerido',
+            'extcurso_id_docente.required' => 'El campo docente es requerido',
+        ];
+
+        $this->validate($request, $rules, $message);
+
+        $cursoFind = DB::table('ext_curso')->where('id', $id)->first();
+
+        $curso = ExtCurso::find($id);
+
+        if ($request->file('extcurso_url_soporte')) {
+            $file = $request->file('extcurso_url_soporte');
+            $titulo_curso = str_replace(' ', '-',$request->get('extcurso_nombre'));
+            $name_curso = $request->get('extcurso_year') . '_' .$titulo_curso. '_' . $request->get('extcurso_fecha') . '.' . $file->extension();
+
+            $ruta = public_path('datos/curso/' . $name_curso);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }else{
+            $name_curso = $cursoFind->extcurso_url_soporte;
+        }
+
+        
+        $curso->extcurso_year = $request->get('extcurso_year');
+        $curso->extcurso_semestre = $request->get('extcurso_semestre');
+        $curso->extcurso_codigo = $request->get('extcurso_codigo');
+        $curso->extcurso_nombre = $request->get('extcurso_nombre');
+        $curso->extcurso_id_cine = $request->get('extcurso_id_cine');
+        $curso->extcurso_extension = $request->get('extcurso_extension');
+        $curso->extcurso_estado = $request->get('extcurso_estado');
+        $curso->extcurso_fecha = $request->get('extcurso_fecha');
+        $curso->extcurso_id_docente = $request->get('extcurso_id_docente');
+        $curso->extcurso_url_soporte = $name_curso;
+
+        $curso->save();
+
+        Alert::success('Exitoso', 'El curso se ha actualizado con exito');
+        return redirect('extension/mostrarcurso');
+    }
+
+    public function eliminarcurso($id){
+        $curso = ExtCurso::find($id);
+        $curso->delete();
+        Alert::success('Exitoso', 'El curso se ha eliminado con exito');
+        return redirect('extension/mostrarcurso');
     }
 
 }

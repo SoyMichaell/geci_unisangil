@@ -44,21 +44,21 @@
                 <i class="fa-solid fa-mask fa-4x"></i>
                 <h4 class="mt-2">Consultoria recurso humano</h4>
             </a>
-            <a class="card__extension tile" href="">
-                <i class="fa-solid fa-boxes-stacked fa-4x"></i>
+            <a class="card__extension tile" href="/extension/mostrarcurso">
+                <i class="fa-solid fa-signature fa-4x"></i>
                 <h4 class="mt-2">Curso</h4>
             </a>
             <a class="card__extension tile" href="">
-                <i class="fa-solid fa-boxes-stacked fa-4x"></i>
+                <i class="fa-solid fa-chalkboard fa-4x"></i>
                 <h4 class="mt-2">Educación continua</h4>
             </a>
             <a class="card__extension tile" href="">
-                <i class="fa-solid fa-boxes-stacked fa-4x"></i>
+                <i class="fa-solid fa-chalkboard-user fa-4x"></i>
                 <h4 class="mt-2">Educación continua docente</h4>
             </a>
             <a class="card__extension tile" href="">
-                <i class="fa-solid fa-boxes-stacked fa-4x"></i>
-                <h4 class="mt-2">Consultoria continua beneficiario</h4>
+                <i class="fa-solid fa-book-open-reader fa-4x"></i>
+                <h4 class="mt-2">Educación continua beneficiario</h4>
             </a>
         </div>
     </div>

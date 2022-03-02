@@ -184,7 +184,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
                         <input id="estu_fecha_nacimiento" type="date"
                             class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
@@ -196,12 +196,23 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
                         <input id="estu_ingreso" type="text"
                             class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
                             value="{{$estudiante->estu_ingreso}}" autocomplete="estu_ingreso" autofocus>
                         @error('estu_ingreso')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
+                        <input id="estu_periodo_ingreso" type="text"
+                            class="form-control @error('estu_periodo_ingreso') is-invalid @enderror" name="estu_periodo_ingreso"
+                            value="{{$estudiante->estu_periodo_ingreso}}" autocomplete="estu_periodo_ingreso" placeholder="Ej: 2016-1" autofocus>
+                        @error('estu_periodo_ingreso')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -272,7 +283,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="estu_estado">{{ __('Estado *') }}</label>
                         <select class="form-select" name="estu_estado" id="estu_estado">
                             <option value="">---- SELECCIONE ----</option>
@@ -290,8 +301,31 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
-                        <label for="estu_matricula">{{ __('Tipo de matricula *') }}</label>
+                    <div class="col-md-4">
+                        <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
+                        <select class="form-select" name="estu_tipo_matricula" id="estu_tipo_matricula">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="movilidad-interna" {{$estudiante->estu_tipo_matricula == 'movilidad-interna' ? 'selected' : ''}}>Movilidad Interna</option>
+                            <option value="nuevo-transferencias-interna" {{$estudiante->estu_tipo_matricula == 'nuevo-transferencias-interna' ? 'selected' : ''}}>Nuevo Transferencias Interna</option>
+                            <option value="nuevo-reingreso" {{$estudiante->estu_tipo_matricula == 'nuevo-reingreso' ? 'selected' : ''}}>Nuevo Reingreso</option>
+                            <option value="estudiante-movilidad-academica" {{$estudiante->estu_tipo_matricula == 'estudiante-movilidad-academica' ? 'selected' : ''}}>Estudiante de Movilidad Académica</option>
+                            <option value="movilidad-externa" {{$estudiante->estu_tipo_matricula == 'movilidad-externa' ? 'selected' : ''}}>Movilidad Externa</option>
+                            <option value="nuevo-transferencia-externa" {{$estudiante->estu_tipo_matricula == 'nuevo-transferencia-externa' ? 'selected' : ''}}>Nuevo Transferencia Externa</option>
+                            <option value="antiguo" {{$estudiante->estu_tipo_matricula == 'antiguo' ? 'selected' : ''}}>Antiguo</option>
+                            <option value="transferencia-obligatoria" {{$estudiante->estu_tipo_matricula == 'transferencia-obligatoria' ? 'selected' : ''}}>Transferencia Obligatoria</option>
+                            <option value="desertor" {{$estudiante->estu_tipo_matricula == 'desertor' ? 'selected' : ''}}>Desertor</option>
+                            <option value="nuevo-regular" {{$estudiante->estu_tipo_matricula == 'nuevo-regular' ? 'selected' : ''}}>Nuevo Regular</option>
+                            <option value="continuidad-academica" {{$estudiante->estu_tipo_matricula == 'continuidad-academica' ? 'selected' : ''}}>Continuidad Académica</option>
+                            <option value="egresado" {{$estudiante->estu_tipo_matricula == 'egresado' ? 'selected' : ''}}>Egresado</option>
+                        </select>
+                        @error('estu_tipo_matricula')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label for="estu_matricula">{{ __('Matricula *') }}</label>
                         <select class="form-select" name="estu_matricula" id="estu_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="pendiente" {{$estudiante->estu_matricula == 'pendiente' ? 'selected' : ''}}>Pendiente</option>

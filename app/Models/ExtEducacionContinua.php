@@ -18,5 +18,13 @@ class ExtEducacionContinua extends Model
         'extedu_numero_horas',
         'extedu_tipo_curso',
         'extedu_valor_curso',
+        'extedu_id_docente',
+        'extedu_tipo_extension',
+        'extedu_cantidad',
     ];
+
+    public function docentes(){
+        return $this->belongsTo(User::class, 'extedu_id_docente');
+    }
+
 }
