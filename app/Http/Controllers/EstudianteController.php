@@ -136,7 +136,6 @@ class EstudianteController extends Controller
         $estudiantes->estu_pga = $request->get('estu_pga');
         $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
         $estudiantes->estu_egresado = $request->get('estu_egresado');
-        $estudiantes->estu_grado = $request->get('estu_grado');
 
 
         $ExisteEstudiante = DB::table('estudiante')
@@ -221,7 +220,6 @@ class EstudianteController extends Controller
         $estudiantes->estu_pga = $request->get('estu_pga');
         $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
         $estudiantes->estu_egresado = $request->get('estu_egresado');
-        $estudiantes->estu_grado = $request->get('estu_grado');
 
         $estudiantes->save();
 

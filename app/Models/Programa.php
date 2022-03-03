@@ -46,6 +46,8 @@ class Programa extends Model
         return $this->hasMany(Software::class, 'id');
     }
 
-    
+    public function redes(){
+        return $this->hasMany(RedAcademica::class, 'id');
+    }
 
 }

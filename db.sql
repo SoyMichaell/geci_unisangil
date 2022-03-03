@@ -383,7 +383,6 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   `estu_pga` double DEFAULT NULL,
   `estu_reconocimiento` int(11) DEFAULT NULL,
   `estu_egresado` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '',
-  `estu_grado` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -396,12 +395,13 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   CONSTRAINT `FK_estudiante_municipio` FOREIGN KEY (`estu_ciudad`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_estudiante_programa` FOREIGN KEY (`estu_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_estudiante_programa_plan_estudio` FOREIGN KEY (`estu_programa_plan`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.estudiante: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
-INSERT IGNORE INTO `estudiante` (`id`, `estu_programa`, `estu_programa_plan`, `estu_tipo_documento`, `estu_numero_documento`, `estu_nombre`, `estu_apellido`, `estu_telefono1`, `estu_telefono2`, `estu_direccion`, `estu_correo`, `estu_estrato`, `estu_departamento`, `estu_ciudad`, `estu_fecha_nacimiento`, `estu_ingreso`, `estu_periodo_ingreso`, `estu_ult_matricula`, `estu_semestre`, `estu_financiamiento`, `estu_entidad`, `estu_estado`, `estu_tipo_matricula`, `estu_matricula`, `estu_pga`, `estu_reconocimiento`, `estu_egresado`, `estu_grado`, `created_at`, `updated_at`) VALUES
-	(4, 6, 4, 'Cédula de ciudadania', '1006450864', 'Michael', 'Rodriguez', '3223342408', NULL, 'calle 29 16bis 32', 'maicolh474121@gmail.com', '2', 1, 2, '2000-11-26', '2017', '2017-1', '2021-2', 10, 'beca', 'TIC\'S', 'egresado-no-graduado', 'antiguo', 'pagado', NULL, NULL, '0', NULL, '2022-03-02 15:22:58', '2022-03-02 15:51:47');
+INSERT IGNORE INTO `estudiante` (`id`, `estu_programa`, `estu_programa_plan`, `estu_tipo_documento`, `estu_numero_documento`, `estu_nombre`, `estu_apellido`, `estu_telefono1`, `estu_telefono2`, `estu_direccion`, `estu_correo`, `estu_estrato`, `estu_departamento`, `estu_ciudad`, `estu_fecha_nacimiento`, `estu_ingreso`, `estu_periodo_ingreso`, `estu_ult_matricula`, `estu_semestre`, `estu_financiamiento`, `estu_entidad`, `estu_estado`, `estu_tipo_matricula`, `estu_matricula`, `estu_pga`, `estu_reconocimiento`, `estu_egresado`, `created_at`, `updated_at`) VALUES
+	(4, 6, 4, 'Cédula de ciudadania', '1006450864', 'Michael', 'Rodriguez', '3223342408', NULL, 'calle 29 16bis 32', 'maicolh474121@gmail.com', '2', 1, 2, '2000-11-26', '2017', '2017-1', '2021-2', 10, 'beca', 'TIC\'S', 'egresado-no-graduado', 'antiguo', 'pagado', NULL, NULL, '0', '2022-03-02 15:22:58', '2022-03-02 15:51:47'),
+	(5, 6, 4, 'Cédula de ciudadania', '1116662524', 'Kenny Jose', 'Rodriguez Hernandez', '3108585194', NULL, 'calle 29 16 bis 32', 'mateo04@gmail.com', '2', 1, 2, '2003-05-13', '2022', '2022-2', '2022-2', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, '0', '2022-03-03 17:05:31', '2022-03-03 17:05:47');
 /*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_actividad_cultural
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `ext_educacion_continua` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_educacion_continua: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_educacion_continua: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_educacion_continua` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_educacion_continua` (`id`, `extedu_semestre`, `extedu_codigo_curso`, `extedu_numero_horas`, `extedu_tipo_curso`, `extedu_valor_curso`, `extedu_id_docente`, `extedu_tipo_extension`, `extedu_cantidad`, `extedu_url_soporte`, `created_at`, `updated_at`) VALUES
 	(6, '2', 'EDC-Y-IS-01-21', 8, 1, 0, 33, 1, 150, 'EDC-Y-IS-01-21_1.rar', '2022-03-02 22:11:12', '2022-03-02 22:11:12');
@@ -579,7 +579,7 @@ CREATE TABLE IF NOT EXISTS `ext_participante` (
   CONSTRAINT `FK_docente_participante_persona` FOREIGN KEY (`dop_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_participante: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_participante: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_participante` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_participante` (`id`, `dop_id_docente`, `dop_fecha_expedicion`, `dop_sexo_biologico`, `dop_estado_civil`, `dop_id_pais`, `dop_id_municipio`, `dop_correo_personal`, `dop_direccion`, `created_at`, `updated_at`) VALUES
 	(1, 29, '2018-12-18', 2, 1, 170, 850001, 'yadiralexandra@gmail.com', 'Km 2 vía Matepantano campus Unisangil  - Yopal', '2022-03-02 23:03:53', '2022-03-02 23:12:33');
@@ -639,7 +639,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.migrations: ~38 rows (aproximadamente)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
@@ -679,7 +679,8 @@ INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(45, '2022_02_28_225023_sector', 20),
 	(47, '2022_03_01_012502_nivel_estudio', 21),
 	(48, '2022_02_28_145215_educacion_continua', 22),
-	(49, '2022_03_02_222218_docente_participantex', 23);
+	(49, '2022_03_02_222218_docente_participantex', 23),
+	(50, '2022_03_03_162600_redes', 24);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.modalidad_grado
@@ -894,6 +895,28 @@ CREATE TABLE IF NOT EXISTS `programa_plan_estudio_asignatura` (
 INSERT IGNORE INTO `programa_plan_estudio_asignatura` (`id`, `asig_id_sede`, `asig_id_programa`, `asig_id_plan_estudio`, `asig_codigo`, `asig_nombre`, `asig_no_creditos`, `asig_no_semanales`, `asig_no_semestre`, `asig_estado`, `created_at`, `updated_at`) VALUES
 	(2, 2, 6, 4, '5203', 'Estructura de datos', 4, 4, 64, 'activo', '2022-02-26 19:04:42', '2022-02-26 19:04:42');
 /*!40000 ALTER TABLE `programa_plan_estudio_asignatura` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.red_academica
+CREATE TABLE IF NOT EXISTS `red_academica` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `red_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_nombre_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_telefono` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_pais` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_ciudad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_alcance` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_accion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_year` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `red_id_programa` int(11) NOT NULL,
+  `red_observacion` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.red_academica: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `red_academica` DISABLE KEYS */;
+/*!40000 ALTER TABLE `red_academica` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.software
 CREATE TABLE IF NOT EXISTS `software` (

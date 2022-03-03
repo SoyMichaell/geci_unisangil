@@ -354,7 +354,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <label for="estu_egresado">{{ __('¿Es egresado? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
@@ -364,17 +364,6 @@
                                 </select>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="estu_grado">{{ __('Fecha de grado (Opcional)') }}</label>
-                        <input id="estu_grado" type="date"
-                            class="form-control @error('estu_grado') is-invalid @enderror" name="estu_grado"
-                            value="{{ old('estu_grado') }}" autocomplete="estu_grado" autofocus>
-                        @error('estu_grado')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
                     </div>
                 </div>
                 <div class="row mb-0">

@@ -190,3 +190,8 @@ Route::get('extension/{participante}/verparticipante', [App\Http\Controllers\Ext
 Route::put('extension/{participante}/actualizarparticipante', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipante']);
 Route::delete('extension/{participante}/eliminarparticipante', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipante']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
+
+
+
+//Rutas Redes Acádemicas
+Route::resource('red', App\Http\Controllers\RedAcademicaController::class);

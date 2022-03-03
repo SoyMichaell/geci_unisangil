@@ -114,6 +114,9 @@
                     <li><a class="treeview-item" href="{{ url('extension') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Extensión</a></li>
+                    <li><a class="treeview-item" href="{{ url('red') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Redes acádemicas</a></li>
                 </ul>
             </li>
         </ul>
