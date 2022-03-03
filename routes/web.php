@@ -195,3 +195,7 @@ Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 //Rutas Redes Acádemicas
 Route::resource('red', App\Http\Controllers\RedAcademicaController::class);
+
+
+//Rutas Practicas Laborales
+Route::resource('practica', App\Http\Controllers\PracticaController::class);

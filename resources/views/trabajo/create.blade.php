@@ -46,7 +46,8 @@
                             id="tra_id_estudiante" multiple>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
-                                <option value="{{ $estudiante->id }}">{{ $estudiante->estu_nombre.' '.$estudiante->estu_apellido}}</option>
+                                <option value="{{ $estudiante->id }}">
+                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
                             @endforeach
                         </select>
                         @error('tra_id_estudiante')
@@ -87,7 +88,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="tra_id_director">Director</label>
-                        <select class="js-example-placeholder-single form-select" name="tra_id_director" id="tra_id_director">
+                        <select class="js-example-placeholder-single form-select" name="tra_id_director"
+                            id="tra_id_director">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">

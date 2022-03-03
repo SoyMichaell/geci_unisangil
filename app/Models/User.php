@@ -67,4 +67,8 @@ class User extends Authenticatable
         return $this->hasMany(ExtParticipante::class, 'id');
     }
 
+    public function practicas(){
+        return $this->hasMany(Practica::class, 'id');
+    }
+
 }

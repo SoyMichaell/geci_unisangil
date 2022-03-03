@@ -397,10 +397,10 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   CONSTRAINT `FK_estudiante_programa_plan_estudio` FOREIGN KEY (`estu_programa_plan`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.estudiante: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.estudiante: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
 INSERT IGNORE INTO `estudiante` (`id`, `estu_programa`, `estu_programa_plan`, `estu_tipo_documento`, `estu_numero_documento`, `estu_nombre`, `estu_apellido`, `estu_telefono1`, `estu_telefono2`, `estu_direccion`, `estu_correo`, `estu_estrato`, `estu_departamento`, `estu_ciudad`, `estu_fecha_nacimiento`, `estu_ingreso`, `estu_periodo_ingreso`, `estu_ult_matricula`, `estu_semestre`, `estu_financiamiento`, `estu_entidad`, `estu_estado`, `estu_tipo_matricula`, `estu_matricula`, `estu_pga`, `estu_reconocimiento`, `estu_egresado`, `created_at`, `updated_at`) VALUES
-	(4, 6, 4, 'Cédula de ciudadania', '1006450864', 'Michael', 'Rodriguez', '3223342408', NULL, 'calle 29 16bis 32', 'maicolh474121@gmail.com', '2', 1, 2, '2000-11-26', '2017', '2017-1', '2021-2', 10, 'beca', 'TIC\'S', 'egresado-no-graduado', 'antiguo', 'pagado', NULL, NULL, '0', '2022-03-02 15:22:58', '2022-03-02 15:51:47'),
+	(4, 6, 4, 'Cédula de ciudadania', '1006450864', 'Mike', 'Rodriguez', '3223342408', NULL, 'calle 29 16bis 32', 'maicolh474121@gmail.com', '2', 1, 2, '2000-11-26', '2017', '2017-1', '2021-2', 10, 'beca', 'TIC\'S', 'egresado-no-graduado', 'antiguo', 'pagado', NULL, NULL, '0', '2022-03-02 15:22:58', '2022-03-02 15:51:47'),
 	(5, 6, 4, 'Cédula de ciudadania', '1116662524', 'Kenny Jose', 'Rodriguez Hernandez', '3108585194', NULL, 'calle 29 16 bis 32', 'mateo04@gmail.com', '2', 1, 2, '2003-05-13', '2022', '2022-2', '2022-2', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, '0', '2022-03-03 17:05:31', '2022-03-03 17:05:47');
 /*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
 
@@ -639,9 +639,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=51 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.migrations: ~38 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.migrations: ~39 rows (aproximadamente)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -680,7 +680,8 @@ INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(47, '2022_03_01_012502_nivel_estudio', 21),
 	(48, '2022_02_28_145215_educacion_continua', 22),
 	(49, '2022_03_02_222218_docente_participantex', 23),
-	(50, '2022_03_03_162600_redes', 24);
+	(50, '2022_03_03_162600_redes', 24),
+	(51, '2022_03_03_195310_practicas', 25);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.modalidad_grado
@@ -778,9 +779,41 @@ INSERT IGNORE INTO `persona` (`id`, `per_tipo_documento`, `per_numero_documento`
 	(27, 'Cédula de ciudadania', '1006450866', 'Michael', 'Rodriguez', '3223342408', 'michaelrodriguezhernandez@unisangil.edu.co', '$2y$10$G6v.CQS5gnw0xaW6KeXuguFOYq4MEhfjqvNMv6P0f0Lj1AxqpoDk6', 1, 2, 1, 'activo', NULL, NULL, '2022-02-26 15:57:04', '2022-02-26 15:57:04'),
 	(28, 'Cédula de ciudadania', '74825033', 'Edwin', 'Rodriguez', '3108585194', 'eroher@hotmail.com', '$2y$10$xQBu.LN7Au4m15Ew34tm8.iMNMCrgQ9Ku3A98vEhZBafB4O30o20e', 1, 2, 2, 'activo', NULL, NULL, '2022-02-26 16:29:56', '2022-02-26 16:29:56'),
 	(29, 'Cédula de ciudadania', '47426505', 'Yadira', 'Hernandez', '3108585194', 'yadira@gmail.com', '', 1, 2, 5, 'activo', NULL, NULL, NULL, NULL),
-	(33, 'Cédula de ciudadania', '1006451234', 'michael', 'rodriguez', '3108585194', 'maicolh474@gmail.com', '$2y$10$1fIJ4ig9RK9m3zwh3zcrouAACIwk1ahdLl.HEBVq4iMQ9Wk.fjjDi', 1, 2, 2, 'activo', NULL, NULL, NULL, NULL),
+	(33, 'Cédula de ciudadania', '1006451234', 'MAICOL', 'rodriguez', '3108585194', 'maicolh474@gmail.com', '$2y$10$1fIJ4ig9RK9m3zwh3zcrouAACIwk1ahdLl.HEBVq4iMQ9Wk.fjjDi', 1, 2, 2, 'activo', NULL, NULL, NULL, NULL),
 	(34, 'Cédula de ciudadania', '1116662526', 'Kenny', 'Rodriguez', '3108585194', 'mateorodriguezhernandez04@gmail.com', NULL, 1, 2, 5, 'activo', NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.practica_laboral
+CREATE TABLE IF NOT EXISTS `practica_laboral` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `prac_year` int(11) NOT NULL DEFAULT 0,
+  `prac_razon_social` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_nit_empresa` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_pais` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_departamento` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_ciudad` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_telefono` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_url_web` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `prac_correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_area_practica` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `prac_id_docente` int(11) DEFAULT NULL,
+  `prac_id_estudiante` int(11) DEFAULT NULL,
+  `prac_cargo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_practica_laboral_estudiante` (`prac_id_estudiante`),
+  KEY `FK_practica_laboral_persona` (`prac_id_docente`),
+  CONSTRAINT `FK_practica_laboral_estudiante` FOREIGN KEY (`prac_id_estudiante`) REFERENCES `estudiante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_practica_laboral_persona` FOREIGN KEY (`prac_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.practica_laboral: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `practica_laboral` DISABLE KEYS */;
+INSERT IGNORE INTO `practica_laboral` (`id`, `prac_year`, `prac_razon_social`, `prac_nit_empresa`, `prac_pais`, `prac_departamento`, `prac_ciudad`, `prac_direccion`, `prac_telefono`, `prac_url_web`, `prac_correo`, `prac_area_practica`, `prac_id_docente`, `prac_id_estudiante`, `prac_cargo`, `created_at`, `updated_at`) VALUES
+	(5, 2022, 'SENA YOPAL', '899999903-4', 'Colombia', 'Casanare', 'Yopal', 'Calle 29 16bis 32', '3223342408', NULL, 'msrodriguezs@sena.edu.co', 'SENNOVA', NULL, 5, 'Investigador Junior', '2022-03-03 22:59:53', '2022-03-03 23:00:06');
+/*!40000 ALTER TABLE `practica_laboral` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.programa
 CREATE TABLE IF NOT EXISTS `programa` (

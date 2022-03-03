@@ -108,6 +108,9 @@
                     <li><a class="treeview-item" href="{{ url('trabajo') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Trabajo de grado</a></li>
+                    <li><a class="treeview-item" href="{{ url('practica') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Practica Laboral</a></li>
                     <li><a class="treeview-item" href="{{ url('software') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             TIC'S</a></li>

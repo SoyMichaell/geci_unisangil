@@ -53,4 +53,8 @@ class Estudiante extends Model
         return $this->belongsTo(Municipio::class, 'estu_ciudad');
     }
 
+    public function practicas(){
+        return $this->hasMany(Practica::class, 'id');
+    }
+
 }
