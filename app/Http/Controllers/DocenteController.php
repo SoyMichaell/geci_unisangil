@@ -816,6 +816,4 @@ class DocenteController extends Controller
         return view('docente/historial.index')
             ->with('historials', $historials);
     }
-
-
 }

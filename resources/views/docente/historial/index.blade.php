@@ -33,22 +33,21 @@
                         <thead>
                             <tr>
                                 <th>#</th>
+                                <th>Año</th>
+                                <th>Semestre</th>
                                 <th>Asignatura</th>
-                                <th>Número de horas dedicadas a la semana de docencia</th>
-                                <th>Número de horas dedicadas a la semana de investigación</th>
-                                <th>Número de horas dedicadas a extensión</th>
-                                <th>Número de horas dedicadas a labores administrativas</th>
+                                <th>Grupo</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php $i = 1; ?>
                             @foreach ($historials as $historial)
                                 <tr>
+                                    <td>{{ $historial->pph_year }}</td>
+                                    <td>{{ $historial->pph_semestre }}</td>
                                     <td>{{ $historial->asignaturas->asig_nombre }}</td>
-                                    <td>{{ $historial->dohiasig_hra_semana_docencia }}</td>
-                                    <td>{{ $historial->dohiasig_hra_semana_investigacion }}</td>
-                                    <td>{{ $historial->dohiasig_hra_semana_extension }}</td>
-                                    <td>{{ $historial->dohiasig_hra_semana_administrativa }}</td>
+                                    <td>{{ $historial->pph_grupo }}</td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <td>
                                             <form action="" method="POST">
