@@ -86,20 +86,26 @@ Route::put('docente/{docente}/actualizarinformacion', [App\Http\Controllers\Doce
 Route::put('docente/{docente}/directorestudios', [App\Http\Controllers\DocenteController::class, 'directorestudios']);
 Route::put('docente/{docente}/zip', [App\Http\Controllers\DocenteController::class, 'zip']);
 Route::put('docente/{docente}/{estado}/estado', [App\Http\Controllers\DocenteController::class, 'estado']);
+//Rutas contratos
 Route::get('docente/{docente}/mostrarcontrato', [App\Http\Controllers\DocenteController::class, 'mostrarcontrato']);
 Route::get('docente/{docente}/crearcontrato', [App\Http\Controllers\DocenteController::class, 'crearcontrato']);
 Route::post('docente/registrocontrato', [App\Http\Controllers\DocenteController::class, 'registrocontrato']);
 Route::get('docente/{docente}/{contrato}/editarcontrato', [App\Http\Controllers\DocenteController::class, 'editarcontrato']);
 Route::put('docente/{contrato}/actualizarcontrato', [App\Http\Controllers\DocenteController::class, 'actualizarcontrato']);
 Route::delete('docente/{contrato}/eliminarcontrato', [App\Http\Controllers\DocenteController::class, 'eliminarcontrato']);
+//Rutas historial asignaturas
+Route::get('docente/{docente}/mostrarhistorial', [App\Http\Controllers\DocenteController::class, 'mostrarhistorial']);
+//Rutas evaluación docente
 Route::get('docente/{docente}/mostrarevaluacion', [App\Http\Controllers\DocenteController::class, 'mostrarevaluacion']);
 Route::get('docente/{docente}/crearevaluacion', [App\Http\Controllers\DocenteController::class, 'crearevaluacion']);
 Route::post('docente/registroevaluacion', [App\Http\Controllers\DocenteController::class, 'registroevaluacion']);
 Route::get('docente/{docente}/{evaluacion}/editarevaluacion', [App\Http\Controllers\DocenteController::class, 'editarevaluacion']);
 Route::put('docente/{evaluacion}/actualizarevaluacion', [App\Http\Controllers\DocenteController::class, 'actualizarevaluacion']);
 Route::delete('docente/{evaluacion}/eliminarevaluacion', [App\Http\Controllers\DocenteController::class, 'eliminarevaluacion']);
+//Rutas asignaturas
 Route::get('docente/{docente}/mostrarasignatura', [App\Http\Controllers\DocenteController::class, 'mostrarasignatura']);
-Route::get('docente/mostrardocencia', [App\Http\Controllers\DocenteController::class, 'mostrardocencia']);
+//Rutas vinculación
+Route::get('docente/mostrarvinculacion', [App\Http\Controllers\DocenteController::class, 'mostrarvinculacion']);
 Route::resource('docente', App\Http\Controllers\DocenteController::class);
 
 /*Rutas programa*/

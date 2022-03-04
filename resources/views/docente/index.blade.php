@@ -75,7 +75,7 @@
                                                         title="Agregar contrato"><i
                                                             class="fa-solid fa-folder-tree"></i></a>
                                                     <a class="btn btn-outline-info btn-sm"
-                                                        href="{{ url('docente/' . $persona->id . '/pdfasignatura') }}"
+                                                        href="{{ url('docente/' . $persona->id . '/mostrarhistorial') }}"
                                                         title="Agregar asignaturas"><i
                                                             class="fa-solid fa-address-book"></i></a>
                                                     <a class="btn btn-outline-primary btn-sm"
@@ -100,6 +100,7 @@
                         @endforeach
                     </tbody>
                 </table>
+                <a href="/docente/mostrarvinculacion">Vinculación docencia</a>
             </div>
         </div>
     </div>

@@ -792,4 +792,30 @@ class DocenteController extends Controller
             ->with('municipios', $municipios)
             ->with('persona', $persona);
     }
+
+    public function mostrarvinculacion(){
+        $personas = DB::table('persona')
+            ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+            return view('docente/vinculacion.index')
+                ->with('personas', $personas);
+    }
+
+    public function mostrarhistorial($id){
+       $historials = DB::table('persona')
+        ->join('programa_asignatura_horario','persona.id','=','programa_asignatura_horario.pph_id_docente')
+        ->join('programa_plan_estudio_asignatura','programa_asignatura_horario.id','=','programa_plan_estudio_asignatura.id')
+        ->where('persona.id', $id)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 4)
+        ->orWhere('per_tipo_usuario', 5)
+        ->get();
+        return view('docente/historial.index')
+            ->with('historials', $historials);
+    }
+
+
 }

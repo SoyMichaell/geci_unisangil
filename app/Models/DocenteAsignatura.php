@@ -13,25 +13,19 @@ class DocenteAsignatura extends Model
 
     protected $fillable = [
             'id',
-            'doa_id_docente',
-            'doa_year',
-            'doa_semestre',
-            'doa_id_asignatura',
-            'doa_grupo',
-            'doa_id_municipio',
-            'doa_unidad',
-            'doa_horas_semana_doc',
-            'doa_horas_semana_inv',
-            'doa_horas_extension',
-            'doa_horas_admin',
+            'docasi_id_docente',
+            'docasi_id_asignatura',
+            'docasi_numero_hora_docencia',
+            'docasi_numero_hora_investigacion',
+            'docasi_numero_hora_extension',
+            'docasi_numero_hora_administrativas',
     ];
+
+    public function docentes(){
+        return $this->belongsTo(User::class, 'docasi_id_docente');
+    }
 
     public function asignaturas(){
         return $this->belongsTo(ProgramaAsignatura::class, 'doa_id_asignatura');
     }
-
-    public function municipios(){
-        return $this->belongsTo(Municipio::class, 'doa_id_municipio');
-    }
-
 }
