@@ -44,4 +44,8 @@ class ProgramaAsignatura extends Model
         return $this->hasMany(Software::class, 'id');
     }
 
+    public function softwarecurso(){
+        return $this->hasMany(SoftwareRecurso::class, 'id');
+    }
+
 }

@@ -13,12 +13,6 @@
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="d-flex">
-            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                <a class="btn btn-outline-success" href="{{ url('software/mostrarrecurso') }}"><i class="fa fa-plus-circle"></i>
-                    Recursos tecnológicos</a>
-            @endif
-        </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
@@ -30,7 +24,7 @@
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('software/export') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('software/create') }}"><i
+                        <a class="btn btn-outline-success" href="{{ url('software/crearrecurso') }}"><i
                                 class="fa fa-plus-circle"></i>
                             Nuevo</a>
                     @endif
@@ -41,13 +35,11 @@
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Tipo software</th>
-                            <th>Software</th>
-                            <th>Desarrollador</th>
-                            <th>Versión</th>
-                            <th>Año adquisición licencia</th>
-                            <th>Año vencimiento licencia</th>
-                            <th>Programa</th>
+                            <th>Año</th>
+                            <th>Periodo</th>
+                            <th>Tipo recurso</th>
+                            <th>Docente</th>
+                            <th>Asignatura</th>
                             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <th>Acciones</th>
                             @endif
@@ -55,24 +47,22 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($softwares as $software)
+                        @foreach ($recursos as $recurso)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $software->sof_tipo }}</td>
-                                <td>{{ $software->sof_nombre }}</td>
-                                <td>{{ $software->sof_desarrollador }}</td>
-                                <td>{{ $software->sof_version }}</td>
-                                <td>{{ $software->sof_year_ad_licencia }}</td>
-                                <td>{{ $software->sof_year_ve_licencia }}</td>
-                                <td>{{ $software->programas->pro_nombre }}</td>
+                                <td>{{ $recurso->sofrete_year }}</td>
+                                <td>{{ $recurso->sofrete_periodo }}</td>
+                                <td>{{ $recurso->sofrete_tipo_recurso }}</td>
+                                <td>{{ $recurso->docentes->per_nombre.' '.$recurso->docentes->per_apellido }}</td>
+                                <td>{{ $recurso->asignaturas->asig_nombre }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="{{ route('software.destroy', $software->id) }}" method="POST">
+                                        <form action="" method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/software/{{ $software->id }}"><i
+                                                <a class="btn btn-sm" href="/software/{{ $recurso->id }}/verrecurso"><i
                                                         class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
-                                                    href="/software/{{ $software->id }}/edit"><i
+                                                    href="/software/{{ $recurso->id }}/editarrecurso"><i
                                                         class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')

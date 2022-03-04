@@ -51,6 +51,7 @@
                             <th>Apellido (s)</th>
                             <th>Correo electronico</th>
                             <th>Año de ingreso</th>
+                            <th>¿Egresado?</th>
                             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <th>Acciones</th>
                             @endif
@@ -67,6 +68,7 @@
                                 <td>{{ $estudiante->estu_apellido }}</td>
                                 <td>{{ $estudiante->estu_correo }}</td>
                                 <td>{{ $estudiante->estu_ingreso }}</td>
+                                <td>{{ $estudiante->estu_egresado}} <a class="badge badge-info" href="/estudiante/{{$estudiante->id}}/crearegresado">{{$estudiante->estu_egresado == 'Si' ? 'Completar datos egresado' : ''}}</a></td>
                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                     <td style="width: 10%">
                                         <form action="{{ route('estudiante.destroy', $estudiante->id) }}"
@@ -89,16 +91,17 @@
                         @endforeach
                     </tbody>
                 </table>
+                <a href="">Ver tabla datos generales</a>
             </div>
         </div>
-        <div class="col-md-5 tile">
-            <form class="form-inline justify-content-center" action="/estudiante/listadoingreso" method="post">
+        <div class="col-md-4 tile">
+            <form class="form-inline" action="/estudiante/listadoingreso" method="post">
                 @csrf
                 <div class="form-group mb-2">
                     <label>Listado por periodo acádemico: </label>
                 </div>
                 <div class="form-group mx-sm-3 mb-2">
-                    <select class="js-example-placeholder-single form-select" name="estu_ingreso" id="estu_ingreso">
+                    <select class="form-select" name="estu_ingreso" id="estu_ingreso">
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($ingresos as $ingreso)
                             <option value="{{ $ingreso->estu_ingreso }}">{{ $ingreso->estu_ingreso }}</option>

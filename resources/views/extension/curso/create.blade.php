@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         <label for="extcurso_semestre">Semestre</label>
                         <input class="form-control @error('extcurso_semestre') is-invalid @enderror"
-                            name="extcurso_semestre" id="extcuextcurso_semestrelre_year"
+                            name="extcurso_semestre" id="extcurso_semestre"
                             value="{{ old('extcurso_semestre') }}" type="number" autocomplete="extcurso_semestre"
                             autofocus>
                         @error('extcurso_semestre')

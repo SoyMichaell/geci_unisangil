@@ -64,6 +64,8 @@ Route::get('/estudiante/listadobeca', [App\Http\Controllers\EstudianteController
 Route::get('/estudiante/listadocontado', [App\Http\Controllers\EstudianteController::class, 'listadocontado']);
 Route::get('/estudiante/listadoprestamo', [App\Http\Controllers\EstudianteController::class, 'listadoprestamo']);
 Route::post('/estudiante/listadoingreso', [App\Http\Controllers\EstudianteController::class, 'listadoingreso']);
+Route::get('estudiante/{estudiante}/crearegresado', [App\Http\Controllers\EstudianteController::class, 'crearegresado']);
+Route::put('estudiante/{estudiante}/actualizaregresado', [App\Http\Controllers\EstudianteController::class, 'actualizaregresado']);
 Route::resource('estudiante', App\Http\Controllers\EstudianteController::class);
 
 /*Rutas docentes*/
@@ -125,6 +127,12 @@ Route::resource('trabajo', App\Http\Controllers\TrabajoController::class);
 Route::resource('modalidad', App\Http\Controllers\ModalidadGradoController::class);
 
 /*Rutas software tic's*/
+Route::get('software/mostrarrecurso', [App\Http\Controllers\SoftwareController::class, 'mostrarrecurso']);
+Route::get('software/crearrecurso', [App\Http\Controllers\SoftwareController::class, 'crearrecurso']);
+Route::post('software/registrorecurso', [App\Http\Controllers\SoftwareController::class, 'registrorecurso']);
+Route::get('software/{recurso}/editarrecurso', [App\Http\Controllers\SoftwareController::class, 'editarrecurso']);
+Route::get('software/{recurso}/verrecurso', [App\Http\Controllers\SoftwareController::class, 'verrecurso']);
+Route::put('software/{recurso}/actualizarrecurso', [App\Http\Controllers\SoftwareController::class, 'actualizarrecurso']);
 Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
 

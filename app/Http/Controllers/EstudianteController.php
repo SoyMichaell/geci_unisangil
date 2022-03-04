@@ -10,6 +10,7 @@ use App\Exports\EstudiantesExports;
 use App\Exports\ListadoEstudiantes\BecasExport;
 use App\Exports\ListadoEstudiantes\ContadosExport;
 use App\Exports\ListadoEstudiantes\PrestamosExport;
+use App\Models\EstudianteEgresado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -24,6 +25,7 @@ class EstudianteController extends Controller
     {
         $estudiantes = Estudiante::all();
         $programas = Programa::all();
+        $estudiante_egresados = EstudianteEgresado::all();
 
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->get();
         $programas = DB::table('programa')
@@ -31,10 +33,10 @@ class EstudianteController extends Controller
             ->get();
 
         if (Auth::user()->per_tipo_usuario == '3') {
-            return view('estudiante.index', compact('estudiantes', 'ingresos'));
+            return view('estudiante.index', compact('estudiantes', 'ingresos','estudiante_egresados'));
         } else {
             if ($programas->count() > 0) {
-                return view('estudiante.index', compact('estudiantes', 'ingresos'));
+                return view('estudiante.index', compact('estudiantes', 'ingresos','estudiante_egresados'));
             } else {
                 Alert::warning('Requisitos', 'Primero registre un programa acádemico');
                 return redirect('/home');
@@ -137,6 +139,45 @@ class EstudianteController extends Controller
         $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
         $estudiantes->estu_egresado = $request->get('estu_egresado');
 
+        DB::table('estudiante')->insert(
+            [
+                'estu_programa' => $request->get('estu_programa'),
+                'estu_programa_plan' =>  $request->get('estu_programa_plan'),
+                'estu_tipo_documento' => $request->get('estu_tipo_documento'),
+                'estu_numero_documento' => $request->get('estu_numero_documento'),
+                'estu_nombre' => $request->get('estu_nombre'),
+                'estu_apellido' => $request->get('estu_apellido'),
+                'estu_telefono1' => $request->get('estu_telefono1'),
+                'estu_direccion' => $request->get('estu_direccion'),
+                'estu_correo' => $request->get('estu_correo'),
+                'estu_estrato' => $request->get('estu_estrato'),
+                'estu_departamento' => $request->get('estu_departamento'),
+                'estu_ciudad' => $request->get('estu_ciudad'),
+                'estu_fecha_nacimiento' => $request->get('estu_fecha_nacimiento'),
+                'estu_ingreso' => $request->get('estu_ingreso'),
+                'estu_periodo_ingreso' => $request->get('estu_periodo_ingreso'),
+                'estu_ult_matricula' => $request->get('estu_ult_matricula'),
+                'estu_semestre' => $request->get('estu_semestre'),
+                'estu_financiamiento' => $request->get('estu_financiamiento'),
+                'estu_entidad' => $request->get('estu_entidad'),
+                'estu_tipo_matricula' => $request->get('estu_tipo_matricula'),
+                'estu_estado' => $request->get('estu_estado'),
+                'estu_matricula' => $request->get('estu_matricula'),
+                'estu_pga' => $request->get('estu_pga'),
+                'estu_reconocimiento' => $request->get('estu_reconocimiento'),
+                'estu_egresado' => $request->get('estu_egresado'),
+            ]
+        );
+
+        if($request->get('estu_egresado') == 'Si'){
+            $id = DB::getPdo()->lastInsertId();
+
+        DB::table('estudiante_egresado')->insert(
+            [
+                'este_id_estudiante' => $id
+            ]
+            );
+        }
 
         $ExisteEstudiante = DB::table('estudiante')
             ->where('estu_numero_documento', $request->get('estu_numero_documento'))
@@ -185,6 +226,32 @@ class EstudianteController extends Controller
             ->with('tiposdocumento', $tiposdocumento);
     }
 
+    public function edit($id)
+    {
+
+        $estudiante = Estudiante::find($id);
+        $programas = Programa::all();
+        $departamentos = Departamento::all();
+        $municipios = Municipio::all();
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
+        $tiposdocumento->all();
+
+        $tipos = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
+        $tipos->all();
+        $semestres = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+        $semestres->all();
+        $estadoprogramas = collect(['Activo', 'Inactivo']);
+        $estadoprogramas->all();
+        return view('estudiante.edit')->with('estudiante', $estudiante)
+            ->with('programas', $programas)
+            ->with('tipos', $tipos)
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios)
+            ->with('semestres', $semestres)
+            ->with('estadoprogramas', $estadoprogramas)
+            ->with('tiposdocumento', $tiposdocumento);
+    }
+
     public function update(Request $request, $id){
 
         $estudiante = DB::table('estudiante')->where('id', $id)->first();
@@ -219,40 +286,32 @@ class EstudianteController extends Controller
         $estudiantes->estu_matricula = $request->get('estu_matricula');
         $estudiantes->estu_pga = $request->get('estu_pga');
         $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
+
+        if($request->get('estu_egresado') == 'No'){
+            $estudiante = DB::table('estudiante_egresado')
+                ->where('este_id_estudiante', $id)
+                ->get();
+            if($estudiante->count()>0){
+                DB::table('estudiante_egresado')
+                    ->where('este_id_estudiante', $id)
+                    ->delete();
+            }
+        }
         $estudiantes->estu_egresado = $request->get('estu_egresado');
+
+        if($request->get('estu_egresado') == 'Si'){
+        DB::table('estudiante_egresado')->insert(
+            [
+                'este_id_estudiante' => $id
+            ]
+            );
+        }
 
         $estudiantes->save();
 
         Alert::success('Exitoso', 'El estudiante se ha registrado con exito');
         return redirect('/estudiante');
     }
-
-    public function edit($id)
-    {
-
-        $estudiante = Estudiante::find($id);
-        $programas = Programa::all();
-        $departamentos = Departamento::all();
-        $municipios = Municipio::all();
-        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
-        $tiposdocumento->all();
-
-        $tipos = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
-        $tipos->all();
-        $semestres = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        $semestres->all();
-        $estadoprogramas = collect(['Activo', 'Inactivo']);
-        $estadoprogramas->all();
-        return view('estudiante.edit')->with('estudiante', $estudiante)
-            ->with('programas', $programas)
-            ->with('tipos', $tipos)
-            ->with('departamentos', $departamentos)
-            ->with('municipios', $municipios)
-            ->with('semestres', $semestres)
-            ->with('estadoprogramas', $estadoprogramas)
-            ->with('tiposdocumento', $tiposdocumento);
-    }
-
 
     public function destroy($id)
     {
@@ -261,6 +320,60 @@ class EstudianteController extends Controller
         Alert::success('Registro Eliminado');
         return redirect('/estudiante');
     }
+
+    public function crearegresado($id){
+        $estudiante = DB::table('estudiante_egresado')
+            ->where('este_id_estudiante', $id)
+            ->first();
+        return view('estudiante.egresado')->with('estudiante', $estudiante);
+    }
+
+    public function actualizaregresado(Request $request){
+        $rules = [
+            'este_fecha_finalizacion' => 'required',
+            'este_promedio_acumulado' => 'required',
+            'este_nombre_empresa' => 'required',
+            'este_area' => 'required',
+            'este_cargo' => 'required',
+            'este_sitio_trabajo' => 'required|not_in:0',
+            'este_tipo_contrato' => 'required|not_in:0',
+            'este_pais_residencia' => 'required',
+            'este_ciudad_residencia' => 'required',
+        ];
+        $message = [
+            'este_fecha_finalizacion.required' => 'El campo fecha finalización es requerido',
+            'este_promedio_acumulado.required' => 'El campo promedio acumulado es requerido',
+            'este_nombre_empresa.required' => 'El campo nombre empresa es requerido',
+            'este_area.required' => 'El campo área de trabajo es requerido',
+            'este_cargo.required' => 'El campo cargo es requerido',
+            'este_sitio_trabajo.required' => 'El campo ¿Labora en algo relacionado a la carrera? es requerido',
+            'este_tipo_contrato.required' => 'El campo tipo contrato es requerido',
+            'este_pais_residencia.required' => 'El campo país es requerido',
+            'este_ciudad_residencia.required' => 'El campo ciudad es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+        DB::table('estudiante_egresado')
+            ->where('este_id_estudiante', $request->get('este_id_estudiante'))
+            ->update(
+                [
+                    'este_fecha_finalizacion' => $request->get('este_fecha_finalizacion'),
+                    'este_promedio_acumulado' => $request->get('este_promedio_acumulado'),
+                    'este_nombre_empresa' => $request->get('este_nombre_empresa'),
+                    'este_area' => $request->get('este_area'),
+                    'este_cargo' => $request->get('este_cargo'),
+                    'este_sitio_trabajo' => $request->get('este_sitio_trabajo'),
+                    'este_tipo_contrato' => $request->get('este_tipo_contrato'),
+                    'este_pais_residencia' => $request->get('este_pais_residencia'),
+                    'este_ciudad_residencia' => $request->get('este_ciudad_residencia'),
+                ]
+            );
+
+        Alert::success('Exitoso', 'La información del estudiante egresado ha sido registrada');
+        return redirect('/estudiante');
+    }
+
 
     public function pdf()
     {

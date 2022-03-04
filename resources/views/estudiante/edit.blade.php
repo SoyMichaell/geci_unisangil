@@ -359,8 +359,8 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <select class="form-select" name="estu_egresado" id="estu_estado">
-                                    <option value="1" {{$estudiante->estu_egresado == '1' ? 'selected' : ''}}>Si</option>
-                                    <option value="0" {{$estudiante->estu_egresado == '0' ? 'selected' : ''}}>No</option>
+                                    <option value="Si" {{$estudiante->estu_egresado == 'Si' ? 'selected' : ''}}>Si</option>
+                                    <option value="No" {{$estudiante->estu_egresado == 'No' ? 'selected' : ''}}>No</option>
                                 </select>
                             </div>
                         </div>

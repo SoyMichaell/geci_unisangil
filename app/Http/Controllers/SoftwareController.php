@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Programa;
 use App\Models\ProgramaAsignatura;
 use App\Models\Software;
+use App\Models\SoftwareRecurso;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SoftwareController extends Controller
@@ -169,4 +171,111 @@ class SoftwareController extends Controller
         Alert::success('Exitoso','El software se elimino de manera exitosa');
         return redirect('/software');
     }
+
+    public function mostrarrecurso(){
+        $recursos = SoftwareRecurso::all();
+        return view('software/recurso.index')
+            ->with('recursos', $recursos);
+    }
+
+    public function crearrecurso(){
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $asignaturas = ProgramaAsignatura::all();
+        return view('software/recurso.create')
+            ->with('docentes', $docentes)
+            ->with('asignaturas', $asignaturas);
+    }
+
+    public function registrorecurso(Request $request){
+        $rules = [
+            'sofrete_year' => 'required',
+            'sofrete_periodo' => 'required',
+            'sofrete_tipo_recurso' => 'required|not_in:0',
+            'sofrete_id_docente' => 'required|not_in:0',
+            'sofrete_id_asignatura' => 'required|not_in:0',
+        ];
+        $message = [
+            'sofrete_year.required' => 'El campo año es requerido',
+            'sofrete_periodo.required' => 'El campo periodo es requerido',
+            'sofrete_tipo_recurso.required' => 'El campo tipo recurso es requerido',
+            'sofrete_id_docente.required' => 'El campo docente es requerido',
+            'sofrete_id_asignatura.required' => 'El campo asginatura es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $recurso = new SoftwareRecurso();
+        $recurso->sofrete_year = $request->get('sofrete_year');
+        $recurso->sofrete_periodo = $request->get('sofrete_periodo');
+        $recurso->sofrete_tipo_recurso = $request->get('sofrete_tipo_recurso');
+        $recurso->sofrete_id_docente = $request->get('sofrete_id_docente');
+        $recurso->sofrete_id_asignatura = $request->get('sofrete_id_asignatura');
+
+        $recurso->save();
+
+        Alert::success('Exitoso', 'El recurso se ha registrado con exito');
+        return redirect('/software/mostrarrecurso');
+    }
+
+    public function editarrecurso($id){
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $asignaturas = ProgramaAsignatura::all();
+        $recurso = SoftwareRecurso::find($id);
+        return view('software/recurso.edit')
+            ->with('docentes', $docentes)
+            ->with('asignaturas', $asignaturas)
+            ->with('recurso', $recurso);
+    }
+
+    public function verrecurso($id){
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        $asignaturas = ProgramaAsignatura::all();
+        $recurso = SoftwareRecurso::find($id);
+        return view('software/recurso.show')
+            ->with('docentes', $docentes)
+            ->with('asignaturas', $asignaturas)
+            ->with('recurso', $recurso);
+    }
+
+    public function actualizarrecurso(Request $request, $id){
+        $rules = [
+            'sofrete_year' => 'required',
+            'sofrete_periodo' => 'required',
+            'sofrete_tipo_recurso' => 'required|not_in:0',
+            'sofrete_id_docente' => 'required|not_in:0',
+            'sofrete_id_asignatura' => 'required|not_in:0',
+        ];
+        $message = [
+            'sofrete_year.required' => 'El campo año es requerido',
+            'sofrete_periodo.required' => 'El campo periodo es requerido',
+            'sofrete_tipo_recurso.required' => 'El campo tipo recurso es requerido',
+            'sofrete_id_docente.required' => 'El campo docente es requerido',
+            'sofrete_id_asignatura.required' => 'El campo asginatura es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $recurso = SoftwareRecurso::find($id);
+        $recurso->sofrete_year = $request->get('sofrete_year');
+        $recurso->sofrete_periodo = $request->get('sofrete_periodo');
+        $recurso->sofrete_tipo_recurso = $request->get('sofrete_tipo_recurso');
+        $recurso->sofrete_id_docente = $request->get('sofrete_id_docente');
+        $recurso->sofrete_id_asignatura = $request->get('sofrete_id_asignatura');
+
+        $recurso->save();
+
+        Alert::success('Exitoso', 'El recurso se ha actualizado con exito');
+        return redirect('/software/mostrarrecurso');
+    }
+
 }

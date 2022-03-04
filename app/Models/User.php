@@ -71,4 +71,8 @@ class User extends Authenticatable
         return $this->hasMany(Practica::class, 'id');
     }
 
+    public function softwarecurso(){
+        return $this->hasMany(SoftwareRecurso::class, 'id');
+    }
+
 }

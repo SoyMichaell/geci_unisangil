@@ -117,6 +117,9 @@
                     <li><a class="treeview-item" href="{{ url('extension') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Extensión</a></li>
+                    <li><a class="treeview-item" href="{{ url('internacionalizacion') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Internacionalización</a></li>
                     <li><a class="treeview-item" href="{{ url('red') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Redes acádemicas</a></li>
