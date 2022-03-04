@@ -1001,4 +1001,12 @@ class ExtensionController extends Controller
         Alert::success('Exitoso', 'Participante actualizado con exito');
         return redirect('extension/mostrarparticipante');
     }
+
+    public function eliminarparticipante($id){
+        $participante = ExtParticipante::find($id);
+        $participante->delete();
+        Alert::success('Exitoso', 'Participante eliminado con exito');
+        return redirect('extension/mostrarparticipante');
+    }
+
 }

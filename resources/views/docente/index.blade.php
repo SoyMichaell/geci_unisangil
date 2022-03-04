@@ -58,7 +58,7 @@
                                 <td>{{ $persona->per_correo }}</td>
                                 <td>{{ $persona->tip_nombre }}</td>
                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <td>
+                                    <td style="width: 10%;">
                                         <form
                                             action="/docente/{{ $persona->id }}/{{ $persona->per_id_estado }}/estado"
                                             method="POST">
@@ -74,10 +74,10 @@
                                                         href="{{ url('docente/' . $persona->id . '/mostrarcontrato') }}"
                                                         title="Agregar contrato"><i
                                                             class="fa-solid fa-folder-tree"></i></a>
-                                                    <a class="btn btn-outline-primary btn-sm"
+                                                    <a class="btn btn-outline-info btn-sm"
                                                         href="{{ url('docente/' . $persona->id . '/pdfasignatura') }}"
                                                         title="Agregar asignaturas"><i
-                                                            class="fa-solid fa-file-pdf"></i></a>
+                                                            class="fa-solid fa-address-book"></i></a>
                                                     <a class="btn btn-outline-primary btn-sm"
                                                         href="{{ url('docente/' . $persona->id . '/mostrarevaluacion') }}"
                                                         title="Agregar evaluación docente"><i

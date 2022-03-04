@@ -11,6 +11,8 @@ use App\Exports\ListadoEstudiantes\BecasExport;
 use App\Exports\ListadoEstudiantes\ContadosExport;
 use App\Exports\ListadoEstudiantes\PrestamosExport;
 use App\Models\EstudianteEgresado;
+use App\Models\EstudianteReporte;
+use App\Models\EstudianteReporteGenerals;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -33,10 +35,10 @@ class EstudianteController extends Controller
             ->get();
 
         if (Auth::user()->per_tipo_usuario == '3') {
-            return view('estudiante.index', compact('estudiantes', 'ingresos','estudiante_egresados'));
+            return view('estudiante.index', compact('estudiantes', 'ingresos', 'estudiante_egresados'));
         } else {
             if ($programas->count() > 0) {
-                return view('estudiante.index', compact('estudiantes', 'ingresos','estudiante_egresados'));
+                return view('estudiante.index', compact('estudiantes', 'ingresos', 'estudiante_egresados'));
             } else {
                 Alert::warning('Requisitos', 'Primero registre un programa acádemico');
                 return redirect('/home');
@@ -169,13 +171,13 @@ class EstudianteController extends Controller
             ]
         );
 
-        if($request->get('estu_egresado') == 'Si'){
+        if ($request->get('estu_egresado') == 'Si') {
             $id = DB::getPdo()->lastInsertId();
 
-        DB::table('estudiante_egresado')->insert(
-            [
-                'este_id_estudiante' => $id
-            ]
+            DB::table('estudiante_egresado')->insert(
+                [
+                    'este_id_estudiante' => $id
+                ]
             );
         }
 
@@ -252,13 +254,14 @@ class EstudianteController extends Controller
             ->with('tiposdocumento', $tiposdocumento);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         $estudiante = DB::table('estudiante')->where('id', $id)->first();
 
         $estudiantes = Estudiante::find($id);
         $estudiantes->estu_programa = $request->get('estu_programa');
-        if($request->get('estu_programa_plan') != ""){
+        if ($request->get('estu_programa_plan') != "") {
             $estudiantes->estu_programa_plan = $estudiante->estu_programa_plan;
         }
         $estudiantes->estu_tipo_documento = $request->get('estu_tipo_documento');
@@ -271,7 +274,7 @@ class EstudianteController extends Controller
         $estudiantes->estu_correo = $request->get('estu_correo');
         $estudiantes->estu_estrato = $request->get('estu_estrato');
         $estudiantes->estu_departamento = $request->get('estu_departamento');
-        if($request->get('estu_ciudad') != ""){
+        if ($request->get('estu_ciudad') != "") {
             $estudiantes->estu_programa_plan = $estudiante->estu_ciudad;
         }
         $estudiantes->estu_fecha_nacimiento = $request->get('estu_fecha_nacimiento');
@@ -287,11 +290,11 @@ class EstudianteController extends Controller
         $estudiantes->estu_pga = $request->get('estu_pga');
         $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
 
-        if($request->get('estu_egresado') == 'No'){
+        if ($request->get('estu_egresado') == 'No') {
             $estudiante = DB::table('estudiante_egresado')
                 ->where('este_id_estudiante', $id)
                 ->get();
-            if($estudiante->count()>0){
+            if ($estudiante->count() > 0) {
                 DB::table('estudiante_egresado')
                     ->where('este_id_estudiante', $id)
                     ->delete();
@@ -299,11 +302,11 @@ class EstudianteController extends Controller
         }
         $estudiantes->estu_egresado = $request->get('estu_egresado');
 
-        if($request->get('estu_egresado') == 'Si'){
-        DB::table('estudiante_egresado')->insert(
-            [
-                'este_id_estudiante' => $id
-            ]
+        if ($request->get('estu_egresado') == 'Si') {
+            DB::table('estudiante_egresado')->insert(
+                [
+                    'este_id_estudiante' => $id
+                ]
             );
         }
 
@@ -321,14 +324,16 @@ class EstudianteController extends Controller
         return redirect('/estudiante');
     }
 
-    public function crearegresado($id){
+    public function crearegresado($id)
+    {
         $estudiante = DB::table('estudiante_egresado')
             ->where('este_id_estudiante', $id)
             ->first();
         return view('estudiante.egresado')->with('estudiante', $estudiante);
     }
 
-    public function actualizaregresado(Request $request){
+    public function actualizaregresado(Request $request)
+    {
         $rules = [
             'este_fecha_finalizacion' => 'required',
             'este_promedio_acumulado' => 'required',
@@ -352,7 +357,7 @@ class EstudianteController extends Controller
             'este_ciudad_residencia.required' => 'El campo ciudad es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         DB::table('estudiante_egresado')
             ->where('este_id_estudiante', $request->get('este_id_estudiante'))
@@ -391,6 +396,185 @@ class EstudianteController extends Controller
 
             return $pdf->stream('estudiantes-reporte.pdf');
         }
+    }
+
+    public function mostrarreporte()
+    {
+        $generales = EstudianteReporte::all();
+        return view('estudiante/general.index')
+            ->with('generales', $generales);
+    }
+
+    public function crearreporte()
+    {
+        $programas = Programa::all();
+        return view('estudiante/general.create')
+            ->with('programas', $programas);
+    }
+
+    public function registroreporte(Request $request)
+    {
+        $rules = [
+            'esture_id_programa' => 'required|not_in:0',
+            'esture_year' => 'required',
+            'esture_periodo' => 'required',
+            'esture_inscritos' => 'required',
+            'esture_admitidos' => 'required',
+            'esture_mat_antiguos' => 'required',
+            'esture_mat_primer_semestre' => 'required',
+            'esture_mat_total' => 'required',
+            'esture_egresado_no_graduado' => 'required',
+            'esture_graduados' => 'required',
+            'esture_retirados' => 'required',
+            'esture_tasa_desercion' => 'required',
+            'esture_tasa_desercion_pro' => 'required',
+            'esture_porcentaje_termina' => 'required',
+            'esture_nro_estudiante_ies_nacional' => 'required',
+            'esture_nro_estudiante_ies_internacional' => 'required',
+            'esture_vis_nacional' => 'required',
+            'esture_vis_internacional' => 'required',
+        ];
+        $message = [
+            'esture_id_programa.required' => 'El campo programa es requerido',
+            'esture_year.required' => 'El campo año es requerido',
+            'esture_periodo.required' => 'El campo periodo es requerido',
+            'esture_inscritos.required' => 'El campo inscritos es requerido',
+            'esture_admitidos.required' => 'El campo admitidos es requerido',
+            'esture_mat_antiguos.required' => 'El campo matriculados antiguos es requerido',
+            'esture_mat_primer_semestre.required' => 'El campo matriculados primer semestre es requerido',
+            'esture_mat_total.required' => 'El campo matriculados total es requerido',
+            'esture_egresado_no_graduado.required' => 'El campo egresados no graduados es requerido',
+            'esture_graduados.required' => 'El campo graduados es requerido',
+            'esture_retirados.required' => 'El campo retirados es requerido',
+            'esture_tasa_desercion.required' => 'El campo tasa de deserción es requerido',
+            'esture_tasa_desercion_pro.required' => 'El campo tasa de deserción del programa es requerido',
+            'esture_porcentaje_termina.required' => 'El campo porcentaje que culmina el programa es requerido',
+            'esture_nro_estudiante_ies_nacional.required' => 'El campo número de estudiantes en otras IES Nacional es requerido',
+            'esture_nro_estudiante_ies_internacional.required' => 'El campo número de estudiante en otra IES Internacional es requerido',
+            'esture_vis_nacional.required' => 'El campo número de visitantes nacional es requerido',
+            'esture_vis_internacional.required' => 'El campo número de visitantes internacional es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $reporte = new EstudianteReporte();
+        $reporte->esture_year = $request->get('esture_year');
+        $reporte->esture_id_programa = $request->get('esture_id_programa');
+        $reporte->esture_periodo = $request->get('esture_periodo');
+        $reporte->esture_inscritos = $request->get('esture_inscritos');
+        $reporte->esture_admitidos = $request->get('esture_admitidos');
+        $reporte->esture_mat_antiguos = $request->get('esture_mat_antiguos');
+        $reporte->esture_mat_primer_semestre = $request->get('esture_mat_primer_semestre');
+        $reporte->esture_mat_total = $request->get('esture_mat_total');
+        $reporte->esture_egresado_no_graduado = $request->get('esture_egresado_no_graduado');
+        $reporte->esture_graduados = $request->get('esture_graduados');
+        $reporte->esture_retirados = $request->get('esture_retirados');
+        $reporte->esture_tasa_desercion = $request->get('esture_tasa_desercion');
+        $reporte->esture_tasa_desercion_pro = $request->get('esture_tasa_desercion_pro');
+        $reporte->esture_porcentaje_termina = $request->get('esture_porcentaje_termina');
+        $reporte->esture_nro_estudiante_ies_nacional = $request->get('esture_nro_estudiante_ies_nacional');
+        $reporte->esture_nro_estudiante_ies_internacional = $request->get('esture_nro_estudiante_ies_internacional');
+        $reporte->esture_vis_nacional = $request->get('esture_vis_nacional');
+        $reporte->esture_vis_internacional = $request->get('esture_vis_internacional');
+
+        $reporte->save();
+
+        Alert::success('Exitoso', 'El reporte ha sido registrado con exito');
+        return redirect('/estudiante/mostrarreporte');
+    }
+
+    public function verreporte($id)
+    {
+        $programas = Programa::all();
+        $general = EstudianteReporte::find($id);
+        return view('estudiante/general.show')
+            ->with('programas', $programas)
+            ->with('general', $general);
+    }
+
+    public function editarreporte($id)
+    {
+        $programas = Programa::all();
+        $general = EstudianteReporte::find($id);
+        return view('estudiante/general.edit')
+            ->with('programas', $programas)
+            ->with('general', $general);
+    }
+
+    public function actualizarreporte(Request $request, $id)
+    {
+        $rules = [
+            'esture_id_programa' => 'required|not_in:0',
+            'esture_year' => 'required',
+            'esture_periodo' => 'required',
+            'esture_inscritos' => 'required',
+            'esture_admitidos' => 'required',
+            'esture_mat_antiguos' => 'required',
+            'esture_mat_primer_semestre' => 'required',
+            'esture_mat_total' => 'required',
+            'esture_egresado_no_graduado' => 'required',
+            'esture_graduados' => 'required',
+            'esture_retirados' => 'required',
+            'esture_tasa_desercion' => 'required',
+            'esture_tasa_desercion_pro' => 'required',
+            'esture_porcentaje_termina' => 'required',
+            'esture_nro_estudiante_ies_nacional' => 'required',
+            'esture_nro_estudiante_ies_internacional' => 'required',
+            'esture_vis_nacional' => 'required',
+            'esture_vis_internacional' => 'required',
+        ];
+        $message = [
+            'esture_id_programa.required' => 'El campo programa es requerido',
+            'esture_year.required' => 'El campo año es requerido',
+            'esture_periodo.required' => 'El campo periodo es requerido',
+            'esture_inscritos.required' => 'El campo inscritos es requerido',
+            'esture_admitidos.required' => 'El campo admitidos es requerido',
+            'esture_mat_antiguos.required' => 'El campo matriculados antiguos es requerido',
+            'esture_mat_primer_semestre.required' => 'El campo matriculados primer semestre es requerido',
+            'esture_mat_total.required' => 'El campo matriculados total es requerido',
+            'esture_egresado_no_graduado.required' => 'El campo egresados no graduados es requerido',
+            'esture_graduados.required' => 'El campo graduados es requerido',
+            'esture_retirados.required' => 'El campo retirados es requerido',
+            'esture_tasa_desercion.required' => 'El campo tasa de deserción es requerido',
+            'esture_tasa_desercion_pro.required' => 'El campo tasa de deserción del programa es requerido',
+            'esture_porcentaje_termina.required' => 'El campo porcentaje que culmina el programa es requerido',
+            'esture_nro_estudiante_ies_nacional.required' => 'El campo número de estudiantes en otras IES Nacional es requerido',
+            'esture_nro_estudiante_ies_internacional.required' => 'El campo número de estudiante en otra IES Internacional es requerido',
+            'esture_vis_nacional.required' => 'El campo número de visitantes nacional es requerido',
+            'esture_vis_internacional.required' => 'El campo número de visitantes internacional es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $reporte = EstudianteReporte::find($id);
+        $reporte->esture_year = $request->get('esture_year');
+        $reporte->esture_id_programa = $request->get('esture_id_programa');
+        $reporte->esture_periodo = $request->get('esture_periodo');
+        $reporte->esture_inscritos = $request->get('esture_inscritos');
+        $reporte->esture_admitidos = $request->get('esture_admitidos');
+        $reporte->esture_mat_antiguos = $request->get('esture_mat_antiguos');
+        $reporte->esture_mat_primer_semestre = $request->get('esture_mat_primer_semestre');
+        $reporte->esture_mat_total = $request->get('esture_mat_total');
+        $reporte->esture_egresado_no_graduado = $request->get('esture_egresado_no_graduado');
+        $reporte->esture_graduados = $request->get('esture_graduados');
+        $reporte->esture_retirados = $request->get('esture_retirados');
+        $reporte->esture_tasa_desercion = $request->get('esture_tasa_desercion');
+        $reporte->esture_tasa_desercion_pro = $request->get('esture_tasa_desercion_pro');
+        $reporte->esture_porcentaje_termina = $request->get('esture_porcentaje_termina');
+        $reporte->esture_nro_estudiante_ies_nacional = $request->get('esture_nro_estudiante_ies_nacional');
+        $reporte->esture_nro_estudiante_ies_internacional = $request->get('esture_nro_estudiante_ies_internacional');
+        $reporte->esture_vis_nacional = $request->get('esture_vis_nacional');
+        $reporte->esture_vis_internacional = $request->get('esture_vis_internacional');
+
+        $reporte->save();
+
+        Alert::success('Exitoso', 'El reporte ha sido actualizado con exito');
+        return redirect('/estudiante/mostrarreporte');
+    }
+
+    public function eliminarreporte($id){
+        $reporte = EstudianteReporte::find($id);
+        $reporte->delete();
+        Alert::success('Exitoso', 'El reporte ha sido eliminado con exito');
+        return redirect('/estudiante/mostrarreporte');
     }
 
     /*public function export(){

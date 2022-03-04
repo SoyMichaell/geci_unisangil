@@ -83,7 +83,7 @@
                 </button>
 
                 <div class="d-flex justify-content-end w-100">
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/register') }}">Registrarse</a>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="/usuario/create">Registrarse</a>
                 </div>
             </nav>
             <div class="row mx-auto" style="margin-top:15%;">

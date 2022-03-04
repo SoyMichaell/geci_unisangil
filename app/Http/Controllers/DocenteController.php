@@ -18,13 +18,14 @@ use RealRashid\SweetAlert\Facades\Alert;
 class DocenteController extends Controller
 {
 
-    public function index(){
+    public function index()
+    {
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $tiposusuario = TipoUsuario::all();
 
         $personas = DB::table('persona')
-            ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido','per_correo','tip_nombre','per_id_estado')
+            ->select('persona.id', 'per_tipo_documento', 'per_numero_documento', 'per_nombre', 'per_apellido', 'per_correo', 'tip_nombre', 'per_id_estado')
             ->join('tipo_usuario', 'persona.per_tipo_usuario', '=', 'tipo_usuario.id')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 5)
@@ -36,7 +37,8 @@ class DocenteController extends Controller
             ->with('personas', $personas);
     }
 
-    public function mostrardocente(){
+    public function mostrardocente()
+    {
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
 
@@ -45,7 +47,8 @@ class DocenteController extends Controller
             ->with('municipios', $municipios);
     }
 
-    public function registrodocente(Request $request){   
+    public function registrodocente(Request $request)
+    {
         //Validación campos
         $rules = [
             'per_tipo_documento' => 'required|in:Tarjeta de identidad,Cédula de ciudadania,Cédula de extranjeria',
@@ -69,22 +72,22 @@ class DocenteController extends Controller
             'per_ciudad.required' => 'El campo ciudad es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         //Validación número de documento
         $personaExiste = DB::table('persona')
             ->where('per_numero_documento', $request->get('per_numero_documento'))
             ->get();
-        if($personaExiste->count()>0){
-            Alert::warning('Registro existente','El número de documento que intenta registrar ya existe');
+        if ($personaExiste->count() > 0) {
+            Alert::warning('Registro existente', 'El número de documento que intenta registrar ya existe');
             return back()->withInput();
         }
         //Validación correo
         $correoExiste = DB::table('persona')
             ->where('per_correo', $request->get('per_correo'))
             ->get();
-        if($correoExiste->count()>0){
-            Alert::warning('Correo encontrado','El correo electronico que intenta registrar ya existe');
+        if ($correoExiste->count() > 0) {
+            Alert::warning('Correo encontrado', 'El correo electronico que intenta registrar ya existe');
             return back()->withInput();
         }
 
@@ -112,15 +115,16 @@ class DocenteController extends Controller
             ]
         );
 
-        Alert::success('Registro exitoso','Recuerde completar la información del docente desde la tabla principal');
+        Alert::success('Registro exitoso', 'Recuerde completar la información del docente desde la tabla principal');
         return redirect('/docente');
     }
 
-    public function directorcompletar($id){
+    public function directorcompletar($id)
+    {
         $persona = DB::table('persona')->select('persona.id')
-            ->where('per_tipo_usuario',2)
-            ->where('persona.id',$id)
-            ->orWhere('per_tipo_usuario',5)
+            ->where('per_tipo_usuario', 2)
+            ->where('persona.id', $id)
+            ->orWhere('per_tipo_usuario', 5)
             ->where('persona.id', $id)
             ->first();
 
@@ -139,7 +143,8 @@ class DocenteController extends Controller
             ->with('cuenta', $cuenta);
     }
 
-    public function directorinformacion(Request $request){
+    public function directorinformacion(Request $request)
+    {
 
         $rules = [
             'ciudad_procedencia' => 'required',
@@ -189,7 +194,8 @@ class DocenteController extends Controller
         return redirect('docente/' . $request->get('id') . '/directorcompletar');
     }
 
-    public function actualizarinformacion(Request $request, $id){
+    public function actualizarinformacion(Request $request, $id)
+    {
 
         $rules = [
             'ciudad_procedencia' => 'required',
@@ -239,7 +245,8 @@ class DocenteController extends Controller
         return redirect('docente/' . $id . '/directorcompletar');
     }
 
-    public function directorestudios(Request $request, $id){
+    public function directorestudios(Request $request, $id)
+    {
 
         $persona = User::find($id);
 
@@ -322,13 +329,14 @@ class DocenteController extends Controller
         return redirect('docente/' . $id . '/directorcompletar');
     }
 
-    public function zip(Request $request, $id){
+    public function zip(Request $request, $id)
+    {
 
         $rules = ['documentos_compl' => 'required'];
 
         $message = ['documentos_compl.required' => 'El campo documentos .zip es requerido'];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $persona = User::find($id);
 
@@ -362,11 +370,12 @@ class DocenteController extends Controller
         return redirect('docente/' . $id . '/directorcompletar');
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $persona = DB::table('persona')->select('persona.id')
-            ->where('per_tipo_usuario',2)
-            ->where('persona.id',$id)
-            ->orWhere('per_tipo_usuario',5)
+            ->where('per_tipo_usuario', 2)
+            ->where('persona.id', $id)
+            ->orWhere('per_tipo_usuario', 5)
             ->where('persona.id', $id)
             ->first();
 
@@ -385,30 +394,40 @@ class DocenteController extends Controller
             ->with('cuenta', $cuenta);
     }
 
-    public function estado($id,$estado){
-        
-        if($estado == 'activo'){
+    public function estado($id, $estado)
+    {
+
+        if ($estado == 'activo') {
             DB::table('persona')
-                ->where('persona.id',$id)
+                ->where('persona.id', $id)
                 ->update([
                     'per_id_estado' => 'inactivo'
                 ]);
 
-            Alert::success('Estado','El estado ha sido actualizado');
+            Alert::success('Estado', 'El estado ha sido actualizado');
             return redirect('/docente');
-        }else if($estado == 'inactivo'){
+        } else if ($estado == 'inactivo') {
             DB::table('persona')
-                ->where('persona.id',$id)
+                ->where('persona.id', $id)
                 ->update([
                     'per_id_estado' => 'activo'
                 ]);
 
-                Alert::success('Estado','El estado ha sido actualizado');
+            Alert::success('Estado', 'El estado ha sido actualizado');
             return redirect('/docente');
         }
     }
-   
-    public function mostrarevaluacion($id){
+
+    public function destroy($id)
+    {
+        $persona = User::find($id);
+        $persona->delete();
+        Alert::success('Exitoso', 'El registro ha sido eliminado');
+        return redirect('/docente');
+    }
+
+    public function mostrarevaluacion($id)
+    {
         $persona = User::find($id);
         $evaluacions = DocenteEvaluacion::all();
         return view('docente/evaluacion.index')
@@ -416,13 +435,15 @@ class DocenteController extends Controller
             ->with('evaluacions', $evaluacions);
     }
 
-    public function crearevaluacion($id){
+    public function crearevaluacion($id)
+    {
         $persona = User::find($id);
         return view('docente/evaluacion.create')
             ->with('persona', $persona);
     }
 
-    public function registroevaluacion(Request $request){
+    public function registroevaluacion(Request $request)
+    {
         $rules = [
             'doe_year' => 'required|max:4',
             'doe_semestre' => 'required',
@@ -445,7 +466,7 @@ class DocenteController extends Controller
             'doe_url_evaluacion.required' => 'El campo soporte evaluación docente es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $EvaluacionExiste = DB::table('docente_evaluacion')
             ->where('doe_persona_docente', $request->get('doe_persona_docente'))
@@ -453,8 +474,8 @@ class DocenteController extends Controller
             ->where('doe_semestre', $request->get('doe_semestre'))
             ->get();
 
-        if($EvaluacionExiste->count()>0){
-            Alert::warning('Advertencia','El docente ya registra evaluación para el periodo que intenta registrar');
+        if ($EvaluacionExiste->count() > 0) {
+            Alert::warning('Advertencia', 'El docente ya registra evaluación para el periodo que intenta registrar');
             return back()->withInput();
         }
 
@@ -465,9 +486,9 @@ class DocenteController extends Controller
 
         if ($request->file('doe_url_evaluacion')) {
             $file = $request->file('doe_url_evaluacion');
-            $name_evaluacion = $request->get('doe_year').'_'.$request->get('doe_semestre').'_'.$persona->per_nombre.'_'.$persona->per_apellido.'_evaluacion'. '.'.$file->extension();
+            $name_evaluacion = $request->get('doe_year') . '_' . $request->get('doe_semestre') . '_' . $persona->per_nombre . '_' . $persona->per_apellido . '_evaluacion' . '.' . $file->extension();
 
-            $ruta = public_path('datos/evaluacion/'.$name_evaluacion);
+            $ruta = public_path('datos/evaluacion/' . $name_evaluacion);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -490,11 +511,12 @@ class DocenteController extends Controller
 
         $evaluacion->save();
 
-        Alert::success('Registro Exitoso','La evaluación ha sido registrada');
-        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarevaluacion');
+        Alert::success('Registro Exitoso', 'La evaluación ha sido registrada');
+        return redirect('/docente' . '/' . $request->get('doe_persona_docente') . '/mostrarevaluacion');
     }
 
-    public function editarevaluacion($persona,$evaluacionid){
+    public function editarevaluacion($persona, $evaluacionid)
+    {
         $persona = User::find($persona);
         $evaluacion = DocenteEvaluacion::find($evaluacionid);
         return view('docente/evaluacion.edit')
@@ -502,7 +524,8 @@ class DocenteController extends Controller
             ->with('evaluacion', $evaluacion);
     }
 
-    public function actualizarevaluacion(Request $request, $evaluacion){
+    public function actualizarevaluacion(Request $request, $evaluacion)
+    {
         $rules = [
             'doe_year' => 'required|max:4',
             'doe_semestre' => 'required',
@@ -523,22 +546,22 @@ class DocenteController extends Controller
             'doe_observacion.required' => 'El campo observación es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         /*Tomar id docente*/
         $personax = DB::table('persona')
             ->where('id', $request->get('doe_persona_docente'))
             ->first();
-        
+
         $nombreEvaluacion = DB::table('docente_evaluacion')
             ->where('id', $evaluacion)
             ->first();
 
         if ($request->file('doe_url_evaluacion')) {
             $file = $request->file('doe_url_evaluacion');
-            $name_evaluacion = $request->get('doe_year').'_'.$request->get('doe_semestre').'_'.$personax->per_nombre.'_'.$personax->per_apellido.'_evaluacion'. '.'.$file->extension();
+            $name_evaluacion = $request->get('doe_year') . '_' . $request->get('doe_semestre') . '_' . $personax->per_nombre . '_' . $personax->per_apellido . '_evaluacion' . '.' . $file->extension();
 
-            $ruta = public_path('datos/evaluacion/'.$name_evaluacion);
+            $ruta = public_path('datos/evaluacion/' . $name_evaluacion);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -546,8 +569,8 @@ class DocenteController extends Controller
                 Alert::warning('El formato del documento no es .PDF');
                 return back()->withInput();
             }
-        }else{
-            $name_evaluacion = $nombreEvaluacion->doe_url_evaluacion; 
+        } else {
+            $name_evaluacion = $nombreEvaluacion->doe_url_evaluacion;
         }
 
         $evaluacion = DocenteEvaluacion::find($evaluacion);
@@ -562,18 +585,20 @@ class DocenteController extends Controller
 
         $evaluacion->save();
 
-        Alert::success('Registro Actualizado','La evaluación ha sido actualizada');
-        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarevaluacion');
+        Alert::success('Registro Actualizado', 'La evaluación ha sido actualizada');
+        return redirect('/docente' . '/' . $request->get('doe_persona_docente') . '/mostrarevaluacion');
     }
 
-    public function eliminarevaluacion($evaluacion){
+    public function eliminarevaluacion($evaluacion)
+    {
         $evaluacion = DocenteEvaluacion::find($evaluacion);
         $evaluacion->delete();
-        Alert::success('Exito','La evaluación se elimino con exito');
+        Alert::success('Exito', 'La evaluación se elimino con exito');
         return redirect('/docente');
     }
 
-    public function mostrarcontrato($id){
+    public function mostrarcontrato($id)
+    {
         $persona = User::find($id);
         $contratos = DocenteContrato::all();
 
@@ -586,13 +611,15 @@ class DocenteController extends Controller
             ->with('contratos', $contratos);
     }
 
-    public function crearcontrato($id){
+    public function crearcontrato($id)
+    {
         $persona = User::find($id);
         return view('docente/contrato.create')
             ->with('persona', $persona);
     }
 
-    public function registrocontrato(Request $request){
+    public function registrocontrato(Request $request)
+    {
         $rules = [
             'doco_numero_contrato' => 'required',
             'doco_objeto_contrato' => 'required',
@@ -615,7 +642,7 @@ class DocenteController extends Controller
             'doco_estado.required' => 'El campo estado de pago es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         /*Docente*/
         $persona = DB::table('persona')
@@ -624,7 +651,7 @@ class DocenteController extends Controller
 
         if ($request->file('doco_url_soporte')) {
             $file = $request->file('doco_url_soporte');
-            $name_contrato = $request->get('doco_fecha_inicio').'_'.$request->get('doco_numero_contrato'). '_' . $persona->per_nombre.'_'.$persona->per_apellido.'_contrato' . '.' . $file->extension();
+            $name_contrato = $request->get('doco_fecha_inicio') . '_' . $request->get('doco_numero_contrato') . '_' . $persona->per_nombre . '_' . $persona->per_apellido . '_contrato' . '.' . $file->extension();
 
             $ruta = public_path('datos/contrato/' . $name_contrato);
 
@@ -649,12 +676,12 @@ class DocenteController extends Controller
 
         $contrato->save();
 
-        Alert::success('Exitoso','Contrato registrado');
-        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarcontrato');
-
+        Alert::success('Exitoso', 'Contrato registrado');
+        return redirect('/docente' . '/' . $request->get('doe_persona_docente') . '/mostrarcontrato');
     }
 
-    public function editarcontrato($persona, $contratoid){
+    public function editarcontrato($persona, $contratoid)
+    {
         $persona = User::find($persona);
         $contrato = DocenteContrato::find($contratoid);
         return view('docente/contrato.edit')
@@ -662,7 +689,8 @@ class DocenteController extends Controller
             ->with('contrato', $contrato);
     }
 
-    public function actualizarcontrato(Request $request, $contrato){
+    public function actualizarcontrato(Request $request, $contrato)
+    {
         $rules = [
             'doco_numero_contrato' => 'required',
             'doco_objeto_contrato' => 'required',
@@ -683,7 +711,7 @@ class DocenteController extends Controller
             'doco_estado.required' => 'El campo estado de pago es requerido',
         ];
 
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         //Name contrato
         $contratox = DB::table('docente_contrato')
@@ -693,11 +721,11 @@ class DocenteController extends Controller
         //Persona contrato
         $persona = DB::table('persona')
             ->where('id', $request->get('doe_persona_docente'))
-            ->first();            
+            ->first();
 
         if ($request->file('doco_url_soporte')) {
             $file = $request->file('doco_url_soporte');
-            $name_contrato = $request->get('doco_fecha_inicio').'_'.$request->get('doco_numero_contrato'). '_' . $persona->per_nombre.'_'.$persona->per_apellido.'contrato' . '.' . $file->extension();
+            $name_contrato = $request->get('doco_fecha_inicio') . '_' . $request->get('doco_numero_contrato') . '_' . $persona->per_nombre . '_' . $persona->per_apellido . 'contrato' . '.' . $file->extension();
 
             $ruta = public_path('datos/contrato/' . $name_contrato);
 
@@ -707,7 +735,7 @@ class DocenteController extends Controller
                 Alert::warning('El formato del documento no es .PDF');
                 return back()->withInput();
             }
-        }else{
+        } else {
             $name_contrato = $contratox->doco_url_soporte;
         }
 
@@ -723,25 +751,38 @@ class DocenteController extends Controller
 
         $contrato->save();
 
-        Alert::success('Registro Actualizado','Contrato actualizado');
-        return redirect('/docente'.'/'.$request->get('doe_persona_docente').'/mostrarcontrato');
+        Alert::success('Registro Actualizado', 'Contrato actualizado');
+        return redirect('/docente' . '/' . $request->get('doe_persona_docente') . '/mostrarcontrato');
     }
 
-    public function eliminarcontrato($contrato){
+    public function eliminarcontrato($contrato)
+    {
         $contratof = DocenteContrato::find($contrato);
         $contratof->delete();
         Alert::success('Registro Eliminado');
         return redirect('/docente');
     }
 
-    public function mostrarasignatura($id){
+    public function mostrarasignatura($id)
+    {
         $persona = User::find($id);
         $asignaturas = DB::table('persona')
-            ->select('docente_asignatura.id','doa_year','doa_semestre','pas_nombre','doa_grupo','mun_nombre','doa_unidad','doa_horas_semana_doc',
-                'doa_horas_semana_inv','doa_horas_extension','doa_horas_admin')
-            ->join('docente_asignatura','persona.id','=','docente_asignatura.doa_id_docente')
-            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura','=','programa_asignatura.id')
-            ->join('municipio','programa_asignatura.pas_id_municipio','=','municipio.id')
+            ->select(
+                'docente_asignatura.id',
+                'doa_year',
+                'doa_semestre',
+                'pas_nombre',
+                'doa_grupo',
+                'mun_nombre',
+                'doa_unidad',
+                'doa_horas_semana_doc',
+                'doa_horas_semana_inv',
+                'doa_horas_extension',
+                'doa_horas_admin'
+            )
+            ->join('docente_asignatura', 'persona.id', '=', 'docente_asignatura.doa_id_docente')
+            ->join('programa_asignatura', 'docente_asignatura.doa_id_asignatura', '=', 'programa_asignatura.id')
+            ->join('municipio', 'programa_asignatura.pas_id_municipio', '=', 'municipio.id')
             ->where('persona.id', $id)
             ->where('docente_asignatura.doa_id_docente', $id)
             ->get();
@@ -750,9 +791,5 @@ class DocenteController extends Controller
             ->with('asignaturas', $asignaturas)
             ->with('municipios', $municipios)
             ->with('persona', $persona);
-    }
-
-    public function exportPDF()
-    {
     }
 }

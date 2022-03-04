@@ -64,8 +64,17 @@ Route::get('/estudiante/listadobeca', [App\Http\Controllers\EstudianteController
 Route::get('/estudiante/listadocontado', [App\Http\Controllers\EstudianteController::class, 'listadocontado']);
 Route::get('/estudiante/listadoprestamo', [App\Http\Controllers\EstudianteController::class, 'listadoprestamo']);
 Route::post('/estudiante/listadoingreso', [App\Http\Controllers\EstudianteController::class, 'listadoingreso']);
+//Rutas egresado
 Route::get('estudiante/{estudiante}/crearegresado', [App\Http\Controllers\EstudianteController::class, 'crearegresado']);
 Route::put('estudiante/{estudiante}/actualizaregresado', [App\Http\Controllers\EstudianteController::class, 'actualizaregresado']);
+//Rutas estudiantes reporte
+Route::get('estudiante/mostrarreporte', [App\Http\Controllers\EstudianteController::class, 'mostrarreporte']);
+Route::get('estudiante/crearreporte', [App\Http\Controllers\EstudianteController::class, 'crearreporte']);
+Route::post('/estudiante/registroreporte', [App\Http\Controllers\EstudianteController::class, 'registroreporte']);
+Route::get('/estudiante/{general}/verreporte', [App\Http\Controllers\EstudianteController::class, 'verreporte']);
+Route::get('/estudiante/{general}/editarreporte', [App\Http\Controllers\EstudianteController::class, 'editarreporte']);
+Route::put('estudiante/{general}/actualizarreporte', [App\Http\Controllers\EstudianteController::class, 'actualizarreporte']);
+Route::delete('estudiante/{general}/eliminarreporte', [App\Http\Controllers\EstudianteController::class, 'eliminarreporte']);
 Route::resource('estudiante', App\Http\Controllers\EstudianteController::class);
 
 /*Rutas docentes*/
@@ -90,6 +99,7 @@ Route::get('docente/{docente}/{evaluacion}/editarevaluacion', [App\Http\Controll
 Route::put('docente/{evaluacion}/actualizarevaluacion', [App\Http\Controllers\DocenteController::class, 'actualizarevaluacion']);
 Route::delete('docente/{evaluacion}/eliminarevaluacion', [App\Http\Controllers\DocenteController::class, 'eliminarevaluacion']);
 Route::get('docente/{docente}/mostrarasignatura', [App\Http\Controllers\DocenteController::class, 'mostrarasignatura']);
+Route::get('docente/mostrardocencia', [App\Http\Controllers\DocenteController::class, 'mostrardocencia']);
 Route::resource('docente', App\Http\Controllers\DocenteController::class);
 
 /*Rutas programa*/

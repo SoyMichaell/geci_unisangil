@@ -91,7 +91,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                <a href="">Ver tabla datos generales</a>
+                <a href="/estudiante/mostrarreporte">Ver tabla datos generales</a>
             </div>
         </div>
         <div class="col-md-4 tile">

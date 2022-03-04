@@ -102,7 +102,7 @@
                                     <td>{{ $persona->per_telefono }}</td>
                                     <td>{{ $persona->tiposusuario->tip_nombre }}</td>
                                     <td>
-                                        <form action="" method="POST">
+                                        <form action="/usuario/{{$persona->id}}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-outline-info btn-sm" href=""><i class="fa-solid fa-refresh"></i></a>
                                                 @csrf

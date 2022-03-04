@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Departamento;
+use App\Models\Municipio;
+use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -10,6 +13,20 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+
+    public function create(){
+        $tiposdocumento = collect(['Tarjeta de identidad','Cédula de ciudadanía','Cédula de extranjeria']);
+        $tiposdocumento->all();
+        $departamentos = Departamento::all();
+        $municipios = Municipio::all();
+        $tiposusuario = TipoUsuario::all();
+        return view('auth.register')
+            ->with('tiposdocumento', $tiposdocumento)
+            ->with('departamentos', $departamentos)
+            ->with('municipios', $municipios)
+            ->with('tiposusuario', $tiposusuario);
+    }
+
 
     public function store(Request $request)
     {
@@ -101,4 +118,12 @@ class UserController extends Controller
         Alert::success('Exitoso', 'La persona ha sido registrada con exito');
         return redirect('/login');
     }
+
+    public function destroy($id){
+        $user = User::find($id);
+        $user->delete();
+        Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
+        return redirect('/home');
+    }
+
 }

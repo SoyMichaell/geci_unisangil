@@ -1,6 +1,7 @@
 $(function() {
     $('#estu_programa').on('change', onSelectProgramaEstudio);
     $('#estu_departamento').on('change', onSelectMunicipio);
+    
 });
 
 function onSelectProgramaEstudio() {
@@ -24,3 +25,4 @@ function onSelectMunicipio() {
         $('#estu_ciudad').html(html_select);
     });
 }
+

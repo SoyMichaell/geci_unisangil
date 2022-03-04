@@ -50,4 +50,8 @@ class Programa extends Model
         return $this->hasMany(RedAcademica::class, 'id');
     }
 
+    public function estudiantereporte(){
+        return $this->hasMany(EstudianteReporte::class, 'id');
+    }
+
 }
