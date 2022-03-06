@@ -105,6 +105,9 @@
                     <li><a class="treeview-item" href="{{ url('docente') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Docentes</a></li>
+                    <li><a class="treeview-item" href="{{ url('prueba') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Pruebas saber</a></li>
                     <li><a class="treeview-item" href="{{ url('trabajo') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Trabajo de grado</a></li>

@@ -104,11 +104,67 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label for="pph_aula">{{ __('Grupo *') }}</label>
+                    <div class="col-md-4">
+                        <label for="pph_aula">{{ __('Aula *') }}</label>
                         <input id="pph_aula" type="text" class="form-control @error('pph_aula') is-invalid @enderror"
                             name="pph_aula" value="{{ old('pph_aula') }}" autocomplete="pph_aula" autofocus>
                         @error('pph_aula')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label
+                            for="pph_nro_horas_semana_docencia">{{ __('Número de horas dedicadas a la docencia *') }}</label>
+                        <input id="pph_nro_horas_semana_docencia" type="number"
+                            class="form-control @error('pph_nro_horas_semana_docencia') is-invalid @enderror"
+                            name="pph_nro_horas_semana_docencia" value="{{ old('pph_nro_horas_semana_docencia') }}"
+                            autocomplete="pph_nro_horas_semana_docencia" autofocus>
+                        @error('pph_nro_horas_semana_docencia')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-4">
+                        <label
+                            for="pph_nro_horas_semana_investigacion">{{ __('Número de horas dedicadas a la investigación *') }}</label>
+                        <input id="pph_nro_horas_semana_investigacion" type="number"
+                            class="form-control @error('pph_nro_horas_semana_investigacion') is-invalid @enderror"
+                            name="pph_nro_horas_semana_investigacion"
+                            value="{{ old('pph_nro_horas_semana_investigacion') }}"
+                            autocomplete="pph_nro_horas_semana_investigacion" autofocus>
+                        @error('pph_nro_horas_semana_investigacion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label
+                            for="pph_nro_horas_semana_extension">{{ __('Número de horas dedicadas a extensión *') }}</label>
+                        <input id="pph_nro_horas_semana_extension" type="number"
+                            class="form-control @error('pph_nro_horas_semana_extension') is-invalid @enderror"
+                            name="pph_nro_horas_semana_extension" value="{{ old('pph_nro_horas_semana_extension') }}"
+                            autocomplete="pph_nro_horas_semana_extension" autofocus>
+                        @error('pph_nro_horas_semana_extension')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label
+                            for="pph_nro_horas_semana_administrativas">{{ __('Número de horas dedicadas a labores administrativas *') }}</label>
+                        <input id="pph_nro_horas_semana_administrativas" type="number"
+                            class="form-control @error('pph_nro_horas_semana_administrativas') is-invalid @enderror"
+                            name="pph_nro_horas_semana_administrativas"
+                            value="{{ old('pph_nro_horas_semana_administrativas') }}"
+                            autocomplete="pph_nro_horas_semana_administrativas" autofocus>
+                        @error('pph_nro_horas_semana_administrativas')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

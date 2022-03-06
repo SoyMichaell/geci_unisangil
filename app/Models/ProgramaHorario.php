@@ -19,6 +19,10 @@ class ProgramaHorario extends Model
         'pph_id_docente',
         'pph_horario',
         'pph_aula',
+        'pph_nro_horas_semana_docencia',
+        'pph_nro_horas_semana_investigacion',
+        'pph_nro_horas_semana_extension',
+        'pph_nro_horas_semana_administrativas',
     ];
 
     public function asignaturas(){

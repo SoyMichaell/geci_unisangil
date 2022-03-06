@@ -33,21 +33,29 @@
                                 <th>Docente</th>
                                 <th>Horario</th>
                                 <th>Aula</th>
+                                <th>Nro. horas semana docencia</th>
+                                <th>Nro. horas semana investigación</th>
+                                <th>Nro. horas semana extensión</th>
+                                <th>Nro. horas semana labores administrativas</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
+                            <?php $i=1; ?>
                             @foreach ($horarios as $horario)
                                 <tr>
-                                    <td>{{ $horario->id }}</td>
+                                    <td>{{ $i++ }}</td>
                                     <td>{{ $horario->pph_year }}</td>
                                     <td>{{ $horario->pph_semestre }}</td>
                                     <td>{{ $horario->asignaturas->asig_nombre }}</td>
                                     <td>{{ $horario->pph_grupo }}</td>
-                                    <td>{{ $horario->docentes->per_nombre . ' ' . $horario->docentes->per_apellido }}
-                                    </td>
+                                    <td>{{ $horario->docentes->per_nombre . ' ' . $horario->docentes->per_apellido }}</td>
                                     <td>{{ $horario->pph_horario }}</td>
                                     <td>{{ $horario->pph_aula }}</td>
+                                    <td>{{ $horario->pph_nro_horas_semana_docencia }}</td>
+                                    <td>{{ $horario->pph_nro_horas_semana_investigacion }}</td>
+                                    <td>{{ $horario->pph_nro_horas_semana_extension }}</td>
+                                    <td>{{ $horario->pph_nro_horas_semana_administrativas }}</td>
                                     <td>
                                         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                             <form action="/programa/{{ $horario->id }}/eliminarhorario" method="POST">

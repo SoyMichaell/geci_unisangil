@@ -106,8 +106,42 @@ Route::delete('docente/{evaluacion}/eliminarevaluacion', [App\Http\Controllers\D
 Route::get('docente/{docente}/mostrarasignatura', [App\Http\Controllers\DocenteController::class, 'mostrarasignatura']);
 //Rutas vinculación
 Route::get('docente/mostrarvinculacion', [App\Http\Controllers\DocenteController::class, 'mostrarvinculacion']);
+//Rutas docente visitante
+Route::get('docente/mostrardocentevisitante', [App\Http\Controllers\DocenteController::class, 'mostrardocentevisitante']);
+Route::get('docente/creardocentevisitante', [App\Http\Controllers\DocenteController::class, 'creardocentevisitante']);
+Route::post('docente/registrodocentevisitante', [App\Http\Controllers\DocenteController::class, 'registrodocentevisitante']);
+Route::get('docente/{docente}/editardocentevisitante', [App\Http\Controllers\DocenteController::class, 'editardocentevisitante']);
+Route::put('docente/{docente}/actualizardocentevisitante', [App\Http\Controllers\DocenteController::class, 'actualizardocentevisitante']);
+Route::delete('docente/{docente}/eliminardocentevisitante', [App\Http\Controllers\DocenteController::class, 'eliminardocentevisitante']);
 Route::resource('docente', App\Http\Controllers\DocenteController::class);
 
+/*Rutas pruebas saber*/
+Route::get('prueba/mostrarpruebasaber', [App\Http\Controllers\PruebaController::class, 'mostrarpruebasaber']);
+//Rutas tipo prueba
+Route::get('prueba/mostratipoprueba', [App\Http\Controllers\PruebaController::class, 'mostratipoprueba']);
+Route::post('prueba/registrotipoprueba', [App\Http\Controllers\PruebaController::class, 'registrotipoprueba']);
+Route::delete('prueba/{prueba}/eliminartipoprueba', [App\Http\Controllers\PruebaController::class, 'eliminartipoprueba']);
+//Rutas tipo módulo
+Route::get('prueba/mostrartipomodulo', [App\Http\Controllers\PruebaController::class, 'mostrartipomodulo']);
+Route::post('prueba/registrotipomodulo', [App\Http\Controllers\PruebaController::class, 'registrotipomodulo']);
+Route::delete('prueba/{prueba}/eliminartipomodulo', [App\Http\Controllers\PruebaController::class, 'eliminartipomodulo']);
+//Rutas saber
+Route::get('prueba/mostrarsaber', [App\Http\Controllers\PruebaController::class, 'mostrarsaber']);
+Route::get('prueba/crearsaber', [App\Http\Controllers\PruebaController::class, 'crearsaber']);
+Route::post('prueba/registrosaber', [App\Http\Controllers\PruebaController::class, 'registrosaber']);
+Route::get('prueba/{prueba}/editarsaber', [App\Http\Controllers\PruebaController::class, 'editarsaber']);
+Route::get('prueba/{prueba}/versaber', [App\Http\Controllers\PruebaController::class, 'versaber']);
+Route::put('prueba/{prueba}/actualizarsaber', [App\Http\Controllers\PruebaController::class, 'actualizarsaber']);
+Route::delete('prueba/{prueba}/eliminarsaber', [App\Http\Controllers\PruebaController::class, 'eliminarsaber']);
+//Rutas saber pro
+Route::get('prueba/mostrarsaberpro', [App\Http\Controllers\PruebaController::class, 'mostrarsaberpro']);
+Route::get('prueba/crearsaberpro', [App\Http\Controllers\PruebaController::class, 'crearsaberpro']);
+Route::post('prueba/registrosaberpro', [App\Http\Controllers\PruebaController::class, 'registrosaberpro']);
+Route::get('prueba/{prueba}/editarsaberpro', [App\Http\Controllers\PruebaController::class, 'editarsaberpro']);
+Route::get('prueba/{prueba}/versaberpro', [App\Http\Controllers\PruebaController::class, 'versaberpro']);
+Route::put('prueba/{prueba}/actualizarsaberpro', [App\Http\Controllers\PruebaController::class, 'actualizarsaberpro']);
+Route::delete('prueba/{prueba}/eliminarsaberpro', [App\Http\Controllers\PruebaController::class, 'eliminarsaberpro']);
+Route::resource('prueba', App\Http\Controllers\PruebaController::class);
 /*Rutas programa*/
 Route::get('programa/mostrarplan', [App\Http\Controllers\ProgramaController::class, 'mostrarplan']);
 Route::get('programa/crearplan', [App\Http\Controllers\ProgramaController::class, 'crearplan']);

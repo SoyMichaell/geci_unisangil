@@ -13,6 +13,9 @@
 @endsection
 @section('content')
     <div class="container-fluid">
+        <div class="d-flex">
+            <a class="btn btn-success" href="/docente/mostrardocentevisitante"><i class="fa-solid fa-circle-plus"></i> Registro docentes visitantes</a>
+        </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">

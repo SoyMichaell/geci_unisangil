@@ -7,6 +7,7 @@ use App\Models\Docente;
 use App\Models\DocenteAsignatura;
 use App\Models\DocenteContrato;
 use App\Models\DocenteEvaluacion;
+use App\Models\DocenteVisitante;
 use App\Models\Municipio;
 use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
@@ -807,7 +808,7 @@ class DocenteController extends Controller
     public function mostrarhistorial($id){
        $historials = DB::table('persona')
         ->join('programa_asignatura_horario','persona.id','=','programa_asignatura_horario.pph_id_docente')
-        ->join('programa_plan_estudio_asignatura','programa_asignatura_horario.id','=','programa_plan_estudio_asignatura.id')
+        ->join('programa_plan_estudio_asignatura','programa_asignatura_horario.pph_id_asignatura','=','programa_plan_estudio_asignatura.id')
         ->where('persona.id', $id)
         ->where('per_tipo_usuario', 2)
         ->orWhere('per_tipo_usuario', 4)
@@ -816,4 +817,210 @@ class DocenteController extends Controller
         return view('docente/historial.index')
             ->with('historials', $historials);
     }
+
+    public function mostrardocentevisitante(){
+        $docentevisitantes = DocenteVisitante::all();
+        return view('docente/visitante.index')
+            ->with('docentevisitantes', $docentevisitantes);
+    }
+
+    public function creardocentevisitante(){
+        return view('docente/visitante.create');
+    }
+
+    public function registrodocentevisitante(Request $request){
+        $rules = [
+            'docvi_tipo_documento' => 'required',
+            'docvi_numero_documento' => 'required',
+            'docvi_nombre' => 'required',
+            'docvi_apellido' => 'required',
+            'docvi_telefono' => 'required',
+            'docvi_correo' => 'required',
+            'docvi_entidad_origen' => 'required',
+            'docvi_pais' => 'required',
+            'docvi_ciudad' => 'required',
+            'docvi_fecha_estadia' => 'required',
+            'docvi_cantidad_hora' => 'required',
+            'docvi_cantidad_dia' => 'required',
+            'docvi_cantidad_semana' => 'required',
+            'docvi_cantidad_mes' => 'required',
+            'docvi_cantidad_year' => 'required',
+            'docvi_objeto' => 'required',
+            'docvi_actividad_desarrolladas' => 'required',
+            'docvi_year' => 'required',
+            'docvi_periodo' => 'required',
+            'docvi_url_soporte' => 'required',
+            'docvi_tipo_usuario' => 'required',
+        ];
+        $message = [
+            'docvi_tipo_documento.required' => 'El campo tipo de documento es requerido',
+            'docvi_numero_documento.required' => 'El campo número de documento es requerido',
+            'docvi_nombre.required' => 'El campo nombre es requerido',
+            'docvi_apellido.required' => 'El campo apellido es requerido',
+            'docvi_telefono.required' => 'El campo telefono es requerido',
+            'docvi_correo.required' => 'El campo correo electronico es requerido',
+            'docvi_entidad_origen.required' => 'El campo entidad es requerido',
+            'docvi_pais.required' => 'El campo país es requerido',
+            'docvi_ciudad.required' => 'El campo ciudad es requerido',
+            'docvi_fecha_estadia.required' => 'El campo fecha estadía es requerido',
+            'docvi_cantidad_hora.required' => 'El campo cantidad hora (s) es requerido',
+            'docvi_cantidad_dia.required' => 'El campo cantidad día (s) es requerido',
+            'docvi_cantidad_semana.required' => 'El campo cantidad semana (s) es requerido',
+            'docvi_cantidad_mes.required' => 'El campo cantidad mes es requerido',
+            'docvi_cantidad_year.required' => 'El campo cantidad año (s) es requerido',
+            'docvi_objeto.required' => 'El campo objeto es requerido',
+            'docvi_actividad_desarrolladas.required' => 'El campo actividades desarrolladas es requerido',
+            'docvi_year.required' => 'El campo año es requerido',
+            'docvi_periodo.required' => 'El campo periodo es requerido',
+            'docvi_url_soporte.required' => 'El campo soporte es requerido',
+            'docvi_tipo_usuario.required' => 'El campo tipo de usuario es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $docentevisitante = new DocenteVisitante();
+        $docentevisitante->docvi_tipo_documento = $request->get('docvi_tipo_documento');
+        $docentevisitante->docvi_numero_documento = $request->get('docvi_numero_documento');
+        $docentevisitante->docvi_nombre = $request->get('docvi_nombre');
+        $docentevisitante->docvi_apellido = $request->get('docvi_apellido');
+        $docentevisitante->docvi_telefono = $request->get('docvi_telefono');
+        $docentevisitante->docvi_entidad_origen = $request->get('docvi_entidad_origen');
+        $docentevisitante->docvi_correo = $request->get('docvi_correo');
+        $docentevisitante->docvi_pais = $request->get('docvi_pais');
+        $docentevisitante->docvi_ciudad = $request->get('docvi_ciudad');
+        $docentevisitante->docvi_fecha_estadia = $request->get('docvi_fecha_estadia');
+        $docentevisitante->docvi_cantidad_hora = $request->get('docvi_cantidad_hora');
+        $docentevisitante->docvi_cantidad_dia = $request->get('docvi_cantidad_dia');
+        $docentevisitante->docvi_cantidad_semana = $request->get('docvi_cantidad_semana');
+        $docentevisitante->docvi_cantidad_mes = $request->get('docvi_cantidad_mes');
+        $docentevisitante->docvi_cantidad_year = $request->get('docvi_cantidad_year');
+        $docentevisitante->docvi_objeto = $request->get('docvi_objeto');
+        $docentevisitante->docvi_actividad_desarrolladas = $request->get('docvi_actividad_desarrolladas');
+        $docentevisitante->docvi_year = $request->get('docvi_year');
+        $docentevisitante->docvi_periodo = $request->get('docvi_periodo');
+
+        if ($request->file('docvi_url_soporte')) {
+            $file = $request->file('docvi_url_soporte');
+            $name_soporte = $request->get('docvi_nombre').'_'.$request->get('docvi_apellido').'_'.$request->get('docvi_year').'.'.$file->extension();
+
+            $ruta = public_path('datos/visitante/' . $name_soporte);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }
+        $docentevisitante->docvi_url_soporte = $name_soporte;
+        $docentevisitante->docvi_tipo_usuario = $request->get('docvi_tipo_usuario');
+        
+        $docentevisitante->save();
+        Alert::success('Exitoso', 'El docente visitante se ha registrado con exito');
+        return redirect('/docente/mostrardocentevisitante');
+    }
+
+    public function editardocentevisitante($id){
+        $docentevisitante = DocenteVisitante::find($id);
+        return view('docente/visitante.edit')
+            ->with('docentevisitante', $docentevisitante);
+    }
+
+    public function actualizardocentevisitante(Request $request, $id){
+            $rules = [
+                'docvi_tipo_documento' => 'required',
+                'docvi_numero_documento' => 'required',
+                'docvi_nombre' => 'required',
+                'docvi_apellido' => 'required',
+                'docvi_telefono' => 'required',
+                'docvi_correo' => 'required',
+                'docvi_entidad_origen' => 'required',
+                'docvi_pais' => 'required',
+                'docvi_ciudad' => 'required',
+                'docvi_fecha_estadia' => 'required',
+                'docvi_cantidad_hora' => 'required',
+                'docvi_cantidad_dia' => 'required',
+                'docvi_cantidad_semana' => 'required',
+                'docvi_cantidad_mes' => 'required',
+                'docvi_cantidad_year' => 'required',
+                'docvi_objeto' => 'required',
+                'docvi_actividad_desarrolladas' => 'required',
+                'docvi_year' => 'required',
+                'docvi_periodo' => 'required',
+                'docvi_tipo_usuario' => 'required',
+            ];
+            $message = [
+                'docvi_tipo_documento.required' => 'El campo tipo de documento es requerido',
+                'docvi_numero_documento.required' => 'El campo número de documento es requerido',
+                'docvi_nombre.required' => 'El campo nombre es requerido',
+                'docvi_apellido.required' => 'El campo apellido es requerido',
+                'docvi_telefono.required' => 'El campo telefono es requerido',
+                'docvi_correo.required' => 'El campo correo electronico es requerido',
+                'docvi_entidad_origen.required' => 'El campo entidad es requerido',
+                'docvi_pais.required' => 'El campo país es requerido',
+                'docvi_ciudad.required' => 'El campo ciudad es requerido',
+                'docvi_fecha_estadia.required' => 'El campo fecha estadía es requerido',
+                'docvi_cantidad_hora.required' => 'El campo cantidad hora (s) es requerido',
+                'docvi_cantidad_dia.required' => 'El campo cantidad día (s) es requerido',
+                'docvi_cantidad_semana.required' => 'El campo cantidad semana (s) es requerido',
+                'docvi_cantidad_mes.required' => 'El campo cantidad mes es requerido',
+                'docvi_cantidad_year.required' => 'El campo cantidad año (s) es requerido',
+                'docvi_objeto.required' => 'El campo objeto es requerido',
+                'docvi_actividad_desarrolladas.required' => 'El campo actividades desarrolladas es requerido',
+                'docvi_year.required' => 'El campo año es requerido',
+                'docvi_periodo.required' => 'El campo periodo es requerido',
+                'docvi_tipo_usuario.required' => 'El campo tipo de usuario es requerido',
+            ];
+            $this->validate($request,$rules,$message);
+    
+            $docentevisitante = DocenteVisitante::find($id);
+            $docentevisitante->docvi_tipo_documento = $request->get('docvi_tipo_documento');
+            $docentevisitante->docvi_numero_documento = $request->get('docvi_numero_documento');
+            $docentevisitante->docvi_nombre = $request->get('docvi_nombre');
+            $docentevisitante->docvi_apellido = $request->get('docvi_apellido');
+            $docentevisitante->docvi_telefono = $request->get('docvi_telefono');
+            $docentevisitante->docvi_entidad_origen = $request->get('docvi_entidad_origen');
+            $docentevisitante->docvi_correo = $request->get('docvi_correo');
+            $docentevisitante->docvi_pais = $request->get('docvi_pais');
+            $docentevisitante->docvi_ciudad = $request->get('docvi_ciudad');
+            $docentevisitante->docvi_fecha_estadia = $request->get('docvi_fecha_estadia');
+            $docentevisitante->docvi_cantidad_hora = $request->get('docvi_cantidad_hora');
+            $docentevisitante->docvi_cantidad_dia = $request->get('docvi_cantidad_dia');
+            $docentevisitante->docvi_cantidad_semana = $request->get('docvi_cantidad_semana');
+            $docentevisitante->docvi_cantidad_mes = $request->get('docvi_cantidad_mes');
+            $docentevisitante->docvi_cantidad_year = $request->get('docvi_cantidad_year');
+            $docentevisitante->docvi_objeto = $request->get('docvi_objeto');
+            $docentevisitante->docvi_actividad_desarrolladas = $request->get('docvi_actividad_desarrolladas');
+            $docentevisitante->docvi_year = $request->get('docvi_year');
+            $docentevisitante->docvi_periodo = $request->get('docvi_periodo');
+    
+            if ($request->file('docvi_url_soporte')) {
+                $file = $request->file('docvi_url_soporte');
+                $name_soporte = $request->get('docvi_nombre').'_'.$request->get('docvi_apellido').'_'.$request->get('docvi_year').'.'.$file->extension();
+    
+                $ruta = public_path('datos/visitante/' . $name_soporte);
+    
+                if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                    copy($file, $ruta);
+                } else {
+                    Alert::warning('Los formatos admitidos son .zip y .rar');
+                    return back()->withInput();
+                }
+            }else{
+                $name_soporte = $docentevisitante->docvi_url_soporte;
+            }
+            $docentevisitante->docvi_url_soporte = $name_soporte;
+            $docentevisitante->docvi_tipo_usuario = $request->get('docvi_tipo_usuario');
+            
+            $docentevisitante->save();
+            Alert::success('Exitoso', 'El docente visitante se ha actualizado con exito');
+            return redirect('/docente/mostrardocentevisitante');
+    }
+
+    public function eliminardocentevisitante($id){
+        $docentevisitante = DocenteVisitante::find($id);
+        $docentevisitante->delete();
+        Alert::success('Exitoso', 'El docente visitante se ha eliminado con exito');
+            return redirect('/docente/mostrardocentevisitante');
+    }
+
 }

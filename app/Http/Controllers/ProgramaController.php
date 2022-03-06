@@ -556,6 +556,7 @@ class ProgramaController extends Controller
             'pph_id_asignatura' => 'required|not_in:0',
             'pph_grupo' => 'required',
             'pph_id_docente' => 'required|not_in:0',
+            
         ];
         $message = [
             'pph_year.required' => 'El campo año es requerido',
@@ -574,10 +575,13 @@ class ProgramaController extends Controller
         $horario->pph_id_docente = $request->get('pph_id_docente');
         $horario->pph_horario = $request->get('pph_horario');
         $horario->pph_aula = $request->get('pph_aula');
-
+        $horario->pph_nro_horas_semana_docencia = $request->get('pph_nro_horas_semana_docencia');
+        $horario->pph_nro_horas_semana_investigacion = $request->get('pph_nro_horas_semana_investigacion');
+        $horario->pph_nro_horas_semana_extension = $request->get('pph_nro_horas_semana_extension');
+        $horario->pph_nro_horas_semana_administrativas = $request->get('pph_nro_horas_semana_administrativas');
         $horario->save();
 
-        Alert::success('Exitoso', 'Materia asignada a docente y horario');
+        Alert::success('Exitoso', 'Materia asignada al docente');
         return redirect('programa/mostrarhorario');
     }
 
@@ -621,10 +625,14 @@ class ProgramaController extends Controller
         $horario->pph_id_docente = $request->get('pph_id_docente');
         $horario->pph_horario = $request->get('pph_horario');
         $horario->pph_aula = $request->get('pph_aula');
+        $horario->pph_nro_horas_semana_docencia = $request->get('pph_nro_horas_semana_docencia');
+        $horario->pph_nro_horas_semana_investigacion = $request->get('pph_nro_horas_semana_investigacion');
+        $horario->pph_nro_horas_semana_extension = $request->get('pph_nro_horas_semana_extension');
+        $horario->pph_nro_horas_semana_administrativas = $request->get('pph_nro_horas_semana_administrativas');
 
         $horario->save();
 
-        Alert::success('Exitoso', 'Asignación a docente y horario actualizada');
+        Alert::success('Exitoso', 'Materia actualizada');
         return redirect('programa/mostrarhorario');
     }
 

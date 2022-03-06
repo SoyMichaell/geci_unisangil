@@ -57,4 +57,11 @@ class Estudiante extends Model
         return $this->hasMany(Practica::class, 'id');
     }
 
+    public function pruebasaber(){
+        return $this->hasMany(PruebaSaber::class, 'id');
+    }
+
+    public function pruebasaberpro(){
+        return $this->hasMany(PruebaSaberPro::class, 'id');
+    }
 }
