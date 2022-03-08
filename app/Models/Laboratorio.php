@@ -36,4 +36,18 @@ class Laboratorio extends Model
         return $this->belongsTo(Facultad::class, 'lab_id_facultad');
     }
 
+    public function programas(){
+        return $this->belongsTo(Programa::class, 'lab_id_programa');
+    }
+
+    public function estudiantes(){
+        return $this->belongsTo(Estudiante::class, 'lab_id_practicante');
+    }
+
+    public function softwares(){
+        return $this->belongsTo(Software::class, 'lab_id_software');
+    }
+
+    
+
 }

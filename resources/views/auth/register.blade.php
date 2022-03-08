@@ -183,14 +183,14 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="per_contrasena"
+                                <label for="password"
                                     class="col-md-12 col-form-label">{{ __('Contraseña *') }}</label>
                                 <div class="col-md-12">
-                                    <input id="per_contrasena" type="password"
-                                        class="form-control-custom @error('per_contrasena') is-invalid @enderror"
-                                        name="per_contrasena" value="{{ old('per_contrasena') }}" autocomplete="per_contrasena"
+                                    <input id="password" type="password"
+                                        class="form-control-custom @error('password') is-invalid @enderror"
+                                        name="password" value="{{ old('password') }}" autocomplete="password"
                                         autofocus>
-                                    @error('per_contrasena')
+                                    @error('password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>

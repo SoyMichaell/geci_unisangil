@@ -119,13 +119,13 @@
                             TIC'S</a></li>
                     <li><a class="treeview-item" href="{{ url('extension') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
-                            Extensión</a></li>
-                    <li><a class="treeview-item" href="{{ url('internacionalizacion') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
-                            Internacionalización</a></li>
+                            Extencion e Internacialización</a></li>
                     <li><a class="treeview-item" href="{{ url('red') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Redes acádemicas</a></li>
+                    <li><a class="treeview-item" href="{{ url('laboratorio') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Laboratorios</a></li>
                 </ul>
             </li>
         </ul>

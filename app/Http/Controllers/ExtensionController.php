@@ -14,9 +14,11 @@ use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
 use App\Models\ExtEducacionContinua;
 use App\Models\ExtParticipante;
+use App\Models\ExtRegistroFotograficoInter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
+use Svg\Tag\Rect;
 
 class ExtensionController extends Controller
 {
@@ -1007,6 +1009,130 @@ class ExtensionController extends Controller
         $participante->delete();
         Alert::success('Exitoso', 'Participante eliminado con exito');
         return redirect('extension/mostrarparticipante');
+    }
+
+    public function mostrarregistrofotografico(){
+        $fotograficos = ExtRegistroFotograficoInter::all();
+        return view('extension/registrofo.index')
+            ->with('fotograficos', $fotograficos);
+    }
+
+    public function crearregistrofotografico(){
+        return view('extension/registrofo.create');
+    }
+
+    public function registrofotografico(Request $request){
+        $rules = [
+            'extrefoin_year' => 'required',
+            'extrefoin_periodo' => 'required',
+            'extrefoin_actividad' => 'required',
+            'extrefoin_ente_organizador' => 'required',
+            'extrefoin_fecha' => 'required',
+            'extrefoin_soporte' => 'required',
+        ];
+        $message = [
+            'extrefoin_year.required' => 'El campo año es requerido',
+            'extrefoin_periodo.required' => 'El campo periodo es requerido',
+            'extrefoin_actividad.required' => 'El campo actividad es requerido',
+            'extrefoin_ente_organizador.required' => 'El campo ente organizador es requerido',
+            'extrefoin_fecha.required' => 'El campo fecha es requerido',
+            'extrefoin_soporte.required' => 'El campo soporte es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $fotografico = new ExtRegistroFotograficoInter();
+        $fotografico->extrefoin_year = $request->get('extrefoin_year');
+        $fotografico->extrefoin_periodo = $request->get('extrefoin_periodo');
+        $fotografico->extrefoin_tipo_actividad = $request->get('extrefoin_tipo_actividad');
+        $fotografico->extrefoin_actividad = $request->get('extrefoin_actividad');
+        $fotografico->extrefoin_ente_organizador = $request->get('extrefoin_ente_organizador');
+        $fotografico->extrefoin_fecha = $request->get('extrefoin_fecha');
+        $fotografico->extrefoin_tipo_evento = $request->get('extrefoin_tipo_evento');
+        $fotografico->extrefoin_tipo_modalidad = $request->get('extrefoin_tipo_modalidad');
+
+        if ($request->file('extrefoin_soporte')) {
+            $file = $request->file('extrefoin_soporte');
+            $name_registro = $request->get('extrefoin_year').'_'.$request->get('extrefoin_actividad').'.'.$file->extension();
+
+            $ruta = public_path('datos/registro-fotografico/' . $name_registro);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        } 
+        $fotografico->extrefoin_soporte = $name_registro;
+
+        $fotografico->save();
+        Alert::success('Exitoso', 'El registro fotografico se guardo con exito');
+        return redirect('extension/mostrarregistrofotografico');
+    }
+
+    public function verregistrofotografico($id){
+        $fotografico = ExtRegistroFotograficoInter::find($id);
+        return view('extension/registrofo.show')
+            ->with('fotografico', $fotografico);
+    }
+
+    public function editarregistrofotografico($id){
+        $fotografico = ExtRegistroFotograficoInter::find($id);
+        return view('extension/registrofo.edit')
+            ->with('fotografico', $fotografico);
+    }
+
+    public function actualizarregistrofotografico(Request $request, $id){
+        $rules = [
+            'extrefoin_year' => 'required',
+            'extrefoin_periodo' => 'required',
+            'extrefoin_actividad' => 'required',
+            'extrefoin_ente_organizador' => 'required',
+            'extrefoin_fecha' => 'required',
+        ];
+        $message = [
+            'extrefoin_year.required' => 'El campo año es requerido',
+            'extrefoin_periodo.required' => 'El campo periodo es requerido',
+            'extrefoin_actividad.required' => 'El campo actividad es requerido',
+            'extrefoin_ente_organizador.required' => 'El campo ente organizador es requerido',
+            'extrefoin_fecha.required' => 'El campo fecha es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $fotografico = ExtRegistroFotograficoInter::find($id);
+        $fotografico->extrefoin_year = $request->get('extrefoin_year');
+        $fotografico->extrefoin_periodo = $request->get('extrefoin_periodo');
+        $fotografico->extrefoin_tipo_actividad = $request->get('extrefoin_tipo_actividad');
+        $fotografico->extrefoin_actividad = $request->get('extrefoin_actividad');
+        $fotografico->extrefoin_ente_organizador = $request->get('extrefoin_ente_organizador');
+        $fotografico->extrefoin_fecha = $request->get('extrefoin_fecha');
+        $fotografico->extrefoin_tipo_evento = $request->get('extrefoin_tipo_evento');
+        $fotografico->extrefoin_tipo_modalidad = $request->get('extrefoin_tipo_modalidad');
+
+        $sfotografico = DB::table('ext_registro_fotografico_inter')
+            ->where('id', $id)
+            ->first();
+
+        if ($request->file('extrefoin_soporte')) {
+            $file = $request->file('extrefoin_soporte');
+            $name_registro = $request->get('extrefoin_year').'_'.$request->get('extrefoin_actividad').'.'.$file->extension();
+
+            $ruta = public_path('datos/registro-fotografico/' . $name_registro);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }else{
+            $name_registro = $sfotografico->extrefoin_soporte;
+        }
+        $fotografico->extrefoin_soporte = $name_registro;
+
+        $fotografico->save();
+        Alert::success('Exitoso', 'El registro fotografico se actualizo con exito');
+        return redirect('extension/mostrarregistrofotografico');
     }
 
 }

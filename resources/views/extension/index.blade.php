@@ -26,7 +26,7 @@
 </style>
 @section('content')
     <div class="container">
-        <h4>Submodulos extensión</h4>
+        <h4 class="ml-3">Extencion</h4>
         <div class="row">
             <a class="card__extension tile" href="/extension/mostraractividad">
                 <i class="fa-solid fa-boxes-stacked fa-4x"></i>
@@ -59,6 +59,21 @@
             <a class="card__extension tile" href="">
                 <i class="fa-solid fa-book-open-reader fa-4x"></i>
                 <h4 class="mt-2">Proyecto de extensión</h4>
+            </a>
+        </div>
+        <h4 class="ml-3">Internacionalización</h4>
+        <div class="row">
+            <a class="card__extension tile" href="/extension/mostrarregistrofotografico">
+                <i class="fa-solid fa-camera fa-4x"></i>
+                <h4 class="mt-2">Registro fotografico actividades</h4>
+            </a>
+            <a class="card__extension tile" href="/extension/mostraractrecurso">
+                <i class="fa-solid fa-microchip fa-4x"></i>
+                <h4 class="mt-2">Redes acádemicas</h4>
+            </a>
+            <a class="card__extension tile" href="/extension/mostrarconsultoria">
+                <i class="fa-solid fa-magnifying-glass fa-4x"></i>
+                <h4 class="mt-2">Redes disciplinarias - asociaciones - organizaciones</h4>
             </a>
         </div>
     </div>

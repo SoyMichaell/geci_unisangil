@@ -255,6 +255,17 @@ Route::get('extension/{participante}/editarparticipante', [App\Http\Controllers\
 Route::get('extension/{participante}/verparticipante', [App\Http\Controllers\ExtensionController::class, 'verparticipante']);
 Route::put('extension/{participante}/actualizarparticipante', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipante']);
 Route::delete('extension/{participante}/eliminarparticipante', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipante']);
+
+
+//Rutas internacionalización
+//Rutas registro fotografico
+Route::get('extension/mostrarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'mostrarregistrofotografico']);
+Route::get('extension/crearregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'crearregistrofotografico']);
+Route::post('extension/registrofotografico', [App\Http\Controllers\ExtensionController::class, 'registrofotografico']);
+Route::get('extension/{registro}/editarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'editarregistrofotografico']);
+Route::get('extension/{registro}/verregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'verregistrofotografico']);
+Route::put('extension/{registro}/actualizarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'actualizarregistrofotografico']);
+Route::delete('extension/{registro}/eliminarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'eliminarregistrofotografico']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 
@@ -265,3 +276,6 @@ Route::resource('red', App\Http\Controllers\RedAcademicaController::class);
 
 //Rutas Practicas Laborales
 Route::resource('practica', App\Http\Controllers\PracticaController::class);
+
+//Rutas laboratorios
+Route::resource('laboratorio',  App\Http\Controllers\LaboratorioController::class);

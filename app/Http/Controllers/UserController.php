@@ -37,8 +37,7 @@ class UserController extends Controller
             'per_apellido' => 'required',
             'per_telefono' => 'required',
             'per_correo' => 'required',
-            'per_contrasena' => 'required',
-            'password_confirmation' => 'required',
+            'password' => 'required',
             'per_departamento' => 'required|not_in:0',
             'per_ciudad' => 'required|not_in:0',
             'per_tipo_usuario' => 'required',
@@ -51,7 +50,7 @@ class UserController extends Controller
             'per_apellido.required' => 'El campo apellido (s) es requerido',
             'per_telefono.required' => 'El campo telefono es requerido',
             'per_correo.required' => 'El campo correo electronico es requerido',
-            'per_contrasena.required' => 'El campo contraseña es requerido',
+            'password.required' => 'El campo contraseña es requerido',
             'password_confirmation.required' => 'El campo confirmar contraseña es requerido',
             'per_departamento.required' => 'El campo departamento es requerido',
             'per_ciudad.required' => 'El campo ciudad es requerido',
@@ -60,7 +59,7 @@ class UserController extends Controller
         ];
         $this->validate($request, $rules, $message);
 
-        if ($request->get('per_contrasena') != $request->get('password_confirmation')) {
+        if ($request->get('password') != $request->get('password_confirmation')) {
             Alert::warning('Advertencia', 'Las contraseñas no coinciden');
             return back()->withInput();
         }
