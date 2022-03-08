@@ -18,7 +18,6 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="pro_estado_programa">{{ __('Estado programa') }}</label>
-
                     <select class="form-select" name="pro_estado_programa" id="pro_estado_programa" disabled>
                         <option selected>---- SELECCIONE ----</option>
                         @foreach ($estadoprogramas as $estadoprograma)
@@ -191,19 +190,38 @@
                 <div class="col-md-6">
                     <label for="pro_periodo">{{ __('Periodo de admisión ') }}</label>
                     <select class="form-select" name="pro_periodo" id="pro_periodo" disabled>
-                        <option selected>---- SELECCIONE ----</option>
+                        <option value="">---- SELECCIONE ----</option>
                         @foreach ($periodoAdmision as $periodo)
-                            <option value="{{ $periodo }}"
-                                {{ $programa->pro_periodo_admision == $periodo ? 'selected' : '' }}>
-                                {{ $periodo }}</option>
+                            <option value="{{ $periodo }}" {{$programa->pro_periodo_admision == $periodo ? 'selected'  : ''}}>{{ $periodo }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-6">
+                    <label for="pro_grupo_referencia">{{ __('Grupo de referencia *') }}</label>
+                    <input id="pro_grupo_referencia" type="text" class="form-control @error('pro_grupo_referencia') is-invalid @enderror"
+                        name="pro_grupo_referencia" value="{{$programa->pro_grupo_referencia}}" autocomplete="pro_grupo_referencia" autofocus disabled>
+                    @error('pro_grupo_referencia')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="pro_grupo_referencia_nbc">{{ __('Grupo de referencia (NBC) *') }}</label>
+                    <input id="pro_grupo_referencia_nbc" type="text" class="form-control @error('pro_grupo_referencia_nbc') is-invalid @enderror"
+                        name="pro_grupo_referencia_nbc" value="{{$programa->pro_grupo_referencia_nbc}}" autocomplete="pro_grupo_referencia_nbc" autofocus disabled>
+                    @error('pro_grupo_referencia_nbc')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
                     <label for="pro_norma">{{ __('Norma creación programa *') }}</label>
                     <input id="pro_norma" type="text" class="form-control @error('pro_norma') is-invalid @enderror"
-                        name="pro_norma" value="{{ $programa->pro_tipo_norma }}" autocomplete="pro_norma" autofocus
-                        disabled>
+                        name="pro_norma" value="{{$programa->pro_tipo_norma}}" autocomplete="pro_norma" autofocus disabled>
                     @error('pro_norma')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

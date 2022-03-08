@@ -223,6 +223,28 @@
                         </select>
                     </div>
                     <div class="col-md-6">
+                        <label for="pro_grupo_referencia">{{ __('Grupo de referencia *') }}</label>
+                        <input id="pro_grupo_referencia" type="text" class="form-control @error('pro_grupo_referencia') is-invalid @enderror"
+                            name="pro_grupo_referencia" value="{{ old('pro_grupo_referencia') }}" autocomplete="pro_grupo_referencia" autofocus>
+                        @error('pro_grupo_referencia')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="pro_grupo_referencia_nbc">{{ __('Grupo de referencia (NBC) *') }}</label>
+                        <input id="pro_grupo_referencia_nbc" type="text" class="form-control @error('pro_grupo_referencia_nbc') is-invalid @enderror"
+                            name="pro_grupo_referencia_nbc" value="{{ old('pro_grupo_referencia_nbc') }}" autocomplete="pro_grupo_referencia_nbc" autofocus>
+                        @error('pro_grupo_referencia_nbc')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
                         <label for="pro_norma">{{ __('Norma creación programa *') }}</label>
                         <input id="pro_norma" type="text" class="form-control @error('pro_norma') is-invalid @enderror"
                             name="pro_norma" value="{{ old('pro_norma') }}" autocomplete="pro_norma" autofocus>

@@ -388,6 +388,7 @@ class PruebaController extends Controller
     public function mostrarresultado(){
         $resultados = DB::table('prueba_resultado_programa')
             ->join('programa','prueba_resultado_programa.prurepro_id_programa','=','programa.id')
+            ->join('municipio','programa.pro_municipio','=','municipio.id')
             ->get();
         return view('prueba/general.index')
             ->with('resultados', $resultados);

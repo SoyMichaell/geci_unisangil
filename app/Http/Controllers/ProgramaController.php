@@ -81,7 +81,9 @@ class ProgramaController extends Controller
             'pro_resolucion' => 'required',
             'pro_fecha_ult' => 'required',
             'pro_fecha_prox' => 'required',
-            'pro_norma' => 'required'
+            'pro_norma' => 'required',
+            'pro_grupo_referencia' => 'required',
+            'pro_grupo_referencia_nbc' => 'required',
         ];
 
         $messages = [
@@ -91,7 +93,9 @@ class ProgramaController extends Controller
             'pro_resolucion.required' => 'El campo resolución es requerido',
             'pro_fecha_ult.required' => 'El campo fecha ultimo registro es requerido',
             'pro_fecha_prox.required' => 'El campo fecha próximo registro es requerido',
-            'pro_norma.required' => 'El campo norma de creación programa es requerido'
+            'pro_norma.required' => 'El campo norma de creación programa es requerido',
+            'pro_grupo_referencia.required' => 'El campo grupo de referencia es requerido',
+            'pro_grupo_referencia_nbc.required' => 'El campo grupo de referencia (NBC) es requerido'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -112,6 +116,8 @@ class ProgramaController extends Controller
         $programas->pro_metodologia = $request->get('pro_metodologia');
         $programas->pro_duraccion = $request->get('pro_duraccion');
         $programas->pro_periodo_admision = $request->get('pro_periodo');
+        $programas->pro_grupo_referencia = $request->get('pro_grupo_referencia');
+        $programas->pro_grupo_referencia_nbc = $request->get('pro_grupo_referencia_nbc');
         $programas->pro_tipo_norma = $request->get('pro_norma');
         $programas->pro_id_director = $request->get('pro_director_programa');
 
@@ -206,7 +212,9 @@ class ProgramaController extends Controller
             'pro_resolucion' => 'required',
             'pro_fecha_ult' => 'required',
             'pro_fecha_prox' => 'required',
-            'pro_norma' => 'required'
+            'pro_norma' => 'required',
+            'pro_grupo_referencia' => 'required',
+            'pro_grupo_referencia_nbc' => 'required',
         ];
 
         $messages = [
@@ -216,7 +224,9 @@ class ProgramaController extends Controller
             'pro_resolucion.required' => 'El campo resolución es requerido',
             'pro_fecha_ult.required' => 'El campo fecha ultimo registro es requerido',
             'pro_fecha_prox.required' => 'El campo fecha próximo registro es requerido',
-            'pro_norma.required' => 'El campo norma de creación programa es requerido'
+            'pro_norma.required' => 'El campo norma de creación programa es requerido',
+            'pro_grupo_referencia.required' => 'El campo grupo de referencia es requerido',
+            'pro_grupo_referencia_nbc.required' => 'El campo grupo de referencia (NBC) es requerido'
         ];
 
         $this->validate($request, $rules, $messages);
@@ -237,6 +247,8 @@ class ProgramaController extends Controller
         $programas->pro_metodologia = $request->get('pro_metodologia');
         $programas->pro_duraccion = $request->get('pro_duraccion');
         $programas->pro_periodo_admision = $request->get('pro_periodo');
+        $programas->pro_grupo_referencia = $request->get('pro_grupo_referencia');
+        $programas->pro_grupo_referencia_nbc = $request->get('pro_grupo_referencia_nbc');
         $programas->pro_tipo_norma = $request->get('pro_norma');
         $programas->pro_id_director = $request->get('pro_director_programa');
 

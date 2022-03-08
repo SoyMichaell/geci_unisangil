@@ -12,10 +12,26 @@ class Programa extends Model
     protected $table = "programa";
 
     protected $fillable = [
-        'id','pro_estado','pro_departamento','pro_municipio','pro_facultad','pro_nombre',
-        'pro_titulo','pro_codigosnies','pro_resolucion','pro_fecha_ult',
-        'pro_fecha_prox','pro_nivel_formacion','pro_programa_ciclo','pro_metodologia',
-        'pro_duraccion','pro_periodo_admision','pro_tipo_norma','pro_id_director'
+        'id',
+        'pro_estado',
+        'pro_departamento',
+        'pro_municipio',
+        'pro_facultad',
+        'pro_nombre',
+        'pro_titulo',
+        'pro_codigosnies',
+        'pro_resolucion',
+        'pro_fecha_ult',
+        'pro_fecha_prox',
+        'pro_nivel_formacion',
+        'pro_programa_ciclo',
+        'pro_metodologia',
+        'pro_duraccion',
+        'pro_periodo_admision',
+        'pro_grupo_referencia',
+        'pro_grupo_referencia_nbc',
+        'pro_tipo_norma',
+        'pro_id_director',
     ];
 
     public function directorprograma(){

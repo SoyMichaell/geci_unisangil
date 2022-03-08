@@ -24,7 +24,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <select class="form-select" name="pro_estado_programa" id="pro_estado_programa">
-                                    <option selected>---- SELECCIONE ----</option>
+                                    <option value="">---- SELECCIONE ----</option>
                                     @foreach ($estadoprogramas as $estadoprograma)
                                         <option value="{{ $estadoprograma }}" {{$programa->pro_estado == $estadoprograma ? 'selected' : ''}}>{{ $estadoprograma }}</option>
                                     @endforeach
@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <select class="form-select" name="pro_departamento" id="pro_departamento">
-                                    <option selected>---- SELECCIONE ----</option>
+                                    <option value="">---- SELECCIONE ----</option>
                                     @foreach ($departamentos as $departamento)
                                         <option value="{{ $departamento->id }}" {{$departamento->id == $programa->pro_departamento ? 'selected' : ''}}>{{ $departamento->dep_nombre }}
                                         </option>
@@ -56,7 +56,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <select class="form-select" name="pro_municipio" id="pro_municipio">
-                                    <option selected>---- SELECCIONE ----</option>
+                                    <option value="">---- SELECCIONE ----</option>
                                     @foreach ($municipios as $municipio)
                                         <option value="{{ $municipio->id }}" {{$municipio->id == $programa->pro_municipio ? 'selected' : ''}}>{{ $municipio->mun_nombre }}</option>
                                     @endforeach
@@ -176,7 +176,7 @@
                     <div class="col-md-6">
                         <label for="pro_programa_ciclos">{{ __('Progama por ciclos') }}</label>
                         <select class="form-select" name="pro_programa_ciclos" id="pro_programa_ciclos">
-                            <option selected>---- SELECCIONE ----</option>
+                            <option value="">---- SELECCIONE ----</option>
                             @foreach ($programasCiclo as $programaCiclo)
                                 <option value="{{ $programaCiclo }}" {{$programa->pro_programa_ciclo == $programaCiclo ? 'selected' : ''}}>{{ $programaCiclo }}
                                 </option>
@@ -190,7 +190,7 @@
                         <div class="row">
                             <div class="col-md-10">
                                 <select class="form-select" name="pro_metodologia" id="pro_metodologia">
-                                    <option selected>---- SELECCIONE ----</option>
+                                    <option value="">---- SELECCIONE ----</option>
                                     @foreach ($metodologias as $metodologia)
                                         <option value="{{ $metodologia->id }}" {{$metodologia->id == $programa->pro_metodologia ? 'selected' : ''}}>{{ $metodologia->met_nombre }}
                                         </option>
@@ -205,7 +205,7 @@
                     <div class="col-md-6">
                         <label for="pro_duraccion">{{ __('Duracción programa (semestres)') }}</label>
                         <select class="form-select" name="pro_duraccion" id="pro_duraccion">
-                            <option selected>---- SELECCIONE ----</option>
+                            <option value="">---- SELECCIONE ----</option>
                             @foreach ($duraccions as $duraccion)
                                 <option value="{{ $duraccion }}" {{$programa->pro_duraccion == $duraccion ? 'selected' : ''}}>{{ $duraccion }}</option>
                             @endforeach
@@ -216,11 +216,33 @@
                     <div class="col-md-6">
                         <label for="pro_periodo">{{ __('Periodo de admisión ') }}</label>
                         <select class="form-select" name="pro_periodo" id="pro_periodo">
-                            <option selected>---- SELECCIONE ----</option>
+                            <option value="">---- SELECCIONE ----</option>
                             @foreach ($periodoAdmision as $periodo)
-                                <option value="{{ $periodo }}" {{$programa->pro_periodo_admision == $periodo ? 'selected' : ''}}>{{ $periodo }}</option>
+                                <option value="{{ $periodo }}" {{$programa->pro_periodo_admision == $periodo ? 'selected'  : ''}}>{{ $periodo }}</option>
                             @endforeach
                         </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pro_grupo_referencia">{{ __('Grupo de referencia *') }}</label>
+                        <input id="pro_grupo_referencia" type="text" class="form-control @error('pro_grupo_referencia') is-invalid @enderror"
+                            name="pro_grupo_referencia" value="{{$programa->pro_grupo_referencia}}" autocomplete="pro_grupo_referencia" autofocus>
+                        @error('pro_grupo_referencia')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="pro_grupo_referencia_nbc">{{ __('Grupo de referencia (NBC) *') }}</label>
+                        <input id="pro_grupo_referencia_nbc" type="text" class="form-control @error('pro_grupo_referencia_nbc') is-invalid @enderror"
+                            name="pro_grupo_referencia_nbc" value="{{$programa->pro_grupo_referencia_nbc}}" autocomplete="pro_grupo_referencia_nbc" autofocus>
+                        @error('pro_grupo_referencia_nbc')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
                     <div class="col-md-6">
                         <label for="pro_norma">{{ __('Norma creación programa *') }}</label>

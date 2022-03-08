@@ -41,7 +41,7 @@
                             <td>{{ $resultado->prurepro_year }}</td>
                             <td>{{ $resultado->pro_nombre }}</td>
                             <td>{{ $resultado->pro_codigosnies }}</td>
-                            <td>{{ $resultado->pro_municipio }}</td>
+                            <td>{{ $resultado->mun_nombre }}</td>
                             <td>
                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                     <form action="/prueba/{{ $resultado->prurepro_id_programa }}/eliminaresultado"
