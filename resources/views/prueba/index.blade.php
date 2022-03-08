@@ -42,6 +42,9 @@
                     <tr>
                         <td>Registro prueba saber pro</td> <td><a href="/prueba/mostrarsaberpro">Enlace</a></td>
                     </tr>
+                    <tr>
+                        <td>Resultados generales de programa</td> <td><a href="/prueba/mostrarresultado">Enlace</a></td>
+                    </tr>
                 </table>
             </div>
         </div>

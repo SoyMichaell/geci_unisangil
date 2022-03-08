@@ -141,6 +141,14 @@ Route::get('prueba/{prueba}/editarsaberpro', [App\Http\Controllers\PruebaControl
 Route::get('prueba/{prueba}/versaberpro', [App\Http\Controllers\PruebaController::class, 'versaberpro']);
 Route::put('prueba/{prueba}/actualizarsaberpro', [App\Http\Controllers\PruebaController::class, 'actualizarsaberpro']);
 Route::delete('prueba/{prueba}/eliminarsaberpro', [App\Http\Controllers\PruebaController::class, 'eliminarsaberpro']);
+//Rutas resultados programas
+Route::get('prueba/mostrarresultado', [App\Http\Controllers\PruebaController::class, 'mostrarresultado']);
+Route::get('prueba/crearresultado', [App\Http\Controllers\PruebaController::class, 'crearresultado']);
+Route::post('prueba/registroresultado', [App\Http\Controllers\PruebaController::class, 'registroresultado']);
+Route::get('prueba/{resultado}/editarresultado', [App\Http\Controllers\PruebaController::class, 'editarresultado']);
+Route::get('prueba/{resultado}/verresultado', [App\Http\Controllers\PruebaController::class, 'verresultado']);
+Route::put('prueba/{resultado}/actualizarresultado', [App\Http\Controllers\PruebaController::class, 'actualizarresultado']);
+Route::delete('prueba/{resultado}/eliminaresultado', [App\Http\Controllers\PruebaController::class, 'eliminaresultado']);
 Route::resource('prueba', App\Http\Controllers\PruebaController::class);
 /*Rutas programa*/
 Route::get('programa/mostrarplan', [App\Http\Controllers\ProgramaController::class, 'mostrarplan']);

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Estudiante;
+use App\Models\Programa;
 use App\Models\PruebaSaber;
 use App\Models\PruebaSaberPro;
 use App\Models\TipoModulo;
@@ -381,6 +382,154 @@ class PruebaController extends Controller
         DB::table('prueba_saber_pro_modulo')->where('prsaprmo_id_estudiante', $id)->delete();
         DB::table('prueba_saber_pro')->where('prsapr_id_estudiante', $id)->delete();
         Alert::success('Exitoso', 'Prueba saber pro eliminada con exito');
+        return redirect('/prueba/mostrarsaberpro');
+    }
+
+    public function mostrarresultado(){
+        $resultados = DB::table('prueba_resultado_programa')
+            ->join('programa','prueba_resultado_programa.prurepro_id_programa','=','programa.id')
+            ->get();
+        return view('prueba/general.index')
+            ->with('resultados', $resultados);
+    }
+
+    public function crearresultado(){
+        $programas = Programa::all();
+        $tiposmodulos = DB::table('tipo_modulo')
+            ->where('tipo_modulo_id_prueba', 3)
+            ->get();
+        return view('prueba/general.create')
+            ->with('programas', $programas)
+            ->with('tiposmodulos', $tiposmodulos);
+    }
+
+    public function registroresultado(Request $request){
+        /*$rules = [
+            'prurepro_year' => 'required',
+            'prurepro_global_programa' => 'required',
+            'prurepro_global_institucion' => 'required',
+            'prurepro_global_sede' => 'required',
+            'prurepro_global_grupo_referencia' => 'required'
+        ];
+        $message = [
+            'prurepro_year.required' => 'El campo año es requerido',
+            'prurepro_global_programa.required' => 'El campo resultado global programa es requerido',
+            'prurepro_global_institucion.required' => 'El campo resultado global institución es requerido',
+            'prurepro_global_sede.required' => 'El campo resultado global sede es requerido',
+            'prurepro_global_grupo_referencia.required' => 'El campo resultado global grupo de referencia es requerido'
+        ];
+        $this->validate($request,$rules,$message);*/
+
+        for ($i=0; $i <count($request->get('prureprono_id_modulo')) ; $i++) { 
+            DB::table('prueba_resultado_programa_modulo')->insert([
+                'prurepromo_id_prueba_programa' => $request->get('prurepromo_id_prueba_programa'),
+                'prureprono_id_modulo' => $request->get('prureprono_id_modulo')[$i],
+                'prureprono_puntaje_programa' => $request->get('prureprono_puntaje_programa')[$i],
+                'prureprono_puntaje_institucion' => $request->get('prureprono_puntaje_institucion')[$i],
+                'prureprono_puntaje_sede' => $request->get('prureprono_puntaje_sede')[$i],
+                'prureprono_puntaje_grupo_referencia' => $request->get('prureprono_puntaje_grupo_referencia')[$i],
+            ]);
+        }
+
+        DB::table('prueba_resultado_programa')->insert(
+            [
+                'prurepro_year' => $request->get('prurepro_year'),
+                'prurepro_id_programa' => $request->get('prurepromo_id_prueba_programa'),
+                'prurepro_global_programa' => $request->get('prurepro_global_programa'),
+                'prurepro_global_institucion' => $request->get('prurepro_global_institucion'),
+                'prurepro_global_sede' => $request->get('prurepro_global_sede'),
+                'prurepro_global_grupo_referencia' => $request->get('prurepro_global_grupo_referencia'),
+            ]
+        );
+
+        Alert::success('Exitoso', 'Resultado general del programa registrado con exito');
+        return redirect('/prueba/mostrarresultado');
+    }
+
+    public function editarresultado($id){
+        $resultados = DB::table('prueba_resultado_programa_modulo')
+        ->join('tipo_modulo','prueba_resultado_programa_modulo.prureprono_id_modulo','=','tipo_modulo.id')
+        ->where('prurepromo_id_prueba_programa', $id)
+        ->get();
+        $resultado = DB::table('prueba_resultado_programa')
+        ->join('prueba_resultado_programa_modulo','prueba_resultado_programa.prurepro_id_programa','=','prueba_resultado_programa_modulo.prurepromo_id_prueba_programa')
+        ->where('prurepromo_id_prueba_programa', $id)
+        ->first();
+    $programas = Programa::all();
+    return view('prueba/general.edit')
+        ->with('programas', $programas)
+        ->with('resultados', $resultados)
+        ->with('resultado', $resultado);
+    }
+
+    public function verresultado($id){
+        $resultados = DB::table('prueba_resultado_programa_modulo')
+        ->join('tipo_modulo','prueba_resultado_programa_modulo.prureprono_id_modulo','=','tipo_modulo.id')
+        ->where('prurepromo_id_prueba_programa', $id)
+        ->get();
+        $resultado = DB::table('prueba_resultado_programa')
+        ->join('programa','prueba_resultado_programa.prurepro_id_programa','=','programa.id')
+        ->join('prueba_resultado_programa_modulo','prueba_resultado_programa.prurepro_id_programa','=','prueba_resultado_programa_modulo.prurepromo_id_prueba_programa')
+        ->where('prurepromo_id_prueba_programa', $id)
+        ->first();
+    return view('prueba/general.show')
+        ->with('resultados', $resultados)
+        ->with('resultado', $resultado);
+    }
+
+    public function actualizarresultado(Request $request, $id){
+        /*$rules = [
+            'prurepro_year' => 'required',
+            'prurepro_global_programa' => 'required',
+            'prurepro_global_institucion' => 'required',
+            'prurepro_global_sede' => 'required',
+            'prurepro_global_grupo_referencia' => 'required'
+        ];
+        $message = [
+            'prurepro_year.required' => 'El campo año es requerido',
+            'prurepro_global_programa.required' => 'El campo resultado global programa es requerido',
+            'prurepro_global_institucion.required' => 'El campo resultado global institución es requerido',
+            'prurepro_global_sede.required' => 'El campo resultado global sede es requerido',
+            'prurepro_global_grupo_referencia.required' => 'El campo resultado global grupo de referencia es requerido'
+        ];
+        $this->validate($request,$rules,$message);*/
+
+        for ($i=0; $i <count($request->get('prureprono_id_modulo')) ; $i++) { 
+            DB::table('prueba_resultado_programa_modulo')
+            ->where('prurepromo_id_prueba_programa', $id)
+            ->where('prureprono_id_modulo', $request->get('prureprono_id_modulo')[$i])
+            ->update(
+                [
+                    'prureprono_id_modulo' => $request->get('prureprono_id_modulo')[$i],
+                    'prureprono_puntaje_programa' => $request->get('prureprono_puntaje_programa')[$i],
+                    'prureprono_puntaje_institucion' => $request->get('prureprono_puntaje_institucion')[$i],
+                    'prureprono_puntaje_sede' => $request->get('prureprono_puntaje_sede')[$i],
+                    'prureprono_puntaje_grupo_referencia' => $request->get('prureprono_puntaje_grupo_referencia')[$i],
+                ]
+            );
+        }
+
+        DB::table('prueba_resultado_programa')
+        ->where('prurepro_id_programa', $id)
+        ->update(
+            [
+                'prurepro_year' => $request->get('prurepro_year'),
+                'prurepro_id_programa' => $request->get('prurepromo_id_prueba_programa'),
+                'prurepro_global_programa' => $request->get('prurepro_global_programa'),
+                'prurepro_global_institucion' => $request->get('prurepro_global_institucion'),
+                'prurepro_global_sede' => $request->get('prurepro_global_sede'),
+                'prurepro_global_grupo_referencia' => $request->get('prurepro_global_grupo_referencia'),
+            ]
+        );
+
+        Alert::success('Exitoso', 'Resultado general del programa actualizado con exito');
+        return redirect('/prueba/mostrarresultado');
+    }
+
+    public function eliminaresultado($id){
+        DB::table('prueba_resultado_programa')->where('prurepro_id_programa', $id)->delete();
+        DB::table('prueba_resultado_programa_modulo')->where('prurepromo_id_prueba_programa', $id)->delete();
+        Alert::success('Exitoso', 'Resultado general del programa eliminado con exito');
         return redirect('/prueba/mostrarsaberpro');
     }
 
