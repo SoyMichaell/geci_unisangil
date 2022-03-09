@@ -255,8 +255,22 @@ Route::get('extension/{participante}/editarparticipante', [App\Http\Controllers\
 Route::get('extension/{participante}/verparticipante', [App\Http\Controllers\ExtensionController::class, 'verparticipante']);
 Route::put('extension/{participante}/actualizarparticipante', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipante']);
 Route::delete('extension/{participante}/eliminarparticipante', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipante']);
-
-
+//Rutas proyectos extension
+Route::get('extension/mostrarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'mostrarproyectoextension']);
+Route::get('extension/crearproyectoextension', [App\Http\Controllers\ExtensionController::class, 'crearproyectoextension']);
+Route::post('extension/registroproyectoextension', [App\Http\Controllers\ExtensionController::class, 'registroproyectoextension']);
+Route::get('extension/{proyecto}/editarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'editarproyectoextension']);
+Route::get('extension/{proyecto}/verproyectoextension', [App\Http\Controllers\ExtensionController::class, 'verproyectoextension']);
+Route::put('extension/{proyecto}/actualizarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'actualizarproyectoextension']);
+Route::delete('extension/{proyecto}/eliminarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'eliminarproyectoextension']);
+//Rutas servicios extensión
+Route::get('extension/mostrarservicioextension', [App\Http\Controllers\ExtensionController::class, 'mostrarservicioextension']);
+Route::get('extension/crearservicioextension', [App\Http\Controllers\ExtensionController::class, 'crearservicioextension']);
+Route::post('extension/registroservicioextension', [App\Http\Controllers\ExtensionController::class, 'registroservicioextension']);
+Route::get('extension/{servicio}/editarservicioextension', [App\Http\Controllers\ExtensionController::class, 'editarservicioextension']);
+Route::get('extension/{servicio}/verservicioextension', [App\Http\Controllers\ExtensionController::class, 'verservicioextension']);
+Route::put('extension/{servicio}/actualizarservicioextension', [App\Http\Controllers\ExtensionController::class, 'actualizarservicioextension']);
+Route::delete('extension/{servicio}/eliminarservicioextension', [App\Http\Controllers\ExtensionController::class, 'eliminarservicioextension']);
 //Rutas internacionalización
 //Rutas registro fotografico
 Route::get('extension/mostrarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'mostrarregistrofotografico']);

@@ -56,9 +56,13 @@
                 <i class="fa-solid fa-chalkboard-user fa-4x"></i>
                 <h4 class="mt-2">Participante</h4>
             </a>
-            <a class="card__extension tile" href="">
+            <a class="card__extension tile" href="/extension/mostrarproyectoextension">
                 <i class="fa-solid fa-book-open-reader fa-4x"></i>
                 <h4 class="mt-2">Proyecto de extensión</h4>
+            </a>
+            <a class="card__extension tile" href="/extension/mostrarservicioextension">
+                <i class="fa-solid fa-book-open-reader fa-4x"></i>
+                <h4 class="mt-2">Servicio de extensión</h4>
             </a>
         </div>
         <h4 class="ml-3">Internacionalización</h4>

@@ -32,9 +32,16 @@
             margin: auto;
         }
 
-        .display {
-            font-size: 65px;
-        }
+        .title-login{
+                font-weight: 900;
+                font-size: 65px;
+                color: #198654;
+            }
+
+            .message-login{
+                font-weight: 300px;
+                font-size: 17px;
+            }
 
         .form-login {
             width: 550px;
@@ -75,9 +82,9 @@
         </nav>
         <div class="row mx-auto" style="margin-top: 5%">
             <div class="col-md-5 mx-auto">
-                <h1 class="display">Registro nuevos usuarios</h1>
-                <p>Plataforma web para la gestión y control de información de procesos académicos y administrativos
-                    del programa ingeniería de sistemas <b>unisangil sede Yopal</b></p>
+                <h1 class="title-login">Registro nuevos usuarios</h1>
+                <p class="message-login">Plataforma web para la gestión y control de información de procesos académicos y administrativos
+                    del programa ingeniería de sistemas <span>unisangil sede Yopal</span></p>
             </div>
             <div class="col-md-7 mx-auto">
                 <div class="form-login">

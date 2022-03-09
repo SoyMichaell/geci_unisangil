@@ -45,12 +45,23 @@
                 margin: auto;
             }
 
-            .display {
+            .title-login{
+                font-weight: 900;
                 font-size: 65px;
+                color: #198654;
+            }
+
+            .message-login{
+                font-weight: 300px;
+                font-size: 17px;
+            }
+
+            .message-login span{
+                color: #198654;
             }
 
             .form-login {
-                width: 400px;
+                width: 430px;
                 margin: auto;
             }
 
@@ -88,9 +99,9 @@
             </nav>
             <div class="row mx-auto" style="margin-top:15%;">
                 <div class="col-md-6 mx-auto">
-                    <h1 class="display">Gestión y control</h1>
-                    <p>Plataforma web para la gestión y control de información de procesos académicos y administrativos
-                        del programa ingeniería de sistemas <b>unisangil sede Yopal</b></p>
+                    <h1 class="title-login">Gestión y control</h1>
+                    <p class="message-login">Plataforma web para la gestión y control de información de procesos académicos y administrativos
+                        del programa ingeniería de sistemas <span>unisangil sede Yopal</span></p>
                 </div>
                 <div class="col-md-6 mx-auto">
                     <div class="form-login">

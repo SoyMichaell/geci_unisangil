@@ -14,7 +14,9 @@ use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
 use App\Models\ExtEducacionContinua;
 use App\Models\ExtParticipante;
+use App\Models\ExtProyectoExtension;
 use App\Models\ExtRegistroFotograficoInter;
+use App\Models\ExtServicioExtension;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -1004,24 +1006,343 @@ class ExtensionController extends Controller
         return redirect('extension/mostrarparticipante');
     }
 
-    public function eliminarparticipante($id){
+    public function eliminarparticipante($id)
+    {
         $participante = ExtParticipante::find($id);
         $participante->delete();
         Alert::success('Exitoso', 'Participante eliminado con exito');
         return redirect('extension/mostrarparticipante');
     }
 
-    public function mostrarregistrofotografico(){
+    public function mostrarproyectoextension()
+    {
+        $proyectos = ExtProyectoExtension::all();
+        return view('extension/proyectoextension.index')
+            ->with('proyectos', $proyectos);
+    }
+
+    public function crearproyectoextension()
+    {
+        $areas = DB::table('compl_area_extension')->get();
+        $areastrabajo = DB::table('compl_area_trabajo')->get();
+        $entidadesnac = DB::table('compl_entidad_nacional')->get();
+        $fuentenacionals = DB::table('compl_fuente_nacional')->get();
+        $entidadesinter = DB::table('compl_fuente_internacional')->get();
+        $sectores = DB::table('compl_sector')->get();
+        $poblacioncondicions = DB::table('compl_poblacion_condicion')->get();
+        $poblaciongrupos = DB::table('compl_poblacion_grupo')->get();
+        return view('extension/proyectoextension.create')
+            ->with('areas', $areas)
+            ->with('areastrabajo', $areastrabajo)
+            ->with('entidadesnac', $entidadesnac)
+            ->with('fuentenacionals', $fuentenacionals)
+            ->with('entidadesinter', $entidadesinter)
+            ->with('sectores', $sectores)
+            ->with('poblacioncondicions', $poblacioncondicions)
+            ->with('poblaciongrupos', $poblaciongrupos);
+    }
+
+    public function registroproyectoextension(Request $request)
+    {
+        $rules = [
+            'extprex_year' => 'required',
+            'extprex_semestre' => 'required',
+            'extprex_codigo_organizacional' => 'required',
+            'extprex_codigo_pr' => 'required',
+            'extprex_nombre_pr' => 'required',
+            'extprex_descripcion_pr' => 'required',
+            'extprex_valor_pr' => 'required',
+            'extprex_id_area_extension' => 'required|not_in:0',
+            'extprex_fecha_inicio' => 'required',
+            'extprex_fecha_final' => 'required',
+            'extprex_nombre_contacto' => 'required',
+            'extprex_apellido_contacto' => 'required',
+            'extprex_telefono_contacto' => 'required',
+            'extprex_correo_contacto' => 'required',
+        ];
+        $message = [
+            'extprex_year.required' => 'El campo año es requerido',
+            'extprex_semestre.required' => 'El campo semestre es requerido',
+            'extprex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
+            'extprex_codigo_pr.required' => 'El campo código proyecto es requerido',
+            'extprex_nombre_pr.required' => 'El campo nombre proyecto es requerido',
+            'extprex_descripcion_pr.required' => 'El campo descripción es requerido',
+            'extprex_valor_pr.required' => 'El campo valor proyecto es requerido',
+            'extprex_id_area_extension.required' => 'El campo area extensión es requerido',
+            'extprex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'extprex_fecha_final.required' => 'El campo fecha final es requerido',
+            'extprex_nombre_contacto.required' => 'El campo nombre contacto es requerido',
+            'extprex_apellido_contacto.required' => 'El campo apellido contacto es requerido',
+            'extprex_telefono_contacto.required' => 'El campo telefono contacto es requerido',
+            'extprex_correo_contacto.required' => 'El campo correo electronico contacto es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $proyectoextension = new ExtProyectoExtension();
+        $proyectoextension->extprex_year = $request->get('extprex_year');
+        $proyectoextension->extprex_semestre = $request->get('extprex_semestre');
+        $proyectoextension->extprex_codigo_organizacional = $request->get('extprex_codigo_organizacional');
+        $proyectoextension->extprex_codigo_pr = $request->get('extprex_codigo_pr');
+        $proyectoextension->extprex_nombre_pr = $request->get('extprex_nombre_pr');
+        $proyectoextension->extprex_descripcion_pr = $request->get('extprex_descripcion_pr');
+        $proyectoextension->extprex_valor_pr = $request->get('extprex_valor_pr');
+        $proyectoextension->extprex_id_area_extension = $request->get('extprex_id_area_extension');
+        $proyectoextension->extprex_fecha_inicio = $request->get('extprex_fecha_inicio');
+        $proyectoextension->extprex_fecha_final = $request->get('extprex_fecha_final');
+        $proyectoextension->extprex_nombre_contacto = $request->get('extprex_nombre_contacto');
+        $proyectoextension->extprex_apellido_contacto = $request->get('extprex_apellido_contacto');
+        $proyectoextension->extprex_telefono_contacto = $request->get('extprex_telefono_contacto');
+        $proyectoextension->extprex_correo_contacto = $request->get('extprex_correo_contacto');
+        $proyectoextension->extprex_id_area_trabajo = $request->get('extprex_id_area_trabajo');
+        $proyectoextension->extprex_id_ciclo_vital = $request->get('extprex_id_ciclo_vital');
+        $proyectoextension->extprex_id_entidad_nacional = $request->get('extprex_id_entidad_nacional');
+        $proyectoextension->extprex_id_fuente_nacional = $request->get('extprex_id_fuente_nacional');
+        $proyectoextension->extprex_valor_financiacion_nac = $request->get('extprex_valor_financiacion_nac');
+        $proyectoextension->extprex_id_fuente_internacional = $request->get('extprex_id_fuente_internacional');
+        $proyectoextension->extprex_id_pais = $request->get('extprex_id_pais');
+        $proyectoextension->extprex_nombre_institucion_inter = $request->get('extprex_nombre_institucion_inter');
+        $proyectoextension->extprex_valor_financiacion_inter = $request->get('extprex_valor_financiacion_inter');
+        $proyectoextension->extprex_nombre_otra_entidad = $request->get('extprex_nombre_otra_entidad');
+        $proyectoextension->extprex_id_sector_otra_entidad = $request->get('extprex_id_sector_otra_entidad');
+        $proyectoextension->extprex_id_pais_otra_entidad = $request->get('extprex_id_pais_otra_entidad');
+        $proyectoextension->extprex_id_poblacion_condicion = $request->get('extprex_id_poblacion_condicion');
+        $proyectoextension->extprex_cantidad_condicion = $request->get('extprex_cantidad_condicion');
+        $proyectoextension->extprex_id_poblacion_grupo = $request->get('extprex_id_poblacion_grupo');
+        $proyectoextension->extprex_cantidad_grupo = $request->get('extprex_cantidad_grupo');
+        if ($request->file('extprex_soporte')) {
+            $file = $request->file('extprex_soporte');
+            $evidencia_proyecto_extension = $request->get('extprex_fecha_inicio').'_'.$request->get('extprex_nombre_pr').'.' . $file->extension();
+
+            $ruta = public_path('datos/proyecto-extension/' . $evidencia_proyecto_extension);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        } 
+        $proyectoextension->extprex_soporte = $request->get('extprex_soporte');
+
+        $proyectoextension->save();
+        Alert::success('Exitoso', 'El proyecto de extensión se ha registrado con exito');
+        return redirect('extension/mostrarproyectoextension');
+    }
+
+    public function editarproyectoextension($id)
+    {
+        $areas = DB::table('compl_area_extension')->get();
+        $areastrabajo = DB::table('compl_area_trabajo')->get();
+        $entidadesnac = DB::table('compl_entidad_nacional')->get();
+        $fuentenacionals = DB::table('compl_fuente_nacional')->get();
+        $entidadesinter = DB::table('compl_fuente_internacional')->get();
+        $sectores = DB::table('compl_sector')->get();
+        $poblacioncondicions = DB::table('compl_poblacion_condicion')->get();
+        $poblaciongrupos = DB::table('compl_poblacion_grupo')->get();
+        $proyectoextension = ExtProyectoExtension::find($id);
+        return view('extension/proyectoextension.edit')
+            ->with('areas', $areas)
+            ->with('areastrabajo', $areastrabajo)
+            ->with('entidadesnac', $entidadesnac)
+            ->with('fuentenacionals', $fuentenacionals)
+            ->with('entidadesinter', $entidadesinter)
+            ->with('sectores', $sectores)
+            ->with('poblacioncondicions', $poblacioncondicions)
+            ->with('poblaciongrupos', $poblaciongrupos)
+            ->with('proyectoextension', $proyectoextension);
+    }
+
+    public function verproyectoextension($id)
+    {
+        $areas = DB::table('compl_area_extension')->get();
+        $areastrabajo = DB::table('compl_area_trabajo')->get();
+        $entidadesnac = DB::table('compl_entidad_nacional')->get();
+        $fuentenacionals = DB::table('compl_fuente_nacional')->get();
+        $entidadesinter = DB::table('compl_fuente_internacional')->get();
+        $sectores = DB::table('compl_sector')->get();
+        $poblacioncondicions = DB::table('compl_poblacion_condicion')->get();
+        $poblaciongrupos = DB::table('compl_poblacion_grupo')->get();
+        $proyectoextension = ExtProyectoExtension::find($id);
+        return view('extension/proyectoextension.show')
+            ->with('areas', $areas)
+            ->with('areastrabajo', $areastrabajo)
+            ->with('entidadesnac', $entidadesnac)
+            ->with('fuentenacionals', $fuentenacionals)
+            ->with('entidadesinter', $entidadesinter)
+            ->with('sectores', $sectores)
+            ->with('poblacioncondicions', $poblacioncondicions)
+            ->with('poblaciongrupos', $poblaciongrupos)
+            ->with('proyectoextension', $proyectoextension);
+    }
+
+    public function actualizarproyectoextension(Request $request, $id)
+    {
+        $rules = [
+            'extprex_year' => 'required',
+            'extprex_semestre' => 'required',
+            'extprex_codigo_organizacional' => 'required',
+            'extprex_codigo_pr' => 'required',
+            'extprex_nombre_pr' => 'required',
+            'extprex_descripcion_pr' => 'required',
+            'extprex_valor_pr' => 'required',
+            'extprex_id_area_extension' => 'required|not_in:0',
+            'extprex_fecha_inicio' => 'required',
+            'extprex_fecha_final' => 'required',
+            'extprex_nombre_contacto' => 'required',
+            'extprex_apellido_contacto' => 'required',
+            'extprex_telefono_contacto' => 'required',
+            'extprex_correo_contacto' => 'required',
+        ];
+        $message = [
+            'extprex_year.required' => 'El campo año es requerido',
+            'extprex_semestre.required' => 'El campo semestre es requerido',
+            'extprex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
+            'extprex_codigo_pr.required' => 'El campo código proyecto es requerido',
+            'extprex_nombre_pr.required' => 'El campo nombre proyecto es requerido',
+            'extprex_descripcion_pr.required' => 'El campo descripción es requerido',
+            'extprex_valor_pr.required' => 'El campo valor proyecto es requerido',
+            'extprex_id_area_extension.required' => 'El campo area extensión es requerido',
+            'extprex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'extprex_fecha_final.required' => 'El campo fecha final es requerido',
+            'extprex_nombre_contacto.required' => 'El campo nombre contacto es requerido',
+            'extprex_apellido_contacto.required' => 'El campo apellido contacto es requerido',
+            'extprex_telefono_contacto.required' => 'El campo telefono contacto es requerido',
+            'extprex_correo_contacto.required' => 'El campo correo electronico contacto es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $proyectoext = DB::table('ext_proyecto_extension')
+            ->where('id', $id)
+            ->first();
+
+        $proyectoextension = ExtProyectoExtension::find($id);
+        $proyectoextension->extprex_year = $request->get('extprex_year');
+        $proyectoextension->extprex_semestre = $request->get('extprex_semestre');
+        $proyectoextension->extprex_codigo_organizacional = $request->get('extprex_codigo_organizacional');
+        $proyectoextension->extprex_codigo_pr = $request->get('extprex_codigo_pr');
+        $proyectoextension->extprex_nombre_pr = $request->get('extprex_nombre_pr');
+        $proyectoextension->extprex_descripcion_pr = $request->get('extprex_descripcion_pr');
+        $proyectoextension->extprex_valor_pr = $request->get('extprex_valor_pr');
+        $proyectoextension->extprex_id_area_extension = $request->get('extprex_id_area_extension');
+        $proyectoextension->extprex_fecha_inicio = $request->get('extprex_fecha_inicio');
+        $proyectoextension->extprex_fecha_final = $request->get('extprex_fecha_final');
+        $proyectoextension->extprex_nombre_contacto = $request->get('extprex_nombre_contacto');
+        $proyectoextension->extprex_apellido_contacto = $request->get('extprex_apellido_contacto');
+        $proyectoextension->extprex_telefono_contacto = $request->get('extprex_telefono_contacto');
+        $proyectoextension->extprex_correo_contacto = $request->get('extprex_correo_contacto');
+        $proyectoextension->extprex_id_area_trabajo = $request->get('extprex_id_area_trabajo');
+        $proyectoextension->extprex_id_ciclo_vital = $request->get('extprex_id_ciclo_vital');
+        $proyectoextension->extprex_id_entidad_nacional = $request->get('extprex_id_entidad_nacional');
+        $proyectoextension->extprex_id_fuente_nacional = $request->get('extprex_id_fuente_nacional');
+        $proyectoextension->extprex_valor_financiacion_nac = $request->get('extprex_valor_financiacion_nac');
+        $proyectoextension->extprex_id_fuente_internacional = $request->get('extprex_id_fuente_internacional');
+        $proyectoextension->extprex_id_pais = $request->get('extprex_id_pais');
+        $proyectoextension->extprex_nombre_institucion_inter = $request->get('extprex_nombre_institucion_inter');
+        $proyectoextension->extprex_valor_financiacion_inter = $request->get('extprex_valor_financiacion_inter');
+        $proyectoextension->extprex_nombre_otra_entidad = $request->get('extprex_nombre_otra_entidad');
+        $proyectoextension->extprex_id_sector_otra_entidad = $request->get('extprex_id_sector_otra_entidad');
+        $proyectoextension->extprex_id_pais_otra_entidad = $request->get('extprex_id_pais_otra_entidad');
+        $proyectoextension->extprex_id_poblacion_condicion = $request->get('extprex_id_poblacion_condicion');
+        $proyectoextension->extprex_cantidad_condicion = $request->get('extprex_cantidad_condicion');
+        $proyectoextension->extprex_id_poblacion_grupo = $request->get('extprex_id_poblacion_grupo');
+        $proyectoextension->extprex_cantidad_grupo = $request->get('extprex_cantidad_grupo');
+        if ($request->file('extprex_soporte')) {
+            $file = $request->file('extprex_soporte');
+            $evidencia_proyecto_extension = $request->get('extprex_fecha_inicio').'_'.$request->get('extprex_nombre_pr').'.' . $file->extension();
+
+            $ruta = public_path('datos/proyecto-extension/' . $evidencia_proyecto_extension);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }else{
+            $evidencia_proyecto_extension = $proyectoext->extprex_soporte;
+        }
+        $proyectoextension->extprex_soporte = $request->get('extprex_soporte');
+
+        $proyectoextension->save();
+        Alert::success('Exitoso', 'El proyecto de extensión se ha actualizado con exito');
+        return redirect('extension/mostrarproyectoextension');
+    }
+
+    public function mostrarservicioextension(){
+        $serviciosextension = ExtServicioExtension::all();
+        return view('extension/servicioextension.index')
+            ->with('serviciosextension', $serviciosextension);
+    }
+
+    public function crearservicioextension(){
+        $areas = DB::table('compl_area_extension')->get();
+        $areastrabajo = DB::table('compl_area_trabajo')->get();
+        $entidadesnac = DB::table('compl_entidad_nacional')->get();
+        $fuentenacionals = DB::table('compl_fuente_nacional')->get();
+        $entidadesinter = DB::table('compl_fuente_internacional')->get();
+        $sectores = DB::table('compl_sector')->get();
+        $poblacioncondicions = DB::table('compl_poblacion_condicion')->get();
+        $poblaciongrupos = DB::table('compl_poblacion_grupo')->get();
+        return view('extension/servicioextension.create')
+            ->with('areas', $areas)
+            ->with('areastrabajo', $areastrabajo)
+            ->with('entidadesnac', $entidadesnac)
+            ->with('fuentenacionals', $fuentenacionals)
+            ->with('entidadesinter', $entidadesinter)
+            ->with('sectores', $sectores)
+            ->with('poblacioncondicions', $poblacioncondicions)
+            ->with('poblaciongrupos', $poblaciongrupos);
+    }
+
+    public function registroservicioextension(Request $request){
+        $rules = [
+            'extseex_year' => 'required',
+            'extseex_semestre' => 'required',
+            'extseex_codigo_organizacional' => 'required',
+            'extseex_codigo_ser' => 'required',
+            'extseex_nombre_ser' => 'required',
+            'extseex_descripcion_ser' => 'required',
+            'extseex_valor_ser' => 'required',
+            'extseex_id_area_extension' => 'required|not_in:0',
+            'extseex_fecha_inicio' => 'required',
+            'extseex_fecha_final' => 'required',
+            'extseex_nombre_contacto' => 'required',
+            'extseex_apellido_contacto' => 'required',
+            'extseex_telefono_contacto' => 'required',
+            'extprex_correo_contacto' => 'required',
+        ];
+        $message = [
+            'extseex_year.required' => 'El campo año es requerido',
+            'extseex_semestre.required' => 'El campo semestre es requerido',
+            'extseex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
+            'extseex_codigo_ser.required' => 'El campo código proyecto es requerido',
+            'extseex_nombre_ser.required' => 'El campo nombre proyecto es requerido',
+            'extseex_descripcion_ser.required' => 'El campo descripción es requerido',
+            'extseex_valor_ser.required' => 'El campo valor proyecto es requerido',
+            'extseex_id_area_extension.required' => 'El campo area extensión es requerido',
+            'extseex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'extseex_fecha_final.required' => 'El campo fecha final es requerido',
+            'extseex_nombre_contacto.required' => 'El campo nombre contacto es requerido',
+            'extseex_apellido_contacto.required' => 'El campo apellido contacto es requerido',
+            'extseex_telefono_contacto.required' => 'El campo telefono contacto es requerido',
+            'extprex_correo_contacto.required' => 'El campo correo electronico contacto es requerido',
+        ];
+    }
+
+    public function mostrarregistrofotografico()
+    {
         $fotograficos = ExtRegistroFotograficoInter::all();
         return view('extension/registrofo.index')
             ->with('fotograficos', $fotograficos);
     }
 
-    public function crearregistrofotografico(){
+    public function crearregistrofotografico()
+    {
         return view('extension/registrofo.create');
     }
 
-    public function registrofotografico(Request $request){
+    public function registrofotografico(Request $request)
+    {
         $rules = [
             'extrefoin_year' => 'required',
             'extrefoin_periodo' => 'required',
@@ -1038,7 +1359,7 @@ class ExtensionController extends Controller
             'extrefoin_fecha.required' => 'El campo fecha es requerido',
             'extrefoin_soporte.required' => 'El campo soporte es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $fotografico = new ExtRegistroFotograficoInter();
         $fotografico->extrefoin_year = $request->get('extrefoin_year');
@@ -1052,7 +1373,7 @@ class ExtensionController extends Controller
 
         if ($request->file('extrefoin_soporte')) {
             $file = $request->file('extrefoin_soporte');
-            $name_registro = $request->get('extrefoin_year').'_'.$request->get('extrefoin_actividad').'.'.$file->extension();
+            $name_registro = $request->get('extrefoin_year') . '_' . $request->get('extrefoin_actividad') . '.' . $file->extension();
 
             $ruta = public_path('datos/registro-fotografico/' . $name_registro);
 
@@ -1062,7 +1383,7 @@ class ExtensionController extends Controller
                 Alert::warning('Los formatos admitidos son .zip y .rar');
                 return back()->withInput();
             }
-        } 
+        }
         $fotografico->extrefoin_soporte = $name_registro;
 
         $fotografico->save();
@@ -1070,19 +1391,22 @@ class ExtensionController extends Controller
         return redirect('extension/mostrarregistrofotografico');
     }
 
-    public function verregistrofotografico($id){
+    public function verregistrofotografico($id)
+    {
         $fotografico = ExtRegistroFotograficoInter::find($id);
         return view('extension/registrofo.show')
             ->with('fotografico', $fotografico);
     }
 
-    public function editarregistrofotografico($id){
+    public function editarregistrofotografico($id)
+    {
         $fotografico = ExtRegistroFotograficoInter::find($id);
         return view('extension/registrofo.edit')
             ->with('fotografico', $fotografico);
     }
 
-    public function actualizarregistrofotografico(Request $request, $id){
+    public function actualizarregistrofotografico(Request $request, $id)
+    {
         $rules = [
             'extrefoin_year' => 'required',
             'extrefoin_periodo' => 'required',
@@ -1097,7 +1421,7 @@ class ExtensionController extends Controller
             'extrefoin_ente_organizador.required' => 'El campo ente organizador es requerido',
             'extrefoin_fecha.required' => 'El campo fecha es requerido',
         ];
-        $this->validate($request,$rules,$message);
+        $this->validate($request, $rules, $message);
 
         $fotografico = ExtRegistroFotograficoInter::find($id);
         $fotografico->extrefoin_year = $request->get('extrefoin_year');
@@ -1115,7 +1439,7 @@ class ExtensionController extends Controller
 
         if ($request->file('extrefoin_soporte')) {
             $file = $request->file('extrefoin_soporte');
-            $name_registro = $request->get('extrefoin_year').'_'.$request->get('extrefoin_actividad').'.'.$file->extension();
+            $name_registro = $request->get('extrefoin_year') . '_' . $request->get('extrefoin_actividad') . '.' . $file->extension();
 
             $ruta = public_path('datos/registro-fotografico/' . $name_registro);
 
@@ -1125,7 +1449,7 @@ class ExtensionController extends Controller
                 Alert::warning('Los formatos admitidos son .zip y .rar');
                 return back()->withInput();
             }
-        }else{
+        } else {
             $name_registro = $sfotografico->extrefoin_soporte;
         }
         $fotografico->extrefoin_soporte = $name_registro;
@@ -1134,5 +1458,4 @@ class ExtensionController extends Controller
         Alert::success('Exitoso', 'El registro fotografico se actualizo con exito');
         return redirect('extension/mostrarregistrofotografico');
     }
-
 }
