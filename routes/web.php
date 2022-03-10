@@ -280,6 +280,14 @@ Route::get('extension/{registro}/editarregistrofotografico', [App\Http\Controlle
 Route::get('extension/{registro}/verregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'verregistrofotografico']);
 Route::put('extension/{registro}/actualizarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'actualizarregistrofotografico']);
 Route::delete('extension/{registro}/eliminarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'eliminarregistrofotografico']);
+//Rutas sector externo - redes acádemicas convenios
+Route::get('extension/mostrarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'mostrarinterredconvenio']);
+Route::get('extension/crearinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'crearinterredconvenio']);
+Route::post('extension/registrointerredconvenio', [App\Http\Controllers\ExtensionController::class, 'registrointerredconvenio']);
+Route::get('extension/{convenio}/editarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'editarinterredconvenio']);
+Route::get('extension/{convenio}/verinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'verinterredconvenio']);
+Route::put('extension/{convenio}/actualizarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'actualizarinterredconvenio']);
+Route::delete('extension/{convenio}/eliminarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'eliminarinterredconvenio']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 

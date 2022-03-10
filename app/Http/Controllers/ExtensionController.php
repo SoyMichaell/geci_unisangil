@@ -13,6 +13,7 @@ use App\Models\ExtConsultoria;
 use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
 use App\Models\ExtEducacionContinua;
+use App\Models\ExtInterRedConvenio;
 use App\Models\ExtParticipante;
 use App\Models\ExtProyectoExtension;
 use App\Models\ExtRegistroFotograficoInter;
@@ -1309,7 +1310,7 @@ class ExtensionController extends Controller
             'extseex_nombre_contacto' => 'required',
             'extseex_apellido_contacto' => 'required',
             'extseex_telefono_contacto' => 'required',
-            'extprex_correo_contacto' => 'required',
+            'extseex_correo_contacto' => 'required',
         ];
         $message = [
             'extseex_year.required' => 'El campo año es requerido',
@@ -1325,8 +1326,198 @@ class ExtensionController extends Controller
             'extseex_nombre_contacto.required' => 'El campo nombre contacto es requerido',
             'extseex_apellido_contacto.required' => 'El campo apellido contacto es requerido',
             'extseex_telefono_contacto.required' => 'El campo telefono contacto es requerido',
-            'extprex_correo_contacto.required' => 'El campo correo electronico contacto es requerido',
+            'extseex_correo_contacto.required' => 'El campo correo electronico contacto es requerido',
         ];
+        $this->validate($request, $rules, $message);
+
+        $servicioextension = new ExtServicioExtension();
+        $servicioextension->extseex_year = $request->get('extseex_year');
+        $servicioextension->extseex_semestre = $request->get('extseex_semestre');
+        $servicioextension->extseex_codigo_organizacional = $request->get('extseex_codigo_organizacional');
+        $servicioextension->extseex_codigo_ser = $request->get('extseex_codigo_ser');
+        $servicioextension->extseex_nombre_ser = $request->get('extseex_nombre_ser');
+        $servicioextension->extseex_descripcion_ser = $request->get('extseex_descripcion_ser');
+        $servicioextension->extseex_valor_ser = $request->get('extseex_valor_ser');
+        $servicioextension->extseex_id_area_extension = $request->get('extseex_id_area_extension');
+        $servicioextension->extseex_fecha_inicio = $request->get('extseex_fecha_inicio');
+        $servicioextension->extseex_fecha_final = $request->get('extseex_fecha_final');
+        $servicioextension->extseex_nombre_contacto = $request->get('extseex_nombre_contacto');
+        $servicioextension->extseex_apellido_contacto = $request->get('extseex_apellido_contacto');
+        $servicioextension->extseex_telefono_contacto = $request->get('extseex_telefono_contacto');
+        $servicioextension->extseex_correo_contacto = $request->get('extseex_correo_contacto');
+        $servicioextension->extseex_costo = $request->get('extseex_costo');
+        $servicioextension->extseex_criterio_elegibilidad = $request->get('extseex_criterio_elegibilidad');
+        $servicioextension->extseex_id_area_trabajo = $request->get('extseex_id_area_trabajo');
+        $servicioextension->extseex_id_ciclo_vital = $request->get('extseex_id_ciclo_vital');
+        $servicioextension->extseex_id_entidad_nacional = $request->get('extseex_id_entidad_nacional');
+        $servicioextension->extseex_id_fuente_nacional = $request->get('extseex_id_fuente_nacional');
+        $servicioextension->extseex_valor_financiacion_nac = $request->get('extseex_valor_financiacion_nac');
+        $servicioextension->extseex_id_fuente_internacional = $request->get('extseex_id_fuente_internacional');
+        $servicioextension->extseex_id_pais = $request->get('extseex_id_pais');
+        $servicioextension->extseex_nombre_institucion_inter = $request->get('extseex_nombre_institucion_inter');
+        $servicioextension->extseex_valor_financiacion_inter = $request->get('extseex_valor_financiacion_inter');
+        $servicioextension->extseex_nombre_otra_entidad = $request->get('extseex_nombre_otra_entidad');
+        $servicioextension->extseex_id_sector_otra_entidad = $request->get('extseex_id_sector_otra_entidad');
+        $servicioextension->extseex_id_pais_otra_entidad = $request->get('extseex_id_pais_otra_entidad');
+        $servicioextension->extseex_id_poblacion_condicion = $request->get('extseex_id_poblacion_condicion');
+        $servicioextension->extseex_cantidad_condicion = $request->get('extseex_cantidad_condicion');
+        $servicioextension->extseex_id_poblacion_grupo = $request->get('extseex_id_poblacion_grupo');
+        $servicioextension->extseex_cantidad_grupo = $request->get('extseex_cantidad_grupo');
+        if ($request->file('extseex_soporte')) {
+            $file = $request->file('extseex_soporte');
+            $evidencia_servicio_extension = $request->get('extseex_fecha_inicio').'_'.$request->get('extseex_nombre_ser').'.' . $file->extension();
+
+            $ruta = public_path('datos/servicio-extension/' . $evidencia_servicio_extension);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        } 
+        $servicioextension->extseex_soporte = $request->get('extseex_soporte');
+
+        $servicioextension->save();
+        Alert::success('Exitoso', 'El servicio de extensión se ha registrado con exito');
+        return redirect('extension/mostrarservicioextension');
+    }
+
+    public function editarservicioextension($id){
+        $areas = DB::table('compl_area_extension')->get();
+        $areastrabajo = DB::table('compl_area_trabajo')->get();
+        $entidadesnac = DB::table('compl_entidad_nacional')->get();
+        $fuentenacionals = DB::table('compl_fuente_nacional')->get();
+        $entidadesinter = DB::table('compl_fuente_internacional')->get();
+        $sectores = DB::table('compl_sector')->get();
+        $poblacioncondicions = DB::table('compl_poblacion_condicion')->get();
+        $poblaciongrupos = DB::table('compl_poblacion_grupo')->get();
+        $servicioextension = ExtServicioExtension::find($id);
+        return view('extension/servicioextension.edit')
+            ->with('areas', $areas)
+            ->with('areastrabajo', $areastrabajo)
+            ->with('entidadesnac', $entidadesnac)
+            ->with('fuentenacionals', $fuentenacionals)
+            ->with('entidadesinter', $entidadesinter)
+            ->with('sectores', $sectores)
+            ->with('poblacioncondicions', $poblacioncondicions)
+            ->with('poblaciongrupos', $poblaciongrupos)
+            ->with('servicioextension', $servicioextension);
+    }
+    public function verservicioextension($id){
+        $areas = DB::table('compl_area_extension')->get();
+        $areastrabajo = DB::table('compl_area_trabajo')->get();
+        $entidadesnac = DB::table('compl_entidad_nacional')->get();
+        $fuentenacionals = DB::table('compl_fuente_nacional')->get();
+        $entidadesinter = DB::table('compl_fuente_internacional')->get();
+        $sectores = DB::table('compl_sector')->get();
+        $poblacioncondicions = DB::table('compl_poblacion_condicion')->get();
+        $poblaciongrupos = DB::table('compl_poblacion_grupo')->get();
+        $servicioextension = ExtServicioExtension::find($id);
+        return view('extension/servicioextension.show')
+            ->with('areas', $areas)
+            ->with('areastrabajo', $areastrabajo)
+            ->with('entidadesnac', $entidadesnac)
+            ->with('fuentenacionals', $fuentenacionals)
+            ->with('entidadesinter', $entidadesinter)
+            ->with('sectores', $sectores)
+            ->with('poblacioncondicions', $poblacioncondicions)
+            ->with('poblaciongrupos', $poblaciongrupos)
+            ->with('servicioextension', $servicioextension);
+    }
+
+    public function actualizarservicioextension(Request $request, $id){
+        $rules = [
+            'extseex_year' => 'required',
+            'extseex_semestre' => 'required',
+            'extseex_codigo_organizacional' => 'required',
+            'extseex_codigo_ser' => 'required',
+            'extseex_nombre_ser' => 'required',
+            'extseex_descripcion_ser' => 'required',
+            'extseex_valor_ser' => 'required',
+            'extseex_id_area_extension' => 'required|not_in:0',
+            'extseex_fecha_inicio' => 'required',
+            'extseex_fecha_final' => 'required',
+            'extseex_nombre_contacto' => 'required',
+            'extseex_apellido_contacto' => 'required',
+            'extseex_telefono_contacto' => 'required',
+            'extseex_correo_contacto' => 'required',
+        ];
+        $message = [
+            'extseex_year.required' => 'El campo año es requerido',
+            'extseex_semestre.required' => 'El campo semestre es requerido',
+            'extseex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
+            'extseex_codigo_ser.required' => 'El campo código proyecto es requerido',
+            'extseex_nombre_ser.required' => 'El campo nombre proyecto es requerido',
+            'extseex_descripcion_ser.required' => 'El campo descripción es requerido',
+            'extseex_valor_ser.required' => 'El campo valor proyecto es requerido',
+            'extseex_id_area_extension.required' => 'El campo area extensión es requerido',
+            'extseex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'extseex_fecha_final.required' => 'El campo fecha final es requerido',
+            'extseex_nombre_contacto.required' => 'El campo nombre contacto es requerido',
+            'extseex_apellido_contacto.required' => 'El campo apellido contacto es requerido',
+            'extseex_telefono_contacto.required' => 'El campo telefono contacto es requerido',
+            'extseex_correo_contacto.required' => 'El campo correo electronico contacto es requerido',
+        ];
+        $this->validate($request, $rules, $message);
+
+        $serviciox = DB::table('ext_servicio_extension')
+            ->where('id', $id)
+            ->first();
+
+        $servicioextension = ExtServicioExtension::find($id);
+        $servicioextension->extseex_year = $request->get('extseex_year');
+        $servicioextension->extseex_semestre = $request->get('extseex_semestre');
+        $servicioextension->extseex_codigo_organizacional = $request->get('extseex_codigo_organizacional');
+        $servicioextension->extseex_codigo_ser = $request->get('extseex_codigo_ser');
+        $servicioextension->extseex_nombre_ser = $request->get('extseex_nombre_ser');
+        $servicioextension->extseex_descripcion_ser = $request->get('extseex_descripcion_ser');
+        $servicioextension->extseex_valor_ser = $request->get('extseex_valor_ser');
+        $servicioextension->extseex_id_area_extension = $request->get('extseex_id_area_extension');
+        $servicioextension->extseex_fecha_inicio = $request->get('extseex_fecha_inicio');
+        $servicioextension->extseex_fecha_final = $request->get('extseex_fecha_final');
+        $servicioextension->extseex_nombre_contacto = $request->get('extseex_nombre_contacto');
+        $servicioextension->extseex_apellido_contacto = $request->get('extseex_apellido_contacto');
+        $servicioextension->extseex_telefono_contacto = $request->get('extseex_telefono_contacto');
+        $servicioextension->extseex_correo_contacto = $request->get('extseex_correo_contacto');
+        $servicioextension->extseex_costo = $request->get('extseex_costo');
+        $servicioextension->extseex_criterio_elegibilidad = $request->get('extseex_criterio_elegibilidad');
+        $servicioextension->extseex_id_area_trabajo = $request->get('extseex_id_area_trabajo');
+        $servicioextension->extseex_id_ciclo_vital = $request->get('extseex_id_ciclo_vital');
+        $servicioextension->extseex_id_entidad_nacional = $request->get('extseex_id_entidad_nacional');
+        $servicioextension->extseex_id_fuente_nacional = $request->get('extseex_id_fuente_nacional');
+        $servicioextension->extseex_valor_financiacion_nac = $request->get('extseex_valor_financiacion_nac');
+        $servicioextension->extseex_id_fuente_internacional = $request->get('extseex_id_fuente_internacional');
+        $servicioextension->extseex_id_pais = $request->get('extseex_id_pais');
+        $servicioextension->extseex_nombre_institucion_inter = $request->get('extseex_nombre_institucion_inter');
+        $servicioextension->extseex_valor_financiacion_inter = $request->get('extseex_valor_financiacion_inter');
+        $servicioextension->extseex_nombre_otra_entidad = $request->get('extseex_nombre_otra_entidad');
+        $servicioextension->extseex_id_sector_otra_entidad = $request->get('extseex_id_sector_otra_entidad');
+        $servicioextension->extseex_id_pais_otra_entidad = $request->get('extseex_id_pais_otra_entidad');
+        $servicioextension->extseex_id_poblacion_condicion = $request->get('extseex_id_poblacion_condicion');
+        $servicioextension->extseex_cantidad_condicion = $request->get('extseex_cantidad_condicion');
+        $servicioextension->extseex_id_poblacion_grupo = $request->get('extseex_id_poblacion_grupo');
+        $servicioextension->extseex_cantidad_grupo = $request->get('extseex_cantidad_grupo');
+        if ($request->file('extseex_soporte')) {
+            $file = $request->file('extseex_soporte');
+            $evidencia_servicio_extension = $request->get('extseex_fecha_inicio').'_'.$request->get('extseex_nombre_ser').'.' . $file->extension();
+
+            $ruta = public_path('datos/servicio-extension/' . $evidencia_servicio_extension);
+
+            if ($file->extension() == 'zip' || $file->extension() == 'rar') {
+                copy($file, $ruta);
+            } else {
+                Alert::warning('Los formatos admitidos son .zip y .rar');
+                return back()->withInput();
+            }
+        }else{
+            $evidencia_servicio_extension = $serviciox->extseex_soporte;
+        } 
+        $servicioextension->extseex_soporte = $evidencia_servicio_extension;
+
+        $servicioextension->save();
+        Alert::success('Exitoso', 'El servicio de extensión se ha actualizado con exito');
+        return redirect('extension/mostrarservicioextension');
     }
 
     public function mostrarregistrofotografico()
@@ -1458,4 +1649,15 @@ class ExtensionController extends Controller
         Alert::success('Exitoso', 'El registro fotografico se actualizo con exito');
         return redirect('extension/mostrarregistrofotografico');
     }
+
+    public function mostrarinterredconvenio(){
+        $interredconvenios = ExtInterRedConvenio::all();
+        return view('extension/interredconvenio.index')
+            ->with('interredconvenios', $interredconvenios);
+    }
+
+    public function crearinterredconvenio(){
+        return view('extension/interredconvenio.create');
+    }
+
 }

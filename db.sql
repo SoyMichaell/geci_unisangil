@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -12,10 +12,46 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Volcando estructura para tabla proyecto.compl_area_extension
+CREATE TABLE IF NOT EXISTS `compl_area_extension` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `coarex_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando estructura de base de datos para proyecto
-CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `proyecto`;
+-- Volcando datos para la tabla proyecto.compl_area_extension: ~3 rows (aproximadamente)
+/*!40000 ALTER TABLE `compl_area_extension` DISABLE KEYS */;
+INSERT IGNORE INTO `compl_area_extension` (`id`, `coarex_nombre`, `created_at`, `updated_at`) VALUES
+	(1, 'Servicio social', '2022-03-09 15:36:24', NULL),
+	(2, 'Gestión tecnológica', '2022-03-09 15:36:38', NULL),
+	(3, 'Programas interdisciplinarios', '2022-03-09 15:36:55', NULL);
+/*!40000 ALTER TABLE `compl_area_extension` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.compl_area_trabajo
+CREATE TABLE IF NOT EXISTS `compl_area_trabajo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `coartra_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.compl_area_trabajo: ~10 rows (aproximadamente)
+/*!40000 ALTER TABLE `compl_area_trabajo` DISABLE KEYS */;
+INSERT IGNORE INTO `compl_area_trabajo` (`id`, `coartra_nombre`, `created_at`, `updated_at`) VALUES
+	(1, 'Educación', '2022-03-09 15:32:14', '2022-03-09 15:32:14'),
+	(2, 'Salud', '2022-03-09 15:32:18', '2022-03-09 15:32:18'),
+	(3, 'Habitat', '2022-03-09 15:32:24', '2022-03-09 15:32:24'),
+	(4, 'Movilidad y espacio público', '2022-03-09 15:32:36', '2022-03-09 15:32:37'),
+	(5, 'Desarrollo productivo y generación de ingresos en microempresas', '2022-03-09 15:33:15', '2022-03-09 15:33:16'),
+	(6, 'Desarrollo productivo y generación de ingresos en pequeñas empresas', '2022-03-09 15:33:40', NULL),
+	(7, 'Desarrollo productivo y generación de ingresos en medianas empresas', '2022-03-09 15:33:54', NULL),
+	(8, 'Desarrollo productivo y generación de ingresos en famiempresas', '2022-03-09 15:34:07', NULL),
+	(9, 'Desarrollo productivo y generación de ingresos en otro tipo de empresas', '2022-03-09 15:34:21', NULL),
+	(10, 'Medio ambiente y recursos naturales', '2022-03-09 15:34:34', NULL);
+/*!40000 ALTER TABLE `compl_area_trabajo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.compl_cine_detallado
 CREATE TABLE IF NOT EXISTS `compl_cine_detallado` (
@@ -111,6 +147,35 @@ INSERT IGNORE INTO `compl_cine_detallado` (`id`, `cocide_nombre`, `created_at`, 
 	(1041, 'Servicios de transporte', NULL, NULL);
 /*!40000 ALTER TABLE `compl_cine_detallado` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyecto.compl_entidad_nacional
+CREATE TABLE IF NOT EXISTS `compl_entidad_nacional` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `coenna_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.compl_entidad_nacional: ~15 rows (aproximadamente)
+/*!40000 ALTER TABLE `compl_entidad_nacional` DISABLE KEYS */;
+INSERT IGNORE INTO `compl_entidad_nacional` (`id`, `coenna_nombre`, `created_at`, `updated_at`) VALUES
+	(1, 'Consejería presidencial para la equidad de la mujer', '2022-03-09 15:52:23', NULL),
+	(2, 'Defenosoría del pueblo', '2022-03-09 15:52:35', NULL),
+	(3, 'ICBF - Instituto colombiano de bienestar familiar', '2022-03-09 15:53:04', NULL),
+	(4, 'SENA - Servicio nacional de aprendizaje', '2022-03-09 15:53:19', NULL),
+	(5, 'Superintendencia de notariado y registro público', '2022-03-09 15:53:43', NULL),
+	(6, 'Universidad nacional de colombia', '2022-03-09 15:53:57', NULL),
+	(7, 'Unidad ejecutiva de servicios públicos', '2022-03-09 15:54:54', NULL),
+	(8, 'Superintendencia de subsidio familiar', '2022-03-09 15:55:15', NULL),
+	(9, 'ACCI - Agenda colombiana de cooperación internacional', '2022-03-09 15:55:42', NULL),
+	(10, 'Colombia jóven', '2022-03-09 15:55:49', NULL),
+	(11, 'Colciencias', '2022-03-09 15:56:02', NULL),
+	(12, 'Ministerio de interior y justicia', '2022-03-09 15:56:18', NULL),
+	(13, 'Ministerio de relaciones exteriores', '2022-03-09 15:56:33', NULL),
+	(14, 'Ministerio de hacienda y crédito público', '2022-03-09 15:56:50', NULL),
+	(15, 'Ministerior de defensa nacional', '2022-03-09 15:57:05', NULL);
+/*!40000 ALTER TABLE `compl_entidad_nacional` ENABLE KEYS */;
+
 -- Volcando estructura para tabla proyecto.compl_fuente_internacional
 CREATE TABLE IF NOT EXISTS `compl_fuente_internacional` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -180,6 +245,61 @@ INSERT IGNORE INTO `compl_nivel_estudio` (`id`, `conies_nombre`, `created_at`, `
 	(11, 'Especialización médico quirúrgica', '2022-02-28 20:33:26', NULL),
 	(12, 'Sin titulo', NULL, NULL);
 /*!40000 ALTER TABLE `compl_nivel_estudio` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.compl_poblacion_condicion
+CREATE TABLE IF NOT EXISTS `compl_poblacion_condicion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `copoco_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.compl_poblacion_condicion: ~16 rows (aproximadamente)
+/*!40000 ALTER TABLE `compl_poblacion_condicion` DISABLE KEYS */;
+INSERT IGNORE INTO `compl_poblacion_condicion` (`id`, `copoco_nombre`, `created_at`, `updated_at`) VALUES
+	(1, 'Vulnerabilidad social - Violencia intrafamiliar', '2022-03-09 15:59:06', NULL),
+	(2, 'Vulnerabilidad social - Violencia sexual', '2022-03-09 15:59:25', NULL),
+	(3, 'Vulnerabilidad social - Riesgo o abandono', '2022-03-09 15:59:42', NULL),
+	(4, 'Vulnerabilidad social - Habitante de calle', '2022-03-09 15:59:52', NULL),
+	(5, 'Vulnerabilidad social - Mujeres cabeza de familiar', '2022-03-09 16:00:07', NULL),
+	(6, 'Vulnerabilidad social - Otro', '2022-03-09 16:00:14', NULL),
+	(7, 'Vulnerabilidad económica - Desempleo', '2022-03-09 16:00:39', NULL),
+	(8, 'Vulnerabilidad económica - Explotación laboral', '2022-03-09 16:00:53', NULL),
+	(9, 'Vulnerabilidad económica - Trafico de personas', '2022-03-09 16:01:07', NULL),
+	(10, 'Vulnerabilidad económica - Prostitución', '2022-03-09 16:01:18', NULL),
+	(11, 'Vulnerabilidad económica - Otro', '2022-03-09 16:01:27', NULL),
+	(12, 'Reclusión', '2022-03-09 16:01:34', NULL),
+	(13, 'Consumo de sustancias psicoactivas', '2022-03-09 16:01:53', NULL),
+	(14, 'Necesidades educativas especiales - personas en condición de discapacidad', '2022-03-09 16:02:18', NULL),
+	(15, 'Necesidades educativas especiales - personas con talentos excepcionales ', NULL, NULL),
+	(16, 'Habitantes de frotera', '2022-03-09 16:02:59', NULL);
+/*!40000 ALTER TABLE `compl_poblacion_condicion` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.compl_poblacion_grupo
+CREATE TABLE IF NOT EXISTS `compl_poblacion_grupo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `copogr_nombre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.compl_poblacion_grupo: ~11 rows (aproximadamente)
+/*!40000 ALTER TABLE `compl_poblacion_grupo` DISABLE KEYS */;
+INSERT IGNORE INTO `compl_poblacion_grupo` (`id`, `copogr_nombre`, `created_at`, `updated_at`) VALUES
+	(1, 'Familia', '2022-03-09 16:03:21', NULL),
+	(2, 'Géneros', '2022-03-09 16:03:28', NULL),
+	(3, 'Profesionales', '2022-03-09 16:03:37', NULL),
+	(4, 'Grupos étnicos', '2022-03-09 16:03:51', NULL),
+	(5, 'Campesinos', '2022-03-09 16:04:01', NULL),
+	(6, 'Mujeres', '2022-03-09 16:04:09', NULL),
+	(7, 'Empleados', '2022-03-09 16:04:09', NULL),
+	(8, 'Comunidades', '2022-03-09 16:04:47', NULL),
+	(9, 'Empresas, Mypimes', '2022-03-09 16:04:47', NULL),
+	(10, 'Entidades gubernamentales', '2022-03-09 16:04:46', NULL),
+	(11, 'Otro', '2022-03-09 16:04:53', NULL);
+/*!40000 ALTER TABLE `compl_poblacion_grupo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.compl_sector
 CREATE TABLE IF NOT EXISTS `compl_sector` (
@@ -641,6 +761,65 @@ CREATE TABLE IF NOT EXISTS `ext_participante` (
 /*!40000 ALTER TABLE `ext_participante` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ext_participante` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyecto.ext_proyecto_extension
+CREATE TABLE IF NOT EXISTS `ext_proyecto_extension` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `extprex_year` int(11) NOT NULL,
+  `extprex_semestre` int(11) NOT NULL,
+  `extprex_codigo_organizacional` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_codigo_pr` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_nombre_pr` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_descripcion_pr` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_valor_pr` int(11) NOT NULL,
+  `extprex_id_area_extension` int(11) NOT NULL,
+  `extprex_fecha_inicio` date NOT NULL,
+  `extprex_fecha_final` date NOT NULL,
+  `extprex_nombre_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_apellido_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_telefono_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_correo_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extprex_id_area_trabajo` int(11) DEFAULT NULL,
+  `extprex_id_ciclo_vital` int(11) DEFAULT NULL,
+  `extprex_id_entidad_nacional` int(11) DEFAULT NULL,
+  `extprex_id_fuente_nacional` int(11) DEFAULT NULL,
+  `extprex_valor_financiacion_nac` int(11) DEFAULT NULL,
+  `extprex_id_fuente_internacional` int(11) DEFAULT NULL,
+  `extprex_id_pais` int(11) DEFAULT NULL,
+  `extprex_nombre_institucion_inter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `extprex_valor_financiacion_inter` int(11) DEFAULT NULL,
+  `extprex_nombre_otra_entidad` int(11) DEFAULT NULL,
+  `extprex_id_sector_otra_entidad` int(11) DEFAULT NULL,
+  `extprex_id_pais_otra_entidad` int(11) DEFAULT NULL,
+  `extprex_id_poblacion_condicion` int(11) DEFAULT NULL,
+  `extprex_cantidad_condicion` int(11) DEFAULT NULL,
+  `extprex_id_poblacion_grupo` int(11) DEFAULT NULL,
+  `extprex_cantidad_grupo` int(11) DEFAULT NULL,
+  `extprex_soporte` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_ext_proyecto_extension_compl_area_extension` (`extprex_id_area_extension`),
+  KEY `FK_ext_proyecto_extension_compl_area_trabajo` (`extprex_id_area_trabajo`),
+  KEY `FK_ext_proyecto_extension_compl_sector` (`extprex_id_sector_otra_entidad`),
+  KEY `FK_ext_proyecto_extension_compl_poblacion_condicion` (`extprex_id_poblacion_condicion`),
+  KEY `FK_ext_proyecto_extension_compl_poblacion_grupo` (`extprex_id_poblacion_grupo`),
+  KEY `FK_ext_proyecto_extension_compl_entidad_nacional` (`extprex_id_entidad_nacional`),
+  KEY `FK_ext_proyecto_extension_compl_fuente_nacional` (`extprex_id_fuente_nacional`),
+  KEY `FK_ext_proyecto_extension_compl_fuente_internacional` (`extprex_id_fuente_internacional`),
+  CONSTRAINT `FK_ext_proyecto_extension_compl_area_extension` FOREIGN KEY (`extprex_id_area_extension`) REFERENCES `compl_area_extension` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_area_trabajo` FOREIGN KEY (`extprex_id_area_trabajo`) REFERENCES `compl_area_trabajo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_entidad_nacional` FOREIGN KEY (`extprex_id_entidad_nacional`) REFERENCES `compl_entidad_nacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_fuente_internacional` FOREIGN KEY (`extprex_id_fuente_internacional`) REFERENCES `compl_fuente_internacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_fuente_nacional` FOREIGN KEY (`extprex_id_fuente_nacional`) REFERENCES `compl_fuente_nacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_poblacion_condicion` FOREIGN KEY (`extprex_id_poblacion_condicion`) REFERENCES `compl_poblacion_condicion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_poblacion_grupo` FOREIGN KEY (`extprex_id_poblacion_grupo`) REFERENCES `compl_poblacion_grupo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_proyecto_extension_compl_sector` FOREIGN KEY (`extprex_id_sector_otra_entidad`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_proyecto_extension: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_proyecto_extension` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ext_proyecto_extension` ENABLE KEYS */;
+
 -- Volcando estructura para tabla proyecto.ext_registro_fotografico_inter
 CREATE TABLE IF NOT EXISTS `ext_registro_fotografico_inter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -663,6 +842,91 @@ CREATE TABLE IF NOT EXISTS `ext_registro_fotografico_inter` (
 INSERT IGNORE INTO `ext_registro_fotografico_inter` (`id`, `extrefoin_year`, `extrefoin_periodo`, `extrefoin_tipo_actividad`, `extrefoin_actividad`, `extrefoin_ente_organizador`, `extrefoin_fecha`, `extrefoin_tipo_evento`, `extrefoin_tipo_modalidad`, `extrefoin_soporte`, `created_at`, `updated_at`) VALUES
 	(1, '2022', '2022-1', 'curso', 'Curso desarrollo web', 'unisangil', '2022-03-10', 'interno', 'investigacion', '2022_Curso desarrollo web.rar', '2022-03-08 22:11:37', '2022-03-08 22:22:23');
 /*!40000 ALTER TABLE `ext_registro_fotografico_inter` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.ext_sector_externo_red_academia_convenio
+CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exsered_year` int(11) NOT NULL,
+  `exsered_periodo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exsered_ies` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exsered_caracter` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exsered_fecha` date NOT NULL,
+  `exsered_logros` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exsered_resultados` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exsered_productos` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exsered_funcion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_sector_externo_red_academia_convenio: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.ext_sector_externo_red_academia_convenio_participantes
+CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio_participantes` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exseredpar_id_red_academica` int(11) NOT NULL,
+  `exseredpar_nombre_participante` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exseredpar_rol_participante` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_ext_sector_externo_red` (`exseredpar_id_red_academica`),
+  CONSTRAINT `FK_ext_sector_externo_red` FOREIGN KEY (`exseredpar_id_red_academica`) REFERENCES `ext_sector_externo_red_academia_convenio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_sector_externo_red_academia_convenio_participantes: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio_participantes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio_participantes` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.ext_servicio_extension
+CREATE TABLE IF NOT EXISTS `ext_servicio_extension` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `extseex_year` int(11) NOT NULL,
+  `extseex_semestre` int(11) NOT NULL,
+  `extseex_codigo_organizacional` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_codigo_ser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_nombre_ser` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_descripcion_ser` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_valor_ser` int(11) NOT NULL,
+  `extseex_id_area_extension` int(11) NOT NULL,
+  `extseex_fecha_inicio` date NOT NULL,
+  `extseex_fecha_final` date NOT NULL,
+  `extseex_nombre_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_apellido_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_telefono_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_correo_contacto` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_costo` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_criterio_elegibilidad` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extseex_id_area_trabajo` int(11) DEFAULT NULL,
+  `extseex_id_ciclo_vital` int(11) DEFAULT NULL,
+  `extseex_id_entidad_nacional` int(11) DEFAULT NULL,
+  `extseex_id_fuente_nacional` int(11) DEFAULT NULL,
+  `extseex_valor_financiacion_nac` int(11) DEFAULT NULL,
+  `extseex_id_fuente_internacional` int(11) DEFAULT NULL,
+  `extseex_id_pais` int(11) DEFAULT NULL,
+  `extseex_nombre_institucion_inter` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `extseex_valor_financiacion_inter` int(11) DEFAULT NULL,
+  `extseex_nombre_otra_entidad` int(11) DEFAULT NULL,
+  `extseex_id_sector_otra_entidad` int(11) DEFAULT NULL,
+  `extseex_id_pais_otra_entidad` int(11) DEFAULT NULL,
+  `extseex_id_poblacion_condicion` int(11) DEFAULT NULL,
+  `extseex_cantidad_condicion` int(11) DEFAULT NULL,
+  `extseex_id_poblacion_grupo` int(11) DEFAULT NULL,
+  `extseex_cantidad_grupo` int(11) DEFAULT NULL,
+  `extseex_soporte` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_servicio_extension: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_servicio_extension` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_servicio_extension` (`id`, `extseex_year`, `extseex_semestre`, `extseex_codigo_organizacional`, `extseex_codigo_ser`, `extseex_nombre_ser`, `extseex_descripcion_ser`, `extseex_valor_ser`, `extseex_id_area_extension`, `extseex_fecha_inicio`, `extseex_fecha_final`, `extseex_nombre_contacto`, `extseex_apellido_contacto`, `extseex_telefono_contacto`, `extseex_correo_contacto`, `extseex_costo`, `extseex_criterio_elegibilidad`, `extseex_id_area_trabajo`, `extseex_id_ciclo_vital`, `extseex_id_entidad_nacional`, `extseex_id_fuente_nacional`, `extseex_valor_financiacion_nac`, `extseex_id_fuente_internacional`, `extseex_id_pais`, `extseex_nombre_institucion_inter`, `extseex_valor_financiacion_inter`, `extseex_nombre_otra_entidad`, `extseex_id_sector_otra_entidad`, `extseex_id_pais_otra_entidad`, `extseex_id_poblacion_condicion`, `extseex_cantidad_condicion`, `extseex_id_poblacion_grupo`, `extseex_cantidad_grupo`, `extseex_soporte`, `created_at`, `updated_at`) VALUES
+	(1, 2022, 2, '12453', '8638', 'mantenimiento', 'sin comentarios', 500000, 2, '2022-03-10', '2022-03-15', 'Luis', 'Boyaca', '3108585194', 'luis@gmail.com', 'Si', 'adasdasbdjkash asjdhasjkd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2022-03-10_mantenimiento.rar', '2022-03-10 03:14:56', '2022-03-10 03:55:26');
+/*!40000 ALTER TABLE `ext_servicio_extension` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.facultad
 CREATE TABLE IF NOT EXISTS `facultad` (
@@ -751,9 +1015,9 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=78 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.migrations: ~53 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.migrations: ~62 rows (aproximadamente)
 /*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
 INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(1, '2014_10_12_000000_create_users_table', 1),
@@ -808,7 +1072,16 @@ INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
 	(65, '2022_03_08_013328_resultado_prueba', 33),
 	(66, '2022_03_08_014241_resultado_prueba_modulo', 33),
 	(67, '2022_03_08_143956_laboratorio', 34),
-	(68, '2022_03_08_214905_registro_fotografico', 35);
+	(68, '2022_03_08_214905_registro_fotografico', 35),
+	(69, '2022_03_09_151233_proyectoextension', 36),
+	(70, '2022_03_09_152913_complareaextension', 36),
+	(71, '2022_03_09_153017_complareatrabajo', 36),
+	(72, '2022_03_09_153133_complsectorentidad', 36),
+	(73, '2022_03_09_153232_complpoblacioncondicion', 36),
+	(74, '2022_03_09_153256_complpoblaciongrupo', 36),
+	(75, '2022_03_09_160717_complentidadnacional', 37),
+	(76, '2022_03_09_213335_servicioextension', 38),
+	(77, '2022_03_10_042421_sector_externo_red_academica_convenio', 39);
 /*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.modalidad_grado

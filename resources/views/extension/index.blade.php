@@ -71,7 +71,7 @@
                 <i class="fa-solid fa-camera fa-4x"></i>
                 <h4 class="mt-2">Registro fotografico actividades</h4>
             </a>
-            <a class="card__extension tile" href="/extension/mostraractrecurso">
+            <a class="card__extension tile" href="/extension/mostrarinterredconvenio">
                 <i class="fa-solid fa-microchip fa-4x"></i>
                 <h4 class="mt-2">Redes acádemicas</h4>
             </a>

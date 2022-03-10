@@ -24,7 +24,7 @@
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/export') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearservicioextension') }}"><i
+                        <a class="btn btn-outline-success" href="{{ url('extension/crearinterredconvenio') }}"><i
                                 class="fa fa-plus-circle"></i>
                             Nuevo</a>
                     @endif
@@ -36,16 +36,12 @@
                         <tr>
                             <th>#</th>
                             <th>Año</th>
-                            <th>Semestre</th>
-                            <th>Código proyecto</th>
-                            <th>Nombre proyecto</th>
-                            <th>Valor</th>
-                            <th>Área extensión</th>
-                            <th>Fecha inicio</th>
-                            <th>Fecha final</th>
-                            <th>Nombre contacto</th>
-                            <th>Telefono</th>
-                            <th>Correo electronico</th>
+                            <th>Periodo</th>
+                            <th>IES</th>
+                            <th>Cáracter</th>
+                            <th>Fecha</th>
+                            <th>Función</th>
+                            <th>No. Participantes</th>
                             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <th>Acciones</th>
                             @endif
@@ -53,31 +49,26 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($serviciosextension as $servicio)
+                        @foreach ($interredconvenios as $interredconvenio)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $servicio->extseex_year }}</td>
-                                <td>{{ $servicio->extseex_semestre }}</td>
-                                <td>{{ $servicio->extseex_codigo_ser }}</td>
-                                <td>{{ $servicio->extseex_nombre_ser }}</td>
-                                <td>{{ number_format($servicio->extseex_valor_ser, 2) }}</td>
-                                <td>{{ $servicio->extseex_id_area_extension }}</td>
-                                <td>{{ $servicio->extseex_fecha_inicio }}</td>
-                                <td>{{ $servicio->extseex_fecha_final }} </td>
-                                <td>{{ $servicio->extseex_nombre_contacto . ' ' . $servicio->extseex_apellido_contacto }}
-                                </td>
-                                <td>{{ $servicio->extseex_telefono_contacto }} </td>
-                                <td>{{ $servicio->extseex_correo_contacto }} </td>
+                                <td>{{ $interredconvenio->exsered_year }}</td>
+                                <td>{{ $interredconvenio->exsered_periodo }}</td>
+                                <td>{{ $interredconvenio->exsered_ies }}</td>
+                                <td>{{ $interredconvenio->exsered_caracter }}</td>
+                                <td>{{ $interredconvenio->exsered_fecha }}</td>
+                                <td>{{ $interredconvenio->exsered_funcion }}</td>
+                                <td>(0)</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $servicio->id }}/eliminarservicioextension"
+                                        <form action="/extension/{{ $interredconvenio->id }}/eliminarinterredconvenio"
                                             method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm"
-                                                    href="/extension/{{ $servicio->id }}/verservicioextension"><i
+                                                    href="/extension/{{ $interredconvenio->id }}/verinterredconvenio"><i
                                                         class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $servicio->id }}/editarservicioextension"><i
+                                                    href="/extension/{{ $interredconvenio->id }}/editarinterredconvenio"><i
                                                         class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
