@@ -288,6 +288,22 @@ Route::get('extension/{convenio}/editarinterredconvenio', [App\Http\Controllers\
 Route::get('extension/{convenio}/verinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'verinterredconvenio']);
 Route::put('extension/{convenio}/actualizarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'actualizarinterredconvenio']);
 Route::delete('extension/{convenio}/eliminarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'eliminarinterredconvenio']);
+//Rutas sector externo - red/organiazciones
+Route::get('extension/mostrarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'mostrarinterorganizacion']);
+Route::get('extension/crearinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'crearinterorganizacion']);
+Route::post('extension/registrointerorganizacion', [App\Http\Controllers\ExtensionController::class, 'registrointerorganizacion']);
+Route::get('extension/{convenio}/editarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'editarinterorganizacion']);
+Route::get('extension/{convenio}/verinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'verinterorganizacion']);
+Route::put('extension/{convenio}/actualizarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'actualizarinterorganizacion']);
+Route::delete('extension/{convenio}/eliminarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'eliminarinterorganizacion']);
+//Rutas internacionalizacion curriculo 
+Route::get('extension/mostrarcurriculo', [App\Http\Controllers\ExtensionController::class, 'mostrarcurriculo']);
+Route::get('extension/crearcurriculo', [App\Http\Controllers\ExtensionController::class, 'crearcurriculo']);
+Route::post('extension/registrocurriculo', [App\Http\Controllers\ExtensionController::class, 'registrocurriculo']);
+Route::get('extension/{curriculo}/editarcurriculo', [App\Http\Controllers\ExtensionController::class, 'editarcurriculo']);
+Route::get('extension/{curriculo}/vercurriculo', [App\Http\Controllers\ExtensionController::class, 'vercurriculo']);
+Route::put('extension/{curriculo}/actualizarcurriculo', [App\Http\Controllers\ExtensionController::class, 'actualizarcurriculo']);
+Route::delete('extension/{curriculo}/eliminarcurriculo', [App\Http\Controllers\ExtensionController::class, 'eliminarcurriculo']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 

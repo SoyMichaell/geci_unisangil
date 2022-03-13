@@ -24,6 +24,7 @@ class SectorExternoRedAcademicaConvenio extends Migration
             $table->text('exsered_resultados');
             $table->text('exsered_productos');
             $table->string('exsered_funcion');
+            $table->integer('exsered_participantes');
             $table->timestamps();
         });
     }

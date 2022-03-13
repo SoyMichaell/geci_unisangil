@@ -14,6 +14,7 @@ class ExtInterRedConvenioParticipante extends Model
     protected $fillable = [
             'id',
             'exseredpar_id_red_academica',
+            'exseredpar_numero_identificacion',
             'exseredpar_nombre_participante',
             'exseredpar_rol_participante',
     ];

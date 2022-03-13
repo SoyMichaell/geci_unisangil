@@ -24,7 +24,7 @@
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/export') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearinterredconvenio') }}"><i
+                        <a class="btn btn-outline-success" href="{{ url('extension/crearcurriculo') }}"><i
                                 class="fa fa-plus-circle"></i>
                             Nuevo</a>
                     @endif
@@ -37,11 +37,9 @@
                             <th>#</th>
                             <th>Año</th>
                             <th>Periodo</th>
-                            <th>IES</th>
-                            <th>Cáracter</th>
-                            <th>Fecha</th>
-                            <th>Función</th>
-                            <th>No. Participantes</th>
+                            <th>Código</th>
+                            <th>Asignautra</th>
+                            <th>Docente</th>
                             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <th>Acciones</th>
                             @endif
@@ -49,26 +47,25 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($interredconvenios as $interredconvenio)
+                        @foreach ($curriculos as $curriculo)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $interredconvenio->exsered_year }}</td>
-                                <td>{{ $interredconvenio->exsered_periodo }}</td>
-                                <td>{{ $interredconvenio->exsered_ies }}</td>
-                                <td>{{ $interredconvenio->exsered_caracter }}</td>
-                                <td>{{ $interredconvenio->exsered_fecha }}</td>
-                                <td>{{ $interredconvenio->exsered_funcion }}</td>
-                                <td>{{ $interredconvenio->exsered_participantes }}</td>
+                                <td>{{ $curriculo->exincu_year }}</td>
+                                <td>{{ $curriculo->exincu_periodo }}</td>
+                                <td>{{ $curriculo->asignaturas->asig_codigo }}</td>
+                                <td>{{ $curriculo->asignaturas->asig_nombre }}</td>
+                                <td>{{ $curriculo->docentes->per_nombre. ' '.$curriculo->docentes->per_apellido }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $interredconvenio->id }}/eliminarinterredconvenio"
+                                        <form
+                                            action="/extension/{{ $curriculo->id }}/eliminarcurriculo"
                                             method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm"
-                                                    href="/extension/{{ $interredconvenio->id }}/verinterredconvenio"><i
+                                                    href="/extension/{{ $curriculo->id }}/vercurriculo"><i
                                                         class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $interredconvenio->id }}/editarinterredconvenio"><i
+                                                    href="/extension/{{ $curriculo->id }}/editarcurriculo"><i
                                                         class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')

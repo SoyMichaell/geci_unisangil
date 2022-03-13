@@ -13,11 +13,15 @@ use App\Models\ExtConsultoria;
 use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
 use App\Models\ExtEducacionContinua;
+use App\Models\ExtInternacionalizacionCurriculo;
 use App\Models\ExtInterRedConvenio;
+use App\Models\ExtInterRedConvenioParticipante;
 use App\Models\ExtParticipante;
 use App\Models\ExtProyectoExtension;
+use App\Models\ExtRedOrganizacion;
 use App\Models\ExtRegistroFotograficoInter;
 use App\Models\ExtServicioExtension;
+use App\Models\ProgramaAsignatura;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -1659,5 +1663,406 @@ class ExtensionController extends Controller
     public function crearinterredconvenio(){
         return view('extension/interredconvenio.create');
     }
+
+    public function registrointerredconvenio(Request $request){
+        $rules = [
+            'exsered_year' => 'required',
+            'exsered_periodo' => 'required',
+            'exsered_ies' => 'required',
+            'exsered_fecha' => 'required',
+        ];
+        $message = [
+            'exsered_year.required' => 'El campo año es requerido',
+            'exsered_periodo.required' => 'El campo periodo es requerido',
+            'exsered_ies.required' => 'El campo IES es requerido',
+            'exsered_fecha.required' => 'El campo fecha es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $cant = $request->get('cantidad');
+
+        DB::table('ext_sector_externo_red_academia_convenio')
+            ->insert([
+                'exsered_year' => $request->get('exsered_year'),
+                'exsered_periodo' => $request->get('exsered_periodo'),
+                'exsered_ies' => $request->get('exsered_ies'),
+                'exsered_caracter' => $request->get('exsered_caracter'),
+                'exsered_fecha' => $request->get('exsered_fecha'),
+                'exsered_logros' => $request->get('exsered_logros'),
+                'exsered_resultados' => $request->get('exsered_resultados'),
+                'exsered_productos' => $request->get('exsered_productos'),
+                'exsered_funcion' => $request->get('exsered_funcion'),
+                'exsered_participantes' => $cant,
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+    
+        for ($i=0; $i<$cant ; $i++) { 
+            DB::table('ext_sector_externo_red_academia_convenio_participantes')->insert(
+                [
+                    'exseredpar_id_red_academica' => $id,
+                    'exseredpar_numero_identificacion' => $request->get('exseredpar_numero_identificacion')[$i],
+                    'exseredpar_nombre_participante' => $request->get('exseredpar_nombre_participante')[$i],
+                    'exseredpar_rol_participante' => $request->get('exseredpar_rol_participante')[$i],
+                ]
+            );   
+        }
+        Alert::success('Exitoso', 'El registro de convenio se ha registrado con exito');
+        return redirect('/extension/mostrarinterredconvenio');
+    }
+
+    public function editarinterredconvenio($id){
+        $participantes = DB::table('ext_sector_externo_red_academia_convenio_participantes')
+            ->where('exseredpar_id_red_academica', $id)->get();
+        $interredconvenio = ExtInterRedConvenio::find($id);
+        return view('extension/interredconvenio.edit')
+            ->with('participantes', $participantes)
+            ->with('interredconvenio', $interredconvenio);
+    }
+
+    public function verinterredconvenio($id){
+        $participantes = DB::table('ext_sector_externo_red_academia_convenio_participantes')
+            ->where('exseredpar_id_red_academica', $id)->get();
+        $interredconvenio = ExtInterRedConvenio::find($id);
+        return view('extension/interredconvenio.show')
+            ->with('participantes', $participantes)
+            ->with('interredconvenio', $interredconvenio);
+    }
+
+    public function actualizarinterredconvenio(Request $request, $id){
+        $rules = [
+            'exsered_year' => 'required',
+            'exsered_periodo' => 'required',
+            'exsered_ies' => 'required',
+            'exsered_fecha' => 'required',
+        ];
+        $message = [
+            'exsered_year.required' => 'El campo año es requerido',
+            'exsered_periodo.required' => 'El campo periodo es requerido',
+            'exsered_ies.required' => 'El campo IES es requerido',
+            'exsered_fecha.required' => 'El campo fecha es requerido',
+        ];
+
+        $this->validate($request,$rules,$message);
+
+    
+
+        DB::table('ext_sector_externo_red_academia_convenio')
+            ->where('id', $id)
+            ->update([
+                'exsered_year' => $request->get('exsered_year'),
+                'exsered_periodo' => $request->get('exsered_periodo'),
+                'exsered_ies' => $request->get('exsered_ies'),
+                'exsered_caracter' => $request->get('exsered_caracter'),
+                'exsered_fecha' => $request->get('exsered_fecha'),
+                'exsered_logros' => $request->get('exsered_logros'),
+                'exsered_resultados' => $request->get('exsered_resultados'),
+                'exsered_productos' => $request->get('exsered_productos'),
+                'exsered_funcion' => $request->get('exsered_funcion'),
+        ]);
+
+        $cantidad = DB::table('ext_sector_externo_red_academia_convenio')
+            ->where('id', $id)
+            ->first();
+    
+        for ($i=0; $i<$cantidad->exsered_participantes ; $i++) { 
+            DB::table('ext_sector_externo_red_academia_convenio_participantes')
+            ->where('exseredpar_id_red_academica', $id)
+            ->where('exseredpar_numero_identificacion',$request->get('exseredpar_numero_identificacion')[$i])
+            ->update(
+                [
+                    'exseredpar_numero_identificacion' =>  $request->get('exseredpar_numero_identificacion')[$i],
+                    'exseredpar_nombre_participante' => $request->get('exseredpar_nombre_participante')[$i],
+                    'exseredpar_rol_participante' => $request->get('exseredpar_rol_participante')[$i],
+                ]
+            );   
+        }
+
+        
+        Alert::success('Exitoso', 'Los datos se actulizaron con exito');
+        return redirect('/extension/mostrarinterredconvenio');
+    }
+
+    public function eliminarinterredconvenio($id){
+
+        DB::table('ext_sector_externo_red_academia_convenio_participantes')
+        ->where('exseredpar_id_red_academica', $id)
+        ->delete();
+
+        DB::table('ext_sector_externo_red_academia_convenio')
+        ->where('id', $id)
+        ->delete();
+
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarinterredconvenio');
+
+    }
+
+    public function mostrarinterorganizacion(){
+        $interredorganizaciones = ExtRedOrganizacion::all();
+        return view('extension/interredorganizacion.index') 
+            ->with('interredorganizaciones', $interredorganizaciones);
+    }
+
+    public function crearinterorganizacion(){
+        return view('extension/interredorganizacion.create');
+    }
+
+    public function registrointerorganizacion(Request $request){
+        $rules = [
+            'exseor_year' => 'required',
+            'exseor_periodo' => 'required',
+            'exseor_nombre' => 'required',
+            'exseor_fecha' => 'required',
+        ];
+        $message = [
+            'exseor_year.required' => 'El campo año es requerido',
+            'exseor_periodo.required' => 'El campo periodo es requerido',
+            'exseor_nombre.required' => 'El campo nombre es requerido',
+            'exseor_fecha.required' => 'El campo fecha es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $cant = $request->get('cantidad');
+
+        DB::table('ext_sector_externo_organizaciones')
+            ->insert([
+                'exseor_year' => $request->get('exseor_year'),
+                'exseor_periodo' => $request->get('exseor_periodo'),
+                'exseor_tipo' => $request->get('exseor_tipo'),
+                'exseor_nombre' => $request->get('exseor_nombre'),
+                'exseor_caracter' => $request->get('exseor_caracter'),
+                'exseor_fecha' => $request->get('exseor_fecha'),
+                'exseor_actividades' => $request->get('exseor_actividades'),
+                'exseor_logros' => $request->get('exseor_logros'),
+                'exseor_resultados' => $request->get('exseor_resultados'),
+                'exseor_productos' => $request->get('exseor_productos'),
+                'exseor_funcion' => $request->get('exseor_funcion'),
+                'exseor_participantes' => $cant,
+        ]);
+
+        $id = DB::getPdo()->lastInsertId();
+
+    
+        for ($i=0; $i<$cant ; $i++) { 
+            DB::table('ext_sector_externo_organizaciones_part')->insert(
+                [
+                    'exseorpar_id_organizacion' => $id,
+                    'exseorpar_numero_identificacion' => $request->get('exseredpar_numero_identificacion')[$i],
+                    'exseorpar_nombre_completo' => $request->get('exseredpar_nombre_participante')[$i],
+                    'exseorpar_rol' => $request->get('exseredpar_rol_participante')[$i],
+                ]
+            );   
+        }
+        Alert::success('Exitoso', 'El registro de convenio se ha registrado con exito');
+        return redirect('/extension/mostrarinterorganizacion');
+    }
+
+    public function editarinterorganizacion($id){
+        $interredorganizacion = ExtRedOrganizacion::find($id);
+        $participantes = DB::table('ext_sector_externo_organizaciones_part')
+            ->where('exseorpar_id_organizacion', $id)
+            ->get();
+        return view('extension/interredorganizacion.edit')
+        ->with('interredorganizacion', $interredorganizacion)
+        ->with('participantes', $participantes);
+    }
+
+    public function verinterorganizacion($id){
+        $interredorganizacion = ExtRedOrganizacion::find($id);
+        $participantes = DB::table('ext_sector_externo_organizaciones_part')
+            ->where('exseorpar_id_organizacion', $id)
+            ->get();
+        return view('extension/interredorganizacion.show')
+        ->with('interredorganizacion', $interredorganizacion)
+        ->with('participantes', $participantes);
+    }
+
+    public function actualizarinterorganizacion(Request $request, $id){
+        $rules = [
+            'exseor_year' => 'required',
+            'exseor_periodo' => 'required',
+            'exseor_nombre' => 'required',
+            'exseor_fecha' => 'required',
+        ];
+        $message = [
+            'exseor_year.required' => 'El campo año es requerido',
+            'exseor_periodo.required' => 'El campo periodo es requerido',
+            'exseor_nombre.required' => 'El campo nombre es requerido',
+            'exseor_fecha.required' => 'El campo fecha es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        DB::table('ext_sector_externo_organizaciones')
+            ->where('id', $id)
+            ->update([
+                'exseor_year' => $request->get('exseor_year'),
+                'exseor_periodo' => $request->get('exseor_periodo'),
+                'exseor_tipo' => $request->get('exseor_tipo'),
+                'exseor_nombre' => $request->get('exseor_nombre'),
+                'exseor_caracter' => $request->get('exseor_caracter'),
+                'exseor_fecha' => $request->get('exseor_fecha'),
+                'exseor_actividades' => $request->get('exseor_actividades'),
+                'exseor_logros' => $request->get('exseor_logros'),
+                'exseor_resultados' => $request->get('exseor_resultados'),
+                'exseor_productos' => $request->get('exseor_productos'),
+                'exseor_funcion' => $request->get('exseor_funcion'),
+        ]);
+
+        $cantidad = DB::table('ext_sector_externo_organizaciones')
+            ->where('id', $id)
+            ->first();
+    
+        for ($i=0; $i<$cantidad->exseor_participantes ; $i++) { 
+            DB::table('ext_sector_externo_organizaciones_part')
+            ->where('exseorpar_id_organizacion', $id)
+            ->where('exseorpar_numero_identificacion',$request->get('exseorpar_numero_identificacion')[$i])
+            ->update(
+                [
+                    'exseorpar_numero_identificacion' => $request->get('exseorpar_numero_identificacion')[$i],
+                    'exseorpar_nombre_completo' => $request->get('exseorpar_nombre_completo')[$i],
+                    'exseorpar_rol' => $request->get('exseorpar_rol')[$i],
+                ]
+            );   
+        }
+        Alert::success('Exitoso', 'El registro de convenio se ha actualizado con exito');
+        return redirect('/extension/mostrarinterorganizacion');
+    }
+
+    public function eliminarinterorganizacion($id){
+
+        DB::table('ext_sector_externo_organizaciones_part')
+        ->where('exseorpar_id_organizacion', $id)
+        ->delete();
+
+        DB::table('ext_sector_externo_organizaciones')
+        ->where('id', $id)
+        ->delete();
+
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarinterorganizacion');
+
+    }
+
+    public function mostrarcurriculo(){
+        $curriculos = ExtInternacionalizacionCurriculo::all();
+        return view('extension/curriculo.index')
+            ->with('curriculos', $curriculos);
+    }
+
+    public function crearcurriculo(){
+        $asignaturas = ProgramaAsignatura::all();
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        return view('extension/curriculo.create')
+            ->with('asignaturas', $asignaturas)
+            ->with('docentes', $docentes);
+    }
+
+    public function registrocurriculo(Request $request){
+        $rules = [
+            'exincu_year' => 'required',
+            'exincu_periodo' => 'required',
+        ];
+        $message = [
+            'exincu_year.required' => 'El campo año es requerido',
+            'exincu_periodo.required' => 'El campo periodo es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $curriculo = new ExtInternacionalizacionCurriculo();
+
+        
+        $curriculo->exincu_year = $request->get('exincu_year');
+        $curriculo->exincu_periodo = $request->get('exincu_periodo');
+        $curriculo->exincu_id_asignatura = $request->get('exincu_id_asignatura');
+        $curriculo->exincu_id_docente = $request->get('exincu_id_docente');
+        if($request->get('ext_uso_idioma') != ""){
+            $curriculo->ext_uso_idioma = implode(';', $request->get('ext_uso_idioma'));
+        }
+        if($request->get('ext_uso_tic') != ""){
+            $curriculo->ext_uso_tic = implode(';', $request->get('ext_uso_tic'));
+        }
+        if($request->get('ext_competencia_global') != ""){
+            $curriculo->ext_competencia_global = implode(';', $request->get('ext_competencia_global'));
+        }
+        $curriculo->ext_movilidad_estudiante = $request->get('ext_movilidad_estudiante');
+        $curriculo->ext_otra_actividad = $request->get('ext_otra_actividad');
+
+        $curriculo->save();
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrarcurriculo');
+    }
+
+    public function editarcurriculo($id){
+        $curriculo = ExtInternacionalizacionCurriculo::find($id);
+        $asignaturas = ProgramaAsignatura::all();
+        $docentes = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->get();
+        return view('extension/curriculo.edit')
+            ->with('asignaturas', $asignaturas)
+            ->with('docentes', $docentes)
+            ->with('curriculo', $curriculo);
+    }
+
+    public function vercurriculo($id){
+        $curriculo = DB::table('ext_internacionalizacion_curriculo')
+            ->join('persona','persona.id', '=', 'ext_internacionalizacion_curriculo.exincu_id_docente')
+            ->join('programa_plan_estudio_asignatura', 'programa_plan_estudio_asignatura.id', '=', 'ext_internacionalizacion_curriculo.exincu_id_asignatura')
+            ->where('ext_internacionalizacion_curriculo.id', $id)
+            ->first();
+        return view('extension/curriculo.show')
+            ->with('curriculo', $curriculo);
+    }
+
+    public function actualizarcurriculo(Request $request, $id){
+        $rules = [
+            'exincu_year' => 'required',
+            'exincu_periodo' => 'required',
+        ];
+        $message = [
+            'exincu_year.required' => 'El campo año es requerido',
+            'exincu_periodo.required' => 'El campo periodo es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $curriculo = ExtInternacionalizacionCurriculo::find($id);
+
+        
+        $curriculo->exincu_year = $request->get('exincu_year');
+        $curriculo->exincu_periodo = $request->get('exincu_periodo');
+        $curriculo->exincu_id_asignatura = $request->get('exincu_id_asignatura');
+        $curriculo->exincu_id_docente = $request->get('exincu_id_docente');
+        if($request->get('ext_uso_idioma') != ""){
+            $curriculo->ext_uso_idioma = implode(';', $request->get('ext_uso_idioma'));
+        }
+        if($request->get('ext_uso_tic') != ""){
+            $curriculo->ext_uso_tic = implode(';', $request->get('ext_uso_tic'));
+        }
+        if($request->get('ext_competencia_global') != ""){
+            $curriculo->ext_competencia_global = implode(';', $request->get('ext_competencia_global'));
+        }
+        $curriculo->ext_movilidad_estudiante = $request->get('ext_movilidad_estudiante');
+        $curriculo->ext_otra_actividad = $request->get('ext_otra_actividad');
+
+        $curriculo->save();
+        Alert::success('Exitoso', 'Los datos se han actualizado con exito');
+        return redirect('/extension/mostrarcurriculo');
+    }
+
+    public function eliminarcurriculo($id){
+        $curriculo = ExtInternacionalizacionCurriculo::find($id);
+        $curriculo->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarcurriculo');
+    }
+
 
 }

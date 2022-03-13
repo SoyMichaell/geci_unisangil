@@ -47,5 +47,9 @@ class ProgramaAsignatura extends Model
     public function softwarecurso(){
         return $this->hasMany(SoftwareRecurso::class, 'id');
     }
+    
+    public function internacionalizacioncurriculo(){
+        return $this->hasMany(ExtInternacionalizacionCurriculo::class , 'id');
+    }
 
 }

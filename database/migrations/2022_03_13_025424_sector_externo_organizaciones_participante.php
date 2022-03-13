@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class SectorExternoRedAcademicaConvenioParticipantes extends Migration
+class SectorExternoOrganizacionesParticipante extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class SectorExternoRedAcademicaConvenioParticipantes extends Migration
      */
     public function up()
     {
-        Schema::create('ext_sector_externo_convenio_participantes', function (Blueprint $table) {
+        Schema::create('ext_sector_externo_organizaciones_part', function (Blueprint $table) {
             $table->integer('id')->primary();
-            $table->integer('exseredpar_id_red_academica');
-            $table->integer('exseredpar_numero_identificacion');
-            $table->string('exseredpar_nombre_participante');
-            $table->string('exseredpar_rol_participante');
+            $table->integer('exseorpar_id_organizacion');
+            $table->string('exseorpar_numero_identificacion');
+            $table->string('exseorpar_nombre_completo');
+            $table->string('exseorpar_rol');
             $table->timestamps();
         });
     }

@@ -22,6 +22,7 @@ class ExtInterRedConvenio extends Model
             'exsered_resultados',
             'exsered_productos',
             'exsered_funcion',
+            'exsered_participantes',
     ];
 
 }

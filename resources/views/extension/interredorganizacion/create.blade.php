@@ -11,26 +11,26 @@
 @section('content')
     <div class="container-fluid">
         <div class="tile">
-            <form action="/extension/registrointerredconvenio" method="post">
+            <form action="/extension/registrointerorganizacion" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exsered_year">Año</label>
-                        <input class="form-control @error('exsered_year') is-invalid @enderror" name="exsered_year"
-                            id="exsered_year" value="{{ old('exsered_year') }}" type="number"
+                        <label for="exseor_year">Año</label>
+                        <input class="form-control @error('exseor_year') is-invalid @enderror" name="exseor_year"
+                            id="exseor_year" value="{{ old('exseor_year') }}" type="number"
                             autocomplete="exsered_year" autofocus>
-                        @error('exsered_year')
+                        @error('exseor_year')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exsered_periodo">Periodo</label>
-                        <input class="form-control @error('exsered_periodo') is-invalid @enderror" name="exsered_periodo"
-                            id="exsered_periodo" value="{{ old('exsered_periodo') }}" type="text"
-                            autocomplete="exsered_periodo" autofocus>
-                        @error('exsered_periodo')
+                        <label for="exseor_periodo">Periodo</label>
+                        <input class="form-control @error('exseor_periodo') is-invalid @enderror" name="exseor_periodo"
+                            id="exseor_periodo" value="{{ old('exseor_periodo') }}" type="text"
+                            autocomplete="exseor_periodo" autofocus>
+                        @error('exseor_periodo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -38,36 +38,52 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="exsered_ies">IES</label>
-                        <input class="form-control @error('exsered_ies') is-invalid @enderror" name="exsered_ies"
-                            id="exsered_ies" value="{{ old('exsered_ies') }}" type="text" autocomplete="exsered_ies"
-                            autofocus>
-                        @error('exsered_ies')
+                    <div class="col-md-6">
+                        <label for="exseor_tipo">Tipo</label>
+                        <select class="form-select" name="exseor_tipo" id="exseor_tipo">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="red">Red</option>
+                            <option value="asociación">Asociación</option>
+                            <option value="organización">Organización</option>
+                        </select>
+                        @error('exseor_tipo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
-                        <label for="exsered_caracter">Cáracter</label>
-                        <select class="form-select" name="exsered_caracter" id="exsered_caracter">
+                    <div class="col-md-6">
+                        <label for="exseor_nombre">Nombre</label>
+                        <input class="form-control @error('exseor_nombre') is-invalid @enderror" name="exseor_nombre"
+                            id="exseor_nombre" value="{{ old('exseor_nombre') }}" type="text" autocomplete="exseor_nombre"
+                            autofocus>
+                        @error('exseor_nombre')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="exseor_caracter">Cáracter</label>
+                        <select class="form-select" name="exseor_caracter" id="exseor_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional">Nacional</option>
                             <option value="internacional">Internacional</option>
                         </select>
-                        @error('exsered_caracter')
+                        @error('exseor_caracter')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
-                        <label for="exsered_fecha">Fecha</label>
-                        <input class="form-control @error('exsered_fecha') is-invalid @enderror" name="exsered_fecha"
-                            id="exsered_fecha" value="{{ old('exsered_fecha') }}" type="date"
-                            autocomplete="exsered_fecha" autofocus>
-                        @error('exsered_fecha')
+                    <div class="col-md-6">
+                        <label for="exseor_fecha">Fecha</label>
+                        <input class="form-control @error('exseor_fecha') is-invalid @enderror" name="exseor_fecha"
+                            id="exseor_fecha" value="{{ old('exseor_fecha') }}" type="date"
+                            autocomplete="exseor_fecha" autofocus>
+                        @error('exseor_fecha')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -75,31 +91,43 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-4">
-                        <label for="exsered_logros">Logro (s)</label>
-                        <textarea class="form-control" name="exsered_logros" id="exsered_logros" cols="30"
+                    <div class="col-md-6">
+                        <label for="exseor_actividades">Actividad (s)</label>
+                        <textarea class="form-control" name="exseor_actividades" id="exseor_actividades" cols="30"
                             rows="10"></textarea>
-                        @error('exsered_logros')
+                        @error('exseor_actividades')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
-                        <label for="exsered_resultados">Resultado (s)</label>
-                        <textarea class="form-control" name="exsered_resultados" id="exsered_resultados" cols="30"
+                    <div class="col-md-6">
+                        <label for="exseor_logros">Logro (s)</label>
+                        <textarea class="form-control" name="exseor_logros" id="exseor_logros" cols="30"
                             rows="10"></textarea>
-                        @error('exsered_resultados')
+                        @error('exseor_logros')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
-                        <label for="exsered_productos">Producto (s)</label>
-                        <textarea class="form-control" name="exsered_productos" id="exsered_productos" cols="30"
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="exseor_resultados">Resultado (s)</label>
+                        <textarea class="form-control" name="exseor_resultados" id="exseor_resultados" cols="30"
                             rows="10"></textarea>
-                        @error('exsered_productos')
+                        @error('exseor_resultados')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="exseor_productos">Producto (s)</label>
+                        <textarea class="form-control" name="exseor_productos" id="exseor_productos" cols="30"
+                            rows="10"></textarea>
+                        @error('exseor_productos')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -108,14 +136,14 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="exsered_funcion">Función</label>
-                        <select class="form-select" name="exsered_funcion" id="exsered_funcion">
+                        <label for="exseor_funcion">Función</label>
+                        <select class="form-select" name="exseor_funcion" id="exseor_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>
                             <option value="investigacion">Investigación</option>
                             <option value="extension">Extensión</option>
                         </select>
-                        @error('exsered_funcion')
+                        @error('exseor_funcion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

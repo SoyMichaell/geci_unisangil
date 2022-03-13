@@ -24,7 +24,7 @@
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/export') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearinterredconvenio') }}"><i
+                        <a class="btn btn-outline-success" href="{{ url('extension/crearinterorganizacion') }}"><i
                                 class="fa fa-plus-circle"></i>
                             Nuevo</a>
                     @endif
@@ -37,7 +37,8 @@
                             <th>#</th>
                             <th>Año</th>
                             <th>Periodo</th>
-                            <th>IES</th>
+                            <th>Tipo</th>
+                            <th>Nombre</th>
                             <th>Cáracter</th>
                             <th>Fecha</th>
                             <th>Función</th>
@@ -49,26 +50,28 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($interredconvenios as $interredconvenio)
+                        @foreach ($interredorganizaciones as $interredorganizacion)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $interredconvenio->exsered_year }}</td>
-                                <td>{{ $interredconvenio->exsered_periodo }}</td>
-                                <td>{{ $interredconvenio->exsered_ies }}</td>
-                                <td>{{ $interredconvenio->exsered_caracter }}</td>
-                                <td>{{ $interredconvenio->exsered_fecha }}</td>
-                                <td>{{ $interredconvenio->exsered_funcion }}</td>
-                                <td>{{ $interredconvenio->exsered_participantes }}</td>
+                                <td>{{ $interredorganizacion->exseor_year }}</td>
+                                <td>{{ $interredorganizacion->exseor_periodo }}</td>
+                                <td>{{ $interredorganizacion->exseor_tipo }}</td>
+                                <td>{{ $interredorganizacion->exseor_nombre }}</td>
+                                <td>{{ $interredorganizacion->exseor_caracter }}</td>
+                                <td>{{ $interredorganizacion->exseor_fecha }}</td>
+                                <td>{{ $interredorganizacion->exseor_funcion }}</td>
+                                <td>{{ $interredorganizacion->exseor_participantes }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $interredconvenio->id }}/eliminarinterredconvenio"
+                                        <form
+                                            action="/extension/{{ $interredorganizacion->id }}/eliminarinterorganizacion"
                                             method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm"
-                                                    href="/extension/{{ $interredconvenio->id }}/verinterredconvenio"><i
+                                                    href="/extension/{{ $interredorganizacion->id }}/verinterorganizacion"><i
                                                         class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $interredconvenio->id }}/editarinterredconvenio"><i
+                                                    href="/extension/{{ $interredorganizacion->id }}/editarinterorganizacion"><i
                                                         class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
