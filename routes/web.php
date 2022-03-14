@@ -304,6 +304,15 @@ Route::get('extension/{curriculo}/editarcurriculo', [App\Http\Controllers\Extens
 Route::get('extension/{curriculo}/vercurriculo', [App\Http\Controllers\ExtensionController::class, 'vercurriculo']);
 Route::put('extension/{curriculo}/actualizarcurriculo', [App\Http\Controllers\ExtensionController::class, 'actualizarcurriculo']);
 Route::delete('extension/{curriculo}/eliminarcurriculo', [App\Http\Controllers\ExtensionController::class, 'eliminarcurriculo']);
+/*Rutas movilidades*/
+//Rutas movilidad nacional
+Route::get('extension/mostrarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'mostrarmovilidadnacional']);
+Route::get('extension/crearmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'crearmovilidadnacional']);
+Route::post('extension/registromovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'registromovilidadnacional']);
+Route::get('extension/{movilidad}/editarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'editarmovilidadnacional']);
+Route::get('extension/{movilidad}/vermovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'vermovilidadnacional']);
+Route::put('extension/{movilidad}/actualizarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadnacional']);
+Route::delete('extension/{movilidad}/eliminarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadnacional']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 

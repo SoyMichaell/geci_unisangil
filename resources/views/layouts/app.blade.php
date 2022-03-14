@@ -119,7 +119,7 @@
                             TIC'S</a></li>
                     <li><a class="treeview-item" href="{{ url('extension') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
-                            Extencion e Internacialización</a></li>
+                            Extensión e Internacialización</a></li>
                     <li><a class="treeview-item" href="{{ url('red') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Redes acádemicas</a></li>

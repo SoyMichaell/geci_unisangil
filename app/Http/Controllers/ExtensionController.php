@@ -8,6 +8,7 @@ use App\Models\ExtActividadCultural;
 use App\Models\complemento\FuenteNacional;
 use App\Models\complemento\NivelEstudio;
 use App\Models\complemento\Sector;
+use App\Models\Estudiante;
 use App\Models\ExtActividadCulturalRecursoHumano;
 use App\Models\ExtConsultoria;
 use App\Models\ExtConsultoriaRecursoHumano;
@@ -16,12 +17,17 @@ use App\Models\ExtEducacionContinua;
 use App\Models\ExtInternacionalizacionCurriculo;
 use App\Models\ExtInterRedConvenio;
 use App\Models\ExtInterRedConvenioParticipante;
+use App\Models\ExtMovilidadNacional;
 use App\Models\ExtParticipante;
 use App\Models\ExtProyectoExtension;
 use App\Models\ExtRedOrganizacion;
 use App\Models\ExtRegistroFotograficoInter;
 use App\Models\ExtServicioExtension;
+use App\Models\Facultad;
+use App\Models\Municipio;
+use App\Models\Programa;
 use App\Models\ProgramaAsignatura;
+use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -2062,6 +2068,178 @@ class ExtensionController extends Controller
         $curriculo->delete();
         Alert::success('Exitoso', 'Los datos se han eliminado con exito');
         return redirect('/extension/mostrarcurriculo');
+    }
+
+    public function mostrarmovilidadnacional(){
+        $movilidadnacionals = ExtMovilidadNacional::all();
+        return view('extension/movilidades/nacional.index')
+            ->with('movilidadnacionals', $movilidadnacionals);
+    }
+
+    public function crearmovilidadnacional(){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        return view('extension/movilidades/nacional.create')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes);
+    }
+
+    public function registromovilidadnacional(Request $request){
+        $rules = [
+            'exmona_tipo' => 'required|not_in:0',
+            'exmona_rol' => 'required|not_in:0',
+            'exmona_id_sede' => 'required|not_in:0',
+            'exmona_id_facultad' => 'required|not_in:0',
+            'exmona_id_programa' => 'required|not_in:0',
+            'exmona_institucion_proviene' => 'required',
+            'exmona_descripcion' => 'required',
+            'exmona_fecha_inicio' => 'required',
+            'exmona_fecha_final' => 'required'
+        ];
+        $message = [
+            'exmona_tipo.required' => 'El campo tipo es requerido',
+            'exmona_rol.required' => 'El campo rol es requerido',
+            'exmona_id_sede.required' => 'El campo sede es requerido',
+            'exmona_id_facultad.required' => 'El campo facultad es requerido',
+            'exmona_id_programa.required' => 'El campo programa es requerido',
+            'exmona_institucion_proviene.' => 'El campo institución es requerido',
+            'exmona_descripcion.required' => 'El campo descripción es requerido',
+            'exmona_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exmona_fecha_final.required' => 'El campo fecha final es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $movilidadnacional = new ExtMovilidadNacional();
+        $movilidadnacional->exmona_tipo = $request->get('exmona_tipo');
+        $movilidadnacional->exmona_rol = $request->get('exmona_rol');
+        $movilidadnacional->exmona_id_sede = $request->get('exmona_id_sede');
+        $movilidadnacional->exmona_id_facultad = $request->get('exmona_id_facultad');
+        $movilidadnacional->exmona_id_programa = $request->get('exmona_id_programa');
+        if($request->get('exmona_rol') == 'docente' || $request->get('exmona_rol') == 'administrativo'){
+            $movilidadnacional->exmona_id_persona = $request->get('exmona_id_persona');
+        }else{
+            $movilidadnacional->exmona_id_persona = $request->get('exmona_id_estudiante');
+        }
+        $movilidadnacional->exmona_institucion_proviene = $request->get('exmona_institucion_proviene');
+        $movilidadnacional->exmona_tipo_movilidad = implode(';' ,$request->get('exmona_tipo_movilidad'));
+        $movilidadnacional->exmona_descripcion = $request->get('exmona_descripcion');
+        $movilidadnacional->exmona_fecha_inicio = $request->get('exmona_fecha_inicio');
+        $movilidadnacional->exmona_fecha_final = $request->get('exmona_fecha_final');
+        
+        $movilidadnacional->save();
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrarmovilidadnacional');
+
+    }
+
+    public function editarmovilidadnacional($id){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        $nacional = ExtMovilidadNacional::find($id);
+        return view('extension/movilidades/nacional.edit')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes)
+            ->with('nacional', $nacional);
+    }
+
+    public function vermovilidadnacional($id){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        $nacional = ExtMovilidadNacional::find($id);
+        return view('extension/movilidades/nacional.show')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes)
+            ->with('nacional', $nacional);
+    }
+
+    public function actualizarmovilidadnacional(Request $request, $id){
+        $rules = [
+            'exmona_tipo' => 'required|not_in:0',
+            'exmona_rol' => 'required|not_in:0',
+            'exmona_id_sede' => 'required|not_in:0',
+            'exmona_id_facultad' => 'required|not_in:0',
+            'exmona_id_programa' => 'required|not_in:0',
+            'exmona_institucion_proviene' => 'required',
+            'exmona_descripcion' => 'required',
+            'exmona_fecha_inicio' => 'required',
+            'exmona_fecha_final' => 'required'
+        ];
+        $message = [
+            'exmona_tipo.required' => 'El campo tipo es requerido',
+            'exmona_rol.required' => 'El campo rol es requerido',
+            'exmona_id_sede.required' => 'El campo sede es requerido',
+            'exmona_id_facultad.required' => 'El campo facultad es requerido',
+            'exmona_id_programa.required' => 'El campo programa es requerido',
+            'exmona_institucion_proviene.' => 'El campo institución es requerido',
+            'exmona_descripcion.required' => 'El campo descripción es requerido',
+            'exmona_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exmona_fecha_final.required' => 'El campo fecha final es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $movilidadnacional = ExtMovilidadNacional::find($id);
+        $movilidadnacional->exmona_tipo = $request->get('exmona_tipo');
+        $movilidadnacional->exmona_rol = $request->get('exmona_rol');
+        $movilidadnacional->exmona_id_sede = $request->get('exmona_id_sede');
+        $movilidadnacional->exmona_id_facultad = $request->get('exmona_id_facultad');
+        $movilidadnacional->exmona_id_programa = $request->get('exmona_id_programa');
+        if($request->get('exmona_rol') == 'docente' || $request->get('exmona_rol') == 'administrativo'){
+            $movilidadnacional->exmona_id_persona = $request->get('exmona_id_persona');
+        }else{
+            $movilidadnacional->exmona_id_persona = $request->get('exmona_id_estudiante');
+        }
+        $movilidadnacional->exmona_institucion_proviene = $request->get('exmona_institucion_proviene');
+        $movilidadnacional->exmona_tipo_movilidad = implode(';' ,$request->get('exmona_tipo_movilidad'));
+        $movilidadnacional->exmona_descripcion = $request->get('exmona_descripcion');
+        $movilidadnacional->exmona_fecha_inicio = $request->get('exmona_fecha_inicio');
+        $movilidadnacional->exmona_fecha_final = $request->get('exmona_fecha_final');
+        
+        $movilidadnacional->save();
+        Alert::success('Exitoso', 'Los datos se han actulizado con exito');
+        return redirect('/extension/mostrarmovilidadnacional');
+
     }
 
 

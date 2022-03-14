@@ -86,17 +86,17 @@
         </div>
         <h4 class="ml-3">Movilidad</h4>
         <div class="row">
-            <a class="card__extension tile" href="/extension/mostrarregistrofotografico">
-                <i class="fa-solid fa-camera fa-4x"></i>
-                <h4 class="mt-2">Registro fotografico actividades</h4>
+            <a class="card__extension tile" href="/extension/mostrarmovilidadnacional">
+                <i class="fa-solid fa-caravan fa-4x"></i>
+                <h4 class="mt-2">Movilidad Nacional</h4>
             </a>
-            <a class="card__extension tile" href="/extension/mostrarinterredconvenio">
-                <i class="fa-solid fa-microchip fa-4x"></i>
-                <h4 class="mt-2">Redes acádemicas</h4>
+            <a class="card__extension tile" href="/extension/mostrarmovilidadintersedes">
+                <i class="fa-solid fa-plane fa-4x"></i>
+                <h4 class="mt-2">Movilidad Intersedes</h4>
             </a>
-            <a class="card__extension tile" href="/extension/mostrarinterorganizacion">
-                <i class="fa-solid fa-magnifying-glass fa-4x"></i>
-                <h4 class="mt-2">Redes disciplinarias - asociaciones - organizaciones</h4>
+            <a class="card__extension tile" href="/extension/mostrarmovilidadinternacional">
+                <i class="fa-solid fa-plane-departure fa-4x"></i>
+                <h4 class="mt-2">Movilidad Internacional</h4>
             </a>
         </div>
     </div>

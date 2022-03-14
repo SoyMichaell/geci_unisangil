@@ -70,4 +70,7 @@ class Programa extends Model
         return $this->hasMany(EstudianteReporte::class, 'id');
     }
 
+    public function movilidadnacional(){
+        return $this->hasMany(ExtMovilidadNacional::class, 'id');
+    }
 }
