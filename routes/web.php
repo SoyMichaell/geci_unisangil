@@ -321,6 +321,14 @@ Route::get('extension/{movilidad}/editarmovilidadintersede', [App\Http\Controlle
 Route::get('extension/{movilidad}/vermovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'vermovilidadintersede']);
 Route::put('extension/{movilidad}/actualizarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadintersede']);
 Route::delete('extension/{movilidad}/eliminarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadintersede']);
+//Rutas movilidad internacional
+Route::get('extension/mostrarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'mostrarmovilidadinternacional']);
+Route::get('extension/crearmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'crearmovilidadinternacional']);
+Route::post('extension/registromovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'registromovilidadinternacional']);
+Route::get('extension/{movilidad}/editarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'editarmovilidadinternacional']);
+Route::get('extension/{movilidad}/vermovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'vermovilidadinternacional']);
+Route::put('extension/{movilidad}/actualizarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadinternacional']);
+Route::delete('extension/{movilidad}/eliminarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadinternacional']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 

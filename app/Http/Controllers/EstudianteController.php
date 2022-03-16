@@ -113,74 +113,6 @@ class EstudianteController extends Controller
 
         $this->validate($request, $rules, $messages);
 
-        $estudiantes = new Estudiante();
-        $estudiantes->estu_programa = $request->get('estu_programa');
-        $estudiantes->estu_programa_plan = $request->get('estu_programa_plan');
-        $estudiantes->estu_tipo_documento = $request->get('estu_tipo_documento');
-        $estudiantes->estu_numero_documento = $request->get('estu_numero_documento');
-        $estudiantes->estu_nombre = $request->get('estu_nombre');
-        $estudiantes->estu_apellido = $request->get('estu_apellido');
-        $estudiantes->estu_telefono1 = $request->get('estu_telefono1');
-        $estudiantes->estu_telefono2 = $request->get('estu_telefono2');
-        $estudiantes->estu_direccion = $request->get('estu_direccion');
-        $estudiantes->estu_correo = $request->get('estu_correo');
-        $estudiantes->estu_estrato = $request->get('estu_estrato');
-        $estudiantes->estu_departamento = $request->get('estu_departamento');
-        $estudiantes->estu_ciudad = $request->get('estu_ciudad');
-        $estudiantes->estu_fecha_nacimiento = $request->get('estu_fecha_nacimiento');
-        $estudiantes->estu_ingreso = $request->get('estu_ingreso');
-        $estudiantes->estu_periodo_ingreso = $request->get('estu_periodo_ingreso');
-        $estudiantes->estu_ult_matricula = $request->get('estu_ult_matricula');
-        $estudiantes->estu_semestre = $request->get('estu_semestre');
-        $estudiantes->estu_financiamiento = $request->get('estu_financiamiento');
-        $estudiantes->estu_entidad = $request->get('estu_entidad');
-        $estudiantes->estu_tipo_matricula = $request->get('estu_tipo_matricula');
-        $estudiantes->estu_estado = $request->get('estu_estado');
-        $estudiantes->estu_matricula = $request->get('estu_matricula');
-        $estudiantes->estu_pga = $request->get('estu_pga');
-        $estudiantes->estu_reconocimiento = $request->get('estu_reconocimiento');
-        $estudiantes->estu_egresado = $request->get('estu_egresado');
-
-        DB::table('estudiante')->insert(
-            [
-                'estu_programa' => $request->get('estu_programa'),
-                'estu_programa_plan' =>  $request->get('estu_programa_plan'),
-                'estu_tipo_documento' => $request->get('estu_tipo_documento'),
-                'estu_numero_documento' => $request->get('estu_numero_documento'),
-                'estu_nombre' => $request->get('estu_nombre'),
-                'estu_apellido' => $request->get('estu_apellido'),
-                'estu_telefono1' => $request->get('estu_telefono1'),
-                'estu_direccion' => $request->get('estu_direccion'),
-                'estu_correo' => $request->get('estu_correo'),
-                'estu_estrato' => $request->get('estu_estrato'),
-                'estu_departamento' => $request->get('estu_departamento'),
-                'estu_ciudad' => $request->get('estu_ciudad'),
-                'estu_fecha_nacimiento' => $request->get('estu_fecha_nacimiento'),
-                'estu_ingreso' => $request->get('estu_ingreso'),
-                'estu_periodo_ingreso' => $request->get('estu_periodo_ingreso'),
-                'estu_ult_matricula' => $request->get('estu_ult_matricula'),
-                'estu_semestre' => $request->get('estu_semestre'),
-                'estu_financiamiento' => $request->get('estu_financiamiento'),
-                'estu_entidad' => $request->get('estu_entidad'),
-                'estu_tipo_matricula' => $request->get('estu_tipo_matricula'),
-                'estu_estado' => $request->get('estu_estado'),
-                'estu_matricula' => $request->get('estu_matricula'),
-                'estu_pga' => $request->get('estu_pga'),
-                'estu_reconocimiento' => $request->get('estu_reconocimiento'),
-                'estu_egresado' => $request->get('estu_egresado'),
-            ]
-        );
-
-        if ($request->get('estu_egresado') == 'Si') {
-            $id = DB::getPdo()->lastInsertId();
-
-            DB::table('estudiante_egresado')->insert(
-                [
-                    'este_id_estudiante' => $id
-                ]
-            );
-        }
-
         $ExisteEstudiante = DB::table('estudiante')
             ->where('estu_numero_documento', $request->get('estu_numero_documento'))
             ->get();
@@ -206,7 +138,49 @@ class EstudianteController extends Controller
             Alert::warning('Advertencia', 'El correo electronico, ya se encuentra registrado');
             return back()->withInput();
         } else {
-            $estudiantes->save();
+
+            DB::table('estudiante')->insert(
+                [
+                    'estu_programa' => $request->get('estu_programa'),
+                    'estu_programa_plan' =>  $request->get('estu_programa_plan'),
+                    'estu_tipo_documento' => $request->get('estu_tipo_documento'),
+                    'estu_numero_documento' => $request->get('estu_numero_documento'),
+                    'estu_nombre' => $request->get('estu_nombre'),
+                    'estu_apellido' => $request->get('estu_apellido'),
+                    'estu_telefono1' => $request->get('estu_telefono1'),
+                    'estu_direccion' => $request->get('estu_direccion'),
+                    'estu_correo' => $request->get('estu_correo'),
+                    'estu_estrato' => $request->get('estu_estrato'),
+                    'estu_departamento' => $request->get('estu_departamento'),
+                    'estu_ciudad' => $request->get('estu_ciudad'),
+                    'estu_fecha_nacimiento' => $request->get('estu_fecha_nacimiento'),
+                    'estu_fecha_expedicion' => $request->get('estu_fecha_expedicion'),
+                    'estu_sexo' => $request->get('estu_sexo'),
+                    'estu_estado_civil' => $request->get('estu_estado_civil'),
+                    'estu_ingreso' => $request->get('estu_ingreso'),
+                    'estu_periodo_ingreso' => $request->get('estu_periodo_ingreso'),
+                    'estu_ult_matricula' => $request->get('estu_ult_matricula'),
+                    'estu_semestre' => $request->get('estu_semestre'),
+                    'estu_financiamiento' => $request->get('estu_financiamiento'),
+                    'estu_entidad' => $request->get('estu_entidad'),
+                    'estu_tipo_matricula' => $request->get('estu_tipo_matricula'),
+                    'estu_estado' => $request->get('estu_estado'),
+                    'estu_matricula' => $request->get('estu_matricula'),
+                    'estu_pga' => $request->get('estu_pga'),
+                    'estu_reconocimiento' => $request->get('estu_reconocimiento'),
+                    'estu_egresado' => $request->get('estu_egresado'),
+                ]
+            );
+
+            if ($request->get('estu_egresado') == 'Si') {
+                $id = DB::getPdo()->lastInsertId();
+
+                DB::table('estudiante_egresado')->insert(
+                    [
+                        'este_id_estudiante' => $id
+                    ]
+                );
+            }
 
             Alert::success('Exitoso', 'El estudiante se ha registrado con exito');
             return redirect('/estudiante');
@@ -570,7 +544,8 @@ class EstudianteController extends Controller
         return redirect('/estudiante/mostrarreporte');
     }
 
-    public function eliminarreporte($id){
+    public function eliminarreporte($id)
+    {
         $reporte = EstudianteReporte::find($id);
         $reporte->delete();
         Alert::success('Exitoso', 'El reporte ha sido eliminado con exito');

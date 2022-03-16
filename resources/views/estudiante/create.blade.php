@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
                         <input id="estu_fecha_nacimiento" type="date"
                             class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
@@ -195,7 +195,54 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
+                        <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  *') }}</label>
+                        <input id="estu_fecha_expedicion" type="date"
+                            class="form-control @error('estu_fecha_expedicion') is-invalid @enderror"
+                            name="estu_fecha_expedicion" value="{{ old('estu_fecha_expedicion') }}"
+                            autocomplete="estu_fecha_expedicion" autofocus>
+                        @error('estu_fecha_expedicion')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
+                        <select class="form-select" name="estu_sexo" id="estu_sexo">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                        </select>
+                        @error('estu_sexo')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
+                        <select class="form-select" name="estu_estado_civil" id="estu_estado_civil">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="soltero(a)">Soltero (a)</option>
+                            <option value="casado(s)">Casado (a)</option>
+                            <option value="divorciado(s)">Divorciado (a)</option>
+                            <option value="viudo(s)">Viudo (a)</option>
+                            <option value="unionlibre">Unión libre</option>
+                            <option value="religioso(s)">Religioso (a)</option>
+                            <option value="separado(s)">Separado (a)</option>
+                        </select>
+                        @error('estu_estado_civil')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
                         <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
                         <input id="estu_ingreso" type="text"
                             class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
@@ -206,11 +253,12 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
                         <input id="estu_periodo_ingreso" type="text"
-                            class="form-control @error('estu_periodo_ingreso') is-invalid @enderror" name="estu_periodo_ingreso"
-                            value="{{ old('estu_periodo_ingreso') }}" autocomplete="estu_periodo_ingreso" placeholder="Ej: 2016-1" autofocus>
+                            class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
+                            name="estu_periodo_ingreso" value="{{ old('estu_periodo_ingreso') }}"
+                            autocomplete="estu_periodo_ingreso" placeholder="Ej: 2016-1" autofocus>
                         @error('estu_periodo_ingreso')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

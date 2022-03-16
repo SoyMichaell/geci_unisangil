@@ -17,6 +17,7 @@ use App\Models\ExtEducacionContinua;
 use App\Models\ExtInternacionalizacionCurriculo;
 use App\Models\ExtInterRedConvenio;
 use App\Models\ExtInterRedConvenioParticipante;
+use App\Models\ExtMovilidadInternacional;
 use App\Models\ExtMovilidadIntersede;
 use App\Models\ExtMovilidadNacional;
 use App\Models\ExtParticipante;
@@ -2440,6 +2441,199 @@ class ExtensionController extends Controller
         $movilidadintersede->delete();
         Alert::success('Exitoso', 'Los datos se han eliminado con exito');
         return redirect('/extension/mostrarmovilidadintersede');
+    }
+
+    public function mostrarmovilidadinternacional(){
+        $movilidadinternacionales = ExtMovilidadInternacional::all();
+        return view('extension/movilidades/internacional.index')
+            ->with('movilidadinternacionales' , $movilidadinternacionales);
+    }
+
+    public function crearmovilidadinternacional(){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        return view('extension/movilidades/internacional.create')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes);
+    }
+
+    public function registromovilidadinternacional(Request $request){
+        $rules = [
+            'exmointer_tipo' => 'required|not_in:0',
+            'exmointer_rol' => 'required|not_in:0',
+            'exmointer_id_sede_or' => 'required|not_in:0',
+            'exmointer_id_facultad_or' => 'required|not_in:0',
+            'exmointer_id_programa_or' => 'required|not_in:0',
+            'exmointer_pais_des' => 'required',
+            'exmointer_ciudad_des' => 'required',
+            'exmointer_institucion_nombre' => 'required',
+            'exmointer_tipo_movilidad' => 'required',
+            'exmointer_descripcion' => 'required',
+            'exmointer_fecha_inicio' => 'required',
+            'exmointer_fecha_final' => 'required'
+        ];
+        $message = [
+            'exmointer_tipo.required' => 'El campo tipo es requerido',
+            'exmointer_rol.required' => 'El campo rol es requerido',
+            'exmointer_id_sede_or.required' => 'El campo sede de origen es requerido',
+            'exmointer_id_facultad_or.required' => 'El campo facultad de origen es requerido',
+            'exmointer_id_programa_or.required' => 'El campo programa de origen es requerido',
+            'exmointer_pais_des.required' => 'El campo país destino es requerido',
+            'exmointer_ciudad_des.required' => 'El campo ciudad destino es requerido',
+            'exmointer_institucion_nombre.required' => 'El campo institución educativa es requerido',
+            'exmointer_tipo_movilidad.required' => 'El campo tipo movilidad es requerido',
+            'exmointer_descripcion.required' => 'El campo descripción es requerido',
+            'exmointer_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exmointer_fecha_final.required' => 'El campo fecha final es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $movilidadinternacional = new ExtMovilidadInternacional();
+        $movilidadinternacional->exmointer_tipo = $request->get('exmointer_tipo');
+        $movilidadinternacional->exmointer_rol = $request->get('exmointer_rol');
+        $movilidadinternacional->exmointer_id_sede_or = $request->get('exmointer_id_sede_or');
+        $movilidadinternacional->exmointer_id_facultad_or = $request->get('exmointer_id_facultad_or');
+        $movilidadinternacional->exmointer_id_programa_or = $request->get('exmointer_id_programa_or');
+        if($request->get('exmointer_rol') == 'docente' || $request->get('exmointer_rol') == 'administrativo'){
+            $movilidadinternacional->exmointer_id_persona = $request->get('exmointer_id_persona');
+        }else{
+            $movilidadinternacional->exmointer_id_persona = $request->get('exmointer_id_estudiante');
+        }
+        $movilidadinternacional->exmointer_pais_des = $request->get('exmointer_pais_des');
+        $movilidadinternacional->exmointer_ciudad_des = $request->get('exmointer_ciudad_des');
+        $movilidadinternacional->exmointer_institucion_nombre = $request->get('exmointer_institucion_nombre');
+        $movilidadinternacional->exmointer_tipo_movilidad = implode(';' ,$request->get('exmointer_tipo_movilidad'));
+        $movilidadinternacional->exmointer_descripcion = $request->get('exmointer_descripcion');
+        $movilidadinternacional->exmointer_fecha_inicio = $request->get('exmointer_fecha_inicio');
+        $movilidadinternacional->exmointer_fecha_final = $request->get('exmointer_fecha_final');
+        
+        $movilidadinternacional->save();
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrarmovilidadinternacional');
+    }
+
+    public function editarmovilidadinternacional($id){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        $internacional = ExtMovilidadInternacional::find($id);
+        return view('extension/movilidades/internacional.edit')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes)
+            ->with('internacional', $internacional);
+    }
+
+    public function vermovilidadinternacional($id){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        $internacional = ExtMovilidadInternacional::find($id);
+        return view('extension/movilidades/internacional.show')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes)
+            ->with('internacional', $internacional);
+    }
+
+    public function actualizarmovilidadinternacional(Request $request ,$id){
+        $rules = [
+            'exmointer_tipo' => 'required|not_in:0',
+            'exmointer_rol' => 'required|not_in:0',
+            'exmointer_id_sede_or' => 'required|not_in:0',
+            'exmointer_id_facultad_or' => 'required|not_in:0',
+            'exmointer_id_programa_or' => 'required|not_in:0',
+            'exmointer_pais_des' => 'required',
+            'exmointer_ciudad_des' => 'required',
+            'exmointer_institucion_nombre' => 'required',
+            'exmointer_tipo_movilidad' => 'required',
+            'exmointer_descripcion' => 'required',
+            'exmointer_fecha_inicio' => 'required',
+            'exmointer_fecha_final' => 'required'
+        ];
+        $message = [
+            'exmointer_tipo.required' => 'El campo tipo es requerido',
+            'exmointer_rol.required' => 'El campo rol es requerido',
+            'exmointer_id_sede_or.required' => 'El campo sede de origen es requerido',
+            'exmointer_id_facultad_or.required' => 'El campo facultad de origen es requerido',
+            'exmointer_id_programa_or.required' => 'El campo programa de origen es requerido',
+            'exmointer_pais_des.required' => 'El campo país destino es requerido',
+            'exmointer_ciudad_des.required' => 'El campo ciudad destino es requerido',
+            'exmointer_institucion_nombre.required' => 'El campo institución educativa es requerido',
+            'exmointer_tipo_movilidad.required' => 'El campo tipo movilidad es requerido',
+            'exmointer_descripcion.required' => 'El campo descripción es requerido',
+            'exmointer_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exmointer_fecha_final.required' => 'El campo fecha final es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $movilidadinternacional = ExtMovilidadInternacional::find($id);
+        $movilidadinternacional->exmointer_tipo = $request->get('exmointer_tipo');
+        $movilidadinternacional->exmointer_rol = $request->get('exmointer_rol');
+        $movilidadinternacional->exmointer_id_sede_or = $request->get('exmointer_id_sede_or');
+        $movilidadinternacional->exmointer_id_facultad_or = $request->get('exmointer_id_facultad_or');
+        $movilidadinternacional->exmointer_id_programa_or = $request->get('exmointer_id_programa_or');
+        if($request->get('exmointer_rol') == 'docente' || $request->get('exmointer_rol') == 'administrativo'){
+            $movilidadinternacional->exmointer_id_persona = $request->get('exmointer_id_persona');
+        }else{
+            $movilidadinternacional->exmointer_id_persona = $request->get('exmointer_id_estudiante');
+        }
+        $movilidadinternacional->exmointer_pais_des = $request->get('exmointer_pais_des');
+        $movilidadinternacional->exmointer_ciudad_des = $request->get('exmointer_ciudad_des');
+        $movilidadinternacional->exmointer_institucion_nombre = $request->get('exmointer_institucion_nombre');
+        $movilidadinternacional->exmointer_tipo_movilidad = implode(';' ,$request->get('exmointer_tipo_movilidad'));
+        $movilidadinternacional->exmointer_descripcion = $request->get('exmointer_descripcion');
+        $movilidadinternacional->exmointer_fecha_inicio = $request->get('exmointer_fecha_inicio');
+        $movilidadinternacional->exmointer_fecha_final = $request->get('exmointer_fecha_final');
+        
+        $movilidadinternacional->save();
+        Alert::success('Exitoso', 'Los datos se han actualizado con exito');
+        return redirect('/extension/mostrarmovilidadinternacional');
+    }
+
+    public function eliminarmovilidadinternacional($id){
+        $movilidadinternacional = ExtMovilidadInternacional::find($id);
+        $movilidadinternacional->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarmovilidadinternacional');
     }
 
 

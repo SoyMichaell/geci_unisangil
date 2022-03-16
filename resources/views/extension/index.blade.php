@@ -26,7 +26,7 @@
 </style>
 @section('content')
     <div class="container">
-        <h4 class="ml-3">Extencion</h4>
+        <h4 class="ml-3">Extensión</h4>
         <div class="row">
             <a class="card__extension tile" href="/extension/mostraractividad">
                 <i class="fa-solid fa-boxes-stacked fa-4x"></i>

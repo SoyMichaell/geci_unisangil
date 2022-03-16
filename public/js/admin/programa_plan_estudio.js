@@ -6,6 +6,9 @@ $(function() {
     var tipoInter = $('#exmoin_tipo').val();
     var rolInter = $('#exmoin_rol').val();
 
+    var tipoInterna = $('#exmointer_tipo').val();
+    var rolInterna = $('#exmointer_rol').val();
+
     if ((tipo == 'entrante' && rol == 'estudiante') || (tipo == 'saliente' && rol == 'estudiante')) {
         $('#tipo-estudiante').show();
         $('#entrante-docente').hide();
@@ -102,6 +105,54 @@ $(function() {
         $('#otros').show();
     }
 
+    if ((tipoInterna == 'entrante' && rolInterna == 'estudiante') || (tipoInterna == 'saliente' && rolInterna == 'estudiante')) {
+        $('#tipo-estudiante').show();
+        $('#entrante-docente').hide();
+        $('#saliente-docente').hide();
+        $('#estudiantes').show();
+        $('#otros').hide();
+    } else if (tipoInterna == 'entrante' && rolInterna == 'docente') {
+        $('#entrante-docente').show();
+        $('#tipo-estudiante').hide();
+        $('#saliente-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').hide();
+    } else if (tipoInterna == 'saliente' && rolInterna == 'docente') {
+        $('#saliente-docente').show();
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').hide();
+    } else if (tipoInterna == 'entrante' && rolInterna == 'administrativo') {
+        $('#saliente-docente').hide();
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').show();
+    } else if (tipoInterna == 'saliente' && rolInterna == 'administrativo') {
+        $('#saliente-docente').show();
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').hide();
+    } else {
+        $('#estu_programa').on('change', onSelectProgramaEstudio);
+        $('#estu_departamento').on('change', onSelectMunicipio);
+        $('#exmointer_tipo').on('change', onSelectTipoMovilidadInternacional);
+        $('#exmointer_rol').on('change', onSelectTipoMovilidadInternacional);
+
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#saliente-docente').hide();
+        $('#entrante-administrativo').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+    }
+
 
 
 });
@@ -178,8 +229,8 @@ function onSelectTipoMovilidadIntersede() {
     var tipoInter = $('#exmoin_tipo').val();
     var rolInter = $('#exmoin_rol').val();
 
-    console.log(tipoInter);
-    console.log(rolInter);
+    //console.log(tipoInter);
+    //console.log(rolInter);
 
     //console.log(tipo);
     //console.log(rol);
@@ -211,6 +262,54 @@ function onSelectTipoMovilidadIntersede() {
         $('#otros').show();
         $('#entrante-administrativo').show();
     } else if (tipoInter == 'saliente' && rolInter == 'administrativo') {
+        $('#saliente-docente').show();
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').hide();
+    }
+
+}
+
+function onSelectTipoMovilidadInternacional() {
+
+    var tipoInterna = $('#exmointer_tipo').val();
+    var rolInterna = $('#exmointer_rol').val();
+
+    //console.log(tipoInter);
+    //console.log(rolInter);
+
+    //console.log(tipo);
+    //console.log(rol);
+    if ((tipoInterna == 'entrante' && rolInterna == 'estudiante') || (tipoInterna == 'saliente' && rolInterna == 'estudiante')) {
+        $('#tipo-estudiante').show();
+        $('#entrante-docente').hide();
+        $('#saliente-docente').hide();
+        $('#estudiantes').show();
+        $('#otros').hide();
+    } else if (tipoInterna == 'entrante' && rolInterna == 'docente') {
+        $('#entrante-docente').show();
+        $('#tipo-estudiante').hide();
+        $('#saliente-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').hide();
+    } else if (tipoInterna == 'saliente' && rolInterna == 'docente') {
+        $('#saliente-docente').show();
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').hide();
+    } else if (tipoInterna == 'entrante' && rolInterna == 'administrativo') {
+        $('#saliente-docente').hide();
+        $('#tipo-estudiante').hide();
+        $('#entrante-docente').hide();
+        $('#estudiantes').hide();
+        $('#otros').show();
+        $('#entrante-administrativo').show();
+    } else if (tipoInterna == 'saliente' && rolInterna == 'administrativo') {
         $('#saliente-docente').show();
         $('#tipo-estudiante').hide();
         $('#entrante-docente').hide();

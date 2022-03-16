@@ -82,4 +82,8 @@ class User extends Authenticatable
     public function movilidadnacional(){
         return $this->hasMany(ExtMovilidadNacional::class, 'id');
     }
+
+    public function movilidadinternacional(){
+        return $this->hasMany(ExtMovilidadInternacional::class, 'id');
+    }
 }

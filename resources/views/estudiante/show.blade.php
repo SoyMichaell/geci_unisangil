@@ -34,7 +34,8 @@
                         <div class="col-md-6">
                             <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
                             <select class="form-select" name="estu_programa_plan" id="estu_programa_plan" disabled>
-                                <option value="{{$estudiante->estu_programa_plan}}">{{$estudiante->planes->pp_plan}}</option>
+                                <option value="{{ $estudiante->estu_programa_plan }}">{{ $estudiante->planes->pp_plan }}
+                                </option>
                             </select>
                             @error('estu_programa_plan')
                                 <span class="invalid-feedback" role="alert">
@@ -46,7 +47,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="estu_tipo_documento">{{ __('Tipo Documento *') }}</label>
-                    <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento" disabled> 
+                    <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($tiposdocumento as $tipo)
                             <option value="{{ $tipo }}"
@@ -179,7 +180,8 @@
                 <div class="col-md-6">
                     <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
                     <select class="form-select" name="estu_ciudad" id="estu_ciudad" disabled>
-                        <option value="{{$estudiante->estu_ciudad}}">{{$estudiante->municipios->mun_nombre}}</option>
+                        <option value="{{ $estudiante->estu_ciudad }}">{{ $estudiante->municipios->mun_nombre }}
+                        </option>
                     </select>
                     @error('estu_ciudad')
                         <span class="invalid-feedback" role="alert">
@@ -189,7 +191,7 @@
                 </div>
             </div>
             <div class="row mb-3">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
                     <input id="estu_fecha_nacimiento" type="date"
                         class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
@@ -201,7 +203,61 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
+                    <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  *') }}</label>
+                    <input id="estu_fecha_expedicion" type="date"
+                        class="form-control @error('estu_fecha_expedicion') is-invalid @enderror"
+                        name="estu_fecha_expedicion" value="{{ $estudiante->estu_fecha_expedicion }}"
+                        autocomplete="estu_fecha_expedicion" autofocus disabled>
+                    @error('estu_fecha_expedicion')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
+                    <select class="form-select" name="estu_sexo" id="estu_sexo" disabled>
+                        <option value="">---- SELECCIONE ----</option>
+                        <option value="M" {{ $estudiante->estu_sexo == 'M' ? 'selected' : '' }}>Masculino</option>
+                        <option value="F" {{ $estudiante->estu_sexo == 'F' ? 'selected' : '' }}>Femenino</option>
+                    </select>
+                    @error('estu_sexo')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <div class="col-md-6">
+                    <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
+                    <select class="form-select" name="estu_estado_civil" id="estu_estado_civil" disabled>
+                        <option value="">---- SELECCIONE ----</option>
+                        <option value="soltero(a)"
+                            {{ $estudiante->estu_estado_civil == 'soltero(a)' ? 'selected' : '' }}>Soltero (a)</option>
+                        <option value="casado(a)" {{ $estudiante->estu_estado_civil == 'F' ? 'casado(a)' : '' }}>Casado
+                            (a)</option>
+                        <option value="divorciado(a)"
+                            {{ $estudiante->estu_estado_civil == 'F' ? 'divorciado(a)' : '' }}>Divorciado (a)</option>
+                        <option value="viudo(a)" {{ $estudiante->estu_estado_civil == 'F' ? 'viudo(a)' : '' }}>Viudo
+                            (a)</option>
+                        <option value="unionlibre" {{ $estudiante->estu_estado_civil == 'F' ? 'unionlibre' : '' }}>
+                            Unión libre</option>
+                        <option value="religioso(a)" {{ $estudiante->estu_estado_civil == 'F' ? 'religioso(a)' : '' }}>
+                            Religioso (a)</option>
+                        <option value="separado(a)" {{ $estudiante->estu_estado_civil == 'F' ? 'separado(a)' : '' }}>
+                            Separado (a)</option>
+                    </select>
+                    @error('estu_estado_civil')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
                     <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
                     <input id="estu_ingreso" type="text"
                         class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
@@ -212,7 +268,7 @@
                         </span>
                     @enderror
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
                     <input id="estu_periodo_ingreso" type="text"
                         class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
@@ -371,7 +427,8 @@
                     <label for="estu_matricula">{{ __('Matricula *') }}</label>
                     <select class="form-select" name="estu_matricula" id="estu_matricula" disabled>
                         <option value="">---- SELECCIONE ----</option>
-                        <option value="pendiente" {{ $estudiante->estu_matricula == 'pendiente' ? 'selected' : '' }}>
+                        <option value="pendiente"
+                            {{ $estudiante->estu_matricula == 'pendiente' ? 'selected' : '' }}>
                             Pendiente</option>
                         <option value="pagado" {{ $estudiante->estu_matricula == 'pagado' ? 'selected' : '' }}>
                             Pagado</option>
@@ -390,7 +447,8 @@
                 <div class="col-md-6">
                     <label for="estu_pga">{{ __('Promedio general acumulado ') }}</label>
                     <input id="estu_pga" type="text" class="form-control @error('estu_pga') is-invalid @enderror"
-                        name="estu_pga" value="{{ $estudiante->estu_pga }}" autocomplete="estu_pga" autofocus disabled>
+                        name="estu_pga" value="{{ $estudiante->estu_pga }}" autocomplete="estu_pga" autofocus
+                        disabled>
                 </div>
                 <div class="col-md-6">
                     <label for="estu_reconocimiento">{{ __('Reconocimiento (Opcional)') }}</label>
