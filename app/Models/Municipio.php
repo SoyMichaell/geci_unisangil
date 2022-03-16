@@ -40,4 +40,9 @@ class Municipio extends Model
     public function estudiantes(){
         return $this->hasMany(Estudiante::class, 'id');
     }
+
+    public function movilidadintersede(){
+        return $this->hasMany(ExtMovilidadIntersede::class, 'id');
+    }
+
 }

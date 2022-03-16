@@ -313,8 +313,15 @@ Route::get('extension/{movilidad}/editarmovilidadnacional', [App\Http\Controller
 Route::get('extension/{movilidad}/vermovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'vermovilidadnacional']);
 Route::put('extension/{movilidad}/actualizarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadnacional']);
 Route::delete('extension/{movilidad}/eliminarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadnacional']);
+//Rutas movilidad intersede
+Route::get('extension/mostrarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'mostrarmovilidadintersede']);
+Route::get('extension/crearmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'crearmovilidadintersede']);
+Route::post('extension/registromovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'registromovilidadintersede']);
+Route::get('extension/{movilidad}/editarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'editarmovilidadintersede']);
+Route::get('extension/{movilidad}/vermovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'vermovilidadintersede']);
+Route::put('extension/{movilidad}/actualizarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadintersede']);
+Route::delete('extension/{movilidad}/eliminarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadintersede']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
-
 
 
 //Rutas Redes Acádemicas

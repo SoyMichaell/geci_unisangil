@@ -73,4 +73,9 @@ class Programa extends Model
     public function movilidadnacional(){
         return $this->hasMany(ExtMovilidadNacional::class, 'id');
     }
+
+    public function movilidadintersede(){
+        return $this->hasMany(ExtMovilidadIntersede::class, 'id');
+    }
+
 }

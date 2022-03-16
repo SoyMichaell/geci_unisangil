@@ -17,6 +17,7 @@ use App\Models\ExtEducacionContinua;
 use App\Models\ExtInternacionalizacionCurriculo;
 use App\Models\ExtInterRedConvenio;
 use App\Models\ExtInterRedConvenioParticipante;
+use App\Models\ExtMovilidadIntersede;
 use App\Models\ExtMovilidadNacional;
 use App\Models\ExtParticipante;
 use App\Models\ExtProyectoExtension;
@@ -2239,7 +2240,206 @@ class ExtensionController extends Controller
         $movilidadnacional->save();
         Alert::success('Exitoso', 'Los datos se han actulizado con exito');
         return redirect('/extension/mostrarmovilidadnacional');
+    }
 
+    public function eliminarmovilidadnacional($id){
+        $movilidadnacional = ExtMovilidadNacional::find($id);
+        $movilidadnacional->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarmovilidadintersede');
+    }
+
+    public function mostrarmovilidadintersede(){
+        $movilidadintersedes = ExtMovilidadIntersede::all();
+        return view('extension/movilidades/intersede.index')
+        ->with('movilidadintersedes', $movilidadintersedes);
+    }
+
+    public function crearmovilidadintersede(){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        return view('extension/movilidades/intersede.create')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes);
+    }
+
+    public function registromovilidadintersede(Request $request){
+        $rules = [
+            'exmoin_tipo' => 'required|not_in:0',
+            'exmoin_rol' => 'required|not_in:0',
+            'exmoin_id_sede_or' => 'required|not_in:0',
+            'exmoin_id_facultad_or' => 'required|not_in:0',
+            'exmoin_id_programa_or' => 'required|not_in:0',
+            'exmoin_id_sede_des' => 'required|not_in:0',
+            'exmoin_id_facultad_des' => 'required|not_in:0',
+            'exmoin_id_programa_des' => 'required|not_in:0',
+            'exmoin_tipo_movilidad' => 'required',
+            'exmoin_descripcion' => 'required',
+            'exmoin_fecha_inicio' => 'required',
+            'exmoin_fecha_final' => 'required'
+        ];
+        $message = [
+            'exmoin_tipo.required' => 'El campo tipo es requerido',
+            'exmoin_rol.required' => 'El campo rol es requerido',
+            'exmoin_id_sede_or.required' => 'El campo sede de origen es requerido',
+            'exmoin_id_facultad_or.required' => 'El campo facultad de origen es requerido',
+            'exmoin_id_programa_or.required' => 'El campo programa de origen es requerido',
+            'exmoin_id_sede_des.required' => 'El campo sede destino es requerido',
+            'exmoin_id_facultad_des.required' => 'El campo facultad destino es requerido',
+            'exmoin_id_programa_des.required' => 'El campo programa destino es requerido',
+            'exmoin_tipo_movilidad.required' => 'El campo tipo movilidad es requerido',
+            'exmoin_descripcion.required' => 'El campo descripción es requerido',
+            'exmoin_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exmoin_fecha_final.required' => 'El campo fecha final es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $movilidadintersede = new ExtMovilidadIntersede();
+        $movilidadintersede->exmoin_tipo = $request->get('exmoin_tipo');
+        $movilidadintersede->exmoin_rol = $request->get('exmoin_rol');
+        $movilidadintersede->exmoin_id_sede_or = $request->get('exmoin_id_sede_or');
+        $movilidadintersede->exmoin_id_facultad_or = $request->get('exmoin_id_facultad_or');
+        $movilidadintersede->exmoin_id_programa_or = $request->get('exmoin_id_programa_or');
+        $movilidadintersede->exmoin_id_sede_des = $request->get('exmoin_id_sede_des');
+        $movilidadintersede->exmoin_id_facultad_des = $request->get('exmoin_id_facultad_des');
+        $movilidadintersede->exmoin_id_programa_des = $request->get('exmoin_id_programa_des');
+        if($request->get('exmoin_rol') == 'docente' || $request->get('exmoin_rol') == 'administrativo'){
+            $movilidadintersede->exmoin_id_persona = $request->get('exmoin_id_persona');
+        }else{
+            $movilidadintersede->exmoin_id_persona = $request->get('exmoin_id_estudiante');
+        }
+        $movilidadintersede->exmoin_tipo_movilidad = implode(';' ,$request->get('exmoin_tipo_movilidad'));
+        $movilidadintersede->exmoin_descripcion = $request->get('exmoin_descripcion');
+        $movilidadintersede->exmoin_fecha_inicio = $request->get('exmoin_fecha_inicio');
+        $movilidadintersede->exmoin_fecha_final = $request->get('exmoin_fecha_final');
+        
+        $movilidadintersede->save();
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrarmovilidadintersede');
+    }
+
+    public function editarmovilidadintersede($id){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        $intersede = ExtMovilidadIntersede::find($id);
+        return view('extension/movilidades/intersede.edit')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes)
+            ->with('intersede', $intersede);
+    }
+
+    public function vermovilidadintersede($id){
+        $roles = TipoUsuario::all();
+        $sedes = Municipio::all();
+        $facultades = Facultad::all();
+        $programas = Programa::all();
+        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 4)
+            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+        $intersede = ExtMovilidadIntersede::find($id);
+        return view('extension/movilidades/intersede.show')
+            ->with('roles', $roles)
+            ->with('sedes', $sedes)
+            ->with('facultades', $facultades)
+            ->with('programas', $programas)
+            ->with('personas', $personas)
+            ->with('estudiantes', $estudiantes)
+            ->with('intersede', $intersede);
+    }
+
+    public function actualizarmovilidadintersede(Request $request, $id){
+        $rules = [
+            'exmoin_tipo' => 'required|not_in:0',
+            'exmoin_rol' => 'required|not_in:0',
+            'exmoin_id_sede_or' => 'required|not_in:0',
+            'exmoin_id_facultad_or' => 'required|not_in:0',
+            'exmoin_id_programa_or' => 'required|not_in:0',
+            'exmoin_id_sede_des' => 'required|not_in:0',
+            'exmoin_id_facultad_des' => 'required|not_in:0',
+            'exmoin_id_programa_des' => 'required|not_in:0',
+            'exmoin_tipo_movilidad' => 'required',
+            'exmoin_descripcion' => 'required',
+            'exmoin_fecha_inicio' => 'required',
+            'exmoin_fecha_final' => 'required'
+        ];
+        $message = [
+            'exmoin_tipo.required' => 'El campo tipo es requerido',
+            'exmoin_rol.required' => 'El campo rol es requerido',
+            'exmoin_id_sede_or.required' => 'El campo sede de origen es requerido',
+            'exmoin_id_facultad_or.required' => 'El campo facultad de origen es requerido',
+            'exmoin_id_programa_or.required' => 'El campo programa de origen es requerido',
+            'exmoin_id_sede_des.required' => 'El campo sede destino es requerido',
+            'exmoin_id_facultad_des.required' => 'El campo facultad destino es requerido',
+            'exmoin_id_programa_des.required' => 'El campo programa destino es requerido',
+            'exmoin_tipo_movilidad.required' => 'El campo tipo movilidad es requerido',
+            'exmoin_descripcion.required' => 'El campo descripción es requerido',
+            'exmoin_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exmoin_fecha_final.required' => 'El campo fecha final es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $movilidadintersede = ExtMovilidadIntersede::find($id);
+        $movilidadintersede->exmoin_tipo = $request->get('exmoin_tipo');
+        $movilidadintersede->exmoin_rol = $request->get('exmoin_rol');
+        $movilidadintersede->exmoin_id_sede_or = $request->get('exmoin_id_sede_or');
+        $movilidadintersede->exmoin_id_facultad_or = $request->get('exmoin_id_facultad_or');
+        $movilidadintersede->exmoin_id_programa_or = $request->get('exmoin_id_programa_or');
+        $movilidadintersede->exmoin_id_sede_des = $request->get('exmoin_id_sede_des');
+        $movilidadintersede->exmoin_id_facultad_des = $request->get('exmoin_id_facultad_des');
+        $movilidadintersede->exmoin_id_programa_des = $request->get('exmoin_id_programa_des');
+        if($request->get('exmoin_rol') == 'docente' || $request->get('exmoin_rol') == 'administrativo'){
+            $movilidadintersede->exmoin_id_persona = $request->get('exmoin_id_persona');
+        }else{
+            $movilidadintersede->exmoin_id_persona = $request->get('exmoin_id_estudiante');
+        }
+        $movilidadintersede->exmoin_tipo_movilidad = implode(';' ,$request->get('exmoin_tipo_movilidad'));
+        $movilidadintersede->exmoin_descripcion = $request->get('exmoin_descripcion');
+        $movilidadintersede->exmoin_fecha_inicio = $request->get('exmoin_fecha_inicio');
+        $movilidadintersede->exmoin_fecha_final = $request->get('exmoin_fecha_final');
+        
+        $movilidadintersede->save();
+        Alert::success('Exitoso', 'Los datos se han actualizado con exito');
+        return redirect('/extension/mostrarmovilidadintersede');
+    }
+
+    public function eliminarmovilidadintersede($id){
+        $movilidadintersede = ExtMovilidadIntersede::find($id);
+        $movilidadintersede->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarmovilidadintersede');
     }
 
 

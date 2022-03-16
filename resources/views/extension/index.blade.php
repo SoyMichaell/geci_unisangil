@@ -90,7 +90,7 @@
                 <i class="fa-solid fa-caravan fa-4x"></i>
                 <h4 class="mt-2">Movilidad Nacional</h4>
             </a>
-            <a class="card__extension tile" href="/extension/mostrarmovilidadintersedes">
+            <a class="card__extension tile" href="/extension/mostrarmovilidadintersede">
                 <i class="fa-solid fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Intersedes</h4>
             </a>

@@ -23,4 +23,8 @@ class Facultad extends Model
         return $this->hasMany(ExtMovilidadNacional::class, 'id');
     }
 
+    public function movilidadintersede(){
+        return $this->hasMany(ExtMovilidadIntersede::class, 'id');
+    }
+
 }
