@@ -19,7 +19,11 @@ class UserController extends Controller
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
-        $tiposusuario = TipoUsuario::all();
+        $tiposusuario = DB::table('tipo_usuario')
+            ->where('id', 1)
+            ->orWhere('id', 2)
+            ->orWhere('id', 4)
+            ->get();
         return view('auth.register')
             ->with('tiposdocumento', $tiposdocumento)
             ->with('departamentos', $departamentos)
@@ -81,6 +85,17 @@ class UserController extends Controller
             return back()->withInput();
         }
 
+        $rol = implode(';',$request->get('per_tipo_usuario'));
+
+        //Validación roles 
+        $roles = explode(';', $rol);
+        foreach($roles as $re){
+            if($re == '12'){
+                Alert::warning('Advertencia','Los roles seleccionados no pueden ser');
+                return back()->withInput();
+            }
+        }
+
         DB::table('persona')->insert(
             [
                 'per_tipo_documento' => $request->get('per_tipo_documento'),
@@ -92,7 +107,7 @@ class UserController extends Controller
                 'password' => Hash::make(($request->get('password'))),
                 'per_departamento' => $request->get('per_departamento'),
                 'per_ciudad' => $request->get('per_ciudad'),
-                'per_tipo_usuario' => $request->get('per_tipo_usuario'),
+                'per_tipo_usuario' => implode(';',$request->get('per_tipo_usuario')),
                 'per_id_estado' => $request->get('per_id_estado'),
             ]
         );
@@ -101,17 +116,19 @@ class UserController extends Controller
 
         $tipoDocente = DB::table('persona')
             ->where('id', $id)
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+            ->first();
 
-        if ($tipoDocente->count() > 0) {
-            DB::table('docente')->insert(
-                [
-                    'id_persona_docente' => $id,
-                    'id_proceso' => 1,
-                ]
-            );
+        $rol = explode(';',$tipoDocente->per_tipo_usuario);
+
+        foreach($rol as $r){
+            if($r == '2' || $r == '3'){
+                DB::table('docente')->insert(
+                    [
+                        'id_persona_docente' => $id,
+                        'id_proceso' => 1,
+                    ]
+                );
+            }
         }
 
         Alert::success('Exitoso', 'La persona ha sido registrada con exito');

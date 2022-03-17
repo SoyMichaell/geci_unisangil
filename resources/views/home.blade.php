@@ -56,6 +56,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+                        <div class="info">
+                            <h4>Personal administrativo</h4>
+                            <a href="/programa/mostrarhorario">Crear</a>
+                        </div>
+                    </div>
+                </div>
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 2)

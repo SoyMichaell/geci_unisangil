@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <link rel="shortcut icon" href="{{asset('image/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('image/favicon.png') }}" type="image/x-icon">
     <title>{{ 'GECI | Registrarse' }}</title>
 
     <!-- Scripts -->
@@ -23,25 +23,26 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        body{
-                background-color: #f5f6fa;
-            }
+        body {
+            background-color: #f5f6fa;
+        }
+
         .contenido {
             width: 70%;
             height: 100vh;
             margin: auto;
         }
 
-        .title-login{
-                font-weight: 900;
-                font-size: 65px;
-                color: #198654;
-            }
+        .title-login {
+            font-weight: 900;
+            font-size: 65px;
+            color: #198654;
+        }
 
-            .message-login{
-                font-weight: 300px;
-                font-size: 17px;
-            }
+        .message-login {
+            font-weight: 300px;
+            font-size: 17px;
+        }
 
         .form-login {
             width: 550px;
@@ -70,7 +71,7 @@
 <body>
     <div class="contenido">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="./"><img src="{{asset('image/banner.jpg')}}" width="200px"></a>
+            <a class="navbar-brand" href="./"><img src="{{ asset('image/banner.jpg') }}" width="200px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -83,7 +84,8 @@
         <div class="row mx-auto" style="margin-top: 5%">
             <div class="col-md-5 mx-auto">
                 <h1 class="title-login">Registro nuevos usuarios</h1>
-                <p class="message-login">Plataforma web para la gestión y control de información de procesos académicos y administrativos
+                <p class="message-login">Plataforma web para la gestión y control de información de procesos académicos
+                    y administrativos
                     del programa ingeniería de sistemas <span>unisangil sede Yopal</span></p>
             </div>
             <div class="col-md-7 mx-auto">
@@ -95,12 +97,13 @@
                                 <label for="per_tipo_documento"
                                     class="col-md-12 col-form-label">{{ __('Tipo Documento *') }}</label>
                                 <div class="col-md-12">
-                                    <select class="form-control-custom @error('per_tipo_documento') is-invalid @enderror"
+                                    <select
+                                        class="form-select @error('per_tipo_documento') is-invalid @enderror"
                                         name="per_tipo_documento" id="per_tipo_documento">
                                         <option value="">---- SELECCIONE ----</option>
                                         @foreach ($tiposdocumento as $tipodocumento)
-                                            <option value="{{$tipodocumento}}">{{$tipodocumento}}</option>
-                                        @endforeach  
+                                            <option value="{{ $tipodocumento }}">{{ $tipodocumento }}</option>
+                                        @endforeach
                                     </select>
                                     @error('per_tipo_documento')
                                         <span class="invalid-feedback" role="alert">
@@ -114,7 +117,7 @@
                                     class="col-md-12 col-form-label">{{ __('Número de Documento *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_numero_documento" type="number"
-                                        class="form-control-custom @error('per_numero_documento') is-invalid @enderror"
+                                        class="form-control @error('per_numero_documento') is-invalid @enderror"
                                         name="per_numero_documento" value="{{ old('per_numero_documento') }}"
                                         autocomplete="per_numero_documento" autofocus>
                                     @error('per_numero_documento')
@@ -131,7 +134,7 @@
                                     class="col-md-12 col-form-label">{{ __('Nombre (s) *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_nombre" type="text"
-                                        class="form-control-custom @error('per_nombre') is-invalid @enderror"
+                                        class="form-control @error('per_nombre') is-invalid @enderror"
                                         name="per_nombre" value="{{ old('per_nombre') }}" autocomplete="per_nombre"
                                         autofocus>
                                     @error('per_nombre')
@@ -146,7 +149,7 @@
                                     class="col-md-12 col-form-label">{{ __('Apellido (s) *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_apellido" type="text"
-                                        class="form-control-custom @error('per_apellido') is-invalid @enderror"
+                                        class="form-control @error('per_apellido') is-invalid @enderror"
                                         name="per_apellido" value="{{ old('per_apellido') }}"
                                         autocomplete="per_apellido" autofocus>
                                     @error('per_apellido')
@@ -163,7 +166,7 @@
                                     class="col-md-12 col-form-label">{{ __('Telefono *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_telefono" type="number"
-                                        class="form-control-custom @error('per_telefono') is-invalid @enderror"
+                                        class="form-control @error('per_telefono') is-invalid @enderror"
                                         name="per_telefono" value="{{ old('per_telefono') }}"
                                         autocomplete="per_telefono" autofocus>
                                     @error('per_telefono')
@@ -178,8 +181,9 @@
                                     class="col-md-12 col-form-label">{{ __('Correo electronico *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_correo" type="email"
-                                        class="form-control-custom @error('per_correo') is-invalid @enderror" name="per_correo"
-                                        value="{{ old('per_correo') }}" autocomplete="per_correo" autofocus>
+                                        class="form-control @error('per_correo') is-invalid @enderror"
+                                        name="per_correo" value="{{ old('per_correo') }}" autocomplete="per_correo"
+                                        autofocus>
                                     @error('per_correo')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -194,7 +198,7 @@
                                     class="col-md-12 col-form-label">{{ __('Contraseña *') }}</label>
                                 <div class="col-md-12">
                                     <input id="password" type="password"
-                                        class="form-control-custom @error('password') is-invalid @enderror"
+                                        class="form-control @error('password') is-invalid @enderror"
                                         name="password" value="{{ old('password') }}" autocomplete="password"
                                         autofocus>
                                     @error('password')
@@ -208,7 +212,7 @@
                                 <label for="password-confirm"
                                     class="col-md-12 col-form-label">{{ __('Confirmar contraseña *') }}</label>
                                 <div class="col-md-12">
-                                    <input id="password-confirm" type="password" class="form-control-custom"
+                                    <input id="password-confirm" type="password" class="form-control"
                                         name="password_confirmation" autocomplete="new-password">
                                 </div>
                             </div>
@@ -218,12 +222,14 @@
                                 <label for="per_departamento"
                                     class="col-md-12 col-form-label">{{ __('Departamento *') }}</label>
                                 <div class="col-md-12">
-                                    <select class="form-control-custom @error('per_departamento') is-invalid @enderror"
+                                    <select class="form-select @error('per_departamento') is-invalid @enderror"
                                         name="per_departamento" id="per_departamento">
                                         <option value="">---- SELECCIONE ----</option>
                                         @foreach ($departamentos as $departamento)
-                                            <option value="{{$departamento->id}}">{{$departamento->dep_nombre}}</option>
-                                        @endforeach  
+                                            <option value="{{ $departamento->id }}">
+                                                {{ $departamento->dep_nombre }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     @error('per_departamento')
                                         <span class="invalid-feedback" role="alert">
@@ -233,15 +239,15 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <label for="per_ciudad"
-                                    class="col-md-12 col-form-label">{{ __('Ciudad *') }}</label>
+                                <label for="per_ciudad" class="col-md-12 col-form-label">{{ __('Ciudad *') }}</label>
                                 <div class="col-md-12">
-                                    <select class="form-control-custom @error('per_ciudad') is-invalid @enderror"
+                                    <select class="form-select @error('per_ciudad') is-invalid @enderror"
                                         name="per_ciudad" id="per_ciudad">
-                                        <option value="">---- SELECCIONE ----</option> 
+                                        <option value="">---- SELECCIONE ----</option>
                                         @foreach ($municipios as $municipio)
-                                            <option value="{{$municipio->id}}">{{$municipio->mun_nombre}}</option>
-                                        @endforeach  
+                                            <option value="{{ $municipio->id }}">{{ $municipio->mun_nombre }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     @error('per_ciudad')
                                         <span class="invalid-feedback" role="alert">
@@ -253,30 +259,24 @@
                         </div>
                         <div class="row mb-3">
                             <div class="col-md-6">
-                                <label for="per_tipo_usuario"
-                                    class="col-md-12 col-form-label">{{ __('Tipo de usuario *') }}</label>
-                                <div class="col-md-12">
-                                    <select class="form-control-custom @error('per_tipo_usuario') is-invalid @enderror"
-                                        name="per_tipo_usuario" id="per_tipo_usuario">
-                                        <option value="">---- SELECCIONE ----</option>
-                                        @foreach ($tiposusuario as $tipousuario)
-                                            <option value="{{$tipousuario->id}}">{{$tipousuario->tip_nombre}}</option>
-                                        @endforeach  
-                                    </select>
-                                    @error('per_tipo_usuario')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                                <label class=" ml-3" for="per_tipo_usuario">Tipo de usuario</label>
+                                @foreach ($tiposusuario as $tipousuario)
+                                    <div class="form-check ml-3">
+                                        <input class="form-check-input" name="per_tipo_usuario[]" type="checkbox" value="{{ $tipousuario->id }}"
+                                            id="flexCheckDefault">
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            {{ $tipousuario->tip_nombre }}
+                                        </label>
+                                    </div>
+                                @endforeach
                             </div>
                             <div class="col-md-6">
                                 <label for="per_id_estado"
                                     class="col-md-12 col-form-label">{{ __('Estado *') }}</label>
                                 <div class="col-md-12">
-                                    <select class="form-control-custom @error('per_id_estado') is-invalid @enderror"
+                                    <select class="form-select @error('per_id_estado') is-invalid @enderror"
                                         name="per_id_estado" id="per_id_estado">
-                                        <option value="activo">Activo</option> 
+                                        <option value="activo">Activo</option>
                                     </select>
                                     @error('per_id_estado')
                                         <span class="invalid-feedback" role="alert">
