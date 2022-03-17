@@ -113,7 +113,7 @@
                                     class="col-md-12 col-form-label text-md-left">{{ __('Correo electronico *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_correo" type="email"
-                                        class="form-control-custom @error('per_correo') is-invalid @enderror" name="per_correo"
+                                        class="form-control @error('per_correo') is-invalid @enderror" name="per_correo"
                                         value="{{ old('per_correo') }}" autocomplete="per_correo" autofocus>
                                     @error('per_correo')
                                         <span class="invalid-feedback" role="alert">
@@ -127,7 +127,7 @@
                                     class="col-md-12 col-form-label text-md-left">{{ __('Contraseña *') }}</label>
                                 <div class="col-md-12">
                                     <input id="password" type="password"
-                                        class="form-control-custom @error('password') is-invalid @enderror"
+                                        class="form-control @error('password') is-invalid @enderror"
                                         name="password" autocomplete="current-password">
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">

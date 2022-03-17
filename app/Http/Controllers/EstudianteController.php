@@ -65,6 +65,12 @@ class EstudianteController extends Controller
         $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
 
+        $tipousuarios = DB::table('tipo_usuario')
+            ->where('id', 4)
+            ->orWhere('id', 5)
+            ->orWhere('id', 6)
+            ->get(); 
+
 
         return view('estudiante.create')
             ->with('programas', $programas)
@@ -73,7 +79,8 @@ class EstudianteController extends Controller
             ->with('municipios', $municipios)
             ->with('semestres', $semestres)
             ->with('estadoprogramas', $estadoprogramas)
-            ->with('tiposdocumento', $tiposdocumento);
+            ->with('tiposdocumento', $tiposdocumento)
+            ->with('tipousuarios', $tipousuarios);
     }
 
     public function store(Request $request)
@@ -139,20 +146,24 @@ class EstudianteController extends Controller
             return back()->withInput();
         } else {
 
+            DB::table('persona')->insert([
+                    'per_tipo_documento' => $request->get('estu_tipo_documento'),
+                    'per_numero_documento' => $request->get('estu_numero_documento'),
+                    'per_nombre' => $request->get('estu_nombre'),
+                    'per_apellido' => $request->get('estu_apellido'),
+                    'per_telefono' => $request->get('estu_telefono1'),
+                    'per_telefono' => $request->get('estu_correo'),
+                    'estu_departamento' => $request->get('estu_departamento'),
+                    'estu_ciudad' => $request->get('estu_ciudad'),
+            ])
+
             DB::table('estudiante')->insert(
                 [
                     'estu_programa' => $request->get('estu_programa'),
                     'estu_programa_plan' =>  $request->get('estu_programa_plan'),
-                    'estu_tipo_documento' => $request->get('estu_tipo_documento'),
-                    'estu_numero_documento' => $request->get('estu_numero_documento'),
-                    'estu_nombre' => $request->get('estu_nombre'),
-                    'estu_apellido' => $request->get('estu_apellido'),
-                    'estu_telefono1' => $request->get('estu_telefono1'),
+                    'estu_telefono2' => $request->get('estu_telefono1'),
                     'estu_direccion' => $request->get('estu_direccion'),
-                    'estu_correo' => $request->get('estu_correo'),
                     'estu_estrato' => $request->get('estu_estrato'),
-                    'estu_departamento' => $request->get('estu_departamento'),
-                    'estu_ciudad' => $request->get('estu_ciudad'),
                     'estu_fecha_nacimiento' => $request->get('estu_fecha_nacimiento'),
                     'estu_fecha_expedicion' => $request->get('estu_fecha_expedicion'),
                     'estu_sexo' => $request->get('estu_sexo'),

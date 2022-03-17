@@ -16,33 +16,31 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <label for="estu_programa">{{ __('Programa *') }}</label>
-                                <select class="form-select" name="estu_programa" id="estu_programa">
-                                    <option value="">---- SELECCIONE ----</option>
-                                    @foreach ($programas as $programa)
-                                        <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
-                                    @endforeach
-                                </select>
-                                @error('estu_programa')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                            <div class="col-md-6">
-                                <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
-                                <select class="form-select" name="estu_programa_plan" id="estu_programa_plan">
-                                </select>
-                                @error('estu_programa_plan')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                        <label for="estu_programa">{{ __('Programa *') }}</label>
+                        <select class="form-select" name="estu_programa" id="estu_programa">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($programas as $programa)
+                                <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
+                            @endforeach
+                        </select>
+                        @error('estu_programa')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
                     </div>
+                    <div class="col-md-6">
+                        <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
+                        <select class="form-select" name="estu_programa_plan" id="estu_programa_plan">
+                        </select>
+                        @error('estu_programa_plan')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_tipo_documento">{{ __('Tipo Documento *') }}</label>
                         <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento">
@@ -57,8 +55,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_numero_documento">{{ __('Número de Documento *') }}</label>
                         <input id="estu_numero_documento" type="number"
@@ -71,6 +67,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_nombre">{{ __('Nombre (s) *') }}</label>
                         <input id="estu_nombre" type="text"
@@ -82,8 +80,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_apellido">{{ __('Apellido (s) *') }}</label>
                         <input id="estu_apellido" type="text"
@@ -95,6 +91,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_telefono1">{{ __('Telefono 1 *') }}</label>
                         <input id="estu_telefono1" type="number"
@@ -106,8 +104,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_telefono2">{{ __('Telefono 2 (Opcional)') }}</label>
                         <input id="estu_telefono2" type="number"
@@ -119,6 +115,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_direccion">{{ __('Dirección *') }}</label>
                         <input id="estu_direccion" type="text"
@@ -130,8 +128,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_correo">{{ __('Correo electronico *') }}</label>
                         <input id="estu_correo" type="email"
@@ -143,6 +139,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_estrato">{{ __('Estrato *') }}</label>
                         <input id="estu_estrato" type="text"
@@ -154,8 +152,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_departamento">{{ __('Departamento *') }}</label>
                         <select class="form-select" name="estu_departamento" id="estu_departamento">
@@ -171,6 +167,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
                         <select class="form-select" name="estu_ciudad" id="estu_ciudad">
@@ -181,8 +179,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
                         <input id="estu_fecha_nacimiento" type="date"
@@ -195,6 +191,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  *') }}</label>
                         <input id="estu_fecha_expedicion" type="date"
@@ -207,8 +205,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
                         <select class="form-select" name="estu_sexo" id="estu_sexo">
@@ -222,6 +218,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
                         <select class="form-select" name="estu_estado_civil" id="estu_estado_civil">
@@ -240,8 +238,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
                         <input id="estu_ingreso" type="text"
@@ -253,6 +249,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
                         <input id="estu_periodo_ingreso" type="text"
@@ -265,8 +263,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_ult_matricula">{{ __('Ultimo periodo matriculado *') }}</label>
                         <input id="estu_ult_matricula" type="text"
@@ -279,6 +275,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_semestre">{{ __('Semestre *') }}</label>
                         <select class="form-select" name="estu_semestre" id="estu_semestre">
@@ -300,8 +298,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_financiamiento">{{ __('Tipo de financiamiento *') }}</label>
                         <select class="form-select" name="estu_financiamiento" id="estu_financiamiento">
@@ -316,6 +312,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label
                             for="estu_entidad">{{ __('Tipo de Beca (Solo si el tipo de financiamiento es BECA)') }}</label>
@@ -328,9 +326,7 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="estu_estado">{{ __('Estado *') }}</label>
                         <select class="form-select" name="estu_estado" id="estu_estado">
                             <option value="">---- SELECCIONE ----</option>
@@ -349,7 +345,9 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
                         <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
                         <select class="form-select" name="estu_tipo_matricula" id="estu_tipo_matricula">
                             <option value="">---- SELECCIONE ----</option>
@@ -372,7 +370,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <label for="estu_matricula">{{ __('Matricula *') }}</label>
                         <select class="form-select" name="estu_matricula" id="estu_matricula">
                             <option value="">---- SELECCIONE ----</option>
@@ -402,7 +400,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="estu_egresado">{{ __('¿Es egresado? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
@@ -412,6 +410,48 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estu_adminitrativo">{{ __('¿Es personal administrativo de unisangil? ') }}</label>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <select class="form-select" name="estu_adminitrativo" id="estu_adminitrativo">
+                                    <option value="Si">Si</option>
+                                    <option value="No" selected>No</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3" id="administrativo-estudiante">
+                    <h4>Datos administrativos</h4>
+                    <div class="col-md-6">
+                        <label for="admin_cargo">{{ __('Cargo') }}</label>
+                        <input id="admin_cargo" type="text"
+                            class="form-control @error('admin_cargo') is-invalid @enderror"
+                            name="admin_cargo" value="{{ old('admin_cargo') }}"
+                            autocomplete="admin_cargo" autofocus>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="admin_dependencia">{{ __('Dependencia') }}</label>
+                        <input id="admin_dependencia" type="text"
+                            class="form-control @error('admin_dependencia') is-invalid @enderror"
+                            name="admin_dependencia" value="{{ old('admin_dependencia') }}"
+                            autocomplete="admin_dependencia" autofocus>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="admin_fecha_ingreso">{{ __('Fecha de ingreso') }}</label>
+                        <input id="admin_fecha_ingreso" type="date"
+                            class="form-control @error('admin_fecha_ingreso') is-invalid @enderror"
+                            name="admin_fecha_ingreso" value="{{ old('admin_fecha_ingreso') }}"
+                            autocomplete="admin_fecha_ingreso" autofocus>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="admin_no_contrato">{{ __('No. contrato') }}</label>
+                        <input id="admin_no_contrato" type="date"
+                            class="form-control @error('admin_no_contrato') is-invalid @enderror"
+                            name="admin_no_contrato" value="{{ old('admin_no_contrato') }}"
+                            autocomplete="admin_no_contrato" autofocus>
                     </div>
                 </div>
                 <div class="row mb-0">
@@ -423,6 +463,7 @@
                 </div>
             </form>
         </div>
+    </div>
     </div>
     <br>
 @endsection

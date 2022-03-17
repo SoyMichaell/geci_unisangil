@@ -14,8 +14,9 @@ use RealRashid\SweetAlert\Facades\Alert;
 class UserController extends Controller
 {
 
-    public function create(){
-        $tiposdocumento = collect(['Tarjeta de identidad','Cédula de ciudadanía','Cédula de extranjeria']);
+    public function create()
+    {
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadanía', 'Cédula de extranjeria']);
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
@@ -85,16 +86,7 @@ class UserController extends Controller
             return back()->withInput();
         }
 
-        $rol = implode(';',$request->get('per_tipo_usuario'));
-
         //Validación roles 
-        $roles = explode(';', $rol);
-        foreach($roles as $re){
-            if($re == '12'){
-                Alert::warning('Advertencia','Los roles seleccionados no pueden ser');
-                return back()->withInput();
-            }
-        }
 
         DB::table('persona')->insert(
             [
@@ -135,11 +127,11 @@ class UserController extends Controller
         return redirect('/login');
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $user = User::find($id);
         $user->delete();
         Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
         return redirect('/home');
     }
-
 }

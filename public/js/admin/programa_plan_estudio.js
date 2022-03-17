@@ -1,5 +1,7 @@
 $(function() {
 
+    var tipoestudiante = $('#estu_adminitrativo').val();
+
     var tipo = $('#exmona_tipo').val();
     var rol = $('#exmona_rol').val();
 
@@ -8,6 +10,13 @@ $(function() {
 
     var tipoInterna = $('#exmointer_tipo').val();
     var rolInterna = $('#exmointer_rol').val();
+
+    if(tipoestudiante == 'Si'){
+        $('#administrativo-estudiante').show();
+    }else{
+        $('#estu_adminitrativo').on('change', onSelectTipoEstudiante);
+        $('#administrativo-estudiante').hide();
+    }
 
     if ((tipo == 'entrante' && rol == 'estudiante') || (tipo == 'saliente' && rol == 'estudiante')) {
         $('#tipo-estudiante').show();
@@ -156,6 +165,16 @@ $(function() {
 
 
 });
+
+function onSelectTipoEstudiante(){
+    var tipoestudiante = $('#estu_adminitrativo').val();
+    if(tipoestudiante == 'Si'){
+        $('#administrativo-estudiante').show();
+    }else{
+        $('#estu_adminitrativo').on('change', onSelectTipoEstudiante);
+        $('#administrativo-estudiante').hide();
+    }
+}
 
 function onSelectProgramaEstudio() {
     var id_programa_plan = $(this).val();
@@ -317,5 +336,6 @@ function onSelectTipoMovilidadInternacional() {
         $('#otros').show();
         $('#entrante-administrativo').hide();
     }
+
 
 }
