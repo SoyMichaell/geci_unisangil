@@ -341,3 +341,7 @@ Route::resource('practica', App\Http\Controllers\PracticaController::class);
 
 //Rutas laboratorios
 Route::resource('laboratorio',  App\Http\Controllers\LaboratorioController::class);
+
+
+//Rutas módulo movilidad
+Route::resource('movilidad', App\Http\Controllers\MovilidadController::class);

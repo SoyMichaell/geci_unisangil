@@ -154,7 +154,7 @@
                     <div class="col-md-4">
                         <label for="">Tipo de persona</label>
                         <select class="form-select" name="tipo_persona" id="tipo_persona">
-                            <option value="0">---- SELECCIONE ----</option>
+                            <option value="">---- SELECCIONE ----</option>
                             <option value="1">Docente</option>
                             <option value="2">Estudiante</option>
                         </select>

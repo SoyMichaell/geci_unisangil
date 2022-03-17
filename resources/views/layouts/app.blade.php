@@ -126,6 +126,9 @@
                     <li><a class="treeview-item" href="{{ url('laboratorio') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Laboratorios</a></li>
+                    <li><a class="treeview-item" href="{{ url('movilidad') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Movilidad</a></li>
                 </ul>
             </li>
         </ul>
