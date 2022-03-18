@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -11,11 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Volcando estructura de base de datos para proyecto
-CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `proyecto`;
 
 -- Volcando estructura para tabla proyecto.compl_area_extension
 CREATE TABLE IF NOT EXISTS `compl_area_extension` (
@@ -388,7 +383,7 @@ CREATE TABLE IF NOT EXISTS `docente` (
   CONSTRAINT `FK_docente_persona` FOREIGN KEY (`id_persona_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.docente: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `docente` DISABLE KEYS */;
 INSERT IGNORE INTO `docente` (`id`, `id_persona_docente`, `ciudad_procedencia`, `correo_personal`, `dedicacion`, `tipo_contratacion`, `fecha_vinculacion`, `eps`, `institucion_esp`, `certificado_esp`, `institucion_dip`, `certificado_dip`, `titulo_pregrado`, `institucion_pre`, `titulo_especializacion`, `institucion_espe`, `titulo_maestria`, `institucion_mae`, `titulo_doctorado`, `institucion_doc`, `area_conocimiento`, `maximo_nivel_formacion`, `titulo_maximo_nivel`, `institucion_maximo_nivel`, `modalidad_programa`, `riesgo`, `caja_compensacion`, `banco`, `no_cuenta`, `pension`, `estado`, `soporte_hoja_vida`, `documentos_compl`, `id_proceso`, `created_at`, `updated_at`) VALUES
 	(32, 56, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL);
@@ -503,7 +498,6 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   `estu_programa_plan` int(11) DEFAULT 0,
   `estu_telefono2` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `estu_direccion` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `estu_correo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `estu_estrato` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `estu_fecha_nacimiento` date NOT NULL,
   `estu_fecha_expedicion` date NOT NULL,
@@ -524,7 +518,6 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `estu_correo` (`estu_correo`),
   KEY `FK_estudiante_programa` (`estu_programa`),
   KEY `FK_estudiante_programa_plan_estudio` (`estu_programa_plan`),
   KEY `FK_estudiante_persona` (`estu_id_estudiante`),
@@ -742,6 +735,53 @@ CREATE TABLE IF NOT EXISTS `ext_educacion_continua` (
 /*!40000 ALTER TABLE `ext_educacion_continua` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ext_educacion_continua` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyecto.ext_eventos_nac_inter
+CREATE TABLE IF NOT EXISTS `ext_eventos_nac_inter` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exevin_tipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_year` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_periodo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_nombre_evento` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_fecha_inicio` date NOT NULL,
+  `exevin_fecha_final` date NOT NULL,
+  `exevin_lugar` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `exevin_sede` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `exevin_ponentes` text COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_institucion` text COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_pais` text COLLATE utf8_unicode_ci NOT NULL,
+  `exevin_nombre_ponencia` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_eventos_nac_inter: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_eventos_nac_inter` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_eventos_nac_inter` (`id`, `exevin_tipo`, `exevin_year`, `exevin_periodo`, `exevin_nombre_evento`, `exevin_fecha_inicio`, `exevin_fecha_final`, `exevin_lugar`, `exevin_sede`, `exevin_ponentes`, `exevin_institucion`, `exevin_pais`, `exevin_nombre_ponencia`, `created_at`, `updated_at`) VALUES
+	(2, 'internacional', '2022', '2022-1', 'IES', '2022-03-18', '2022-05-18', 'México', 'UNAB', 'dkajsdkljasld', 'kjdsalkasjd', 'Colombia', 'adasdasd', '2022-03-18 06:18:24', '2022-03-18 06:21:08');
+/*!40000 ALTER TABLE `ext_eventos_nac_inter` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.ext_eventos_virtuales
+CREATE TABLE IF NOT EXISTS `ext_eventos_virtuales` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `exevir_nombre_evento` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `exevir_fecha_inicio` date NOT NULL,
+  `exevir_fecha_fin` date NOT NULL,
+  `exevir_enlace_ingreso` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `exevir_enlace_imagen` varchar(200) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `exevir_nombre_ponente` text COLLATE utf8_unicode_ci NOT NULL,
+  `exevir_institucion_origen` text COLLATE utf8_unicode_ci NOT NULL,
+  `exevir_pais` text COLLATE utf8_unicode_ci NOT NULL,
+  `exevir_nombre_ponencia` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_eventos_virtuales: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_eventos_virtuales` DISABLE KEYS */;
+/*!40000 ALTER TABLE `ext_eventos_virtuales` ENABLE KEYS */;
+
 -- Volcando estructura para tabla proyecto.ext_internacionalizacion_curriculo
 CREATE TABLE IF NOT EXISTS `ext_internacionalizacion_curriculo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -828,10 +868,12 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_intersede` (
   CONSTRAINT `FK_ext_movilidad_intersede_municipio_2` FOREIGN KEY (`exmoin_id_sede_des`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_movilidad_intersede_programa` FOREIGN KEY (`exmoin_id_programa_or`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_movilidad_intersede_programa_2` FOREIGN KEY (`exmoin_id_programa_des`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_movilidad_intersede: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_movilidad_intersede: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_movilidad_intersede` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_movilidad_intersede` (`id`, `exmoin_tipo`, `exmoin_rol`, `exmoin_id_sede_or`, `exmoin_id_facultad_or`, `exmoin_id_programa_or`, `exmoin_id_sede_des`, `exmoin_id_facultad_des`, `exmoin_id_programa_des`, `exmoin_id_persona`, `exmoin_tipo_movilidad`, `exmoin_descripcion`, `exmoin_fecha_inicio`, `exmoin_fecha_final`, `created_at`, `updated_at`) VALUES
+	(3, 'entrante', 'docente', 2, 2, 10, 2, 2, 10, 56, 'Profesor programa pregrado', 'sdasda', '2022-03-17', '2023-03-17', '2022-03-18 03:41:02', '2022-03-18 03:41:02');
 /*!40000 ALTER TABLE `ext_movilidad_intersede` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_movilidad_nacional
@@ -858,6 +900,29 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_nacional` (
 INSERT IGNORE INTO `ext_movilidad_nacional` (`id`, `exmona_tipo`, `exmona_rol`, `exmona_id_sede`, `exmona_id_facultad`, `exmona_id_programa`, `exmona_id_persona`, `exmona_institucion_proviene`, `exmona_tipo_movilidad`, `exmona_descripcion`, `exmona_fecha_inicio`, `exmona_fecha_final`, `created_at`, `updated_at`) VALUES
 	(1, 'entrante', 'docente', 2, 2, 9, 43, 'UNISANGIL', 'Misión;Curso corto', 'Sin comentarios', '2021-03-14', '2022-03-14', '2022-03-14 21:31:29', '2022-03-14 22:25:35');
 /*!40000 ALTER TABLE `ext_movilidad_nacional` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.ext_participacion_eventos
+CREATE TABLE IF NOT EXISTS `ext_participacion_eventos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `expaev_year` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `expaev_periodo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `expaev_tipo_evento` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `expaev_nombre_evento` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `expaev_fecha` date NOT NULL,
+  `expaev_organizador` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `expaev_id_persona` int(11) NOT NULL DEFAULT 0,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_ext_participacion_eventos_persona` (`expaev_id_persona`),
+  CONSTRAINT `FK_ext_participacion_eventos_persona` FOREIGN KEY (`expaev_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.ext_participacion_eventos: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `ext_participacion_eventos` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_participacion_eventos` (`id`, `expaev_year`, `expaev_periodo`, `expaev_tipo_evento`, `expaev_nombre_evento`, `expaev_fecha`, `expaev_organizador`, `expaev_id_persona`, `created_at`, `updated_at`) VALUES
+	(1, '2021', '2021-2', 'webinar', 'Taller usando Microbit - Desafío Do your:bit de la BBC de Londres', '2021-07-08', 'fedesoft - Redis', 56, '2022-03-18 05:16:31', '2022-03-18 05:28:32');
+/*!40000 ALTER TABLE `ext_participacion_eventos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_participante
 CREATE TABLE IF NOT EXISTS `ext_participante` (
@@ -1769,7 +1834,7 @@ CREATE TABLE IF NOT EXISTS `tipo_usuario` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.tipo_usuario: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.tipo_usuario: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
 INSERT IGNORE INTO `tipo_usuario` (`id`, `tip_nombre`, `created_at`, `updated_at`) VALUES
 	(1, 'Adminitrador', '2022-03-17 10:41:16', NULL),
