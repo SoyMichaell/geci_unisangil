@@ -90,4 +90,8 @@ class User extends Authenticatable
     public function movilidad(){
         return $this->hasMany(Movilidad::class, 'id');
     }
+
+    public function participancioneventos(){
+        return $this->hasMany(ExtParticipacionEvento::class, 'id');
+    }
 }

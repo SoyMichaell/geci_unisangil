@@ -83,6 +83,18 @@
                 <i class="fa-solid fa-globe fa-4x"></i>
                 <h4 class="mt-2">Internacionalización de curriculo (asignauturas)</h4>
             </a>
+            <a class="card__extension tile" href="/extension/mostrareventosvirtuales">
+                <i class="fa-solid fa-globe fa-4x"></i>
+                <h4 class="mt-2">Eventos virtuales</h4>
+            </a>
+            <a class="card__extension tile" href="/extension/mostrarparticipacioneventos">
+                <i class="fa-solid fa-globe fa-4x"></i>
+                <h4 class="mt-2">Participación eventos</h4>
+            </a>
+            <a class="card__extension tile" href="/extension/mostrareventosinternacionales">
+                <i class="fa-solid fa-globe fa-4x"></i>
+                <h4 class="mt-2">Eventos internacionales</h4>
+            </a>
         </div>
         <h4 class="ml-3">Movilidad</h4>
         <div class="row">

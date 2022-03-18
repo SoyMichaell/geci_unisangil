@@ -329,6 +329,30 @@ Route::get('extension/{movilidad}/editarmovilidadinternacional', [App\Http\Contr
 Route::get('extension/{movilidad}/vermovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'vermovilidadinternacional']);
 Route::put('extension/{movilidad}/actualizarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadinternacional']);
 Route::delete('extension/{movilidad}/eliminarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadinternacional']);
+//Rutas eventos virtuales
+Route::get('extension/mostrareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'mostrareventosvirtuales']);
+Route::get('extension/creareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'creareventosvirtuales']);
+Route::post('extension/registroeventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'registroeventosvirtuales']);
+Route::get('extension/{evento}/editareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'editareventosvirtuales']);
+Route::get('extension/{evento}/vereventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'vereventosvirtuales']);
+Route::put('extension/{evento}/actualizareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'actualizareventosvirtuales']);
+Route::delete('extension/{evento}/eliminareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'eliminareventosvirtuales']);
+//Rutas participación eventos
+Route::get('extension/mostrarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'mostrarparticipacioneventos']);
+Route::get('extension/crearparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'crearparticipacioneventos']);
+Route::post('extension/registroparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'registroparticipacioneventos']);
+Route::get('extension/{evento}/editarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'editarparticipacioneventos']);
+Route::get('extension/{evento}/verparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'verparticipacioneventos']);
+Route::put('extension/{evento}/actualizarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipacioneventos']);
+Route::delete('extension/{evento}/eliminarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipacioneventos']);
+//Rutas eventos internacionales
+Route::get('extension/mostrareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'mostrareventosinternacionales']);
+Route::get('extension/creareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'creareventosinternacionales']);
+Route::post('extension/registroeventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'registroeventosinternacionales']);
+Route::get('extension/{evento}/editareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'editareventosinternacionales']);
+Route::get('extension/{evento}/vereventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'vereventosinternacionales']);
+Route::put('extension/{evento}/actualizareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'actualizareventosinternacionales']);
+Route::delete('extension/{evento}/eliminareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'eliminareventosinternacionales']);
 Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 

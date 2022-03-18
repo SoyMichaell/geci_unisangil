@@ -14,12 +14,15 @@ use App\Models\ExtConsultoria;
 use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
 use App\Models\ExtEducacionContinua;
+use App\Models\ExtEventoInternacional;
+use App\Models\ExtEventoVirtual;
 use App\Models\ExtInternacionalizacionCurriculo;
 use App\Models\ExtInterRedConvenio;
 use App\Models\ExtInterRedConvenioParticipante;
 use App\Models\ExtMovilidadInternacional;
 use App\Models\ExtMovilidadIntersede;
 use App\Models\ExtMovilidadNacional;
+use App\Models\ExtParticipacionEvento;
 use App\Models\ExtParticipante;
 use App\Models\ExtProyectoExtension;
 use App\Models\ExtRedOrganizacion;
@@ -2634,6 +2637,359 @@ class ExtensionController extends Controller
         $movilidadinternacional->delete();
         Alert::success('Exitoso', 'Los datos se han eliminado con exito');
         return redirect('/extension/mostrarmovilidadinternacional');
+    }
+
+    public function mostrareventosvirtuales(){
+        $eventosvirtuales = ExtEventoVirtual::all();
+        return view('extension/eventos/virtual.index')
+            ->with('eventosvirtuales', $eventosvirtuales);
+    }
+
+    public function creareventosvirtuales(){
+        return view('extension/eventos/virtual.create');
+    }
+
+    public function registroeventosvirtuales(Request $request){
+        $rules = [
+            'exevir_nombre_evento' => 'required',
+            'exevir_fecha_inicio' => 'required',
+            'exevir_fecha_fin' => 'required',
+            'exevir_enlace_ingreso' => 'required',
+            'exevir_nombre_ponente' => 'required',
+            'exevir_institucion_origen' => 'required',
+            'exevir_pais' => 'required',
+            'exevir_nombre_ponencia' => 'required',
+        ];
+        $message = [
+            'exevir_nombre_evento.required' => 'El campo nombre evento es requerido',
+            'exevir_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exevir_fecha_fin.required' => 'El campo fecha fin es requerido',
+            'exevir_enlace_ingreso.required' => 'El campo enlace ingreso es requerido',
+            'exevir_nombre_ponente.required' => 'El campo nombre ponente es requerido',
+            'exevir_institucion_origen.required' => 'El campo institución origen es requerido',
+            'exevir_pais.required' => 'El campo país es requerido',
+            'exevir_nombre_ponencia.required' => 'El campo nombre ponencia es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $virtual = new ExtEventoVirtual();
+        $virtual->exevir_nombre_evento = $request->get('exevir_nombre_evento');
+        $virtual->exevir_fecha_inicio = $request->get('exevir_fecha_inicio');
+        $virtual->exevir_fecha_fin = $request->get('exevir_fecha_fin');
+        $virtual->exevir_enlace_ingreso = $request->get('exevir_enlace_ingreso');
+        $virtual->exevir_enlace_imagen = $request->get('exevir_enlace_imagen');
+        $virtual->exevir_nombre_ponente = implode(';',$request->get('exevir_nombre_ponente'));
+        $virtual->exevir_institucion_origen = implode(';',$request->get('exevir_institucion_origen'));
+        $virtual->exevir_pais = implode(';',$request->get('exevir_pais'));
+        $virtual->exevir_nombre_ponencia = implode(';',$request->get('exevir_nombre_ponencia'));
+        $virtual->save();
+
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrareventosvirtuales');
+    }
+
+    public function vereventosvirtuales($id){
+        $virtual = ExtEventoVirtual::find($id);
+        return view('extension/eventos/virtual.show')
+            ->with('virtual', $virtual);
+    }
+
+    public function editareventosvirtuales($id){
+        $virtual = ExtEventoVirtual::find($id);
+        return view('extension/eventos/virtual.edit')
+            ->with('virtual', $virtual);
+    }
+
+    public function actualizareventosvirtuales(Request $request, $id){
+        $rules = [
+            'exevir_nombre_evento' => 'required',
+            'exevir_fecha_inicio' => 'required',
+            'exevir_fecha_fin' => 'required',
+            'exevir_enlace_ingreso' => 'required',
+            'exevir_nombre_ponente' => 'required',
+            'exevir_institucion_origen' => 'required',
+            'exevir_pais' => 'required',
+            'exevir_nombre_ponencia' => 'required',
+        ];
+        $message = [
+            'exevir_nombre_evento.required' => 'El campo nombre evento es requerido',
+            'exevir_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exevir_fecha_fin.required' => 'El campo fecha fin es requerido',
+            'exevir_enlace_ingreso.required' => 'El campo enlace ingreso es requerido',
+            'exevir_nombre_ponente.required' => 'El campo nombre ponente es requerido',
+            'exevir_institucion_origen.required' => 'El campo institución origen es requerido',
+            'exevir_pais.required' => 'El campo país es requerido',
+            'exevir_nombre_ponencia.required' => 'El campo nombre ponencia es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $virtual = ExtEventoVirtual::find($id);
+        $virtual->exevir_nombre_evento = $request->get('exevir_nombre_evento');
+        $virtual->exevir_fecha_inicio = $request->get('exevir_fecha_inicio');
+        $virtual->exevir_fecha_fin = $request->get('exevir_fecha_fin');
+        $virtual->exevir_enlace_ingreso = $request->get('exevir_enlace_ingreso');
+        $virtual->exevir_enlace_imagen = $request->get('exevir_enlace_imagen');
+        $virtual->exevir_nombre_ponente = implode(';',$request->get('exevir_nombre_ponente'));
+        $virtual->exevir_institucion_origen = implode(';',$request->get('exevir_institucion_origen'));
+        $virtual->exevir_pais = implode(';',$request->get('exevir_pais'));
+        $virtual->exevir_nombre_ponencia = implode(';',$request->get('exevir_nombre_ponencia'));
+        $virtual->save();
+
+        Alert::success('Exitoso', 'Los datos se han actualizado con exito');
+        return redirect('/extension/mostrareventosvirtuales');
+    }
+
+    public function eliminareventosvirtuales($id){
+        $virtual = ExtEventoVirtual::find($id);
+        $virtual->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrareventosvirtuales');
+    }
+
+    public function mostrarparticipacioneventos(){
+        $participaciones = ExtParticipacionEvento::all();
+        return view('extension/eventos/participacion.index')
+            ->with('participaciones', $participaciones);
+    }
+
+    public function crearparticipacioneventos(){
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 6)
+            ->get();
+        return view('extension/eventos/participacion.create')
+            ->with('personas', $personas);
+    }
+
+    public function registroparticipacioneventos(Request $request){
+        $rules = [
+            'expaev_year' => 'required',
+            'expaev_periodo' => 'required',
+            'expaev_tipo_evento' => 'required',
+            'expaev_nombre_evento' => 'required',
+            'expaev_fecha' => 'required',
+            'expaev_organizador' => 'required',
+            'expaev_id_persona' => 'required|not_in:0',
+        ];
+        $message = [
+            'expaev_year.required' => 'El campo año es requerido',
+            'expaev_periodo.required' => 'El campo periodo es requerido',
+            'expaev_tipo_evento.required' => 'El campo tipo evento es requerido',
+            'expaev_nombre_evento.required' => 'El campo nombre evento es requerido',
+            'expaev_fecha.required' => 'El campo fecha es requerido',
+            'expaev_organizador.required' => 'El campo organizador es requerido',
+            'expaev_id_persona.required' => 'El campo nombre participante es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $participacion = new ExtParticipacionEvento();
+        $participacion->expaev_year = $request->get('expaev_year');
+        $participacion->expaev_periodo = $request->get('expaev_periodo');
+        $participacion->expaev_tipo_evento = $request->get('expaev_tipo_evento');
+        $participacion->expaev_nombre_evento = $request->get('expaev_nombre_evento');
+        $participacion->expaev_fecha = $request->get('expaev_fecha');
+        $participacion->expaev_organizador = $request->get('expaev_organizador');
+        $participacion->expaev_id_persona = $request->get('expaev_id_persona');
+
+        $participacion->save();
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrarparticipacioneventos');
+    }
+
+    public function verparticipacioneventos($id){
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 6)
+            ->get();
+        $participacion = ExtParticipacionEvento::find($id);
+        return view('extension/eventos/participacion.show')
+            ->with('personas', $personas)
+            ->with('participacion', $participacion);
+    }
+
+    public function editarparticipacioneventos($id){
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 6)
+            ->get();
+        $participacion = ExtParticipacionEvento::find($id);
+        return view('extension/eventos/participacion.edit')
+            ->with('personas', $personas)
+            ->with('participacion', $participacion);
+    }
+
+    public function actualizarparticipacioneventos(Request $request, $id){
+        $rules = [
+            'expaev_year' => 'required',
+            'expaev_periodo' => 'required',
+            'expaev_tipo_evento' => 'required',
+            'expaev_nombre_evento' => 'required',
+            'expaev_fecha' => 'required',
+            'expaev_organizador' => 'required',
+            'expaev_id_persona' => 'required|not_in:0',
+        ];
+        $message = [
+            'expaev_year.required' => 'El campo año es requerido',
+            'expaev_periodo.required' => 'El campo periodo es requerido',
+            'expaev_tipo_evento.required' => 'El campo tipo evento es requerido',
+            'expaev_nombre_evento.required' => 'El campo nombre evento es requerido',
+            'expaev_fecha.required' => 'El campo fecha es requerido',
+            'expaev_organizador.required' => 'El campo organizador es requerido',
+            'expaev_id_persona.required' => 'El campo nombre participante es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $participacion = ExtParticipacionEvento::find($id);
+        $participacion->expaev_year = $request->get('expaev_year');
+        $participacion->expaev_periodo = $request->get('expaev_periodo');
+        $participacion->expaev_tipo_evento = $request->get('expaev_tipo_evento');
+        $participacion->expaev_nombre_evento = $request->get('expaev_nombre_evento');
+        $participacion->expaev_fecha = $request->get('expaev_fecha');
+        $participacion->expaev_organizador = $request->get('expaev_organizador');
+        $participacion->expaev_id_persona = $request->get('expaev_id_persona');
+
+        $participacion->save();
+        Alert::success('Exitoso', 'Los datos se han actualizado con exito');
+        return redirect('/extension/mostrarparticipacioneventos');
+    }
+
+    public function eliminarparticipacioneventos($id){
+        $participacion = ExtParticipacionEvento::find($id);
+        $participacion->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrarparticipacioneventos');
+    }
+
+    public function mostrareventosinternacionales(){
+        $internacionales = ExtEventoInternacional::all();
+        return view('extension/eventos/internacional.index')
+            ->with('internacionales', $internacionales);
+    }
+
+    public function creareventosinternacionales(){
+        return view('extension/eventos/internacional.create');
+    }
+
+    public function registroeventosinternacionales(Request $request){
+        $rules = [
+            'exevin_tipo' => 'required',
+            'exevin_year' => 'required',
+            'exevin_periodo' => 'required',
+            'exevin_nombre_evento' => 'required',
+            'exevin_fecha_inicio' => 'required',
+            'exevin_fecha_final' => 'required',
+            'exevin_lugar' => 'required',
+            'exevin_sede' => 'required',
+            'exevin_ponentes' => 'required',
+            'exevin_institucion' => 'required',
+            'exevin_pais' => 'required',
+            'exevin_nombre_ponencia' => 'required',
+        ];
+        $message = [
+            'exevin_tipo.required' => 'El campo alcance es requerido',
+            'exevin_year.required' => 'El campo año es requerido',
+            'exevin_periodo.required' => 'El campo periodo es requerido',
+            'exevin_nombre_evento.required' => 'El campo nombre evento es requerido',
+            'exevin_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exevin_fecha_final.required' => 'El campo fecha fin es requerido',
+            'exevin_lugar.required' => 'El campo lugar es requerido',
+            'exevin_sede.required' => 'El campo sede es requerido',
+            'exevin_ponentes.required' => 'El campo ponentes es requerido',
+            'exevin_institucion.required' => 'El campo institución es requerido',
+            'exevin_pais.required' => 'El campo país es requerido',
+            'exevin_nombre_ponencia.required' => 'El campo nombre ponencia es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $internacional = new ExtEventoInternacional();
+        $internacional->exevin_tipo = $request->get('exevin_tipo');
+        $internacional->exevin_year = $request->get('exevin_year');
+        $internacional->exevin_periodo = $request->get('exevin_periodo');
+        $internacional->exevin_nombre_evento = $request->get('exevin_nombre_evento');
+        $internacional->exevin_fecha_inicio = $request->get('exevin_fecha_inicio');
+        $internacional->exevin_fecha_final = $request->get('exevin_fecha_final');
+        $internacional->exevin_lugar = $request->get('exevin_lugar');
+        $internacional->exevin_sede = $request->get('exevin_sede');
+        $internacional->exevin_ponentes = implode(';',$request->get('exevin_ponentes'));
+        $internacional->exevin_institucion = implode(';',$request->get('exevin_institucion'));
+        $internacional->exevin_pais = implode(';',$request->get('exevin_pais'));
+        $internacional->exevin_nombre_ponencia = implode(';',$request->get('exevin_nombre_ponencia'));
+
+        $internacional->save();
+        Alert::success('Exitoso', 'Los datos se han registrado con exito');
+        return redirect('/extension/mostrareventosinternacionales');
+    }
+
+    public function vereventosinternacionales($id){
+        $internacional = ExtEventoInternacional::find($id);
+        return view('extension/eventos/internacional.show')
+            ->with('internacional', $internacional);
+    }
+
+    public function editareventosinternacionales($id){
+        $internacional = ExtEventoInternacional::find($id);
+        return view('extension/eventos/internacional.edit')
+            ->with('internacional', $internacional);
+    }
+
+    public function actualizareventosinternacionales(Request $request, $id){
+        $rules = [
+            'exevin_tipo' => 'required',
+            'exevin_year' => 'required',
+            'exevin_periodo' => 'required',
+            'exevin_nombre_evento' => 'required',
+            'exevin_fecha_inicio' => 'required',
+            'exevin_fecha_final' => 'required',
+            'exevin_lugar' => 'required',
+            'exevin_sede' => 'required',
+            'exevin_ponentes' => 'required',
+            'exevin_institucion' => 'required',
+            'exevin_pais' => 'required',
+            'exevin_nombre_ponencia' => 'required',
+        ];
+        $message = [
+            'exevin_tipo.required' => 'El campo alcance es requerido',
+            'exevin_year.required' => 'El campo año es requerido',
+            'exevin_periodo.required' => 'El campo periodo es requerido',
+            'exevin_nombre_evento.required' => 'El campo nombre evento es requerido',
+            'exevin_fecha_inicio.required' => 'El campo fecha inicio es requerido',
+            'exevin_fecha_final.required' => 'El campo fecha fin es requerido',
+            'exevin_lugar.required' => 'El campo lugar es requerido',
+            'exevin_sede.required' => 'El campo sede es requerido',
+            'exevin_ponentes.required' => 'El campo ponentes es requerido',
+            'exevin_institucion.required' => 'El campo institución es requerido',
+            'exevin_pais.required' => 'El campo país es requerido',
+            'exevin_nombre_ponencia.required' => 'El campo nombre ponencia es requerido',
+        ];
+        $this->validate($request,$rules,$message);
+
+        $internacional = ExtEventoInternacional::find($id);
+        $internacional->exevin_tipo = $request->get('exevin_tipo');
+        $internacional->exevin_year = $request->get('exevin_year');
+        $internacional->exevin_periodo = $request->get('exevin_periodo');
+        $internacional->exevin_nombre_evento = $request->get('exevin_nombre_evento');
+        $internacional->exevin_fecha_inicio = $request->get('exevin_fecha_inicio');
+        $internacional->exevin_fecha_final = $request->get('exevin_fecha_final');
+        $internacional->exevin_lugar = $request->get('exevin_lugar');
+        $internacional->exevin_sede = $request->get('exevin_sede');
+        $internacional->exevin_ponentes = implode(';',$request->get('exevin_ponentes'));
+        $internacional->exevin_institucion = implode(';',$request->get('exevin_institucion'));
+        $internacional->exevin_pais = implode(';',$request->get('exevin_pais'));
+        $internacional->exevin_nombre_ponencia = implode(';',$request->get('exevin_nombre_ponencia'));
+
+        $internacional->save();
+        Alert::success('Exitoso', 'Los datos se han actualizado con exito');
+        return redirect('/extension/mostrareventosinternacionales');
+    }
+
+    public function eliminareventosinternacionales($id){
+        $internacional = ExtEventoInternacional::find($id);
+        $internacional->delete();
+        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+        return redirect('/extension/mostrareventosinternacionales');
     }
 
 
