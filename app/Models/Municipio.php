@@ -49,4 +49,8 @@ class Municipio extends Model
         return $this->hasMany(ExtMovilidadInternacional::class, 'id');
     }
 
+    public function grupoinvestigacion(){
+        return $this->hasMany(Municipio::class, 'id');
+    }
+
 }

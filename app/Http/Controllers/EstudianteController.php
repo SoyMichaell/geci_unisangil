@@ -155,7 +155,7 @@ class EstudianteController extends Controller
                     'per_telefono' => $request->get('estu_correo'),
                     'estu_departamento' => $request->get('estu_departamento'),
                     'estu_ciudad' => $request->get('estu_ciudad'),
-            ])
+            ]);
 
             DB::table('estudiante')->insert(
                 [

@@ -323,6 +323,37 @@ INSERT IGNORE INTO `compl_sector` (`id`, `cose_nombre`, `created_at`, `updated_a
 	(8, 'Otro', '2022-02-28 17:53:21', NULL);
 /*!40000 ALTER TABLE `compl_sector` ENABLE KEYS */;
 
+-- Volcando estructura para tabla proyecto.convenio
+CREATE TABLE IF NOT EXISTS `convenio` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `con_numero` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_alcance` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_tipo` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_institucion` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_nit` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_direccion` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `con_ciudad` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_pais` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_contacto` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `con_correo` varchar(200) COLLATE utf8_unicode_ci NOT NULL,
+  `con_telefono` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `con_objeto` text COLLATE utf8_unicode_ci NOT NULL,
+  `con_logro_resultado` text COLLATE utf8_unicode_ci NOT NULL,
+  `con_vigencia` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `con_programa_beneficiado` text COLLATE utf8_unicode_ci NOT NULL,
+  `con_actividad_year_programa` text COLLATE utf8_unicode_ci NOT NULL,
+  `con_fecha_inicio` date NOT NULL,
+  `con_fecha_final` date NOT NULL,
+  `con_observacion` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.convenio: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `convenio` DISABLE KEYS */;
+/*!40000 ALTER TABLE `convenio` ENABLE KEYS */;
+
 -- Volcando estructura para tabla proyecto.departamento
 CREATE TABLE IF NOT EXISTS `departamento` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -870,7 +901,7 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_intersede` (
   CONSTRAINT `FK_ext_movilidad_intersede_programa_2` FOREIGN KEY (`exmoin_id_programa_des`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_movilidad_intersede: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_movilidad_intersede: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_movilidad_intersede` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_movilidad_intersede` (`id`, `exmoin_tipo`, `exmoin_rol`, `exmoin_id_sede_or`, `exmoin_id_facultad_or`, `exmoin_id_programa_or`, `exmoin_id_sede_des`, `exmoin_id_facultad_des`, `exmoin_id_programa_des`, `exmoin_id_persona`, `exmoin_tipo_movilidad`, `exmoin_descripcion`, `exmoin_fecha_inicio`, `exmoin_fecha_final`, `created_at`, `updated_at`) VALUES
 	(3, 'entrante', 'docente', 2, 2, 10, 2, 2, 10, 56, 'Profesor programa pregrado', 'sdasda', '2022-03-17', '2023-03-17', '2022-03-18 03:41:02', '2022-03-18 03:41:02');
@@ -918,7 +949,7 @@ CREATE TABLE IF NOT EXISTS `ext_participacion_eventos` (
   CONSTRAINT `FK_ext_participacion_eventos_persona` FOREIGN KEY (`expaev_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_participacion_eventos: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_participacion_eventos: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_participacion_eventos` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_participacion_eventos` (`id`, `expaev_year`, `expaev_periodo`, `expaev_tipo_evento`, `expaev_nombre_evento`, `expaev_fecha`, `expaev_organizador`, `expaev_id_persona`, `created_at`, `updated_at`) VALUES
 	(1, '2021', '2021-2', 'webinar', 'Taller usando Microbit - Desafío Do your:bit de la BBC de Londres', '2021-07-08', 'fedesoft - Redis', 56, '2022-03-18 05:16:31', '2022-03-18 05:28:32');
@@ -1196,6 +1227,41 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Volcando datos para la tabla proyecto.failed_jobs: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
 /*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+
+-- Volcando estructura para tabla proyecto.inv_grupo_investigacion
+CREATE TABLE IF NOT EXISTS `inv_grupo_investigacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `inv_id_coordinador` int(11) NOT NULL,
+  `inv_nombre_grupo` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `inv_correo_institucional_grupo` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `inv_codigo_minciencias` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `inv_mision` text COLLATE utf8_unicode_ci NOT NULL,
+  `inv_vision` text COLLATE utf8_unicode_ci NOT NULL,
+  `inv_url_grupo` varchar(255) COLLATE utf8_unicode_ci DEFAULT '',
+  `inv_url_gruplac` varchar(255) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `inv_area_conocimiento_principal` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `inv_nucleo_conocimiento_nbc` varchar(150) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `inv_sede` int(11) NOT NULL DEFAULT 0,
+  `inv_facultad` int(11) NOT NULL DEFAULT 0,
+  `inv_categoria_grupo` varchar(150) COLLATE utf8_unicode_ci DEFAULT '0',
+  `inv_aval_minciencias` varchar(150) COLLATE utf8_unicode_ci DEFAULT '0',
+  `inv_lineas_investigacion` text COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_inv_grupo_investigacion_persona` (`inv_id_coordinador`),
+  KEY `FK_inv_grupo_investigacion_municipio` (`inv_sede`),
+  KEY `FK_inv_grupo_investigacion_facultad` (`inv_facultad`),
+  CONSTRAINT `FK_inv_grupo_investigacion_facultad` FOREIGN KEY (`inv_facultad`) REFERENCES `facultad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_inv_grupo_investigacion_municipio` FOREIGN KEY (`inv_sede`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_inv_grupo_investigacion_persona` FOREIGN KEY (`inv_id_coordinador`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `inv_grupo_investigacion` DISABLE KEYS */;
+INSERT IGNORE INTO `inv_grupo_investigacion` (`id`, `inv_id_coordinador`, `inv_nombre_grupo`, `inv_correo_institucional_grupo`, `inv_codigo_minciencias`, `inv_mision`, `inv_vision`, `inv_url_grupo`, `inv_url_gruplac`, `inv_area_conocimiento_principal`, `inv_nucleo_conocimiento_nbc`, `inv_sede`, `inv_facultad`, `inv_categoria_grupo`, `inv_aval_minciencias`, `inv_lineas_investigacion`, `created_at`, `updated_at`) VALUES
+	(1, 56, 'mussa cafec', 'rcosto@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 03:41:33');
+/*!40000 ALTER TABLE `inv_grupo_investigacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.laboratorio
 CREATE TABLE IF NOT EXISTS `laboratorio` (
@@ -1832,7 +1898,7 @@ CREATE TABLE IF NOT EXISTS `tipo_usuario` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.tipo_usuario: ~7 rows (aproximadamente)
 /*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;

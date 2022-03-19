@@ -369,3 +369,15 @@ Route::resource('laboratorio',  App\Http\Controllers\LaboratorioController::clas
 
 //Rutas módulo movilidad
 Route::resource('movilidad', App\Http\Controllers\MovilidadController::class);
+
+
+//Rutas convenios
+Route::resource('convenio', App\Http\Controllers\ConvenioController::class);
+
+//Rutas investigacion
+Route::get('investigacion/mostrargrupo', [App\Http\Controllers\InvestigacionController::class, 'mostrargrupo']);
+Route::get('investigacion/creargrupo', [App\Http\Controllers\InvestigacionController::class, 'creargrupo']);
+Route::post('investigacion/registrogrupo', [App\Http\Controllers\InvestigacionController::class, 'registrogrupo']);
+Route::get('investigacion/{grupo}/vergrupo', [App\Http\Controllers\InvestigacionController::class, 'vergrupo']);
+Route::get('investigacion/{grupo}/editargrupo', [App\Http\Controllers\InvestigacionController::class, 'editargrupo']);
+Route::resource('investigacion', App\Http\Controllers\InvestigacionController::class);

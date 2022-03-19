@@ -94,4 +94,9 @@ class User extends Authenticatable
     public function participancioneventos(){
         return $this->hasMany(ExtParticipacionEvento::class, 'id');
     }
+
+    public function grupoinvestigacion(){
+        return $this->hasMany(InvGrupoInvestigacion::class, 'id');
+    }
+
 }
