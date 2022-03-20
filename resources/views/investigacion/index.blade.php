@@ -18,7 +18,7 @@
                 <a class="col-md-4" href="/investigacion/mostrargrupo">
                     Grupo de investigación
                 </a>
-                <a class="col-md-4" href="">
+                <a class="col-md-4" href="/investigacion/mostrarintegrante">
                     Investigadores
                 </a>
                 <a class="col-md-4" href="">

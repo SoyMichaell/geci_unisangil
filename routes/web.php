@@ -375,9 +375,20 @@ Route::resource('movilidad', App\Http\Controllers\MovilidadController::class);
 Route::resource('convenio', App\Http\Controllers\ConvenioController::class);
 
 //Rutas investigacion
+//Rutas grupo
 Route::get('investigacion/mostrargrupo', [App\Http\Controllers\InvestigacionController::class, 'mostrargrupo']);
 Route::get('investigacion/creargrupo', [App\Http\Controllers\InvestigacionController::class, 'creargrupo']);
 Route::post('investigacion/registrogrupo', [App\Http\Controllers\InvestigacionController::class, 'registrogrupo']);
 Route::get('investigacion/{grupo}/vergrupo', [App\Http\Controllers\InvestigacionController::class, 'vergrupo']);
 Route::get('investigacion/{grupo}/editargrupo', [App\Http\Controllers\InvestigacionController::class, 'editargrupo']);
+Route::put('investigacion/{grupo}/actualizargrupo', [App\Http\Controllers\InvestigacionController::class, 'actualizargrupo']);
+Route::delete('investigacion/{grupo}/eliminargrupo', [App\Http\Controllers\InvestigacionController::class, 'eliminargrupo']);
+//Rutas investigadores
+Route::get('investigacion/mostrarintegrante', [App\Http\Controllers\InvestigacionController::class, 'mostrarintegrante']);
+Route::get('investigacion/crearintegrante', [App\Http\Controllers\InvestigacionController::class, 'crearintegrante']);
+Route::post('investigacion/registrointegrante', [App\Http\Controllers\InvestigacionController::class, 'registrointegrante']);
+Route::get('investigacion/{integrante}/verintegrante', [App\Http\Controllers\InvestigacionController::class, 'verintegrante']);
+Route::get('investigacion/{integrante}/editarintegrante', [App\Http\Controllers\InvestigacionController::class, 'editarintegrante']);
+Route::put('investigacion/{integrante}/actualizarintegrante', [App\Http\Controllers\InvestigacionController::class, 'actualizarintegrante']);
+Route::delete('investigacion/{integrante}/eliminarintegrante', [App\Http\Controllers\InvestigacionController::class, 'eliminarintegrante']);
 Route::resource('investigacion', App\Http\Controllers\InvestigacionController::class);

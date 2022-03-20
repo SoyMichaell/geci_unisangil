@@ -22,6 +22,9 @@
         text-decoration: none;
         list-style: none;
     }
+    #integrantes{
+        text-decoration: none;
+    }
 
 </style>
 @section('content')
@@ -64,11 +67,13 @@
             </div>
             <div class="col-md-4">
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-success btn-sm" href="">Editar grupo</a>
+                    <a class="btn btn-success btn-sm" href="/investigacion/{{$grupo->id}}/editargrupo">Editar grupo</a>
                 </div>
                 <h4 class="fw-bold text-right">Integrantes</h4>
                 <ul class="text-right">
-                    <li><a href="">[Michael Steven Rodriguez Hernandez]</a></li>
+                    @foreach ($integrantes as $integrante)
+                        <li><a href="" id="integrantes">[{{$integrante->per_nombre.' '.$integrante->per_apellido}} | {{$grupo->inv_id_coordinador == $integrante->inves_id_persona ? 'Coordinador' : $integrante->tip_nombre}}]</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
