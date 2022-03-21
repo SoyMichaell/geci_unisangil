@@ -106,12 +106,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="sof_asignatura">{{ __('Asignatura *') }}</label>
-                        <select class="form-select @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura" id="sof_asignatura" multiple>
+                        <select class="js-example-placeholder-single form-select @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura[]" id="sof_asignatura" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
-                                <option value="{{$asignatura->id}}">{{$asignatura->asig_nombre}}</option>
+                                <option value="{{$asignatura->asig_nombre}}">{{$asignatura->asig_nombre}}</option>
                             @endforeach
                         </select>
+                        <strong>{{$asignaturas->count()<=0 ? 'No hay asignaturas registradas' : ''}}</strong>
                         @error('sof_tipo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -133,12 +134,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="sof_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa" id="sof_id_programa" multiple>
+                        <select class="js-example-placeholder-single form-select @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa[]" id="sof_id_programa" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
-                                <option value="{{$programa->id}}">{{$programa->pro_nombre}}</option>
+                                <option value="{{$programa->pro_nombre}}">{{$programa->pro_nombre}}</option>
                             @endforeach
                         </select>
+                        <strong>{{$programas->count()<=0 ? 'No hay programas registrados' : ''}}</strong>
                         @error('sof_tipo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

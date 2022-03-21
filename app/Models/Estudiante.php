@@ -41,7 +41,12 @@ class Estudiante extends Model
             'estu_matricula',
             'estu_pga',
             'estu_reconocimiento',
-            'estu_egresado',        
+            'estu_egresado',      
+            'estu_administrativo',
+            'estu_cargo',
+            'estu_dependencia',
+            'estu_fecha_ingreso',
+            'estu_no_contrato',  
     ];
 
     public function trabajos(){

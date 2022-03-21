@@ -188,8 +188,7 @@
                         @php
                             $conveniox = explode(';',$convenio->con_programa_beneficiado);
                         @endphp
-                        <select class="form-select @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
-                            <option value="">---- SELECCIONE ----</option>
+                        <select class="js-example-placeholder-single form-select @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
                             @foreach ($programas as $programa)
                                 <option value="{{$programa->pro_nombre}}" @foreach($conveniox as $x) {{$x == $programa->pro_nombre ? 'selected' : ''}} @endforeach>{{$programa->pro_nombre}}</option>
                             @endforeach

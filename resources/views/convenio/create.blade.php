@@ -184,8 +184,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="con_programa_beneficiado">{{ __('Programa Beneficiarios *') }}</label>
-                        <select class="form-select @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
-                            <option value="">---- SELECCIONE ----</option>
+                        <select class="js-example-placeholder-single form-select @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
                             @foreach ($programas as $programa)
                                 <option value="{{$programa->pro_nombre}}">{{$programa->pro_nombre}}</option>
                             @endforeach

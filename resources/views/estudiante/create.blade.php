@@ -32,6 +32,11 @@
                     <div class="col-md-6">
                         <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
                         <select class="form-select" name="estu_programa_plan" id="estu_programa_plan">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($planes as $plan)
+                                <option value="{{ $plan->id }}">
+                                    {{ $plan->pp_plan }}</option>
+                            @endforeach
                         </select>
                         @error('estu_programa_plan')
                             <span class="invalid-feedback" role="alert">
@@ -172,6 +177,12 @@
                     <div class="col-md-6">
                         <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
                         <select class="form-select" name="estu_ciudad" id="estu_ciudad">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($municipios as $municipio)
+                                <option value="{{ $municipio->id }}">
+                                    {{ $municipio->mun_nombre }}
+                                </option>
+                            @endforeach
                         </select>
                         @error('estu_ciudad')
                             <span class="invalid-feedback" role="alert">

@@ -661,6 +661,10 @@ class ProgramaController extends Controller
         return DB::table('programa_plan_estudio')->where('pp_id_programa', $id)->get();
     }
 
+    public function editplan($id){
+        return DB::table('programa_plan_estudio')->where('pp_id_programa', $id)->first();
+    }
+
     public function selectivomunicipio($id)
     {
         return DB::table('municipio')->where('mun_departamento', $id)->get();

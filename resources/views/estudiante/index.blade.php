@@ -59,25 +59,25 @@
                     </thead>
                     <tbody>
                         <?php $i = 1; ?>
-                        @foreach ($estudiantes as $estudiante)
+                        @foreach ($personas as $persona)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $estudiante->estu_tipo_documento }}</td>
-                                <td>{{ $estudiante->estu_numero_documento }}</td>
-                                <td>{{ $estudiante->estu_nombre }}</td>
-                                <td>{{ $estudiante->estu_apellido }}</td>
-                                <td>{{ $estudiante->estu_correo }}</td>
-                                <td>{{ $estudiante->estu_ingreso }}</td>
-                                <td>{{ $estudiante->estu_egresado}} <a class="badge badge-info" href="/estudiante/{{$estudiante->id}}/crearegresado">{{$estudiante->estu_egresado == 'Si' ? 'Completar datos egresado' : ''}}</a></td>
+                                <td>{{ $persona->per_tipo_documento }}</td>
+                                <td>{{ $persona->per_numero_documento }}</td>
+                                <td>{{ $persona->per_nombre }}</td>
+                                <td>{{ $persona->per_apellido }}</td>
+                                <td>{{ $persona->per_correo }}</td>
+                                <td>{{ $persona->estu_ingreso }}</td>
+                                <td>{{ $persona->estu_egresado}} <a class="badge badge-info" href="/estudiante/{{$persona->id}}/crearegresado">{{$persona->estu_egresado == 'Si' ? 'Completar datos egresado' : ''}}</a></td>
                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                     <td style="width: 10%">
-                                        <form action="{{ route('estudiante.destroy', $estudiante->id) }}"
+                                        <form action="{{ route('estudiante.destroy', $persona->id) }}"
                                             method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/estudiante/{{ $estudiante->id }}"><i
+                                                <a class="btn btn-sm" href="/estudiante/{{ $persona->id }}"><i
                                                         class="fa-solid fa-folder-open "></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
-                                                    href="/estudiante/{{ $estudiante->id }}/edit"><i
+                                                    href="/estudiante/{{ $persona->id }}/edit"><i
                                                         class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')

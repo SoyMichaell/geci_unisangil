@@ -54,7 +54,7 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $trabajo->tra_codigo_proyecto }}</td>
                                 <td>{{ $trabajo->tra_titulo_proyecto }}</td>
-                                <td>{{ $trabajo->estudiantes->estu_nombre. ' '.$trabajo->estudiantes->estu_apellido }}</td>
+                                <td>{{ $trabajo->tra_id_estudiante }}</td>
                                 <td>{{ $trabajo->directores->per_nombre.' '.$trabajo->directores->per_apellido }}</td>
                                 <td>{{ $trabajo->codirectores->per_nombre.' '.$trabajo->codirectores->per_apellido }}</td>
                                 <td>{{ $trabajo->tra_fecha_inicio }}</td>

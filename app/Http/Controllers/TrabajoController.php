@@ -19,7 +19,6 @@ class TrabajoController extends Controller
     {
 
         $trabajos = Trabajo::all();
-        $estudiantes = Estudiante::all();
 
         return view('trabajo.index')
             ->with('trabajos', $trabajos);
@@ -27,13 +26,16 @@ class TrabajoController extends Controller
 
     public function create()
     {
-        $estudiantes = Estudiante::all();
 
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 7)
             ->get();
+
+        $estudiantes = DB::table('persona')
+        ->Where('per_tipo_usuario', 6)
+        ->get();
 
         $modalidades = ModalidadGrado::all();
 
@@ -71,7 +73,7 @@ class TrabajoController extends Controller
         $trabajos = new Trabajo();
         $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
         $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
-        $trabajos->implode(';',$request->get('tra_id_estudiante'));
+        $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
         $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
         $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
 
@@ -93,8 +95,15 @@ class TrabajoController extends Controller
     public function show($id)
     {
 
-        $estudiantes = Estudiante::all();
-        $docentes = Docente::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+
+        $estudiantes = DB::table('persona')
+        ->Where('per_tipo_usuario', 6)
+        ->get();
 
         $trabajon = DB::table('trabajo_grado')->get();
 
@@ -107,46 +116,29 @@ class TrabajoController extends Controller
                 ->get();
         }
 
-        $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
-
-
         $trabajo = Trabajo::find($id);
         $modalidades = ModalidadGrado::all();
 
-        $jurado1 = DB::table('persona')
-            ->join('trabajo_grado', 'persona.id', '=', 'trabajo_grado.tra_id_jurado1')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->where('trabajo_grado.tra_id_jurado1', $trabajo->tra_id_jurado1)
-            ->first();
-
-        $jurado2 = DB::table('persona')
-            ->join('trabajo_grado', 'persona.id', '=', 'trabajo_grado.tra_id_jurado2')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->where('trabajo_grado.tra_id_jurado2', $trabajo->tra_id_jurado2)
-            ->first();
-
-        return view('trabajo.show')->with('estudiantes', $estudiantes)
+        return view('trabajo.show')
+            ->with('estudiantes', $estudiantes)
             ->with('personas', $personas)
             ->with('trabajo', $trabajo)
             ->with('modalidades', $modalidades)
-            ->with('contratos', $contratos)
-            ->with('jurado1', $jurado1)
-            ->with('jurado2', $jurado2);
+            ->with('contratos', $contratos);
     }
 
     public function edit($id)
     {
 
-        $estudiantes = Estudiante::all();
-        $docentes = Docente::all();
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 7)
+            ->get();
+
+        $estudiantes = DB::table('persona')
+        ->Where('per_tipo_usuario', 6)
+        ->get();
 
         $trabajon = DB::table('trabajo_grado')->get();
 
@@ -159,41 +151,15 @@ class TrabajoController extends Controller
                 ->get();
         }
 
-        $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
-
-
         $trabajo = Trabajo::find($id);
         $modalidades = ModalidadGrado::all();
 
-        $jurado1 = DB::table('persona')
-            ->join('trabajo_grado', 'persona.id', '=', 'trabajo_grado.tra_id_jurado1')
-            ->join('docente_contrato', 'persona.id', '=', 'docente_contrato.doco_persona_docente')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->where('trabajo_grado.tra_id_jurado1', $trabajo->tra_id_jurado1)
-            ->first();
-
-        $jurado2 = DB::table('persona')
-            ->join('trabajo_grado', 'persona.id', '=', 'trabajo_grado.tra_id_jurado2')
-            ->join('docente_contrato', 'persona.id', '=', 'docente_contrato.doco_persona_docente')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->where('trabajo_grado.tra_id_jurado2', $trabajo->tra_id_jurado2)
-            ->first();
-
-        return view('trabajo.edit')->with('estudiantes', $estudiantes)
+        return view('trabajo.edit')
+            ->with('estudiantes', $estudiantes)
             ->with('personas', $personas)
             ->with('trabajo', $trabajo)
             ->with('modalidades', $modalidades)
-            ->with('contratos', $contratos)
-            ->with('jurado1', $jurado1)
-            ->with('jurado2', $jurado2);
+            ->with('contratos', $contratos);
     }
 
     public function update(Request $request, $id)
@@ -224,7 +190,7 @@ class TrabajoController extends Controller
         $trabajos = Trabajo::find($id);
         $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
         $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
-        $trabajos->implode(';',$request->get('tra_id_estudiante'));
+        $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
         $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
         $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
         $trabajos->tra_id_director = $request->get('tra_id_director');

@@ -76,14 +76,17 @@
                     </div>
                     <div class="row mb-3">
                         <div class="col-md-12">
+                            @php
+                                $estudiantex = explode(';',$trabajo->tra_id_estudiante);
+                            @endphp
                             <label for="tra_id_estudiante">Estudiante (s)</label>
                             <select class="js-example-placeholder-single form-select" name="tra_id_estudiante[]"
                                 id="tra_id_estudiante" multiple>
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($estudiantes as $estudiante)
-                                    <option value="{{ $estudiante->id }}"
-                                        {{ $estudiante->id == $trabajo->tra_id_estudiante ? 'selected' : '' }}>
-                                        {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    <option value="{{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}" @foreach($estudiantex as $estu)
+                                        {{ $estu == $estudiante->per_nombre . ' ' . $estudiante->per_apellido ? 'selected' : '' }} @endforeach>
+                                        {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                                 @endforeach
                             </select>
                             @error('tra_id_estudiante')
@@ -408,9 +411,7 @@
                     </div>
                 @else
                     <div class="alert alert-primary" role="alert">
-                        <strong>
-                            <h3>No registra contratos</h3>
-                        </strong>
+                        <strong>Los jurados no registran contratos</strong>
                     </div>
                 @endif
             </div>

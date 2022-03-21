@@ -41,9 +41,4 @@ class Trabajo extends Model
     public function codirectores(){
         return $this->belongsTo(User::class, 'tra_id_codirector');
     }
-
-    public function estudiantes(){
-        return $this->belongsTo(Estudiante::class, 'tra_id_estudiante');
-    }
-
 }

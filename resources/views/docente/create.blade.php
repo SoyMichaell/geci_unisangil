@@ -168,7 +168,7 @@
                             <div class="col-md-12">
                                 <select class="form-select @error('per_tipo_usuario') is-invalid @enderror"
                                     name="per_tipo_usuario" id="per_tipo_usuario">
-                                    <option value="5">Docente</option>
+                                    <option value="3">Docente</option>
                                 </select>
                                 @error('per_tipo_usuario')
                                     <span class="invalid-feedback" role="alert">

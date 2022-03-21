@@ -72,9 +72,9 @@ class SoftwareController extends Controller
         $software->sof_no_licencia = $request->get('sof_no_licencia');
         $software->sof_year_ad_licencia = $request->get('sof_year_ad_licencia');
         $software->sof_year_ve_licencia = $request->get('sof_year_ve_licencia');
-        $software->sof_asignatura = $request->get('sof_asignatura');
+        $software->sof_asignatura = implode(';',$request->get('sof_asignatura'));
         $software->sof_cantidad = $request->get('sof_cantidad');
-        $software->sof_id_programa = $request->get('sof_id_programa');
+        $software->sof_id_programa = implode(';',$request->get('sof_id_programa'));
         $software->sof_valor_unitario = $request->get('sof_valor_unitario');
         $software->sof_valor_total = $request->get('sof_valor_total');
         $software->sof_fecha_actualizar = $request->get('sof_fecha_actualizar');
@@ -151,9 +151,9 @@ class SoftwareController extends Controller
         $software->sof_no_licencia = $request->get('sof_no_licencia');
         $software->sof_year_ad_licencia = $request->get('sof_year_ad_licencia');
         $software->sof_year_ve_licencia = $request->get('sof_year_ve_licencia');
-        $software->sof_asignatura = $request->get('sof_asignatura');
+        $software->sof_asignatura = implode(';',$request->get('sof_asignatura'));
         $software->sof_cantidad = $request->get('sof_cantidad');
-        $software->sof_id_programa = $request->get('sof_id_programa');
+        $software->sof_id_programa = implode(';',$request->get('sof_id_programa'));
         $software->sof_valor_unitario = $request->get('sof_valor_unitario');
         $software->sof_valor_total = $request->get('sof_valor_total');
         $software->sof_fecha_actualizar = $request->get('sof_fecha_actualizar');

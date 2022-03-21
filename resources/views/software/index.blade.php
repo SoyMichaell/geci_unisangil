@@ -64,7 +64,7 @@
                                 <td>{{ $software->sof_version }}</td>
                                 <td>{{ $software->sof_year_ad_licencia }}</td>
                                 <td>{{ $software->sof_year_ve_licencia }}</td>
-                                <td>{{ $software->programas->pro_nombre }}</td>
+                                <td>{{ $software->sof_id_programa}}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <form action="{{ route('software.destroy', $software->id) }}" method="POST">
