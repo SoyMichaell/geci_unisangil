@@ -71,10 +71,7 @@ class TrabajoController extends Controller
         $trabajos = new Trabajo();
         $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
         $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
-        $estudiantes = $request->get('tra_id_estudiante');
-        foreach ($estudiantes as $estudiante) {
-            $trabajos->tra_id_estudiante = $estudiante;
-        }
+        $trabajos->implode(';',$request->get('tra_id_estudiante'));
         $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
         $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
 
@@ -227,11 +224,7 @@ class TrabajoController extends Controller
         $trabajos = Trabajo::find($id);
         $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
         $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
-        $estudiantes = $request->get('tra_id_estudiante');
-        foreach ($estudiantes as $estudiante) {
-            $trabajos->tra_id_estudiante = $estudiante;
-        }
-
+        $trabajos->implode(';',$request->get('tra_id_estudiante'));
         $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
         $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
         $trabajos->tra_id_director = $request->get('tra_id_director');

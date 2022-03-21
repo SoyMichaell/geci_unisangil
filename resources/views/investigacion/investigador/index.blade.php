@@ -60,7 +60,7 @@
                                         <form action=""
                                             method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/investigacion/{{ $investigador->id }}/verintegrante"><i
+                                                <a class="btn btn-sm" href="/investigacion/{{ $investigador->inves_id_persona }}/verintegrante"><i
                                                         class="fa-solid fa-folder-open "></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/investigacion/{{ $investigador->id }}/editarintegrante"><i

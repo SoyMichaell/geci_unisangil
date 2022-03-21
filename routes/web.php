@@ -391,4 +391,12 @@ Route::get('investigacion/{integrante}/verintegrante', [App\Http\Controllers\Inv
 Route::get('investigacion/{integrante}/editarintegrante', [App\Http\Controllers\InvestigacionController::class, 'editarintegrante']);
 Route::put('investigacion/{integrante}/actualizarintegrante', [App\Http\Controllers\InvestigacionController::class, 'actualizarintegrante']);
 Route::delete('investigacion/{integrante}/eliminarintegrante', [App\Http\Controllers\InvestigacionController::class, 'eliminarintegrante']);
+//Rutas proyectos
+Route::get('investigacion/mostrarproyecto', [App\Http\Controllers\InvestigacionController::class, 'mostrarproyecto']);
+Route::get('investigacion/crearproyecto', [App\Http\Controllers\InvestigacionController::class, 'crearproyecto']);
+Route::post('investigacion/registroproyecto', [App\Http\Controllers\InvestigacionController::class, 'registroproyecto']);
+Route::get('investigacion/{proyecto}/verproyecto', [App\Http\Controllers\InvestigacionController::class, 'verproyecto']);
+Route::get('investigacion/{proyecto}/editarproyecto', [App\Http\Controllers\InvestigacionController::class, 'editarproyecto']);
+Route::put('investigacion/{proyecto}/actualizarproyecto', [App\Http\Controllers\InvestigacionController::class, 'actualizarproyecto']);
+Route::delete('investigacion/{proyecto}/eliminarproyecto', [App\Http\Controllers\InvestigacionController::class, 'eliminarproyecto']);
 Route::resource('investigacion', App\Http\Controllers\InvestigacionController::class);

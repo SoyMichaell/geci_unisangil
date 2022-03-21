@@ -12,16 +12,16 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="tile col-md-12 mt-2">
-            <div class="row">
-                <a class="col-md-4" href="/investigacion/mostrargrupo">
+    <div class="container">
+        <div class="mt-2">
+            <div class="row mx-auto">
+                <a class="col-md-4 tile" style="width: 400px; margin-left: 10px;" href="/investigacion/mostrargrupo">
                     Grupo de investigación
                 </a>
-                <a class="col-md-4" href="/investigacion/mostrarintegrante">
+                <a class="col-md-4 tile" style="width: 400px; margin-left: 10px;" href="/investigacion/mostrarintegrante">
                     Investigadores
                 </a>
-                <a class="col-md-4" href="">
+                <a class="col-md-4 tile" style="width: 400px; margin-left: 10px;" href="/investigacion/mostrarproyecto">
                     Proyectos
                 </a>
             </div>

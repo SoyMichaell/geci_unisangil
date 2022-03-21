@@ -72,7 +72,7 @@
                 <h4 class="fw-bold text-right">Integrantes</h4>
                 <ul class="text-right">
                     @foreach ($integrantes as $integrante)
-                        <li><a href="" id="integrantes">[{{$integrante->per_nombre.' '.$integrante->per_apellido}} | {{$grupo->inv_id_coordinador == $integrante->inves_id_persona ? 'Coordinador' : $integrante->tip_nombre}}]</a></li>
+                        <li><a href="/investigacion/{{$integrante->id}}/verintegrante" id="integrantes">[{{$integrante->per_nombre.' '.$integrante->per_apellido}} | {{$grupo->inv_id_coordinador == $integrante->inves_id_persona ? 'Coordinador' : $integrante->tip_nombre}}]</a></li>
                     @endforeach
                 </ul>
             </div>

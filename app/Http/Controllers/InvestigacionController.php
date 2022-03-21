@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Facultad;
 use App\Models\InvGrupoInvestigacion;
 use App\Models\InvInvestigador;
+use App\Models\InvProyecto;
 use App\Models\Municipio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -97,6 +98,7 @@ class InvestigacionController extends Controller
             ->get();
         $grupo = InvGrupoInvestigacion::find($id);
         $integrantes = DB::table('inv_investigador')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre','inves_id_persona')
             ->join('persona','inv_investigador.inves_id_persona','=','persona.id')
             ->join('tipo_usuario', 'persona.per_tipo_usuario','=','tipo_usuario.id')
             ->where('inves_id_grupo', $id)
@@ -184,7 +186,7 @@ class InvestigacionController extends Controller
 
     public function mostrarintegrante(){
         $investigadores = DB::table('inv_investigador')
-        ->select('inv_nombre_grupo','per_nombre','per_apellido','inves_enlace_cvlac','inves_categoria','per_tipo_usuario','inv_investigador.id')
+        ->select('inv_nombre_grupo','per_nombre','per_apellido','inves_enlace_cvlac','inves_categoria','per_tipo_usuario','inves_id_persona','inv_investigador.id')
         ->join('persona','persona.id','=','inv_investigador.inves_id_persona')
         ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
         ->join('inv_grupo_investigacion','inv_grupo_investigacion.id','=','inv_investigador.inves_id_grupo')
@@ -246,16 +248,20 @@ class InvestigacionController extends Controller
     }
 
     public function verintegrante($id){
-        $personas = DB::table('persona')
-        ->where('per_tipo_usuario', 2)
-        ->orWhere('per_tipo_usuario', 3)
-        ->orWhere('per_tipo_usuario', 6)
-        ->get();
-        $grupos = InvGrupoInvestigacion::all();
-        $investigador = InvInvestigador::find($id);
+        $investigador = DB::table('inv_investigador')
+        ->select(
+            'persona.id','per_nombre','per_apellido','per_tipo_documento','per_numero_documento',
+            'inves_enlace_cvlac','inves_tipo_vinculacion','tip_nombre','inves_categoria','titulo_pregrado',
+            'institucion_pre','titulo_especializacion','institucion_espe','titulo_maestria','institucion_mae',
+            'titulo_doctorado','institucion_doc','inv_nombre_grupo','inv_id_coordinador','inves_id_persona'
+        )
+        ->join('persona','inv_investigador.inves_id_persona','=','persona.id')
+        ->join('inv_grupo_investigacion','inv_investigador.inves_id_grupo','=','inv_grupo_investigacion.id')
+        ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+        ->join('docente','persona.id','=','docente.id_persona_docente')
+        ->where('persona.id', $id)
+        ->first();
         return view('investigacion/investigador.show')
-            ->with('personas', $personas)
-            ->with('grupos', $grupos)
             ->with('investigador', $investigador);     
     }
 
@@ -297,6 +303,146 @@ class InvestigacionController extends Controller
 
         Alert::success('Exitoso', 'Los datos se han actualizado');
         return redirect('investigacion/mostrarintegrante');
+    }
+
+    public function mostrarproyecto(){
+        $proyectos = DB::table('inv_proyecto')
+        ->select('inv_proyecto.id','invpro_titulo','invpro_estado','inv_nombre_grupo')
+            ->join('inv_grupo_investigacion','inv_proyecto.invpro_id_grupo','=','inv_grupo_investigacion.id')
+            ->get();
+        return view('investigacion/proyecto.index')
+            ->with('proyectos', $proyectos);
+    }
+
+    public function crearproyecto(){
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 6)
+            ->get();
+        $grupos = InvGrupoInvestigacion::all();
+        return view('investigacion/proyecto.create')
+            ->with('grupos', $grupos)
+            ->with('personas', $personas);
+    }
+
+    public function registroproyecto(Request $request){
+        $rules = [
+            'invpro_id_grupo' => 'required|not_in:0',
+            'invpro_titulo' => 'required',
+            'invpro_resumen' => 'required',
+            'invpro_impacto' => 'required',
+            'invpro_lugar' => 'required',
+            'invpro_resultados' => 'required',
+            'invpro_fecha_inicio' => 'required',
+            'invpro_palabras_clave' => 'required',
+            'invpro_estado' => 'required|not_in:0'
+        ];
+        $message = [
+            'invpro_id_grupo' => 'El campo grupo de investigación es requerido',
+            'invpro_titulo' => 'El campo titulo proyecto es requerido',
+            'invpro_resumen' => 'El campo resumen es requerido',
+            'invpro_impacto' => 'El campo impacto es requerido',
+            'invpro_lugar' => 'El campo lugar es requerido',
+            'invpro_resultados' => 'El campo resultado (s) es requerido',
+            'invpro_fecha_inicio' => 'El campo fecha inicio es requerido',
+            'invpro_palabras_clave' => 'El campo palabras claves es requerido',
+            'invpro_estado' => 'El campo estado proyecto es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $proyecto = new InvProyecto();
+        $proyecto->invpro_id_grupo = $request->get('invpro_id_grupo');
+        $proyecto->invpro_titulo = $request->get('invpro_titulo');
+        $proyecto->invpro_resumen = $request->get('invpro_resumen');
+        $proyecto->invpro_impacto = $request->get('invpro_impacto');
+        $proyecto->invpro_lugar = $request->get('invpro_lugar');
+        $proyecto->invpro_resultados = $request->get('invpro_resultados');
+        $proyecto->invpro_fecha_inicio = $request->get('invpro_fecha_inicio');
+        $proyecto->invpro_id_integrantes = implode(';',$request->get('invpro_id_integrantes'));
+        $proyecto->invpro_palabras_clave = $request->get('invpro_palabras_clave');
+        $proyecto->invpro_estado = $request->get('invpro_estado');
+
+        $proyecto->save();
+
+        Alert::success('Exitoso', 'Los datos se han registrado');
+        return redirect('investigacion/mostrarproyecto');
+    }
+
+    public function verproyecto($id){
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 6)
+            ->get();
+        $grupos = InvGrupoInvestigacion::all();
+        $proyecto = DB::table('inv_proyecto')
+        ->select('inv_nombre_grupo','invpro_titulo','invpro_resumen','invpro_impacto','invpro_lugar',
+            'invpro_resultados','invpro_fecha_inicio','invpro_estado','inv_proyecto.id','invpro_id_integrantes','invpro_palabras_clave')
+            ->join('inv_grupo_investigacion','inv_proyecto.invpro_id_grupo','=','inv_grupo_investigacion.id')
+            ->where('inv_proyecto.id', $id)
+            ->first();
+        return view('investigacion/proyecto.show')
+            ->with('grupos', $grupos)
+            ->with('personas', $personas)
+            ->with('proyecto', $proyecto);
+    }
+
+    public function editarproyecto($id){
+        $personas = DB::table('persona')
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 6)
+            ->get();
+        $grupos = InvGrupoInvestigacion::all();
+        $proyecto = InvProyecto::find($id);
+        return view('investigacion/proyecto.edit')
+            ->with('grupos', $grupos)
+            ->with('personas', $personas)
+            ->with('proyecto', $proyecto);
+    }
+
+    public function actualizarproyecto(Request $request, $id){
+        $rules = [
+            'invpro_id_grupo' => 'required|not_in:0',
+            'invpro_titulo' => 'required',
+            'invpro_resumen' => 'required',
+            'invpro_impacto' => 'required',
+            'invpro_lugar' => 'required',
+            'invpro_resultados' => 'required',
+            'invpro_fecha_inicio' => 'required',
+            'invpro_palabras_clave' => 'required',
+            'invpro_estado' => 'required|not_in:0'
+        ];
+        $message = [
+            'invpro_id_grupo' => 'El campo grupo de investigación es requerido',
+            'invpro_titulo' => 'El campo titulo proyecto es requerido',
+            'invpro_resumen' => 'El campo resumen es requerido',
+            'invpro_impacto' => 'El campo impacto es requerido',
+            'invpro_lugar' => 'El campo lugar es requerido',
+            'invpro_resultados' => 'El campo resultado (s) es requerido',
+            'invpro_fecha_inicio' => 'El campo fecha inicio es requerido',
+            'invpro_palabras_clave' => 'El campo palabras claves es requerido',
+            'invpro_estado' => 'El campo estado proyecto es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $proyecto = InvProyecto::find($id);
+        $proyecto->invpro_id_grupo = $request->get('invpro_id_grupo');
+        $proyecto->invpro_titulo = $request->get('invpro_titulo');
+        $proyecto->invpro_resumen = $request->get('invpro_resumen');
+        $proyecto->invpro_impacto = $request->get('invpro_impacto');
+        $proyecto->invpro_lugar = $request->get('invpro_lugar');
+        $proyecto->invpro_resultados = $request->get('invpro_resultados');
+        $proyecto->invpro_fecha_inicio = $request->get('invpro_fecha_inicio');
+        $proyecto->invpro_id_integrantes = implode(';',$request->get('invpro_id_integrantes'));
+        $proyecto->invpro_palabras_clave = $request->get('invpro_palabras_clave');
+        $proyecto->invpro_estado = $request->get('invpro_estado');
+
+        $proyecto->save();
+
+        Alert::success('Exitoso', 'Los datos se han actualizado');
+        return redirect('investigacion/mostrarproyecto');
     }
 
 }
