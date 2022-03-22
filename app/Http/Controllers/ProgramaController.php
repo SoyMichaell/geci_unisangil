@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ProgramaExport;
 use App\Models\Departamento;
-use App\Models\Docente;
 use App\Models\Facultad;
 use App\Models\Metodologia;
 use App\Models\Municipio;
@@ -14,6 +14,7 @@ use App\Models\ProgramaHorario;
 use App\Models\ProgramaPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ProgramaController extends Controller
@@ -669,4 +670,34 @@ class ProgramaController extends Controller
     {
         return DB::table('municipio')->where('mun_departamento', $id)->get();
     }
+
+
+    public function exportpdf()
+    {
+        $datos = DB::table('programa')
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/programa');
+        } else {
+            $view = \view('reporte.reporte', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel()
+    {
+        $programas = Programa::all();
+        if ($programas->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/programa');
+        } else {
+            return Excel::download(new ProgramaExport, 'programas.xlsx');
+        }
+    }
+
 }

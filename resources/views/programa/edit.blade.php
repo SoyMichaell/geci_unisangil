@@ -6,15 +6,16 @@
         <a href="/programa/edit">Editar</a> / <a href="/programa">Programa</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Actualizar registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Diligenciar los campos requeridos, para la debida actualización.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile w-100 mx-auto">
-            <h4 class="tile title"><i class="fab fa-wpforms"></i> Registro programa</h4>
+            <h4><i class="fab fa-wpforms"></i> Editar información </h4>
+            <hr>
             <form action="/programa/{{$programa->id}}" method="post">
                 @csrf
                 @method('PUT')

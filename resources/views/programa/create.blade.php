@@ -12,9 +12,10 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile w-100 mx-auto">
-            <h4 class="tile title"><i class="fab fa-wpforms"></i> Registro programa</h4>
+            <h4><i class="fab fa-wpforms"></i> Registro programa</h4>
+            <hr>
             <form action="/programa" method="post">
                 @csrf
                 <div class="row mb-3">

@@ -171,6 +171,8 @@ Route::post('programa/registrohorario', [App\Http\Controllers\ProgramaController
 Route::get('programa/{horario}/editarhorario', [App\Http\Controllers\ProgramaController::class, 'editarhorario']);
 Route::put('programa/{horario}/actualizarhorario', [App\Http\Controllers\ProgramaController::class, 'actualizarhorario']);
 Route::delete('programa/{horario}/eliminarhorario', [App\Http\Controllers\ProgramaController::class, 'eliminarhorario']);
+Route::get('/programa/exportpdf', [App\Http\Controllers\ProgramaController::class, 'exportpdf']);
+Route::get('/programa/exportexcel', [App\Http\Controllers\ProgramaController::class, 'exportexcel']);
 Route::resource('programa', App\Http\Controllers\ProgramaController::class);
 
 /*Rutas asignatura*/
