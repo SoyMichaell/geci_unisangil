@@ -147,7 +147,16 @@ class ProgramaController extends Controller
             ->orWhere('per_tipo_usuario', 5)
             ->where('per_id_estado', '=', 'activo')
             ->get();
-        $programa = Programa::find($id);
+        $programa = DB::table('programa')
+            ->join('facultad','programa.pro_facultad','=','facultad.id')
+            ->join('municipio','programa.pro_municipio','=','municipio.id')
+            ->join('nivel_formacion','programa.pro_nivel_formacion','=','nivel_formacion.id')
+            ->join('metodologia','programa.pro_metodologia','=','metodologia.id')
+            ->where('programa.id', $id)
+            ->first();
+        $asignaturas = DB::table('programa_plan_estudio_asignatura')
+            ->where('asig_id_programa', $id)
+            ->get();
         $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
         $programasCiclo = collect(['Si', 'No']);
@@ -156,7 +165,8 @@ class ProgramaController extends Controller
         $duraccions->all();
         $periodoAdmision = collect(['Trimestral', 'Semestral', 'Anual']);
         $periodoAdmision->all();
-        return view('programa.show')->with('programa', $programa)
+        return view('programa.show')
+            ->with('programa', $programa)
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios)
             ->with('facultades', $facultades)
@@ -166,7 +176,8 @@ class ProgramaController extends Controller
             ->with('docentes', $docentes)
             ->with('programasCiclo', $programasCiclo)
             ->with('duraccions', $duraccions)
-            ->with('periodoAdmision', $periodoAdmision);
+            ->with('periodoAdmision', $periodoAdmision)
+            ->with('asignaturas', $asignaturas);
     }
 
     public function edit($id)
