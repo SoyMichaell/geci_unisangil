@@ -31,11 +31,16 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
+                        @php
+                            $programaplanes = DB::table('programa')
+                                ->join('programa_plan_estudio','programa.id','=','programa_plan_estudio.pp_id_programa')
+                                ->get();
+                        @endphp
                         <select class="form-select" name="estu_programa_plan" id="estu_programa_plan">
                             <option value="">---- SELECCIONE ----</option>
-                            @foreach ($planes as $plan)
+                            @foreach ($programaplanes as $plan)
                                 <option value="{{ $plan->id }}">
-                                    {{ $plan->pp_plan }}</option>
+                                    {{ $programa->pro_nombre.' '.$plan->pp_plan }}</option>
                             @endforeach
                         </select>
                         @error('estu_programa_plan')

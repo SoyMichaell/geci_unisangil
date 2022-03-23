@@ -58,7 +58,8 @@ Route::resource('/metodologia', App\Http\Controllers\MetodologiaController::clas
 
 
 /*Rutas Estudiantes*/
-Route::get('/estudiante/pdf', [App\Http\Controllers\EstudianteController::class, 'pdf']);
+Route::get('/estudiante/{programa}/verestudiantes', [App\Http\Controllers\EstudianteController::class, 'verestudiantes']);
+Route::get('/estudiante/exportpdf', [App\Http\Controllers\EstudianteController::class, 'exportpdf']);
 Route::get('/estudiante/export', [App\Http\Controllers\EstudianteController::class, 'export']);
 Route::get('/estudiante/listadobeca', [App\Http\Controllers\EstudianteController::class, 'listadobeca']);
 Route::get('/estudiante/listadocontado', [App\Http\Controllers\EstudianteController::class, 'listadocontado']);

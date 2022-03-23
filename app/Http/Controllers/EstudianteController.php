@@ -20,13 +20,13 @@ class EstudianteController extends Controller
 
     public function index()
     {
-        $programas = Programa::all();
-        $estudiante_egresados = EstudianteEgresado::all();
-
-        $ingresos = DB::table('estudiante')->select('estu_ingreso')->distinct()->get();
         $programas = DB::table('programa')
-            ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
+            ->select('pro_nombre','per_nombre','per_apellido','niv_nombre','pro_grupo_referencia','pro_grupo_referencia_nbc','programa.id')
+            ->join('persona','programa.pro_id_director','=','persona.id')
+            ->join('nivel_formacion','programa.pro_nivel_formacion','=','nivel_formacion.id')
             ->get();
+
+        
         $personas = DB::table('persona')
             ->select('per_tipo_documento','per_numero_documento','per_nombre','per_apellido',
                 'per_correo','estu_ingreso','estu_egresado','per_tipo_usuario','persona.id')
@@ -35,15 +35,28 @@ class EstudianteController extends Controller
             ->get();
 
         if (Auth::user()->per_tipo_usuario == '3') {
-            return view('estudiante.index', compact('personas', 'ingresos', 'estudiante_egresados'));
+            return view('estudiante.index', compact('personas','programas'));
         } else {
             if ($programas->count() > 0) {
-                return view('estudiante.index', compact('personas', 'ingresos', 'estudiante_egresados'));
+                return view('estudiante.index', compact('personas','programas'));
             } else {
                 Alert::warning('Requisitos', 'Primero registre un programa acádemico');
                 return redirect('/home');
             }
         }
+    }
+
+    public function verestudiantes($programa){
+        $programaestudiantes = DB::table('estudiante')
+            ->join('persona','estudiante.estu_id_estudiante','=','persona.id')
+            ->join('programa','estudiante.estu_programa','=','programa.id')
+            ->where('programa.id', $programa)
+            ->get();
+
+        $ingresos = DB::table('estudiante')->select('estu_ingreso')->distinct()->where('estu_programa', $programa)->get();
+        return view('estudiante.listado')
+            ->with('programaestudiantes', $programaestudiantes)
+            ->with('ingresos', $ingresos);
     }
 
     public function create()
@@ -629,6 +642,25 @@ class EstudianteController extends Controller
         $reporte->delete();
         Alert::success('Exitoso', 'El reporte ha sido eliminado con exito');
         return redirect('/estudiante/mostrarreporte');
+    }
+
+    public function exportpdf()
+    {
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->where('per_tipo_usuario', 6)
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/estudiante');
+        } else {
+            $view = \view('reporte.estudiante', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
     }
 
     /*public function export(){
