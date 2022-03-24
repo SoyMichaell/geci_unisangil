@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EstudianteExport;
 use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Programa;
@@ -12,6 +13,7 @@ use App\Models\ProgramaPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -48,15 +50,18 @@ class EstudianteController extends Controller
 
     public function verestudiantes($programa){
         $programaestudiantes = DB::table('estudiante')
+            ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido',
+            'per_correo','estu_ingreso','estu_egresado')
             ->join('persona','estudiante.estu_id_estudiante','=','persona.id')
             ->join('programa','estudiante.estu_programa','=','programa.id')
             ->where('programa.id', $programa)
             ->get();
-
+        $programax = $programa;
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->distinct()->where('estu_programa', $programa)->get();
         return view('estudiante.listado')
             ->with('programaestudiantes', $programaestudiantes)
-            ->with('ingresos', $ingresos);
+            ->with('ingresos', $ingresos)
+            ->with('programax', $programax);
     }
 
     public function create()
@@ -84,8 +89,6 @@ class EstudianteController extends Controller
             ->orWhere('id', 6)
             ->get(); 
 
-            $planes = ProgramaPlan::all();
-
         return view('estudiante.create')
             ->with('programas', $programas)
             ->with('programasPlan', $programasPlan)
@@ -94,13 +97,15 @@ class EstudianteController extends Controller
             ->with('semestres', $semestres)
             ->with('estadoprogramas', $estadoprogramas)
             ->with('tiposdocumento', $tiposdocumento)
-            ->with('tipousuarios', $tipousuarios)
-            ->with('planes', $planes);
+            ->with('tipousuarios', $tipousuarios);
     }
 
     public function store(Request $request)
     {
         $rules = [
+            'estu_programa' => 'required|not_in:0',
+            'estu_programa_plan' => 'required|not_in:0',
+            'estu_tipo_documento' => 'required|not_in:0',
             'estu_numero_documento' => 'required',
             'estu_nombre' => 'required',
             'estu_apellido' => 'required',
@@ -108,11 +113,20 @@ class EstudianteController extends Controller
             'estu_direccion' => 'required',
             'estu_correo' => 'required',
             'estu_estrato' => 'required',
-            'estu_departamento' => 'required',
-            'estu_ciudad' => 'required',
+            'estu_departamento' => 'required|not_in:0',
+            'estu_ciudad' => 'required|not_in:0',
             'estu_fecha_nacimiento' => 'required',
+            'estu_fecha_expedicion' => 'required',
+            'estu_sexo' => 'required|not_in:0',
+            'estu_estado_civil' => 'required|not_in:0',
+            'estu_ult_matricula' => 'required',
+            'estu_semestre' => 'required|not_in:0',
+            'estu_financiamiento' => 'required|not_in:0',
             'estu_ingreso' => 'required',
             'estu_periodo_ingreso' => 'required',
+            'estu_estado' => 'required|not_in:0',
+            'estu_tipo_matricula' => 'required|not_in:0',
+            'estu_matricula' => 'required|not_in:0'
         ];
 
         $messages = [
@@ -129,8 +143,17 @@ class EstudianteController extends Controller
             'estu_departamento.required' => 'El campo departamento es requerido',
             'estu_ciudad.required' => 'El campo sede es requerido',
             'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
+            'estu_fecha_expedicion.required' => 'El campo fecha de expedición es requerido',
+            'estu_sexo.required' => 'El campo fecha de sexo biológico es requerido',
+            'estu_estado_civil.required' => 'El campo estado civil es requerido',
+            'estu_ult_matricula.required' => 'El campo ultimo periodo matriculado es requerido',
+            'estu_semestre.required' => 'El campo semestre es requerido',
+            'estu_financiamiento.required' => 'El campo tipo financiamiento es requerido',
             'estu_ingreso.required' => 'El campo año de ingreso es requerido',
             'estu_periodo_ingreso.required' => 'El campo periodo de ingreso es requerido',
+            'estu_estado.required' => 'El campo estado es requerido',
+            'estu_tipo_matricula.required' => 'El campo tipo matricula es requerido',
+            'estu_matricula.required' => 'El campo matricula es requerido',
         ];
 
         $this->validate($request, $rules, $messages);
@@ -295,6 +318,9 @@ class EstudianteController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
+            'estu_programa' => 'required|not_in:0',
+            'estu_programa_plan' => 'required|not_in:0',
+            'estu_tipo_documento' => 'required|not_in:0',
             'estu_numero_documento' => 'required',
             'estu_nombre' => 'required',
             'estu_apellido' => 'required',
@@ -302,11 +328,20 @@ class EstudianteController extends Controller
             'estu_direccion' => 'required',
             'estu_correo' => 'required',
             'estu_estrato' => 'required',
-            'estu_departamento' => 'required',
-            'estu_ciudad' => 'required',
+            'estu_departamento' => 'required|not_in:0',
+            'estu_ciudad' => 'required|not_in:0',
             'estu_fecha_nacimiento' => 'required',
+            'estu_fecha_expedicion' => 'required',
+            'estu_sexo' => 'required|not_in:0',
+            'estu_estado_civil' => 'required|not_in:0',
+            'estu_ult_matricula' => 'required',
+            'estu_semestre' => 'required|not_in:0',
+            'estu_financiamiento' => 'required|not_in:0',
             'estu_ingreso' => 'required',
             'estu_periodo_ingreso' => 'required',
+            'estu_estado' => 'required|not_in:0',
+            'estu_tipo_matricula' => 'required|not_in:0',
+            'estu_matricula' => 'required|not_in:0'
         ];
 
         $messages = [
@@ -323,8 +358,17 @@ class EstudianteController extends Controller
             'estu_departamento.required' => 'El campo departamento es requerido',
             'estu_ciudad.required' => 'El campo sede es requerido',
             'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
+            'estu_fecha_expedicion.required' => 'El campo fecha de expedición es requerido',
+            'estu_sexo.required' => 'El campo fecha de sexo biológico es requerido',
+            'estu_estado_civil.required' => 'El campo estado civil es requerido',
+            'estu_ult_matricula.required' => 'El campo ultimo periodo matriculado es requerido',
+            'estu_semestre.required' => 'El campo semestre es requerido',
+            'estu_financiamiento.required' => 'El campo tipo financiamiento es requerido',
             'estu_ingreso.required' => 'El campo año de ingreso es requerido',
             'estu_periodo_ingreso.required' => 'El campo periodo de ingreso es requerido',
+            'estu_estado.required' => 'El campo estado es requerido',
+            'estu_tipo_matricula.required' => 'El campo tipo matricula es requerido',
+            'estu_matricula.required' => 'El campo matricula es requerido',
         ];
 
         $this->validate($request, $rules, $messages);
@@ -644,11 +688,13 @@ class EstudianteController extends Controller
         return redirect('/estudiante/mostrarreporte');
     }
 
-    public function exportpdf()
+    public function exportpdf($id)
     {
         $datos = DB::table('persona')
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('programa','estudiante.estu_programa','=','programa.id')
         ->where('per_tipo_usuario', 6)
+        ->where('estu_programa', $id)
         ->get();
         if ($datos->count() <= 0) {
             Alert::warning('No hay registros');
@@ -663,16 +709,22 @@ class EstudianteController extends Controller
         }
     }
 
-    /*public function export(){
-        $estudiantes = Estudiante::all();
-        if ($estudiantes->count() <= 0) {
+    public function exportexcel($id){
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('programa','estudiante.estu_programa','=','programa.id')
+        ->where('per_tipo_usuario', 6)
+        ->where('estu_programa', $id)
+        ->get();
+        if ($datos->count() <= 0) {
             Alert::warning('No hay registros');
             return redirect('/estudiante');
         } else { 
-            return Excel::download(new EstudiantesExports, 'estudiantes.xlsx');
+            return Excel::download(new EstudianteExport, 'estudiantes.xlsx');
         }
     }
 
+    /*
     public function listadobeca(){
         $estudiantes = Estudiante::all();
         if ($estudiantes->count() <= 0) {

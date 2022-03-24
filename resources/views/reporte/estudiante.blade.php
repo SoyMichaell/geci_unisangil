@@ -67,10 +67,10 @@
 <p class="header_right">Unisangil <br>@php
     $fecha = date('Y-m-d');
     echo $fecha;
-@endphp <br>Módulo: programas</p>
+@endphp <br>Módulo: estudiantes</p>
 <br>
 <hr>
-<p class="titulo__header">Programas:</p>
+<p class="titulo__header">Estudiantes: @foreach($datos as $nombre) {{$nombre->pro_nombre}} @endforeach</p>
 <table class="table">
     <thead>
         <tr>
@@ -80,7 +80,10 @@
             <th>Nombre (s)</th>
             <th>Apellido (s)</th>
             <th>Correo electronico</th>
+            <th>Semestre</th>
+            <th>Tipo financiamiento</th>
             <th>Año de ingreso</th>
+            <th>Tipo de matricula</th>
         </tr>
     </thead>
     <tbody>
@@ -93,7 +96,10 @@
                 <td>{{ $estudiante->per_nombre }}</td>
                 <td>{{ $estudiante->per_apellido }}</td>
                 <td>{{ $estudiante->per_correo }}</td>
+                <td>{{ $estudiante->estu_semestre}}</td>
+                <td>{{ $estudiante->estu_financiamiento }}</td>
                 <td>{{ $estudiante->estu_ingreso }}</td>
+                <td>{{ $estudiante->estu_tipo_matricula }}</td>
             </tr>
         @endforeach
     </tbody>

@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" style="border-radius: 100%"
-                        href="{{ url('estudiante/exportpdf') }}" title="Generar reporte pdf" target="_blank"><i
+                        href="{{ url('estudiante/'.$programax.'/exportpdf') }}" title="Generar reporte pdf" target="_blank"><i
                             class="fa-solid fa-file-pdf"></i></a>
                     <div class="dropdown">
                         <a class="btn btn-outline-success" style="border-radius: 100%" href="#" role="button"
@@ -25,11 +25,11 @@
                             <i class="fa-solid fa-file-excel"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ url('estudiante/export') }}">Listado general</a>
-                            <a class="dropdown-item" href="{{ url('estudiante/listadobeca') }}">Listado SF Beca</a>
-                            <a class="dropdown-item" href="{{ url('estudiante/listadocontado') }}">Listado SF De
+                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/exportpdf') }}">Listado general programa</a>
+                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/listadobeca') }}">Listado SF Beca</a>
+                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/listadocontado') }}">Listado SF De
                                 contado</a>
-                            <a class="dropdown-item" href="{{ url('estudiante/listadoprestamo') }}">Listado SF
+                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/listadoprestamo') }}">Listado SF
                                 Prestamo</a>
                         </div>
                     </div>

@@ -40,7 +40,7 @@
                     Nuevo</a>
             @endif
         </div>
-        <div class="row">
+        <div class="row mt-3">
             @foreach ($programas as $programa)
                 <a class="bg-white p-3 col-md-4" id="card-programa"
                     href="estudiante/{{ $programa->id }}/verestudiantes">

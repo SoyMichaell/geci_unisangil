@@ -9,9 +9,10 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile w-100">
-            <h4 class="tile title"><i class="fas fa-plus-square"></i> Registro estudiante</h4>
+            <h4 class="title"><i class="fab fa-wpforms"></i> Registro estudiante</h4>
+            <hr>
             <form action="/estudiante/{{ $persona->id }}" method="post">
                 @csrf
                 @method('PUT')

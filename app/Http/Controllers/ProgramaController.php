@@ -152,10 +152,11 @@ class ProgramaController extends Controller
             ->join('municipio','programa.pro_municipio','=','municipio.id')
             ->join('nivel_formacion','programa.pro_nivel_formacion','=','nivel_formacion.id')
             ->join('metodologia','programa.pro_metodologia','=','metodologia.id')
+            ->join('persona','programa.pro_id_director','=','persona.id')
             ->where('programa.id', $id)
             ->first();
-        $asignaturas = DB::table('programa_plan_estudio_asignatura')
-            ->where('asig_id_programa', $id)
+        $planes = DB::table('programa_plan_estudio')
+            ->where('pp_id_programa', $id)
             ->get();
         $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
@@ -177,7 +178,7 @@ class ProgramaController extends Controller
             ->with('programasCiclo', $programasCiclo)
             ->with('duraccions', $duraccions)
             ->with('periodoAdmision', $periodoAdmision)
-            ->with('asignaturas', $asignaturas);
+            ->with('planes', $planes);
     }
 
     public function edit($id)

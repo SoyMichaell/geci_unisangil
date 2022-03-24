@@ -9,15 +9,16 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile w-100">
-            <h4 class="tile title"><i class="fas fa-plus-square"></i> Registro estudiante</h4>
+            <h4 class="title"><i class="fab fa-wpforms"></i> Registro estudiante</h4>
+            <hr>
             <form action="/estudiante" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select" name="estu_programa" id="estu_programa">
+                        <select class="form-select @error('estu_programa') is-invalid @enderror" name="estu_programa" id="estu_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
@@ -31,16 +32,11 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
-                        @php
-                            $programaplanes = DB::table('programa')
-                                ->join('programa_plan_estudio','programa.id','=','programa_plan_estudio.pp_id_programa')
-                                ->get();
-                        @endphp
-                        <select class="form-select" name="estu_programa_plan" id="estu_programa_plan">
+                        <select class="form-select @error('estu_programa_plan') is-invalid @enderror" name="estu_programa_plan" id="estu_programa_plan">
                             <option value="">---- SELECCIONE ----</option>
-                            @foreach ($programaplanes as $plan)
+                            @foreach ($programasPlan as $plan)
                                 <option value="{{ $plan->id }}">
-                                    {{ $programa->pro_nombre.' '.$plan->pp_plan }}</option>
+                                    {{ $plan->pro_nombre.' '.$plan->pp_plan }}</option>
                             @endforeach
                         </select>
                         @error('estu_programa_plan')
@@ -53,7 +49,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_tipo_documento">{{ __('Tipo Documento *') }}</label>
-                        <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento">
+                        <select class="form-select @error('estu_tipo_documento') is-invalid @enderror" name="estu_tipo_documento" id="estu_tipo_documento">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($tiposdocumento as $tipo)
                                 <option value="{{ $tipo }}">{{ $tipo }}</option>
@@ -164,7 +160,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_departamento">{{ __('Departamento *') }}</label>
-                        <select class="form-select" name="estu_departamento" id="estu_departamento">
+                        <select class="form-select @error('estu_departamento') is-invalid @enderror" name="estu_departamento" id="estu_departamento">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($departamentos as $departamento)
                                 <option value="{{ $departamento->id }}">{{ $departamento->dep_nombre }}
@@ -181,7 +177,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
-                        <select class="form-select" name="estu_ciudad" id="estu_ciudad">
+                        <select class="form-select @error('estu_ciudad') is-invalid @enderror" name="estu_ciudad" id="estu_ciudad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}">
@@ -223,7 +219,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
-                        <select class="form-select" name="estu_sexo" id="estu_sexo">
+                        <select class="form-select @error('estu_sexo') is-invalid @enderror" name="estu_sexo" id="estu_sexo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
@@ -238,7 +234,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
-                        <select class="form-select" name="estu_estado_civil" id="estu_estado_civil">
+                        <select class="form-select  @error('estu_estado_civil') is-invalid @enderror" name="estu_estado_civil" id="estu_estado_civil">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="soltero(a)">Soltero (a)</option>
                             <option value="casado(s)">Casado (a)</option>
@@ -295,7 +291,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_semestre">{{ __('Semestre *') }}</label>
-                        <select class="form-select" name="estu_semestre" id="estu_semestre">
+                        <select class="form-select @error('estu_semestre') is-invalid @enderror" name="estu_semestre" id="estu_semestre">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -316,7 +312,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_financiamiento">{{ __('Tipo de financiamiento *') }}</label>
-                        <select class="form-select" name="estu_financiamiento" id="estu_financiamiento">
+                        <select class="form-select @error('estu_financiamiento') is-invalid @enderror" name="estu_financiamiento" id="estu_financiamiento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="beca">Beca</option>
                             <option value="de-contado">De contado</option>
@@ -344,7 +340,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="estu_estado" id="estu_estado">
+                        <select class="form-select @error('estu_estado') is-invalid @enderror" name="estu_estado" id="estu_estado">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="activo">Activo</option>
                             <option value="inactivo">Inactivo</option>
@@ -365,7 +361,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
-                        <select class="form-select" name="estu_tipo_matricula" id="estu_tipo_matricula">
+                        <select class="form-select @error('estu_tipo_matricula') is-invalid @enderror" name="estu_tipo_matricula" id="estu_tipo_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="movilidad-interna">Movilidad Interna</option>
                             <option value="nuevo-transferencias-interna">Nuevo Transferencias Interna</option>
@@ -388,7 +384,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_matricula">{{ __('Matricula *') }}</label>
-                        <select class="form-select" name="estu_matricula" id="estu_matricula">
+                        <select class="form-select @error('estu_matricula') is-invalid @enderror" name="estu_matricula" id="estu_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="pendiente">Pendiente</option>
                             <option value="pagado">Pagado</option>
@@ -428,10 +424,10 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_adminitrativo">{{ __('¿Es personal administrativo de unisangil? ') }}</label>
+                        <label for="estu_administrativo">{{ __('¿Es personal administrativo de unisangil? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <select class="form-select" name="estu_adminitrativo" id="estu_adminitrativo">
+                                <select class="form-select" name="estu_administrativo" id="estu_administrativo">
                                     <option value="Si">Si</option>
                                     <option value="No" selected>No</option>
                                 </select>
