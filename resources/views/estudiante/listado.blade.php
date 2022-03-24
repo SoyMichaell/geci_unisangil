@@ -10,26 +10,30 @@
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="tile col-md-12 mt-2">
+        <div class="bg-white col-md-12 mt-2 p-3">
             <div class="row">
                 <div class="col-md-8">
                     <h4>Listado estudiantes</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" style="border-radius: 100%"
-                        href="{{ url('estudiante/'.$programax.'/exportpdf') }}" title="Generar reporte pdf" target="_blank"><i
-                            class="fa-solid fa-file-pdf"></i></a>
+                        href="{{ url('estudiante/' . $programax . '/exportpdf') }}" title="Generar reporte pdf"
+                        target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
                     <div class="dropdown">
                         <a class="btn btn-outline-success" style="border-radius: 100%" href="#" role="button"
                             id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
                             <i class="fa-solid fa-file-excel"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/exportpdf') }}">Listado general programa</a>
-                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/listadobeca') }}">Listado SF Beca</a>
-                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/listadocontado') }}">Listado SF De
+                            <a class="dropdown-item"
+                                href="{{ url('estudiante/' . $programax . '/exportexcel') }}">Listado general programa</a>
+                            <a class="dropdown-item"
+                                href="{{ url('estudiante/' . $programax . '/exportbecaexcel') }}">Listado SF Beca</a>
+                            <a class="dropdown-item"
+                                href="{{ url('estudiante/' . $programax . '/exportcontadoexcel') }}">Listado SF De
                                 contado</a>
-                            <a class="dropdown-item" href="{{ url('estudiante/'.$programax.'/listadoprestamo') }}">Listado SF
+                            <a class="dropdown-item"
+                                href="{{ url('estudiante/' . $programax . '/exportprestamoexcel') }}">Listado SF
                                 Prestamo</a>
                         </div>
                     </div>
@@ -95,19 +99,50 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-5 tile">
-            <form class="form-inline" action="/estudiante/listadoingreso" method="post">
+        <hr>
+        <div class="col-md-8 mt-3">
+            <form class="form-inline" action="/estudiante/{{ $programax }}/listadoingreso" method="post">
                 @csrf
                 <div class="form-group mb-2">
-                    <label>Listado por periodo acádemico: </label>
+                    <label>Listado por año de ingreso: </label>
                 </div>
-                <div class="form-group mx-sm-3 mb-2">
-                    <select class="form-select" name="estu_ingreso" id="estu_ingreso">
+                <div class="form-group mx-sm-3 col-md-4 mb-2">
+                    <select class="form-select @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
+                        id="estu_ingreso">
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($ingresos as $ingreso)
                             <option value="{{ $ingreso->estu_ingreso }}">{{ $ingreso->estu_ingreso }}</option>
                         @endforeach
                     </select>
+                    @error('estu_ingreso')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>
+                <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
+            </form>
+        </div>
+        <hr>
+        <div class="col-md-8 mt-3">
+            <form class="form-inline" action="/estudiante/{{ $programax }}/listadoperiodoingreso" method="post">
+                @csrf
+                <div class="form-group mb-2">
+                    <label>Listado por periodo académico: </label>
+                </div>
+                <div class="form-group mx-sm-3 col-md-4 mb-2">
+                    <select class="form-select @error('estu_periodo_ingreso') is-invalid @enderror" name="estu_periodo_ingreso"
+                        id="estu_periodo_ingreso">
+                        <option value="">---- SELECCIONE ----</option>
+                        @foreach ($periodos as $periodo)
+                            <option value="{{ $periodo->estu_periodo_ingreso }}">{{ $periodo->estu_periodo_ingreso }}</option>
+                        @endforeach
+                    </select>
+                    @error('estu_periodo_ingreso')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
             </form>

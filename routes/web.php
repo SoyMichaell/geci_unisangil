@@ -59,12 +59,16 @@ Route::resource('/metodologia', App\Http\Controllers\MetodologiaController::clas
 
 /*Rutas Estudiantes*/
 Route::get('/estudiante/{programa}/verestudiantes', [App\Http\Controllers\EstudianteController::class, 'verestudiantes']);
+Route::get('/estudiante/exportpdfgeneral', [App\Http\Controllers\EstudianteController::class, 'exportpdfgeneral']);
+Route::get('/estudiante/exportexcelgeneral', [App\Http\Controllers\EstudianteController::class, 'exportexcelgeneral']);
 Route::get('/estudiante/{programa}/exportpdf', [App\Http\Controllers\EstudianteController::class, 'exportpdf']);
-Route::get('/estudiante/export', [App\Http\Controllers\EstudianteController::class, 'export']);
-Route::get('/estudiante/listadobeca', [App\Http\Controllers\EstudianteController::class, 'listadobeca']);
-Route::get('/estudiante/listadocontado', [App\Http\Controllers\EstudianteController::class, 'listadocontado']);
-Route::get('/estudiante/listadoprestamo', [App\Http\Controllers\EstudianteController::class, 'listadoprestamo']);
-Route::post('/estudiante/listadoingreso', [App\Http\Controllers\EstudianteController::class, 'listadoingreso']);
+Route::get('/estudiante/{programa}/exportexcel', [App\Http\Controllers\EstudianteController::class, 'exportexcel']);
+Route::get('/estudiante/{programa}/exportbecaexcel', [App\Http\Controllers\EstudianteController::class, 'exportbecaexcel']);
+Route::get('/estudiante/{programa}/exportcontadoexcel', [App\Http\Controllers\EstudianteController::class, 'exportcontadoexcel']);
+Route::get('/estudiante/{programa}/exportprestamoexcel', [App\Http\Controllers\EstudianteController::class, 'exportprestamoexcel']);
+Route::post('/estudiante/{programa}/listadoingreso', [App\Http\Controllers\EstudianteController::class, 'listadoingreso']);
+Route::post('/estudiante/{programa}/listadoperiodoingreso', [App\Http\Controllers\EstudianteController::class, 'listadoperiodoingreso']);
+
 //Rutas egresado
 Route::get('estudiante/{estudiante}/crearegresado', [App\Http\Controllers\EstudianteController::class, 'crearegresado']);
 Route::put('estudiante/{estudiante}/actualizaregresado', [App\Http\Controllers\EstudianteController::class, 'actualizaregresado']);

@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\EstudianteBecaExport;
+use App\Exports\EstudianteContadoExport;
 use App\Exports\EstudianteExport;
+use App\Exports\EstudianteGeneralExport;
+use App\Exports\EstudianteIngresoExport;
+use App\Exports\EstudiantePeriodoExport;
+use App\Exports\EstudiantePrestamoExport;
 use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Programa;
@@ -58,9 +64,11 @@ class EstudianteController extends Controller
             ->get();
         $programax = $programa;
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->distinct()->where('estu_programa', $programa)->get();
+        $periodos = DB::table('estudiante')->select('estu_periodo_ingreso')->distinct()->where('estu_programa', $programa)->get();
         return view('estudiante.listado')
             ->with('programaestudiantes', $programaestudiantes)
             ->with('ingresos', $ingresos)
+            ->with('periodos', $periodos)
             ->with('programax', $programax);
     }
 
@@ -688,6 +696,43 @@ class EstudianteController extends Controller
         return redirect('/estudiante/mostrarreporte');
     }
 
+    public function exportpdfgeneral()
+    {
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('programa','estudiante.estu_programa','=','programa.id')
+        ->where('per_tipo_usuario', 6)
+        ->orderByDesc('pro_nombre')
+        ->get();
+        $nombre_datos = "";
+        if ($datos->count() <= 0) {
+            Alert::warning('No hay registros');
+            return redirect('/estudiante');
+        } else {
+            $view = \view('reporte.estudiante', compact('datos','nombre_datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcelgeneral(){
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros');
+            return redirect('/estudiante');
+        } else { 
+            return Excel::download(new EstudianteGeneralExport, 'estudiantes.xlsx');
+        }
+    }
+
     public function exportpdf($id)
     {
         $datos = DB::table('persona')
@@ -696,11 +741,14 @@ class EstudianteController extends Controller
         ->where('per_tipo_usuario', 6)
         ->where('estu_programa', $id)
         ->get();
+        $nombre_datos = DB::table('programa')
+            ->where('id', $id)
+            ->first();
         if ($datos->count() <= 0) {
             Alert::warning('No hay registros');
             return redirect('/estudiante');
         } else {
-            $view = \view('reporte.estudiante', compact('datos'))->render();
+            $view = \view('reporte.estudiante', compact('datos','nombre_datos'))->render();
             $pdf = \App::make('dompdf.wrapper');
             $pdf->setPaper('A4', 'landscape');
             $pdf->loadHTML($view);
@@ -712,15 +760,115 @@ class EstudianteController extends Controller
     public function exportexcel($id){
         $datos = DB::table('persona')
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
-        ->join('programa','estudiante.estu_programa','=','programa.id')
-        ->where('per_tipo_usuario', 6)
-        ->where('estu_programa', $id)
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->where('estudiante.estu_programa', $id)
         ->get();
         if ($datos->count() <= 0) {
-            Alert::warning('No hay registros');
+            Alert::warning('Advertencia','No hay registros');
             return redirect('/estudiante');
         } else { 
-            return Excel::download(new EstudianteExport, 'estudiantes.xlsx');
+            return Excel::download(new EstudianteExport($id), 'estudiantes.xlsx');
+        }
+    }
+
+    public function exportbecaexcel($id){
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->where('estudiante.estu_programa', $id)
+        ->where('estudiante.estu_financiamiento', 'beca')
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No existen estudiantes con financiamiento tipo beca');
+            return redirect('/estudiante/'.$id.'/verestudiantes');
+        } else { 
+            return Excel::download(new EstudianteBecaExport($id), 'estudiantes-beca.xlsx');
+        }
+    }
+
+    public function exportcontadoexcel($id){
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->where('estudiante.estu_programa', $id)
+        ->where('estudiante.estu_financiamiento', 'de-contado')
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No existen estudiantes con financiamiento de contado');
+            return redirect('/estudiante/'.$id.'/verestudiantes');
+        } else { 
+            return Excel::download(new EstudianteContadoExport($id), 'estudiantes-de-contado.xlsx');
+        }
+    }
+
+    public function exportprestamoexcel($id){
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->where('estudiante.estu_programa', $id)
+        ->where('estudiante.estu_financiamiento', 'prestamo')
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No existen estudiantes con financiamiento tipo prestamo');
+            return redirect('/estudiante/'.$id.'/verestudiantes');
+        } else { 
+            return Excel::download(new EstudiantePrestamoExport($id), 'estudiantes-con-prestamo.xlsx');
+        }
+    }
+
+    public function listadoingreso(Request $request, $id){
+        $rules = [
+            'estu_ingreso' => 'required|not_in:0'
+        ];
+        $message = [
+            'estu_ingreso' => 'El campo listado por año es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->where('estudiante.estu_programa', $id)
+        ->where('estudiante.estu_ingreso', $request->get('estu_ingreso'))
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No existen estudiantes registrados durante ese año');
+            return redirect('/estudiante/'.$id.'/verestudiantes');
+        } else { 
+            return Excel::download(new EstudianteIngresoExport($id,$request->get('estu_ingreso')), 'estudiantes-año-ingreso.xlsx');
+        }
+    }
+
+    public function listadoperiodoingreso(Request $request, $id){
+        $rules = [
+            'estu_periodo_ingreso' => 'required|not_in:0'
+        ];
+        $message = [
+            'estu_periodo_ingreso' => 'El campo listado por año es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+        $datos = DB::table('persona')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->join('departamento','persona.per_departamento','=','departamento.id')
+        ->join('municipio','persona.per_ciudad','=','municipio.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->where('estudiante.estu_programa', $id)
+        ->where('estudiante.estu_periodo_ingreso', $request->get('estu_periodo_ingreso'))
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No existen estudiantes registrados en ese periodo de tiempo');
+            return redirect('/estudiante/'.$id.'/verestudiantes');
+        } else { 
+            return Excel::download(new EstudiantePeriodoExport($id,$request->get('estu_periodo_ingreso')), 'estudiantes-periodo-ingreso.xlsx');
         }
     }
 

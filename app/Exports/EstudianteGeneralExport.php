@@ -7,12 +7,8 @@ use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use PhpParser\Node\Expr\AssignOp\Concat;
 
-class EstudianteExport implements FromCollection, WithHeadings
+class EstudianteGeneralExport implements FromCollection, WithHeadings
 {
-
-    public function __construct(int $programa){ 
-        $this->programa = $programa;
-    }
 
     public function headings(): array
     {
@@ -70,7 +66,6 @@ class EstudianteExport implements FromCollection, WithHeadings
             ->join('municipio','persona.per_ciudad','=','municipio.id')
             ->join('programa_plan_estudio','estudiante.estu_programa_plan','=','programa_plan_estudio.id')
             ->where('persona.per_tipo_usuario', 6)
-            ->where('estudiante.estu_programa', $this->programa)
             ->get();
         return $estudiantes;
     }

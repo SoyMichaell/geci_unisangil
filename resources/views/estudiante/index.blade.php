@@ -34,6 +34,10 @@
             blanditiis inventore.</p>
         <hr>
         <div class="d-flex justify-content-end">
+            <a class="btn btn-outline-danger" href="{{url('estudiante/exportpdfgeneral')}}" title="Generar reporte pdf" target="_blank"><i
+                    class="fa-solid fa-file-pdf"></i></a>
+            <a class="btn btn-success" href="{{url('estudiante/exportexcelgeneral')}}" title="Generar reporte excel" target="_blank"><i
+                    class="fa-solid fa-file-excel"></i></a>
             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                 <a class="btn btn-outline-success btn-sm" href="{{ url('estudiante/create') }}"><i
                         class="fa fa-plus-circle"></i>

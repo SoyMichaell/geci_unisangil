@@ -1,5 +1,6 @@
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;600;800;900&display=swap');
+
     body {
         font-family: "Nunito Sans", sans-serif !important;
     }
@@ -70,7 +71,10 @@
 @endphp <br>Módulo: estudiantes</p>
 <br>
 <hr>
-<p class="titulo__header">Estudiantes: @foreach($datos as $nombre) {{$nombre->pro_nombre}} @endforeach</p>
+@if ($nombre_datos != '' || $nombre_datos != null)
+    <p class="titulo__header">Estudiantes: {{ $nombre_datos->pro_nombre }} </p>
+@endif
+
 <table class="table">
     <thead>
         <tr>
@@ -80,7 +84,11 @@
             <th>Nombre (s)</th>
             <th>Apellido (s)</th>
             <th>Correo electronico</th>
-            <th>Semestre</th>
+            @if ($nombre_datos != '' || $nombre_datos != null)
+                <td>Semestre</td>
+            @else
+                <td>Programa</td>
+            @endif
             <th>Tipo financiamiento</th>
             <th>Año de ingreso</th>
             <th>Tipo de matricula</th>
@@ -96,7 +104,11 @@
                 <td>{{ $estudiante->per_nombre }}</td>
                 <td>{{ $estudiante->per_apellido }}</td>
                 <td>{{ $estudiante->per_correo }}</td>
-                <td>{{ $estudiante->estu_semestre}}</td>
+                @if ($nombre_datos != '' || $nombre_datos != null)
+                    <td>{{ $estudiante->estu_semestre }}</td>
+                @else
+                    <td>{{ $estudiante->pro_nombre }}</td>
+                @endif
                 <td>{{ $estudiante->estu_financiamiento }}</td>
                 <td>{{ $estudiante->estu_ingreso }}</td>
                 <td>{{ $estudiante->estu_tipo_matricula }}</td>
