@@ -13,8 +13,9 @@
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="tile w-100 mx-auto">
-            <h4 class="tile title"><i class="fab fa-wpforms"></i> Registro evaluación docente</h4>
+        <div class="tile">
+            <h4><i class="fab fa-wpforms"></i> Registro evaluación docente</h4>
+            <hr>
             <form action="/docente/{{$evaluacion->id}}/actualizarevaluacion" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -104,8 +105,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="doe_observacion">{{ __('Observación *') }}</label>
-                        <textarea class="form-control @error('doe_total_pro') is-invalid @enderror"
-                            name="doe_observacion" id="doe_observacion" cols="30" rows="10">{{$evaluacion->doe_total_pro}}</textarea>
+                        <textarea class="form-control @error('doe_observacion') is-invalid @enderror"
+                            name="doe_observacion" id="doe_observacion" cols="30" rows="10">{{$evaluacion->doe_observacion}}</textarea>
                         @error('doe_observacion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

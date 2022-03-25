@@ -2,13 +2,10 @@
     @include('home')
 @else
     @extends('layouts.app')
-    @section('navegar')
-        <a href="/docente/{{$persona->id}}/directorcompletar">Complementar información</a> / <a href="/docente">Docente</a>
-    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de complemento de información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Diligenciar los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
@@ -30,7 +27,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane {{ $cuenta > 0 ? ($docente->id_proceso == 1 ? 'show active' : '') : 'show active' }} tile p-3" id="informacion" role="tabpanel" aria-labelledby="informacion-tab">
                 <form
-                    action="{{$cuenta > 0 ? ($docente->id_persona_docente == $persona->id ? '/docente'.'/'.$persona->id.'/actualizarinformacion' : '/docente/directorinformacion') : '/docente/directorinformacion'}}"
+                    action="/docente/{{$persona->id}}/actualizarinformacion"
                     method="post">
                     @csrf @method('PUT')
                     <input type="hidden" value="{{ $persona->id }}" name="id" id="id" readonly>
@@ -273,14 +270,13 @@
                                 for="institucion_pre">{{ __('Nombre de la institución donde realizo pregrado (Opcional)') }}</label>
                             <input id="institucion_pre" type="text"
                                 class="form-control @error('institucion_pre') is-invalid @enderror"
-                                name="institucion_pre" value="{{ old('institucion_pre') }}"
+                                name="institucion_pre" value="{{$docente->institucion_pre}}"
                                 autocomplete="institucion_pre" autofocus>
                             @error('institucion_pre')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->institucion_pre == "" ? '' : asset('estudios/'.$docente->institucion_pre) ) : asset('estudios/'.$docente->institucion_pre) }}">ver. {{$docente->institucion_pre}}</a>
                         </div>
                     </div>
                     <div class="row mb-3">

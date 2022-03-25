@@ -5,11 +5,11 @@
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Diligenciar los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-5 shadow-sm bg-white p-3">
                 <h4>Listado tipo de pruebas</h4>
@@ -45,7 +45,7 @@
                 </table>
             </div>
             <div class="col-md-7 shadow-sm bg-white p-3">
-                <h4><i class="fab fa-wpforms"></i> Registro evaluación docente</h4>
+                <h4><i class="fab fa-wpforms"></i> Registro tipo pruebas</h4>
                 <form action="/prueba/registrotipoprueba" method="post">
                     @csrf
                     <div class="row mb-3">

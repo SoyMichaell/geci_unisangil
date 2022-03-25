@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DocenteExport;
+use App\Exports\DocenteVinculacionExport;
+use App\Exports\DocenteVisitanteExport;
 use App\Models\Departamento;
 use App\Models\Docente;
 use App\Models\DocenteAsignatura;
@@ -14,6 +17,7 @@ use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class DocenteController extends Controller
@@ -122,10 +126,8 @@ class DocenteController extends Controller
 
     public function directorcompletar($id)
     {
-        $persona = DB::table('persona')->select('persona.id')
-            ->where('per_tipo_usuario', 2)
-            ->where('persona.id', $id)
-            ->orWhere('per_tipo_usuario', 5)
+        $persona = DB::table('persona')
+            ->select('persona.id')
             ->where('persona.id', $id)
             ->first();
 
@@ -142,57 +144,6 @@ class DocenteController extends Controller
             ->with('persona', $persona)
             ->with('modalidadprograma', $modalidadprograma)
             ->with('cuenta', $cuenta);
-    }
-
-    public function directorinformacion(Request $request)
-    {
-
-        $rules = [
-            'ciudad_procedencia' => 'required',
-            'correo_personal' => 'required',
-            'fecha_vinculacion' => 'required',
-            'eps' => 'required',
-            'riesgo' => 'required',
-            'cajacompensacion' => 'required',
-            'banco' => 'required',
-            'no_cuenta' => 'required',
-            'pension' => 'required'
-        ];
-
-        $message = [
-            'ciudad_procedencia.required' => 'El campo ciudad de procedencia es requerido',
-            'correo_personal.required' => 'El campo correo personal es requerido',
-            'fecha_vinculacion.required' => 'El campo fecha vinculación es requerido',
-            'eps.required' => 'El campo eps es requerido',
-            'riesgo.required' => 'El campo riesgo es requerido',
-            'cajacompensacion.required' => 'El campo caja de compensacion es requerido',
-            'banco.required' => 'El campo banco es requerido',
-            'no_cuenta.required' => 'El campo no. banco es requerido',
-            'pension.required' => 'El campo pensión es requerido'
-        ];
-
-        $this->validate($request, $rules, $message);
-
-        $directord = new Docente();
-        $directord->id_persona_docente = $request->get('id');
-        $directord->ciudad_procedencia = $request->get('ciudad_procedencia');
-        $directord->correo_personal = $request->get('correo_personal');
-        $directord->dedicacion = $request->get('dedicacion');
-        $directord->tipo_contratacion = $request->get('tipo_contratacion');
-        $directord->fecha_vinculacion = $request->get('fecha_vinculacion');
-        $directord->eps = $request->get('eps');
-        $directord->riesgo = $request->get('riesgo');
-        $directord->caja_compensacion = $request->get('cajacompensacion');
-        $directord->pension = $request->get('pension');
-        $directord->banco = $request->get('banco');
-        $directord->no_cuenta = $request->get('no_cuenta');
-        $directord->estado = $request->get('estado');
-        $directord->id_proceso = 2;
-
-        $directord->save();
-
-        Alert::success('Registro exitos');
-        return redirect('docente/' . $request->get('id') . '/directorcompletar');
     }
 
     public function actualizarinformacion(Request $request, $id)
@@ -224,7 +175,9 @@ class DocenteController extends Controller
 
         $this->validate($request, $rules, $message);
 
-        DB::table('docente')->update(
+        DB::table('docente')
+        ->where('id_persona_docente', $id)
+        ->update(
             [
                 'ciudad_procedencia' => $request->get('ciudad_procedencia'),
                 'correo_personal' => $request->get('correo_personal'),
@@ -373,10 +326,17 @@ class DocenteController extends Controller
 
     public function show($id)
     {
-        $persona = DB::table('persona')->select('persona.id')
-            ->where('per_tipo_usuario', 2)
-            ->where('persona.id', $id)
-            ->orWhere('per_tipo_usuario', 5)
+        $persona = DB::table('persona')
+            ->select('persona.id','per_nombre','per_apellido','per_tipo_documento','per_numero_documento',
+            'per_telefono','per_correo','dep_nombre','mun_nombre','ciudad_procedencia','correo_personal',
+            'dedicacion','tipo_contratacion','fecha_vinculacion','eps','riesgo','caja_compensacion',
+            'banco','no_cuenta','pension','institucion_esp','institucion_dip','titulo_pregrado','institucion_pre',
+            'titulo_especializacion','institucion_espe','titulo_maestria','institucion_mae','titulo_doctorado',
+            'institucion_doc','area_conocimiento','maximo_nivel_formacion','titulo_maximo_nivel','institucion_maximo_nivel',
+            'modalidad_programa')
+            ->join('docente','persona.id','=','docente.id_persona_docente')
+            ->join('departamento','persona.per_departamento','=','departamento.id')
+            ->join('municipio','persona.per_ciudad','=','municipio.id')
             ->where('persona.id', $id)
             ->first();
 
@@ -612,13 +572,6 @@ class DocenteController extends Controller
             ->with('contratos', $contratos);
     }
 
-    public function crearcontrato($id)
-    {
-        $persona = User::find($id);
-        return view('docente/contrato.create')
-            ->with('persona', $persona);
-    }
-
     public function registrocontrato(Request $request)
     {
         $rules = [
@@ -798,8 +751,7 @@ class DocenteController extends Controller
         $personas = DB::table('persona')
             ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
             return view('docente/vinculacion.index')
                 ->with('personas', $personas);
@@ -1023,4 +975,94 @@ class DocenteController extends Controller
             return redirect('/docente/mostrardocentevisitante');
     }
 
+    public function exportpdf(){
+        $datos = DB::table('persona')
+        ->join('docente','persona.id','=','docente.id_persona_docente')
+            ->join('departamento','persona.per_departamento','=','departamento.id')
+            ->join('municipio','persona.per_ciudad','=','municipio.id')
+            ->where('persona.per_tipo_usuario', 3)
+            ->orWhere('persona.per_tipo_usuario', 2)
+            ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de docentes');
+            return redirect('/docente');
+        } else {
+            $view = \view('reporte.docente', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel(){
+        $datos = DB::table('persona')
+        ->join('docente','persona.id','=','docente.id_persona_docente')
+            ->join('departamento','persona.per_departamento','=','departamento.id')
+            ->join('municipio','persona.per_ciudad','=','municipio.id')
+            ->where('persona.per_tipo_usuario', 3)
+            ->orWhere('persona.per_tipo_usuario', 2)
+            ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de docentes');
+            return redirect('/docente');
+        } else { 
+            return Excel::download(new DocenteExport, 'docentes.xlsx');
+        }
+    }
+
+    public function exportvisitantepdf(){
+        $datos = DB::table('docente_visitante')->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de docentes visitantes');
+            return redirect('/docente');
+        } else {
+            $view = \view('reporte.docentevisitante', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportvisitanteexcel(){
+        $datos = DB::table('docente_visitante')->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de docentes visitantes');
+            return redirect('/docente');
+        } else { 
+            return Excel::download(new DocenteVisitanteExport, 'docentes-visitantes.xlsx');
+        }
+    }
+
+    public function exportvinculacionpdf(){
+        $datos = DB::table('persona')
+        ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de docentes vinculación');
+            return redirect('/docente');
+        } else {
+            $view = \view('reporte.docentevinculacion', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportvinculacionexcel(){
+        $datos = DB::table('persona')
+        ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de docentes vinculación');
+            return redirect('/docente');
+        } else { 
+            return Excel::download(new DocenteVinculacionExport, 'vinculacion-docencia.xlsx');
+        }
+    }
 }

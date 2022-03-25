@@ -3,19 +3,23 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Módulo pruebas saber 11</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Listado pruebas saber 11.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="col-md-12 tile">
+    <div class="container">
+        <div class="col-md-12 bg-white p-3">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Listado módulos</h4>
+                    <h4>Listado pruebas saber 11</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('prueba/exportsaberpdf') }}"
+                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('prueba/exportexcel') }}"
+                        title="Generar reporte excel"><i class="fa-solid fa-file-excel"></i></a>
                     <a class="btn btn-outline-success" href="/prueba/crearsaber"><i class="fa-solid fa-circle-plus"></i>
                         Nuevo</a>
                 </div>
@@ -38,7 +42,7 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>{{ $saber->prueba_saber_year }}</td>
-                            <td>{{ $saber->estudiantes->estu_nombre . ' ' . $saber->estudiantes->estu_apellido }}</td>
+                            <td>{{ $saber->per_nombre . ' ' . $saber->per_apellido }}</td>
                             <td>{{ $saber->prueba_saber_periodo }}</td>
                             <td>{{ number_format($saber->prueba_saber_puntaje_global, 2) }}</td>
                             <td>

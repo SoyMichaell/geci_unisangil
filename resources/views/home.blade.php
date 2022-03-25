@@ -36,7 +36,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-school fa-3x"></i>
                         <div class="info">
                             <h4>Estudiantes</h4>
-                            <p><b></b></p>
+                            <p><b>({{$estudiantes->count()}})</b></p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
                             <h4>Docentes</h4>
-                            <p><b></b></p>
+                            <p><b>({{$docentes->count()}})</b></p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
                         <div class="info">
                             <h4>Egresados</h4>
-                            <p><b></b></p>
+                            <p><b>({{$egresados->count()}})</b></p>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,8 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
                         <div class="info">
                             <h4>Personal administrativo</h4>
-                            <a href="/programa/mostrarhorario">Crear</a>
+                            <p><b>({{$administrativos->count()}})</b> <a href="/programa/mostrarhorario">Crear</a></p>
+                            
                         </div>
                     </div>
                 </div>
@@ -72,7 +73,7 @@
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 1)
-            <div class="tile col-md-12 mt-2">
+            <div class="bg-white p-3 col-md-12 mt-2">
                 <div class="row">
                     <div class="col-md-6">
                         <h4 class="titulo">Usuarios en plataforma</h4>
@@ -94,7 +95,6 @@
                                 <th>Correo electronico</th>
                                 <th>Telefono</th>
                                 <th>Tipo de usuario</th>
-                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -108,18 +108,7 @@
                                     <td>{{ $persona->per_apellido }}</td>
                                     <td>{{ $persona->per_correo }}</td>
                                     <td>{{ $persona->per_telefono }}</td>
-                                    <td>{{ $persona->tiposusuario->tip_nombre }}</td>
-                                    <td>
-                                        <form action="/usuario/{{$persona->id}}" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-outline-info btn-sm" href=""><i class="fa-solid fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
+                                    <td>{{ $persona->tip_nombre }}</td>
                                 </tr>
                             @endforeach
                         </tbody>

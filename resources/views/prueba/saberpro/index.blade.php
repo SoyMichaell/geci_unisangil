@@ -3,17 +3,17 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Módulo pruebas saber Pro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Listado pruebas saber pro</p>
     @endsection
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-12 tile">
+        <div class="col-md-12 bg-white p-3">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Listado módulos</h4>
+                    <h4>Listado pruebas saber pro</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <a class="btn btn-outline-success" href="/prueba/crearsaberpro"><i class="fa-solid fa-circle-plus"></i>

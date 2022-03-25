@@ -16,15 +16,15 @@
         <div class="d-flex">
             <a class="btn btn-success" href="/docente/mostrardocentevisitante"><i class="fa-solid fa-circle-plus"></i> Registro docentes visitantes</a>
         </div>
-        <div class="tile col-md-12 mt-2">
+        <div class="bg-white col-md-12 mt-2 p-3">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('docente/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('docente/exportpdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('docente/export') }}"
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('docente/exportexcel') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success " href="{{ url('docente/mostrardocente') }}"><i
@@ -77,10 +77,6 @@
                                                         href="{{ url('docente/' . $persona->id . '/mostrarcontrato') }}"
                                                         title="Agregar contrato"><i
                                                             class="fa-solid fa-folder-tree"></i></a>
-                                                    <a class="btn btn-outline-info btn-sm"
-                                                        href="{{ url('docente/' . $persona->id . '/mostrarhistorial') }}"
-                                                        title="Agregar asignaturas"><i
-                                                            class="fa-solid fa-address-book"></i></a>
                                                     <a class="btn btn-outline-primary btn-sm"
                                                         href="{{ url('docente/' . $persona->id . '/mostrarevaluacion') }}"
                                                         title="Agregar evaluación docente"><i

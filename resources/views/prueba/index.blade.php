@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension">Extensión</a>
+        <a href="/prueba">Pruebas saber</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Extensión</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Pruebas Saber</h1>
     @section('message')
-        <p>Listado de registro programas académic os</p>
+        <p>Menu principal módulo pruebas saber </p>
     @endsection
 @endsection
 <style>
@@ -25,7 +25,7 @@
 
 </style>
 @section('content')
-    <div class="container tile p-3">
+    <div class="container bg-white p-3">
         <h4 class="fw-bold">Módulo pruebas saber</h4>
         <div class="row">
             <div class="col-md-12">

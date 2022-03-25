@@ -82,7 +82,13 @@ Route::put('estudiante/{general}/actualizarreporte', [App\Http\Controllers\Estud
 Route::delete('estudiante/{general}/eliminarreporte', [App\Http\Controllers\EstudianteController::class, 'eliminarreporte']);
 Route::resource('estudiante', App\Http\Controllers\EstudianteController::class);
 
-/*Rutas docentes*/
+/*Rutas docentes*/ 
+Route::get('/docente/exportpdf', [App\Http\Controllers\DocenteController::class, 'exportpdf']);
+Route::get('/docente/exportexcel', [App\Http\Controllers\DocenteController::class, 'exportexcel']);
+Route::get('/docente/exportvisitantepdf', [App\Http\Controllers\DocenteController::class, 'exportvisitantepdf']);
+Route::get('/docente/exportvisitanteexcel', [App\Http\Controllers\DocenteController::class, 'exportvisitanteexcel']);
+Route::get('/docente/exportvinculacionpdf', [App\Http\Controllers\DocenteController::class, 'exportvinculacionpdf']);
+Route::get('/docente/exportvinculacionexcel', [App\Http\Controllers\DocenteController::class, 'exportvinculacionexcel']);
 Route::get('docente/mostrardocente', [App\Http\Controllers\DocenteController::class, 'mostrardocente']);
 Route::post('docente/registrodocente', [App\Http\Controllers\DocenteController::class, 'registrodocente']);
 Route::get('docente/{docente}/directorcompletar', [App\Http\Controllers\DocenteController::class, 'directorcompletar']);
@@ -131,6 +137,7 @@ Route::get('prueba/mostrartipomodulo', [App\Http\Controllers\PruebaController::c
 Route::post('prueba/registrotipomodulo', [App\Http\Controllers\PruebaController::class, 'registrotipomodulo']);
 Route::delete('prueba/{prueba}/eliminartipomodulo', [App\Http\Controllers\PruebaController::class, 'eliminartipomodulo']);
 //Rutas saber
+Route::get('/prueba/exportsaberpdf', [App\Http\Controllers\PruebaController::class, 'exportsaberpdf']);
 Route::get('prueba/mostrarsaber', [App\Http\Controllers\PruebaController::class, 'mostrarsaber']);
 Route::get('prueba/crearsaber', [App\Http\Controllers\PruebaController::class, 'crearsaber']);
 Route::post('prueba/registrosaber', [App\Http\Controllers\PruebaController::class, 'registrosaber']);

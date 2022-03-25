@@ -98,13 +98,19 @@ class PruebaController extends Controller
     }
 
     public function mostrarsaber(){
-        $saberes = PruebaSaber::all();
+        $saberes = DB::table('prueba_saber')
+            ->join('persona','prueba_saber.prueba_saber_id_estudiante','=','persona.id')
+            ->get();
         return view('prueba/saber.index')
             ->with('saberes', $saberes);
     }
 
     public function crearsaber(){
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->select('persona.id','per_nombre','per_apellido')
+            ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+            ->where('persona.per_tipo_usuario', 6)
+            ->get();
         $tiposmodulos = DB::table('tipo_modulo')
             ->where('tipo_modulo_id_prueba', 1)
             ->get();
@@ -114,18 +120,12 @@ class PruebaController extends Controller
     }
 
     public function registrosaber(Request $request){
-        $rules = [
-            'prueba_saber_year' => 'required',
-            'prueba_saber_periodo' => 'required',
-            'prueba_saber_id_estudiante' => 'required|not_in:0'
-        ];
-        $message = [
-            'prueba_saber_year.required' => 'El campo año es requerido',
-            'prueba_saber_periodo.required' => 'El campo periodo es requerido',
-            'prueba_saber_id_estudiante.required' => 'El campo estudiante es requerido'
-        ];
-        $this->validate($request,$rules,$message);
-        $puntaje_global = 0;
+
+        if($request->get('prueba_saber_year') == "" || $request->get('prueba_saber_periodo') == ""){
+            Alert::warning('Advertencia','Diligencie los campos faltantes');
+            return back()->withInput();
+        }else{
+            $puntaje_global = 0;
         for ($i=0; $i <count($request->get('prsamo_id_modulo')) ; $i++) { 
             DB::table('prueba_saber_modulo')->insert([
                 'prsamo_id_estudiante' => $request->get('prueba_saber_id_estudiante'),
@@ -150,6 +150,7 @@ class PruebaController extends Controller
 
         Alert::success('Exitoso', 'Prueba saber registrada con exito');
         return redirect('/prueba/mostrarsaber');
+        }
     }
 
     public function versaber($id){
@@ -159,9 +160,12 @@ class PruebaController extends Controller
             ->get();
             $saber = DB::table('prueba_saber')
             ->join('prueba_saber_modulo','prueba_saber.prueba_saber_id_estudiante','=','prueba_saber_modulo.prsamo_id_estudiante')
+            ->join('persona','prueba_saber.prueba_saber_id_estudiante','=','persona.id')
             ->where('prueba_saber_id_estudiante', $id)
             ->first();
-        $estudiantes = Estudiante::all();
+            $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->get();
         return view('prueba/saber.show')
             ->with('estudiantes', $estudiantes)
             ->with('saberes', $saberes)
@@ -175,9 +179,12 @@ class PruebaController extends Controller
             ->get();
             $saber = DB::table('prueba_saber')
             ->join('prueba_saber_modulo','prueba_saber.prueba_saber_id_estudiante','=','prueba_saber_modulo.prsamo_id_estudiante')
+            ->join('persona','prueba_saber.prueba_saber_id_estudiante','=','persona.id')
             ->where('prueba_saber_id_estudiante', $id)
             ->first();
-        $estudiantes = Estudiante::all();
+            $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->get();
         return view('prueba/saber.edit')
             ->with('estudiantes', $estudiantes)
             ->with('saberes', $saberes)
@@ -532,6 +539,24 @@ class PruebaController extends Controller
         DB::table('prueba_resultado_programa_modulo')->where('prurepromo_id_prueba_programa', $id)->delete();
         Alert::success('Exitoso', 'Resultado general del programa eliminado con exito');
         return redirect('/prueba/mostrarsaberpro');
+    }
+
+    public function exportsaberpdf(){
+        $datos = DB::table('prueba_saber')
+        ->join('persona','prueba_saber.prueba_saber_id_estudiante','=','persona.id')
+        ->where('persona.per_tipo_usuario', 6)
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de pruebas saber 11');
+            return redirect('/prueba');
+        } else {
+            $view = \view('reporte.pruebasaber11', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
     }
 
 }

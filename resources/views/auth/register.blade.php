@@ -78,7 +78,7 @@
             </button>
 
             <div class="d-flex justify-content-end w-100">
-                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/login') }}">Login</a>
+                <a class="btn btn-outline-success my-2 my-sm-0" href="{{ url('/login') }}">Iniciar sesión</a>
             </div>
         </nav>
         <div class="row mx-auto" style="margin-top: 5%">

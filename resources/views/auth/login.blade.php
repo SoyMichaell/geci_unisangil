@@ -47,7 +47,7 @@
 
             .title-login{
                 font-weight: 900;
-                font-size: 65px;
+                font-size: 90px;
                 color: #198654;
             }
 
@@ -99,7 +99,7 @@
             </nav>
             <div class="row mx-auto" style="margin-top:15%;">
                 <div class="col-md-6 mx-auto">
-                    <h1 class="title-login">Gestión y control</h1>
+                    <h1 class="title-login badge badge-light">GICPAC</h1>
                     <p class="message-login">Plataforma web para la gestión y control de información de procesos académicos y administrativos
                         del programa ingeniería de sistemas <span>unisangil sede Yopal</span></p>
                 </div>

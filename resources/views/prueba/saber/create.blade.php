@@ -9,23 +9,24 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="tile" style="width: 500px">
+    <div class="container">
+        <div class="bg-white p-3">
+            <h4><i class="fab fa-wpforms"></i> Registro pruebas saber 11</h4>
+            <hr>
             <form action="/prueba/registrosaber" method="post">
                 @csrf
                 <div class="row mb-3">
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="prueba_saber_id_estudiante">Estudiante</label>
-                        <select class="form-select" name="prueba_saber_id_estudiante"
-                            id="prueba_saber_id_estudiante">
+                        <select class="form-select js-example-placeholder-single" name="prueba_saber_id_estudiante" id="prueba_saber_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
-                            @foreach ($estudiantes as $estudiante)
-                                <option value="{{ $estudiante->id }}">
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                            @foreach ($estudiantes as $persona)
+                                <option value="{{ $persona->id }}">
+                                    {{ $persona->per_nombre . ' ' . $persona->per_apellido }}</option>
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-6 mb-3">
                         <label for="prueba_saber_year">Año</label>
                         <input class="form-control @error('prueba_saber_year') is-invalid @enderror"
                             name="prueba_saber_year" id="prueba_saber_year" value="{{ old('prueba_saber_year') }}"
@@ -36,6 +37,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="prueba_saber_periodo">Periodo</label>
                         <input class="form-control @error('prueba_saber_periodo') is-invalid @enderror"
@@ -49,19 +52,18 @@
                         @enderror
                     </div>
                     @foreach ($tiposmodulos as $tiposmodulo)
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="prsamo_id_modulo">Módulo {{ $tiposmodulo->tipo_modulo_nombre }}</label>
                             <input class="form-control @error('prsamo_id_modulo') is-invalid @enderror"
-                                name="prsamo_id_modulo[]" id="prsamo_id_modulo"
-                                value="{{ $tiposmodulo->id }}" type="hidden"
-                                autocomplete="prsamo_id_modulo" autofocus readonly>
+                                name="prsamo_id_modulo[]" id="prsamo_id_modulo" value="{{ $tiposmodulo->id }}"
+                                type="hidden" autocomplete="prsamo_id_modulo" autofocus readonly>
                             @error('prsamo_id_modulo')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
                         </div>
-                        <div class="col-md-12 mb-3">
+                        <div class="col-md-6 mb-3">
                             <label for="prsamo_puntaje">Puntaje</label>
                             <input class="form-control @error('prsamo_puntaje') is-invalid @enderror"
                                 name="prsamo_puntaje[]" id="prsamo_puntaje" value="{{ old('prsamo_puntaje') }}"
