@@ -191,6 +191,8 @@ Route::resource('programa', App\Http\Controllers\ProgramaController::class);
 Route::resource('asignatura', App\Http\Controllers\AsignaturaController::class);
 
 /*Rutas trabajo de grado*/
+Route::get('/trabajo/exportpdf', [App\Http\Controllers\TrabajoController::class, 'exportpdf']);
+Route::get('/trabajo/exportexcel', [App\Http\Controllers\TrabajoController::class, 'exportexcel']);
 Route::put('trabajo/{trabajo}/faseestado', [App\Http\Controllers\TrabajoController::class, 'faseestado']);
 Route::put('trabajo/{trabajo}/fasejurado', [App\Http\Controllers\TrabajoController::class, 'fasejurado']);
 Route::put('trabajo/{trabajo}/faseacta', [App\Http\Controllers\TrabajoController::class, 'faseacta']);

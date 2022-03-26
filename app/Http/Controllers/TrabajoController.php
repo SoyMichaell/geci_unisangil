@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\TrabajoGradoExport;
 use App\Exports\TrabajosExport;
 use App\Models\Trabajo;
 use App\Models\Estudiante;
@@ -95,16 +96,6 @@ class TrabajoController extends Controller
     public function show($id)
     {
 
-        $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 3)
-            ->orWhere('per_tipo_usuario', 7)
-            ->get();
-
-        $estudiantes = DB::table('persona')
-        ->Where('per_tipo_usuario', 6)
-        ->get();
-
         $trabajon = DB::table('trabajo_grado')->get();
 
         foreach ($trabajon as $t) {
@@ -114,17 +105,45 @@ class TrabajoController extends Controller
                 ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado1)
                 ->orWhere('docente_contrato.doco_persona_docente', $t->tra_id_jurado2)
                 ->get();
+
+                $director = DB::table('persona')
+                ->join('trabajo_grado','persona.id','=','trabajo_grado.tra_id_director')
+                    ->where('persona.id', $t->tra_id_director)
+                    ->first();
+
+                    $codirector = DB::table('persona')
+                    ->join('trabajo_grado','persona.id','=','trabajo_grado.tra_id_codirector')
+                        ->where('persona.id', $t->tra_id_codirector)
+                        ->first();
+
+                $jurado1 = DB::table('persona')
+                ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+                ->where('docente_contrato.doco_rol', 'jurado-tesis')
+                    ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado1)
+                    ->first();
+
+                    $jurado2 = DB::table('persona')
+                    ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+                    ->where('docente_contrato.doco_rol', 'jurado-tesis')
+                        ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado2)
+                        ->first();
         }
 
-        $trabajo = Trabajo::find($id);
-        $modalidades = ModalidadGrado::all();
+        
+
+        $trabajo = DB::table('trabajo_grado')
+            ->join('modalidad_grado','trabajo_grado.tra_modalidad_grado','=','modalidad_grado.id')
+            ->where('trabajo_grado.id', $id)
+            ->first();
+        
 
         return view('trabajo.show')
-            ->with('estudiantes', $estudiantes)
-            ->with('personas', $personas)
             ->with('trabajo', $trabajo)
-            ->with('modalidades', $modalidades)
-            ->with('contratos', $contratos);
+            ->with('contratos', $contratos)
+            ->with('director', $director)
+            ->with('codirector', $codirector)
+            ->with('jurado1', $jurado1)
+            ->with('jurado2', $jurado2);
     }
 
     public function edit($id)
@@ -149,7 +168,21 @@ class TrabajoController extends Controller
                 ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado1)
                 ->orWhere('docente_contrato.doco_persona_docente', $t->tra_id_jurado2)
                 ->get();
+
+                $jurado1 = DB::table('persona')
+                ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+                ->where('docente_contrato.doco_rol', 'jurado-tesis')
+                    ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado1)
+                    ->first();
+
+                    $jurado2 = DB::table('persona')
+                    ->join('docente_contrato','persona.id','=','docente_contrato.doco_persona_docente')
+                    ->where('docente_contrato.doco_rol', 'jurado-tesis')
+                        ->where('docente_contrato.doco_persona_docente', $t->tra_id_jurado2)
+                        ->first();
         }
+
+        
 
         $trabajo = Trabajo::find($id);
         $modalidades = ModalidadGrado::all();
@@ -159,7 +192,9 @@ class TrabajoController extends Controller
             ->with('personas', $personas)
             ->with('trabajo', $trabajo)
             ->with('modalidades', $modalidades)
-            ->with('contratos', $contratos);
+            ->with('contratos', $contratos)
+            ->with('jurado1', $jurado1)
+            ->with('jurado2', $jurado2);
     }
 
     public function update(Request $request, $id)
@@ -393,42 +428,36 @@ class TrabajoController extends Controller
         return redirect('/trabajo');
     }
 
-    /*public function pdf(Request $request)
+    public function exportpdf()
     {
-        $trabajos = Trabajo::all();
-        if ($trabajos->count() <= 0) {
-            Alert::warning('No hay registros');
+        $datos = DB::table('trabajo_grado')->orderByDesc('tra_fecha_inicio')->get();
+        $director = DB::table('persona')
+            ->join('trabajo_grado','persona.id','=','trabajo_grado.tra_id_director')
+            ->get();
+            $codirector = DB::table('persona')
+            ->join('trabajo_grado','persona.id','=','trabajo_grado.tra_id_codirector')
+            ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de trabajos de grado');
             return redirect('/trabajo');
         } else {
-            $view = \view('trabajo.pdf', compact('trabajos'))->render();
+            $view = \view('reporte.trabajogrado', compact('datos','director','codirector'))->render();
             $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
             $pdf->loadHTML($view);
 
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'pdf',
-                'modulo' => 'trabajo_grado'
-            ]);
-
-            return $pdf->stream('trabajos-grado-reporte.pdf');
+            return $pdf->stream('reporte.pdf');
         }
     }
 
-    public function export()
+    public function exportexcel()
     {
         $trabajos = Trabajo::all();
         if ($trabajos->count() <= 0) {
-            Alert::warning('No hay registros');
+            Alert::warning('Advertencia', 'No hay registros de trabajos de grado');
             return redirect('/trabajo');
         } else {
-
-            DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel',
-                'modulo' => 'trabajo_grado'
-            ]);
-
-            return Excel::download(new TrabajosExport, 'trabajos_grado.xlsx');
+            return Excel::download(new TrabajoGradoExport, 'trabajo-grados.xlsx');
         }
-    }*/
+    }
 }

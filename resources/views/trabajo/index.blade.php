@@ -9,7 +9,7 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="d-flex justify-content-start">
             <a class="btn btn-success" href="{{ url('modalidad') }}">Modalidad de grado</a>
         </div>
@@ -19,10 +19,10 @@
                     <h3>Lista de registros</h3><!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-5 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('trabajo/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('trabajo/exportpdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('trabajo/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('trabajo/exportexcel') }}"
+                        title="Generar reporte excel"s><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success " href="{{ url('trabajo/create') }}"><i
                                 class="fa-solid fa-plus-circle"></i>

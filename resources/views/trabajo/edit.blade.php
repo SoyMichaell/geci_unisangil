@@ -9,7 +9,7 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <a class="nav-link {{ $trabajo->tra_id_proceso == 1 ? 'active tile' : '' }}" id="fasestado-tab"
@@ -77,15 +77,15 @@
                     <div class="row mb-3">
                         <div class="col-md-12">
                             @php
-                                $estudiantex = explode(';',$trabajo->tra_id_estudiante);
+                                $estudiantex = explode(';', $trabajo->tra_id_estudiante);
                             @endphp
                             <label for="tra_id_estudiante">Estudiante (s)</label>
                             <select class="js-example-placeholder-single form-select" name="tra_id_estudiante[]"
                                 id="tra_id_estudiante" multiple>
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($estudiantes as $estudiante)
-                                    <option value="{{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}" @foreach($estudiantex as $estu)
-                                        {{ $estu == $estudiante->per_nombre . ' ' . $estudiante->per_apellido ? 'selected' : '' }} @endforeach>
+                                    <option value="{{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}"
+                                        @foreach ($estudiantex as $estu) {{ $estu == $estudiante->per_nombre . ' ' . $estudiante->per_apellido ? 'selected' : '' }} @endforeach>
                                         {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                                 @endforeach
                             </select>
@@ -300,11 +300,9 @@
                     <form action="/trabajo/{{ $trabajo->id }}/faseacta" method="post" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
-                        <div class="mb-3 form-inline">
-                            <div class="form-group col-md-1">
-                                <label for="tra_acta_sustentacion">Acta sustentación</label>
-                            </div>
-                            <div class="form-group col-md-6">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="">Acta de sustentación</label>
                                 <input class="form-control w-100 @error('tra_acta_sustentacion') is-invalid @enderror"
                                     name="tra_acta_sustentacion" id="tra_acta_sustentacion"
                                     value="{{ $trabajo->tra_numero_acta_sustentacion }}" type="number"
@@ -316,17 +314,20 @@
                                     </span>
                                 @enderror
                             </div>
-                            <input class="form-control col-md-5" type="file" name="tra_acta_sustentacion_soporte[]"
-                                id="tra_acta_sustentacion_soporte" multiple>
-                            <span><small>{{ $trabajo->tra_acta_sustentacion_soporte }}</small></span>
-                            <span><small>Cargar los 2 soporte de actas en un archivo .zip o .rar</small></span>
+                            <div class="col-md-6">
+                                <label
+                                    for=""><span><small>{{ $trabajo->tra_acta_sustentacion_soporte }}</small></span>
+                                    <span><small>Cargar los 2 soporte de actas en un archivo .zip o
+                                            .rar</small></span></label>
+                                <input class="form-control" type="file" name="tra_acta_sustentacion_soporte"
+                                    id="tra_acta_sustentacion_soporte" multiple>
+
+                            </div>
                         </div>
                         <hr>
-                        <div class="mb-3 form-inline">
-                            <div class="form-group col-md-1">
-                                <label for="tra_acta_grado">Acta grado</label>
-                            </div>
-                            <div class="form-group col-md-6">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="">Acta de grado</label>
                                 <input class="form-control w-100 @error('tra_acta_grado') is-invalid @enderror"
                                     name="tra_acta_grado" id="tra_acta_grado"
                                     value="{{ $trabajo->tra_numero_acta_grado }}" type="number"
@@ -337,10 +338,13 @@
                                     </span>
                                 @enderror
                             </div>
-                            <input class="form-control col-md-5" type="file" name="tra_acta_grado_soporte[]"
-                                id="tra_acta_grado_soporte" multiple>
-                            <p><small>{{ $trabajo->tra_acta_grado_soporte }}</small></p>
-                            <span><small>Cargar los 2 soporte de actas en un archivo .zip o .rar</small></span>
+                            <div class="col-md-6">
+                                <label for=""><small>{{ $trabajo->tra_acta_grado_soporte }}</small>
+                                    <span><small>Cargar los 2 soporte de actas en un archivo .zip o
+                                            .rar</small></span></label>
+                                <input class="form-control" type="file" name="tra_acta_grado_soporte"
+                                    id="tra_acta_grado_soporte" multiple>
+                            </div>
                         </div>
                         <hr>
                         <div class="mb-3 form-inline">
@@ -387,24 +391,36 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>{{ $jurado1->per_nombre . ' ' . $jurado1->per_apellido }}</td>
-                                        <td><a
-                                                href="/datos/contrato/{{ $jurado1->doco_url_soporte }}">{{ $jurado1->doco_url_soporte }}</a>
-                                        </td>
-                                        <td>{{ $jurado1->doco_estado }}</td>
-                                        <td><a href="/docente">Cambiar estado de pago</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>{{ $jurado2->per_nombre . ' ' . $jurado2->per_apellido }}</td>
-                                        <td><a
-                                                href="/datos/contrato/{{ $jurado2->doco_url_soporte }}">{{ $jurado2->doco_url_soporte }}</a>
-                                        </td>
-                                        <td>{{ $jurado2->doco_estado }}</td>
-                                        <td><a href="/docente">Cambiar estado de pago</a></td>
-                                    </tr>
+                                    @if ($jurado1 != '')
+                                        <tr>
+                                            <td>1</td>
+                                            <td>{{ $jurado1->per_nombre . ' ' . $jurado1->per_apellido }}</td>
+                                            <td><a
+                                                    href="/datos/contrato/{{ $jurado1->doco_url_soporte }}">{{ $jurado1->doco_url_soporte }}</a>
+                                            </td>
+                                            <td>{{ $jurado1->doco_estado }}</td>
+                                            <td><a href="/docente">Cambiar estado de pago</a></td>
+                                        </tr>
+                                    @else
+                                        <div class="alert alert-primary" role="alert">
+                                            <strong>El jurado 1 no registra contrato como rol de jurado-tesis</strong>
+                                        </div>
+                                    @endif
+                                    @if ($jurado2 != '')
+                                        <tr>
+                                            <td>2</td>
+                                            <td>{{ $jurado2->per_nombre . ' ' . $jurado2->per_apellido }}</td>
+                                            <td><a
+                                                    href="/datos/contrato/{{ $jurado2->doco_url_soporte }}">{{ $jurado2->doco_url_soporte }}</a>
+                                            </td>
+                                            <td>{{ $jurado2->doco_estado }}</td>
+                                            <td><a href="/docente">Cambiar estado de pago</a></td>
+                                        </tr>
+                                    @else
+                                        <div class="alert alert-primary" role="alert">
+                                            <strong>El jurado 2 no registra contrato como rol de jurado-tesis</strong>
+                                        </div>
+                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -417,13 +433,14 @@
             </div>
             <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 6 ? 'show active tile p-3' : 'tile p-3' }}"
                 id="fasefinal" role="tabpanel" aria-labelledby="fasefinal-tab">
-                <form action="/trabajo/{{$trabajo->id}}/registroobservacion" method="post">
+                <form action="/trabajo/{{ $trabajo->id }}/registroobservacion" method="post">
                     @csrf
                     @method('PUT')
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <label for="tra_obsevacion">Observación</label>
-                            <textarea class="form-control" name="tra_observacion" id="tra_observacion" cols="30" rows="10">{{old('tra_obsevacion')}}</textarea>
+                            <textarea class="form-control" name="tra_observacion" id="tra_observacion" cols="30"
+                                rows="10">{{ old('tra_obsevacion') }}</textarea>
                         </div>
                     </div>
                     <div class="row mb-0 ">
