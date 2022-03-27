@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+        <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo investigación</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Módulo investigación Unisangil, Grupo de investigación , Investigadores y Proyectos</p>
     @endsection
 @endsection
 @section('content')

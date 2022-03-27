@@ -4,23 +4,23 @@
     @extends('layouts.app')
 
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo TIC'S</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Laboratorios</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro laboratorios</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
+                    <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('software/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('laboratorio/exportpdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('software/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('laboratorio/exportexcel') }}"
+                        title="Generar reporte excel"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('laboratorio/create') }}"><i
                                 class="fa fa-plus-circle"></i>
@@ -56,7 +56,7 @@
                                 <td>{{ $laboratorio->docentes->per_nombre.' '.$laboratorio->docentes->per_apellido }}</td>
                                 <td>{{ $laboratorio->facultades->fac_nombre }}</td>
                                 <td>{{ $laboratorio->programas->pro_nombre }}</td>
-                                <td>{{ $laboratorio->estudiantes->estu_nombre.' '.$laboratorio->estudiantes->estu_apellido }}</td>
+                                <td>{{ $laboratorio->estudiantes->per_nombre.' '.$laboratorio->estudiantes->per_apellido }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <form action="{{ route('laboratorio.destroy', $laboratorio->id) }}" method="POST">

@@ -12,9 +12,10 @@
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
             <h4 class="titulo"><i class="fab fa-wpforms"></i> Actualizar software</h4>
+            <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="sof_tipo">{{ __('Tipo de software *') }}</label>
@@ -103,11 +104,13 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
+                        @php
+                            $asignaturasx = explode(';',$software->sof_asignatura);
+                        @endphp
                         <label for="sof_asignatura">{{ __('Asignatura *') }}</label>
-                        <select class="form-select @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura" id="sof_asignatura" multiple disabled>
-                            <option value="">---- SELECCIONE ----</option>
+                        <select class="js-example-placeholder-single form-select @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura[]" id="sof_asignatura" multiple="multiple" disabled>
                             @foreach ($asignaturas as $asignatura)
-                                <option value="{{$asignatura->id}}" {{$asignatura->id == $software->sof_asignatura ? 'selected' : ''}}>{{$asignatura->asig_nombre}}</option>
+                                <option value="{{$asignatura->asig_nombre}}" @foreach($asignaturasx as $asig) {{$asig == $asignatura->asig_nombre ? 'selected' : ''}} @endforeach>{{$asignatura->asig_nombre}}</option>
                             @endforeach
                         </select>
                         @error('sof_tipo')
@@ -130,11 +133,13 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
+                        @php
+                            $programasx = explode(';',$software->sof_id_programa);
+                        @endphp
                         <label for="sof_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa" id="sof_id_programa" multiple disabled>
-                            <option value="">---- SELECCIONE ----</option>
+                        <select class="js-example-placeholder-single form-select @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa[]" id="sof_id_programa" multiple="multiple" disabled>
                             @foreach ($programas as $programa)
-                                <option value="{{$programa->id}}" {{$programa->id == $software->sof_id_programa ? 'selected' : ''}}>{{$programa->pro_nombre}}</option>
+                                <option value="{{$programa->pro_nombre}}" @foreach($programasx as $pro) {{$pro == $programa->pro_nombre ? 'selected' : ''}} @endforeach>{{$programa->pro_nombre}}</option>
                             @endforeach
                         </select>
                         @error('sof_tipo')

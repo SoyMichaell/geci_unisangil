@@ -3,26 +3,26 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+        <a href="/movilidad">Movilidad</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo movilidad</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro movilidades</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('docente/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('movilidad/exportpdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('docente/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('movilidad/exportexcel') }}"
+                        title="Generar reporte excel"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('movilidad/create') }}"><i
                                 class="fa fa-plus-circle"></i>
@@ -54,14 +54,16 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $movilidad->movi_year }}</td>
                                 <td>{{ $movilidad->movi_periodo }}</td>
-                                <td>{{ $movilidad->movi_tipo_persona }}</td>
-                                <td>{{ $movilidad->movi_tipo_persona == 'administrativo' ? $movilidad->personas->per_nombre.' '.$movilidad->personas->per_apellido : '' }} {{$movilidad->movi_tipo_persona == 'docente' ? $movilidad->personas->per_nombre.' '.$movilidad->personas->per_apellido : ''}} @foreach ($estudiantes as $estudiante) {{$estudiante->estu_nombre.' '.$estudiante->estu_apellido}} @endforeach</td>
+                                <td>{{ Str::ucfirst($movilidad->movi_tipo_persona) }}</td>
+                                <td>{{ ($movilidad->movi_tipo_persona == 'administrativo'? $movilidad->administrativos->per_nombre . ' ' . $movilidad->administrativos->per_apellido: '') .($movilidad->movi_tipo_persona == 'docente' ? $movilidad->docentes->per_nombre . ' ' . $movilidad->docentes->per_apellido: '') . ($movilidad->movi_tipo_persona == 'estudiante' ? $movilidad->estudiantes->per_nombre.' '.$movilidad->estudiantes->per_apellido : '') }}
+                                </td>
                                 <td>{{ $movilidad->movi_tipo_movilidad }}</td>
                                 <td>{{ $movilidad->movi_pais }}</td>
                                 <td>{{ $movilidad->movi_ciudad }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="{{ route('movilidad.destroy', $movilidad->id) }}" method="POST">
+                                        <form action="{{ route('movilidad.destroy', $movilidad->id) }}"
+                                            method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="/movilidad/{{ $movilidad->id }}"><i
                                                         class="fa-solid fa-folder-open"></i></a>

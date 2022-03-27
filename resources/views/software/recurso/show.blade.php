@@ -3,14 +3,16 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Información registrada.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Información de registro</h4>
+            <hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="sofrete_year">Año</label>

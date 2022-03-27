@@ -12,9 +12,10 @@
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
             <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro red acádemica</h4>
+            <hr>
             <form action="/red/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -119,11 +120,11 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="red_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select @error('red_id_programa') is-invalid @enderror"
-                            name="red_id_programa" id="red_id_programa">
+                        <select class="form-select js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
+                            name="red_id_programa[]" id="red_id_programa" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
-                                <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
+                                <option value="{{ $programa->pro_nombre }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
                         @error('red_id_programa')

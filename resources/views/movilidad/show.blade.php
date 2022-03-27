@@ -3,14 +3,15 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Información de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="movi_year">Año</label>
@@ -40,14 +41,9 @@
                     <select class="form-select @error('tipo_persona_movilidad') is-invalid @enderror"
                         name="tipo_persona_movilidad" id="tipo_persona_movilidad" disabled>
                         <option value="">---- SELECCIONE ----</option>
-                        <option value="administrativo"
-                            {{ $movilidad->movi_tipo_persona == 'administrativo' ? 'selected' : '' }}>Administrativo
-                        </option>
-                        <option value="docente" {{ $movilidad->movi_tipo_persona == 'docente' ? 'selected' : '' }}>
-                            Docente</option>
-                        <option value="estudiante"
-                            {{ $movilidad->movi_tipo_persona == 'estudiante' ? 'selected' : '' }}>Estudiante
-                        </option>
+                        <option value="administrativo" {{$movilidad->movi_tipo_persona == 'administrativo' ? 'selected' : ''}}>Administrativo</option>
+                        <option value="docente" {{$movilidad->movi_tipo_persona == 'docente' ? 'selected' : ''}}>Docente</option>
+                        <option value="estudiante" {{$movilidad->movi_tipo_persona == 'estudiante' ? 'selected' : ''}}>Estudiante</option>
                     </select>
                     @error('tipo_persona_movilidad')
                         <span class="invalid-feedback" role="alert">
@@ -55,13 +51,22 @@
                         </span>
                     @enderror
                 </div>
+                <div class="col-md-6" id="administrativo">
+                    <label for="">Nombre completo</label>
+                    <select class="form-select" name="prac_id_administrativo" id="prac_id_administrativo" disabled>
+                        <option value="">---- SELECCIONE ----</option>
+                        @foreach ($administrativos as $administrativo)
+                            <option value="{{ $administrativo->id }}" {{$movilidad->movi_id_persona == $administrativo->id ? 'selected' : ''}}>
+                                {{ $administrativo->per_nombre . ' ' . $administrativo->per_apellido }}</option>
+                        @endforeach
+                    </select>
+                </div>
                 <div class="col-md-6" id="docente">
                     <label for="">Nombre completo</label>
                     <select class="form-select" name="prac_id_docente" id="prac_id_docente" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)
-                            <option value="{{ $persona->id }}"
-                                {{ $movilidad->movi_id_persona == $persona->id ? 'selected' : '' }}>
+                            <option value="{{ $persona->id }}" {{$movilidad->movi_id_persona == $persona->id ? 'selected' : ''}}>
                                 {{ $persona->per_nombre . ' ' . $persona->per_apellido }}</option>
                         @endforeach
                     </select>
@@ -71,9 +76,8 @@
                     <select class="form-select" name="prac_id_estudiante" id="prac_id_estudiante" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
-                            <option value="{{ $estudiante->id }}"
-                                {{ $movilidad->movi_id_persona == $estudiante->id ? 'selected' : '' }}>
-                                {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                            <option value="{{ $estudiante->id }}" {{$movilidad->movi_id_persona == $estudiante->id ? 'selected' : ''}}>
+                                {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                         @endforeach
                     </select>
                 </div>

@@ -3,18 +3,19 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/red/create">Crear</a> / <a href="/red">Redes acádemicas</a>
+        <a href="/red/{{$red->id}}">Vista</a> / <a href="/red">Redes acádemicas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de redes acádemicas</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Visualizar información</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Información registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro red acádemica</h4>
+            <h4 class="titulo"><i class="fab fa-wpforms"></i> Información de registro</h4>
+            <hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="red_nombre">{{ __('Nombre red *') }}</label>
@@ -117,14 +118,15 @@
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
+                    @php
+                        $programax = explode(';',$red->red_id_programa);
+                    @endphp
                     <label for="red_id_programa">{{ __('Programa *') }}</label>
-                    <select class="form-select @error('red_id_programa') is-invalid @enderror" name="red_id_programa"
-                        id="red_id_programa" disabled>
+                    <select class="form-select js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
+                        name="red_id_programa[]" id="red_id_programa" multiple="multiple" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($programas as $programa)
-                            <option value="{{ $programa->id }}"
-                                {{ $programa->id == $red->red_id_programa ? 'selected' : '' }}>
-                                {{ $programa->pro_nombre }}</option>
+                            <option value="{{ $programa->pro_nombre }}" @foreach($programax as $x) {{$programa->pro_nombre == $x ? 'selected' : ''}} @endforeach>{{ $programa->pro_nombre }}</option>
                         @endforeach
                     </select>
                     @error('red_id_programa')

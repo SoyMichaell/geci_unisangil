@@ -5,12 +5,13 @@
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Registro movilidad</h4><hr>
             <form action="/movilidad/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -28,7 +29,7 @@
                     <div class="col-md-6">
                         <label for="movi_periodo">Periodo</label>
                         <input class="form-control @error('movi_periodo') is-invalid @enderror" name="movi_periodo"
-                            id="movi_periodo" value="{{ old('movi_periodo') }}" type="text"
+                            id="movi_periodo" value="{{ old('movi_periodo') }}" type="text" placeholder="2022-1 | 2022-2"
                             autocomplete="movi_periodo" autofocus>
                         @error('movi_periodo')
                             <span class="invalid-feedback" role="alert">
@@ -52,6 +53,16 @@
                             </span>
                         @enderror
                     </div>
+                    <div class="col-md-6" id="administrativo">
+                        <label for="">Nombre completo</label>
+                        <select class="form-select" name="prac_id_administrativo" id="prac_id_administrativo">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($administrativos as $administrativo)
+                                <option value="{{ $administrativo->id }}">
+                                    {{ $administrativo->per_nombre . ' ' . $administrativo->per_apellido }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-md-6" id="docente">
                         <label for="">Nombre completo</label>
                         <select class="form-select" name="prac_id_docente" id="prac_id_docente">
@@ -68,7 +79,7 @@
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
                     </div>

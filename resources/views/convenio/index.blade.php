@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+        <a href="/convenio">Convenio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo convenios</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro convenios</p>
     @endsection
 @endsection
 @section('content')
@@ -19,9 +19,9 @@
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('docente/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('convenio/exportpdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('docente/export') }}"
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('convenio/exportexcel') }}"
                         title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('convenio/create') }}"><i
@@ -54,7 +54,7 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $convenio->con_numero }}</td>
-                                <td>{{ $convenio->con_alcance }}</td>
+                                <td>{{ Str::ucfirst($convenio->con_alcance) }}</td>
                                 <td>{{ $convenio->con_tipo }}</td>
                                 <td>{{ $convenio->con_institucion }}</td>
                                 <td>{{ $convenio->con_pais }}</td>

@@ -8,22 +8,24 @@
     @section('title')
         <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo TIC'S</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro recursos tecnológicos</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
-                    <h2>Lista de registros</h2> <!-- TODO: arreglar botones pdf y excel-->
+                    <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('software/pdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('software/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                        <a class="btn btn-outline-danger" style="border-radius: 100%"
+                            href="{{ url('software/exportrecursopdf') }}" title="Generar reporte pdf" target="_blank"><i
+                                class="fa-solid fa-file-pdf"></i></a>
+                        <a class="btn btn-outline-success" style="border-radius: 100%"
+                            href="{{ url('software/exportrecursoexcel') }}" title="Generar reporte excel"><i
+                                class="fa-solid fa-file-excel"></i></a>
                         <a class="btn btn-outline-success" href="{{ url('software/crearrecurso') }}"><i
                                 class="fa fa-plus-circle"></i>
                             Nuevo</a>
@@ -53,13 +55,14 @@
                                 <td>{{ $recurso->sofrete_year }}</td>
                                 <td>{{ $recurso->sofrete_periodo }}</td>
                                 <td>{{ $recurso->sofrete_tipo_recurso }}</td>
-                                <td>{{ $recurso->docentes->per_nombre.' '.$recurso->docentes->per_apellido }}</td>
+                                <td>{{ $recurso->docentes->per_nombre . ' ' . $recurso->docentes->per_apellido }}</td>
                                 <td>{{ $recurso->asignaturas->asig_nombre }}</td>
                                 <td>
                                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="" method="POST">
+                                        <form action="/software/{{$recurso->id}}/eliminarrecurso" method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/software/{{ $recurso->id }}/verrecurso"><i
+                                                <a class="btn btn-sm"
+                                                    href="/software/{{ $recurso->id }}/verrecurso"><i
                                                         class="fa-solid fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
                                                     href="/software/{{ $recurso->id }}/editarrecurso"><i

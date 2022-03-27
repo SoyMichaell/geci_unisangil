@@ -3,18 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software/create">Crear</a> / <a href="/software">Software</a>
+        <a href="/convenio/create">Crear</a> / <a href="/convenio">Convenio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de convenio</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligencie los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
+            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro convenio</h4><hr>
             <form action="/convenio/" method="post">
                 @csrf
                 <div class="row mb-3">

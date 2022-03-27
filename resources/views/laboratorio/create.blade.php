@@ -3,18 +3,19 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software/create">Crear</a> / <a href="/software">Software</a>
+        <a href="/laboratorio/create">Crear</a> / <a href="/laboratorio">Laboratorio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de laboratorios</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligencie los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
+            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro laboratorio</h4>
+            <hr>
             <form action="/laboratorio/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -61,6 +62,7 @@
                                 <option value="{{ $docente->id }}">
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
+                            <p style="font-size: 12px; color:red;"><strong>{{$docentes->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
                         </select>
                         @error('lab_id_docente')
                             <span class="invalid-feedback" role="alert">
@@ -90,6 +92,7 @@
                                 <option value="{{ $facultad->id }}">{{ $facultad->fac_nombre }}</option>
                             @endforeach
                         </select>
+                        <p style="font-size: 12px; color:red;"><strong>{{$facultades->count()<=0 ? 'No existen registros de facultades' : ''}}</strong></p>
                         @error('lab_id_facultad')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -107,6 +110,7 @@
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
+                        <p style="font-size: 12px; color:red;"><strong>{{$programas->count()<=0 ? 'No existen registros de programas' : ''}}</strong></p>
                         @error('lab_id_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -120,9 +124,10 @@
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
+                        <p style="font-size: 12px; color:red;"><strong>{{$estudiantes->count()<=0 ? 'No existen registros de practicantes' : ''}}</strong></p>
                         @error('lab_id_practicante')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -164,6 +169,7 @@
                                 <option value="{{ $software->id }}">{{ $software->sof_nombre }}</option>
                             @endforeach
                         </select>
+                        <p style="font-size: 12px; color:red;"><strong>{{$softwares->count()<=0 ? 'No existen registros de software' : ''}}</strong></p>
                         @error('lab_id_software')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -174,7 +180,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="lab_material">{{ __('Materiales *') }}</label>
-                        <textarea class="form-control" name="lab_material" id="lab_material" cols="30"
+                        <textarea class="form-control @error('lab_material') is-invalid @enderror" name="lab_material" id="lab_material" cols="30"
                             rows="10"></textarea>
                         @error('lab_material')
                             <span class="invalid-feedback" role="alert">
@@ -184,7 +190,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_observaciones">{{ __('Observaciones *') }}</label>
-                        <textarea class="form-control" name="lab_observaciones" id="lab_observaciones" cols="30"
+                        <textarea class="form-control @error('lab_observaciones') is-invalid @enderror" name="lab_observaciones" id="lab_observaciones" cols="30"
                             rows="10"></textarea>
                         @error('lab_observaciones')
                             <span class="invalid-feedback" role="alert">

@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ConvenioExport;
 use App\Models\Convenio;
 use App\Models\Programa;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class ConvenioController extends Controller
@@ -183,4 +185,32 @@ class ConvenioController extends Controller
         Alert::success('Exitoso','Los datos se han eliminado con exito');
         return redirect('/convenio');
     }
+
+    public function exportpdf()
+    {
+        $datos = Convenio::all();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de convenios');
+            return redirect('/convenio');
+        } else {
+            $view = \view('reporte.convenio', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel()
+    {
+        $convenios = Convenio::all();
+        if ($convenios->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de convenios');
+            return redirect('/convenio');
+        } else {
+            return Excel::download(new ConvenioExport, 'convenios.xlsx');
+        }
+    }
+
 }

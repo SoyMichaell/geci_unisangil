@@ -3,18 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software/create">Crear</a> / <a href="/software">Software</a>
+        <a href="/software/{{$laboratorio->id}}">Editar</a> / <a href="/laboratorio">Laboratorio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de edición</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligencie los campos requeridos</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
+            <h4 class="titulo"><i class="fab fa-wpforms"></i> Actualizar información</h4><hr>
             <form action="/laboratorio/{{$laboratorio->id}}" method="post">
                 @csrf
                 @method('PUT')
@@ -121,7 +121,7 @@
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}" {{$estudiante->id == $laboratorio->lab_id_practicante ? 'selected' : ''}}>
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
                         @error('lab_id_practicante')

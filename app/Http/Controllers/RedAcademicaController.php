@@ -2,18 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RedExport;
 use App\Models\Programa;
 use App\Models\RedAcademica;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class RedAcademicaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $redes =RedAcademica::all();
@@ -21,11 +19,6 @@ class RedAcademicaController extends Controller
             ->with('redes', $redes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $programas = Programa::all();
@@ -33,12 +26,6 @@ class RedAcademicaController extends Controller
             ->with('programas', $programas);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = [
@@ -76,7 +63,7 @@ class RedAcademicaController extends Controller
         $redes->red_alcance = $request->get('red_alcance');
         $redes->red_accion = $request->get('red_accion');
         $redes->red_year = $request->get('red_year');
-        $redes->red_id_programa = $request->get('red_id_programa');
+        $redes->red_id_programa = implode(';',$request->get('red_id_programa'));
         $redes->red_observacion = $request->get('red_observacion');
 
         $redes->save();
@@ -141,7 +128,7 @@ class RedAcademicaController extends Controller
         $redes->red_alcance = $request->get('red_alcance');
         $redes->red_accion = $request->get('red_accion');
         $redes->red_year = $request->get('red_year');
-        $redes->red_id_programa = $request->get('red_id_programa');
+        $redes->red_id_programa = implode(';',$request->get('red_id_programa'));
         $redes->red_observacion = $request->get('red_observacion');
 
         $redes->save();
@@ -157,4 +144,42 @@ class RedAcademicaController extends Controller
         Alert::success('Exitoso','La red se ha eliminado con exito');
         return redirect('/red');
     }
+
+    public function exportpdf()
+    {
+        $datos = DB::table('red_academica')
+        ->select(
+            'red_academica.id','red_year','red_nombre','red_nombre_contacto','red_telefono','red_pais',
+            'red_ciudad','red_alcance','red_accion','red_id_programa','red_observacion'
+        )
+        ->get();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de redes académicas');
+            return redirect('/software');
+        } else {
+            $view = \view('reporte.red', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel()
+    {
+        $redes = DB::table('red_academica')
+        ->select(
+            'red_academica.id','red_year','red_nombre','red_nombre_contacto','red_telefono','red_pais',
+            'red_ciudad','red_alcance','red_accion','red_id_programa','red_observacion'
+        )
+        ->get();
+        if ($redes->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de redes académicas');
+            return redirect('/red');
+        } else {
+            return Excel::download(new RedExport, 'redes-académicas.xlsx');
+        }
+    }
+    
 }

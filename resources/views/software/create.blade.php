@@ -8,13 +8,14 @@
     @section('title')
         <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligencie los campos requeridos. </p>
     @endsection
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
+            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro software en uso</h4>
+            <hr>
             <form action="/software/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -149,7 +150,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="sof_valor_unitario">{{ __('Valor unitario *') }}</label>
                         <input id="sof_valor_unitario" type="text"
                             class="form-control @error('sof_valor_unitario') is-invalid @enderror" name="sof_valor_unitario"
@@ -160,20 +161,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
-                        <label for="sof_valor_total">{{ __('Valor total *') }}</label>
-                        <input id="sof_valor_total" type="text"
-                            class="form-control @error('sof_valor_total') is-invalid @enderror" name="sof_valor_total"
-                            value="{{ old('sof_valor_total') }}" autocomplete="sof_valor_total" autofocus>
-                        @error('sof_valor_total')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="sof_fecha_actualizar">{{ __('Fecha ultima actualización *') }}</label>
                         <input id="sof_fecha_actualizar" type="date"
                             class="form-control @error('sof_fecha_actualizar') is-invalid @enderror" name="sof_fecha_actualizar"
@@ -184,7 +172,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <label for="sof_fecha_instalacion">{{ __('Fecha instalación *') }}</label>
                         <input id="sof_fecha_instalacion" type="date"
                             class="form-control @error('sof_fecha_instalacion') is-invalid @enderror" name="sof_fecha_instalacion"

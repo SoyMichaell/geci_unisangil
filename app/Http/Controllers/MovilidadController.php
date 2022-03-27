@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MovilidadExport;
 use App\Models\Estudiante;
 use App\Models\Movilidad;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MovilidadController extends Controller
@@ -14,20 +16,32 @@ class MovilidadController extends Controller
     public function index()
     {
         $movilidades = Movilidad::all();
-        $estudiantes = DB::table('estudiante')->get();
         return view('movilidad.index')
-            ->with('movilidades', $movilidades)
-            ->with('estudiantes', $estudiantes);
+            ->with('movilidades', $movilidades);
     }
 
     public function create()
     {
-        $personas = DB::table('persona')->get();
-        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario',3)
+        ->get();
+        $estudiantes = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->where('per_tipo_usuario',6)
+        ->get();
+        $administrativos = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->where('per_tipo_usuario',6)
+        ->where('estudiante.estu_administrativo', 'Si')
+        ->get();
 
         return view('movilidad.create')
             ->with('personas', $personas)
-            ->with('estudiantes', $estudiantes);
+            ->with('estudiantes', $estudiantes)
+            ->with('administrativos', $administrativos);
     }
 
     public function store(Request $request)
@@ -57,10 +71,12 @@ class MovilidadController extends Controller
         $movilidad = new Movilidad();
         $movilidad->movi_year = $request->get('movi_year');
         $movilidad->movi_periodo = $request->get('movi_periodo');
-        if($request->get('tipo_persona_movilidad') == 'administrativo' || $request->get('tipo_persona_movilidad') == 'docente'){
+        if($request->get('tipo_persona_movilidad') == 'docente'){
             $movilidad->movi_id_persona = $request->get('prac_id_docente');
-        }else{
+        }else if($request->get('tipo_persona_movilidad') == 'estudiante'){
             $movilidad->movi_id_persona = $request->get('prac_id_estudiante');
+        }else if($request->get('tipo_persona_movilidad') == 'administrativo'){
+            $movilidad->movi_id_persona = $request->get('prac_id_administrativo');
         }
         $movilidad->movi_tipo_persona = $request->get('tipo_persona_movilidad');
         $movilidad->movi_tipo_movilidad = $request->get('movi_tipo_movilidad');
@@ -78,23 +94,51 @@ class MovilidadController extends Controller
 
     public function show($id)
     {
-        $personas = DB::table('persona')->get();
-        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario',3)
+        ->get();
+        $estudiantes = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->where('per_tipo_usuario',6)
+        ->get();
+        $administrativos = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->where('per_tipo_usuario',6)
+        ->where('estudiante.estu_administrativo', 'Si')
+        ->get();
         $movilidad = Movilidad::find($id);
         return view('movilidad.show')
             ->with('personas', $personas)
             ->with('estudiantes', $estudiantes)
+            ->with('administrativos', $administrativos)
             ->with('movilidad', $movilidad);
     }
 
     public function edit($id)
     {
-        $personas = DB::table('persona')->get();
-        $estudiantes = Estudiante::all();
+        $personas = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario',3)
+        ->get();
+        $estudiantes = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->where('per_tipo_usuario',6)
+        ->get();
+        $administrativos = DB::table('persona')
+        ->select('persona.id','per_nombre','per_apellido')
+        ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+        ->where('per_tipo_usuario',6)
+        ->where('estudiante.estu_administrativo', 'Si')
+        ->get();
         $movilidad = Movilidad::find($id);
         return view('movilidad.edit')
             ->with('personas', $personas)
             ->with('estudiantes', $estudiantes)
+            ->with('administrativos', $administrativos)
             ->with('movilidad', $movilidad);
     }
 
@@ -149,5 +193,32 @@ class MovilidadController extends Controller
         $movilidad->delete();
         Alert::success('Exitoso','Registro eliminado');
         return redirect('/movilidad');
+    }
+
+    public function exportpdf()
+    {
+        $datos = Movilidad::all();
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades');
+            return redirect('/movilidad');
+        } else {
+            $view = \view('reporte.movilidad', compact('datos'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel()
+    {
+        $movilidades = Movilidad::all();
+        if ($movilidades->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de movilidades');
+            return redirect('/movilidad');
+        } else {
+            return Excel::download(new MovilidadExport, 'movilidades.xlsx');
+        }
     }
 }

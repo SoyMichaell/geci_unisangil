@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SoftwareExport;
 use App\Models\Programa;
 use App\Models\ProgramaAsignatura;
 use App\Models\Software;
 use App\Models\SoftwareRecurso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class SoftwareController extends Controller
@@ -42,7 +44,6 @@ class SoftwareController extends Controller
             'sof_cantidad' => 'required',
             'sof_id_programa' => 'required|not_in:0',
             'sof_valor_unitario' => 'required',
-            'sof_valor_total' => 'required',
             'sof_fecha_actualizar' => 'required',
             'sof_fecha_instalacion' => 'required',
         ];
@@ -58,7 +59,6 @@ class SoftwareController extends Controller
             'sof_cantidad.required' => 'El campo cantidad licencia es requerido',
             'sof_id_programa.required' => 'El campo programa es requerido',
             'sof_valor_unitario.required' => 'El campo valor unitario es requerido',
-            'sof_valor_total.required' => 'El campo valor total es requerido',
             'sof_fecha_actualizar.required' => 'El campo fecha ultima actualización es requerido',
             'sof_fecha_instalacion.required' => 'El campo fecha instalación es requerido',
         ];
@@ -76,7 +76,8 @@ class SoftwareController extends Controller
         $software->sof_cantidad = $request->get('sof_cantidad');
         $software->sof_id_programa = implode(';',$request->get('sof_id_programa'));
         $software->sof_valor_unitario = $request->get('sof_valor_unitario');
-        $software->sof_valor_total = $request->get('sof_valor_total');
+        $valor_total = $request->get('sof_valor_unitario') * $request->get('sof_cantidad');
+        $software->sof_valor_total = $valor_total;
         $software->sof_fecha_actualizar = $request->get('sof_fecha_actualizar');
         $software->sof_fecha_instalacion = $request->get('sof_fecha_instalacion');
 
@@ -121,7 +122,6 @@ class SoftwareController extends Controller
             'sof_cantidad' => 'required',
             'sof_id_programa' => 'required|not_in:0',
             'sof_valor_unitario' => 'required',
-            'sof_valor_total' => 'required',
             'sof_fecha_actualizar' => 'required',
             'sof_fecha_instalacion' => 'required',
         ];
@@ -137,7 +137,6 @@ class SoftwareController extends Controller
             'sof_cantidad.required' => 'El campo cantidad licencia es requerido',
             'sof_id_programa.required' => 'El campo programa es requerido',
             'sof_valor_unitario.required' => 'El campo valor unitario es requerido',
-            'sof_valor_total.required' => 'El campo valor total es requerido',
             'sof_fecha_actualizar.required' => 'El campo fecha ultima actualización es requerido',
             'sof_fecha_instalacion.required' => 'El campo fecha instalación es requerido',
         ];
@@ -155,7 +154,8 @@ class SoftwareController extends Controller
         $software->sof_cantidad = $request->get('sof_cantidad');
         $software->sof_id_programa = implode(';',$request->get('sof_id_programa'));
         $software->sof_valor_unitario = $request->get('sof_valor_unitario');
-        $software->sof_valor_total = $request->get('sof_valor_total');
+        $valor_total = $request->get('sof_valor_unitario') * $request->get('sof_cantidad');
+        $software->sof_valor_total = $valor_total;
         $software->sof_fecha_actualizar = $request->get('sof_fecha_actualizar');
         $software->sof_fecha_instalacion = $request->get('sof_fecha_instalacion');
 
@@ -181,8 +181,7 @@ class SoftwareController extends Controller
     public function crearrecurso(){
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
         $asignaturas = ProgramaAsignatura::all();
         return view('software/recurso.create')
@@ -276,6 +275,72 @@ class SoftwareController extends Controller
 
         Alert::success('Exitoso', 'El recurso se ha actualizado con exito');
         return redirect('/software/mostrarrecurso');
+    }
+
+    public function eliminarrecurso($id){
+        $recurso = SoftwareRecurso::find($id);
+        $recurso->delete();
+        Alert::success('Exitoso', 'El recurso se ha eliminado con exito');
+        return redirect('/software/mostrarrecurso');
+    }
+
+    public function exportpdf()
+    {
+        $datos = DB::table('software')->get();
+        $valor = 'software';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de software en uso');
+            return redirect('/software');
+        } else {
+            $view = \view('reporte.software', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel()
+    {
+        $softwares = Software::all();
+        if ($softwares->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de software en uso');
+            return redirect('/software');
+        } else {
+            return Excel::download(new SoftwareExport('software'), 'software.xlsx');
+        }
+    }
+
+    public function exportrecursopdf()
+    {
+        $datos = DB::table('software_recurso_tecnologico')
+        ->join('persona','software_recurso_tecnologico.sofrete_id_docente','=','persona.id')
+        ->join('programa_plan_estudio_asignatura','software_recurso_tecnologico.sofrete_id_asignatura','=','programa_plan_estudio_asignatura.id')
+        ->get();
+        $valor = 'recurso';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de recursos tecnológicos');
+            return redirect('/software');
+        } else {
+            $view = \view('reporte.software', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportrecursoexcel()
+    {
+        $softwares = Software::all();
+        if ($softwares->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de recursos tecnológicos');
+            return redirect('/software');
+        } else {
+            return Excel::download(new SoftwareExport('recurso'), 'recurso-tecnologico.xlsx');
+        }
     }
 
 }

@@ -5,14 +5,16 @@
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
             <form action="/software/registrorecurso" method="post">
                 @csrf
+                <h4>Registro recursos tecnológicos</h4>
+                <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="sofrete_year">Año</label>
@@ -41,7 +43,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="sofrete_tipo_recurso">Tipo recurso</label>
-                        <select class="form-select" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso">
+                        <select class="form-select js-example-placeholder-single @error('sofrete_tipo_recurso') is-invalid @enderror" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="software">Software</option>
                             <option value="plataforma-agora">Plataforma Agora</option>
@@ -56,7 +58,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="sofrete_id_docente">Docente</label>
-                        <select class="form-select" name="sofrete_id_docente" id="sofrete_id_docente">
+                        <select class="form-select js-example-placeholder-single @error('sofrete_id_docente') is-invalid @enderror" name="sofrete_id_docente" id="sofrete_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{$docente->id}}">{{$docente->per_nombre.' '.$docente->per_apellido}}</option>
@@ -70,7 +72,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="sofrete_id_asignatura">Asignatura</label>
-                        <select class="form-select" name="sofrete_id_asignatura" id="sofrete_id_asignatura">
+                        <select class="form-select js-example-placeholder-single @error('sofrete_id_asignatura') is-invalid @enderror" name="sofrete_id_asignatura" id="sofrete_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{$asignatura->id}}">{{$asignatura->asig_nombre}}</option>

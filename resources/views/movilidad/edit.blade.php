@@ -3,14 +3,15 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Actualizar información</h4><hr>
             <form action="/movilidad/{{$movilidad->id}}" method="post">
                 @csrf
                 @method('PUT')
@@ -54,6 +55,16 @@
                             </span>
                         @enderror
                     </div>
+                    <div class="col-md-6" id="administrativo">
+                        <label for="">Nombre completo</label>
+                        <select class="form-select" name="prac_id_administrativo" id="prac_id_administrativo">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($administrativos as $administrativo)
+                                <option value="{{ $administrativo->id }}" {{$movilidad->movi_id_persona == $administrativo->id ? 'selected' : ''}}>
+                                    {{ $administrativo->per_nombre . ' ' . $administrativo->per_apellido }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="col-md-6" id="docente">
                         <label for="">Nombre completo</label>
                         <select class="form-select" name="prac_id_docente" id="prac_id_docente">
@@ -70,7 +81,7 @@
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}" {{$movilidad->movi_id_persona == $estudiante->id ? 'selected' : ''}}>
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
                     </div>

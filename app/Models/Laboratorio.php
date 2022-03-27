@@ -41,7 +41,7 @@ class Laboratorio extends Model
     }
 
     public function estudiantes(){
-        return $this->belongsTo(Estudiante::class, 'lab_id_practicante');
+        return $this->belongsTo(User::class, 'lab_id_practicante');
     }
 
     public function softwares(){

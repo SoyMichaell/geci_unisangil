@@ -201,12 +201,17 @@ Route::resource('trabajo', App\Http\Controllers\TrabajoController::class);
 Route::resource('modalidad', App\Http\Controllers\ModalidadGradoController::class);
 
 /*Rutas software tic's*/
+Route::get('/software/exportpdf', [App\Http\Controllers\SoftwareController::class, 'exportpdf']);
+Route::get('/software/exportexcel', [App\Http\Controllers\SoftwareController::class, 'exportexcel']);
+Route::get('/software/exportrecursopdf', [App\Http\Controllers\SoftwareController::class, 'exportrecursopdf']);
+Route::get('/software/exportrecursoexcel', [App\Http\Controllers\SoftwareController::class, 'exportrecursoexcel']);
 Route::get('software/mostrarrecurso', [App\Http\Controllers\SoftwareController::class, 'mostrarrecurso']);
 Route::get('software/crearrecurso', [App\Http\Controllers\SoftwareController::class, 'crearrecurso']);
 Route::post('software/registrorecurso', [App\Http\Controllers\SoftwareController::class, 'registrorecurso']);
 Route::get('software/{recurso}/editarrecurso', [App\Http\Controllers\SoftwareController::class, 'editarrecurso']);
 Route::get('software/{recurso}/verrecurso', [App\Http\Controllers\SoftwareController::class, 'verrecurso']);
 Route::put('software/{recurso}/actualizarrecurso', [App\Http\Controllers\SoftwareController::class, 'actualizarrecurso']);
+Route::delete('software/{recurso}/eliminarrecurso', [App\Http\Controllers\SoftwareController::class, 'eliminarrecurso']);
 Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
 
@@ -373,6 +378,8 @@ Route::resource('extension', App\Http\Controllers\ExtensionController::class);
 
 
 //Rutas Redes Acádemicas
+Route::get('/red/exportpdf', [App\Http\Controllers\RedAcademicaController::class, 'exportpdf']);
+Route::get('/red/exportexcel', [App\Http\Controllers\RedAcademicaController::class, 'exportexcel']);
 Route::resource('red', App\Http\Controllers\RedAcademicaController::class);
 
 
@@ -386,14 +393,20 @@ Route::get('/practica/exportestudianteexcel', [App\Http\Controllers\PracticaCont
 Route::resource('practica', App\Http\Controllers\PracticaController::class);
 
 //Rutas laboratorios
+Route::get('/laboratorio/exportpdf', [App\Http\Controllers\LaboratorioController::class, 'exportpdf']);
+Route::get('/laboratorio/exportexcel', [App\Http\Controllers\LaboratorioController::class, 'exportexcel']);
 Route::resource('laboratorio',  App\Http\Controllers\LaboratorioController::class);
 
 
 //Rutas módulo movilidad
+Route::get('/movilidad/exportpdf', [App\Http\Controllers\MovilidadController::class, 'exportpdf']);
+Route::get('/movilidad/exportexcel', [App\Http\Controllers\MovilidadController::class, 'exportexcel']);
 Route::resource('movilidad', App\Http\Controllers\MovilidadController::class);
 
 
 //Rutas convenios
+Route::get('/convenio/exportpdf', [App\Http\Controllers\ConvenioController::class, 'exportpdf']);
+Route::get('/convenio/exportexcel', [App\Http\Controllers\ConvenioController::class, 'exportexcel']);
 Route::resource('convenio', App\Http\Controllers\ConvenioController::class);
 
 //Rutas investigacion

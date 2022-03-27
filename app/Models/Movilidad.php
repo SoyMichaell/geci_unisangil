@@ -24,7 +24,15 @@ class Movilidad extends Model
             'movi_observacion',
     ];
 
-    public function personas(){
+    public function docentes(){
+        return $this->belongsTo(User::class, 'movi_id_persona');
+    }
+
+    public function administrativos(){
+        return $this->belongsTo(User::class, 'movi_id_persona');
+    }
+
+    public function estudiantes(){
         return $this->belongsTo(User::class, 'movi_id_persona');
     }
 
