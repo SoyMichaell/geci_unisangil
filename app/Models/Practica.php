@@ -23,17 +23,8 @@ class Practica extends Model
             'prac_url_web',
             'prac_correo',
             'prac_area_practica',
-            'prac_id_docente',
-            'prac_id_estudiante',
+            'prac_id_persona',
+            'prac_rol',
             'prac_cargo',
     ];
-
-    public function docentes(){
-        return $this->belongsTo(User::class, 'prac_id_docente');
-    }
-
-    public function estudiantes(){
-        return $this->belongsTo(Estudiante::class, 'prac_id_estudiante');
-    }
-
 }

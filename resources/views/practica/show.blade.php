@@ -3,16 +3,17 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Datos registrados</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
             <div class="seccion1">
-                <h4>Información institución</h4>
+                <h4>Vista registro</h4>
+                <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="prac_year">Año</label>
@@ -176,7 +177,7 @@
                         @foreach ($estudiantes as $estudiante)
                             <option value="{{ $estudiante->id }}"
                                 {{ $estudiante->id == $practica->prac_id_estudiante ? 'selected' : '' }}>
-                                {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                         @endforeach
                     </select>
                 </div>

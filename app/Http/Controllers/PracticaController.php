@@ -2,18 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PracticaExport;
 use App\Models\Estudiante;
 use App\Models\Practica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class PracticaController extends Controller
 {
     public function index()
     {
-        $practicas = Practica::all();
+        $practicas = DB::table('practica_laboral')->get();
+        $docentes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 2)
+            ->orWhere('persona.per_tipo_usuario', 3)
+            ->get();
+        $estudiantes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 6)
+            ->get();
         return view('practica.index')
+            ->with('docentes', $docentes)
+            ->with('estudiantes', $estudiantes)
             ->with('practicas', $practicas);
     }
 
@@ -21,10 +36,11 @@ class PracticaController extends Controller
     {
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
-        $estudiantes = Estudiante::all();
+            $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->get();
         return view('practica.create')
             ->with('docentes', $docentes)
             ->with('estudiantes', $estudiantes);
@@ -72,9 +88,11 @@ class PracticaController extends Controller
         $practica->prac_correo = $request->get('prac_correo');
         $practica->prac_area_practica = $request->get('prac_area_practica');
         if ($request->get('tipo_persona') == '1') {
-            $practica->prac_id_docente = $request->get('prac_id_docente');
+            $practica->prac_id_persona = $request->get('prac_id_docente');
+            $practica->prac_id_rol = 'Docente';
         } else if ($request->get('tipo_persona') == '2') {
-            $practica->prac_id_estudiante = $request->get('prac_id_estudiante');
+            $practica->prac_id_persona = $request->get('prac_id_estudiante');
+            $practica->prac_id_rol = 'Estudiante';
         }
         $practica->prac_cargo = $request->get('prac_cargo');
 
@@ -88,11 +106,12 @@ class PracticaController extends Controller
     public function show($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
-        $estudiantes = Estudiante::all();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->get();
+        $estudiantes = DB::table('persona')
+        ->where('per_tipo_usuario', 6)
+        ->get();
         $practica = Practica::find($id);
         return view('practica.show')
             ->with('docentes', $docentes)
@@ -103,11 +122,12 @@ class PracticaController extends Controller
     public function edit($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
-        $estudiantes = Estudiante::all();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->get();
+        $estudiantes = DB::table('persona')
+        ->where('per_tipo_usuario', 6)
+        ->get();
         $practica = Practica::find($id);
         return view('practica.edit')
             ->with('docentes', $docentes)
@@ -172,14 +192,129 @@ class PracticaController extends Controller
         return redirect('/practica');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function exportpdf()
+    {
+        $datos = DB::table('practica_laboral')->get();
+        $docentes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 2)
+            ->orWhere('persona.per_tipo_usuario', 3)
+            ->get();
+        $estudiantes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 6)
+            ->get();
+        $valor = 'general';
+        if ($datos->count() <= 0) {
+            Alert::warning('Adevertencia','No hay registros de practicas laborales');
+            return redirect('/practica');
+        } else {
+            $view = \view('reporte.practica', compact('datos','docentes','estudiantes','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportdocentepdf()
+    {
+        $datos = DB::table('practica_laboral')->get();
+        $docentes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 2)
+            ->orWhere('persona.per_tipo_usuario', 3)
+            ->get();
+        $estudiantes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 6)
+            ->get();
+        $valor = 'docente';
+        if ($docentes->count() <= 0) {
+            Alert::warning('Adevertencia','No hay registros de practicas laborales');
+            return redirect('/practica');
+        } else {
+            $view = \view('reporte.practica', compact('datos','docentes','estudiantes','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportestudiantepdf()
+    {
+        $datos = DB::table('practica_laboral')->get();
+        $docentes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 2)
+            ->orWhere('persona.per_tipo_usuario', 3)
+            ->get();
+        $estudiantes = DB::table('practica_laboral')
+            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->where('persona.per_tipo_usuario', 6)
+            ->get();
+        $valor = 'estudiante';
+        if ($estudiantes->count() <= 0) {
+            Alert::warning('Adevertencia','No hay registros de practicas laborales');
+            return redirect('/practica');
+        } else {
+            $view = \view('reporte.practica', compact('datos','docentes','estudiantes','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcel()
+    {
+        $practica = Practica::all();
+        if ($practica->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de practicas laborales');
+            return redirect('/practica');
+        } else {
+            return Excel::download(new PracticaExport('general'), 'practicas-laborales.xlsx');
+        }
+    }
+
+    public function exportdocenteexcel()
+    {
+        $practica = DB::table('practica_laboral')->where('prac_rol', 'Docente')->get();
+        if ($practica->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de practicas laborales docentes');
+            return redirect('/practica');
+        } else {
+            return Excel::download(new PracticaExport('docente'), 'practicas-laborales-docentes.xlsx');
+        }
+    }
+
+    public function exportestudianteexcel()
+    {
+        $practica = DB::table('practica_laboral')->where('prac_rol', 'Estudiante')->get();
+        if ($practica->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de practicas laborales estudiantes');
+            return redirect('/practica');
+        } else {
+            return Excel::download(new PracticaExport('estudiante'), 'practicas-laborales-estudiantes.xlsx');
+        }
+    }
+
+
     public function destroy($id)
     {
-        //
+        $practica = Practica::find($id);
+        $practica->delete();
+        Alert::success('Exitoso', 'La practica se ha eliminado con exito');
+        return redirect('/practica');
     }
 }

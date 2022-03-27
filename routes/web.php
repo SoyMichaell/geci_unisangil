@@ -377,6 +377,12 @@ Route::resource('red', App\Http\Controllers\RedAcademicaController::class);
 
 
 //Rutas Practicas Laborales
+Route::get('/practica/exportpdf', [App\Http\Controllers\PracticaController::class, 'exportpdf']);
+Route::get('/practica/exportdocentepdf', [App\Http\Controllers\PracticaController::class, 'exportdocentepdf']);
+Route::get('/practica/exportestudiantepdf', [App\Http\Controllers\PracticaController::class, 'exportestudiantepdf']);
+Route::get('/practica/exportexcel', [App\Http\Controllers\PracticaController::class, 'exportexcel']);
+Route::get('/practica/exportdocenteexcel', [App\Http\Controllers\PracticaController::class, 'exportdocenteexcel']);
+Route::get('/practica/exportestudianteexcel', [App\Http\Controllers\PracticaController::class, 'exportestudianteexcel']);
 Route::resource('practica', App\Http\Controllers\PracticaController::class);
 
 //Rutas laboratorios

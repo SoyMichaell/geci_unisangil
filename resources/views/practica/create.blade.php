@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa-solid fa-plus-square"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
     @endsection
@@ -14,7 +14,8 @@
             <form action="/practica/" method="post">
                 @csrf
                 <div class="seccion1">
-                    <h4>Información institución</h4>
+                    <h4>Registro practica laboral</h4>
+                    <hr/>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="prac_year">Año</label>
@@ -175,7 +176,7 @@
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
                     </div>
