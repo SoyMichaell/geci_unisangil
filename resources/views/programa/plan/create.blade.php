@@ -1,13 +1,18 @@
 @if (!Auth::check())
     @include('home')
 @else
-@extends('layouts.app')
-    @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Planes de estudio</h1>
-        @section('message') <p>Programas acádemicos </p> @endsection
+    @extends('layouts.app')
+    @section('navegar')
+        <a href="/programa/crearplan">Crear</a> / <a href="/programa/mostrarplan">Plan de estudio</a>
     @endsection
-    @section('content')
-    <div class="col-md-12">
+    @section('title')
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Módulo Programa</h1>
+    @section('message')
+        <p>Formulario de registro plan de estudio </p>
+    @endsection
+@endsection
+@section('content')
+    <div class="container col-md-12">
         <div class="tile">
             <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
             <form action="/programa/registroplan" method="post">
@@ -18,7 +23,7 @@
                         <select class="form-select" name="pp_id_sede" id="pp_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
-                                <option value="{{$municipio->id}}">{{$municipio->mun_nombre}}</option>
+                                <option value="{{ $municipio->id }}">{{ $municipio->mun_nombre }}</option>
                             @endforeach
                         </select>
                         @error('pp_id_sede')
@@ -32,10 +37,10 @@
                         <select class="form-select" name="pp_id_programa" id="pp_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
-                                <option value="{{$programa->id}}">{{$programa->pro_nombre}}</option>
+                                <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
-                        <small>{{$programas->count()>0 ? '' : 'No hay programas, primero registre'}}</small>
+                        <small>{{ $programas->count() > 0 ? '' : 'No hay programas, primero registre' }}</small>
                         @error('pp_id_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -46,9 +51,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pp_plan">{{ __('Nombre plan *') }}</label>
-                        <input id="pp_plan" type="text"
-                            class="form-control @error('pp_plan') is-invalid @enderror" name="pp_plan"
-                            value="{{ old('pp_plan') }}" autocomplete="pp_plan" autofocus>
+                        <input id="pp_plan" type="text" class="form-control @error('pp_plan') is-invalid @enderror"
+                            name="pp_plan" value="{{ old('pp_plan') }}" autocomplete="pp_plan" autofocus>
                         @error('pp_plan')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -82,8 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pp_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="pp_estado"
-                            id="pp_estado">
+                        <select class="form-select" name="pp_estado" id="pp_estado">
                             <option value="activo">Activo</option>
                             <option value="inactivo">Inactivo</option>
                         </select>
@@ -104,5 +107,5 @@
             </form>
         </div>
     </div>
-    @endsection
+@endsection
 @endif

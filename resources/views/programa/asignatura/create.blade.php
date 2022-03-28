@@ -2,14 +2,17 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/programa/crearasignatura">Crear</a> / <a href="/programa/mostrarasignatura">Asignaturas</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de asignaturas</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Módulo Programa</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Formulario de registro asignatura</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
             <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
             <form action="/programa/registroasignatura" method="post">

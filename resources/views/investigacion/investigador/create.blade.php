@@ -3,17 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software/create">Crear</a> / <a href="/software">Software</a>
+        <a href="/investigacion/crearintegrante">Crear</a> / <a href="/investigacion/mostrarintegrante">Investigador</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de investigador</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligencie todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="tile w-50">
+            <h4>Registro investigador</h4><hr>
             <form action="/investigacion/registrointegrante" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -70,7 +71,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-12">
+                    <div class="col-md-12 mt-2">
                         <label for="inves_id_grupo">{{ __('Grupo de investigación *') }}</label>
                         <select class="form-select @error('inves_id_grupo') is-invalid @enderror"
                             name="inves_id_grupo" id="inves_id_grupo">

@@ -25,4 +25,8 @@ class InvProyecto extends Model
         'invpro_estado'
     ];
 
+    public function grupos(){
+        return $this->belongsTo(InvGrupoInvestigacion::class, 'invpro_id_grupo');
+    }
+
 }

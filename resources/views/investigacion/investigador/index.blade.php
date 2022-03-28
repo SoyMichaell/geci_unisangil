@@ -2,28 +2,27 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/investigacion/mostrarintegrante">Investigador</a> / <a href="/investigacion">Investigación</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-users"></i> Módulo Estudiantes</h1>
+        <h1 class="titulo"><i class="fas fa-users"></i> Módulo Investigación</h1>
     @section('message')
-        <p>Lista de registro estudiantes</p>
+        <p>Lista de registro investigadores</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="tile col-md-12 mt-2">
+    <div class="container">
+        <div class="bg-white p-3 col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-8">
                     <h4>Listado investigadores</h4>
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('estudiante/pdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <div class="dropdown">
-                        <a class="btn btn-outline-success" style="border-radius: 100%" href="#" role="button"
-                            id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-file-excel"></i>
-                        </a>
-                    </div>
+                    <a class="btn btn-outline-danger" href="{{ url('investigacion/exportpdfintegrante') }}"
+                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa-solid fa-file-pdf"></i></a>
+                        <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelintegrante') }}"
+                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success " href="{{ url('investigacion/crearintegrante') }}"><i
                                 class="fa fa-plus-circle"></i>
@@ -52,15 +51,15 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ Str::upper($investigador->inv_nombre_grupo) }}</td>
-                                <td>{{ $investigador->per_nombre.' '.$investigador->per_apellido }}</td>
+                                <td>{{ $investigador->per_nombre . ' ' . $investigador->per_apellido }}</td>
                                 <td>{{ $investigador->inves_enlace_cvlac }}</td>
                                 <td>{{ $investigador->inves_categoria }}</td>
                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                     <td style="width: 10%">
-                                        <form action=""
-                                            method="POST">
+                                        <form action="" method="POST">
                                             <div class="d-flex">
-                                                <a class="btn btn-sm" href="/investigacion/{{ $investigador->inves_id_persona }}/verintegrante"><i
+                                                <a class="btn btn-sm"
+                                                    href="/investigacion/{{ $investigador->inves_id_persona }}/verintegrante"><i
                                                         class="fa-solid fa-folder-open "></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/investigacion/{{ $investigador->id }}/editarintegrante"><i

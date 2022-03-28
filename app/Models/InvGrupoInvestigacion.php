@@ -42,4 +42,12 @@ class InvGrupoInvestigacion extends Model
         return $this->belongsTo(Facultad::class, 'inv_facultad');
     }
 
+    public function investigadores(){
+        return $this->hasMany(InvInvestigador::class, 'id');
+    }
+
+    public function proyectos(){
+        return $this->hasMany(InvProyecto::class, 'id');
+    }
+
 }

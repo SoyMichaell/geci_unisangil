@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+    <a href="/investigacion/vergrupo">Vista</a> / <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Visualizar información</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Información registrada</p>
     @endsection
 @endsection
 <style>
@@ -17,7 +17,11 @@
         font-weight: 900;
     }
 
-    li {
+    li{
+        list-style: none;
+    }
+
+    #li {
         font-size: 16px;
         text-decoration: none;
         list-style: none;
@@ -36,30 +40,30 @@
                 <hr>
                 <h4 class="fw-bold">Información general</h4>
                 <ul>
-                    <li><strong>Grupo</strong> <br> {{ $grupo->inv_nombre_grupo }}</li>
-                    <li><strong>Correo institucional</strong> <br> {{ $grupo->inv_correo_institucional_grupo }}</li>
-                    <li><strong>Código MinCiencias</strong> <br> {{ $grupo->inv_codigo_minciencias }}</li>
-                    <li><strong>Plan estratégico</strong> <br> Misión <br> {{ $grupo->inv_mision }} <br> Visión <br>
+                    <li id="li"><strong>Grupo</strong> <br> {{ $grupo->inv_nombre_grupo }}</li>
+                    <li id="li"><strong>Correo institucional</strong> <br> {{ $grupo->inv_correo_institucional_grupo }}</li>
+                    <li id="li"><strong>Código MinCiencias</strong> <br> {{ $grupo->inv_codigo_minciencias }}</li>
+                    <li id="li"><strong>Plan estratégico</strong> <br> Misión <br> {{ $grupo->inv_mision }} <br> Visión <br>
                         {{ $grupo->inv_vision }}</li>
-                    <li><strong>Enlace del grupo</strong> <br> <a
+                    <li id="li"><strong>Enlace del grupo</strong> <br> <a
                             href="{{ $grupo->inv_url_grupo }}">{{ $grupo->inv_url_grupo == '' ? 'Sin registro' : $grupo->inv_url_grupo }}</a>
                     </li>
-                    <li><strong>Enlace GrupLac</strong> <br> <a
+                    <li id="li"><strong>Enlace GrupLac</strong> <br> <a
                             href="{{ $grupo->inv_url_gruplac }}">{{ $grupo->inv_url_gruplac == '' ? 'Sin registro' : $grupo->inv_url_gruplac }}</a>
                     </li>
-                    <li><strong>Área de conocimiento (Principal)</strong> <br>
+                    <li id="li"><strong>Área de conocimiento (Principal)</strong> <br>
                         {{ $grupo->inv_area_conocimiento_principal == '' ? 'Sin registro' : $grupo->inv_area_conocimiento_principal }}
                     </li>
-                    <li><strong>Nucleo del conocimiento (NBC)</strong> <br>
+                    <li id="li"><strong>Nucleo del conocimiento (NBC)</strong> <br>
                         {{ $grupo->inv_nucleo_conocimiento_nbc == '' ? 'Sin registro' : $grupo->inv_nucleo_conocimiento_nbc }}
                     </li>
-                    <li><strong>Sede</strong> <br> {{ $grupo->sedes->mun_nombre }}</li>
-                    <li><strong>Facultad</strong> <br> {{ $grupo->facultades->fac_nombre }}</li>
-                    <li><strong>Categoria</strong> <br>
+                    <li id="li"><strong>Sede</strong> <br> {{ $grupo->sedes->mun_nombre }}</li>
+                    <li id="li"><strong>Facultad</strong> <br> {{ $grupo->facultades->fac_nombre }}</li>
+                    <li id="li"><strong>Categoria</strong> <br>
                         {{ $grupo->inv_categoria_grupo == '' ? 'Sin registro' : $grupo->inv_categoria_grupo }}</li>
-                    <li><strong>Aval MinCiencias</strong> <br>
+                    <li id="li"><strong>Aval MinCiencias</strong> <br>
                         {{ $grupo->inv_aval_minciencias == '' ? 'Sin registro' : $grupo->inv_aval_minciencias }}</li>
-                    <li><strong>Lineas de investigación</strong> <br>
+                    <li id="li"><strong>Lineas de investigación</strong> <br>
                         {{ $grupo->inv_lineas_investigacion == '' ? 'Sin registro' : $grupo->inv_lineas_investigacion }}
                     </li>
                 </ul>

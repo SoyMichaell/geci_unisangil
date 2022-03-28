@@ -3,17 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software/create">Crear</a> / <a href="/software">Software</a>
+        <a href="/investigacion/creargrupo">Crear</a> / <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
+        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de grupo de investigación</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligencia todos los campos requeridos. </p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container col-md-12">
         <div class="tile">
+            <h4>Registro grupo de investigación</h4><hr>
             <form action="/investigacion/registrogrupo" method="post">
                 @csrf
                 <div class="row mb-3">

@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('title')
     <h1 class="titulo"><i class="fa fa-tachometer"></i> Bienvenido (a),
-        {{ auth()->user()->per_nombre . ' ' . auth()->user()->per_apellido }} </h1>
+        {{ Str::ucfirst(auth()->user()->per_nombre . ' ' . auth()->user()->per_apellido) }} </h1>
 @endsection
 
 @section('content')
@@ -60,7 +60,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
                         <div class="info">
                             <h4>Personal administrativo</h4>
-                            <p><b>({{$administrativos->count()}})</b> <a href="/programa/mostrarhorario">Crear</a></p>
+                            <p><b>({{$administrativos->count()}})</b>
                             
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         <h4 class="titulo">Usuarios en plataforma</h4>
                     </div>
                     <div class="col-md-6 d-flex justify-content-end">
-                        <a class="btn btn-success" href=""><i class="fa fa-plus-circle"></i>
+                        <a class="btn btn-outline-success" href=""><i class="fa fa-plus-circle"></i>
                             Nuevo</a>
                     </div>
                 </div>

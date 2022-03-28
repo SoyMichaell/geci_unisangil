@@ -4,15 +4,15 @@
 @endsection
 @section('navegar') <a href="/departamento/{{$departamento->id}}">Vista</a> / <a href="/departamento">Departamento</a> @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-book" ></i> Vista registro</h1> <!-- TODO: validar icono-->
+    <h1 class="titulo"><i class="fa fa-book" ></i> Visualizar Información</h1> <!-- TODO: validar icono-->
 @section('message')
-    <p>Información almanecanada en el sistema</p>
+    <p>Información de registro</p>
 @endsection
 @endsection
 @section('content')
-<div class="container-fluid">
-    <div class="tile card__config">
-        <h4 class="tile title"><i class="fa fa-question-circle"></i> Vista registro</h4>
+<div class="container">
+    <div class="tile">
+        <h4 class="title"><i class="fa fa-question-circle"></i> Vista registro</h4>
         <div class="row mb-3">
             <label for="dep_nombre">{{ __('Departamento *') }}</label>
             <div class="col-md-12">

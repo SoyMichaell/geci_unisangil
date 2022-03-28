@@ -28,7 +28,7 @@
 </style>
 @section('content')
     <div class="container">
-        <h2>Programas</h2>
+        <h3>Estudiante por programa</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur accusamus enim eius quaerat? Consectetur
             esse, explicabo obcaecati libero iste et vero ratione, eius voluptates cupiditate dolore illum? Repudiandae,
             blanditiis inventore.</p>

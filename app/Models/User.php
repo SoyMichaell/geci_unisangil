@@ -99,4 +99,9 @@ class User extends Authenticatable
         return $this->hasMany(InvGrupoInvestigacion::class, 'id');
     }
 
+    public function investigadores(){
+        return $this->hasMany(InvInvestigador::class, 'id');
+    }
+    
+
 }

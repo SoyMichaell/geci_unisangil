@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\InvestigacionExport;
 use App\Models\Facultad;
 use App\Models\InvGrupoInvestigacion;
 use App\Models\InvInvestigador;
@@ -9,6 +10,7 @@ use App\Models\InvProyecto;
 use App\Models\Municipio;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class InvestigacionController extends Controller
@@ -443,6 +445,90 @@ class InvestigacionController extends Controller
 
         Alert::success('Exitoso', 'Los datos se han actualizado');
         return redirect('investigacion/mostrarproyecto');
+    }
+
+    public function exportpdfinvestigacion()
+    {
+        $datos = InvGrupoInvestigacion::all();
+        $valor = 'grupo';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de grupos de investigación');
+            return redirect('/investigacion/mostrargrupo');
+        } else {
+            $view = \view('reporte.investigacion', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcelinvestigacion()
+    {
+        $grupos = InvGrupoInvestigacion::all();
+        if ($grupos->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de grupos de investigación');
+            return redirect('/investigacion/mostrargrupo');
+        } else {
+            return Excel::download(new InvestigacionExport('grupo'), 'grupos-investigación.xlsx');
+        }
+    }
+
+    public function exportpdfintegrante()
+    {
+        $datos = InvInvestigador::all();
+        $valor = 'investigadores';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de investigadores');
+            return redirect('/investigacion/mostrarintegrante');
+        } else {
+            $view = \view('reporte.investigacion', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcelintegrante()
+    {
+        $integrantes = InvInvestigador::all();
+        if ($integrantes->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de investigadores');
+            return redirect('/investigacion/mostrarintegrante');
+        } else {
+            return Excel::download(new InvestigacionExport('integrante'), 'integrantes.xlsx');
+        }
+    }
+
+    public function exportpdfproyecto()
+    {
+        $datos = InvProyecto::all();
+        $valor = 'proyectos';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de proyectos');
+            return redirect('/investigacion/mostrarproyecto');
+        } else {
+            $view = \view('reporte.investigacion', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportexcelproyecto()
+    {
+        $proyectos = InvProyecto::all();
+        if ($proyectos->count() <= 0) {
+            Alert::warning('Advertencia', 'No hay registros de proyectos');
+            return redirect('/investigacion/mostrarproyecto');
+        } else {
+            return Excel::download(new InvestigacionExport('proyecto'), 'proyectos.xlsx');
+        }
     }
 
 }

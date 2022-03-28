@@ -228,7 +228,6 @@ class EstudianteController extends Controller
             );
 
             if ($request->get('estu_egresado') == 'Si') {
-                $id = DB::getPdo()->lastInsertId();
 
                 DB::table('estudiante_egresado')->insert(
                     [
@@ -429,6 +428,23 @@ class EstudianteController extends Controller
         ]
         );
 
+        if($request->get('estu_egresado') == 'Si'){
+            DB::table('estudiante_egresado')
+            ->where('este_id_estudiante', $id)
+            ->update([
+                'este_id_estudiante' => $id,
+                'este_fecha_finalizacion' => $request->get('este_fecha_finalizacion'),
+                'este_promedio_acumulado' => $request->get('este_promedio_acumulado'),
+                'este_nombre_empresa' => $request->get('este_nombre_empresa'),
+                'este_area' => $request->get('este_area'),
+                'este_cargo' => $request->get('este_cargo'),
+                'este_sitio_trabajo' => $request->get('este_sitio_trabajo'),
+                'este_tipo_contrato' => $request->get('este_tipo_contrato'),
+                'este_pais_residencia' => $request->get('este_pais_residencia'),
+                'este_ciudad_residencia' => $request->get('este_ciudad_residencia'),
+            ]);
+        }
+
         Alert::success('Exitoso', 'El estudiante se ha registrado con exito');
         return redirect('/estudiante');
 
@@ -436,8 +452,9 @@ class EstudianteController extends Controller
 
     public function destroy($id)
     {
-        $estudiante = Estudiante::find($id);
-        $estudiante->delete();
+        DB::table('estudiante_egresado')->where('este_id_estudiante', $id)->delete();
+        DB::table('estudiante')->where('estu_id_estudiante', $id)->delete();
+        DB::table('persona')->where('persona.id', $id)->delete();
         Alert::success('Registro Eliminado');
         return redirect('/estudiante');
     }

@@ -3,15 +3,15 @@
     <a href="/facultad/show">Vista</a> / <a href="/facultad">Facultad</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-book" ></i> Vista registro</h1>
+    <h1 class="titulo"><i class="fa fa-book" ></i> Visualizar información</h1>
 @section('message')
-    <p>Información almanecanada en el sistema</p>
+    <p>Información de registro.</p>
 @endsection
 @endsection
 @section('content')
-<div class="container-fluid">
-    <div class="tile card__config">
-        <h4 class="tile title"><i class="fa fa-question-circle"></i> Vista registro</h4>
+<div class="container">
+    <div class="tile">
+        <h4 class="title"><i class="fa fa-question-circle"></i> Vista registro</h4>
         <div class="row mb-3">
             <label for="fac_nombre">{{ __('Facultad *') }}</label>
             <div class="col-md-12">

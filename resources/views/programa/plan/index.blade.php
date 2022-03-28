@@ -2,13 +2,17 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/programa/mostrarplan">Plan de estudio</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fas fa-vector-square"></i> Planes de estudio</h1>
+        <p>Listado plan de estudios programas</p>
     @section('message')
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive tile mt-2">
@@ -17,7 +21,7 @@
                             <h4>Listado plan de estudios</h4>
                         </div>
                         <div class="col-md-5 d-flex justify-content-end align-items-center">
-                            <a class="btn btn-success" href="/programa/crearplan"><i class="fa-solid fa-circle-plus"></i>
+                            <a class="btn btn-outline-success" href="/programa/crearplan"><i class="fa-solid fa-circle-plus"></i>
                                 Nuevo</a>
                         </div>
                     </div>

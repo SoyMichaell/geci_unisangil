@@ -411,6 +411,8 @@ Route::resource('convenio', App\Http\Controllers\ConvenioController::class);
 
 //Rutas investigacion
 //Rutas grupo
+Route::get('/investigacion/exportpdfinvestigacion', [App\Http\Controllers\InvestigacionController::class, 'exportpdfinvestigacion']);
+Route::get('/investigacion/exportexcelinvestigacion', [App\Http\Controllers\InvestigacionController::class, 'exportexcelinvestigacion']);
 Route::get('investigacion/mostrargrupo', [App\Http\Controllers\InvestigacionController::class, 'mostrargrupo']);
 Route::get('investigacion/creargrupo', [App\Http\Controllers\InvestigacionController::class, 'creargrupo']);
 Route::post('investigacion/registrogrupo', [App\Http\Controllers\InvestigacionController::class, 'registrogrupo']);
@@ -419,6 +421,8 @@ Route::get('investigacion/{grupo}/editargrupo', [App\Http\Controllers\Investigac
 Route::put('investigacion/{grupo}/actualizargrupo', [App\Http\Controllers\InvestigacionController::class, 'actualizargrupo']);
 Route::delete('investigacion/{grupo}/eliminargrupo', [App\Http\Controllers\InvestigacionController::class, 'eliminargrupo']);
 //Rutas investigadores
+Route::get('/investigacion/exportpdfintegrante', [App\Http\Controllers\InvestigacionController::class, 'exportpdfintegrante']);
+Route::get('/investigacion/exportexcelintegrante', [App\Http\Controllers\InvestigacionController::class, 'exportexcelintegrante']);
 Route::get('investigacion/mostrarintegrante', [App\Http\Controllers\InvestigacionController::class, 'mostrarintegrante']);
 Route::get('investigacion/crearintegrante', [App\Http\Controllers\InvestigacionController::class, 'crearintegrante']);
 Route::post('investigacion/registrointegrante', [App\Http\Controllers\InvestigacionController::class, 'registrointegrante']);
@@ -427,6 +431,8 @@ Route::get('investigacion/{integrante}/editarintegrante', [App\Http\Controllers\
 Route::put('investigacion/{integrante}/actualizarintegrante', [App\Http\Controllers\InvestigacionController::class, 'actualizarintegrante']);
 Route::delete('investigacion/{integrante}/eliminarintegrante', [App\Http\Controllers\InvestigacionController::class, 'eliminarintegrante']);
 //Rutas proyectos
+Route::get('/investigacion/exportpdfproyecto', [App\Http\Controllers\InvestigacionController::class, 'exportpdfproyecto']);
+Route::get('/investigacion/exportexcelproyecto', [App\Http\Controllers\InvestigacionController::class, 'exportexcelproyecto']);
 Route::get('investigacion/mostrarproyecto', [App\Http\Controllers\InvestigacionController::class, 'mostrarproyecto']);
 Route::get('investigacion/crearproyecto', [App\Http\Controllers\InvestigacionController::class, 'crearproyecto']);
 Route::post('investigacion/registroproyecto', [App\Http\Controllers\InvestigacionController::class, 'registroproyecto']);

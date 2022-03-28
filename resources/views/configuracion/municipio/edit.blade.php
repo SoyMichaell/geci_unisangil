@@ -3,13 +3,13 @@
     <a href="/municipio/edit">Editar</a> / <a href="/municipio">Municipio</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición de datos</h1>
-    <p>Formulario de actualización de la información</p>
+    <h1 class="titulo"><i class="fa fa-pencil-square"></i> Formulario de edición</h1>
+    <p>Diligencie todos los campos requeridos *.</p>
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="tile card__config">
-            <h4 class="tile title">Actualizar información</h4>
+    <div class="container">
+        <div class="tile">
+            <h4 class="title">Actualizar información</h4>
             <form action="/municipio/{{ $municipio->id }}" method="POST">
                 @csrf
                 @method('PUT')

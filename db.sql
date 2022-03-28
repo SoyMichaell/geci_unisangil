@@ -350,7 +350,7 @@ CREATE TABLE IF NOT EXISTS `convenio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.convenio: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.convenio: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `convenio` DISABLE KEYS */;
 INSERT IGNORE INTO `convenio` (`id`, `con_numero`, `con_alcance`, `con_tipo`, `con_institucion`, `con_nit`, `con_direccion`, `con_ciudad`, `con_pais`, `con_contacto`, `con_correo`, `con_telefono`, `con_objeto`, `con_logro_resultado`, `con_vigencia`, `con_programa_beneficiado`, `con_actividad_year_programa`, `con_fecha_inicio`, `con_fecha_final`, `con_observacion`, `created_at`, `updated_at`) VALUES
 	(3, '123456', 'regional', 'Interdisciplinario', 'Unitropico', '899990214-2', 'cale 44', 'yopal', 'colombia', 'Mateo Tarquino', 'mateo@gmail.com', '3104721212', 'Convenio entre entidad publica y privada', 'n/a', '2022-2023-2024', 'Ingeniería de sistemas', 'n/a', '2022-03-27', '2023-03-27', 'sin comentarios', '2022-03-27 22:07:15', '2022-03-27 22:09:10');
@@ -573,14 +573,13 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   CONSTRAINT `FK_estudiante_persona` FOREIGN KEY (`estu_id_estudiante`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_estudiante_programa` FOREIGN KEY (`estu_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_estudiante_programa_plan_estudio` FOREIGN KEY (`estu_programa_plan`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.estudiante: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.estudiante: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
 INSERT IGNORE INTO `estudiante` (`id`, `estu_id_estudiante`, `estu_programa`, `estu_programa_plan`, `estu_telefono2`, `estu_direccion`, `estu_estrato`, `estu_fecha_nacimiento`, `estu_fecha_expedicion`, `estu_sexo`, `estu_estado_civil`, `estu_ingreso`, `estu_periodo_ingreso`, `estu_ult_matricula`, `estu_semestre`, `estu_financiamiento`, `estu_entidad`, `estu_estado`, `estu_tipo_matricula`, `estu_matricula`, `estu_pga`, `estu_reconocimiento`, `estu_egresado`, `estu_administrativo`, `estu_cargo`, `estu_dependencia`, `estu_fecha_ingreso`, `estu_no_contrato`, `created_at`, `updated_at`) VALUES
-	(16, 58, 10, 9, '3223342408', 'calle 29 16 bis 32', '2', '2003-05-15', '2020-05-15', 'M', 'soltero(a)', '2022', '2022-2', '2022-2', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'Si', 'Si', 'Practicante laboratori', 'Sistemas', '2022-03-22', '123456789', NULL, NULL),
-	(17, 59, 10, 9, '31245612478', 'prueba', '2', '2000-05-13', '2000-05-13', 'M', 'soltero(a)', '2022', '2021-1', '2021-1', 4, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL),
-	(18, 62, 11, 10, '3108585194', 'calle 29 16bis 32', '2', '2000-11-26', '2018-12-18', 'M', 'soltero(a)', '2022', '2022-1', '2022-1', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'No', 'Si', 'Laboratorio practicante', 'Sistemas', '2022-03-23', '123456789', NULL, NULL);
+	(18, 62, 11, 10, '3108585194', 'calle 29 16bis 32', '2', '2000-11-26', '2018-12-18', 'M', 'soltero(a)', '2022', '2022-1', '2022-1', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'No', 'Si', 'Laboratorio practicante', 'Sistemas', '2022-03-23', '123456789', NULL, NULL),
+	(21, 66, 10, 9, '3104741245', 'calle 29 16bis 32', '2', '2000-11-26', '2018-12-18', 'M', 'soltero(a)', '2022', '2022-1', '2022-1', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'Si', 'No', NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.estudiante_egresado
@@ -600,11 +599,13 @@ CREATE TABLE IF NOT EXISTS `estudiante_egresado` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK_estudiante_egresado_estudiante` (`este_id_estudiante`),
-  CONSTRAINT `FK_estudiante_egresado_estudiante` FOREIGN KEY (`este_id_estudiante`) REFERENCES `estudiante` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  CONSTRAINT `FK_estudiante_egresado_persona` FOREIGN KEY (`este_id_estudiante`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.estudiante_egresado: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `estudiante_egresado` DISABLE KEYS */;
+INSERT IGNORE INTO `estudiante_egresado` (`id`, `este_id_estudiante`, `este_fecha_finalizacion`, `este_promedio_acumulado`, `este_nombre_empresa`, `este_area`, `este_cargo`, `este_sitio_trabajo`, `este_tipo_contrato`, `este_pais_residencia`, `este_ciudad_residencia`, `created_at`, `updated_at`) VALUES
+	(6, 66, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `estudiante_egresado` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.estudiante_reporte_general
@@ -1511,11 +1512,10 @@ CREATE TABLE IF NOT EXISTS `movilidad` (
   CONSTRAINT `FK_movilidad_persona` FOREIGN KEY (`movi_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.movilidad: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.movilidad: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `movilidad` DISABLE KEYS */;
 INSERT IGNORE INTO `movilidad` (`id`, `movi_year`, `movi_periodo`, `movi_tipo_persona`, `movi_id_persona`, `movi_tipo_movilidad`, `movi_evento`, `movi_pais`, `movi_ciudad`, `movi_observacion`, `created_at`, `updated_at`) VALUES
-	(7, '2022', '2022-1', 'docente', 56, 'Traslado', 'Traslado de sede', 'Colombia', 'San gil', 'Sin observaciones', '2022-03-27 21:36:01', '2022-03-27 21:46:57'),
-	(9, '2022', '2022-1', 'administrativo', 58, 'Traslado', 'Traslado de sede', 'Colombia', 'Chiquinquira', 'Sin observaciones', '2022-03-27 22:04:06', '2022-03-27 22:04:06');
+	(7, '2022', '2022-1', 'docente', 56, 'Traslado', 'Traslado de sede', 'Colombia', 'San gil', 'Sin observaciones', '2022-03-27 21:36:01', '2022-03-27 21:46:57');
 /*!40000 ALTER TABLE `movilidad` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.municipio
@@ -1591,20 +1591,20 @@ CREATE TABLE IF NOT EXISTS `persona` (
   KEY `FK_persona_departamento` (`per_departamento`),
   KEY `FK_persona_tipo_usuario` (`per_tipo_usuario`),
   CONSTRAINT `FK_persona_departamento` FOREIGN KEY (`per_departamento`) REFERENCES `departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=64 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.persona: ~6 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.persona: ~9 rows (aproximadamente)
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
 INSERT IGNORE INTO `persona` (`id`, `per_tipo_documento`, `per_numero_documento`, `per_nombre`, `per_apellido`, `per_telefono`, `per_correo`, `password`, `per_departamento`, `per_ciudad`, `per_tipo_usuario`, `per_id_estado`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(55, 'Cédula de ciudadanía', '1006450866', 'michael', 'rodriguez', '3223342408', 'eroher@gmail.com', '$2y$10$hnJlzXkSv.67Jb4vRSNqvOVrBhp8Isb3.zBDdUB.GQeM6BQX.LVo6', 1, 2, '1', 'activo', NULL, NULL, NULL, NULL),
 	(56, 'Cédula de ciudadanía', '74825033', 'Edwin', 'Rodriguez', '3108585194', 'eroher@hotmail.com', '$2y$10$uAQnIplkYx2AhEJOFQzh8Of9FAEYXlhrWdbnl0/tO46VykOiHmHv6', 1, 2, '2', 'activo', NULL, NULL, NULL, NULL),
 	(57, 'Cédula de ciudadania', '47426505', 'Yadira Alexandra', 'Hernández Betancourt', '3223342408', 'yadiralexandra@unisangil.edu.co', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL),
 	(58, 'Cédula de ciudadania', '1116662526', 'Kenny José', 'Rodríguez Hernández', '3223342408', 'mateo@unisangil.edu.co', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL),
-	(59, 'Cédula de ciudadania', '1006451245', 'Prueba', 'Prueba', '31245612478', 'prueba@gmail.com', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL),
 	(60, 'Cédula de ciudadania', '47426504', 'Paula Andrea', 'Ángel Rincón', '3142179453', 'paula@unisangil.edu.co', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL),
 	(61, 'Cédula de ciudadanía', '1117412526', 'Wilson', 'Ortiz', '3223312123', 'wilsono@unisangil.edu.co', '$2y$10$5gZ/T6d85hPT8S3fq9qH7.T6LaudiP5iGhG3YWSjDXStjRn9O3Ncy', 1, 2, '2', 'activo', NULL, NULL, NULL, NULL),
 	(62, 'Cédula de ciudadania', '1114441122', 'prubea 2', 'prueba 222', '3108585194', 'prueba22@gmail.com', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL),
-	(63, 'Cédula de ciudadania', '12121', 'klasjdkas', 'jkhasjkdha', '3122455', 'jsdhjkas@gmail.com', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL);
+	(63, 'Cédula de ciudadania', '12121', 'klasjdkas', 'jkhasjkdha', '3122455', 'jsdhjkas@gmail.com', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL),
+	(66, 'Tarjeta de identidad', '1114447878', 'Prueba 9', 'Prueba 10', '3104741245', 'prueba910@gmail.com', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.practica_laboral

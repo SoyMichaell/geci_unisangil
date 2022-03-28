@@ -2,32 +2,25 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/programa/mostrarasignatura">Asignaturas</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Listado asignaturas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Programa</h1>
     @section('message')
-        <p>Historial de asignaturas</p>
+        <p>Listado de asignaturas</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 d-flex justify-content-end">
-
-            </div>
-        </div>
+    <div class="container">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('asignatura/pdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%"
-                        href="{{ url('asignatura/export') }}" title="Generar reporte excel" target="_blank"><i
-                            class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-success" href="{{ url('programa/crearasignatura') }}"><i
+                        <a class="btn btn-outline-success" href="{{ url('programa/crearasignatura') }}"><i
                                 class="fa-solid fa-circle-plus"></i> Nuevo</a>
                     @endif
 

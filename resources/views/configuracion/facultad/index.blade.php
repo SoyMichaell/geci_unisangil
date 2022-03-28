@@ -9,18 +9,14 @@
 @endsection
 @endsection
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="tile col-md-12">
         <div class="row">
             <div class="col-md-7">
                 <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
             </div>
             <div class="col-md-5 d-flex justify-content-end align-items-start">
-                <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('facultad/pdf') }}"
-                    title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('facultad/export') }}"
-                    title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
-                <a class="btn btn-success" href="{{ url('facultad/create') }}"><i class="fa fa-plus-circle"></i>
+                <a class="btn btn-outline-success" href="{{ url('facultad/create') }}"><i class="fa fa-plus-circle"></i>
                     Nuevo</a>
             </div>
         </div>

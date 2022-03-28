@@ -3,15 +3,15 @@
     <a href="/metodologia/edit">Editar</a> / <a href="/metodologia">Metodologia</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición de datos</h1>
+    <h1 class="titulo"><i class="fa fa-pencil-square"></i> Formulario de edición</h1>
 @section('message')
-    <p>Formulario de actualización de la información</p>
+    <p>Diligencie todos los campos requeridos *.</p>
 @endsection
 @endsection
 @section('content')
-<div class="container-fluid">
-    <div class="tile card__config">
-        <h4 class="tile title">Actualizar información</h4>
+<div class="container">
+    <div class="tile">
+        <h4 class="title">Actualizar información</h4>
         <form action="/metodologia/{{ $metodologia->id }}" method="POST">
             @csrf
             @method('PUT')

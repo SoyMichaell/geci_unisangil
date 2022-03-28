@@ -5,13 +5,13 @@
     @section('title')
         <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del estudiante.</p>
+        <p>Diligenciar todos los campos requeridos *.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="tile w-100">
-            <h4 class="tile title"><i class="fas fa-plus-square"></i> Registro complementario egresado</h4>
+    <div class="container">
+        <div class="tile">
+            <h4 class="title"><i class="fas fa-plus-square"></i> Registro complementario egresado</h4>
             <form action="/estudiante/{{$estudiante->id}}/actualizaregresado" method="post">
                 @csrf
                 @method('PUT')

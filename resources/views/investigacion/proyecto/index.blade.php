@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+        <a href="/investigacion/">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Investigación</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro proyectos</p>
     @endsection
 @endsection
 <style>
@@ -33,13 +33,19 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Proyectos de investigación <a class="btn btn-outline-success btn-sm" href="/investigacion/crearproyecto"><i
-                    class="fa-solid fa-circle-plus"></i> Crear nuevo proyecto</a></h3>
+        <h3>Proyectos de investigación <a class="btn btn-success btn-sm" href="/investigacion/crearproyecto"><i
+                    class="fa-solid fa-circle-plus"></i> Crear nuevo proyecto</a>
+                    <a class="btn btn-outline-danger"
+                href="{{ url('investigacion/exportpdfproyecto') }}" title="Generar reporte pdf" target="_blank"><i
+                    class="fa-solid fa-file-pdf"></i></a>
+            <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelproyecto') }}"
+                title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+        </h3>
         <hr>
         @if ($proyectos->count() > 0)
             @foreach ($proyectos as $proyecto)
                 <a class="card col-md-12 p-3 mt-2" id="card-investigacion"
-                    href="/investigacion/{{$proyecto->id}}/verproyecto">
+                    href="/investigacion/{{ $proyecto->id }}/verproyecto">
                     <h4>{{ Str::upper($proyecto->invpro_titulo) }}</h4>
                     <p>Estado proyecto: {{ $proyecto->invpro_estado }}<br>
                         <span>Grupo de investigación:

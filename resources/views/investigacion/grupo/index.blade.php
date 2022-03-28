@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+        <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Investigación</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de grupos de investigación</p>
     @endsection
 @endsection
 <style>
@@ -33,12 +33,18 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Grupos de investigación <a class="btn btn-outline-success btn-sm" href="creargrupo"><i
-                    class="fa-solid fa-circle-plus"></i> Crear nuevo grupo</a></h3>
+        <h3>Grupos de investigación <a class="btn btn-success btn-sm" href="creargrupo"><i
+                    class="fa-solid fa-circle-plus"></i> Crear nuevo grupo</a>
+            <a class="btn btn-outline-danger" href="{{ url('investigacion/exportpdfinvestigacion') }}"
+                title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+            <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelinvestigacion') }}"
+                title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+        </h3>
         <hr>
         @if ($grupos->count() > 0)
             @foreach ($grupos as $grupo)
-                <a class="card col-md-12 p-3 mt-2" id="card-investigacion" href="/investigacion/{{$grupo->id}}/vergrupo">
+                <a class="card col-md-12 p-3 mt-2" id="card-investigacion"
+                    href="/investigacion/{{ $grupo->id }}/vergrupo">
                     <h4>{{ Str::upper($grupo->inv_nombre_grupo) }}</h4>
                     <p>{{ $grupo->inv_categoria_grupo == '' ? 'Sin categoria' : $grupo->inv_categoria_grupo }}<br>
                         <span>Lider grupo:

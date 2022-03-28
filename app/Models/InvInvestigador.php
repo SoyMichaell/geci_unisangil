@@ -20,6 +20,14 @@ class InvInvestigador extends Model
         'inves_id_grupo'
     ];
 
+    public function personas(){
+        return $this->belongsTo(User::class, 'inves_id_persona');
+    }
+
+    public function grupos(){
+        return $this->belongsTo(InvGrupoInvestigacion::class, 'inves_id_grupo');
+    }
+
     
 
 }
