@@ -129,6 +129,9 @@
                     <li><a class="treeview-item" href="{{ url('convenio') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Convenio</a></li>
+                    <li><a class="treeview-item" href="{{ url('bienestar') }}"><i
+                                class="icon fa-solid fa-circle-notch"></i>
+                            Bienestar Institucional</a></li>
                     <li><a class="treeview-item" href="{{ url('investigacion') }}"><i
                                 class="icon fa-solid fa-circle-notch"></i>
                             Investigación</a></li>

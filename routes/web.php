@@ -409,6 +409,12 @@ Route::get('/convenio/exportpdf', [App\Http\Controllers\ConvenioController::clas
 Route::get('/convenio/exportexcel', [App\Http\Controllers\ConvenioController::class, 'exportexcel']);
 Route::resource('convenio', App\Http\Controllers\ConvenioController::class);
 
+//Rutas bienestar
+Route::get('/bienestar/exportpdf', [App\Http\Controllers\BienestarController::class, 'exportpdf']);
+Route::get('/bienestar/exportexcel', [App\Http\Controllers\BienestarController::class, 'exportexcel']);
+Route::resource('bienestar', App\Http\Controllers\BienestarController::class);
+
+
 //Rutas investigacion
 //Rutas grupo
 Route::get('/investigacion/exportpdfinvestigacion', [App\Http\Controllers\InvestigacionController::class, 'exportpdfinvestigacion']);

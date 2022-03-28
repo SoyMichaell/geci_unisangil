@@ -28,7 +28,7 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Estudiante por programa</h3>
+        <h3>Estudiantes por programa</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur accusamus enim eius quaerat? Consectetur
             esse, explicabo obcaecati libero iste et vero ratione, eius voluptates cupiditate dolore illum? Repudiandae,
             blanditiis inventore.</p>
@@ -36,7 +36,7 @@
         <div class="d-flex justify-content-end">
             <a class="btn btn-outline-danger" href="{{url('estudiante/exportpdfgeneral')}}" title="Generar reporte pdf" target="_blank"><i
                     class="fa-solid fa-file-pdf"></i></a>
-            <a class="btn btn-success" href="{{url('estudiante/exportexcelgeneral')}}" title="Generar reporte excel" target="_blank"><i
+            <a class="btn btn-outline-success" href="{{url('estudiante/exportexcelgeneral')}}" title="Generar reporte excel" target="_blank"><i
                     class="fa-solid fa-file-excel"></i></a>
             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                 <a class="btn btn-outline-success btn-sm" href="{{ url('estudiante/create') }}"><i

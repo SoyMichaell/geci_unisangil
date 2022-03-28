@@ -6,9 +6,9 @@
         <a href="/extension">Extensión</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Extensión</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización</h1>
     @section('message')
-        <p>Listado de registro programas académic os</p>
+        <p>Listado eventos extensión e internacionalización</p>
     @endsection
 @endsection
 <style>

@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -11,6 +11,36 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Volcando estructura de base de datos para proyecto
+CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `proyecto`;
+
+-- Volcando estructura para tabla proyecto.bienestar_institucional
+CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bie_fecha` date NOT NULL,
+  `bie_nombre_actividad` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bie_total_participantes` int(11) NOT NULL DEFAULT 0,
+  `bie_estudiantes` int(11) NOT NULL DEFAULT 0,
+  `bie_docentes` int(11) NOT NULL DEFAULT 0,
+  `bie_administrativos` int(11) NOT NULL DEFAULT 0,
+  `bie_egresados` int(11) NOT NULL DEFAULT 0,
+  `bie_particulares` int(11) NOT NULL DEFAULT 0,
+  `bie_codigo_snies` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `bie_soporte` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bie_observacion` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Volcando datos para la tabla proyecto.bienestar_institucional: ~1 rows (aproximadamente)
+/*!40000 ALTER TABLE `bienestar_institucional` DISABLE KEYS */;
+INSERT IGNORE INTO `bienestar_institucional` (`id`, `bie_fecha`, `bie_nombre_actividad`, `bie_total_participantes`, `bie_estudiantes`, `bie_docentes`, `bie_administrativos`, `bie_egresados`, `bie_particulares`, `bie_codigo_snies`, `bie_soporte`, `bie_observacion`, `created_at`, `updated_at`) VALUES
+	(1, '2022-03-28', 'Divulgación tecnológica de ingenieros', 50, 35, 5, 5, 3, 2, '7915', '2022-03-28_Divulgación tecnológica de ingenieros.pdf', 'Sin comentarios', '2022-03-28 09:59:33', '2022-03-28 14:59:33');
+/*!40000 ALTER TABLE `bienestar_institucional` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.compl_area_extension
 CREATE TABLE IF NOT EXISTS `compl_area_extension` (
@@ -350,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `convenio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.convenio: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.convenio: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `convenio` DISABLE KEYS */;
 INSERT IGNORE INTO `convenio` (`id`, `con_numero`, `con_alcance`, `con_tipo`, `con_institucion`, `con_nit`, `con_direccion`, `con_ciudad`, `con_pais`, `con_contacto`, `con_correo`, `con_telefono`, `con_objeto`, `con_logro_resultado`, `con_vigencia`, `con_programa_beneficiado`, `con_actividad_year_programa`, `con_fecha_inicio`, `con_fecha_final`, `con_observacion`, `created_at`, `updated_at`) VALUES
 	(3, '123456', 'regional', 'Interdisciplinario', 'Unitropico', '899990214-2', 'cale 44', 'yopal', 'colombia', 'Mateo Tarquino', 'mateo@gmail.com', '3104721212', 'Convenio entre entidad publica y privada', 'n/a', '2022-2023-2024', 'Ingeniería de sistemas', 'n/a', '2022-03-27', '2023-03-27', 'sin comentarios', '2022-03-27 22:07:15', '2022-03-27 22:09:10');
@@ -657,6 +687,8 @@ CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
   `extcul_fuente_internacional` int(11) DEFAULT NULL,
   `extcul_pais_financiador` int(11) DEFAULT NULL,
   `extcul_valor_internacional` int(11) DEFAULT NULL,
+  `extcul_tipo_documento` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `Columna 17` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1366,7 +1398,7 @@ CREATE TABLE IF NOT EXISTS `laboratorio` (
   CONSTRAINT `FK_laboratorio_software` FOREIGN KEY (`lab_id_software`) REFERENCES `software` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.laboratorio: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.laboratorio: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `laboratorio` DISABLE KEYS */;
 INSERT IGNORE INTO `laboratorio` (`id`, `lab_fecha`, `lab_nombre`, `lab_ubicacion`, `lab_id_docente`, `lab_finalidad`, `lab_id_facultad`, `lab_id_programa`, `lab_id_practicante`, `lab_nombre_practica`, `lab_cantidad_estudiante`, `lab_id_software`, `lab_material`, `lab_observaciones`, `created_at`, `updated_at`) VALUES
 	(5, '2022-03-29', 'Uso editor de texto Visual Studio Code', 'Aula 203', 56, 'Conocer interfaz editor visual studio code', 2, 10, 62, 'Laboratorio 3 Visual', 10, 7, 'N/A', 'Sin comentarios', '2022-03-27 20:39:03', '2022-03-27 20:43:26');
@@ -1480,7 +1512,7 @@ CREATE TABLE IF NOT EXISTS `modalidad_grado` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.modalidad_grado: ~7 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.modalidad_grado: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `modalidad_grado` DISABLE KEYS */;
 INSERT IGNORE INTO `modalidad_grado` (`id`, `mod_nombre`, `created_at`, `updated_at`) VALUES
 	(1, 'Desarrollo tecnológico', '2022-02-25 02:42:55', '2022-02-25 02:45:14'),
@@ -1512,7 +1544,7 @@ CREATE TABLE IF NOT EXISTS `movilidad` (
   CONSTRAINT `FK_movilidad_persona` FOREIGN KEY (`movi_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.movilidad: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.movilidad: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `movilidad` DISABLE KEYS */;
 INSERT IGNORE INTO `movilidad` (`id`, `movi_year`, `movi_periodo`, `movi_tipo_persona`, `movi_id_persona`, `movi_tipo_movilidad`, `movi_evento`, `movi_pais`, `movi_ciudad`, `movi_observacion`, `created_at`, `updated_at`) VALUES
 	(7, '2022', '2022-1', 'docente', 56, 'Traslado', 'Traslado de sede', 'Colombia', 'San gil', 'Sin observaciones', '2022-03-27 21:36:01', '2022-03-27 21:46:57');
@@ -1631,7 +1663,7 @@ CREATE TABLE IF NOT EXISTS `practica_laboral` (
   CONSTRAINT `FK_practica_laboral_persona` FOREIGN KEY (`prac_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.practica_laboral: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.practica_laboral: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `practica_laboral` DISABLE KEYS */;
 /*!40000 ALTER TABLE `practica_laboral` ENABLE KEYS */;
 
@@ -1716,7 +1748,7 @@ CREATE TABLE IF NOT EXISTS `programa_plan_estudio` (
   CONSTRAINT `FK_programa_plan_estudio_programa` FOREIGN KEY (`pp_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa_plan_estudio: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.programa_plan_estudio: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `programa_plan_estudio` DISABLE KEYS */;
 INSERT IGNORE INTO `programa_plan_estudio` (`id`, `pp_id_sede`, `pp_id_programa`, `pp_plan`, `pp_creditos`, `pp_no_asignaturas`, `pp_estado`, `created_at`, `updated_at`) VALUES
 	(9, 2, 10, '2016', 164, 28, 'activo', '2022-03-17 20:14:29', '2022-03-17 20:14:29'),
@@ -1830,7 +1862,7 @@ CREATE TABLE IF NOT EXISTS `prueba_saber_modulo` (
   CONSTRAINT `FK_prueba_saber_modulo_tipo_modulo` FOREIGN KEY (`prsamo_id_modulo`) REFERENCES `tipo_modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_saber_modulo: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.prueba_saber_modulo: ~3 rows (aproximadamente)
 /*!40000 ALTER TABLE `prueba_saber_modulo` DISABLE KEYS */;
 INSERT IGNORE INTO `prueba_saber_modulo` (`id`, `prsamo_id_estudiante`, `prsamo_id_modulo`, `prsamo_puntaje`, `created_at`, `updated_at`) VALUES
 	(52, 58, 2, 60, NULL, NULL),
@@ -1901,7 +1933,7 @@ CREATE TABLE IF NOT EXISTS `red_academica` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.red_academica: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.red_academica: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `red_academica` DISABLE KEYS */;
 INSERT IGNORE INTO `red_academica` (`id`, `red_nombre`, `red_nombre_contacto`, `red_telefono`, `red_pais`, `red_ciudad`, `red_alcance`, `red_accion`, `red_year`, `red_id_programa`, `red_observacion`, `created_at`, `updated_at`) VALUES
 	(3, 'Red de ingenieros', 'Michael Rodriguez', '3223342408', 'Colombia', 'Yopal', 'regional', 'Red de ingenieros a nivel regional', '2022', 'Ingeniería de sistemas', 'Sin comentarios', '2022-03-27 19:57:28', '2022-03-27 20:04:06');
@@ -1929,7 +1961,7 @@ CREATE TABLE IF NOT EXISTS `software` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.software: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.software: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `software` DISABLE KEYS */;
 INSERT IGNORE INTO `software` (`id`, `sof_tipo`, `sof_nombre`, `sof_desarrollador`, `sof_version`, `sof_no_licencia`, `sof_year_ad_licencia`, `sof_year_ve_licencia`, `sof_asignatura`, `sof_cantidad`, `sof_id_programa`, `sof_valor_unitario`, `sof_valor_total`, `sof_fecha_actualizar`, `sof_fecha_instalacion`, `created_at`, `updated_at`) VALUES
 	(7, 'libre', 'Visual Studio Code', 'Microsoft', '1.0', '1112022', '2022', '2024', 'Estructura de datos;Programación II', 2, 'Ingeniería de sistemas;Ingeniería electrónica', 350000, 700000, '2022-03-27', '2022-03-27', '2022-03-27 20:32:56', '2022-03-27 20:32:56');
@@ -2053,7 +2085,7 @@ CREATE TABLE IF NOT EXISTS `trabajo_grado` (
   CONSTRAINT `FK_trabajo_grado_persona_5` FOREIGN KEY (`tra_id_jurado2`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.trabajo_grado: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.trabajo_grado: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `trabajo_grado` DISABLE KEYS */;
 INSERT IGNORE INTO `trabajo_grado` (`id`, `tra_codigo_proyecto`, `tra_titulo_proyecto`, `tra_id_estudiante`, `tra_fecha_inicio`, `tra_modalidad_grado`, `tra_id_director`, `tra_id_codirector`, `tra_id_externo`, `tra_estado_propuesta`, `tra_estado_proyecto`, `tra_id_jurado1`, `tra_id_jurado2`, `tra_numero_acta_sustentacion`, `tra_acta_sustentacion_soporte`, `tra_numero_acta_grado`, `tra_acta_grado_soporte`, `tra_fecha_finalizacion`, `tra_observacion`, `tra_id_proceso`, `created_at`, `updated_at`) VALUES
 	(10, '8638-2021', 'La Nueva Realidad', 'Kenny José Rodríguez Hernández', '2021-02-15', 6, 56, 57, NULL, 'aprobada', 'aprobado-director', 60, 61, NULL, NULL, NULL, '', NULL, NULL, 4, '2022-03-21 04:18:44', '2022-03-26 05:31:04');
