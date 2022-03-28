@@ -3,14 +3,15 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Actualizar información</h4><hr>
             <form action="/extension/{{$actividad->id}}/actualizaractividad" method="post">
                 @csrf
                 @method('PUT')
@@ -79,11 +80,11 @@
                         <label for="extcul_tipo_actividad">Tipo de actividad</label>
                         <select class="form-select" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
-                            <option value="1" {{$actividad->extcul_tipo_actividad == '1' ? 'selected' : ''}}>1-> Medio de comunicación</option>
-                            <option value="2" {{$actividad->extcul_tipo_actividad == '2' ? 'selected' : ''}}>2-> Semana cultural</option>
-                            <option value="3" {{$actividad->extcul_tipo_actividad == '3' ? 'selected' : ''}}>3-> Museo universitario</option>
-                            <option value="4" {{$actividad->extcul_tipo_actividad == '4' ? 'selected' : ''}}>4-> Programa guia cultural</option>
-                            <option value="5" {{$actividad->extcul_tipo_actividad == '5' ? 'selected' : ''}}>5-> Otro</option>
+                            <option value="1" {{$actividad->extcul_tipo_actividad == '1' ? 'selected' : ''}}>1. Medio de comunicación</option>
+                            <option value="2" {{$actividad->extcul_tipo_actividad == '2' ? 'selected' : ''}}>2. Semana cultural</option>
+                            <option value="3" {{$actividad->extcul_tipo_actividad == '3' ? 'selected' : ''}}>3. Museo universitario</option>
+                            <option value="4" {{$actividad->extcul_tipo_actividad == '4' ? 'selected' : ''}}>4. Programa guia cultural</option>
+                            <option value="5" {{$actividad->extcul_tipo_actividad == '5' ? 'selected' : ''}}>5. Otro</option>
                         </select>
                         @error('extcul_tipo_actividad')
                             <span class="invalid-feedback" role="alert">
@@ -193,6 +194,34 @@
                             value="{{$actividad->extcul_valor_internacional}}" type="number"
                             autocomplete="extcul_valor_internacional" autofocus>
                         @error('extcul_valor_internacional')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <h4 class="tile titulo">Registro Actividad Cultural Recurso Humano</h4>
+                    <div class="col-md-6">
+                        <label for="extcul_persona">Recurso Humano | Persona</label>
+                        <select class="form-select js-example-placeholder-single" name="extcul_persona" id="extcul_persona">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($personas as $persona)
+                                <option value="{{$persona->id}}" {{$actividad->extcul_persona == $persona->id ? 'selected' : ''}}>{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>
+                            @endforeach
+                        </select>
+                        @error('extcul_persona')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="extcul_dedicacion">Dedicación</label>
+                        <input class="form-control @error('extcul_dedicacion') is-invalid @enderror"
+                            name="extcul_dedicacion" id="extcul_dedicacion" value="{{$actividad->extcul_dedicacion}}"
+                            type="text" autocomplete="extcul_dedicacion" autofocus>
+                        @error('extcul_dedicacion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

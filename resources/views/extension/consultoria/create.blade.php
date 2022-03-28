@@ -5,17 +5,18 @@
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Registro consultoria</h4><hr>
             <form action="/extension/registroconsultoria" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_year">Año</label>
+                        <label for="extcon_year">Año *</label>
                         <input class="form-control @error('extcon_year') is-invalid @enderror" name="extcon_year"
                             id="extcon_year" value="{{ old('extcon_year') }}" type="number" autocomplete="extcon_year"
                             autofocus>
@@ -26,7 +27,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_semestre">Semestre</label>
+                        <label for="extcon_semestre">Semestre *</label>
                         <input class="form-control @error('extcon_semestre') is-invalid @enderror" name="extcon_semestre"
                             id="extcon_semestre" value="{{ old('extcon_semestre') }}" type="number"
                             autocomplete="extcon_semestre" autofocus>
@@ -39,7 +40,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_codigo_consultoria">Código consultoria</label>
+                        <label for="extcon_codigo_consultoria">Código consultoria *</label>
                         <input class="form-control @error('extcon_codigo_consultoria') is-invalid @enderror"
                             name="extcon_codigo_consultoria" id="extcon_codigo_consultoria"
                             value="{{ old('extcon_codigo_consultoria') }}" type="text"
@@ -51,7 +52,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_descripcion">Descripción</label>
+                        <label for="extcon_descripcion">Descripción *</label>
                         <textarea class="form-control" name="extcon_descripcion" id="extcon_descripcion" cols="30" rows="10"></textarea>
                         @error('extcon_descripcion')
                             <span class="invalid-feedback" role="alert">
@@ -62,7 +63,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_id_cine_campo">ID CINE Detallado</label>
+                        <label for="extcon_id_cine_campo">ID CINE Detallado </label>
                         <select class="form-select" name="extcon_id_cine_campo" id="extcon_id_cine_campo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cinedetallados as $cinedetallado)
@@ -117,7 +118,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_fecha_inicio">Fecha de inicio</label>
+                        <label for="extcon_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('extcon_fecha_inicio') is-invalid @enderror"
                             name="extcon_fecha_inicio" id="extcon_fecha_inicio" value="{{ old('extcon_fecha_inicio') }}"
                             type="date" autocomplete="extcon_fecha_inicio" autofocus>
@@ -128,7 +129,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_fecha_fin">Fecha fin</label>
+                        <label for="extcon_fecha_fin">Fecha fin *</label>
                         <input class="form-control @error('extcon_fecha_fin') is-invalid @enderror"
                             name="extcon_fecha_fin" id="extcon_fecha_fin" value="{{ old('extcon_fecha_fin') }}"
                             type="date" autocomplete="extcon_fecha_fin" autofocus>

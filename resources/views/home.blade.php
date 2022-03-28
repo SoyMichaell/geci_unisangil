@@ -78,10 +78,6 @@
                     <div class="col-md-6">
                         <h4 class="titulo">Usuarios en plataforma</h4>
                     </div>
-                    <div class="col-md-6 d-flex justify-content-end">
-                        <a class="btn btn-outline-success" href=""><i class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    </div>
                 </div>
                 <div class="table-responsive mt-3">
                     <table class="table table-bordered" id="tables">

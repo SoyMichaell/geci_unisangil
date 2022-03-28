@@ -44,10 +44,6 @@
                 <i class="fa-solid fa-boxes-stacked fa-4x"></i>
                 <h4 class="mt-2">Actividad cultural</h4>
             </a>
-            <a class="card__extension" href="/extension/mostraractrecurso">
-                <i class="fa-solid fa-helmet-safety fa-4x"></i>
-                <h4 class="mt-2">Actividad cultural recurso humano</h4>
-            </a>
             <a class="card__extension" href="/extension/mostrarconsultoria">
                 <i class="fa-solid fa-magnifying-glass fa-4x"></i>
                 <h4 class="mt-2">Consultoria</h4>

@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.bienestar_institucional: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.bienestar_institucional: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `bienestar_institucional` DISABLE KEYS */;
 INSERT IGNORE INTO `bienestar_institucional` (`id`, `bie_fecha`, `bie_nombre_actividad`, `bie_total_participantes`, `bie_estudiantes`, `bie_docentes`, `bie_administrativos`, `bie_egresados`, `bie_particulares`, `bie_codigo_snies`, `bie_soporte`, `bie_observacion`, `created_at`, `updated_at`) VALUES
 	(1, '2022-03-28', 'Divulgación tecnológica de ingenieros', 50, 35, 5, 5, 3, 2, '7915', '2022-03-28_Divulgación tecnológica de ingenieros.pdf', 'Sin comentarios', '2022-03-28 09:59:33', '2022-03-28 14:59:33');
@@ -687,8 +687,8 @@ CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
   `extcul_fuente_internacional` int(11) DEFAULT NULL,
   `extcul_pais_financiador` int(11) DEFAULT NULL,
   `extcul_valor_internacional` int(11) DEFAULT NULL,
-  `extcul_tipo_documento` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Columna 17` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `extcul_persona` int(11) DEFAULT NULL,
+  `extcul_dedicacion` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -696,29 +696,13 @@ CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
   KEY `FK_ext_actividad_cultural_compl_fuente_internacional` (`extcul_fuente_internacional`),
   CONSTRAINT `FK_ext_actividad_cultural_compl_fuente_internacional` FOREIGN KEY (`extcul_fuente_internacional`) REFERENCES `compl_fuente_internacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_actividad_cultural_compl_fuente_nacional` FOREIGN KEY (`extcul_fuente_nacional`) REFERENCES `compl_fuente_nacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_actividad_cultural` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_actividad_cultural` (`id`, `extcul_year`, `extcul_semestre`, `extcul_codigo_unidad_org`, `extcul_codigo_actividad`, `extcul_descripcion_actividad`, `extcul_tipo_actividad`, `extcul_fecha_inicio`, `extcul_fecha_fin`, `extcul_fuente_nacional`, `extcul_valor_financiacion_nac`, `extcul_nombre_institucion`, `extcul_fuente_internacional`, `extcul_pais_financiador`, `extcul_valor_internacional`, `extcul_persona`, `extcul_dedicacion`, `created_at`, `updated_at`) VALUES
+	(2, '2022', '2', '10', '10', 'Sin comentarios', 2, '2022-03-28', '2022-03-30', 8, 1500000, 'Unisangil', NULL, NULL, NULL, NULL, NULL, '2022-03-28 20:30:33', '2022-03-28 20:34:21');
 /*!40000 ALTER TABLE `ext_actividad_cultural` ENABLE KEYS */;
-
--- Volcando estructura para tabla proyecto.ext_actividad_cultural_recurso_humano
-CREATE TABLE IF NOT EXISTS `ext_actividad_cultural_recurso_humano` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `extculre_year` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extculre_codigo_organizacional` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extculre_codigo_actividad` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extculre_tipo_documento` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extculre_numero_documento` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extculre_dedicacion` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Volcando datos para la tabla proyecto.ext_actividad_cultural_recurso_humano: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_actividad_cultural_recurso_humano` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_actividad_cultural_recurso_humano` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_consultoria
 CREATE TABLE IF NOT EXISTS `ext_consultoria` (
@@ -739,6 +723,8 @@ CREATE TABLE IF NOT EXISTS `ext_consultoria` (
   `extcon_fuente_internacional` int(11) DEFAULT NULL,
   `extcon_pais` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `extcon_valor_internacional` int(11) DEFAULT NULL,
+  `extcon_id_persona` int(11) DEFAULT NULL,
+  `extcon_id_nivel_estudio` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -1310,12 +1296,13 @@ CREATE TABLE IF NOT EXISTS `inv_grupo_investigacion` (
   CONSTRAINT `FK_inv_grupo_investigacion_facultad` FOREIGN KEY (`inv_facultad`) REFERENCES `facultad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_inv_grupo_investigacion_municipio` FOREIGN KEY (`inv_sede`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_inv_grupo_investigacion_persona` FOREIGN KEY (`inv_id_coordinador`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `inv_grupo_investigacion` DISABLE KEYS */;
 INSERT IGNORE INTO `inv_grupo_investigacion` (`id`, `inv_id_coordinador`, `inv_nombre_grupo`, `inv_correo_institucional_grupo`, `inv_codigo_minciencias`, `inv_mision`, `inv_vision`, `inv_url_grupo`, `inv_url_gruplac`, `inv_area_conocimiento_principal`, `inv_nucleo_conocimiento_nbc`, `inv_sede`, `inv_facultad`, `inv_categoria_grupo`, `inv_aval_minciencias`, `inv_lineas_investigacion`, `created_at`, `updated_at`) VALUES
-	(1, 56, 'mussa cafec', 'rcostoa@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 22:18:53');
+	(1, 56, 'mussa cafec', 'rcostoa@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 22:18:53'),
+	(2, 56, 'biota', 'rcostoa@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 22:18:53');
 /*!40000 ALTER TABLE `inv_grupo_investigacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.inv_investigador

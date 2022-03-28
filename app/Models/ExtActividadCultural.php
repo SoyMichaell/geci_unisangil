@@ -27,6 +27,8 @@ class ExtActividadCultural extends Model
             'extcul_fuente_internacional',
             'extcul_pais_financiador',
             'extcul_valor_internacional',
+            'extcul_id_persona',
+            'extcul_dedicacion'
     ];
 
 }

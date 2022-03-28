@@ -55,9 +55,15 @@ class ExtensionController extends Controller
     {
         $fuentenacionales = FuenteNacional::all();
         $fuenteinternacionales = FuenteInternacional::all();
+        $personas = DB::table('persona')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre')
+            ->orderBy('per_nombre')
+            ->get();
         return view('extension/cultural.create')
             ->with('fuentenacionales', $fuentenacionales)
-            ->with('fuenteinternacionales', $fuenteinternacionales);
+            ->with('fuenteinternacionales', $fuenteinternacionales)
+            ->with('personas', $personas);
     }
 
     public function registroactividad(Request $request)
@@ -106,6 +112,8 @@ class ExtensionController extends Controller
         $actividad->extcul_fuente_internacional = $request->get('extcul_fuente_internacional');
         $actividad->extcul_pais_financiador = $request->get('extcul_pais_financiador');
         $actividad->extcul_valor_internacional = $request->get('extcul_valor_internacional');
+        $actividad->extcul_persona = $request->get('extcul_persona');
+        $actividad->extcul_dedicacion = $request->get('extcul_dedicacion');
 
         $actividad->save();
 
@@ -118,10 +126,16 @@ class ExtensionController extends Controller
         $fuentenacionales = FuenteNacional::all();
         $fuenteinternacionales = FuenteInternacional::all();
         $actividad = ExtActividadCultural::find($id);
+        $personas = DB::table('persona')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre')
+            ->orderBy('per_nombre')
+            ->get();
         return view('extension/cultural.edit')
             ->with('fuentenacionales', $fuentenacionales)
             ->with('fuenteinternacionales', $fuenteinternacionales)
-            ->with('actividad', $actividad);
+            ->with('actividad', $actividad)
+            ->with('personas', $personas);
     }
 
     public function actualizaractividad(Request $request, $id)
@@ -171,6 +185,8 @@ class ExtensionController extends Controller
         $actividad->extcul_fuente_internacional = $request->get('extcul_fuente_internacional');
         $actividad->extcul_pais_financiador = $request->get('extcul_pais_financiador');
         $actividad->extcul_valor_internacional = $request->get('extcul_valor_internacional');
+        $actividad->extcul_persona = $request->get('extcul_persona');
+        $actividad->extcul_dedicacion = $request->get('extcul_dedicacion');
 
         $actividad->save();
 
@@ -183,10 +199,16 @@ class ExtensionController extends Controller
         $fuentenacionales = FuenteNacional::all();
         $fuenteinternacionales = FuenteInternacional::all();
         $actividad = ExtActividadCultural::find($id);
+        $personas = DB::table('persona')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre')
+            ->orderBy('per_nombre')
+            ->get();
         return view('extension/cultural.show')
             ->with('fuentenacionales', $fuentenacionales)
             ->with('fuenteinternacionales', $fuenteinternacionales)
-            ->with('actividad', $actividad);
+            ->with('actividad', $actividad)
+            ->with('personas', $personas);
     }
 
     public function eliminaractividad($id)
@@ -195,99 +217,6 @@ class ExtensionController extends Controller
         $actividad->delete();
         Alert::success('Exitoso', 'La actividad se ha eliminado con exito');
         return redirect('/extension/mostraractividad');
-    }
-
-    public function mostraractrecurso()
-    {
-        $actrecursos  = ExtActividadCulturalRecursoHumano::all();
-        return view('extension/culturalrecurso.index')->with('actrecursos', $actrecursos);
-    }
-
-    public function crearactrecurso()
-    {
-        return view('extension/culturalrecurso.create');
-    }
-
-    public function registroactrecurso(Request $request)
-    {
-        $rules = [
-            'extculre_year' => 'required',
-            'extculre_codigo_organizacional' => 'required',
-            'extculre_codigo_actividad' => 'required',
-            'extculre_tipo_documento' => 'required',
-            'extculre_numero_documento' => 'required',
-            'extculre_dedicacion' => 'required|not_in:0',
-        ];
-        $message = [
-            'extculre_year.required' => 'El campo año es requerido',
-            'extculre_codigo_organizacional.required' => 'El campo código unidad organizacional es requerido',
-            'extculre_codigo_actividad.required' => 'El campo código actividad es requerido',
-            'extculre_tipo_documento.required' => 'El campo tipo documento es requerido',
-            'extculre_numero_documento.required' => 'El campo número de documento es requerido',
-            'extculre_dedicacion.required' => 'El campo dedicación recurso humano es requerido',
-        ];
-
-        $this->validate($request, $rules, $message);
-
-        $recurso = new ExtActividadCulturalRecursoHumano();
-        $recurso->extculre_year = $request->get('extculre_year');
-        $recurso->extculre_codigo_organizacional = $request->get('extculre_codigo_organizacional');
-        $recurso->extculre_codigo_actividad = $request->get('extculre_codigo_actividad');
-        $recurso->extculre_tipo_documento = $request->get('extculre_tipo_documento');
-        $recurso->extculre_numero_documento = $request->get('extculre_numero_documento');
-        $recurso->extculre_dedicacion = $request->get('extculre_dedicacion');
-
-        $recurso->save();
-
-        Alert::success('Exitoso', 'La actividad recurso humano se ha creado con exito');
-        return redirect('/extension/mostraractrecurso');
-    }
-
-    public function veractrecurso($id)
-    {
-        $actrecurso = ExtActividadCulturalRecursoHumano::find($id);
-        return view('extension/culturalrecurso.show')->with('actrecurso', $actrecurso);
-    }
-
-    public function editaractrecurso($id)
-    {
-        $actrecurso = ExtActividadCulturalRecursoHumano::find($id);
-        return view('extension/culturalrecurso.edit')->with('actrecurso', $actrecurso);
-    }
-
-    public function actualizaractrecurso(Request $request, $id)
-    {
-        $rules = [
-            'extculre_year' => 'required',
-            'extculre_codigo_organizacional' => 'required',
-            'extculre_codigo_actividad' => 'required',
-            'extculre_tipo_documento' => 'required',
-            'extculre_numero_documento' => 'required',
-            'extculre_dedicacion' => 'required|not_in:0',
-        ];
-        $message = [
-            'extculre_year.required' => 'El campo año es requerido',
-            'extculre_codigo_organizacional.required' => 'El campo código unidad organizacional es requerido',
-            'extculre_codigo_actividad.required' => 'El campo código actividad es requerido',
-            'extculre_tipo_documento.required' => 'El campo tipo documento es requerido',
-            'extculre_numero_documento.required' => 'El campo número de documento es requerido',
-            'extculre_dedicacion.required' => 'El campo dedicación recurso humano es requerido',
-        ];
-
-        $this->validate($request, $rules, $message);
-
-        $recurso = ExtActividadCulturalRecursoHumano::find($id);
-        $recurso->extculre_year = $request->get('extculre_year');
-        $recurso->extculre_codigo_organizacional = $request->get('extculre_codigo_organizacional');
-        $recurso->extculre_codigo_actividad = $request->get('extculre_codigo_actividad');
-        $recurso->extculre_tipo_documento = $request->get('extculre_tipo_documento');
-        $recurso->extculre_numero_documento = $request->get('extculre_numero_documento');
-        $recurso->extculre_dedicacion = $request->get('extculre_dedicacion');
-
-        $recurso->save();
-
-        Alert::success('Exitoso', 'La actividad recurso humano se ha actualizado con exito');
-        return redirect('/extension/mostraractrecurso');
     }
 
     public function mostrarconsultoria()

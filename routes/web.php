@@ -228,14 +228,6 @@ Route::get('extension/{actividad}/editaractividad', [App\Http\Controllers\Extens
 Route::get('extension/{actividad}/veractividad', [App\Http\Controllers\ExtensionController::class, 'veractividad']);
 Route::put('extension/{actividad}/actualizaractividad', [App\Http\Controllers\ExtensionController::class, 'actualizaractividad']);
 Route::delete('extension/{actividad}/eliminaractividad', [App\Http\Controllers\ExtensionController::class, 'eliminaractividad']);
-//Rutas actividad recurso
-Route::get('extension/mostraractrecurso', [App\Http\Controllers\ExtensionController::class, 'mostraractrecurso']);
-Route::get('extension/crearactrecurso', [App\Http\Controllers\ExtensionController::class, 'crearactrecurso']);
-Route::post('extension/registroactrecurso', [App\Http\Controllers\ExtensionController::class, 'registroactrecurso']);
-Route::get('extension/{recurso}/editaractrecurso', [App\Http\Controllers\ExtensionController::class, 'editaractrecurso']);
-Route::get('extension/{recurso}/veractrecurso', [App\Http\Controllers\ExtensionController::class, 'veractrecurso']);
-Route::put('extension/{recurso}/actualizaractrecurso', [App\Http\Controllers\ExtensionController::class, 'actualizaractrecurso']);
-Route::delete('extension/{recurso}/eliminaractrecurso', [App\Http\Controllers\ExtensionController::class, 'eliminaractrecurso']);
 //Rutas consultoria
 Route::get('extension/mostrarconsultoria', [App\Http\Controllers\ExtensionController::class, 'mostrarconsultoria']);
 Route::get('extension/crearconsultoria', [App\Http\Controllers\ExtensionController::class, 'crearconsultoria']);

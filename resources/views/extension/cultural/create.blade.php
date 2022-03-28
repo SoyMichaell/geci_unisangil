@@ -9,8 +9,9 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Registro actividad cultural</h4><hr>
             <form action="/extension/registroactividad" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -66,7 +67,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcul_descripcion_actividad">Descripción actividad</label>
-                        <textarea class="form-control" name="extcul_descripcion_actividad"
+                        <textarea class="form-control @error('extcul_descripcion_actividad') is-invalid @enderror" name="extcul_descripcion_actividad"
                             id="extcul_descripcion_actividad" cols="30" rows="10"></textarea>
                         @error('extcul_descripcion_actividad')
                             <span class="invalid-feedback" role="alert">
@@ -76,13 +77,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcul_tipo_actividad">Tipo de actividad</label>
-                        <select class="form-select" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
+                        <select class="form-select @error('extcul_tipo_actividad') is-invalid @enderror" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
-                            <option value="1">1-> Medio de comunicación</option>
-                            <option value="2">2-> Semana cultural</option>
-                            <option value="3">3-> Museo universitario</option>
-                            <option value="4">4-> Programa guia cultural</option>
-                            <option value="5">5-> Otro</option>
+                            <option value="1">1. Medio de comunicación</option>
+                            <option value="2">2. Semana cultural</option>
+                            <option value="3">3. Museo universitario</option>
+                            <option value="4">4. Programa guia cultural</option>
+                            <option value="5">5. Otro</option>
                         </select>
                         @error('extcul_tipo_actividad')
                             <span class="invalid-feedback" role="alert">
@@ -119,13 +120,13 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="extcul_fuente_nacional">Fuente nacional</label>
-                        <select class="form-select" name="extcul_fuente_nacional" id="extcul_fuente_nacional">
+                        <select class="form-select @error('extcul_fuente_nacional') is-invalid @enderror" name="extcul_fuente_nacional" id="extcul_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionales as $nacionales)
                                 <option value="{{$nacionales->id}}">{{$nacionales->cofuna_nombre}}</option>
                             @endforeach
                         </select>
-                        @error('extul_tipo_actividad')
+                        @error('extcul_fuente_nacional')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -186,6 +187,34 @@
                             name="extcul_valor_internacional" id="extcul_valor_internacional" value="{{ old('extcul_valor_internacional') }}"
                             type="number" autocomplete="extcul_valor_internacional" autofocus>
                         @error('extcul_valor_internacional')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <h4 class="tile titulo">Registro Actividad Cultural Recurso Humano</h4>
+                    <div class="col-md-6">
+                        <label for="extcul_persona">Recurso Humano | Persona</label>
+                        <select class="form-select js-example-placeholder-single" name="extcul_persona" id="extcul_persona">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($personas as $persona)
+                                <option value="{{$persona->id}}">{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>
+                            @endforeach
+                        </select>
+                        @error('extcul_persona')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="extcul_dedicacion">Dedicación</label>
+                        <input class="form-control @error('extcul_dedicacion') is-invalid @enderror"
+                            name="extcul_dedicacion" id="extcul_dedicacion" value="{{ old('extcul_dedicacion') }}"
+                            type="text" autocomplete="extcul_dedicacion" autofocus>
+                        @error('extcul_dedicacion')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
