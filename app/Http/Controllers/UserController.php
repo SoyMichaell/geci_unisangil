@@ -46,7 +46,6 @@ class UserController extends Controller
             'per_departamento' => 'required|not_in:0',
             'per_ciudad' => 'required|not_in:0',
             'per_tipo_usuario' => 'required',
-            'per_id_estado' => 'required',
         ];
         $message = [
             'per_tipo_documento.required' => 'El campo tipo de documento es requerido',
@@ -60,8 +59,8 @@ class UserController extends Controller
             'per_departamento.required' => 'El campo departamento es requerido',
             'per_ciudad.required' => 'El campo ciudad es requerido',
             'per_tipo_usuario.required' => 'El campo tipo de usuario es requerido',
-            'per_id_estado.required' => 'El campo estado es requerido',
         ];
+
         $this->validate($request, $rules, $message);
 
         if ($request->get('password') != $request->get('password_confirmation')) {
@@ -88,6 +87,10 @@ class UserController extends Controller
 
         //Validación roles 
 
+        if(){
+            
+        }
+
         DB::table('persona')->insert(
             [
                 'per_tipo_documento' => $request->get('per_tipo_documento'),
@@ -100,7 +103,7 @@ class UserController extends Controller
                 'per_departamento' => $request->get('per_departamento'),
                 'per_ciudad' => $request->get('per_ciudad'),
                 'per_tipo_usuario' => implode(';',$request->get('per_tipo_usuario')),
-                'per_id_estado' => $request->get('per_id_estado'),
+                'per_id_estado' => 'en-espera',
             ]
         );
 

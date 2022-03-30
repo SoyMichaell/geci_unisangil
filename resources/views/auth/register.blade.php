@@ -258,7 +258,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label class=" ml-3" for="per_tipo_usuario">Tipo de usuario</label>
                                 @foreach ($tiposusuario as $tipousuario)
                                     <div class="form-check ml-3">
@@ -269,21 +269,6 @@
                                         </label>
                                     </div>
                                 @endforeach
-                            </div>
-                            <div class="col-md-6">
-                                <label for="per_id_estado"
-                                    class="col-md-12 col-form-label">{{ __('Estado *') }}</label>
-                                <div class="col-md-12">
-                                    <select class="form-select @error('per_id_estado') is-invalid @enderror"
-                                        name="per_id_estado" id="per_id_estado">
-                                        <option value="activo">Activo</option>
-                                    </select>
-                                    @error('per_id_estado')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
                             </div>
                         </div>
                         <div class="row mb-0 mx-auto">

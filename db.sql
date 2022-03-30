@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -11,6 +11,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Volcando estructura de base de datos para proyecto
+CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `proyecto`;
 
 -- Volcando estructura para tabla proyecto.bienestar_institucional
 CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
@@ -441,14 +446,8 @@ CREATE TABLE IF NOT EXISTS `docente` (
   CONSTRAINT `FK_docente_persona` FOREIGN KEY (`id_persona_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente: ~5 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.docente: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `docente` DISABLE KEYS */;
-INSERT IGNORE INTO `docente` (`id`, `id_persona_docente`, `ciudad_procedencia`, `correo_personal`, `dedicacion`, `tipo_contratacion`, `fecha_vinculacion`, `eps`, `institucion_esp`, `certificado_esp`, `institucion_dip`, `certificado_dip`, `titulo_pregrado`, `institucion_pre`, `titulo_especializacion`, `institucion_espe`, `titulo_maestria`, `institucion_mae`, `titulo_doctorado`, `institucion_doc`, `area_conocimiento`, `maximo_nivel_formacion`, `titulo_maximo_nivel`, `institucion_maximo_nivel`, `modalidad_programa`, `riesgo`, `caja_compensacion`, `banco`, `no_cuenta`, `pension`, `estado`, `soporte_hoja_vida`, `documentos_compl`, `id_proceso`, `created_at`, `updated_at`) VALUES
-	(32, 56, '', '', '', '', '0000-00-00', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', NULL, NULL, 1, NULL, NULL),
-	(33, 57, '', '', '', '', '0000-00-00', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', NULL, NULL, 1, NULL, NULL),
-	(34, 60, 'San Luis de palenque', 'paangel@gmail.com', 'tiemplo-completo', 'contrato-indefinido', '2022-03-24', 'Capresoca', NULL, NULL, NULL, NULL, 'Negocios internacionales', 'Uniboyaca', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'positiva', 'n/a', 'Banco agrario', '01100035576', 'n/a', 'activo', NULL, NULL, 2, NULL, NULL),
-	(35, 61, '', '', '', '', '0000-00-00', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', '', '', '', NULL, NULL, 1, NULL, NULL),
-	(36, 63, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL);
 /*!40000 ALTER TABLE `docente` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.docente_asignatura
@@ -492,13 +491,8 @@ CREATE TABLE IF NOT EXISTS `docente_contrato` (
   CONSTRAINT `FK_docente_contrato_persona` FOREIGN KEY (`doco_persona_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente_contrato: ~4 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.docente_contrato: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `docente_contrato` DISABLE KEYS */;
-INSERT IGNORE INTO `docente_contrato` (`id`, `doco_persona_docente`, `doco_numero_contrato`, `doco_objeto_contrato`, `doco_tipo_contrato`, `doco_fecha_inicio`, `doco_fecha_fin`, `doco_rol`, `doco_url_soporte`, `doco_estado`, `created_at`, `updated_at`) VALUES
-	(14, 57, '25022022', 'Prestar servicios personales de apoyo a la ejecución de los proyecto vigente', 'ops', '2022-03-22', '2022-12-22', 'docente-catedra', '2022-03-22_25022022_Yadira Alexandra_Hernández Betancourt_contrato.pdf', 'no-cancelado', '2022-03-23 03:35:31', '2022-03-23 03:35:31'),
-	(15, 56, '012022', 'asdasdsa', 'ops', '2022-03-24', '2022-12-24', 'docente-catedra', '2022-03-24_012022_Edwin_Rodriguez_contrato.pdf', 'no-cancelado', '2022-03-25 04:16:54', '2022-03-25 04:19:27'),
-	(16, 60, '25032022', 'Prestar servicios profesionales como jurado de trabajo de grados vigencia 2022', 'ops', '2022-03-25', '2022-12-25', 'jurado-tesis', '2022-03-25_25032022_Paula Andrea_Ángel Rincón_contrato.pdf', 'no-cancelado', '2022-03-26 03:50:37', '2022-03-26 03:50:37'),
-	(18, 63, '25032022', 'Sin comentarios', 'ops', '2022-03-25', '2022-12-25', 'jurado-tesis', '2022-03-25_25032022_klasjdkas_jkhasjkdha_contrato.pdf', 'no-cancelado', '2022-03-26 04:00:10', '2022-03-26 04:00:10');
 /*!40000 ALTER TABLE `docente_contrato` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.docente_evaluacion
@@ -555,8 +549,6 @@ CREATE TABLE IF NOT EXISTS `docente_visitante` (
 
 -- Volcando datos para la tabla proyecto.docente_visitante: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `docente_visitante` DISABLE KEYS */;
-INSERT IGNORE INTO `docente_visitante` (`id`, `docvi_tipo_documento`, `docvi_numero_documento`, `docvi_nombre`, `docvi_apellido`, `docvi_telefono`, `docvi_correo`, `docvi_entidad_origen`, `docvi_pais`, `docvi_ciudad`, `docvi_fecha_estadia`, `docvi_cantidad_hora`, `docvi_cantidad_dia`, `docvi_cantidad_semana`, `docvi_cantidad_mes`, `docvi_cantidad_year`, `docvi_objeto`, `docvi_actividad_desarrolladas`, `docvi_year`, `docvi_periodo`, `docvi_url_soporte`, `docvi_tipo_usuario`, `created_at`, `updated_at`) VALUES
-	(2, 'Cédula de ciudadania', '6662526', 'Prueba 4', 'Prueba 5', '3104747123', 'prueba4@gmail.com', 'UNIBOYACA', 'COLOMBIA', 'TUNJA', '2022-03-24', 8, 10, 1.2, 0, 0, 'ASDASDASDA', 'ADSDASASDAS DASDASDASDASDASD', 2022, '2022-1', 'Prueba 4_Prueba 5_2022.zip', 7, '2022-03-25 04:36:48', '2022-03-25 04:36:48');
 /*!40000 ALTER TABLE `docente_visitante` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.estudiante
@@ -600,11 +592,8 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   CONSTRAINT `FK_estudiante_programa_plan_estudio` FOREIGN KEY (`estu_programa_plan`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.estudiante: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.estudiante: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
-INSERT IGNORE INTO `estudiante` (`id`, `estu_id_estudiante`, `estu_programa`, `estu_programa_plan`, `estu_telefono2`, `estu_direccion`, `estu_estrato`, `estu_fecha_nacimiento`, `estu_fecha_expedicion`, `estu_sexo`, `estu_estado_civil`, `estu_ingreso`, `estu_periodo_ingreso`, `estu_ult_matricula`, `estu_semestre`, `estu_financiamiento`, `estu_entidad`, `estu_estado`, `estu_tipo_matricula`, `estu_matricula`, `estu_pga`, `estu_reconocimiento`, `estu_egresado`, `estu_administrativo`, `estu_cargo`, `estu_dependencia`, `estu_fecha_ingreso`, `estu_no_contrato`, `created_at`, `updated_at`) VALUES
-	(18, 62, 11, 10, '3108585194', 'calle 29 16bis 32', '2', '2000-11-26', '2018-12-18', 'M', 'soltero(a)', '2022', '2022-1', '2022-1', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'No', 'Si', 'Laboratorio practicante', 'Sistemas', '2022-03-23', '123456789', NULL, NULL),
-	(21, 66, 10, 9, '3104741245', 'calle 29 16bis 32', '2', '2000-11-26', '2018-12-18', 'M', 'soltero(a)', '2022', '2022-1', '2022-1', 1, 'de-contado', NULL, 'activo', 'nuevo-regular', 'pagado', NULL, NULL, 'Si', 'No', NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.estudiante_egresado
@@ -733,7 +722,7 @@ CREATE TABLE IF NOT EXISTS `ext_consultoria` (
   CONSTRAINT `FK_ext_consultoria_compl_sector` FOREIGN KEY (`ext_sector_consultoria`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_consultoria: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_consultoria: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_consultoria` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_consultoria` (`id`, `extcon_year`, `extcon_semestre`, `extcon_codigo_consultoria`, `extcon_descripcion`, `extcon_id_cine_campo`, `extcon_nombre_entidad`, `ext_sector_consultoria`, `extcon_valor`, `extcon_fecha_inicio`, `extcon_fecha_fin`, `extcon_fuente_nacional`, `extcon_valor_nacional`, `extcon_nombre_institucion`, `extcon_fuente_internacional`, `extcon_pais`, `extcon_valor_internacional`, `extcon_id_persona`, `extcon_id_nivel_estudio`, `created_at`, `updated_at`) VALUES
 	(2, '2022', '2', '123456789', 'Sin comentarios', 214, 'Servicion nacional de aprendizaje sena', 7, 150000, '2022-03-29', '2022-03-30', 3, 0, NULL, NULL, NULL, NULL, 56, 'Especialización universitaria', '2022-03-30 02:53:47', '2022-03-30 02:53:47');
@@ -763,8 +752,6 @@ CREATE TABLE IF NOT EXISTS `ext_curso` (
 
 -- Volcando datos para la tabla proyecto.ext_curso: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_curso` DISABLE KEYS */;
-INSERT IGNORE INTO `ext_curso` (`id`, `extcurso_year`, `extcurso_semestre`, `extcurso_codigo`, `extcurso_nombre`, `extcurso_id_cine`, `extcurso_extension`, `extcurso_estado`, `extcurso_fecha`, `extcurso_id_docente`, `extcurso_url_soporte`, `created_at`, `updated_at`) VALUES
-	(2, '2022', '2', '8638', 'Corto', 11, 'N', 'S', '2022-03-29', 56, '2022_Corto_2022-03-29.zip', '2022-03-30 03:09:49', '2022-03-30 03:09:49');
 /*!40000 ALTER TABLE `ext_curso` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_educacion_continua
@@ -925,8 +912,6 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_intersede` (
 
 -- Volcando datos para la tabla proyecto.ext_movilidad_intersede: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_movilidad_intersede` DISABLE KEYS */;
-INSERT IGNORE INTO `ext_movilidad_intersede` (`id`, `exmoin_tipo`, `exmoin_rol`, `exmoin_id_sede_or`, `exmoin_id_facultad_or`, `exmoin_id_programa_or`, `exmoin_id_sede_des`, `exmoin_id_facultad_des`, `exmoin_id_programa_des`, `exmoin_id_persona`, `exmoin_tipo_movilidad`, `exmoin_descripcion`, `exmoin_fecha_inicio`, `exmoin_fecha_final`, `created_at`, `updated_at`) VALUES
-	(3, 'entrante', 'docente', 2, 2, 10, 2, 2, 10, 56, 'Profesor programa pregrado', 'sdasda', '2022-03-17', '2023-03-17', '2022-03-18 03:41:02', '2022-03-18 03:41:02');
 /*!40000 ALTER TABLE `ext_movilidad_intersede` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_movilidad_nacional
@@ -977,8 +962,6 @@ CREATE TABLE IF NOT EXISTS `ext_participacion_eventos` (
 
 -- Volcando datos para la tabla proyecto.ext_participacion_eventos: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_participacion_eventos` DISABLE KEYS */;
-INSERT IGNORE INTO `ext_participacion_eventos` (`id`, `expaev_year`, `expaev_periodo`, `expaev_tipo_evento`, `expaev_nombre_evento`, `expaev_fecha`, `expaev_organizador`, `expaev_id_persona`, `created_at`, `updated_at`) VALUES
-	(1, '2021', '2021-2', 'webinar', 'Taller usando Microbit - Desafío Do your:bit de la BBC de Londres', '2021-07-08', 'fedesoft - Redis', 56, '2022-03-18 05:16:31', '2022-03-18 05:28:32');
 /*!40000 ALTER TABLE `ext_participacion_eventos` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_participante
@@ -1283,11 +1266,8 @@ CREATE TABLE IF NOT EXISTS `inv_grupo_investigacion` (
   CONSTRAINT `FK_inv_grupo_investigacion_persona` FOREIGN KEY (`inv_id_coordinador`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `inv_grupo_investigacion` DISABLE KEYS */;
-INSERT IGNORE INTO `inv_grupo_investigacion` (`id`, `inv_id_coordinador`, `inv_nombre_grupo`, `inv_correo_institucional_grupo`, `inv_codigo_minciencias`, `inv_mision`, `inv_vision`, `inv_url_grupo`, `inv_url_gruplac`, `inv_area_conocimiento_principal`, `inv_nucleo_conocimiento_nbc`, `inv_sede`, `inv_facultad`, `inv_categoria_grupo`, `inv_aval_minciencias`, `inv_lineas_investigacion`, `created_at`, `updated_at`) VALUES
-	(1, 56, 'mussa cafec', 'rcostoa@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 22:18:53'),
-	(2, 56, 'biota', 'rcostoa@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 22:18:53');
 /*!40000 ALTER TABLE `inv_grupo_investigacion` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.inv_investigador
@@ -1307,11 +1287,8 @@ CREATE TABLE IF NOT EXISTS `inv_investigador` (
   CONSTRAINT `FK_inv_investigador_persona` FOREIGN KEY (`inves_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_investigador: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.inv_investigador: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `inv_investigador` DISABLE KEYS */;
-INSERT IGNORE INTO `inv_investigador` (`id`, `inves_id_persona`, `inves_enlace_cvlac`, `inves_tipo_vinculacion`, `inves_categoria`, `inves_id_grupo`, `created_at`, `updated_at`) VALUES
-	(1, 56, 'https://github.com/', 'Interno', 'Sin categoria', 1, '2022-03-19 23:03:43', '2022-03-19 23:03:43'),
-	(2, 57, 'https://github.com/', 'Externo', 'C', 1, '2022-03-19 23:15:23', '2022-03-20 00:15:02');
 /*!40000 ALTER TABLE `inv_investigador` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.inv_proyecto
@@ -1334,11 +1311,8 @@ CREATE TABLE IF NOT EXISTS `inv_proyecto` (
   CONSTRAINT `FK_inv_proyecto_inv_grupo_investigacion` FOREIGN KEY (`invpro_id_grupo`) REFERENCES `inv_grupo_investigacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_proyecto: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.inv_proyecto: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `inv_proyecto` DISABLE KEYS */;
-INSERT IGNORE INTO `inv_proyecto` (`id`, `invpro_id_grupo`, `invpro_titulo`, `invpro_resumen`, `invpro_impacto`, `invpro_lugar`, `invpro_resultados`, `invpro_fecha_inicio`, `invpro_id_integrantes`, `invpro_palabras_clave`, `invpro_estado`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'La Nueva Realidad Fase II', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.', 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using \'Content here, content here\', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for \'lorem ipsum\' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).', 'Yopal', 'Ganar ambos parley hoy', '2022-03-20', 'Edwin Rodriguez;Yadira Alexandra Hernández Betancourt', 'Realidad - Impacto - Covid 19', 'en-curso', '2022-03-20 22:41:53', '2022-03-20 23:31:13'),
-	(2, 1, 'Biodigestor', 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.', 'There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don\'t look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn\'t anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.', 'Yopal', 'Que funcione', '2021-02-15', 'Yadira Alexandra Hernández Betancourt', 'Biodigestor - Energia', 'en-curso', '2022-03-20 23:32:20', '2022-03-20 23:32:20');
 /*!40000 ALTER TABLE `inv_proyecto` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.laboratorio
@@ -1372,8 +1346,6 @@ CREATE TABLE IF NOT EXISTS `laboratorio` (
 
 -- Volcando datos para la tabla proyecto.laboratorio: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `laboratorio` DISABLE KEYS */;
-INSERT IGNORE INTO `laboratorio` (`id`, `lab_fecha`, `lab_nombre`, `lab_ubicacion`, `lab_id_docente`, `lab_finalidad`, `lab_id_facultad`, `lab_id_programa`, `lab_id_practicante`, `lab_nombre_practica`, `lab_cantidad_estudiante`, `lab_id_software`, `lab_material`, `lab_observaciones`, `created_at`, `updated_at`) VALUES
-	(5, '2022-03-29', 'Uso editor de texto Visual Studio Code', 'Aula 203', 56, 'Conocer interfaz editor visual studio code', 2, 10, 62, 'Laboratorio 3 Visual', 10, 7, 'N/A', 'Sin comentarios', '2022-03-27 20:39:03', '2022-03-27 20:43:26');
 /*!40000 ALTER TABLE `laboratorio` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.metodologia
@@ -1518,8 +1490,6 @@ CREATE TABLE IF NOT EXISTS `movilidad` (
 
 -- Volcando datos para la tabla proyecto.movilidad: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `movilidad` DISABLE KEYS */;
-INSERT IGNORE INTO `movilidad` (`id`, `movi_year`, `movi_periodo`, `movi_tipo_persona`, `movi_id_persona`, `movi_tipo_movilidad`, `movi_evento`, `movi_pais`, `movi_ciudad`, `movi_observacion`, `created_at`, `updated_at`) VALUES
-	(7, '2022', '2022-1', 'docente', 56, 'Traslado', 'Traslado de sede', 'Colombia', 'San gil', 'Sin observaciones', '2022-03-27 21:36:01', '2022-03-27 21:46:57');
 /*!40000 ALTER TABLE `movilidad` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.municipio
@@ -1597,15 +1567,13 @@ CREATE TABLE IF NOT EXISTS `persona` (
   CONSTRAINT `FK_persona_departamento` FOREIGN KEY (`per_departamento`) REFERENCES `departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.persona: ~9 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.persona: ~8 rows (aproximadamente)
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
 INSERT IGNORE INTO `persona` (`id`, `per_tipo_documento`, `per_numero_documento`, `per_nombre`, `per_apellido`, `per_telefono`, `per_correo`, `password`, `per_departamento`, `per_ciudad`, `per_tipo_usuario`, `per_id_estado`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
 	(55, 'Cédula de ciudadanía', '1006450866', 'michael', 'rodriguez', '3223342408', 'eroher@gmail.com', '$2y$10$hnJlzXkSv.67Jb4vRSNqvOVrBhp8Isb3.zBDdUB.GQeM6BQX.LVo6', 1, 2, '1', 'activo', NULL, NULL, NULL, NULL),
-	(56, 'Cédula de ciudadanía', '74825033', 'Edwin', 'Rodriguez', '3108585194', 'eroher@hotmail.com', '$2y$10$uAQnIplkYx2AhEJOFQzh8Of9FAEYXlhrWdbnl0/tO46VykOiHmHv6', 1, 2, '2', 'activo', NULL, NULL, NULL, NULL),
 	(57, 'Cédula de ciudadania', '47426505', 'Yadira Alexandra', 'Hernández Betancourt', '3223342408', 'yadiralexandra@unisangil.edu.co', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL),
 	(58, 'Cédula de ciudadania', '1116662526', 'Kenny José', 'Rodríguez Hernández', '3223342408', 'mateo@unisangil.edu.co', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL),
 	(60, 'Cédula de ciudadania', '47426504', 'Paula Andrea', 'Ángel Rincón', '3142179453', 'paula@unisangil.edu.co', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL),
-	(61, 'Cédula de ciudadanía', '1117412526', 'Wilson', 'Ortiz', '3223312123', 'wilsono@unisangil.edu.co', '$2y$10$5gZ/T6d85hPT8S3fq9qH7.T6LaudiP5iGhG3YWSjDXStjRn9O3Ncy', 1, 2, '2', 'activo', NULL, NULL, NULL, NULL),
 	(62, 'Cédula de ciudadania', '1114441122', 'prubea 2', 'prueba 222', '3108585194', 'prueba22@gmail.com', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL),
 	(63, 'Cédula de ciudadania', '12121', 'klasjdkas', 'jkhasjkdha', '3122455', 'jsdhjkas@gmail.com', NULL, 1, 2, '3', 'activo', NULL, NULL, NULL, NULL),
 	(66, 'Tarjeta de identidad', '1114447878', 'Prueba 9', 'Prueba 10', '3104741245', 'prueba910@gmail.com', NULL, 1, 2, '6', NULL, NULL, NULL, NULL, NULL);
@@ -1668,11 +1636,8 @@ CREATE TABLE IF NOT EXISTS `programa` (
   CONSTRAINT `FK_programa_persona` FOREIGN KEY (`pro_id_director`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.programa: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `programa` DISABLE KEYS */;
-INSERT IGNORE INTO `programa` (`id`, `pro_nombre`, `pro_estado`, `pro_departamento`, `pro_municipio`, `pro_facultad`, `pro_titulo`, `pro_codigosnies`, `pro_resolucion`, `pro_fecha_ult`, `pro_fecha_prox`, `pro_nivel_formacion`, `pro_programa_ciclo`, `pro_metodologia`, `pro_duraccion`, `pro_periodo_admision`, `pro_grupo_referencia`, `pro_grupo_referencia_nbc`, `pro_tipo_norma`, `pro_id_director`, `created_at`, `updated_at`) VALUES
-	(10, 'Ingeniería de sistemas', 'Activo', 1, 2, 2, 'Ingeniero de sistemas', '7415', 'Resolución Número 6760 de Mayo 9 del 2014. Con una vigencia de (7) siete años.', '2022-03-17', '2022-03-17', 4, 'Si', 2, 10, 'Semestral', 'Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 'n/a', 56, '2022-03-17 20:14:10', '2022-03-17 20:14:10'),
-	(11, 'Ingeniería electrónica', 'Activo', 1, 2, 2, 'Ingeniero (a) electrónico', '56603', 'Resolución  Número 2488 de Enero 25 del 2015. Con una vigencia de (7) siete años.', '2022-03-21', '2022-03-21', 4, 'Si', 2, 10, 'Semestral', 'Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 'xx', 61, '2022-03-21 23:24:56', '2022-03-21 23:24:56');
 /*!40000 ALTER TABLE `programa` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.programa_asignatura_horario
@@ -1720,11 +1685,8 @@ CREATE TABLE IF NOT EXISTS `programa_plan_estudio` (
   CONSTRAINT `FK_programa_plan_estudio_programa` FOREIGN KEY (`pp_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa_plan_estudio: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.programa_plan_estudio: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `programa_plan_estudio` DISABLE KEYS */;
-INSERT IGNORE INTO `programa_plan_estudio` (`id`, `pp_id_sede`, `pp_id_programa`, `pp_plan`, `pp_creditos`, `pp_no_asignaturas`, `pp_estado`, `created_at`, `updated_at`) VALUES
-	(9, 2, 10, '2016', 164, 28, 'activo', '2022-03-17 20:14:29', '2022-03-17 20:14:29'),
-	(10, 2, 11, '2018', 164, 28, 'activo', '2022-03-24 03:09:30', '2022-03-24 03:09:30');
 /*!40000 ALTER TABLE `programa_plan_estudio` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.programa_plan_estudio_asignatura
@@ -1750,11 +1712,8 @@ CREATE TABLE IF NOT EXISTS `programa_plan_estudio_asignatura` (
   CONSTRAINT `FK_programa_plan_estudio_asignatura_programa_plan_estudio` FOREIGN KEY (`asig_id_plan_estudio`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa_plan_estudio_asignatura: ~2 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.programa_plan_estudio_asignatura: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `programa_plan_estudio_asignatura` DISABLE KEYS */;
-INSERT IGNORE INTO `programa_plan_estudio_asignatura` (`id`, `asig_id_sede`, `asig_id_programa`, `asig_id_plan_estudio`, `asig_codigo`, `asig_nombre`, `asig_no_creditos`, `asig_no_semanales`, `asig_no_semestre`, `asig_estado`, `created_at`, `updated_at`) VALUES
-	(6, 2, 10, 9, '5203', 'Estructura de datos', 4, 4, 64, 'activo', '2022-03-21 04:36:25', '2022-03-21 04:36:25'),
-	(7, 2, 10, 9, '5204', 'Programación II', 4, 4, 64, 'activo', '2022-03-21 04:36:47', '2022-03-21 04:36:47');
 /*!40000 ALTER TABLE `programa_plan_estudio_asignatura` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.prueba_resultado_programa
@@ -1834,12 +1793,8 @@ CREATE TABLE IF NOT EXISTS `prueba_saber_modulo` (
   CONSTRAINT `FK_prueba_saber_modulo_tipo_modulo` FOREIGN KEY (`prsamo_id_modulo`) REFERENCES `tipo_modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_saber_modulo: ~3 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.prueba_saber_modulo: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `prueba_saber_modulo` DISABLE KEYS */;
-INSERT IGNORE INTO `prueba_saber_modulo` (`id`, `prsamo_id_estudiante`, `prsamo_id_modulo`, `prsamo_puntaje`, `created_at`, `updated_at`) VALUES
-	(52, 58, 2, 60, NULL, NULL),
-	(53, 58, 3, 60, NULL, NULL),
-	(54, 58, 4, 62, NULL, NULL);
 /*!40000 ALTER TABLE `prueba_saber_modulo` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.prueba_saber_pro
@@ -1907,8 +1862,6 @@ CREATE TABLE IF NOT EXISTS `red_academica` (
 
 -- Volcando datos para la tabla proyecto.red_academica: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `red_academica` DISABLE KEYS */;
-INSERT IGNORE INTO `red_academica` (`id`, `red_nombre`, `red_nombre_contacto`, `red_telefono`, `red_pais`, `red_ciudad`, `red_alcance`, `red_accion`, `red_year`, `red_id_programa`, `red_observacion`, `created_at`, `updated_at`) VALUES
-	(3, 'Red de ingenieros', 'Michael Rodriguez', '3223342408', 'Colombia', 'Yopal', 'regional', 'Red de ingenieros a nivel regional', '2022', 'Ingeniería de sistemas', 'Sin comentarios', '2022-03-27 19:57:28', '2022-03-27 20:04:06');
 /*!40000 ALTER TABLE `red_academica` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.software
@@ -1935,8 +1888,6 @@ CREATE TABLE IF NOT EXISTS `software` (
 
 -- Volcando datos para la tabla proyecto.software: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `software` DISABLE KEYS */;
-INSERT IGNORE INTO `software` (`id`, `sof_tipo`, `sof_nombre`, `sof_desarrollador`, `sof_version`, `sof_no_licencia`, `sof_year_ad_licencia`, `sof_year_ve_licencia`, `sof_asignatura`, `sof_cantidad`, `sof_id_programa`, `sof_valor_unitario`, `sof_valor_total`, `sof_fecha_actualizar`, `sof_fecha_instalacion`, `created_at`, `updated_at`) VALUES
-	(7, 'libre', 'Visual Studio Code', 'Microsoft', '1.0', '1112022', '2022', '2024', 'Estructura de datos;Programación II', 2, 'Ingeniería de sistemas;Ingeniería electrónica', 350000, 700000, '2022-03-27', '2022-03-27', '2022-03-27 20:32:56', '2022-03-27 20:32:56');
 /*!40000 ALTER TABLE `software` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.software_recurso_tecnologico
@@ -2059,8 +2010,6 @@ CREATE TABLE IF NOT EXISTS `trabajo_grado` (
 
 -- Volcando datos para la tabla proyecto.trabajo_grado: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `trabajo_grado` DISABLE KEYS */;
-INSERT IGNORE INTO `trabajo_grado` (`id`, `tra_codigo_proyecto`, `tra_titulo_proyecto`, `tra_id_estudiante`, `tra_fecha_inicio`, `tra_modalidad_grado`, `tra_id_director`, `tra_id_codirector`, `tra_id_externo`, `tra_estado_propuesta`, `tra_estado_proyecto`, `tra_id_jurado1`, `tra_id_jurado2`, `tra_numero_acta_sustentacion`, `tra_acta_sustentacion_soporte`, `tra_numero_acta_grado`, `tra_acta_grado_soporte`, `tra_fecha_finalizacion`, `tra_observacion`, `tra_id_proceso`, `created_at`, `updated_at`) VALUES
-	(10, '8638-2021', 'La Nueva Realidad', 'Kenny José Rodríguez Hernández', '2021-02-15', 6, 56, 57, NULL, 'aprobada', 'aprobado-director', 60, 61, NULL, NULL, NULL, '', NULL, NULL, 4, '2022-03-21 04:18:44', '2022-03-26 05:31:04');
 /*!40000 ALTER TABLE `trabajo_grado` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
