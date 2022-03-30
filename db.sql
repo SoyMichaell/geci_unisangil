@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -11,11 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Volcando estructura de base de datos para proyecto
-CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `proyecto`;
 
 -- Volcando estructura para tabla proyecto.bienestar_institucional
 CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
@@ -698,7 +693,7 @@ CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
   CONSTRAINT `FK_ext_actividad_cultural_compl_fuente_nacional` FOREIGN KEY (`extcul_fuente_nacional`) REFERENCES `compl_fuente_nacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~1 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_actividad_cultural` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_actividad_cultural` (`id`, `extcul_year`, `extcul_semestre`, `extcul_codigo_unidad_org`, `extcul_codigo_actividad`, `extcul_descripcion_actividad`, `extcul_tipo_actividad`, `extcul_fecha_inicio`, `extcul_fecha_fin`, `extcul_fuente_nacional`, `extcul_valor_financiacion_nac`, `extcul_nombre_institucion`, `extcul_fuente_internacional`, `extcul_pais_financiador`, `extcul_valor_internacional`, `extcul_persona`, `extcul_dedicacion`, `created_at`, `updated_at`) VALUES
 	(2, '2022', '2', '10', '10', 'Sin comentarios', 2, '2022-03-28', '2022-03-30', 8, 1500000, 'Unisangil', NULL, NULL, NULL, NULL, NULL, '2022-03-28 20:30:33', '2022-03-28 20:34:21');
@@ -736,29 +731,13 @@ CREATE TABLE IF NOT EXISTS `ext_consultoria` (
   CONSTRAINT `FK_ext_consultoria_compl_fuente_internacional` FOREIGN KEY (`extcon_fuente_internacional`) REFERENCES `compl_fuente_internacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_consultoria_compl_fuente_nacional` FOREIGN KEY (`extcon_fuente_nacional`) REFERENCES `compl_fuente_nacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_consultoria_compl_sector` FOREIGN KEY (`ext_sector_consultoria`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_consultoria: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_consultoria: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_consultoria` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_consultoria` (`id`, `extcon_year`, `extcon_semestre`, `extcon_codigo_consultoria`, `extcon_descripcion`, `extcon_id_cine_campo`, `extcon_nombre_entidad`, `ext_sector_consultoria`, `extcon_valor`, `extcon_fecha_inicio`, `extcon_fecha_fin`, `extcon_fuente_nacional`, `extcon_valor_nacional`, `extcon_nombre_institucion`, `extcon_fuente_internacional`, `extcon_pais`, `extcon_valor_internacional`, `extcon_id_persona`, `extcon_id_nivel_estudio`, `created_at`, `updated_at`) VALUES
+	(2, '2022', '2', '123456789', 'Sin comentarios', 214, 'Servicion nacional de aprendizaje sena', 7, 150000, '2022-03-29', '2022-03-30', 3, 0, NULL, NULL, NULL, NULL, 56, 'Especialización universitaria', '2022-03-30 02:53:47', '2022-03-30 02:53:47');
 /*!40000 ALTER TABLE `ext_consultoria` ENABLE KEYS */;
-
--- Volcando estructura para tabla proyecto.ext_consultoria_recurso_humano
-CREATE TABLE IF NOT EXISTS `ext_consultoria_recurso_humano` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `extcor_year` varchar(4) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extcor_semestre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extcor_codigo_consultoria` varchar(15) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extcor_tipo_documento` varchar(2) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extcor_numero_documento` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `extcor_id_nivel_estudio` int(11) NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Volcando datos para la tabla proyecto.ext_consultoria_recurso_humano: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_consultoria_recurso_humano` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_consultoria_recurso_humano` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_curso
 CREATE TABLE IF NOT EXISTS `ext_curso` (
@@ -780,10 +759,12 @@ CREATE TABLE IF NOT EXISTS `ext_curso` (
   KEY `FK_ext_curso_compl_cine_detallado` (`extcurso_id_cine`),
   CONSTRAINT `FK_ext_curso_compl_cine_detallado` FOREIGN KEY (`extcurso_id_cine`) REFERENCES `compl_cine_detallado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_curso_persona` FOREIGN KEY (`extcurso_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.ext_curso: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_curso` DISABLE KEYS */;
+INSERT IGNORE INTO `ext_curso` (`id`, `extcurso_year`, `extcurso_semestre`, `extcurso_codigo`, `extcurso_nombre`, `extcurso_id_cine`, `extcurso_extension`, `extcurso_estado`, `extcurso_fecha`, `extcurso_id_docente`, `extcurso_url_soporte`, `created_at`, `updated_at`) VALUES
+	(2, '2022', '2', '8638', 'Corto', 11, 'N', 'S', '2022-03-29', 56, '2022_Corto_2022-03-29.zip', '2022-03-30 03:09:49', '2022-03-30 03:09:49');
 /*!40000 ALTER TABLE `ext_curso` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_educacion_continua
@@ -964,13 +945,17 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_nacional` (
   `exmona_fecha_final` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `FK_ext_movilidad_nacional_programa` (`exmona_id_programa`),
+  KEY `FK_ext_movilidad_nacional_facultad` (`exmona_id_facultad`),
+  KEY `FK_ext_movilidad_nacional_municipio` (`exmona_id_sede`),
+  CONSTRAINT `FK_ext_movilidad_nacional_facultad` FOREIGN KEY (`exmona_id_facultad`) REFERENCES `facultad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_movilidad_nacional_municipio` FOREIGN KEY (`exmona_id_sede`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `FK_ext_movilidad_nacional_programa` FOREIGN KEY (`exmona_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Volcando datos para la tabla proyecto.ext_movilidad_nacional: ~0 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_movilidad_nacional` DISABLE KEYS */;
-INSERT IGNORE INTO `ext_movilidad_nacional` (`id`, `exmona_tipo`, `exmona_rol`, `exmona_id_sede`, `exmona_id_facultad`, `exmona_id_programa`, `exmona_id_persona`, `exmona_institucion_proviene`, `exmona_tipo_movilidad`, `exmona_descripcion`, `exmona_fecha_inicio`, `exmona_fecha_final`, `created_at`, `updated_at`) VALUES
-	(1, 'entrante', 'docente', 2, 2, 9, 43, 'UNISANGIL', 'Misión;Curso corto', 'Sin comentarios', '2021-03-14', '2022-03-14', '2022-03-14 21:31:29', '2022-03-14 22:25:35');
 /*!40000 ALTER TABLE `ext_movilidad_nacional` ENABLE KEYS */;
 
 -- Volcando estructura para tabla proyecto.ext_participacion_eventos
@@ -1298,7 +1283,7 @@ CREATE TABLE IF NOT EXISTS `inv_grupo_investigacion` (
   CONSTRAINT `FK_inv_grupo_investigacion_persona` FOREIGN KEY (`inv_id_coordinador`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~2 rows (aproximadamente)
 /*!40000 ALTER TABLE `inv_grupo_investigacion` DISABLE KEYS */;
 INSERT IGNORE INTO `inv_grupo_investigacion` (`id`, `inv_id_coordinador`, `inv_nombre_grupo`, `inv_correo_institucional_grupo`, `inv_codigo_minciencias`, `inv_mision`, `inv_vision`, `inv_url_grupo`, `inv_url_gruplac`, `inv_area_conocimiento_principal`, `inv_nucleo_conocimiento_nbc`, `inv_sede`, `inv_facultad`, `inv_categoria_grupo`, `inv_aval_minciencias`, `inv_lineas_investigacion`, `created_at`, `updated_at`) VALUES
 	(1, 56, 'mussa cafec', 'rcostoa@sena.edu.co', 'COL0160536', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', 'El grupo de Investigación MUSSA CAFEC se consolidará en el 2024 como entidad que genera I+D+i\r\nrealizando publicaciones indexadas, participando en seminarios, congresos y a través de SENNOVA \r\nposicionar el semillero a nivel local, regional y nacional.', NULL, 'https://scienti.minciencias.gov.co/gruplac/EnGrupoInvestigacion/edit.do', 'Ciencia, Tecnología e Innovación en Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 2, 2, NULL, NULL, 'Adaptación y mitigación al cambio climático; Ambientes urbanos y rurales sostenibles', '2022-03-19 03:41:33', '2022-03-19 22:18:53'),

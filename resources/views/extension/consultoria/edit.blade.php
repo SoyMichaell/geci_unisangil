@@ -3,14 +3,15 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Actualizar información</h4><hr>
             <form action="/extension/{{$consultoria->id}}/actualizarconsultoria" method="post">
                 @csrf
                 @method('PUT')
@@ -212,6 +213,37 @@
                             name="extcon_valor_internacional" id="extcon_valor_internacional" value="{{$consultoria->extcon_valor_internacional}}"
                             type="number" autocomplete="extcon_valor_internacional" autofocus>
                         @error('extcon_valor_internacional') 
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <h4 class="tile">Actualizar consultoria recurso humano</h4>
+                    <div class="col-md-6">
+                        <label for="extcon_id_persona">Recurso Humano | Persona</label>
+                        <select class="form-select js-example-placeholder-single" name="extcon_id_persona" id="extcon_id_persona">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($personas as $persona)
+                                <option value="{{$persona->id}}" {{$consultoria->extcon_id_persona == $persona->id ? 'selected' : ''}}>{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>
+                            @endforeach
+                        </select>
+                        @error('extcon_id_persona')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="extcon_id_nivel_estudio">Nivel de estudio</label>
+                        <select class="form-select js-example-placeholder-single" name="extcon_id_nivel_estudio" id="extcon_id_nivel_estudio">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($nivelestudios as $nivel)
+                                <option value="{{$nivel->conies_nombre}}" {{$consultoria->extcon_id_nivel_estudio == $nivel->conies_nombre ? 'selected' : ''}}>{{$nivel->conies_nombre}}</option>
+                            @endforeach
+                        </select>
+                        @error('extcon_id_nivel_estudio')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

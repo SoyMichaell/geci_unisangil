@@ -9,9 +9,7 @@ use App\Models\complemento\FuenteNacional;
 use App\Models\complemento\NivelEstudio;
 use App\Models\complemento\Sector;
 use App\Models\Estudiante;
-use App\Models\ExtActividadCulturalRecursoHumano;
 use App\Models\ExtConsultoria;
-use App\Models\ExtConsultoriaRecursoHumano;
 use App\Models\ExtCurso;
 use App\Models\ExtEducacionContinua;
 use App\Models\ExtEventoInternacional;
@@ -232,11 +230,19 @@ class ExtensionController extends Controller
         $sectores = Sector::all();
         $fuentenacionales = FuenteNacional::all();
         $fuenteinternacionales = FuenteInternacional::all();
+        $nivelestudios = NivelEstudio::all();
+        $personas = DB::table('persona')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre')
+            ->orderBy('per_nombre')
+            ->get();
         return view('extension/consultoria.create')
             ->with('cinedetallados', $cinedetallados)
             ->with('sectores', $sectores)
             ->with('fuentenacionales', $fuentenacionales)
-            ->with('fuenteinternacionales', $fuenteinternacionales);
+            ->with('fuenteinternacionales', $fuenteinternacionales)
+            ->with('nivelestudios', $nivelestudios)
+            ->with('personas', $personas);
     }
 
     public function registroconsultoria(Request $request)
@@ -250,6 +256,7 @@ class ExtensionController extends Controller
             'ext_sector_consultoria' => 'required',
             'extcon_valor' => 'required',
             'extcon_fecha_inicio' => 'required',
+            'extcon_fecha_fin' => 'required'
         ];
         $message = [
             'extcon_year.required' => 'El campo año es requerido',
@@ -260,6 +267,7 @@ class ExtensionController extends Controller
             'ext_sector_consultoria.required' => 'El campo sector consultoria es requerido',
             'extcon_valor.required' => 'El campo valor consultoria es requerido',
             'extcon_fecha_inicio.required' => 'El campo fecha de inicio es requerido',
+            'extcon_fecha_fin.required' => 'El campo fecha fin es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -280,6 +288,8 @@ class ExtensionController extends Controller
         $consultoria->extcon_fuente_internacional = $request->get('extcon_fuente_internacional');
         $consultoria->extcon_pais = $request->get('extcon_pais');
         $consultoria->extcon_valor_internacional = $request->get('extcon_valor_internacional');
+        $consultoria->extcon_id_persona = $request->get('extcon_id_persona');
+        $consultoria->extcon_id_nivel_estudio = $request->get('extcon_id_nivel_estudio');
         $consultoria->save();
 
         Alert::success('Exitoso', 'La consultoria se ha registrado con exito');
@@ -289,31 +299,47 @@ class ExtensionController extends Controller
     public function editarconsultoria($id)
     {
         $cinedetallados = CineDetallado::all();
-        $sectores = ComplementoSector::all();
+        $sectores = Sector::all();
         $fuentenacionales = FuenteNacional::all();
         $fuenteinternacionales = FuenteInternacional::all();
         $consultoria = ExtConsultoria::find($id);
+        $nivelestudios = NivelEstudio::all();
+        $personas = DB::table('persona')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre')
+            ->orderBy('per_nombre')
+            ->get();
         return view('extension/consultoria.edit')
             ->with('cinedetallados', $cinedetallados)
             ->with('sectores', $sectores)
             ->with('fuentenacionales', $fuentenacionales)
             ->with('fuenteinternacionales', $fuenteinternacionales)
-            ->with('consultoria', $consultoria);
+            ->with('consultoria', $consultoria)
+            ->with('nivelestudios', $nivelestudios)
+            ->with('personas', $personas);
     }
 
     public function verconsultoria($id)
     {
         $cinedetallados = CineDetallado::all();
-        $sectores = ComplementoSector::all();
+        $sectores = Sector::all();
         $fuentenacionales = FuenteNacional::all();
         $fuenteinternacionales = FuenteInternacional::all();
         $consultoria = ExtConsultoria::find($id);
+        $nivelestudios = NivelEstudio::all();
+        $personas = DB::table('persona')
+            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
+            ->select('persona.id','per_nombre','per_apellido','tip_nombre')
+            ->orderBy('per_nombre')
+            ->get();
         return view('extension/consultoria.show')
             ->with('cinedetallados', $cinedetallados)
             ->with('sectores', $sectores)
             ->with('fuentenacionales', $fuentenacionales)
             ->with('fuenteinternacionales', $fuenteinternacionales)
-            ->with('consultoria', $consultoria);
+            ->with('consultoria', $consultoria)
+            ->with('nivelestudios', $nivelestudios)
+            ->with('personas', $personas);
     }
 
     public function actualizarconsultoria(Request $request, $id)
@@ -357,116 +383,12 @@ class ExtensionController extends Controller
         $consultoria->extcon_fuente_internacional = $request->get('extcon_fuente_internacional');
         $consultoria->extcon_pais = $request->get('extcon_pais');
         $consultoria->extcon_valor_internacional = $request->get('extcon_valor_internacional');
+        $consultoria->extcon_id_persona = $request->get('extcon_id_persona');
+        $consultoria->extcon_id_nivel_estudio = $request->get('extcon_id_nivel_estudio');
         $consultoria->save();
 
         Alert::success('Exitoso', 'La consultoria se ha actualizado con exito');
         return redirect('/extension/mostrarconsultoria');
-    }
-
-    //falta eliminar consultoria
-
-    public function mostrarconsurecurso()
-    {
-        $consulrecursos  = ExtConsultoriaRecursoHumano::all();
-        return view('extension/consultoriarecurso.index')
-            ->with('consulrecursos', $consulrecursos);
-    }
-
-    public function crearconsurecurso()
-    {
-        $nivelestudios = NivelEstudio::all();
-        return view('extension/consultoriarecurso.create')
-            ->with('nivelestudios', $nivelestudios);
-    }
-
-    public function registroconsurecurso(Request $request)
-    {
-        $rules = [
-            'extcor_year' => 'required',
-            'extcor_semestre' => 'required',
-            'extcor_codigo_consultoria' => 'required',
-            'extcor_tipo_documento' => 'required',
-            'extcor_numero_documento' => 'required',
-            'extcor_id_nivel_estudio' => 'required',
-        ];
-        $message = [
-            'extcor_year.required' => 'El campo año es requerido',
-            'extcor_semestre.required' => 'El campo semestre es requerido',
-            'extcor_codigo_consultoria.required' => 'El campo código consultoria es requerido',
-            'extcor_tipo_documento.required' => 'El campo tipo de documento es requerido',
-            'extcor_numero_documento.required' => 'El campo número de documento es requerido',
-            'extcor_id_nivel_estudio.required' => 'El campo máximo nivel de estudio es requerido',
-        ];
-        $this->validate($request, $rules, $message);
-        $consulrecurso = new ExtConsultoriaRecursoHumano();
-        $consulrecurso->extcor_year = $request->get('extcor_year');
-        $consulrecurso->extcor_semestre = $request->get('extcor_semestre');
-        $consulrecurso->extcor_codigo_consultoria = $request->get('extcor_codigo_consultoria');
-        $consulrecurso->extcor_tipo_documento = $request->get('extcor_tipo_documento');
-        $consulrecurso->extcor_numero_documento = $request->get('extcor_numero_documento');
-        $consulrecurso->extcor_id_nivel_estudio = $request->get('extcor_id_nivel_estudio');
-        $consulrecurso->save();
-
-        Alert::success('Exitoso', 'La consultoria de recurso humano ha sido registrada con exito');
-        return redirect('extension/mostrarconsurecurso');
-    }
-
-    public function verconsurecurso($id)
-    {
-        $nivelestudios = NivelEstudio::all();
-        $consurecurso = ExtConsultoriaRecursoHumano::find($id);
-        return view('extension/consultoriarecurso.show')
-            ->with('nivelestudios', $nivelestudios)
-            ->with('consurecurso', $consurecurso);
-    }
-
-    public function editarconsurecurso($id)
-    {
-        $nivelestudios = NivelEstudio::all();
-        $consurecurso = ExtConsultoriaRecursoHumano::find($id);
-        return view('extension/consultoriarecurso.edit')
-            ->with('nivelestudios', $nivelestudios)
-            ->with('consurecurso', $consurecurso);
-    }
-
-    public function actualizarconsurecurso(Request $request, $id)
-    {
-        $rules = [
-            'extcor_year' => 'required',
-            'extcor_semestre' => 'required',
-            'extcor_codigo_consultoria' => 'required',
-            'extcor_tipo_documento' => 'required',
-            'extcor_numero_documento' => 'required',
-            'extcor_id_nivel_estudio' => 'required',
-        ];
-        $message = [
-            'extcor_year.required' => 'El campo año es requerido',
-            'extcor_semestre.required' => 'El campo semestre es requerido',
-            'extcor_codigo_consultoria.required' => 'El campo código consultoria es requerido',
-            'extcor_tipo_documento.required' => 'El campo tipo de documento es requerido',
-            'extcor_numero_documento.required' => 'El campo número de documento es requerido',
-            'extcor_id_nivel_estudio.required' => 'El campo máximo nivel de estudio es requerido',
-        ];
-        $this->validate($request, $rules, $message);
-        $consulrecurso = ExtConsultoriaRecursoHumano::find($id);
-        $consulrecurso->extcor_year = $request->get('extcor_year');
-        $consulrecurso->extcor_semestre = $request->get('extcor_semestre');
-        $consulrecurso->extcor_codigo_consultoria = $request->get('extcor_codigo_consultoria');
-        $consulrecurso->extcor_tipo_documento = $request->get('extcor_tipo_documento');
-        $consulrecurso->extcor_numero_documento = $request->get('extcor_numero_documento');
-        $consulrecurso->extcor_id_nivel_estudio = $request->get('extcor_id_nivel_estudio');
-        $consulrecurso->save();
-
-        Alert::success('Exitoso', 'La consultoria de recurso humano ha sido actualizada con exito');
-        return redirect('extension/mostrarconsurecurso');
-    }
-
-    public function eliminarconsurecurso($id)
-    {
-        $consurecurso = ExtConsultoriaRecursoHumano::find($id);
-        $consurecurso->delete();
-        Alert::success('Exitoso', 'La consultoria de recurso humano ha sido eliminada con exito');
-        return redirect('extension/mostrarconsurecurso');
     }
 
     public function mostrarcurso()
@@ -481,8 +403,7 @@ class ExtensionController extends Controller
         $cines = CineDetallado::all();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
         return view('extension/curso.create')
             ->with('cines', $cines)
@@ -554,8 +475,7 @@ class ExtensionController extends Controller
         $cines = CineDetallado::all();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
         $curso = ExtCurso::find($id);
         return view('extension/curso.edit')

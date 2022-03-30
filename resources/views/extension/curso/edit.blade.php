@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+    <a href="/extension/{{$curso->id}}/editarcurso">Editar</a> / <a href="/extension/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Actualizar información</h4><hr>
             <form action="/extension/{{$curso->id}}/actualizarcurso" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -66,7 +70,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcurso_id_cine">CINE Detallado</label>
-                        <select class="form-select" name="extcurso_id_cine" id="extcurso_id_cine">
+                        <select class="form-select js-example-placeholder-single @error('extcurso_id_cine') is-invalid @enderror" name="extcurso_id_cine" id="extcurso_id_cine">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cines as $cine)
                                 <option value="{{ $cine->id }}" {{$cine->id == $curso->extcurso_id_cine ? 'selected' : ''}}>{{ $cine->cocide_nombre }}</option>
@@ -80,7 +84,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcurso_extension">Es curso de extensión?</label>
-                        <select class="form-select" name="extcurso_extension" id="extcurso_extension">
+                        <select class="form-select @error('extcurso_extension') is-invalid @enderror" name="extcurso_extension" id="extcurso_extension">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="S" {{$curso->extcurso_extension == 'S' ? 'selected' : ''}}>Si</option>
                             <option value="N" {{$curso->extcurso_extension == 'N' ? 'selected' : ''}}>No</option>
@@ -95,7 +99,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcurso_estado">Estado curso activo?</label>
-                        <select class="form-select" name="extcurso_estado" id="extcurso_estado">
+                        <select class="form-select @error('extcurso_estado') is-invalid @enderror" name="extcurso_estado" id="extcurso_estado">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="S" {{$curso->extcurso_extension == 'S' ? 'selected' : ''}}>Si</option>
                             <option value="N" {{$curso->extcurso_extension == 'N' ? 'selected' : ''}}>No</option>
@@ -121,7 +125,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcurso_id_docente">Docente</label>
-                        <select class="form-select" name="extcurso_id_docente" id="extcurso_id_docente">
+                        <select class="form-select js-example-placeholder-single @error('extcurso_id_docente') is-invalid @enderror" name="extcurso_id_docente" id="extcurso_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}" {{$persona->id == $curso->extcurso_id_docente ? 'selected' : ''}}>

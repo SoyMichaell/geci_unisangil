@@ -6,13 +6,13 @@
         <a href="/software">Software</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo TIC'S</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización | Consultoria</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro consultoria</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">

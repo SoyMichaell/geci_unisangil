@@ -236,14 +236,7 @@ Route::get('extension/{consultoria}/editarconsultoria', [App\Http\Controllers\Ex
 Route::get('extension/{consultoria}/verconsultoria', [App\Http\Controllers\ExtensionController::class, 'verconsultoria']);
 Route::put('extension/{consultoria}/actualizarconsultoria', [App\Http\Controllers\ExtensionController::class, 'actualizarconsultoria']);
 Route::delete('extension/{consultoria}/eliminarconsultoria', [App\Http\Controllers\ExtensionController::class, 'eliminarconsultoria']);
-//Rutas consultoria recurso
-Route::get('extension/mostrarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'mostrarconsurecurso']);
-Route::get('extension/crearconsurecurso', [App\Http\Controllers\ExtensionController::class, 'crearconsurecurso']);
-Route::post('extension/registroconsurecurso', [App\Http\Controllers\ExtensionController::class, 'registroconsurecurso']);
-Route::get('extension/{recurso}/editarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'editarconsurecurso']);
-Route::get('extension/{recurso}/verconsurecurso', [App\Http\Controllers\ExtensionController::class, 'verconsurecurso']);
-Route::put('extension/{recurso}/actualizarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'actualizarconsurecurso']);
-Route::delete('extension/{recurso}/eliminarconsurecurso', [App\Http\Controllers\ExtensionController::class, 'eliminarconsurecurso']);
+
 //Rutas curso
 Route::get('extension/mostrarcurso', [App\Http\Controllers\ExtensionController::class, 'mostrarcurso']);
 Route::get('extension/crearcurso', [App\Http\Controllers\ExtensionController::class, 'crearcurso']);

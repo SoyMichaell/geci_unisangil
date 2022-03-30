@@ -29,8 +29,8 @@ class ExtConsultoria extends Model
             'extcon_fuente_internacional',
             'extcon_pais',
             'extcon_valor_internacional',
-            'extcor_id_persona',
-            'extcor_id_nivel_estudio',
+            'extcon_id_persona',
+            'extcon_id_nivel_estudio',
     ];
 
 }

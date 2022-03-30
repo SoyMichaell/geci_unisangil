@@ -48,10 +48,6 @@
                 <i class="fa-solid fa-magnifying-glass fa-4x"></i>
                 <h4 class="mt-2">Consultoria</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarconsurecurso">
-                <i class="fa-solid fa-mask fa-4x"></i>
-                <h4 class="mt-2">Consultoria recurso humano</h4>
-            </a>
             <a class="card__extension" href="/extension/mostrarcurso">
                 <i class="fa-solid fa-signature fa-4x"></i>
                 <h4 class="mt-2">Curso</h4>
