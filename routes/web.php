@@ -221,6 +221,8 @@ Route::resource('usuario', App\Http\Controllers\UserController::class);
 
 /*Rutas extensión*/
 //Rutas actividad
+Route::get('extension/exportactividadculturalpdf', [App\Http\Controllers\ExtensionController::class, 'exportactividadculturalpdf']);
+Route::get('extension/exportactividadculturalexcel', [App\Http\Controllers\ExtensionController::class, 'exportactividadculturalexcel']);
 Route::get('extension/mostraractividad', [App\Http\Controllers\ExtensionController::class, 'mostraractividad']);
 Route::get('extension/crearactividad', [App\Http\Controllers\ExtensionController::class, 'crearactividad']);
 Route::post('extension/registroactividad', [App\Http\Controllers\ExtensionController::class, 'registroactividad']);
@@ -229,6 +231,8 @@ Route::get('extension/{actividad}/veractividad', [App\Http\Controllers\Extension
 Route::put('extension/{actividad}/actualizaractividad', [App\Http\Controllers\ExtensionController::class, 'actualizaractividad']);
 Route::delete('extension/{actividad}/eliminaractividad', [App\Http\Controllers\ExtensionController::class, 'eliminaractividad']);
 //Rutas consultoria
+Route::get('extension/exportconsultoriapdf', [App\Http\Controllers\ExtensionController::class, 'exportconsultoriapdf']);
+Route::get('extension/exportconsultoriaexcel', [App\Http\Controllers\ExtensionController::class, 'exportconsultoriaexcel']);
 Route::get('extension/mostrarconsultoria', [App\Http\Controllers\ExtensionController::class, 'mostrarconsultoria']);
 Route::get('extension/crearconsultoria', [App\Http\Controllers\ExtensionController::class, 'crearconsultoria']);
 Route::post('extension/registroconsultoria', [App\Http\Controllers\ExtensionController::class, 'registroconsultoria']);
@@ -238,6 +242,8 @@ Route::put('extension/{consultoria}/actualizarconsultoria', [App\Http\Controller
 Route::delete('extension/{consultoria}/eliminarconsultoria', [App\Http\Controllers\ExtensionController::class, 'eliminarconsultoria']);
 
 //Rutas curso
+Route::get('extension/exportcursopdf', [App\Http\Controllers\ExtensionController::class, 'exportcursopdf']);
+Route::get('extension/exportcursoexcel', [App\Http\Controllers\ExtensionController::class, 'exportcursoexcel']);
 Route::get('extension/mostrarcurso', [App\Http\Controllers\ExtensionController::class, 'mostrarcurso']);
 Route::get('extension/crearcurso', [App\Http\Controllers\ExtensionController::class, 'crearcurso']);
 Route::post('extension/registrocurso', [App\Http\Controllers\ExtensionController::class, 'registrocurso']);
@@ -246,6 +252,8 @@ Route::get('extension/{curso}/vercurso', [App\Http\Controllers\ExtensionControll
 Route::put('extension/{curso}/actualizarcurso', [App\Http\Controllers\ExtensionController::class, 'actualizarcurso']);
 Route::delete('extension/{curso}/eliminarcurso', [App\Http\Controllers\ExtensionController::class, 'eliminarcurso']);
 //Rutas educación continua
+Route::get('extension/exporteducacionpdf', [App\Http\Controllers\ExtensionController::class, 'exporteducacionpdf']);
+Route::get('extension/exporteducacionexcel', [App\Http\Controllers\ExtensionController::class, 'exporteducacionexcel']);
 Route::get('extension/mostrareducacion', [App\Http\Controllers\ExtensionController::class, 'mostrareducacion']);
 Route::get('extension/creareducacion', [App\Http\Controllers\ExtensionController::class, 'creareducacion']);
 Route::post('extension/registroeducacion', [App\Http\Controllers\ExtensionController::class, 'registroeducacion']);
@@ -254,6 +262,8 @@ Route::get('extension/{educacion}/vereducacion', [App\Http\Controllers\Extension
 Route::put('extension/{educacion}/actualizareducacion', [App\Http\Controllers\ExtensionController::class, 'actualizareducacion']);
 Route::delete('extension/{educacion}/eliminareducacion', [App\Http\Controllers\ExtensionController::class, 'eliminareducacion']);
 //Rutas participantes
+Route::get('extension/exportparticipantepdf', [App\Http\Controllers\ExtensionController::class, 'exportparticipantepdf']);
+Route::get('extension/exportparticipanteexcel', [App\Http\Controllers\ExtensionController::class, 'exportparticipanteexcel']);
 Route::get('extension/mostrarparticipante', [App\Http\Controllers\ExtensionController::class, 'mostrarparticipante']);
 Route::get('extension/crearparticipante', [App\Http\Controllers\ExtensionController::class, 'crearparticipante']);
 Route::post('extension/registroparticipante', [App\Http\Controllers\ExtensionController::class, 'registroparticipante']);

@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software">Software</a>
+        <a href="/extension/mostrarconsultoria">Consultoria</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
         <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización | Consultoria</h1>
@@ -19,10 +19,10 @@
                     <h4>Lista actividad consultoria</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportconsultoriapdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportconsultoriaexcel') }}"
+                        title="Generar reporte excel" ><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('extension/crearconsultoria') }}"><i
                                 class="fa fa-plus-circle"></i>

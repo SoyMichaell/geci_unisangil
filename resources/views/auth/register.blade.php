@@ -71,7 +71,7 @@
 <body>
     <div class="contenido">
         <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="./"><img src="{{ asset('image/banner.jpg') }}" width="200px"></a>
+            <a class="navbar-brand" href="/home"><img src="{{ asset('image/banner.jpg') }}" width="200px"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
                 aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -262,7 +262,7 @@
                                 <label class=" ml-3" for="per_tipo_usuario">Tipo de usuario</label>
                                 @foreach ($tiposusuario as $tipousuario)
                                     <div class="form-check ml-3">
-                                        <input class="form-check-input" name="per_tipo_usuario[]" type="checkbox" value="{{ $tipousuario->id }}"
+                                        <input class="form-check-input" name="per_tipo_usuario[]" type="radio" value="{{ $tipousuario->id }}"
                                             id="flexCheckDefault">
                                         <label class="form-check-label" for="flexCheckDefault">
                                             {{ $tipousuario->tip_nombre }}

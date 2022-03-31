@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ExtensionExport;
 use App\Models\complemento\CineDetallado;
 use App\Models\complemento\FuenteInternacional;
 use App\Models\ExtActividadCultural;
@@ -33,6 +34,7 @@ use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 use Svg\Tag\Rect;
 
@@ -2841,5 +2843,152 @@ class ExtensionController extends Controller
         return redirect('/extension/mostrareventosinternacionales');
     }
 
+    public function exportactividadculturalpdf()
+    {
+        $datos = DB::table('ext_actividad_cultural')->get();
+        $valor = 'actividadcultural';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de actividades culturales');
+            return redirect('/extension/mostraractividad');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportactividadculturalexcel()
+    {
+        $actividadcultural = ExtActividadCultural::all();
+        if ($actividadcultural->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de actividades culturales');
+            return redirect('/extension/mostraractividad');
+        } else {
+            return Excel::download(new ExtensionExport('actividadcultural'), 'actividades-culturaltes.xlsx');
+        }
+    }
+
+    public function exportconsultoriapdf()
+    {
+        $datos = DB::table('ext_consultoria')->get();
+        $valor = 'consultoria';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de consultoria');
+            return redirect('/extension/mostrarconsultoria');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportconsultoriaexcel()
+    {
+        $consultorias = ExtConsultoria::all();
+        if ($consultorias->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de consultoria');
+            return redirect('/extension/mostrarconsultoria');
+        } else {
+            return Excel::download(new ExtensionExport('consultoria'), 'consultorias.xlsx');
+        }
+    }
+
+    public function exportcursopdf()
+    {
+        $datos = DB::table('ext_curso')
+        ->join('compl_cine_detallado','ext_curso.extcurso_id_cine','=','compl_cine_detallado.id')
+        ->join('persona','ext_curso.extcurso_id_docente','=','persona.id')
+        ->get();
+        $valor = 'curso';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de cursos');
+            return redirect('/extension/mostrarcurso');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportcursoexcel()
+    {
+        $consultorias = ExtCurso::all();
+        if ($consultorias->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de cursos');
+            return redirect('/extension/mostrarcurso');
+        } else {
+            return Excel::download(new ExtensionExport('curso'), 'cursos.xlsx');
+        }
+    }
+
+    public function exporteducacionpdf()
+    {
+        $datos = DB::table('ext_educacion_continua')
+        ->join('persona','ext_educacion_continua.extedu_id_docente','=','persona.id')
+        ->join('compl_area_extension','ext_educacion_continua.extedu_tipo_extension','=','compl_area_extension.id')
+        ->get();
+        $valor = 'educacioncontinua';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de educación continua');
+            return redirect('/extension/mostrareducacioncontinua');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exporteducacionexcel()
+    {
+        $consultorias = ExtEducacionContinua::all();
+        if ($consultorias->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de educación continua');
+            return redirect('/extension/mostrareducacioncontinua');
+        } else {
+            return Excel::download(new ExtensionExport('educacioncontinua'), 'educacion-continua.xlsx');
+        }
+    }
+
+    public function exportparticipantepdf()
+    {
+        $datos = DB::table('ext_participante')
+        ->join('persona','ext_participante.dop_id_docente','=','persona.id')
+        ->get();
+        $valor = 'participante';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de participantes');
+            return redirect('/extension/mostrarparticipante');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportparticipanteexcel()
+    {
+        $consultorias = ExtParticipante::all();
+        if ($consultorias->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de participantes');
+            return redirect('/extension/mostrarparticipante');
+        } else {
+            return Excel::download(new ExtensionExport('participante'), 'participantes.xlsx');
+        }
+    }
 
 }

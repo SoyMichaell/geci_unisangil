@@ -87,10 +87,6 @@ class UserController extends Controller
 
         //Validación roles 
 
-        if(){
-            
-        }
-
         DB::table('persona')->insert(
             [
                 'per_tipo_documento' => $request->get('per_tipo_documento'),
@@ -103,7 +99,7 @@ class UserController extends Controller
                 'per_departamento' => $request->get('per_departamento'),
                 'per_ciudad' => $request->get('per_ciudad'),
                 'per_tipo_usuario' => implode(';',$request->get('per_tipo_usuario')),
-                'per_id_estado' => 'en-espera',
+                'per_id_estado' => 'activo',
             ]
         );
 

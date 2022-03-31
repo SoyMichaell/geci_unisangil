@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-    <a href="/mostrarcrearcurso">Crear</a> / <a href="/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
+    <a href="/extension/crearcurso">Crear</a> / <a href="/extension/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
     @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
@@ -130,6 +130,7 @@
                                 <option value="{{$persona->id}}">{{$persona->per_nombre.' '.$persona->per_apellido}}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger"><strong>{{$personas->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
                         @error('extcurso_id_docente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
