@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -11,6 +11,11 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+-- Volcando estructura de base de datos para proyecto
+CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
+USE `proyecto`;
 
 -- Volcando estructura para tabla proyecto.bienestar_institucional
 CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
@@ -31,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.bienestar_institucional: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.bienestar_institucional: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `bienestar_institucional` DISABLE KEYS */;
 INSERT IGNORE INTO `bienestar_institucional` (`id`, `bie_fecha`, `bie_nombre_actividad`, `bie_total_participantes`, `bie_estudiantes`, `bie_docentes`, `bie_administrativos`, `bie_egresados`, `bie_particulares`, `bie_codigo_snies`, `bie_soporte`, `bie_observacion`, `created_at`, `updated_at`) VALUES
 	(1, '2022-03-28', 'Divulgación tecnológica de ingenieros', 50, 35, 5, 5, 3, 2, '7915', '2022-03-28_Divulgación tecnológica de ingenieros.pdf', 'Sin comentarios', '2022-03-28 09:59:33', '2022-03-28 14:59:33');
@@ -375,7 +380,7 @@ CREATE TABLE IF NOT EXISTS `convenio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.convenio: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.convenio: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `convenio` DISABLE KEYS */;
 INSERT IGNORE INTO `convenio` (`id`, `con_numero`, `con_alcance`, `con_tipo`, `con_institucion`, `con_nit`, `con_direccion`, `con_ciudad`, `con_pais`, `con_contacto`, `con_correo`, `con_telefono`, `con_objeto`, `con_logro_resultado`, `con_vigencia`, `con_programa_beneficiado`, `con_actividad_year_programa`, `con_fecha_inicio`, `con_fecha_final`, `con_observacion`, `created_at`, `updated_at`) VALUES
 	(3, '123456', 'regional', 'Interdisciplinario', 'Unitropico', '899990214-2', 'cale 44', 'yopal', 'colombia', 'Mateo Tarquino', 'mateo@gmail.com', '3104721212', 'Convenio entre entidad publica y privada', 'n/a', '2022-2023-2024', 'Ingeniería de sistemas', 'n/a', '2022-03-27', '2023-03-27', 'sin comentarios', '2022-03-27 22:07:15', '2022-03-27 22:09:10');
@@ -677,7 +682,7 @@ CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
   CONSTRAINT `FK_ext_actividad_cultural_persona` FOREIGN KEY (`extcul_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_actividad_cultural` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_actividad_cultural` (`id`, `extcul_year`, `extcul_semestre`, `extcul_codigo_unidad_org`, `extcul_codigo_actividad`, `extcul_descripcion_actividad`, `extcul_tipo_actividad`, `extcul_fecha_inicio`, `extcul_fecha_fin`, `extcul_fuente_nacional`, `extcul_valor_financiacion_nac`, `extcul_nombre_institucion`, `extcul_fuente_internacional`, `extcul_pais_financiador`, `extcul_valor_internacional`, `extcul_persona`, `extcul_dedicacion`, `created_at`, `updated_at`) VALUES
 	(2, '2022', '2', '10', '10', 'Sin comentarios', 2, '2022-03-28', '2022-03-30', 8, 1500000, 'Unisangil', NULL, NULL, NULL, NULL, NULL, '2022-03-28 20:30:33', '2022-03-28 20:34:21');
@@ -717,7 +722,7 @@ CREATE TABLE IF NOT EXISTS `ext_consultoria` (
   CONSTRAINT `FK_ext_consultoria_compl_sector` FOREIGN KEY (`ext_sector_consultoria`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_consultoria: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_consultoria: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_consultoria` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_consultoria` (`id`, `extcon_year`, `extcon_semestre`, `extcon_codigo_consultoria`, `extcon_descripcion`, `extcon_id_cine_campo`, `extcon_nombre_entidad`, `ext_sector_consultoria`, `extcon_valor`, `extcon_fecha_inicio`, `extcon_fecha_fin`, `extcon_fuente_nacional`, `extcon_valor_nacional`, `extcon_nombre_institucion`, `extcon_fuente_internacional`, `extcon_pais`, `extcon_valor_internacional`, `extcon_id_persona`, `extcon_id_nivel_estudio`, `created_at`, `updated_at`) VALUES
 	(2, '2022', '2', '123456789', 'Sin comentarios', 214, 'Servicion nacional de aprendizaje sena', 7, 150000, '2022-03-29', '2022-03-30', 3, 0, NULL, NULL, NULL, NULL, 56, 'Especialización universitaria', '2022-03-30 02:53:47', '2022-03-30 02:53:47');
@@ -794,7 +799,7 @@ CREATE TABLE IF NOT EXISTS `ext_eventos_nac_inter` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_eventos_nac_inter: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_eventos_nac_inter: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_eventos_nac_inter` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_eventos_nac_inter` (`id`, `exevin_tipo`, `exevin_year`, `exevin_periodo`, `exevin_nombre_evento`, `exevin_fecha_inicio`, `exevin_fecha_final`, `exevin_lugar`, `exevin_sede`, `exevin_ponentes`, `exevin_institucion`, `exevin_pais`, `exevin_nombre_ponencia`, `created_at`, `updated_at`) VALUES
 	(2, 'internacional', '2022', '2022-1', 'IES', '2022-03-18', '2022-05-18', 'México', 'UNAB', 'dkajsdkljasld', 'kjdsalkasjd', 'Colombia', 'adasdasd', '2022-03-18 06:18:24', '2022-03-18 06:21:08');
@@ -838,6 +843,7 @@ CREATE TABLE IF NOT EXISTS `ext_internacionalizacion_curriculo` (
   PRIMARY KEY (`id`),
   KEY `FK_ext_internacionalizacion_curriculo_programa_pa` (`exincu_id_asignatura`),
   KEY `FK_ext_internacionalizacion_curriculo_persona` (`exincu_id_docente`),
+  CONSTRAINT `FK_ext_internacionalizacion_curriculo__asignatura` FOREIGN KEY (`exincu_id_asignatura`) REFERENCES `programa_plan_estudio_asignatura` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_internacionalizacion_curriculo_persona` FOREIGN KEY (`exincu_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1061,7 +1067,7 @@ CREATE TABLE IF NOT EXISTS `ext_registro_fotografico_inter` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_registro_fotografico_inter: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_registro_fotografico_inter: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_registro_fotografico_inter` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_registro_fotografico_inter` (`id`, `extrefoin_year`, `extrefoin_periodo`, `extrefoin_tipo_actividad`, `extrefoin_actividad`, `extrefoin_ente_organizador`, `extrefoin_fecha`, `extrefoin_tipo_evento`, `extrefoin_tipo_modalidad`, `extrefoin_soporte`, `created_at`, `updated_at`) VALUES
 	(1, '2022', '2022-1', 'curso', 'Curso desarrollo web', 'unisangil', '2022-03-10', 'interno', 'investigacion', '2022_Curso desarrollo web.rar', '2022-03-08 22:11:37', '2022-03-08 22:22:23');
@@ -1127,7 +1133,7 @@ CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_sector_externo_red_academia_convenio: ~0 rows (aproximadamente)
+-- Volcando datos para la tabla proyecto.ext_sector_externo_red_academia_convenio: ~1 rows (aproximadamente)
 /*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio` DISABLE KEYS */;
 INSERT IGNORE INTO `ext_sector_externo_red_academia_convenio` (`id`, `exsered_year`, `exsered_periodo`, `exsered_ies`, `exsered_caracter`, `exsered_fecha`, `exsered_logros`, `exsered_resultados`, `exsered_productos`, `exsered_funcion`, `exsered_participantes`, `created_at`, `updated_at`) VALUES
 	(3, 2022, '2022-1', 'SI', 'nacional', '2022-03-12', 'jsahdjkas djhdjkashdkj jkdhajk hkjashdkjashd', 'jdhaskj dhaskdhask hdkja hkjdhaskjdhask dka hdkjashdkjashd', 'jdhaskjdhasjkd hdkjahskjdhasjkd hdkjashdjkashdjkas kjhdjkashdkj sahdkjash kjshd kjashd', 'investigacion', 4, NULL, NULL);

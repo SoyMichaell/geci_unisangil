@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+       <a href="/extension/crearparticipacioneventos">Crear</a>  / <a href="/extension/mostrarparticipacioneventos">Participación eventos</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Registro participación a evento</h4><hr>
             <form action="/extension/registroparticipacioneventos" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -102,12 +106,13 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="expaev_id_persona">Nombre completo participante</label>
-                        <select class="form-select @error('expaev_id_persona') is-invalid @enderror" name="expaev_id_persona" id="expaev_id_persona">
+                        <select class="form-select js-example-placeholder-single @error('expaev_id_persona') is-invalid @enderror" name="expaev_id_persona" id="expaev_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}">{{$persona->per_nombre.' '.$persona->per_apellido}}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger"><strong>{{$personas->count()<=0 ? 'No existen registros de participantes' : ''}}</strong></p>
                         @error('expaev_id_persona')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

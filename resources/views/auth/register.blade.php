@@ -178,7 +178,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="per_correo"
-                                    class="col-md-12 col-form-label">{{ __('Correo electronico *') }}</label>
+                                    class="col-md-12 col-form-label">{{ __('Correo electronico institucional *') }}</label>
                                 <div class="col-md-12">
                                     <input id="per_correo" type="email"
                                         class="form-control @error('per_correo') is-invalid @enderror"

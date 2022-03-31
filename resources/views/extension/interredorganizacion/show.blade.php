@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension">Extensión</a>
+        <a href="/extension/{{$interredorganizacion->id}}/verinterorganizacion">Vista</a> / <a href="/extension/mostrarinterorganizacion">Red organizaciones</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Extensión</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Visualizar información</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Información de registro</p>
     @endsection
 @endsection
 <style>
@@ -29,7 +29,7 @@
 
 </style>
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-6" style="width: 500px">
                 <ul>

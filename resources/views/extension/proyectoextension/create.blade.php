@@ -35,7 +35,7 @@
                             name="extprex_semestre" id="extprex_semestre" value="{{ old('extprex_semestre') }}"
                             type="number" autocomplete="extprex_semestre" autofocus>
                         @error('extprex_year')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -49,7 +49,7 @@
                             value="{{ old('extprex_codigo_organizacional') }}" type="text"
                             autocomplete="extprex_codigo_organizacional" autofocus>
                         @error('extprex_codigo_organizacional')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -60,7 +60,7 @@
                             name="extprex_codigo_pr" id="extprex_codigo_pr" value="{{ old('extprex_codigo_pr') }}"
                             type="text" autocomplete="extprex_codigo_pr" autofocus>
                         @error('extprex_codigo_pr')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -73,7 +73,7 @@
                             name="extprex_nombre_pr" id="extprex_nombre_pr" value="{{ old('extprex_nombre_pr') }}"
                             type="text" autocomplete="extprex_nombre_pr" autofocus>
                         @error('extprex_nombre_pr')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -83,7 +83,7 @@
                         <textarea class="form-control" name="extprex_descripcion_pr" id="extprex_descripcion_pr"
                             cols="30" rows="10"></textarea>
                         @error('extprex_descripcion_pr')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -96,7 +96,7 @@
                             name="extprex_valor_pr" id="extprex_valor_pr" value="{{ old('extprex_valor_pr') }}"
                             type="text" autocomplete="extprex_valor_pr" autofocus>
                         @error('extprex_valor_pr')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -124,7 +124,7 @@
                             value="{{ old('extprex_fecha_inicio') }}" type="date" autocomplete="extprex_fecha_inicio"
                             autofocus>
                         @error('extprex_fecha_inicio')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -136,7 +136,7 @@
                             value="{{ old('extprex_fecha_final') }}" type="date" autocomplete="extprex_fecha_final"
                             autofocus>
                         @error('extprex_fecha_final')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -151,7 +151,7 @@
                             value="{{ old('extprex_nombre_contacto') }}" type="text"
                             autocomplete="extprex_nombre_contacto" autofocus>
                         @error('extprex_nombre_contacto')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -163,7 +163,7 @@
                             value="{{ old('extprex_apellido_contacto') }}" type="text"
                             autocomplete="extprex_apellido_contacto" autofocus>
                         @error('extprex_apellido_contacto')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -177,7 +177,7 @@
                             value="{{ old('extprex_telefono_contacto') }}" type="number"
                             autocomplete="extprex_telefono_contacto" autofocus>
                         @error('extprex_telefono_contacto')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
@@ -189,7 +189,7 @@
                             value="{{ old('extprex_correo_contacto') }}" type="email"
                             autocomplete="extprex_correo_contacto" autofocus>
                         @error('extprex_correo_contacto')
-                            <span extprex_semestre="invalid-feedback" role="alert">
+                            <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror

@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/extension/crearmovilidadinternacional">Crear</a> / <a href="/extension/mostrarmovilidadinternacional">Movilidad internacional</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Registro movilidad internacional</h4><hr>
             <form action="/extension/registromovilidadinternacional" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -86,6 +90,7 @@
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{ $programas->count() <= 0 ? 'No existen registros de programas' : '' }}</p>
                         @error('exmointer_id_programa_or')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -102,7 +107,7 @@
                                     {{ $persona->per_nombre . ' ' . $persona->per_apellido }}</option>
                             @endforeach
                         </select>
-                        {{ $personas->count() <= 0 ? 'No hay registros en plataforma' : '' }}
+                        <p class="badge badge-danger">{{ $personas->count() <= 0 ? 'No existen registros de personas' : '' }}</p>
                         @error('exmointer_id_persona')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

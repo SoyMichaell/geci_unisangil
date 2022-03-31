@@ -240,7 +240,6 @@ Route::get('extension/{consultoria}/editarconsultoria', [App\Http\Controllers\Ex
 Route::get('extension/{consultoria}/verconsultoria', [App\Http\Controllers\ExtensionController::class, 'verconsultoria']);
 Route::put('extension/{consultoria}/actualizarconsultoria', [App\Http\Controllers\ExtensionController::class, 'actualizarconsultoria']);
 Route::delete('extension/{consultoria}/eliminarconsultoria', [App\Http\Controllers\ExtensionController::class, 'eliminarconsultoria']);
-
 //Rutas curso
 Route::get('extension/exportcursopdf', [App\Http\Controllers\ExtensionController::class, 'exportcursopdf']);
 Route::get('extension/exportcursoexcel', [App\Http\Controllers\ExtensionController::class, 'exportcursoexcel']);
@@ -272,6 +271,8 @@ Route::get('extension/{participante}/verparticipante', [App\Http\Controllers\Ext
 Route::put('extension/{participante}/actualizarparticipante', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipante']);
 Route::delete('extension/{participante}/eliminarparticipante', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipante']);
 //Rutas proyectos extension
+Route::get('extension/exportproyectoextensionpdf', [App\Http\Controllers\ExtensionController::class, 'exportproyectoextensionpdf']);
+Route::get('extension/exportproyectoextensionexcel', [App\Http\Controllers\ExtensionController::class, 'exportproyectoextensionexcel']);
 Route::get('extension/mostrarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'mostrarproyectoextension']);
 Route::get('extension/crearproyectoextension', [App\Http\Controllers\ExtensionController::class, 'crearproyectoextension']);
 Route::post('extension/registroproyectoextension', [App\Http\Controllers\ExtensionController::class, 'registroproyectoextension']);
@@ -280,6 +281,8 @@ Route::get('extension/{proyecto}/verproyectoextension', [App\Http\Controllers\Ex
 Route::put('extension/{proyecto}/actualizarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'actualizarproyectoextension']);
 Route::delete('extension/{proyecto}/eliminarproyectoextension', [App\Http\Controllers\ExtensionController::class, 'eliminarproyectoextension']);
 //Rutas servicios extensión
+Route::get('extension/exportservicioextensionpdf', [App\Http\Controllers\ExtensionController::class, 'exportservicioextensionpdf']);
+Route::get('extension/exportservicioextensionexcel', [App\Http\Controllers\ExtensionController::class, 'exportservicioextensionexcel']);
 Route::get('extension/mostrarservicioextension', [App\Http\Controllers\ExtensionController::class, 'mostrarservicioextension']);
 Route::get('extension/crearservicioextension', [App\Http\Controllers\ExtensionController::class, 'crearservicioextension']);
 Route::post('extension/registroservicioextension', [App\Http\Controllers\ExtensionController::class, 'registroservicioextension']);
@@ -289,6 +292,8 @@ Route::put('extension/{servicio}/actualizarservicioextension', [App\Http\Control
 Route::delete('extension/{servicio}/eliminarservicioextension', [App\Http\Controllers\ExtensionController::class, 'eliminarservicioextension']);
 //Rutas internacionalización
 //Rutas registro fotografico
+Route::get('extension/exportfotograficopdf', [App\Http\Controllers\ExtensionController::class, 'exportfotograficopdf']);
+Route::get('extension/exportfotograficoexcel', [App\Http\Controllers\ExtensionController::class, 'exportfotograficoexcel']);
 Route::get('extension/mostrarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'mostrarregistrofotografico']);
 Route::get('extension/crearregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'crearregistrofotografico']);
 Route::post('extension/registrofotografico', [App\Http\Controllers\ExtensionController::class, 'registrofotografico']);
@@ -297,6 +302,8 @@ Route::get('extension/{registro}/verregistrofotografico', [App\Http\Controllers\
 Route::put('extension/{registro}/actualizarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'actualizarregistrofotografico']);
 Route::delete('extension/{registro}/eliminarregistrofotografico', [App\Http\Controllers\ExtensionController::class, 'eliminarregistrofotografico']);
 //Rutas sector externo - redes acádemicas convenios
+Route::get('extension/exportredacademiapdf', [App\Http\Controllers\ExtensionController::class, 'exportredacademiapdf']);
+Route::get('extension/exportredacademiaexcel', [App\Http\Controllers\ExtensionController::class, 'exportredacademiaexcel']);
 Route::get('extension/mostrarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'mostrarinterredconvenio']);
 Route::get('extension/crearinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'crearinterredconvenio']);
 Route::post('extension/registrointerredconvenio', [App\Http\Controllers\ExtensionController::class, 'registrointerredconvenio']);
@@ -305,6 +312,8 @@ Route::get('extension/{convenio}/verinterredconvenio', [App\Http\Controllers\Ext
 Route::put('extension/{convenio}/actualizarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'actualizarinterredconvenio']);
 Route::delete('extension/{convenio}/eliminarinterredconvenio', [App\Http\Controllers\ExtensionController::class, 'eliminarinterredconvenio']);
 //Rutas sector externo - red/organiazciones
+Route::get('extension/exportredorganizacionpdf', [App\Http\Controllers\ExtensionController::class, 'exportredorganizacionpdf']);
+Route::get('extension/exportredorganizacionexcel', [App\Http\Controllers\ExtensionController::class, 'exportredorganizacionexcel']);
 Route::get('extension/mostrarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'mostrarinterorganizacion']);
 Route::get('extension/crearinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'crearinterorganizacion']);
 Route::post('extension/registrointerorganizacion', [App\Http\Controllers\ExtensionController::class, 'registrointerorganizacion']);
@@ -313,6 +322,8 @@ Route::get('extension/{convenio}/verinterorganizacion', [App\Http\Controllers\Ex
 Route::put('extension/{convenio}/actualizarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'actualizarinterorganizacion']);
 Route::delete('extension/{convenio}/eliminarinterorganizacion', [App\Http\Controllers\ExtensionController::class, 'eliminarinterorganizacion']);
 //Rutas internacionalizacion curriculo 
+Route::get('extension/exportcurriculopdf', [App\Http\Controllers\ExtensionController::class, 'exportcurriculopdf']);
+Route::get('extension/exportcurriculoexcel', [App\Http\Controllers\ExtensionController::class, 'exportcurriculoexcel']);
 Route::get('extension/mostrarcurriculo', [App\Http\Controllers\ExtensionController::class, 'mostrarcurriculo']);
 Route::get('extension/crearcurriculo', [App\Http\Controllers\ExtensionController::class, 'crearcurriculo']);
 Route::post('extension/registrocurriculo', [App\Http\Controllers\ExtensionController::class, 'registrocurriculo']);

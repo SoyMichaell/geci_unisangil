@@ -3,26 +3,26 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software">Software</a>
+        <a href="/extension/mostrarcurriculo">Curriculo</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo TIC'S</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización | Curriculo</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Listado de registro curriculo internacional</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Lista participantes</h4> <!-- TODO: arreglar botones pdf y excel-->
+                    <h4>Listado de registro curriculo internacional</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/pdf') }}"
+                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportcurriculopdf') }}"
                         title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/export') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportcurriculoexcel') }}"
+                        title="Generar reporte excel"><i class="fa-solid fa-file-excel"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('extension/crearcurriculo') }}"><i
                                 class="fa fa-plus-circle"></i>

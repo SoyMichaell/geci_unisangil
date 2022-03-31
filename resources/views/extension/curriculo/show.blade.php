@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension">Extensión</a>
+         <a href="/extension/{{ $curriculo->id }}/vercurriculo">Vista</a> / <a href="/extension/mostrarcurriculo">Curriculo</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
         <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Extensión</h1>
@@ -34,7 +34,7 @@
 
 </style>
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-md-12">
                 <h4 class="fw-bold">Datos asignatura</h4>

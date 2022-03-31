@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+         <a href="/extension/crearcurriculo">Crear</a> / <a href="/extension/mostrarcurriculo">Curriculo</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Registro curriculo internacional</h4><hr>
             <form action="/extension/registrocurriculo" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -40,13 +44,14 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exincu_id_asignatura">Asignatura</label>
-                        <select class="form-select" name="exincu_id_asignatura" id="exincu_id_asignatura">
+                        <select class="form-select @error('exincu_id_asignatura') is-invalid @enderror" name="exincu_id_asignatura" id="exincu_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{ $asignatura->id }}">{{ $asignatura->asig_nombre }}
                                 </option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger"><strong>{{$asignaturas->count()<=0 ? 'No existen registros de asignaturas' : ''}}</strong></p>
                         @error('exincu_id_asignatura')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -54,14 +59,15 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="[]">Docente</label>
-                        <select class="form-select" name="exincu_id_docente" id="exincu_id_docente">
+                        <label for="exincu_id_docente">Docente</label>
+                        <select class="form-select @error('exincu_id_docente') is-invalid @enderror" name="exincu_id_docente" id="exincu_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}">
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger"><strong>{{$docentes->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
                         @error('exincu_id_docente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

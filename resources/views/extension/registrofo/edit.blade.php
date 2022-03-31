@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/extension/{{$fotografico->id}}/editarregistrofotografico">Editar</a> / <a href="/extension/mostrarregistrofotografico">Registro fotografico</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4>Actualizar información</h4><hr>
             <form action="/extension/{{$fotografico->id}}/actualizarregistrofotografico" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -41,7 +45,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extrefoin_tipo_actividad">Tipo actividad</label>
-                        <select class="form-select" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad">
+                        <select class="form-select @error('extrefoin_tipo_actividad') is-invalid @enderror" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="internacionalizacion-curriculo" {{$fotografico->extrefoin_tipo_actividad == 'internacionalizacion-curriculo' ? 'selected' : ''}}>Internacionalización del curriculo</option>
                             <option value="segundo-idioma" {{$fotografico->extrefoin_tipo_actividad == 'segundo-idioma' ? 'selected' : ''}}>Segundo idioma</option>
@@ -97,7 +101,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="extrefoin_tipo_evento">Tipo evento</label>
-                        <select class="form-select" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento">
+                        <select class="form-select @error('extrefoin_tipo_evento') is-invalid @enderror" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="interno" {{$fotografico->extrefoin_tipo_evento == 'interno' ? 'selected' : ''}}>Interno</option>
                             <option value="externo" {{$fotografico->extrefoin_tipo_evento == 'externo' ? 'selected' : ''}}>Externo</option>
@@ -110,7 +114,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="extrefoin_tipo_modalidad">Tipo de modalidad</label>
-                        <select class="form-select" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad">
+                        <select class="form-select @error('extrefoin_tipo_modalidad ') is-invalid @enderror" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion" {{$fotografico->extrefoin_tipo_modalidad == 'formacion' ? 'selected' : ''}}>Formación</option>
                             <option value="investigacion" {{$fotografico->extrefoin_tipo_modalidad == 'investigacion' ? 'selected' : ''}}>Investigación</option>

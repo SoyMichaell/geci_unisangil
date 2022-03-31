@@ -1404,7 +1404,10 @@ class ExtensionController extends Controller
             'extrefoin_year' => 'required',
             'extrefoin_periodo' => 'required',
             'extrefoin_actividad' => 'required',
+            'extrefoin_tipo_actividad' => 'required|not_in:0',
             'extrefoin_ente_organizador' => 'required',
+            'extrefoin_tipo_evento' => 'required|not_in:0',
+            'extrefoin_tipo_modalidad' => 'required|not_in:0',
             'extrefoin_fecha' => 'required',
             'extrefoin_soporte' => 'required',
         ];
@@ -1412,7 +1415,10 @@ class ExtensionController extends Controller
             'extrefoin_year.required' => 'El campo año es requerido',
             'extrefoin_periodo.required' => 'El campo periodo es requerido',
             'extrefoin_actividad.required' => 'El campo actividad es requerido',
+            'extrefoin_tipo_actividad.required' => 'El campo tipo actividad es requerido',
             'extrefoin_ente_organizador.required' => 'El campo ente organizador es requerido',
+            'extrefoin_tipo_evento.required' => 'El campo tipo evento es requerido',
+            'extrefoin_tipo_modalidad.required' => 'El campo tipo modalidad es requerido',
             'extrefoin_fecha.required' => 'El campo fecha es requerido',
             'extrefoin_soporte.required' => 'El campo soporte es requerido',
         ];
@@ -1468,15 +1474,23 @@ class ExtensionController extends Controller
             'extrefoin_year' => 'required',
             'extrefoin_periodo' => 'required',
             'extrefoin_actividad' => 'required',
+            'extrefoin_tipo_actividad' => 'required|not_in:0',
             'extrefoin_ente_organizador' => 'required',
+            'extrefoin_tipo_evento' => 'required|not_in:0',
+            'extrefoin_tipo_modalidad' => 'required|not_in:0',
             'extrefoin_fecha' => 'required',
+            'extrefoin_soporte' => 'required',
         ];
         $message = [
             'extrefoin_year.required' => 'El campo año es requerido',
             'extrefoin_periodo.required' => 'El campo periodo es requerido',
             'extrefoin_actividad.required' => 'El campo actividad es requerido',
+            'extrefoin_tipo_actividad.required' => 'El campo tipo actividad es requerido',
             'extrefoin_ente_organizador.required' => 'El campo ente organizador es requerido',
+            'extrefoin_tipo_evento.required' => 'El campo tipo evento es requerido',
+            'extrefoin_tipo_modalidad.required' => 'El campo tipo modalidad es requerido',
             'extrefoin_fecha.required' => 'El campo fecha es requerido',
+            'extrefoin_soporte.required' => 'El campo soporte es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -2939,7 +2953,7 @@ class ExtensionController extends Controller
         $valor = 'educacioncontinua';
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No hay registros de educación continua');
-            return redirect('/extension/mostrareducacioncontinua');
+            return redirect('/extension/mostrareducacion');
         } else {
             $view = \view('reporte.extension', compact('datos','valor'))->render();
             $pdf = \App::make('dompdf.wrapper');
@@ -2955,7 +2969,7 @@ class ExtensionController extends Controller
         $consultorias = ExtEducacionContinua::all();
         if ($consultorias->count() <= 0) {
             Alert::warning('Advertencia','No hay registros de educación continua');
-            return redirect('/extension/mostrareducacioncontinua');
+            return redirect('/extension/mostrareducacion');
         } else {
             return Excel::download(new ExtensionExport('educacioncontinua'), 'educacion-continua.xlsx');
         }
@@ -2988,6 +3002,195 @@ class ExtensionController extends Controller
             return redirect('/extension/mostrarparticipante');
         } else {
             return Excel::download(new ExtensionExport('participante'), 'participantes.xlsx');
+        }
+    }
+
+    public function exportproyectoextensionpdf()
+    {
+        $datos = DB::table('ext_proyecto_extension')
+        ->leftJoin('compl_area_extension','ext_proyecto_extension.extprex_id_area_extension','=','compl_area_extension.id')
+        ->leftJoin('compl_area_trabajo','ext_proyecto_extension.extprex_id_area_trabajo','=','compl_area_trabajo.id')
+        ->leftJoin('compl_entidad_nacional','ext_proyecto_extension.extprex_id_entidad_nacional','=','compl_entidad_nacional.id')
+        ->leftJoin('compl_fuente_nacional','ext_proyecto_extension.extprex_id_fuente_nacional','=','compl_fuente_nacional.id')
+        ->leftJoin('compl_fuente_internacional','ext_proyecto_extension.extprex_id_fuente_internacional','=','compl_fuente_internacional.id')
+        ->leftJoin('compl_sector','ext_proyecto_extension.extprex_id_sector_otra_entidad','=','compl_sector.id')
+        ->leftJoin('compl_poblacion_condicion','ext_proyecto_extension.extprex_id_poblacion_condicion','=','compl_poblacion_condicion.id')
+        ->leftJoin('compl_poblacion_grupo','ext_proyecto_extension.extprex_id_poblacion_grupo','=','compl_poblacion_grupo.id')
+        ->get();
+        $valor = 'proyectoextension';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de proyectos de extensión');
+            return redirect('/extension/mostrarproyectoextension');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportproyectoextensionexcel()
+    {
+        $proyectos = ExtProyectoExtension::all();
+        if ($proyectos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de proyectos extensión');
+            return redirect('/extension/mostrarproyectoextension');
+        } else {
+            return Excel::download(new ExtensionExport('proyectoextension'), 'proyectos-extension.xlsx');
+        }
+    }
+
+    public function exportservicioextensionpdf()
+    {
+        $datos = DB::table('ext_servicio_extension')
+        ->leftJoin('compl_area_extension','ext_servicio_extension.extseex_id_area_extension','=','compl_area_extension.id')
+        ->leftJoin('compl_area_trabajo','ext_servicio_extension.extseex_id_area_trabajo','=','compl_area_trabajo.id')
+        ->leftJoin('compl_entidad_nacional','ext_servicio_extension.extseex_id_entidad_nacional','=','compl_entidad_nacional.id')
+        ->leftJoin('compl_fuente_nacional','ext_servicio_extension.extseex_id_fuente_nacional','=','compl_fuente_nacional.id')
+        ->leftJoin('compl_fuente_internacional','ext_servicio_extension.extseex_id_fuente_internacional','=','compl_fuente_internacional.id')
+        ->leftJoin('compl_sector','ext_servicio_extension.extseex_id_sector_otra_entidad','=','compl_sector.id')
+        ->leftJoin('compl_poblacion_condicion','ext_servicio_extension.extseex_id_poblacion_condicion','=','compl_poblacion_condicion.id')
+        ->leftJoin('compl_poblacion_grupo','ext_servicio_extension.extseex_id_poblacion_grupo','=','compl_poblacion_grupo.id')
+        ->get();
+        $valor = 'servicioextension';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de servicios de extensión');
+            return redirect('/extension/mostrarproyectoextension');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportservicioextensionexcel()
+    {
+        $proyectos = ExtServicioExtension::all();
+        if ($proyectos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de servicios extensión');
+            return redirect('/extension/mostrarproyectoextension');
+        } else {
+            return Excel::download(new ExtensionExport('servicioextension'), 'proyectos-extension.xlsx');
+        }
+    }
+
+    public function exportfotograficopdf()
+    {
+        $datos = DB::table('ext_registro_fotografico_inter')->get();
+        $valor = 'fotografico';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros fotograficos');
+            return redirect('/extension/mostrarregistrofotografico');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportfotograficoexcel()
+    {
+        $fotograficos = ExtRegistroFotograficoInter::all();
+        if ($fotograficos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros fotograficos');
+            return redirect('/extension/mostrarregistrofotografico');
+        } else {
+            return Excel::download(new ExtensionExport('fotografico'), 'registros-fotograficos.xlsx');
+        }
+    }
+
+    public function exportredacademiapdf()
+    {
+        $datos = DB::table('ext_sector_externo_red_academia_convenio')->get();
+        $valor = 'redacademica';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de convenios');
+            return redirect('/extension/mostrarinterredconvenio');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportredacademiaexcel()
+    {
+        $redacademica = ExtInterRedConvenio::all();
+        if ($redacademica->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de convenios');
+            return redirect('/extension/mostrarinterredconvenio');
+        } else {
+            return Excel::download(new ExtensionExport('redacademica'), 'redes-académicas.xlsx');
+        }
+    }
+
+    public function exportredorganizacionpdf()
+    {
+        $datos = DB::table('ext_sector_externo_organizaciones')->get();
+        $valor = 'redorganizacion';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de convenios');
+            return redirect('/extension/mostrarinterorganizacion');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportredorganizacionexcel()
+    {
+        $redacademica = ExtRedOrganizacion::all();
+        if ($redacademica->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de convenios');
+            return redirect('/extension/mostrarinterorganizacion');
+        } else {
+            return Excel::download(new ExtensionExport('redorganizacion'), 'red-organizaciones.xlsx');
+        }
+    }
+
+    public function exportcurriculopdf()
+    {
+        $datos = DB::table('ext_internacionalizacion_curriculo')
+        ->join('persona','ext_internacionalizacion_curriculo.exincu_id_docente','=','persona.id')
+        ->join('programa_plan_estudio_asignatura','ext_internacionalizacion_curriculo.exincu_id_asignatura','programa_plan_estudio_asignatura.id')
+        ->get();
+        $valor = 'curriculo';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de curriculos internacionales');
+            return redirect('/extension/mostrarcurriculo');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportcurriculoexcel()
+    {
+        $curriculos = ExtInternacionalizacionCurriculo::all();
+        if ($curriculos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de curriculos internacionales');
+            return redirect('/extension/mostrarcurriculo');
+        } else {
+            return Excel::download(new ExtensionExport('curriculo'), 'curriculo-internacional.xlsx');
         }
     }
 
