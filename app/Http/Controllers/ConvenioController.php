@@ -180,10 +180,15 @@ class ConvenioController extends Controller
 
     public function destroy($id)
     {
-        $convenio = Convenio::find($id);
-        $convenio->delete();
-        Alert::success('Exitoso','Los datos se han eliminado con exito');
-        return redirect('/convenio');
+        try{
+            $convenio = Convenio::find($id);
+            $convenio->delete();
+            Alert::success('Exitoso','Los datos se han eliminado con exito');
+            return redirect('/convenio');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function exportpdf()

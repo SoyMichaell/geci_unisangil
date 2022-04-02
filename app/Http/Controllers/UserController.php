@@ -21,8 +21,7 @@ class UserController extends Controller
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $tiposusuario = DB::table('tipo_usuario')
-            ->where('id', 1)
-            ->orWhere('id', 2)
+            ->Where('id', 2)
             ->orWhere('id', 4)
             ->get();
         return view('auth.register')

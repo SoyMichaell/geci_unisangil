@@ -180,10 +180,15 @@ class InvestigacionController extends Controller
     }
 
     public function eliminargrupo($id){
-        $grupo = InvGrupoInvestigacion::find($id);
-        $grupo->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado');
-        return redirect('investigacion/mostrargrupo');
+        try{
+            $grupo = InvGrupoInvestigacion::find($id);
+            $grupo->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado');
+            return redirect('investigacion/mostrargrupo');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarintegrante(){
@@ -305,6 +310,18 @@ class InvestigacionController extends Controller
 
         Alert::success('Exitoso', 'Los datos se han actualizado');
         return redirect('investigacion/mostrarintegrante');
+    }
+
+    public function eliminarintegrante($id){
+        try{
+            $integrante = InvInvestigador::find($id);
+            $integrante->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado');
+            return redirect('investigacion/mostrarintegrante');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarproyecto(){
@@ -445,6 +462,18 @@ class InvestigacionController extends Controller
 
         Alert::success('Exitoso', 'Los datos se han actualizado');
         return redirect('investigacion/mostrarproyecto');
+    }
+
+    public function eliminarproyecto($id){
+        try{
+            $proyecto = InvProyecto::find($id);
+            $proyecto->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado');
+            return redirect('investigacion/mostrarproyecto');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function exportpdfinvestigacion()

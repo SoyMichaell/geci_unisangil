@@ -176,10 +176,15 @@ class BienestarController extends Controller
 
     public function destroy($id)
     {
-        $bienestar = Bienestar::find($id);
-        $bienestar->delete();
-        Alert::success('Exitoso', 'El evento se ha eliminado');
-        return redirect('/bienestar');
+        try{
+            $bienestar = Bienestar::find($id);
+            $bienestar->delete();
+            Alert::success('Exitoso', 'El evento se ha eliminado');
+            return redirect('/bienestar');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function exportpdf()

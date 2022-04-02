@@ -55,10 +55,15 @@ class PruebaController extends Controller
     }
 
     public function eliminartipoprueba($id){
-        $tipoprueba = TipoPrueba::find($id);
-        $tipoprueba->delete();
-        Alert::success('Exitoso', 'Tipo prueba eliminado con exito');
-        return redirect('/prueba/mostratipoprueba');
+        try{
+            $tipoprueba = TipoPrueba::find($id);
+            $tipoprueba->delete();
+            Alert::success('Exitoso', 'Tipo prueba eliminado con exito');
+            return redirect('/prueba/mostratipoprueba');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }  
     }
 
     public function mostrartipomodulo(){
@@ -91,10 +96,15 @@ class PruebaController extends Controller
     }
 
     public function eliminartipomodulo($id){
-        $tipomodulo = TipoModulo::find($id);
-        $tipomodulo->delete();
-        Alert::success('Exitoso', 'Tipo módulo eliminado con exito');
-        return redirect('/prueba/mostrartipomodulo');
+        try{
+            $tipomodulo = TipoModulo::find($id);
+            $tipomodulo->delete();
+            Alert::success('Exitoso', 'Tipo módulo eliminado con exito');
+            return redirect('/prueba/mostrartipomodulo');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarsaber(){
@@ -232,10 +242,15 @@ class PruebaController extends Controller
     }
 
     public function eliminarsaber($id){
-        DB::table('prueba_saber_modulo')->where('prsamo_id_estudiante', $id)->delete();
-        DB::table('prueba_saber')->where('prueba_saber_id_estudiante', $id)->delete();
-        Alert::success('Exitoso', 'Prueba saber eliminada con exito');
-        return redirect('/prueba/mostrarsaber');
+        try{
+            DB::table('prueba_saber_modulo')->where('prsamo_id_estudiante', $id)->delete();
+            DB::table('prueba_saber')->where('prueba_saber_id_estudiante', $id)->delete();
+            Alert::success('Exitoso', 'Prueba saber eliminada con exito');
+            return redirect('/prueba/mostrarsaber');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrarsaberpro(){
@@ -386,10 +401,15 @@ class PruebaController extends Controller
     }
 
     public function eliminarsaberpro($id){
-        DB::table('prueba_saber_pro_modulo')->where('prsaprmo_id_estudiante', $id)->delete();
-        DB::table('prueba_saber_pro')->where('prsapr_id_estudiante', $id)->delete();
-        Alert::success('Exitoso', 'Prueba saber pro eliminada con exito');
-        return redirect('/prueba/mostrarsaberpro');
+        try{
+            DB::table('prueba_saber_pro_modulo')->where('prsaprmo_id_estudiante', $id)->delete();
+            DB::table('prueba_saber_pro')->where('prsapr_id_estudiante', $id)->delete();
+            Alert::success('Exitoso', 'Prueba saber pro eliminada con exito');
+            return redirect('/prueba/mostrarsaberpro');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }   
     }
 
     public function mostrarresultado(){
@@ -535,10 +555,15 @@ class PruebaController extends Controller
     }
 
     public function eliminaresultado($id){
-        DB::table('prueba_resultado_programa')->where('prurepro_id_programa', $id)->delete();
-        DB::table('prueba_resultado_programa_modulo')->where('prurepromo_id_prueba_programa', $id)->delete();
-        Alert::success('Exitoso', 'Resultado general del programa eliminado con exito');
-        return redirect('/prueba/mostrarsaberpro');
+        try{
+            DB::table('prueba_resultado_programa')->where('prurepro_id_programa', $id)->delete();
+            DB::table('prueba_resultado_programa_modulo')->where('prurepromo_id_prueba_programa', $id)->delete();
+            Alert::success('Exitoso', 'Resultado general del programa eliminado con exito');
+            return redirect('/prueba/mostrarsaberpro');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function exportsaberpdf(){

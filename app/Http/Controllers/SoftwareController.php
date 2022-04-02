@@ -166,10 +166,15 @@ class SoftwareController extends Controller
 
     public function destroy($id)
     {
-        $software = Software::find($id);
-        $software->delete();
-        Alert::success('Exitoso','El software se elimino de manera exitosa');
-        return redirect('/software');
+        try{
+            $software = Software::find($id);
+            $software->delete();
+            Alert::success('Exitoso','El software se elimino de manera exitosa');
+            return redirect('/software');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }  
     }
 
     public function mostrarrecurso(){
@@ -278,10 +283,15 @@ class SoftwareController extends Controller
     }
 
     public function eliminarrecurso($id){
-        $recurso = SoftwareRecurso::find($id);
-        $recurso->delete();
-        Alert::success('Exitoso', 'El recurso se ha eliminado con exito');
-        return redirect('/software/mostrarrecurso');
+        try{
+            $recurso = SoftwareRecurso::find($id);
+            $recurso->delete();
+            Alert::success('Exitoso', 'El recurso se ha eliminado con exito');
+            return redirect('/software/mostrarrecurso');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function exportpdf()

@@ -17,9 +17,11 @@
                 <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
             </div>
             <div class="col-md-5 d-flex justify-content-end align-items-start">
+                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                 <a class="btn btn-outline-success" href="{{ url('nivelformacion/create') }}"><i
                         class="fa-solid fa-plus-circle"></i>
                     Nuevo</a>
+                @endif
             </div>
         </div>
         <br>

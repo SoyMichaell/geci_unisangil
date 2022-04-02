@@ -213,10 +213,15 @@ class ExtensionController extends Controller
 
     public function eliminaractividad($id)
     {
-        $actividad = ExtActividadCultural::find($id);
-        $actividad->delete();
-        Alert::success('Exitoso', 'La actividad se ha eliminado con exito');
-        return redirect('/extension/mostraractividad');
+        try{
+            $actividad = ExtActividadCultural::find($id);
+            $actividad->delete();
+            Alert::success('Exitoso', 'La actividad se ha eliminado con exito');
+            return redirect('/extension/mostraractividad');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrarconsultoria()
@@ -391,6 +396,19 @@ class ExtensionController extends Controller
 
         Alert::success('Exitoso', 'La consultoria se ha actualizado con exito');
         return redirect('/extension/mostrarconsultoria');
+    }
+
+    public function eliminarconsultoria($id)
+    {
+        try{
+            $consultoria = ExtConsultoria::find($id);
+            $consultoria->delete();
+            Alert::success('Exitoso', 'La consultoria se ha eliminado con exito');
+            return redirect('/extension/mostrarconsultoria');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrarcurso()
@@ -569,10 +587,15 @@ class ExtensionController extends Controller
 
     public function eliminarcurso($id)
     {
-        $curso = ExtCurso::find($id);
-        $curso->delete();
-        Alert::success('Exitoso', 'El curso se ha eliminado con exito');
-        return redirect('extension/mostrarcurso');
+        try{
+            $curso = ExtCurso::find($id);
+            $curso->delete();
+            Alert::success('Exitoso', 'El curso se ha eliminado con exito');
+            return redirect('extension/mostrarcurso');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrareducacion()
@@ -736,11 +759,15 @@ class ExtensionController extends Controller
 
     public function eliminareducacion($id)
     {
-        //generar 3 tipos de excel -> educacion continua -> educacion continua docente -> educacion continua beneficiaros
-        $educacion = ExtEducacionContinua::find($id);
-        $educacion->delete();
-        Alert::success('Exitoso', 'Educación continua eliminada con exito');
-        return redirect('extension/mostrareducacion');
+        try{
+            $educacion = ExtEducacionContinua::find($id);
+            $educacion->delete();
+            Alert::success('Exitoso', 'Educación continua eliminada con exito');
+            return redirect('extension/mostrareducacion');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarparticipante()
@@ -875,10 +902,15 @@ class ExtensionController extends Controller
 
     public function eliminarparticipante($id)
     {
-        $participante = ExtParticipante::find($id);
-        $participante->delete();
-        Alert::success('Exitoso', 'Participante eliminado con exito');
-        return redirect('extension/mostrarparticipante');
+        try{
+            $participante = ExtParticipante::find($id);
+            $participante->delete();
+            Alert::success('Exitoso', 'Participante eliminado con exito');
+            return redirect('extension/mostrarparticipante');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarproyectoextension()
@@ -1661,18 +1693,21 @@ class ExtensionController extends Controller
     }
 
     public function eliminarinterredconvenio($id){
+        try{
+            DB::table('ext_sector_externo_red_academia_convenio_participantes')
+            ->where('exseredpar_id_red_academica', $id)
+            ->delete();
 
-        DB::table('ext_sector_externo_red_academia_convenio_participantes')
-        ->where('exseredpar_id_red_academica', $id)
-        ->delete();
+            DB::table('ext_sector_externo_red_academia_convenio')
+            ->where('id', $id)
+            ->delete();
 
-        DB::table('ext_sector_externo_red_academia_convenio')
-        ->where('id', $id)
-        ->delete();
-
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarinterredconvenio');
-
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarinterredconvenio');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarinterorganizacion(){
@@ -1807,18 +1842,21 @@ class ExtensionController extends Controller
     }
 
     public function eliminarinterorganizacion($id){
+        try{
+            DB::table('ext_sector_externo_organizaciones_part')
+            ->where('exseorpar_id_organizacion', $id)
+            ->delete();
 
-        DB::table('ext_sector_externo_organizaciones_part')
-        ->where('exseorpar_id_organizacion', $id)
-        ->delete();
+            DB::table('ext_sector_externo_organizaciones')
+            ->where('id', $id)
+            ->delete();
 
-        DB::table('ext_sector_externo_organizaciones')
-        ->where('id', $id)
-        ->delete();
-
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarinterorganizacion');
-
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarinterorganizacion');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarcurriculo(){
@@ -1934,10 +1972,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminarcurriculo($id){
-        $curriculo = ExtInternacionalizacionCurriculo::find($id);
-        $curriculo->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarcurriculo');
+        try{
+            $curriculo = ExtInternacionalizacionCurriculo::find($id);
+            $curriculo->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarcurriculo');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarmovilidadnacional(){
@@ -2112,10 +2155,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminarmovilidadnacional($id){
-        $movilidadnacional = ExtMovilidadNacional::find($id);
-        $movilidadnacional->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarmovilidadintersede');
+        try{
+            $movilidadnacional = ExtMovilidadNacional::find($id);
+            $movilidadnacional->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarmovilidadintersede');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarmovilidadintersede(){
@@ -2305,10 +2353,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminarmovilidadintersede($id){
-        $movilidadintersede = ExtMovilidadIntersede::find($id);
-        $movilidadintersede->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarmovilidadintersede');
+        try{
+            $movilidadintersede = ExtMovilidadIntersede::find($id);
+            $movilidadintersede->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarmovilidadintersede');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrarmovilidadinternacional(){
@@ -2498,10 +2551,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminarmovilidadinternacional($id){
-        $movilidadinternacional = ExtMovilidadInternacional::find($id);
-        $movilidadinternacional->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarmovilidadinternacional');
+        try{
+            $movilidadinternacional = ExtMovilidadInternacional::find($id);
+            $movilidadinternacional->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarmovilidadinternacional');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrareventosvirtuales(){
@@ -2605,10 +2663,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminareventosvirtuales($id){
-        $virtual = ExtEventoVirtual::find($id);
-        $virtual->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrareventosvirtuales');
+        try{
+            $virtual = ExtEventoVirtual::find($id);
+            $virtual->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrareventosvirtuales');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function mostrarparticipacioneventos(){
@@ -2722,10 +2785,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminarparticipacioneventos($id){
-        $participacion = ExtParticipacionEvento::find($id);
-        $participacion->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrarparticipacioneventos');
+        try{
+            $participacion = ExtParticipacionEvento::find($id);
+            $participacion->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrarparticipacioneventos');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrareventosinternacionales(){
@@ -2851,10 +2919,15 @@ class ExtensionController extends Controller
     }
 
     public function eliminareventosinternacionales($id){
-        $internacional = ExtEventoInternacional::find($id);
-        $internacional->delete();
-        Alert::success('Exitoso', 'Los datos se han eliminado con exito');
-        return redirect('/extension/mostrareventosinternacionales');
+        try{
+            $internacional = ExtEventoInternacional::find($id);
+            $internacional->delete();
+            Alert::success('Exitoso', 'Los datos se han eliminado con exito');
+            return redirect('/extension/mostrareventosinternacionales');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function exportactividadculturalpdf()
@@ -3191,6 +3264,191 @@ class ExtensionController extends Controller
             return redirect('/extension/mostrarcurriculo');
         } else {
             return Excel::download(new ExtensionExport('curriculo'), 'curriculo-internacional.xlsx');
+        }
+    }
+
+    public function exporteventopdf()
+    {
+        $datos = DB::table('ext_eventos_virtuales')->get();
+        $valor = 'eventovirtual';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de eventos virtuales');
+            return redirect('/extension/mostrareventosvirtuales');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exporteventoexcel()
+    {
+        $eventos = ExtEventoVirtual::all();
+        if ($eventos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de eventos virtuales');
+            return redirect('/extension/mostrareventosvirtuales');
+        } else {
+            return Excel::download(new ExtensionExport('eventovirtual'), 'eventos-virtuales.xlsx');
+        }
+    }
+
+    public function exportparticipacionpdf()
+    {
+        $datos = DB::table('ext_participacion_eventos')
+        ->join('persona','ext_participacion_eventos.expaev_id_persona','=','persona.id')
+        ->get();
+        $valor = 'participacion';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de participación eventos');
+            return redirect('/extension/mostrarparticipacioneventos');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportparticipacionexcel()
+    {
+        $participaciones = ExtParticipacionEvento::all();
+        if ($participaciones->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de participación eventos');
+            return redirect('/extension/mostrarparticipacioneventos');
+        } else {
+            return Excel::download(new ExtensionExport('participacion'), 'participacion-eventos.xlsx');
+        }
+    }
+
+    public function exportinternacionalpdf()
+    {
+        $datos = DB::table('ext_eventos_nac_inter')->get();
+        $valor = 'einternacional';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de eventos internacionales');
+            return redirect('/extension/mostrareventosinternacionales');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportinternacionalexcel()
+    {
+        $participaciones = ExtEventoInternacional::all();
+        if ($participaciones->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de eventos internacionales');
+            return redirect('/extension/mostrareventosinternacionales');
+        } else {
+            return Excel::download(new ExtensionExport('einternacional'), 'eventos-internacionales.xlsx');
+        }
+    }
+
+    public function exportmovilidadnacionalpdf()
+    {
+        $datos = DB::table('ext_movilidad_nacional')
+        ->join('municipio','ext_movilidad_nacional.exmona_id_sede','=','municipio.id')
+        ->join('facultad','ext_movilidad_nacional.exmona_id_facultad','=','facultad.id')
+        ->join('programa','ext_movilidad_nacional.exmona_id_programa','=','programa.id')
+        ->join('persona','ext_movilidad_nacional.exmona_id_persona','=','persona.id')
+        ->get();
+        $valor = 'mnacional';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades nacionales');
+            return redirect('/extension/mostrarmovilidadnacional');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportmovilidadnacionalexcel()
+    {
+        $mnacionales = ExtMovilidadNacional::all();
+        if ($mnacionales->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades nacionales');
+            return redirect('/extension/mostrarmovilidadnacional');
+        } else {
+            return Excel::download(new ExtensionExport('mnacional'), 'movilidades-nacionales.xlsx');
+        }
+    }
+
+    public function exportmovilidadintersedepdf()
+    {
+        $datos = DB::table('ext_movilidad_intersede')
+        ->join('municipio','ext_movilidad_intersede.exmoin_id_sede_or','=','municipio.id')
+        ->join('facultad','ext_movilidad_intersede.exmoin_id_facultad_or','=','facultad.id')
+        ->join('programa','ext_movilidad_intersede.exmoin_id_programa_or','=','programa.id')
+        ->join('persona','ext_movilidad_intersede.exmoin_id_persona','=','persona.id')
+        ->get();
+        $valor = 'mintersede';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades intersedes');
+            return redirect('/extension/mostrarmovilidadintersede');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportmovilidadintersedeexcel()
+    {
+        $mintersedes = ExtMovilidadIntersede::all();
+        if ($mintersedes->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades intersedes');
+            return redirect('/extension/mostrarmovilidadintersede');
+        } else {
+            return Excel::download(new ExtensionExport('mintersede'), 'movilidades-intersedes.xlsx');
+        }
+    }
+
+    public function exportmovilidadinternacionalpdf()
+    {
+        $datos = DB::table('ext_movilidad_internacional')
+        ->join('municipio','ext_movilidad_internacional.exmointer_id_sede_or','=','municipio.id')
+        ->join('facultad','ext_movilidad_internacional.exmointer_id_facultad_or','=','facultad.id')
+        ->join('programa','ext_movilidad_internacional.exmointer_id_programa_or','=','programa.id')
+        ->join('persona','ext_movilidad_internacional.exmointer_id_persona','=','persona.id')
+        ->get();
+        $valor = 'minternacional';
+        if ($datos->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades internacionales');
+            return redirect('/extension/mostrarmovilidadinternacional');
+        } else {
+            $view = \view('reporte.extension', compact('datos','valor'))->render();
+            $pdf = \App::make('dompdf.wrapper');
+            $pdf->setPaper('A4', 'landscape');
+            $pdf->loadHTML($view);
+
+            return $pdf->stream('reporte.pdf');
+        }
+    }
+
+    public function exportmovilidadinternacionalexcel()
+    {
+        $minternacionales = ExtMovilidadInternacional::all();
+        if ($minternacionales->count() <= 0) {
+            Alert::warning('Advertencia','No hay registros de movilidades internacionales');
+            return redirect('/extension/mostrarmovilidadinternacional');
+        } else {
+            return Excel::download(new ExtensionExport('minternacional'), 'movilidades-intersedes.xlsx');
         }
     }
 

@@ -56,37 +56,16 @@ class FacultadController extends Controller
     }
 
     public function destroy($id){
-        $facultad = Facultad::find($id);
-        $facultad->delete();
+        try{
+            $facultad = Facultad::find($id);
+            $facultad->delete();
 
-        Alert::success('Registro Eliminado');
+            Alert::success('Registro Eliminado');
 
-        return redirect('/facultad');
-    }
-
-    public function pdf(Request $request){
-        $facultades = Facultad::all();
-        if ($facultades->count() <= 0) {
-            Alert::warning('No hay registros');
             return redirect('/facultad');
-        } else {
-            $view = \view('configuracion/facultad.pdf', compact('facultades'))->render();
-            $pdf = \App::make('dompdf.wrapper');
-            $pdf->setPaper('A4', 'landscape');
-            $pdf->loadHTML($view);
-
-            return $pdf->stream('facultades.pdf');
-        }
-    }
-
-    public function export(){
-        $facultades = Facultad::all();
-        if ($facultades->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/facultad');
-        } else {
-
-            return Excel::download(new FacultadExports, 'facultades.xlsx');
-        }
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta facultad, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }     
     }
 }

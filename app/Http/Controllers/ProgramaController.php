@@ -13,6 +13,7 @@ use App\Models\ProgramaAsignatura;
 use App\Models\ProgramaHorario;
 use App\Models\ProgramaPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -36,7 +37,9 @@ class ProgramaController extends Controller
 
     public function create()
     {
-        $departamentos = Departamento::all();
+
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
+            $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
         $niveles = NivelFormacion::all();
@@ -70,6 +73,9 @@ class ProgramaController extends Controller
             ->with('programasCiclo', $programasCiclo)
             ->with('duraccions', $duraccions)
             ->with('periodoAdmision', $periodoAdmision);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function store(Request $request)
@@ -183,6 +189,7 @@ class ProgramaController extends Controller
 
     public function edit($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
@@ -214,6 +221,9 @@ class ProgramaController extends Controller
             ->with('programasCiclo', $programasCiclo)
             ->with('duraccions', $duraccions)
             ->with('periodoAdmision', $periodoAdmision);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function update(Request $request, $id)
@@ -272,22 +282,17 @@ class ProgramaController extends Controller
 
     public function destroy($id)
     {
-        $programa = Programa::find($id);
+        try{
+            $programa = Programa::find($id);
+            $programa->delete();
 
-        $ExisteEst = DB::table('estudiante')->where('estu_programa', $id);
-        $ExistePlan = DB::table('programa_plan_estudio')->where('pp_id_programa', $id);
-        $ExisteAsig = DB::table('programa_plan_estudio_asignatura')->where('asig_id_programa', $id);
+            Alert::success('Exitoso', 'El programa se ha eliminado con exito');
 
-        if($ExisteEst->count()>0 || $ExistePlan->count()>0 || $ExisteAsig->count()>0){
-            Alert::warning('Advertencia', 'El programa no se puede eliminar, debio a que se encuentra en uso por otra entidad');
             return redirect('/programa');
-        }
-
-        $programa->delete();
-
-        Alert::success('Exitoso', 'El programa se ha eliminado con exito');
-
-        return redirect('/programa');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar este programa, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }   
     }
 
     public function mostrarplan()
@@ -299,11 +304,15 @@ class ProgramaController extends Controller
 
     public function crearplan()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programas = Programa::all();
         $municipios = Municipio::all();
         return view('programa/plan.create')
             ->with('programas', $programas)
             ->with('municipios', $municipios);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registroplan(Request $request)
@@ -344,6 +353,7 @@ class ProgramaController extends Controller
 
     public function editarplan($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programas = Programa::all();
         $municipios = Municipio::all();
         $plan = ProgramaPlan::find($id);
@@ -351,6 +361,9 @@ class ProgramaController extends Controller
             ->with('programas', $programas)
             ->with('municipios', $municipios)
             ->with('plan', $plan);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarplan(Request $request, $id)
@@ -432,6 +445,7 @@ class ProgramaController extends Controller
 
     public function crearasignatura()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $municipios = Municipio::all();
         $programas = Programa::all();
         $plans = ProgramaPlan::all();
@@ -439,6 +453,9 @@ class ProgramaController extends Controller
             ->with('municipios', $municipios)
             ->with('programas', $programas)
             ->with('plans', $plans);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registroasignatura(Request $request)
@@ -488,6 +505,7 @@ class ProgramaController extends Controller
 
     public function editarasignatura($id,)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $municipios = Municipio::all();
         $programas = Programa::all();
         $plans = ProgramaPlan::all();
@@ -497,6 +515,9 @@ class ProgramaController extends Controller
             ->with('programas', $programas)
             ->with('plans', $plans)
             ->with('asignatura', $asignatura);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarasignatura(Request $request, $id)
@@ -546,10 +567,15 @@ class ProgramaController extends Controller
 
     public function eliminarasignatura($id)
     {
-        $asignatura = ProgramaAsignatura::find($id);
-        $asignatura->delete();
-        Alert::success('Exitoso', 'La asignatura se elimino correctamente');
-        return redirect('programa/mostrarasignatura');
+        try{
+            $asignatura = ProgramaAsignatura::find($id);
+            $asignatura->delete();
+            Alert::success('Exitoso', 'La asignatura se elimino correctamente');
+            return redirect('programa/mostrarasignatura');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta asignatura, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }      
     }
 
     public function mostrarhorario()
@@ -561,6 +587,7 @@ class ProgramaController extends Controller
 
     public function crearhorario()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $horarios = ProgramaHorario::all();
         $asignaturas = ProgramaAsignatura::all();
         $personas = DB::table('persona')
@@ -571,6 +598,9 @@ class ProgramaController extends Controller
             ->with('asignaturas', $asignaturas)
             ->with('personas', $personas)
             ->with('horarios', $horarios);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registrohorario(Request $request)
@@ -612,6 +642,7 @@ class ProgramaController extends Controller
 
     public function editarhorario($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $horario = ProgramaHorario::find($id);
         $asignaturas = ProgramaAsignatura::all();
         $personas = DB::table('persona')
@@ -622,6 +653,9 @@ class ProgramaController extends Controller
             ->with('asignaturas', $asignaturas)
             ->with('personas', $personas)
             ->with('horario', $horario);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarhorario(Request $request, $id)
@@ -663,10 +697,15 @@ class ProgramaController extends Controller
 
     public function eliminarhorario($id)
     {
-        $horario = ProgramaHorario::find($id);
-        $horario->delete();
-        Alert::success('Exitoso', 'Asignación docente y horario eliminada');
-        return redirect('programa/mostrarhorario');
+        try{
+            $horario = ProgramaHorario::find($id);
+            $horario->delete();
+            Alert::success('Exitoso', 'Asignación docente y horario eliminada');
+            return redirect('programa/mostrarhorario');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar este horario, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        } 
     }
 
     public function selectivoplan($id)
@@ -682,7 +721,6 @@ class ProgramaController extends Controller
     {
         return DB::table('municipio')->where('mun_departamento', $id)->get();
     }
-
 
     public function exportpdf()
     {

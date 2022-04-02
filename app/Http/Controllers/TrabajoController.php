@@ -421,11 +421,16 @@ class TrabajoController extends Controller
 
     public function destroy($id)
     {
-        $trabajo = Trabajo::find($id);
-        $trabajo->delete();
+        try{
+            $trabajo = Trabajo::find($id);
+            $trabajo->delete();
 
-        Alert::success('Registro Eliminado');
-        return redirect('/trabajo');
+            Alert::success('Registro Eliminado');
+            return redirect('/trabajo');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function exportpdf()

@@ -12,8 +12,8 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
-        <div class="col-md-12 mt-2 bg-white p-3">            
+    <div class="container">
+        <div class="col-md-12 tile">            
             <div class="row">
                 <div class="col-md-6">
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->

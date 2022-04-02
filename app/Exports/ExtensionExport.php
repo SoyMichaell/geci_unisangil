@@ -242,6 +242,106 @@ class ExtensionExport implements FromCollection, WithHeadings
                     'Número movilidad estudiantil',
                     'Otra (s) actividad'
                 ];
+            }else if($this->valor == 'eventovirtual'){
+                return [
+                    '#',
+                    'Nombre evento',
+                    'Fecha inicio',
+                    'Fecha fin',
+                    'Enlace ingreso',
+                    'Enlace imagen',
+                    'Nombre ponente (s)',
+                    'Institución',
+                    'País',
+                    'Ponencia'
+                ];
+            }else if($this->valor == 'participacion'){
+                return [
+                    '#',
+                    'Año',
+                    'Periodo',
+                    'Tipo evento',
+                    'Nombre evento',
+                    'Fecha',
+                    'Organizador',
+                    'Tipo documento',
+                    'Número de documento',
+                    'Nombre (s)',
+                    'Apellido (s)'
+                ];
+            }else if($this->valor == 'einternacional'){
+                return [
+                    '#',
+                    'Tipo',
+                    'Año',
+                    'Periodo',
+                    'Nombre evento',
+                    'Fecha inicio',
+                    'Fecha fin',
+                    'Lugar',
+                    'Sede',
+                    'Ponentes',
+                    'Institución',
+                    'País',
+                    'Ponencia (s)'
+                ];
+            }else if($this->valor == 'mnacional'){
+                return [
+                    '#',
+                    'Tipo',
+                    'Rol',
+                    'Sede',
+                    'Facultad',
+                    'Programa',
+                    'Tipo documento',
+                    'Número documento',
+                    'Nombre (s)',
+                    'Apellido (s)',
+                    'Institución donde proviene',
+                    'Descripción',
+                    'Fecha inicio',
+                    'Fecha fin'
+                ];
+            }else if($this->valor == 'minterssede'){
+                return [
+                    '#',
+                    'Tipo',
+                    'Rol',
+                    'Sede origen',
+                    'Facultad origen',
+                    'Programa origen',
+                    'Sede destino',
+                    'Facultad destino',
+                    'Programa destino',
+                    'Tipo documento',
+                    'Número documento',
+                    'Nombre (s)',
+                    'Apellido (s)',
+                    'Tipo movilidad',
+                    'Descripción',
+                    'Fecha inicio',
+                    'Fecha fin'
+                ];
+            }else if($this->valor == 'minternacional'){
+                return [
+                    '#',
+                    'Tipo',
+                    'Rol',
+                    'Sede origen',
+                    'Facultad origen',
+                    'Programa origen',
+                    'Tipo documento',
+                    'Número documento',
+                    'Nombre (s)',
+                    'Apellido (s)',
+                    'País destino',
+                    'Ciudad destino',
+                    'Institución destino',
+                    'Tipo movilidad',
+                    'Descripción',
+                    'Fecha inicio',
+                    'Fecha fin'
+                ];
             }
         
     }
@@ -354,6 +454,58 @@ class ExtensionExport implements FromCollection, WithHeadings
             ->join('programa_plan_estudio_asignatura','ext_internacionalizacion_curriculo.exincu_id_asignatura','programa_plan_estudio_asignatura.id')
             ->get();
             return $curriculos;
+        }else if($this->valor == 'eventovirtual'){
+            $eventosvirtuales = DB::table('ext_eventos_virtuales')
+            ->select('ext_eventos_virtuales.id','exevir_nombre_evento','exevir_fecha_inicio','exevir_fecha_fin','exevir_enlace_ingreso','exevir_enlace_imagen',
+            'exevir_nombre_ponente','exevir_institucion_origen','exevir_pais','exevir_nombre_ponencia')
+            ->get();
+            return $eventosvirtuales;
+        }else if($this->valor == 'participacion'){
+            $participaciones = DB::table('ext_participacion_eventos')
+            ->select('ext_participacion_eventos.id','expaev_year','expaev_periodo','expaev_tipo_evento','expaev_nombre_evento','expaev_fecha',
+            'expaev_organizador','per_tipo_documento','per_numero_documento','per_nombre','per_apellido')
+            ->join('persona','ext_participacion_eventos.expaev_id_persona','=','persona.id')
+            ->get();
+            return $participaciones;
+        }else if($this->valor == 'einternacional'){
+            $internacionales = DB::table('ext_eventos_nac_inter')
+            ->select('ext_eventos_nac_inter.id','exevin_tipo','exevin_year','exevin_periodo','exevin_nombre_evento','exevin_fecha_inicio','exevin_fecha_final',
+            'exevin_lugar','exevin_sede','exevin_ponentes','exevin_institucion','exevin_pais','exevin_nombre_ponencia')
+            ->get();
+            return $internacionales;
+        }else if($this->valor == 'mnacional'){
+            $nacionales = DB::table('ext_movilidad_nacional')
+            ->select('ext_movilidad_nacional.id','exmona_tipo','exmona_rol','mun_nombre','fac_nombre','pro_nombre','per_tipo_documento','per_numero_documento',
+            'per_nombre','per_apellido','exmona_institucion_proviene','exmona_tipo_movilidad','exmona_descripcion','exmona_fecha_inicio','exmona_fecha_final')
+            ->join('municipio','ext_movilidad_nacional.exmona_id_sede','=','municipio.id')
+            ->join('facultad','ext_movilidad_nacional.exmona_id_facultad','=','facultad.id')
+            ->join('programa','ext_movilidad_nacional.exmona_id_programa','=','programa.id')
+            ->join('persona','ext_movilidad_nacional.exmona_id_persona','=','persona.id')
+            ->get();
+            return $nacionales;
+        }else if($this->valor == 'mintersede'){
+            $intersedes = DB::table('ext_movilidad_intersede')
+            ->select('ext_movilidad_intersede.id','exmoin_tipo','exmoin_rol','mun_nombre','fac_nombre','pro_nombre','mdes.mun_nombre','fdes.fac_nombre','pdes.pro_nombre',
+            'per_tipo_documento','per_numero_documento','per_nombre','per_apellido','exmoin_tipo_movilidad','exmoin_descripcion','exmoin_fecha_inicio','exmoin_fecha_final')
+            ->join('municipio','ext_movilidad_intersede.exmoin_id_sede_or','=','municipio.id')
+            ->join('facultad','ext_movilidad_intersede.exmoin_id_facultad_or','=','facultad.id')
+            ->join('programa','ext_movilidad_intersede.exmoin_id_programa_or','=','programa.id')
+            ->join('municipio AS mdes','ext_movilidad_intersede.exmoin_id_sede_des','=','mdes.id')
+            ->join('facultad AS fdes','ext_movilidad_intersede.exmoin_id_facultad_des','=','fdes.id')
+            ->join('programa AS pdes','ext_movilidad_intersede.exmoin_id_programa_des','=','pdes.id')
+            ->join('persona','ext_movilidad_intersede.exmoin_id_persona','=','persona.id')
+            ->get();
+            return $intersedes;
+        }else if($this->valor == 'minternacional'){
+            $minternacionales = DB::table('ext_movilidad_internacional')
+            ->select('ext_movilidad_internacional.id','exmointer_tipo','exmointer_rol','mun_nombre','fac_nombre','pro_nombre','per_tipo_documento','per_numero_documento',
+            'per_nombre','per_apellido','exmointer_pais_des','exmointer_ciudad_des','exmointer_institucion_nombre','exmointer_tipo_movilidad','exmointer_descripcion','exmointer_fecha_inicio','exmointer_fecha_final')
+            ->join('municipio','ext_movilidad_internacional.exmointer_id_sede_or','=','municipio.id')
+            ->join('facultad','ext_movilidad_internacional.exmointer_id_facultad_or','=','facultad.id')
+            ->join('programa','ext_movilidad_internacional.exmointer_id_programa_or','=','programa.id')
+            ->join('persona','ext_movilidad_internacional.exmointer_id_persona','=','persona.id')
+            ->get();
+            return $minternacionales;
         }
     }
 }

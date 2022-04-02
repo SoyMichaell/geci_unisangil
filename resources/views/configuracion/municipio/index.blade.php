@@ -14,9 +14,11 @@
                         <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                     </div>
                     <div class="col-md-5 d-flex justify-content-end align-items-start">
+                        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('municipio/create') }}"><i
                         class="fa-solid fa-plus-circle"></i>
                             Nuevo</a>
+                        @endif
                     </div>
                 </div>
                 <br>
@@ -42,6 +44,7 @@
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="municipio/{{ $municipio->id }}"
                                                     title="Visualizar"><i class="fa-solid fa-folder-open"></i></a>
+                                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/municipio/{{ $municipio->id }}/edit" title="Editar"><i
                                                     class="fa-solid fa-refresh"></i></a>
@@ -49,6 +52,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
                                                 class="fa-solid fa-trash"></i></button>
+                                                @endif
                                             </div>
                                         </form>
                                     </td>

@@ -16,6 +16,7 @@ use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -44,12 +45,16 @@ class DocenteController extends Controller
 
     public function mostrardocente()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
 
         return view('docente.create')
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registrodocente(Request $request)
@@ -126,6 +131,7 @@ class DocenteController extends Controller
 
     public function directorcompletar($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = DB::table('persona')
             ->select('persona.id')
             ->where('persona.id', $id)
@@ -144,6 +150,9 @@ class DocenteController extends Controller
             ->with('persona', $persona)
             ->with('modalidadprograma', $modalidadprograma)
             ->with('cuenta', $cuenta);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarinformacion(Request $request, $id)
@@ -201,7 +210,7 @@ class DocenteController extends Controller
 
     public function directorestudios(Request $request, $id)
     {
-
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = User::find($id);
 
         $docente = DB::table('docente')->select('certificado_esp', 'certificado_dip', 'soporte_hoja_vida')->where('id_persona_docente', $id)->first();
@@ -281,11 +290,14 @@ class DocenteController extends Controller
 
         Alert::success('Registro Actualizado');
         return redirect('docente/' . $id . '/directorcompletar');
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function zip(Request $request, $id)
     {
-
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $rules = ['documentos_compl' => 'required'];
 
         $message = ['documentos_compl.required' => 'El campo documentos .zip es requerido'];
@@ -322,6 +334,9 @@ class DocenteController extends Controller
 
         Alert::success('Registro Actualizado');
         return redirect('docente/' . $id . '/directorcompletar');
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function show($id)
@@ -381,10 +396,15 @@ class DocenteController extends Controller
 
     public function destroy($id)
     {
-        $persona = User::find($id);
-        $persona->delete();
-        Alert::success('Exitoso', 'El registro ha sido eliminado');
-        return redirect('/docente');
+        try{
+            $persona = User::find($id);
+            $persona->delete();
+            Alert::success('Exitoso', 'El registro ha sido eliminado');
+            return redirect('/docente');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar el docente, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function mostrarevaluacion($id)
@@ -398,9 +418,13 @@ class DocenteController extends Controller
 
     public function crearevaluacion($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = User::find($id);
         return view('docente/evaluacion.create')
             ->with('persona', $persona);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registroevaluacion(Request $request)
@@ -478,11 +502,15 @@ class DocenteController extends Controller
 
     public function editarevaluacion($persona, $evaluacionid)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = User::find($persona);
         $evaluacion = DocenteEvaluacion::find($evaluacionid);
         return view('docente/evaluacion.edit')
             ->with('persona', $persona)
             ->with('evaluacion', $evaluacion);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarevaluacion(Request $request, $evaluacion)
@@ -552,14 +580,20 @@ class DocenteController extends Controller
 
     public function eliminarevaluacion($evaluacion)
     {
-        $evaluacion = DocenteEvaluacion::find($evaluacion);
-        $evaluacion->delete();
-        Alert::success('Exito', 'La evaluación se elimino con exito');
-        return redirect('/docente');
+        try{
+            $evaluacion = DocenteEvaluacion::find($evaluacion);
+            $evaluacion->delete();
+            Alert::success('Exitoso', 'La evaluación se elimino con exito');
+            return redirect('/docente');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar el docente, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }  
     }
 
     public function mostrarcontrato($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = User::find($id);
         $contratos = DocenteContrato::all();
 
@@ -570,6 +604,9 @@ class DocenteController extends Controller
         return view('docente/contrato.index')
             ->with('persona', $persona)
             ->with('contratos', $contratos);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registrocontrato(Request $request)
@@ -636,11 +673,15 @@ class DocenteController extends Controller
 
     public function editarcontrato($persona, $contratoid)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = User::find($persona);
         $contrato = DocenteContrato::find($contratoid);
         return view('docente/contrato.edit')
             ->with('persona', $persona)
             ->with('contrato', $contrato);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarcontrato(Request $request, $contrato)
@@ -711,10 +752,16 @@ class DocenteController extends Controller
 
     public function eliminarcontrato($contrato)
     {
-        $contratof = DocenteContrato::find($contrato);
-        $contratof->delete();
-        Alert::success('Registro Eliminado');
-        return redirect('/docente');
+        try{
+            $contratof = DocenteContrato::find($contrato);
+            $contratof->delete();
+            Alert::success('Registro Eliminado');
+            return redirect('/docente');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar el docente, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
+        
     }
 
     public function mostrarasignatura($id)
@@ -777,7 +824,11 @@ class DocenteController extends Controller
     }
 
     public function creardocentevisitante(){
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         return view('docente/visitante.create');
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registrodocentevisitante(Request $request){
@@ -872,9 +923,13 @@ class DocenteController extends Controller
     }
 
     public function editardocentevisitante($id){
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $docentevisitante = DocenteVisitante::find($id);
         return view('docente/visitante.edit')
             ->with('docentevisitante', $docentevisitante);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizardocentevisitante(Request $request, $id){

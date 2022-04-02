@@ -12,33 +12,21 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class MetodologiaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $metodologia = Metodologia::all();
         return view('configuracion/metodologia.index')->with('metodologia', $metodologia);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         return view('configuracion/metodologia.create');
+        }else{
+            return redirect('/home');
+        }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $rules = ['met_nombre' => 'required'];
@@ -58,37 +46,22 @@ class MetodologiaController extends Controller
         return redirect('/metodologia');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $metodologia = Metodologia::find($id);
         return view('configuracion/metodologia.show')->with('metodologia', $metodologia);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $metodologia = Metodologia::find($id);
         return view('configuracion/metodologia.edit')->with('metodologia', $metodologia);
+        }else{
+            return redirect('/home');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $rules = ['met_nombre' => 'required'];
@@ -108,58 +81,18 @@ class MetodologiaController extends Controller
         return redirect('/metodologia');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $metodologia = Metodologia::find($id);
-        $metodologia->delete();
+        try{
+            $metodologia = Metodologia::find($id);
+            $metodologia->delete();
 
-        Alert::success('Registro Eliminado');
+            Alert::success('Registro Eliminado');
 
-        return redirect('/metodologia');
-    }
-    public function pdf(Request $request)
-    {
-        $metodologias = Metodologia::all();
-        if ($metodologias->count() <= 0) {
-            Alert::warning('No hay registros');
             return redirect('/metodologia');
-        } else {
-            $view = \view('configuracion/metodologia.pdf', compact('metodologias'))->render();
-            $pdf = \App::make('dompdf.wrapper');
-            $pdf->setPaper('A4', 'landscape');
-            $pdf->loadHTML($view);
-
-           /* DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'pdf',
-                'modulo' => 'metodologia'
-            ]);*/
-
-            return $pdf->stream('metodologia.pdf');
-        }
-    }
-
-    public function export()
-    {
-        $metodologias = Metodologia::all();
-        if ($metodologias->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/metodologia');
-        } else {
-
-            /*DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel',
-                'modulo' => 'metodologia'
-            ]);*/
-
-            return Excel::download(new MetodologiaExports, 'metodologias.xlsx');
-        }
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta metodologia, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }    
     }
 }

@@ -206,10 +206,15 @@ class LaboratorioController extends Controller
 
     public function destroy($id)
     {
-        $laboratorio = Laboratorio::find($id);
-        $laboratorio->delete();
-        Alert::success('Exitoso', 'El laboratorio se ha eliminado con exito');
-        return redirect('/laboratorio');
+        try{
+            $laboratorio = Laboratorio::find($id);
+            $laboratorio->delete();
+            Alert::success('Exitoso', 'El laboratorio se ha eliminado con exito');
+            return redirect('/laboratorio');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function exportpdf()

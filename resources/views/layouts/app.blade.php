@@ -33,7 +33,7 @@
 
 <body class="app sidebar-mini" style="background-color: var(--bs-gray-200);">
     @include('sweetalert::alert')
-    <header class="app-header"><a class="app-header__logo" href="{{ url('home') }}">GE<span>CI</span></a>
+    <header class="app-header"><a class="app-header__logo" href="{{ url('home') }}">GIC<span>PAC</span></a>
         <a class="app-sidebar__toggle" href="#" data-toggle="sidebar" aria-label="Hide Sidebar"></a>
         <ul class="app-nav">
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
@@ -55,7 +55,7 @@
         <div class="app-sidebar__user">
             <div>
                 <p class="app-sidebar__user-name">
-                    {{ Str::ucfirst(auth()->user()->per_nombre . ' ' . auth()->user()->per_apellido) }}
+                    {{ Str::ucfirst(auth()->user()->per_nombre.' '.auth()->user()->per_apellido) }}
                 </p>
                 <p class="app-sidebar__user-designation">{{ auth()->user()->tiposusuario->tip_nombre }}</p>
             </div>

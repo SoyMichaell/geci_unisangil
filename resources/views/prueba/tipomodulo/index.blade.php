@@ -11,7 +11,7 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-5 shadow-sm bg-white p-3">
+            <div class=" {{Auth::user()->per_tipo_usuario == 4 ? 'col-md-12' : 'col-md-5'}} tile">
                 <h4>Listado módulos</h4>
                 <table class="table table-bordered" id="tables">
                     <thead>
@@ -19,7 +19,9 @@
                             <th>#</th>
                             <th>Módulo</th>
                             <th>Tipo prueba</th>
+                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                             <th style="width: 7%">Acciones</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -29,8 +31,8 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $tipomodulo->tipo_modulo_nombre }}</td>
                                 <td>{{ $tipomodulo->pruebas->tipo_prueba_nombre }}</td>
+                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <form action="/prueba/{{$tipomodulo->id}}/eliminartipomodulo" method="POST">
                                             <div class="d-flex justify-content-center">
                                                 @csrf
@@ -39,13 +41,14 @@
                                                         class="fa-solid fa-trash"></i></button>
                                             </div>
                                         </form>
-                                    @endif
                                 </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
+            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
             <div class="col-md-7 shadow-sm bg-white p-3">
                 <h4><i class="fab fa-wpforms"></i> Registro módulos pruebas</h4>
                 <form action="/prueba/registrotipomodulo" method="post">
@@ -87,6 +90,7 @@
                     </div>
                 </form>
             </div>
+            @endif
         </div>
     </div>
 @endsection

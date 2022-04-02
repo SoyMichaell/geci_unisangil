@@ -312,9 +312,14 @@ class PracticaController extends Controller
 
     public function destroy($id)
     {
-        $practica = Practica::find($id);
-        $practica->delete();
-        Alert::success('Exitoso', 'La practica se ha eliminado con exito');
-        return redirect('/practica');
+        try{
+            $practica = Practica::find($id);
+            $practica->delete();
+            Alert::success('Exitoso', 'La practica se ha eliminado con exito');
+            return redirect('/practica');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }  
     }
 }

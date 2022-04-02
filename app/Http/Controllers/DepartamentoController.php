@@ -20,7 +20,11 @@ class DepartamentoController extends Controller
 
     public function create()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         return view('configuracion/departamento.create');
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function store(Request $request)
@@ -52,8 +56,12 @@ class DepartamentoController extends Controller
 
     public function edit($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $departamento = Departamento::find($id);
         return view('configuracion/departamento.edit')->with('departamento', $departamento);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function update(Request $request, $id)
@@ -77,51 +85,19 @@ class DepartamentoController extends Controller
 
     public function destroy($id)
     {
-        $departamento = Departamento::find($id);
-        $departamento->delete();
 
-        Alert::success('Registro Eliminado');
-
-        return redirect('/departamento');
-
-    }
-
-    public function pdf(Request $request)
-    {
-        $departamentos = Departamento::all();
-        if ($departamentos->count() <= 0) {
-            Alert::warning('No hay registros');
+        try{
+            Departamento::find($id)->delete();
+            Alert::success('Registro Eliminado');
+    
             return redirect('/departamento');
-        } else {
-            $view = \view('configuracion/departamento.pdf', compact('departamentos'))->render();
-            $pdf = \App::make('dompdf.wrapper');
-            $pdf->setPaper('A4', 'landscape');
-            $pdf->loadHTML($view);
-
-            /*DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'pdf',
-                'modulo' => 'departamentos'
-            ]);*/
-
-            return $pdf->stream('departamentos.pdf');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
         }
+
+       
+
     }
 
-    public function export(){
-        $departamentos = Departamento::all();
-        if($departamentos->count()<=0){
-            Alert::warning('No hay registros');
-            return redirect('/departamento');
-        }else{
-
-           /* DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel',
-                'modulo' => 'departamentos'
-            ]);*/
-
-            return Excel::download(new DepartamentoExports, 'departamentos.xlsx');
-        }
-    }
 }

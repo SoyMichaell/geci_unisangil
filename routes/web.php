@@ -333,6 +333,8 @@ Route::put('extension/{curriculo}/actualizarcurriculo', [App\Http\Controllers\Ex
 Route::delete('extension/{curriculo}/eliminarcurriculo', [App\Http\Controllers\ExtensionController::class, 'eliminarcurriculo']);
 /*Rutas movilidades*/
 //Rutas movilidad nacional
+Route::get('extension/exportmovilidadnacionalpdf', [App\Http\Controllers\ExtensionController::class, 'exportmovilidadnacionalpdf']);
+Route::get('extension/exportmovilidadnacionalexcel', [App\Http\Controllers\ExtensionController::class, 'exportmovilidadnacionalexcel']);
 Route::get('extension/mostrarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'mostrarmovilidadnacional']);
 Route::get('extension/crearmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'crearmovilidadnacional']);
 Route::post('extension/registromovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'registromovilidadnacional']);
@@ -341,6 +343,8 @@ Route::get('extension/{movilidad}/vermovilidadnacional', [App\Http\Controllers\E
 Route::put('extension/{movilidad}/actualizarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadnacional']);
 Route::delete('extension/{movilidad}/eliminarmovilidadnacional', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadnacional']);
 //Rutas movilidad intersede
+Route::get('extension/exportmovilidadintersedepdf', [App\Http\Controllers\ExtensionController::class, 'exportmovilidadintersedepdf']);
+Route::get('extension/exportmovilidadintersedeexcel', [App\Http\Controllers\ExtensionController::class, 'exportmovilidadintersedeexcel']);
 Route::get('extension/mostrarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'mostrarmovilidadintersede']);
 Route::get('extension/crearmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'crearmovilidadintersede']);
 Route::post('extension/registromovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'registromovilidadintersede']);
@@ -349,6 +353,8 @@ Route::get('extension/{movilidad}/vermovilidadintersede', [App\Http\Controllers\
 Route::put('extension/{movilidad}/actualizarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadintersede']);
 Route::delete('extension/{movilidad}/eliminarmovilidadintersede', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadintersede']);
 //Rutas movilidad internacional
+Route::get('extension/exportmovilidadinternacionalpdf', [App\Http\Controllers\ExtensionController::class, 'exportmovilidadinternacionalpdf']);
+Route::get('extension/exportmovilidadinternacionalexcel', [App\Http\Controllers\ExtensionController::class, 'exportmovilidadinternacionalexcel']);
 Route::get('extension/mostrarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'mostrarmovilidadinternacional']);
 Route::get('extension/crearmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'crearmovilidadinternacional']);
 Route::post('extension/registromovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'registromovilidadinternacional']);
@@ -357,6 +363,8 @@ Route::get('extension/{movilidad}/vermovilidadinternacional', [App\Http\Controll
 Route::put('extension/{movilidad}/actualizarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'actualizarmovilidadinternacional']);
 Route::delete('extension/{movilidad}/eliminarmovilidadinternacional', [App\Http\Controllers\ExtensionController::class, 'eliminarmovilidadinternacional']);
 //Rutas eventos virtuales
+Route::get('extension/exporteventopdf', [App\Http\Controllers\ExtensionController::class, 'exporteventopdf']);
+Route::get('extension/exporteventoexcel', [App\Http\Controllers\ExtensionController::class, 'exporteventoexcel']);
 Route::get('extension/mostrareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'mostrareventosvirtuales']);
 Route::get('extension/creareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'creareventosvirtuales']);
 Route::post('extension/registroeventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'registroeventosvirtuales']);
@@ -365,6 +373,8 @@ Route::get('extension/{evento}/vereventosvirtuales', [App\Http\Controllers\Exten
 Route::put('extension/{evento}/actualizareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'actualizareventosvirtuales']);
 Route::delete('extension/{evento}/eliminareventosvirtuales', [App\Http\Controllers\ExtensionController::class, 'eliminareventosvirtuales']);
 //Rutas participación eventos
+Route::get('extension/exportparticipacionpdf', [App\Http\Controllers\ExtensionController::class, 'exportparticipacionpdf']);
+Route::get('extension/exportparticipacionexcel', [App\Http\Controllers\ExtensionController::class, 'exportparticipacionexcel']);
 Route::get('extension/mostrarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'mostrarparticipacioneventos']);
 Route::get('extension/crearparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'crearparticipacioneventos']);
 Route::post('extension/registroparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'registroparticipacioneventos']);
@@ -373,6 +383,8 @@ Route::get('extension/{evento}/verparticipacioneventos', [App\Http\Controllers\E
 Route::put('extension/{evento}/actualizarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'actualizarparticipacioneventos']);
 Route::delete('extension/{evento}/eliminarparticipacioneventos', [App\Http\Controllers\ExtensionController::class, 'eliminarparticipacioneventos']);
 //Rutas eventos internacionales
+Route::get('extension/exportinternacionalpdf', [App\Http\Controllers\ExtensionController::class, 'exportinternacionalpdf']);
+Route::get('extension/exportinternacionalexcel', [App\Http\Controllers\ExtensionController::class, 'exportinternacionalexcel']);
 Route::get('extension/mostrareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'mostrareventosinternacionales']);
 Route::get('extension/creareventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'creareventosinternacionales']);
 Route::post('extension/registroeventosinternacionales', [App\Http\Controllers\ExtensionController::class, 'registroeventosinternacionales']);

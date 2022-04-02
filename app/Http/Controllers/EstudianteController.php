@@ -74,6 +74,7 @@ class EstudianteController extends Controller
 
     public function create()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programasPlan = DB::table('programa')
             ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
             ->get();
@@ -106,6 +107,9 @@ class EstudianteController extends Controller
             ->with('estadoprogramas', $estadoprogramas)
             ->with('tiposdocumento', $tiposdocumento)
             ->with('tipousuarios', $tipousuarios);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function store(Request $request)
@@ -283,7 +287,7 @@ class EstudianteController extends Controller
 
     public function edit($id)
     {
-
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = DB::table('persona')
             ->select('persona.id','estu_programa','estu_programa_plan','per_tipo_documento',
             'per_numero_documento','per_nombre','per_apellido','per_telefono','estu_telefono2',
@@ -320,6 +324,9 @@ class EstudianteController extends Controller
             ->with('estadoprogramas', $estadoprogramas)
             ->with('tiposdocumento', $tiposdocumento)
             ->with('planes', $planes);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function update(Request $request, $id)
@@ -452,19 +459,28 @@ class EstudianteController extends Controller
 
     public function destroy($id)
     {
-        DB::table('estudiante_egresado')->where('este_id_estudiante', $id)->delete();
-        DB::table('estudiante')->where('estu_id_estudiante', $id)->delete();
-        DB::table('persona')->where('persona.id', $id)->delete();
-        Alert::success('Registro Eliminado');
-        return redirect('/estudiante');
+        try{
+            DB::table('estudiante_egresado')->where('este_id_estudiante', $id)->delete();
+            DB::table('estudiante')->where('estu_id_estudiante', $id)->delete();
+            DB::table('persona')->where('persona.id', $id)->delete();
+            Alert::success('Registro Eliminado');
+            return redirect('/estudiante');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar el estudiante, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 
     public function crearegresado($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $estudiante = DB::table('estudiante_egresado')
             ->where('este_id_estudiante', $id)
             ->first();
         return view('estudiante.egresado')->with('estudiante', $estudiante);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizaregresado(Request $request)
@@ -542,9 +558,13 @@ class EstudianteController extends Controller
 
     public function crearreporte()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programas = Programa::all();
         return view('estudiante/general.create')
             ->with('programas', $programas);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function registroreporte(Request $request)
@@ -628,11 +648,15 @@ class EstudianteController extends Controller
 
     public function editarreporte($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programas = Programa::all();
         $general = EstudianteReporte::find($id);
         return view('estudiante/general.edit')
             ->with('programas', $programas)
             ->with('general', $general);
+        }else{
+            return redirect('/home');
+        }
     }
 
     public function actualizarreporte(Request $request, $id)
@@ -888,54 +912,4 @@ class EstudianteController extends Controller
             return Excel::download(new EstudiantePeriodoExport($id,$request->get('estu_periodo_ingreso')), 'estudiantes-periodo-ingreso.xlsx');
         }
     }
-
-    /*
-    public function listadobeca(){
-        $estudiantes = Estudiante::all();
-        if ($estudiantes->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/estudiante');
-        } else {
-            return Excel::download(new BecasExport, 'estudiantes-becas.xlsx');
-        }
-    }
-
-    public function listadocontado(){
-        $estudiantes = Estudiante::all();
-        if ($estudiantes->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/estudiante');
-        } else {
-            return Excel::download(new ContadosExport, 'estudiantes-contado.xlsx');
-        }
-    }
-
-    public function listadoprestamo(){
-        $estudiantes = Estudiante::all();
-        if ($estudiantes->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/estudiante');
-        } else {
-            return Excel::download(new PrestamosExport, 'estudiantes-prestamo.xlsx');
-        }
-    }
-
-    public function listadoingreso(Request $request){
-        $ingreso = $request->get('estu_ingreso');
-        $estudiantes = DB::table('estudiante')
-        ->join('programa', 'estudiante.estu_programa','=','programa.id')
-        ->where('estu_ingreso', $ingreso)
-        ->get();
-        if ($estudiantes->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/estudiante');
-        } else {
-            $view = \view('estudiante.pdf', compact('estudiantes'))->render();
-            $pdf = \App::make('dompdf.wrapper');
-            $pdf->setPaper('A4', 'landscape');
-            $pdf->loadHTML($view);
-
-            return $pdf->stream('estudiantes-ingreso.pdf');
-        }
-    }*/
 }

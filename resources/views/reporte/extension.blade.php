@@ -92,6 +92,18 @@
         echo 'Módulo: internacionalización | redes disciplinarias - asociaciones - organizaciones';
     } elseif ($valor == 'curriculo') {
         echo 'Módulo: internacionalización | curriculo internacional';
+    } elseif ($valor == 'eventovirtual') {
+        echo 'Módulo: internacionalización | evento virtual';
+    } elseif ($valor == 'participacion') {
+        echo 'Módulo: internacionalización | participación eventos  ';
+    } elseif ($valor == 'einternacional') {
+        echo 'Módulo: internacionalización | evento internacional  ';
+    } elseif ($valor == 'mnacional') {
+        echo 'Módulo: movilidad | movilidad nacional  ';
+    } elseif ($valor == 'mintersede') {
+        echo 'Módulo: movilidad | movilidad intersede  ';
+    } elseif ($valor == 'minternacional') {
+        echo 'Módulo: movilidad | movilidad internacional  ';
     }
     ?></p>
 
@@ -443,11 +455,217 @@
                     <td>{{ $curriculo->exincu_year }}</td>
                     <td>{{ $curriculo->exincu_periodo }}</td>
                     <td>{{ $curriculo->asig_nombre }}</td>
-                    <td>{{ $curriculo->per_nombre.' '.$curriculo->per_apellido }}</td>
+                    <td>{{ $curriculo->per_nombre . ' ' . $curriculo->per_apellido }}</td>
                     <td>{{ $curriculo->ext_uso_idioma }}</td>
                     <td>{{ $curriculo->ext_uso_tic }}</td>
                     <td>{{ $curriculo->ext_competencia_global }}</td>
                     <td>{{ $curriculo->ext_movilidad_estudiante }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@elseif($valor == 'eventovirtual')
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre evento</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+                <th>Enlace ingreso</th>
+                <th>Nombre ponente</th>
+                <th>Institución</th>
+                <th>País</th>
+                <th>Ponencia</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; ?>
+            @foreach ($datos as $evento)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $evento->exevir_nombre_evento }}</td>
+                    <td>{{ $evento->exevir_fecha_inicio }}</td>
+                    <td>{{ $evento->exevir_fecha_fin }}</td>
+                    <td>{{ $evento->exevir_enlace_ingreso }}</td>
+                    <td>{{ $evento->exevir_nombre_ponente }}</td>
+                    <td>{{ $evento->exevir_institucion_origen }}</td>
+                    <td>{{ $evento->exevir_pais }}</td>
+                    <td>{{ $evento->exevir_nombre_ponencia }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@elseif($valor == 'participacion')
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Año</th>
+                <th>Periodo</th>
+                <th>Tipo evento</th>
+                <th>Nombre evento</th>
+                <th>Fecha</th>
+                <th>Organizador</th>
+                <th>Tipo documento</th>
+                <th>Número documento</th>
+                <th>Nombre (s)</th>
+                <th>Apellido (s)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; ?>
+            @foreach ($datos as $participacion)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $participacion->expaev_year }}</td>
+                    <td>{{ $participacion->expaev_periodo }}</td>
+                    <td>{{ $participacion->expaev_tipo_evento }}</td>
+                    <td>{{ $participacion->expaev_nombre_evento }}</td>
+                    <td>{{ $participacion->expaev_fecha }}</td>
+                    <td>{{ $participacion->expaev_organizador }}</td>
+                    <td>{{ $participacion->per_tipo_documento }}</td>
+                    <td>{{ $participacion->per_numero_documento }}</td>
+                    <td>{{ $participacion->per_nombre }}</td>
+                    <td>{{ $participacion->per_apellido }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@elseif($valor == 'einternacional')
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Año</th>
+                <th>Periodo</th>
+                <th>Nombre evento</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+                <th>Lugar</th>
+                <th>Sede</th>
+                <th>Ponente (s)</th>
+                <th>País</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; ?>
+            @foreach ($datos as $einternacional)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $einternacional->exevin_tipo }}</td>
+                    <td>{{ $einternacional->exevin_year }}</td>
+                    <td>{{ $einternacional->exevin_periodo }}</td>
+                    <td>{{ $einternacional->exevin_nombre_evento }}</td>
+                    <td>{{ $einternacional->exevin_fecha_inicio }}</td>
+                    <td>{{ $einternacional->exevin_fecha_final }}</td>
+                    <td>{{ $einternacional->exevin_lugar }}</td>
+                    <td>{{ $einternacional->exevin_sede }}</td>
+                    <td>{{ $einternacional->exevin_ponentes }}</td>
+                    <td>{{ $einternacional->exevin_pais }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@elseif($valor == 'mnacional')
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Rol</th>
+                <th>Sede</th>
+                <th>Facultad</th>
+                <th>Programa</th>
+                <th>Nombre completo</th>
+                <th>Tipo movilidad</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; ?>
+            @foreach ($datos as $mnacional)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $mnacional->exmona_tipo }}</td>
+                    <td>{{ $mnacional->exmona_rol }}</td>
+                    <td>{{ $mnacional->mun_nombre }}</td>
+                    <td>{{ $mnacional->fac_nombre }}</td>
+                    <td>{{ $mnacional->pro_nombre }}</td>
+                    <td>{{ $mnacional->per_nombre . ' ' . $mnacional->per_apellido }}</td>
+                    <td>{{ $mnacional->exmona_tipo_movilidad }}</td>
+                    <td>{{ $mnacional->exmona_fecha_inicio }}</td>
+                    <td>{{ $mnacional->exmona_fecha_final }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@elseif($valor == 'mintersede')
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Rol</th>
+                <th>Sede origen</th>
+                <th>Facultad origen</th>
+                <th>Programa origen</th>
+                <th>Nombre completo</th>
+                <th>Tipo movilidad</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; ?>
+            @foreach ($datos as $mintersede)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $mintersede->exmoin_tipo }}</td>
+                    <td>{{ $mintersede->exmoin_rol }}</td>
+                    <td>{{ $mintersede->mun_nombre }}</td>
+                    <td>{{ $mintersede->fac_nombre }}</td>
+                    <td>{{ $mintersede->pro_nombre }}</td>
+                    <td>{{ $mintersede->per_nombre . ' ' . $mintersede->per_apellido }}</td>
+                    <td>{{ $mintersede->exmoin_tipo_movilidad }}</td>
+                    <td>{{ $mintersede->exmoin_fecha_inicio }}</td>
+                    <td>{{ $mintersede->exmoin_fecha_final }}</td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+@elseif($valor == 'minternacional')
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tipo</th>
+                <th>Rol</th>
+                <th>Sede origen</th>
+                <th>Facultad origen</th>
+                <th>Programa origen</th>
+                <th>Nombre completo</th>
+                <th>Tipo movilidad</th>
+                <th>Fecha inicio</th>
+                <th>Fecha fin</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php $i = 1; ?>
+            @foreach ($datos as $minternacional)
+                <tr>
+                    <td>{{ $i++ }}</td>
+                    <td>{{ $minternacional->exmointer_tipo }}</td>
+                    <td>{{ $minternacional->exmointer_rol }}</td>
+                    <td>{{ $minternacional->mun_nombre }}</td>
+                    <td>{{ $minternacional->fac_nombre }}</td>
+                    <td>{{ $minternacional->pro_nombre }}</td>
+                    <td>{{ $minternacional->per_nombre . ' ' . $minternacional->per_apellido }}</td>
+                    <td>{{ $minternacional->exmointer_tipo_movilidad }}</td>
+                    <td>{{ $minternacional->exmointer_fecha_inicio }}</td>
+                    <td>{{ $minternacional->exmointer_fecha_final }}</td>
                 </tr>
             @endforeach
         </tbody>

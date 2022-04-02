@@ -189,10 +189,15 @@ class MovilidadController extends Controller
 
     public function destroy($id)
     {
-        $movilidad = Movilidad::find($id);
-        $movilidad->delete();
-        Alert::success('Exitoso','Registro eliminado');
-        return redirect('/movilidad');
+        try{
+            $movilidad = Movilidad::find($id);
+            $movilidad->delete();
+            Alert::success('Exitoso','Registro eliminado');
+            return redirect('/movilidad');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }    
     }
 
     public function exportpdf()

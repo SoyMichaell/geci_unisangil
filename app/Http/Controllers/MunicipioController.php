@@ -23,9 +23,13 @@ class MunicipioController extends Controller
 
     public function create()
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $departamentos = Departamento::all();
 
         return view('configuracion/municipio.create')->with("departamentos",$departamentos);
+        }else{
+            return redirect('/home');
+        }
     }
 
 
@@ -52,12 +56,6 @@ class MunicipioController extends Controller
         return redirect('/municipio');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $municipio = Municipio::find($id);
@@ -67,28 +65,19 @@ class MunicipioController extends Controller
             ->with('departamentos', $departamentos);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
+        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $municipio = Municipio::find($id);
         $departamentos = Departamento::all();
         return view('configuracion/municipio.edit')
             ->with('municipio', $municipio)
             ->with('departamentos', $departamentos);
+        }else{
+            return redirect('/home');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $rules = ['mun_nombre' => 'required'];
@@ -106,58 +95,17 @@ class MunicipioController extends Controller
         return redirect('/municipio');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $municipio = Municipio::find($id);
-        $municipio->delete();
-
-        Alert::success('Registro Eliminado');
-        return redirect('/municipio');
-
-    }
-    public function pdf(Request $request)
-    {
-        $municipios = Municipio::all();
-        if ($municipios->count() <= 0) {
-            Alert::warning('No hay registros');
+        try{
+            $municipio = Municipio::find($id);
+            $municipio->delete();
+    
+            Alert::success('Registro Eliminado');
             return redirect('/municipio');
-        } else {
-            $view = \view('configuracion/municipio.pdf', compact('municipios'))->render();
-            $pdf = \App::make('dompdf.wrapper');
-            $pdf->setPaper('A4', 'landscape');
-            $pdf->loadHTML($view);
-
-            /*DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'pdf',
-                'modulo' => 'municipios'
-            ]);*/
-
-            return $pdf->stream('municipios.pdf');
-        }
-    }
-
-    public function export()
-    {
-        $municipios = Municipio::all();
-        if ($municipios->count() <= 0) {
-            Alert::warning('No hay registros');
-            return redirect('/municipio');
-        } else {
-
-            /*DB::table('acciones_plataforma')->insert([
-                'usuario' => Auth::user()->id,
-                'accion' => 'excel',
-                'modulo' => 'municipios'
-            ]);*/
-
-            return Excel::download(new MunicipioExports, 'municipios.xlsx');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar esté municipio, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
         }
     }
 }
