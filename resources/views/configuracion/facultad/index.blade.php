@@ -42,15 +42,15 @@
                                 <form action="{{ route('facultad.destroy', $facultad->id) }}" method="POST">
                                     <div class="d-flex">
                                         <a class="btn btn-sm" href="facultad/{{ $facultad->id }}"
-                                            title="Visualizar"><i class="fa-solid fa-folder-open"></i></a>
+                                            title="Visualizar"><i class="fa fa-folder-open"></i></a>
                                         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <a class="btn btn-outline-info btn-sm btn-eye"
                                             href="/facultad/{{ $facultad->id }}/edit" title="Editar"><i
-                                                class="fa-solid fa-refresh"></i></a>
+                                                class="fa fa-refresh"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa fa-trash"></i></button>
                                         @endif
                                     </div>
                                 </form>

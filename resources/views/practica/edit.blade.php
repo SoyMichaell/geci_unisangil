@@ -2,20 +2,24 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/practica/{{$practica->id}}/edit">Editar</a> / <a href="/practica">Practica Laboral</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="tile">
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/practica/{{$practica->id}}/" method="post">
                 @csrf
                 @method('PUT')
                 <div class="seccion1">
-                    <h4>Información institución</h4>
+                    <h4><i class=""></i></h4>
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="prac_year">Año</label>
@@ -154,28 +158,28 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="">Tipo de persona</label>
-                        <select class="form-select" name="tipo_persona" id="tipo_persona">
-                            <option value="0">---- SELECCIONE ----</option>
-                            <option value="1" {{$practica->prac_id_docente != "" ? 'selected' : ''}}>Docente</option>
-                            <option value="2" {{$practica->prac_id_estudiante != "" ? 'selected' : ''}}>Estudiante</option>
+                        <select class="form-control" name="tipo_persona_movilidad" id="tipo_persona_movilidad">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="docente" {{$practica->prac_rol == "docente" ? 'selected' : ''}}>Docente</option>
+                            <option value="estudiante" {{$practica->prac_rol == "estudiante" ? 'selected' : ''}}>Estudiante</option>
                         </select>
                     </div>
                     <div class="col-md-4" id="docente">
                         <label for="">Docente</label>
-                        <select class="form-select" name="prac_id_docente" id="prac_id_docente">
+                        <select class="form-control" name="prac_id_docente" id="prac_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
-                                <option value="{{ $docente->id }}" {{$docente->id == $practica->prac_id_docente ? 'selected' : ''}}>
+                                <option value="{{ $docente->id }}" {{$docente->id == $practica->prac_id_persona ? 'selected' : ''}}>
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="col-md-4" id="estudiante">
                         <label for="">Estudiante</label>
-                        <select class="form-select" name="prac_id_estudiante" id="prac_id_estudiante">
+                        <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
-                                <option value="{{ $estudiante->id }}" {{$estudiante->id == $practica->prac_id_estudiante ? 'selected' : ''}}>
+                                <option value="{{ $estudiante->id }}" {{$estudiante->id == $practica->prac_id_persona ? 'selected' : ''}}>
                                     {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>

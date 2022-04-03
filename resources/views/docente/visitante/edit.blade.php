@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/docente/create">Crear</a> / <a href="/docente">Docente</a>
+        <a href="/docente/{{$docentevisitante->id}}/editardocentevisitante">Editar</a> / <a href="/mostrardocentevisitante">Docente visintante</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
@@ -16,7 +16,7 @@
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
                 <button class="nav-link active" id="informacion-tab" data-bs-toggle="tab" data-bs-target="#fase1"
-                    type="button" role="tab" aria-controls="fase1" aria-selected="true">Registro basico docente</button>
+                    type="button" role="tab" aria-controls="fase1" aria-selected="true">Actualizar información</button>
             </li>
         </ul>
         <div class="tab-content" id="myTabContent">
@@ -30,7 +30,7 @@
                             <label for="docvi_tipo_documento"
                                 class="col-md-12 col-form-label">{{ __('Tipo Documento *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('docvi_tipo_documento') is-invalid @enderror"
+                                <select class="form-control @error('docvi_tipo_documento') is-invalid @enderror"
                                     name="docvi_tipo_documento" id="docvi_tipo_documento">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="Tarjeta de identidad"
@@ -350,7 +350,7 @@
                             <label for="docvi_tipo_usuario"
                                 class="col-md-12 col-form-label">{{ __('Tipo de usuario *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('docvi_tipo_usuario') is-invalid @enderror"
+                                <select class="form-control @error('docvi_tipo_usuario') is-invalid @enderror"
                                     name="docvi_tipo_usuario" id="docvi_tipo_usuario">
                                     <option value="7"
                                         {{ $docentevisitante->docvi_tipo_usuario == '7' ? 'selected' : '' }}>Docente

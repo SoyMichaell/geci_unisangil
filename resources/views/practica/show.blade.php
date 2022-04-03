@@ -2,17 +2,20 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/practica/{{$practica->id}}">Vista</a> / <a href="/practica">Practica Laboral</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Datos registrados</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
         <div class="tile">
             <div class="seccion1">
-                <h4>Vista registro</h4>
+                <h4><i class="fa fa-question-circle"></i> Vista registro</h4>
                 <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -152,31 +155,31 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="">Tipo de persona</label>
-                    <select class="form-select" name="tipo_persona" id="tipo_persona" disabled>
-                        <option value="0">---- SELECCIONE ----</option>
-                        <option value="1" {{ $practica->prac_id_docente != '' ? 'selected' : '' }}>Docente</option>
-                        <option value="2" {{ $practica->prac_id_estudiante != '' ? 'selected' : '' }}>Estudiante
+                    <select class="form-control" name="tipo_persona_movilidad" id="tipo_persona_movilidad" disabled>
+                        <option value="">---- SELECCIONE ----</option>
+                        <option value="docente" {{ $practica->prac_rol == 'docente' ? 'selected' : '' }}>Docente</option>
+                        <option value="estudiante" {{ $practica->prac_rol == 'estudiante' ? 'selected' : '' }}>Estudiante
                         </option>
                     </select>
                 </div>
                 <div class="col-md-4" id="docente">
                     <label for="">Docente</label>
-                    <select class="form-select" name="prac_id_docente" id="prac_id_docente" disabled>
+                    <select class="form-control" name="prac_id_docente" id="prac_id_docente" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($docentes as $docente)
                             <option value="{{ $docente->id }}"
-                                {{ $docente->id == $practica->prac_id_docente ? 'selected' : '' }}>
+                                {{ $docente->id == $practica->prac_id_persona ? 'selected' : '' }}>
                                 {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-4" id="estudiante">
                     <label for="">Estudiante</label>
-                    <select class="form-select" name="prac_id_estudiante" id="prac_id_estudiante" disabled>
+                    <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
                             <option value="{{ $estudiante->id }}"
-                                {{ $estudiante->id == $practica->prac_id_estudiante ? 'selected' : '' }}>
+                                {{ $estudiante->id == $practica->prac_id_persona ? 'selected' : '' }}>
                                 {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                         @endforeach
                     </select>

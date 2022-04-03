@@ -227,8 +227,7 @@ class SoftwareController extends Controller
     public function editarrecurso($id){
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
         $asignaturas = ProgramaAsignatura::all();
         $recurso = SoftwareRecurso::find($id);
@@ -241,8 +240,7 @@ class SoftwareController extends Controller
     public function verrecurso($id){
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
             ->get();
         $asignaturas = ProgramaAsignatura::all();
         $recurso = SoftwareRecurso::find($id);

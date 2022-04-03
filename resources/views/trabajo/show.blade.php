@@ -2,10 +2,13 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/trabajo/{{$trabajo->id}}">Vista</a> / <a href="/trabajo">Trabajo de grado</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-wpforms"></i> Módulo trabajo de grado</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Lista de registro trabajo de grado</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 <style>
@@ -29,7 +32,7 @@
 @section('content')
     <div class="container">
         <div class="tile col-md-12">
-            <h4 class="tile">Información trabajo de grado</h4>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Información trabajo de grado</h4>
             <table style="width: 100%;">
                 <tbody>
                     <tr>
@@ -137,7 +140,7 @@
                 </tbody>
             </table>
             <br>
-            <h4 class="tile">Contratos jurados</h4>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Contratos jurados</h4>
             @if ($contratos->count() > 0)
                 <div class="row">
                     <div class="col-md-12">

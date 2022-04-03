@@ -3,12 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/docente/create">Crear</a> / <a href="/docente">Docente</a>
+        <a href="/docente/creardocentevisitante">Crear</a> / <a href="/docente/mostrardocentevisitante">Docente visintante</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
@@ -28,7 +28,7 @@
                             <label for="docvi_tipo_documento"
                                 class="col-md-12 col-form-label">{{ __('Tipo Documento *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('docvi_tipo_documento') is-invalid @enderror"
+                                <select class="form-control @error('docvi_tipo_documento') is-invalid @enderror"
                                     name="docvi_tipo_documento" id="docvi_tipo_documento">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="Tarjeta de identidad">Tarjeta de identidad</option>
@@ -338,7 +338,7 @@
                             <label for="docvi_tipo_usuario"
                                 class="col-md-12 col-form-label">{{ __('Tipo de usuario *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('docvi_tipo_usuario') is-invalid @enderror"
+                                <select class="form-control @error('docvi_tipo_usuario') is-invalid @enderror"
                                     name="docvi_tipo_usuario" id="docvi_tipo_usuario">
                                     <option value="7">Docente visitante</option>
                                 </select>

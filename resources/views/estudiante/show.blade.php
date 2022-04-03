@@ -2,20 +2,23 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/estudiante/{{$persona->id}}">Vista</a> / <a href="/estudiante">Estudiante</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del estudiante.</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="tile w-100">
-            <h4 class="tile title"><i class="fas fa-plus-square"></i> Registro estudiante</h4>
+            <h4 class="title"><i class="fa fa-question-circle"></i> Registro estudiante</h4><hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select" name="estu_programa" id="estu_programa" disabled>
+                        <select class="form-control" name="estu_programa" id="estu_programa" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}"
@@ -31,7 +34,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
-                        <select class="form-select" name="estu_programa_plan" id="estu_programa_plan" disabled>
+                        <select class="form-control" name="estu_programa_plan" id="estu_programa_plan" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($planes as $plan)
                                 <option value="{{ $plan->id }}"
@@ -49,7 +52,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_tipo_documento">{{ __('Tipo Documento *') }}</label>
-                        <select class="form-select" name="estu_tipo_documento" id="estu_tipo_documento" disabled>
+                        <select class="form-control" name="estu_tipo_documento" id="estu_tipo_documento" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($tiposdocumento as $tipo)
                                 <option value="{{ $tipo }}"
@@ -162,7 +165,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_departamento">{{ __('Departamento *') }}</label>
-                        <select class="form-select" name="estu_departamento" id="estu_departamento" disabled>
+                        <select class="form-control" name="estu_departamento" id="estu_departamento" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($departamentos as $departamento)
                                 <option value="{{ $departamento->id }}"
@@ -181,7 +184,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
-                        <select class="form-select" name="estu_ciudad" id="estu_ciudad" disabled>
+                        <select class="form-control" name="estu_ciudad" id="estu_ciudad" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}"
@@ -224,7 +227,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
-                        <select class="form-select" name="estu_sexo" id="estu_sexo" disabled>
+                        <select class="form-control" name="estu_sexo" id="estu_sexo" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="M" {{ $persona->estu_sexo == 'M' ? 'selected' : '' }}>Masculino</option>
                             <option value="F" {{ $persona->estu_sexo == 'F' ? 'selected' : '' }}>Femenino</option>
@@ -239,7 +242,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
-                        <select class="form-select" name="estu_estado_civil" id="estu_estado_civil" disabled>
+                        <select class="form-control" name="estu_estado_civil" id="estu_estado_civil" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="soltero(a)"
                                 {{ $persona->estu_estado_civil == 'soltero(a)' ? 'selected' : '' }}>Soltero (a)
@@ -304,7 +307,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_semestre">{{ __('Semestre *') }}</label>
-                        <select class="form-select" name="estu_semestre" id="estu_semestre" disabled>
+                        <select class="form-control" name="estu_semestre" id="estu_semestre" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{ $persona->estu_semestre == '1' ? 'selected' : '' }}>1</option>
                             <option value="2" {{ $persona->estu_semestre == '2' ? 'selected' : '' }}>2</option>
@@ -325,7 +328,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_financiamiento">{{ __('Tipo de financiamiento *') }}</label>
-                        <select class="form-select" name="estu_financiamiento" id="estu_financiamiento" disabled>
+                        <select class="form-control" name="estu_financiamiento" id="estu_financiamiento" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="beca" {{ $persona->estu_financiamiento == 'beca' ? 'selected' : '' }}>Beca
                             </option>
@@ -357,7 +360,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="estu_estado" id="estu_estado" disabled>
+                        <select class="form-control" name="estu_estado" id="estu_estado" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="activo" {{ $persona->estu_estado == 'activo' ? 'selected' : '' }}>Activo
                             </option>
@@ -386,7 +389,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
-                        <select class="form-select" name="estu_tipo_matricula" id="estu_tipo_matricula" disabled>
+                        <select class="form-control" name="estu_tipo_matricula" id="estu_tipo_matricula" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="movilidad-interna"
                                 {{ $persona->estu_tipo_matricula == 'movilidad-interna' ? 'selected' : '' }}>Movilidad
@@ -430,7 +433,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_matricula">{{ __('Matricula *') }}</label>
-                        <select class="form-select" name="estu_matricula" id="estu_matricula" disabled>
+                        <select class="form-control" name="estu_matricula" id="estu_matricula" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             <option value="pendiente" {{ $persona->estu_matricula == 'pendiente' ? 'selected' : '' }}>
                                 Pendiente</option>
@@ -466,7 +469,7 @@
                         <label for="estu_egresado">{{ __('¿Es egresado? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <select class="form-select" name="estu_egresado" id="estu_egresado" disabled>
+                                <select class="form-control" name="estu_egresado" id="estu_egresado" disabled>
                                     <option value="Si" {{ $persona->estu_egresado == 'Si' ? 'selected' : '' }}>Si
                                     </option>
                                     <option value="No" {{ $persona->estu_egresado == 'No' ? 'selected' : '' }}>No
@@ -480,7 +483,7 @@
                             for="estu_administrativo">{{ __('¿Es personal administrativo de unisangil? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <select class="form-select" name="estu_administrativo" id="estu_administrativo" disabled>
+                                <select class="form-control" name="estu_administrativo" id="estu_administrativo" disabled>
                                     <option value="Si" {{ $persona->estu_administrativo == 'Si' ? 'selected' : '' }}>Si
                                     </option>
                                     <option value="No" {{ $persona->estu_administrativo == 'No' ? 'selected' : '' }}>No

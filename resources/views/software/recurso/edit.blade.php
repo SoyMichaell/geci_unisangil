@@ -2,18 +2,20 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/software/{{$recurso->id}}/editarrecurso">Editar</a> / <a href="/software/mostrarrecurso">Recurso tecnológico</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
         <div class="tile">
             <form action="/software/{{$recurso->id}}/actualizarrecurso" method="post">
-                <h4>Actualizar información</h4>
-                <hr>
+                <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
@@ -43,7 +45,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="sofrete_tipo_recurso">Tipo recurso</label>
-                        <select class="form-select js-example-placeholder-single" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso">
+                        <select class="form-control js-example-placeholder-single" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="software" {{$recurso->sofrete_tipo_recurso == 'software' ? 'selected' : ''}}>Software</option>
                             <option value="plataforma-agora" {{$recurso->sofrete_tipo_recurso == 'plataforma-agora' ? 'selected' : ''}}>Plataforma Agora</option>
@@ -58,7 +60,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="sofrete_id_docente">Docente</label>
-                        <select class="form-select js-example-placeholder-single" name="sofrete_id_docente" id="sofrete_id_docente">
+                        <select class="form-control js-example-placeholder-single" name="sofrete_id_docente" id="sofrete_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}" {{$docente->id == $recurso->sofrete_id_docente ? 'selected' : ''}}>
@@ -73,7 +75,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="sofrete_id_asignatura">Asignatura</label>
-                        <select class="form-select js-example-placeholder-single" name="sofrete_id_asignatura" id="sofrete_id_asignatura">
+                        <select class="form-control js-example-placeholder-single" name="sofrete_id_asignatura" id="sofrete_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{ $asignatura->id }}" {{$asignatura->id == $recurso->sofrete_id_asignatura ? 'selected' : ''}}>{{ $asignatura->asig_nombre }}</option>

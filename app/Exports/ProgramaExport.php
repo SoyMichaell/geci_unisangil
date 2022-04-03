@@ -72,7 +72,7 @@ class ProgramaExport implements FromCollection, WithHeadings
             ->join('nivel_formacion', 'programa.pro_nivel_formacion', '=', 'nivel_formacion.id')
             ->join('metodologia', 'programa.pro_metodologia', '=', 'metodologia.id')
             ->join('persona', 'programa.pro_id_director', '=', 'persona.id')
-            ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
+            ->leftJoin('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
             ->get();
         return $programas;
     }

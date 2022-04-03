@@ -6,22 +6,21 @@
         <a href="/software/create">Crear</a> / <a href="/software">Software</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de software</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligencie los campos requeridos. </p>
+        <p>Diligencie todos los campos requeridos. </p>
     @endsection
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro software en uso</h4>
-            <hr>
+            <h4 class="titulo"><i class="fa fa-cube"></i> Registro de software</h4><hr>
             <form action="/software/" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="sof_tipo">{{ __('Tipo de software *') }}</label>
-                        <select class="form-select @error('sof_tipo') is-invalid @enderror" name="sof_tipo" id="sof_tipo">
+                        <select class="form-control @error('sof_tipo') is-invalid @enderror" name="sof_tipo" id="sof_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="libre">Libre</option>
                             <option value="pago">Pago</option>
@@ -107,13 +106,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="sof_asignatura">{{ __('Asignatura *') }}</label>
-                        <select class="js-example-placeholder-single form-select @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura[]" id="sof_asignatura" multiple="multiple">
+                        <select class="js-example-placeholder-single form-control @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura[]" id="sof_asignatura" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{$asignatura->asig_nombre}}">{{$asignatura->asig_nombre}}</option>
                             @endforeach
                         </select>
-                        <strong>{{$asignaturas->count()<=0 ? 'No hay asignaturas registradas' : ''}}</strong>
+                        <p class="badge badge-danger">{{$asignaturas->count()<=0 ? 'No existen asignaturas registradas' : ''}}</p>
                         @error('sof_tipo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -135,13 +134,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="sof_id_programa">{{ __('Programa *') }}</label>
-                        <select class="js-example-placeholder-single form-select @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa[]" id="sof_id_programa" multiple="multiple">
+                        <select class="js-example-placeholder-single form-control @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa[]" id="sof_id_programa" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{$programa->pro_nombre}}">{{$programa->pro_nombre}}</option>
                             @endforeach
                         </select>
-                        <strong>{{$programas->count()<=0 ? 'No hay programas registrados' : ''}}</strong>
+                        <p class="badge badge-danger">{{$programas->count()<=0 ? 'No existen programas registrados' : ''}}</p>
                         @error('sof_tipo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

@@ -154,6 +154,9 @@ class ProgramaController extends Controller
             ->where('per_id_estado', '=', 'activo')
             ->get();
         $programa = DB::table('programa')
+            ->select('programa.id','pro_nombre','per_nombre','per_apellido','pro_grupo_referencia','fac_nombre',
+            'niv_nombre','met_nombre','mun_nombre','pro_duraccion','pro_codigosnies','pro_resolucion',
+            'pro_fecha_ult','pro_fecha_prox','pro_programa_ciclo','pro_periodo_admision','pro_grupo_referencia_nbc')
             ->join('facultad','programa.pro_facultad','=','facultad.id')
             ->join('municipio','programa.pro_municipio','=','municipio.id')
             ->join('nivel_formacion','programa.pro_nivel_formacion','=','nivel_formacion.id')

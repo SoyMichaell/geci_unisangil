@@ -3,7 +3,7 @@
     <a href="/municipio/create">Crear</a> / <a href="/municipio">Municipio</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1> <!--TODO: Validad icono-->
+    <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1> <!--TODO: Validad icono-->
 @section('message')
     <p>Diligencie todos los campos requeridos *.</p>
 @endsection
@@ -11,23 +11,24 @@
 @section('content')
 <div class="container">
     <div class="tile">
-        <h4 class="title"><i class="fa fa-wpforms"></i> Registro municipio</h4>
+        <h4 class="title"><i class="fa fa-cube"></i> Registro municipio</h4><hr>
         <form action="/municipio" method="post">
             @csrf
             <div class="row mb-3">
-                <label for="mun_departamento">{{ __('Departamento *') }}</label>
                 <div class="col-md-12">
-                    <select class="form-select" name="mun_departamento"
+                    <label for="mun_departamento">{{ __('Departamento *') }}</label>
+                    <select class="form-control @error('mun_departamento') is-invalid @enderror" name="mun_departamento"
                         id="mun_departamento">
                         @foreach ($departamentos as $departamento)
                             <option value="{{ $departamento->id }}">{{ $departamento->dep_nombre }}</option>
                         @endforeach
                     </select>
+                    <p class="badge badge-danger">{{$departamentos->count()<=0 ? 'No existen registros de departamentos' : ''}}</p>
                 </div>
             </div>
             <div class="row mb-3">
-                <label for="mun_nombre">{{ __('Municipio *') }}</label>
                 <div class="col-md-12">
+                    <label for="mun_nombre">{{ __('Municipio *') }}</label>
                     <input id="mun_nombre" type="text" class="form-control @error('mun_nombre') is-invalid @enderror"
                         name="mun_nombre" value="{{ old('mun_nombre') }}" autocomplete="mun_nombre" autofocus>
                     @error('mun_nombre')

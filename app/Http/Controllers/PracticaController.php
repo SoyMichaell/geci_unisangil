@@ -14,21 +14,12 @@ class PracticaController extends Controller
 {
     public function index()
     {
-        $practicas = DB::table('practica_laboral')->get();
-        $docentes = DB::table('practica_laboral')
-            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
-            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
-            ->where('persona.per_tipo_usuario', 2)
-            ->orWhere('persona.per_tipo_usuario', 3)
-            ->get();
-        $estudiantes = DB::table('practica_laboral')
-            ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
-            ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
-            ->where('persona.per_tipo_usuario', 6)
-            ->get();
+        $practicas = DB::table('practica_laboral')
+        ->select('practica_laboral.id','prac_year','prac_rol','per_nombre','per_apellido','prac_razon_social','prac_nit_empresa','prac_pais',
+        'prac_departamento','prac_ciudad','prac_direccion','prac_telefono')
+        ->join('persona','practica_laboral.prac_id_persona','=','persona.id')
+        ->get();
         return view('practica.index')
-            ->with('docentes', $docentes)
-            ->with('estudiantes', $estudiantes)
             ->with('practicas', $practicas);
     }
 
@@ -87,12 +78,12 @@ class PracticaController extends Controller
         $practica->prac_telefono = $request->get('prac_telefono');
         $practica->prac_correo = $request->get('prac_correo');
         $practica->prac_area_practica = $request->get('prac_area_practica');
-        if ($request->get('tipo_persona') == '1') {
+        if ($request->get('tipo_persona_movilidad') == 'docente') {
             $practica->prac_id_persona = $request->get('prac_id_docente');
-            $practica->prac_id_rol = 'Docente';
-        } else if ($request->get('tipo_persona') == '2') {
+            $practica->prac_rol = 'docente';
+        } else if ($request->get('tipo_persona_movilidad') == 'estudiante') {
             $practica->prac_id_persona = $request->get('prac_id_estudiante');
-            $practica->prac_id_rol = 'Estudiante';
+            $practica->prac_rol = 'estudiante';
         }
         $practica->prac_cargo = $request->get('prac_cargo');
 
@@ -176,12 +167,12 @@ class PracticaController extends Controller
         $practica->prac_telefono = $request->get('prac_telefono');
         $practica->prac_correo = $request->get('prac_correo');
         $practica->prac_area_practica = $request->get('prac_area_practica');
-        if ($request->get('tipo_persona') == '1') {
-            $practica->prac_id_docente = $request->get('prac_id_docente');
-            $practica->prac_id_estudiante = null;
-        } else if ($request->get('tipo_persona') == '2') {
-            $practica->prac_id_estudiante = $request->get('prac_id_estudiante');
-            $practica->prac_id_docente = null;
+        if ($request->get('tipo_persona_movilidad') == 'docente') {
+            $practica->prac_id_persona = $request->get('prac_id_docente');
+            $practica->prac_rol = 'docente';
+        } else if ($request->get('tipo_persona_movilidad') == 'estudiante') {
+            $practica->prac_id_persona = $request->get('prac_id_estudiante');
+            $practica->prac_rol = 'estudiante';
         }
         $practica->prac_cargo = $request->get('prac_cargo');
 

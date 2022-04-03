@@ -2,10 +2,13 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/trabajo/{{$trabajo->id}}/edit">Editar</a> / <a href="/trabajo">Trabajo de grado</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-wpforms"></i> Módulo trabajo de grado</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Módulo trabajo de grado | completar información</h1>
     @section('message')
-        <p>Lista de registro trabajo de grado</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
@@ -80,7 +83,7 @@
                                 $estudiantex = explode(';', $trabajo->tra_id_estudiante);
                             @endphp
                             <label for="tra_id_estudiante">Estudiante (s)</label>
-                            <select class="js-example-placeholder-single form-select" name="tra_id_estudiante[]"
+                            <select class="js-example-placeholder-single form-control" name="tra_id_estudiante[]"
                                 id="tra_id_estudiante" multiple>
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($estudiantes as $estudiante)
@@ -111,7 +114,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="tra_modalidad_grado">Modalidad de grado</label>
-                            <select class="js-example-placeholder-single form-select" name="tra_modalidad_grado"
+                            <select class="js-example-placeholder-single form-control" name="tra_modalidad_grado"
                                 id="tra_modalidad_grado">
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($modalidades as $modalidad)
@@ -130,7 +133,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="tra_id_director">Director</label>
-                            <select class="js-example-placeholder-single form-select" name="tra_id_director"
+                            <select class="js-example-placeholder-single form-control" name="tra_id_director"
                                 id="tra_id_director">
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($personas as $persona)
@@ -147,7 +150,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="tra_id_codirector">Codirector</label>
-                            <select class="js-example-placeholder-single form-select" name="tra_id_codirector"
+                            <select class="js-example-placeholder-single form-control" name="tra_id_codirector"
                                 id="tra_id_codirector">
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($personas as $persona)
@@ -181,7 +184,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="tra_estado_propuesta">Estado de la propuesta</label>
-                                <select class="form-select" name="tra_estado_propuesta" id="tra_estado_propuesta">
+                                <select class="form-control" name="tra_estado_propuesta" id="tra_estado_propuesta">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="aprobada"
                                         {{ $trabajo->tra_estado_propuesta == 'aprobada' ? 'selected' : '' }}>Aprobada
@@ -202,7 +205,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="tra_estado_proyecto">Estado del proyecto</label>
-                                <select class="form-select" name="tra_estado_proyecto" id="tra_estado_proyecto">
+                                <select class="form-control" name="tra_estado_proyecto" id="tra_estado_proyecto">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="aprobado-anteproyecto"
                                         {{ $trabajo->tra_estado_proyecto == 'aprobado-anteproyecto' ? 'selected' : '' }}>
@@ -253,7 +256,7 @@
                         <div class="row mb-3">
                             <div class="col-md-6">
                                 <label for="tra_id_jurado1">Jurado 1</label>
-                                <select class="form-select" name="tra_id_jurado1" id="tra_id_jurado1">
+                                <select class="js-example-placeholder-single form-control" name="tra_id_jurado1" id="tra_id_jurado1">
                                     <option value="">---- SELECCIONE ----</option>
                                     @foreach ($personas as $persona)
                                         <option value="{{ $persona->id }}"
@@ -269,7 +272,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label for="tra_id_jurado2">Jurado 2</label>
-                                <select class="form-select" name="tra_id_jurado2" id="tra_id_jurado2">
+                                <select class="js-example-placeholder-single form-control" name="tra_id_jurado2" id="tra_id_jurado2">
                                     <option value="">---- SELECCIONE ----</option>
                                     @foreach ($personas as $persona)
                                         <option value="{{ $persona->id }}"

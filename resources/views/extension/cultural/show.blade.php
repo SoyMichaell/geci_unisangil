@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+         <a href="/extension/{{$actividad->id}}/veractividad">Vista</a> / <a href="/extension/mostraractividad">Actividad cultural</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Información de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Información de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcul_year">Año</label>
@@ -76,7 +79,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="extcul_tipo_actividad">Tipo de actividad</label>
-                    <select class="form-select" name="extcul_tipo_actividad" id="extcul_tipo_actividad" disabled>
+                    <select class="form-control" name="extcul_tipo_actividad" id="extcul_tipo_actividad" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="1" {{ $actividad->extcul_tipo_actividad == '1' ? 'selected' : '' }}>1.
                             Medio de comunicación</option>
@@ -124,7 +127,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="extcul_fuente_nacional">Fuente nacional</label>
-                    <select class="form-select" name="extcul_fuente_nacional" id="extcul_fuente_nacional" disabled>
+                    <select class="form-control" name="extcul_fuente_nacional" id="extcul_fuente_nacional" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($fuentenacionales as $nacionales)
                             <option value="{{ $nacionales->id }}"
@@ -166,7 +169,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="extcul_fuente_internacional">Fuente internacional</label>
-                    <select class="form-select" name="extcul_fuente_internacional" id="extcul_fuente_internacional"
+                    <select class="form-control" name="extcul_fuente_internacional" id="extcul_fuente_internacional"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($fuenteinternacionales as $internacionales)
@@ -207,11 +210,11 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile titulo"><i class="fa fa-question-circle"></i> Información Actividad Cultural Recurso Humano</h4>
             <div class="row mb-3">
-                <h4 class="tile titulo">Registro Actividad Cultural Recurso Humano</h4>
                 <div class="col-md-6">
                     <label for="extcul_persona">Recurso Humano | Persona</label>
-                    <select class="form-select js-example-placeholder-single" name="extcul_persona" id="extcul_persona" disabled>
+                    <select class="form-control js-example-placeholder-single" name="extcul_persona" id="extcul_persona" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)
                             <option value="{{$persona->id}}" {{$actividad->extcul_persona == $persona->id ? 'selected' : ''}}>{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>

@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/trabajo/create">Crear</a> / <a href="/trabajo">Trabajo de grado</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="tile">
+            <h4><i class="fa fa-cube"></i> Registro trabajo de grado</h4><hr>
             <form action="/trabajo/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -42,7 +46,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="tra_id_estudiante">Estudiante (s)</label>
-                        <select class="js-example-placeholder-single form-select" name="tra_id_estudiante[]"
+                        <select class="js-example-placeholder-single form-control" name="tra_id_estudiante[]"
                             id="tra_id_estudiante" multiple>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
@@ -50,6 +54,7 @@
                                     {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{$estudiantes->count()<=0 ? 'No existen registros de estudiantes' : ''}}</p>
                         @error('tra_id_estudiante')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -71,7 +76,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="tra_modalidad_grado">Modalidad de grado</label>
-                        <select class="js-example-placeholder-single form-select" name="tra_modalidad_grado"
+                        <select class="js-example-placeholder-single form-control" name="tra_modalidad_grado"
                             id="tra_modalidad_grado">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($modalidades as $modalidad)
@@ -88,7 +93,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="tra_id_director">Director</label>
-                        <select class="js-example-placeholder-single form-select" name="tra_id_director"
+                        <select class="js-example-placeholder-single form-control" name="tra_id_director"
                             id="tra_id_director">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
@@ -104,7 +109,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="tra_id_codirector">Codirector</label>
-                        <select class="js-example-placeholder-single form-select" name="tra_id_codirector"
+                        <select class="js-example-placeholder-single form-control" name="tra_id_codirector"
                             id="tra_id_codirector">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)

@@ -2,10 +2,13 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/docente/{{$persona->id}}">Vista</a> / <a href="/docente">Docente</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Campos registrados</p>
+        <p>Información de registro</p>
     @endsection
 @endsection
 <style>
@@ -26,7 +29,7 @@
     <div class="container">
         <div class="row p-3">
             <div class="col-md-8">
-                <h5 class="fw-bold">Información básica</h5>
+                <h5 class="fw-bold"><i class="fa fa-question-circle"></i> Información básica</h5>
                 <ul>
                     <li><strong>Nombre completo</strong> <br>
                         {{ $persona->per_nombre . ' ' . $persona->per_apellido }}</li>
@@ -37,7 +40,7 @@
                     <li><strong>Departamento</strong> <br> {{ $persona->dep_nombre }}</li>
                     <li><strong>Municipio</strong> <br> {{ $persona->mun_nombre }}</li>
                 </ul>
-                <h5 class="fw-bold">Información complementaria</h5>
+                <h5 class="fw-bold"><i class="fa fa-question-circle"></i> Información complementaria</h5>
                 <ul>
                     <li><strong>Ciudad de procedencia</strong> <br>
                         {{ $persona->ciudad_procedencia == '' ? 'Sin registro' : $persona->ciudad_procedencia }}</li>
@@ -64,7 +67,7 @@
                 </ul>
             </div>
             <div class="col-md-4">
-                <h5 class="fw-bold">Formación académica</h5>
+                <h5 class="fw-bold"><i class="fa fa-question-circle"></i> Formación académica</h5>
                 <ul>
                     <li><strong>Institución especialización</strong> <br>
                         {{ $persona->institucion_esp == "" ? 'Sin registro' : $persona->institucion_esp }}</li>

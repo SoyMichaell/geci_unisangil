@@ -6,7 +6,7 @@
         <a href="/practica">Practica Laboral</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Practicas Laborales</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Practicas Laborales</h1>
     @section('message')
         <p>Listado de practicas laborales docentes / estudiantes</p>
     @endsection
@@ -22,7 +22,7 @@
                     <div class="dropdown">
                         <a class="btn btn-outline-danger" style="border-radius: 100%" href="#" role="button"
                             id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-file-pdf"></i>
+                            <i class="fa fa-file-pdf-o"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="{{ url('practica/exportpdf') }}" target="_blank">Practica laboral general</a>
@@ -35,7 +35,7 @@
                     <div class="dropdown">
                         <a class="btn btn-outline-success" style="border-radius: 100%" href="#" role="button"
                             id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-file-pdf"></i>
+                            <i class="fa fa-file-pdf-o"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" href="{{ url('practica/exportexcel') }}">Practica laboral general</a>
@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="table-responsive mt-2">
-                <table class="table table-bordered" id="tables">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -78,29 +78,8 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $practica->prac_year }}</td>
-                                <td>
-                                    @php
-                                        if ($practica->prac_rol == 'Estudiante') {
-                                            echo 'Estudiante';
-                                        } elseif ($practica->prac_rol == 'Docente') {
-                                            echo 'Docente';
-                                        }
-                                        
-                                    @endphp
-                                </td>
-                                <td>
-                                    @php
-                                        if ($practica->prac_rol == 'Estudiante') {
-                                            foreach ($estudiantes as $estu) {
-                                                echo $estu->per_nombre . ' ' . $estu->per_apellido;
-                                            }
-                                        } elseif ($practica->prac_rol == 'Docente') {
-                                            foreach ($docentes as $doc) {
-                                                echo $doc->per_nombre . ' ' . $doc->per_apellido;
-                                            }
-                                        }  
-                                    @endphp
-                                </td>
+                                <td>{{ Str::ucfirst($practica->prac_rol) }}</td>
+                                <td>{{ $practica->per_nombre.' '.$practica->per_apellido}}</td>
                                 <td>{{ $practica->prac_razon_social }}</td>
                                 <td>{{ $practica->prac_nit_empresa }}</td>
                                 <td>{{ $practica->prac_pais }}</td>
@@ -113,14 +92,14 @@
                                         <form action="{{ route('practica.destroy', $practica->id) }}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="/practica/{{ $practica->id }}"><i
-                                                        class="fa-solid fa-folder-open"></i></a>
+                                                        class="fa fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
                                                     href="/practica/{{ $practica->id }}/edit"><i
-                                                        class="fa-solid fa-refresh"></i></a>
+                                                        class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     @endif

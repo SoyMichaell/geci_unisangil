@@ -6,9 +6,9 @@
         <a href="/programa/crearplan">Crear</a> / <a href="/programa/mostrarplan">Plan de estudio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Módulo Programa</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Plan de estudio | formulario de registro</h1>
     @section('message')
-        <p>Formulario de registro plan de estudio </p>
+        <p>Diligencie todo los campos requeridos *.</p>
     @endsection
 @endsection
 @section('content')

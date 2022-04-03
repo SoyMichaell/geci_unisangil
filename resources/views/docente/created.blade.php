@@ -2,10 +2,13 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/docente/{{$persona->id}}/directorcompletar">Completar información</a> / <a href="/docente">Docente</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de complemento de información</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
@@ -62,7 +65,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="dedicacion">{{ __('Dedicación *') }}</label>
-                            <select class="form-select" name="dedicacion" id="dedicacion">
+                            <select class="form-control" name="dedicacion" id="dedicacion">
                                 <option value="medio-tiempo"
                                     {{ $cuenta > 0 ? ($docente->dedicacion == 'medio-tiempo' ? 'selected' : '') : '' }}>Medio tiempo
                                 </option>
@@ -76,7 +79,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="tipo_contratacion">{{ __('Tipo de contratación *') }}</label>
-                            <select class="form-select" name="tipo_contratacion" id="tipo_contratacion">
+                            <select class="form-control" name="tipo_contratacion" id="tipo_contratacion">
                                 <option value="contrato-indefinido" {{ $cuenta > 0 ? ($docente->tipo_contratacion == 'contrato-indefinido' ? 'selected' : '') : '' }}>Contrato indefinido</option>
                                 <option value="contrato-a-termino-fijo" {{ $cuenta > 0 ? ($docente->tipo_contratacion == 'contrato-a-termino-fijo' ? 'selected' : '') : '' }}> Contrato a término fijo</option>
                             </select>
@@ -174,7 +177,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="estado">{{ __('Estado *') }}</label>
-                            <select class="form-select" name="estado" id="estado">
+                            <select class="form-control" name="estado" id="estado">
                                 <option value="activo" {{ $cuenta > 0 ? ($docente->estado == 'activo' ? 'selected' : '') : '' }}>Activo
                                 </option>
                                 <option value="inactivo" {{ $cuenta > 0 ? ($docente->estado == 'inactivo' ? 'selected' : '') : '' }}>
@@ -418,7 +421,7 @@
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="modalidad_programa">{{ __('Modalidad programa *') }}</label>
-                            <select class="form-select" name="modalidad_programa" id="modalidad_programa">
+                            <select class="form-control" name="modalidad_programa" id="modalidad_programa">
                                 <option value="">---- SELECCIONE ----</option>
                                 <option value="presencial" {{$cuenta > 0 ? ($docente->modalidad_programa == 'presencial' ? 'selected' : '') : 'presencial'}}>Presencial</option>
                                 <option value="virtual" {{$cuenta > 0 ? ($docente->modalidad_programa == 'virtual' ? 'selected' : '') : 'virtual'}}>Virtual</option>
@@ -466,7 +469,8 @@
                                 </span>
                             @enderror
                         </div>
-                    <div class="row mb-0">
+                    </div>
+                    <div class="row mb-3">
                         <div class="col-md-12 offset-md-12 mt-2">
                             <button type="submit" class="btn btn-success">
                                 {{ __('Finalizar') }}

@@ -3,7 +3,7 @@
     <a href="/nivelformacion/show">Vista</a> / <a href="/nivelformacion">Nivel de formación</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-book" ></i> Visualizar información</h1>
+    <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
 @section('message')
     <p>Información de registro</p>
 @endsection
@@ -11,10 +11,10 @@
 @section('content')
 <div class="container">
     <div class="tile">
-        <h4 class="title"><i class="fa-solid fa-question-circle"></i> Vista registro</h4>
-        <div class="row mb-3">
-            <label for="niv_nombre">{{ __('Nivel Formación *') }}</label>
+        <h4 class="title"><i class="fa fa-question-circle"></i> Vista registro</h4><hr>
+        <div class="row mb-3">            
             <div class="col-md-12">
+                <label for="niv_nombre">{{ __('Nivel Formación *') }}</label>
                 <input id="niv_nombre" type="text" class="form-control @error('niv_nombre') is-invalid @enderror"
                     name="niv_nombre" value="{{ $nivelformacion->niv_nombre }}" autocomplete="niv_nombre" readonly
                     autofocus>

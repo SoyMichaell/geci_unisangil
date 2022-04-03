@@ -7,7 +7,7 @@
             href="/docente/{{ $persona->id }}/mostrarcontrato">Contrato</a> / <a href="/docente">Docente</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de actualización</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar los campos requeridos.</p>
     @endsection
@@ -15,8 +15,7 @@
 @section('content')
     <div class="container">
         <div class="bg-white p-3">
-            <h4><i class="fab fa-wpforms"></i> Actualizar datos del contrato</h4>
-            <hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/docente/{{ $contrato->id }}/actualizarcontrato" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -48,7 +47,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="doco_tipo_contrato">{{ __('Número de contrato *') }}</label>
-                        <select class="form-select" name="doco_tipo_contrato" id="doco_tipo_contrato">
+                        <select class="form-control" name="doco_tipo_contrato" id="doco_tipo_contrato">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="ops" {{ $contrato->doco_tipo_contrato == 'ops' ? 'selected' : '' }}>OPS
                             </option>
@@ -88,7 +87,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="doco_rol">{{ __('Rol *') }}</label>
-                        <select class="form-select" name="doco_rol" id="doco_rol">
+                        <select class="form-control" name="doco_rol" id="doco_rol">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="director" {{ $contrato->doco_rol == 'director' ? 'selected' : '' }}>Director
                             </option>
@@ -115,7 +114,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="doco_estado">{{ __('Estado de pago *') }}</label>
-                        <select class="form-select" name="doco_estado" id="doco_estado">
+                        <select class="form-control" name="doco_estado" id="doco_estado">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="cancelado" {{ $contrato->doco_estado == 'cancelado' ? 'selected' : '' }}>
                                 Cancelado</option>

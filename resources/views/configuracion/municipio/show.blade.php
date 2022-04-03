@@ -3,7 +3,7 @@
     <a href="/municipio/show">Vista</a> / <a href="/municipio">Municipio</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-book" ></i> Visualizar información</h1>
+    <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
 @section('message')
     <p>Información de registro</p>
 @endsection
@@ -11,12 +11,11 @@
 @section('content')
 <div class="container">
     <div class="tile">
-        <h4 class="title"><i class="fa fa-question-circle"></i> Vista registro</h4>
+        <h4 class="title"><i class="fa fa-question-circle"></i> Vista registro</h4><hr>
         <div class="row mb-3">
-            <label for="mun_departamento">{{ __('Departamento *') }}</label>
             <div class="col-md-12">
-                <select class="js-example-placeholder-single form-select" name="mun_departamento" id="mun_departamento"
-                    disabled>
+                <label for="mun_departamento">{{ __('Departamento *') }}</label>
+                <select class="form-control" name="mun_departamento" id="mun_departamento" disabled>
                     <option value="">---- SELECCIONE ----</option>
                     @foreach ($departamentos as $departamento)
                         <option value="{{ $departamento->id }}"
@@ -27,8 +26,8 @@
             </div>
         </div>
         <div class="row mb-3">
-            <label for="mun_nombre">{{ __('Municipio *') }}</label>
             <div class="col-md-12">
+                <label for="mun_nombre">{{ __('Municipio *') }}</label>
                 <input id="mun_nombre" type="text" class="form-control @error('mun_nombre') is-invalid @enderror"
                     name="mun_nombre" value="{{ $municipio->mun_nombre }}" disabled required autocomplete="mun_nombre"
                     autofocus>

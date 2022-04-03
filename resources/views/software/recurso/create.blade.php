@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar los campos requeridos.</p>
     @endsection
@@ -11,10 +11,9 @@
 @section('content')
     <div class="container">
         <div class="tile">
+            <h4><i class="fa fa-cube"></i> Registro recurso</h4><hr>
             <form action="/software/registrorecurso" method="post">
                 @csrf
-                <h4>Registro recursos tecnológicos</h4>
-                <hr>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="sofrete_year">Año</label>
@@ -43,7 +42,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="sofrete_tipo_recurso">Tipo recurso</label>
-                        <select class="form-select js-example-placeholder-single @error('sofrete_tipo_recurso') is-invalid @enderror" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso">
+                        <select class="form-control js-example-placeholder-single @error('sofrete_tipo_recurso') is-invalid @enderror" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="software">Software</option>
                             <option value="plataforma-agora">Plataforma Agora</option>
@@ -58,12 +57,13 @@
                     </div>
                     <div class="col-md-4">
                         <label for="sofrete_id_docente">Docente</label>
-                        <select class="form-select js-example-placeholder-single @error('sofrete_id_docente') is-invalid @enderror" name="sofrete_id_docente" id="sofrete_id_docente">
+                        <select class="form-control js-example-placeholder-single @error('sofrete_id_docente') is-invalid @enderror" name="sofrete_id_docente" id="sofrete_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{$docente->id}}">{{$docente->per_nombre.' '.$docente->per_apellido}}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{$docentes->count()<=0 ? 'No existen registro de docentes' : ''}}</p>
                         @error('sofrete_id_docente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -72,12 +72,13 @@
                     </div>
                     <div class="col-md-4">
                         <label for="sofrete_id_asignatura">Asignatura</label>
-                        <select class="form-select js-example-placeholder-single @error('sofrete_id_asignatura') is-invalid @enderror" name="sofrete_id_asignatura" id="sofrete_id_asignatura">
+                        <select class="form-control js-example-placeholder-single @error('sofrete_id_asignatura') is-invalid @enderror" name="sofrete_id_asignatura" id="sofrete_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{$asignatura->id}}">{{$asignatura->asig_nombre}}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{$asignaturas->count()<=0 ? 'No existen registro de asignaturas' : ''}}</p>
                         @error('sofrete_id_docente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

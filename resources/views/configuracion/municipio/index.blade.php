@@ -3,7 +3,7 @@
     <a href="/municipio">Municipio</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-cog"></i> Configuración / municipio</h1>
+    <h1 class="titulo"><i class="fa fa-cog"></i> Configuración / municipios</h1>
     <p>Municipios: Listado municipios o sedes registrados</p>
 @endsection
 @section('content')
@@ -16,7 +16,7 @@
                     <div class="col-md-5 d-flex justify-content-end align-items-start">
                         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('municipio/create') }}"><i
-                        class="fa-solid fa-plus-circle"></i>
+                        class="fa fa-plus-circle"></i>
                             Nuevo</a>
                         @endif
                     </div>
@@ -43,15 +43,15 @@
                                         <form action="{{ route('municipio.destroy', $municipio->id) }}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="municipio/{{ $municipio->id }}"
-                                                    title="Visualizar"><i class="fa-solid fa-folder-open"></i></a>
+                                                    title="Visualizar"><i class="fa fa-folder-open"></i></a>
                                                 @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/municipio/{{ $municipio->id }}/edit" title="Editar"><i
-                                                    class="fa-solid fa-refresh"></i></a>
+                                                    class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa fa-trash"></i></button>
                                                 @endif
                                             </div>
                                         </form>

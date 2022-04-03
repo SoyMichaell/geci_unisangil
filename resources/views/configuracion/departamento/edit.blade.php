@@ -9,13 +9,13 @@
 @section('content')
 <div class="container">
     <div class="tile">
-        <h4 class="title">Actualizar información</h4>
+        <h4 class="title"><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
         <form action="/departamento/{{ $departamento->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="row mb-3">
-                <label for="dep_nombre">{{ __('Departamento *') }}</label>
                 <div class="col-md-12">
+                    <label for="dep_nombre">{{ __('Departamento *') }}</label>
                     <input id="dep_nombre" type="text" class="form-control @error('dep_nombre') is-invalid @enderror"
                         name="dep_nombre" value="{{ $departamento->dep_nombre }}" autocomplete="dep_nombre" autofocus>
                     @error('dep_nombre')

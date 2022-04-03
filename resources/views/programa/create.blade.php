@@ -6,13 +6,13 @@
         <a href="/programa/create">Crear</a> / <a href="/programa">Programa</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile w-100 mx-auto">
             <h4><i class="fa fa-cube"></i> Registro programa</h4>
             <hr>

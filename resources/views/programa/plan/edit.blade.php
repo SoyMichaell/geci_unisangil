@@ -3,18 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa/editarplan">Editar</a> / <a href="/programa/mostrarplan">Plan de estudio</a>
+        <a href="/programa/{{$plan->id}}/editarplan">Editar</a> / <a href="/programa/mostrarplan">Plan de estudio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Módulo Programa</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Módulo Programa | formulario de edición</h1>
     @section('message')
-        <p>Formulario de edición plan de estudio</p>
+        <p>Diligencia todos los campos requeridos *.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Actualizar plan de estudio</h4>
+            <h4 class="titulo"><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/programa/{{ $plan->id }}/actualizarplan" method="post">
                 @csrf
                 @method('PUT')

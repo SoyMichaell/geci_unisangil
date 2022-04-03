@@ -3,7 +3,7 @@
     <a href="/facultad/edit">Editar</a> / <a href="/facultad">Facultad</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-pencil-square"></i> Formulario de edición</h1>
+    <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
 @section('message')
     <p>Diligencie todos los campos requeridos *.</p>
 @endsection
@@ -11,13 +11,13 @@
 @section('content')
 <div class="container">
     <div class="tile">
-        <h4 class="title">Actualizar información</h4>
+        <h4 class="title"><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
         <form action="/facultad/{{ $facultad->id }}" method="POST">
             @csrf
             @method('PUT')
             <div class="row mb-3">
-                <label for="fac_nombre">{{ __('Facultad *') }}</label>
                 <div class="col-md-12">
+                    <label for="fac_nombre">{{ __('Facultad *') }}</label>
                     <input id="fac_nombre" type="text" class="form-control @error('fac_nombre') is-invalid @enderror"
                         name="fac_nombre" value="{{ $facultad->fac_nombre }}" required autocomplete="fac_nombre"
                         autofocus>

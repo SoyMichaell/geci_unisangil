@@ -6,7 +6,7 @@
         <a href="/extension">Extensión</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización</h1>
     @section('message')
         <p>Listado eventos extensión e internacionalización</p>
     @endsection
@@ -41,31 +41,31 @@
         <hr>
         <div class="row mb-3">
             <a class="card__extension" href="/extension/mostraractividad">
-                <i class="fa-solid fa-boxes-stacked fa-4x"></i>
+                <i class="fa fa-map-o fa-4x"></i>
                 <h4 class="mt-2">Actividad cultural</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarconsultoria">
-                <i class="fa-solid fa-magnifying-glass fa-4x"></i>
+                <i class="fa fa-search fa-4x"></i>
                 <h4 class="mt-2">Consultoria</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarcurso">
-                <i class="fa-solid fa-signature fa-4x"></i>
+                <i class="fa fa-book fa-4x"></i>
                 <h4 class="mt-2">Curso</h4>
             </a>
             <a class="card__extension" href="/extension/mostrareducacion">
-                <i class="fa-solid fa-chalkboard fa-4x"></i>
+                <i class="fa fa-window-restore fa-4x"></i>
                 <h4 class="mt-2">Educación continua</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarparticipante">
-                <i class="fa-solid fa-chalkboard-user fa-4x"></i>
+                <i class="fa fa-users fa-4x"></i>
                 <h4 class="mt-2">Participante</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarproyectoextension">
-                <i class="fa-solid fa-book-open-reader fa-4x"></i>
+                <i class="fa fa-external-link-square fa-4x"></i>
                 <h4 class="mt-2">Proyecto de extensión</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarservicioextension">
-                <i class="fa-solid fa-book-open-reader fa-4x"></i>
+                <i class="fa fa-external-link-square fa-4x"></i>
                 <h4 class="mt-2">Servicio de extensión</h4>
             </a>
         </div>
@@ -73,31 +73,31 @@
         <hr>
         <div class="row mb-3">
             <a class="card__extension" href="/extension/mostrarregistrofotografico">
-                <i class="fa-solid fa-camera fa-4x"></i>
+                <i class="fa fa-camera fa-4x"></i>
                 <h4 class="mt-2">Registro fotografico actividades</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarinterredconvenio">
-                <i class="fa-solid fa-microchip fa-4x"></i>
+                <i class="fa fa-microchip fa-4x"></i>
                 <h4 class="mt-2">Redes acádemicas</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarinterorganizacion">
-                <i class="fa-solid fa-magnifying-glass fa-4x"></i>
+                <i class="fa fa-sitemap fa-4x"></i>
                 <h4 class="mt-2">Redes disciplinarias - asociaciones - organizaciones</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarcurriculo">
-                <i class="fa-solid fa-globe fa-4x"></i>
+                <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Internacionalización de curriculo (asignauturas)</h4>
             </a>
             <a class="card__extension" href="/extension/mostrareventosvirtuales">
-                <i class="fa-solid fa-globe fa-4x"></i>
+                <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Eventos virtuales</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarparticipacioneventos">
-                <i class="fa-solid fa-globe fa-4x"></i>
+                <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Participación eventos</h4>
             </a>
             <a class="card__extension" href="/extension/mostrareventosinternacionales">
-                <i class="fa-solid fa-globe fa-4x"></i>
+                <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Eventos internacionales</h4>
             </a>
         </div>
@@ -105,15 +105,15 @@
         <hr>
         <div class="row mb-3">
             <a class="card__extension" href="/extension/mostrarmovilidadnacional">
-                <i class="fa-solid fa-caravan fa-4x"></i>
+                <i class="fa fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Nacional</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarmovilidadintersede">
-                <i class="fa-solid fa-plane fa-4x"></i>
+                <i class="fa fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Intersedes</h4>
             </a>
             <a class="card__extension" href="/extension/mostrarmovilidadinternacional">
-                <i class="fa-solid fa-plane-departure fa-4x"></i>
+                <i class="fa fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Internacional</h4>
             </a>
         </div>

@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fas fa-users"></i> Módulo Estudiantes</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Estudiantes</h1>
     @section('message')
         <p>Estudiantes - programas</p>
     @endsection
@@ -28,16 +28,16 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Estudiantes por programa</h3>
+        <h3>Listado de estudiantes registrados por programa académico</h3>
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur accusamus enim eius quaerat? Consectetur
             esse, explicabo obcaecati libero iste et vero ratione, eius voluptates cupiditate dolore illum? Repudiandae,
             blanditiis inventore.</p>
         <hr>
         <div class="d-flex justify-content-end">
             <a class="btn btn-outline-danger" href="{{url('estudiante/exportpdfgeneral')}}" title="Generar reporte pdf" target="_blank"><i
-                    class="fa-solid fa-file-pdf"></i></a>
+                    class="fa fa-file-pdf-o"></i></a>
             <a class="btn btn-outline-success" href="{{url('estudiante/exportexcelgeneral')}}" title="Generar reporte excel" target="_blank"><i
-                    class="fa-solid fa-file-excel"></i></a>
+                    class="fa fa-file-excel-o"></i></a>
             @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                 <a class="btn btn-outline-success btn-sm" href="{{ url('estudiante/create') }}"><i
                         class="fa fa-plus-circle"></i>

@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/docente/{{$persona->id}}/directorcompletar">Completar información</a> / <a href="/docente">Docente</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de actualización</h1>
     @section('message')

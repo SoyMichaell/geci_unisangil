@@ -2,17 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/software/{{$recurso->id}}/verrecurso">Vista</a> / <a href="/software/mostrarrecurso">Recurso tecnológico</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Información registrada.</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Información de registro</h4>
-            <hr>
+            <h4><i class="fa fa-question-circle"></i> Vista registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="sofrete_year">Año</label>
@@ -40,7 +42,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="sofrete_tipo_recurso">Tipo recurso</label>
-                    <select class="form-select" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso" disabled>
+                    <select class="form-control" name="sofrete_tipo_recurso" id="sofrete_tipo_recurso" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="software" {{ $recurso->sofrete_tipo_recurso == 'software' ? 'selected' : '' }}>
                             Software</option>
@@ -61,7 +63,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="sofrete_id_docente">Docente</label>
-                    <select class="form-select" name="sofrete_id_docente" id="sofrete_id_docente" disabled>
+                    <select class="form-control" name="sofrete_id_docente" id="sofrete_id_docente" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($docentes as $docente)
                             <option value="{{ $docente->id }}"
@@ -77,7 +79,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="sofrete_id_asignatura">Asignatura</label>
-                    <select class="form-select" name="sofrete_id_asignatura" id="sofrete_id_asignatura" disabled>
+                    <select class="form-control" name="sofrete_id_asignatura" id="sofrete_id_asignatura" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($asignaturas as $asignatura)
                             <option value="{{ $asignatura->id }}"

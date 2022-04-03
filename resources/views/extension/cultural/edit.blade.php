@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+         <a href="/extension/{{$actividad->id}}/editaractividad">Editar</a> / <a href="/extension/mostraractividad">Actividad cultural</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$actividad->id}}/actualizaractividad" method="post">
                 @csrf
                 @method('PUT')
@@ -78,7 +81,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcul_tipo_actividad">Tipo de actividad</label>
-                        <select class="form-select" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
+                        <select class="form-control" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$actividad->extcul_tipo_actividad == '1' ? 'selected' : ''}}>1. Medio de comunicación</option>
                             <option value="2" {{$actividad->extcul_tipo_actividad == '2' ? 'selected' : ''}}>2. Semana cultural</option>
@@ -121,7 +124,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="extcul_fuente_nacional">Fuente nacional</label>
-                        <select class="form-select" name="extcul_fuente_nacional" id="extcul_fuente_nacional">
+                        <select class="form-control" name="extcul_fuente_nacional" id="extcul_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionales as $nacionales)
                                 <option value="{{ $nacionales->id }}" {{$actividad->extcul_fuente_nacional == $nacionales->id ? 'selected' : '' }}>{{ $nacionales->cofuna_nombre }}</option>
@@ -161,7 +164,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="extcul_fuente_internacional">Fuente internacional</label>
-                        <select class="form-select" name="extcul_fuente_internacional"
+                        <select class="form-control" name="extcul_fuente_internacional"
                             id="extcul_fuente_internacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuenteinternacionales as $internacionales)
@@ -200,11 +203,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile titulo"><i class="fa fa-pencil"></i> Actualizar Actividad Cultural Recurso Humano</h4>
                 <div class="row mb-3">
-                    <h4 class="tile titulo">Registro Actividad Cultural Recurso Humano</h4>
                     <div class="col-md-6">
                         <label for="extcul_persona">Recurso Humano | Persona</label>
-                        <select class="form-select js-example-placeholder-single" name="extcul_persona" id="extcul_persona">
+                        <select class="form-control js-example-placeholder-single" name="extcul_persona" id="extcul_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}" {{$actividad->extcul_persona == $persona->id ? 'selected' : ''}}>{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>

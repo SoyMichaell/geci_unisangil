@@ -24,7 +24,7 @@ class Practica extends Model
             'prac_correo',
             'prac_area_practica',
             'prac_id_persona',
-            'prac_rol',
+            'prac_id_rol',
             'prac_cargo',
     ];
 }

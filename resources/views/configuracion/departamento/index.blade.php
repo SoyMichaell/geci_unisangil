@@ -43,15 +43,15 @@
                                 <form action="{{ url("departamento/{$departamento->id}") }}" method="POST">
                                     <div class="d-flex">
                                         <a class="btn btn-sm" href="/departamento/{{ $departamento->id }}"
-                                            title="Ver registro"><i class="fa-solid fa-folder-open"></i></a>
+                                            title="Ver registro"><i class="fa fa-folder-open"></i></a>
                                         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                         <a class="btn btn-outline-info btn-sm"
                                             href="departamento/{{ $departamento->id }}/edit"
-                                            title="Editar registro"><i class="fa-solid fa-refresh"></i></a>
+                                            title="Editar registro"><i class="fa fa-refresh"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa fa-trash"></i></button>
                                         @endif
                                     </div>
                                 </form>

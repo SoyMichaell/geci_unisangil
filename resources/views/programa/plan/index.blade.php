@@ -6,7 +6,7 @@
         <a href="/programa/mostrarplan">Plan de estudio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Planes de estudio</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Plan de estudio</h1>
         <p>Listado plan de estudios programas</p>
     @section('message')
     @endsection
@@ -21,11 +21,12 @@
                             <h4>Listado plan de estudios</h4>
                         </div>
                         <div class="col-md-5 d-flex justify-content-end align-items-center">
-                            <a class="btn btn-outline-success" href="/programa/crearplan"><i class="fa fa-plus-circle"></i>
+                            <a class="btn btn-outline-success" href="/programa/crearplan"><i
+                                    class="fa fa-plus-circle"></i>
                                 Nuevo</a>
                         </div>
                     </div>
-                    <table class="table table-bordered" id="tables">
+                    <table class="table" id="tables">
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -35,7 +36,7 @@
                                 <th>Número de creditos</th>
                                 <th>Número de asignaturas</th>
                                 <th>Estado</th>
-                                <th>Acciones</th>
+                                <th style="width: 15%">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -48,28 +49,28 @@
                                     <td>{{ $plan->pp_creditos }}</td>
                                     <td>{{ $plan->pp_no_asignaturas }}</td>
                                     <td>{{ Str::ucfirst($plan->pp_estado) }}</td>
-                                    <td>
-                                        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                        <td>
                                             <form action="/programa/{{ $plan->id }}/estado" method="POST">
                                                 <div class="d-flex text-center">
                                                     @if ($plan->pp_estado == 'activo')
                                                         <a class="btn btn-outline-info btn-sm"
                                                             href="/programa/{{ $plan->id }}/editarplan"><i
-                                                                class="fa-solid fa-refresh text-center"></i> Editar</a>
+                                                                class="fa fa-refresh text-center"></i></a>
                                                     @endif
                                                     @csrf
                                                     @method('PUT')
                                                     @if ($plan->pp_estado == 'activo')
                                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                                                class="fa-solid fa-ban"></i> Inactivar</button>
+                                                                class="fa fa-ban"></i> Inactivar</button>
                                                     @else
                                                         <button type="submit" class="btn btn-success btn-sm"><i
-                                                                class="fa-solid fa-circle-check"></i> Activar</button>
+                                                                class="fa fa-circle-check"></i> Activar</button>
                                                     @endif
                                                 </div>
                                             </form>
-                                        @endif
-                                    </td>
+                                        </td>
+                                    @endif
                                 </tr>
                             @endforeach
                         </tbody>

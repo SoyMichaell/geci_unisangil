@@ -3,25 +3,25 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/software/edit">Editar</a> / <a href="/software">Software</a>
+        <a href="/software/{{$software->id}}/edit">Editar</a> / <a href="/software">Software</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligencie los campos requeridos.</p>
+        <p>Diligencie todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Actualizar información registro</h4>
+            <h4 class="titulo"><i class="fa fa-pencils"></i> Actualizar información</h4><hr>
             <form action="/software/{{$software->id}}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="sof_tipo">{{ __('Tipo de software *') }}</label>
-                        <select class="form-select @error('sof_tipo') is-invalid @enderror" name="sof_tipo" id="sof_tipo">
+                        <select class="form-control @error('sof_tipo') is-invalid @enderror" name="sof_tipo" id="sof_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="libre" {{$software->sof_tipo == 'libre' ? 'selected' : ''}}>Libre</option>
                             <option value="pago" {{$software->sof_tipo == 'pago' ? 'selected' : ''}}>Pago</option>
@@ -110,7 +110,7 @@
                             $asignaturasx = explode(';',$software->sof_asignatura);
                         @endphp
                         <label for="sof_asignatura">{{ __('Asignatura *') }}</label>
-                        <select class="js-example-placeholder-single form-select @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura[]" id="sof_asignatura" multiple="multiple">
+                        <select class="js-example-placeholder-single form-control @error('sof_asignatura') is-invalid @enderror" name="sof_asignatura[]" id="sof_asignatura" multiple="multiple">
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{$asignatura->asig_nombre}}" @foreach($asignaturasx as $asig) {{$asig == $asignatura->asig_nombre ? 'selected' : ''}} @endforeach>{{$asignatura->asig_nombre}}</option>
                             @endforeach
@@ -139,7 +139,7 @@
                             $programasx = explode(';',$software->sof_id_programa);
                         @endphp
                         <label for="sof_id_programa">{{ __('Programa *') }}</label>
-                        <select class="js-example-placeholder-single form-select @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa[]" id="sof_id_programa" multiple="multiple">
+                        <select class="js-example-placeholder-single form-control @error('sof_id_programa') is-invalid @enderror" name="sof_id_programa[]" id="sof_id_programa" multiple="multiple">
                             @foreach ($programas as $programa)
                                 <option value="{{$programa->pro_nombre}}" @foreach($programasx as $pro) {{$pro == $programa->pro_nombre ? 'selected' : ''}} @endforeach>{{$programa->pro_nombre}}</option>
                             @endforeach

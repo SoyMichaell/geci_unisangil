@@ -3,14 +3,14 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fas fa-users"></i> Módulo Estudiantes</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Estudiantes</h1>
     @section('message')
         <p>Lista de registro estudiantes</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
-        <div class="bg-white col-md-12 mt-2 p-3">
+        <div class="tile col-md-12 mt-2 p-3">
             <div class="row">
                 <div class="col-md-8">
                     <h4>Listado estudiantes</h4>
@@ -18,15 +18,16 @@
                 <div class="col-md-4 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" style="border-radius: 100%"
                         href="{{ url('estudiante/' . $programax . '/exportpdf') }}" title="Generar reporte pdf"
-                        target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                        target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                     <div class="dropdown">
                         <a class="btn btn-outline-success" style="border-radius: 100%" href="#" role="button"
                             id="dropdownMenuLink" data-toggle="dropdown" aria-expanded="false">
-                            <i class="fa-solid fa-file-excel"></i>
+                            <i class="fa fa-file-excel-o"></i>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item"
-                                href="{{ url('estudiante/' . $programax . '/exportexcel') }}">Listado general programa</a>
+                                href="{{ url('estudiante/' . $programax . '/exportexcel') }}">Listado general
+                                programa</a>
                             <a class="dropdown-item"
                                 href="{{ url('estudiante/' . $programax . '/exportbecaexcel') }}">Listado SF Beca</a>
                             <a class="dropdown-item"
@@ -46,7 +47,7 @@
             </div>
             <br>
             <div class="table-responsive">
-                <table class="table table-bordered" id="tables">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>N°</th>
@@ -81,14 +82,14 @@
                                         <form action="{{ route('estudiante.destroy', $persona->id) }}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="/estudiante/{{ $persona->id }}"><i
-                                                        class="fa-solid fa-folder-open "></i></a>
+                                                        class="fa fa-folder-open "></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/estudiante/{{ $persona->id }}/edit"><i
-                                                        class="fa-solid fa-refresh"></i></a>
+                                                        class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>
@@ -100,51 +101,63 @@
             </div>
         </div>
         <hr>
-        <div class="col-md-8 mt-3">
-            <form class="form-inline" action="/estudiante/{{ $programax }}/listadoingreso" method="post">
+        <div class="col-md-6 mt-3 tile">
+            <h4><i class="fa fa-files-o"></i> Reporte por año de ingreso</h4>
+            <hr>
+            <form action="/estudiante/{{ $programax }}/listadoingreso" method="post">
                 @csrf
-                <div class="form-group mb-2">
-                    <label>Listado por año de ingreso: </label>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label>Listado por año de ingreso: </label>
+                        <select class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
+                            id="estu_ingreso">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($ingresos as $ingreso)
+                                <option value="{{ $ingreso->estu_ingreso }}">{{ $ingreso->estu_ingreso }}</option>
+                            @endforeach
+                        </select>
+                        @error('estu_ingreso')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="form-group mx-sm-3 col-md-4 mb-2">
-                    <select class="form-select @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
-                        id="estu_ingreso">
-                        <option value="">---- SELECCIONE ----</option>
-                        @foreach ($ingresos as $ingreso)
-                            <option value="{{ $ingreso->estu_ingreso }}">{{ $ingreso->estu_ingreso }}</option>
-                        @endforeach
-                    </select>
-                    @error('estu_ingreso')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
             </form>
         </div>
-        <hr>
-        <div class="col-md-8 mt-3">
-            <form class="form-inline" action="/estudiante/{{ $programax }}/listadoperiodoingreso" method="post">
+        <div class="col-md-6 mt-3 tile">
+            <h4><i class="fa fa-files-o"></i> Reporte por periodo académico</h4>
+            <hr>
+            <form action="/estudiante/{{ $programax }}/listadoperiodoingreso" method="post">
                 @csrf
-                <div class="form-group mb-2">
-                    <label>Listado por periodo académico: </label>
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <label>Listado por periodo académico: </label>
+                        <select class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
+                            name="estu_periodo_ingreso" id="estu_periodo_ingreso">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($periodos as $periodo)
+                                <option value="{{ $periodo->estu_periodo_ingreso }}">
+                                    {{ $periodo->estu_periodo_ingreso }}</option>
+                            @endforeach
+                        </select>
+                        @error('estu_periodo_ingreso')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
                 </div>
-                <div class="form-group mx-sm-3 col-md-4 mb-2">
-                    <select class="form-select @error('estu_periodo_ingreso') is-invalid @enderror" name="estu_periodo_ingreso"
-                        id="estu_periodo_ingreso">
-                        <option value="">---- SELECCIONE ----</option>
-                        @foreach ($periodos as $periodo)
-                            <option value="{{ $periodo->estu_periodo_ingreso }}">{{ $periodo->estu_periodo_ingreso }}</option>
-                        @endforeach
-                    </select>
-                    @error('estu_periodo_ingreso')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
             </form>
         </div>
     </div>

@@ -6,9 +6,9 @@
         <a href="/docente/create">Crear</a> / <a href="/docente">Docente</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
@@ -30,7 +30,7 @@
                             <label for="per_tipo_documento"
                                 class="col-md-12 col-form-label">{{ __('Tipo Documento *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('per_tipo_documento') is-invalid @enderror"
+                                <select class="form-control @error('per_tipo_documento') is-invalid @enderror"
                                     name="per_tipo_documento" id="per_tipo_documento">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="Tarjeta de identidad">Tarjeta de identidad</option>
@@ -128,7 +128,7 @@
                             <label for="per_departamento"
                                 class="col-md-12 col-form-label">{{ __('Departamento *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('per_departamento') is-invalid @enderror"
+                                <select class="form-control @error('per_departamento') is-invalid @enderror"
                                     name="per_departamento" id="per_departamento">
                                     <option value="">---- SELECCIONE ----</option>
                                     @foreach ($departamentos as $departamento)
@@ -146,7 +146,7 @@
                             <label for="per_ciudad"
                                 class="col-md-12 col-form-label">{{ __('Ciudad *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('per_ciudad') is-invalid @enderror"
+                                <select class="form-control @error('per_ciudad') is-invalid @enderror"
                                     name="per_ciudad" id="per_ciudad">
                                     <option value="">---- SELECCIONE ----</option> 
                                     @foreach ($municipios as $municipio)
@@ -166,7 +166,7 @@
                             <label for="per_tipo_usuario"
                                 class="col-md-12 col-form-label">{{ __('Tipo de usuario *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('per_tipo_usuario') is-invalid @enderror"
+                                <select class="form-control @error('per_tipo_usuario') is-invalid @enderror"
                                     name="per_tipo_usuario" id="per_tipo_usuario">
                                     <option value="3">Docente</option>
                                 </select>
@@ -181,7 +181,7 @@
                             <label for="per_id_estado"
                                 class="col-md-12 col-form-label">{{ __('Estado *') }}</label>
                             <div class="col-md-12">
-                                <select class="form-select @error('per_id_estado') is-invalid @enderror"
+                                <select class="form-control @error('per_id_estado') is-invalid @enderror"
                                     name="per_id_estado" id="per_id_estado">
                                     <option value="activo">Activo</option> 
                                 </select>

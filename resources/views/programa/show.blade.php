@@ -3,24 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/programa">Programa</a>
+        <a href="/programa/{{$programa->id}}">Vista</a> / <a href="/programa">Programa</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Módulo programas | visuliazar información</h1>
     @section('message')
-        <p>Listado de registro programas académicos</p>
+        <p>Información de registro</p>
     @endsection
 @endsection
 <style>
     h4 {
         color: brown;
         font-weight: bold;
-    }
-
-    li {
-        font-size: 16px;
-        text-decoration: none;
-        list-style: none;
     }
 
     #integrantes {
@@ -49,7 +43,7 @@
         <div class="tile">
             <div class="row">
                 <div class="col-md-12 mx-auto">
-                    <h4 class="fw-bold">{{ $programa->pro_nombre }}</h4>
+                    <h4 class="fw-bold"><i class="fa fa-question-circle"></i> {{ $programa->pro_nombre }}</h4>
                     <p>{{ $programa->per_nombre . ' ' . $programa->per_apellido }}</p>
                     <hr>
                     <table class="p-3">
@@ -95,7 +89,7 @@
                                 <td>{{ $programa->pro_fecha_prox }}</td>
                             </tr>
                             <tr>
-                                <th>Programa ofrecido por ciclso</th>
+                                <th>Programa ofrecido por ciclos</th>
                                 <td>{{ $programa->pro_programa_ciclo }}</td>
                             </tr>
                             <tr>

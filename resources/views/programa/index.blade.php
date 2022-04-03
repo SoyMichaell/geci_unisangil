@@ -6,7 +6,7 @@
         <a href="/programa">Programa</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo programas</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo programas</h1>
     @section('message')
         <p>Listado de registro programas académicos</p>
     @endsection
@@ -63,14 +63,14 @@
                                         <form action="{{ route('programa.destroy', $programa->id) }}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-sm" href="/programa/{{ $programa->id }}"><i
-                                                        class="fa-solid fa-folder-open"></i></a>
+                                                        class="fa fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
                                                     href="/programa/{{ $programa->id }}/edit"><i
-                                                        class="fa-solid fa-refresh"></i></a>
+                                                        class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     @endif

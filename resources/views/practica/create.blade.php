@@ -2,10 +2,13 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/practica/create">Crear</a> / <a href="/practica">Practica Laboral</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa-solid fa-plus-square"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
@@ -14,7 +17,7 @@
             <form action="/practica/" method="post">
                 @csrf
                 <div class="seccion1">
-                    <h4>Registro practica laboral</h4>
+                    <h4><i class="fa fa-cube"></i> Registro practica laboral</h4>
                     <hr/>
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -154,31 +157,33 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="">Tipo de persona</label>
-                        <select class="form-select" name="tipo_persona" id="tipo_persona">
+                        <select class="form-control" name="tipo_persona_movilidad" id="tipo_persona_movilidad">
                             <option value="">---- SELECCIONE ----</option>
-                            <option value="1">Docente</option>
-                            <option value="2">Estudiante</option>
+                            <option value="docente">Docente</option>
+                            <option value="estudiante">Estudiante</option>
                         </select>
                     </div>
                     <div class="col-md-4" id="docente">
                         <label for="">Docente</label>
-                        <select class="form-select" name="prac_id_docente" id="prac_id_docente">
+                        <select class="form-control" name="prac_id_docente" id="prac_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}">
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{$docentes->count()<=0 ? 'No existen registro de docentes' : ''}}</p>
                     </div>
                     <div class="col-md-4" id="estudiante">
                         <label for="">Estudiante</label>
-                        <select class="form-select" name="prac_id_estudiante" id="prac_id_estudiante">
+                        <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
                                     {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{$estudiantes->count()<=0 ? 'No existen registro de estudiantes' : ''}}</p>
                     </div>
                     <div class="col-md-4">
                         <label for="prac_cargo">Cargo</label>
@@ -204,7 +209,7 @@
     </div>
 @endsection
 @endif
-
 @section('scripts')
 <script src="/js/divoculto.js"></script>
 @endsection
+
