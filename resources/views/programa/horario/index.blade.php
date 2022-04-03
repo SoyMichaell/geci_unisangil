@@ -14,11 +14,11 @@
                 <div class="table-responsive tile mt-2">
                     <div class="row mb-3">
                         <div class="col-md-7">
-                            <h4>Listado plan de estudios</h4>
+                            <h4>Listado registro horario</h4>
                         </div>
                         <div class="col-md-5 d-flex justify-content-end align-items-center">
-                            <a class="btn btn-success" href="/programa/crearhorario"><i
-                                    class="fa-solid fa-circle-plus"></i>
+                            <a class="btn btn-outline-success" href="/programa/crearhorario"><i
+                                    class="fa fa-plus-circle"></i>
                                 Nuevo</a>
                         </div>
                     </div>

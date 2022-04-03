@@ -9,7 +9,7 @@
         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
             <div class="row mb-3">
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-book-open-reader fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-book fa-3x"></i>
                         <div class="info">
                             <h4>Plan de estudio</h4>
                             <a href="/programa/mostrarplan">Crear</a>
@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-bookmark fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-bookmark fa-3x"></i>
                         <div class="info">
                             <h4>Asignaturas</h4>
                             <a href="/programa/mostrarasignatura">Crear</a>
@@ -25,15 +25,15 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-calendar-days fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-calendar fa-3x"></i>
                         <div class="info">
-                            <h4>Asignación horarios</h4>
+                            <h4>Horario</h4>
                             <a href="/programa/mostrarhorario">Crear</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa-solid fa-school fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
                             <h4>Estudiantes</h4>
                             <p><b>({{$estudiantes->count()}})</b></p>
@@ -57,7 +57,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 col-lg-3">
-                    <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
                             <h4>Personal administrativo</h4>
                             <p><b>({{$administrativos->count()}})</b>
@@ -73,7 +73,7 @@
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 1)
-            <div class="bg-white p-3 col-md-12 mt-2">
+            <div class="tile col-md-12 mt-2">
                 <div class="row">
                     <div class="col-md-6">
                         <h4 class="titulo">Usuarios en plataforma</h4>

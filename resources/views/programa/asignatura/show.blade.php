@@ -15,7 +15,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="pas_id_municipio">{{ __('Sede *') }}</label>
-                    <select class="form-select @error('pas_id_municipio') is-invalid @enderror" name="pas_id_municipio"
+                    <select class="form-control @error('pas_id_municipio') is-invalid @enderror" name="pas_id_municipio"
                         id="pas_id_municipio" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($municipios as $municipios)
@@ -33,7 +33,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="pas_id_facultad">{{ __('Facultad *') }}</label>
-                    <select class="form-select @error('pas_id_facultad') is-invalid @enderror" name="pas_id_facultad"
+                    <select class="form-control @error('pas_id_facultad') is-invalid @enderror" name="pas_id_facultad"
                         id="pas_id_facultad" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($facultades as $facultad)
@@ -53,7 +53,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="pas_id_programa">{{ __('Programa *') }}</label>
-                    <select class="form-select @error('pas_id_programa') is-invalid @enderror" name="pas_id_programa"
+                    <select class="form-control @error('pas_id_programa') is-invalid @enderror" name="pas_id_programa"
                         id="pas_id_programa" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($programas as $programa)
@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="pas_id_programa_plan">{{ __('Plan estudio programa *') }}</label>
-                    <select class="form-select @error('pas_id_programa_plan') is-invalid @enderror"
+                    <select class="form-control @error('pas_id_programa_plan') is-invalid @enderror"
                         name="pas_id_programa_plan" id="pas_id_programa_plan" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($plans as $plan)

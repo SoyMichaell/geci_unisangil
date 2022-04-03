@@ -14,13 +14,13 @@
 @section('content')
     <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
+            <h4 class="titulo"><i class="fa fa-cube"></i> Registro asignatura</h4><hr>
             <form action="/programa/registroasignatura" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_id_sede">{{ __('Sede *') }}</label>
-                        <select class="form-select" name="asig_id_sede" id="asig_id_sede">
+                        <select class="form-control @error('asig_id_sede') is-invalid @enderror" name="asig_id_sede" id="asig_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}">{{ $municipio->mun_nombre }}</option>
@@ -34,13 +34,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="asig_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select" name="asig_id_programa" id="asig_id_programa">
+                        <select class="form-control @error('asig_id_programa') is-invalid @enderror" name="asig_id_programa" id="asig_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
-                        <small>{{ $programas->count() > 0 ? '' : 'No hay programas, primero registre' }}</small>
+                        <p class="badge badge-danger">{{ $programas->count() > 0 ? '' : 'No exiten registros de programas' }}</p>
                         @error('asig_id_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -51,12 +51,13 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_id_plan_estudio">{{ __('Plan de estudio *') }}</label>
-                        <select class="form-select" name="asig_id_plan_estudio" id="asig_id_plan_estudio">
+                        <select class="form-control @error('asig_id_plan_estudio') is-invalid @enderror" name="asig_id_plan_estudio" id="asig_id_plan_estudio">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($plans as $plan)
                                 <option value="{{ $plan->id }}">{{ $plan->pp_plan }}</option>
                             @endforeach
                         </select>
+                        <p class="badge badge-danger">{{ $plans->count() > 0 ? '' : 'No exiten plan o planes de estudio' }}</p>
                         @error('asig_id_plan_estudio')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -129,7 +130,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="asig_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="asig_estado" id="asig_estado">
+                        <select class="form-control" name="asig_estado" id="asig_estado">
                             <option value="activo">Activo</option>
                             <option value="inactivo">Inactivo</option>
                         </select>

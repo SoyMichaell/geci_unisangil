@@ -125,6 +125,67 @@ class UserController extends Controller
         return redirect('/login');
     }
 
+    public function profile(){
+        return view('auth.profile');
+    }
+
+    public function update(Request $request, $id){
+        $rules = [
+            'per_tipo_documento' => 'required|not_in:0',
+            'per_numero_documento' => 'required',
+            'per_nombre' => 'required',
+            'per_apellido' => 'required',
+            'per_telefono' => 'required',
+            'per_correo' => 'required'
+        ];
+        $message = [
+            'per_tipo_documento.required' => 'El campo tipo documento es requerido',
+            'per_numero_documento.required' => 'El campo número documento es requerido',
+            'per_nombre.required' => 'El campo nombre (s) es requerido',
+            'per_apellido.required' => 'El campo apellido (s) es requerido',
+            'per_telefono.required' => 'El campo telefono es requerido',
+            'per_correo.required' => 'El campo correo es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        $user = User::find($id);
+        $user->per_tipo_documento = $request->get('per_tipo_documento');
+        $user->per_numero_documento = $request->get('per_numero_documento');
+        $user->per_nombre = $request->get('per_nombre');
+        $user->per_apellido = $request->get('per_apellido');
+        $user->per_telefono = $request->get('per_telefono');
+        $user->per_correo = $request->get('per_correo');
+        $user->save();
+
+        Alert::success('Exitoso', 'La información se actulizo con exito');
+        return redirect('/usuario/profile');
+
+    }
+
+    public function actualizar_password(Request $request, $id){
+        $rules = [
+            'password' => 'required',
+            'password_confirm' => 'required',
+        ];
+        $message = [
+            'password.required' => 'El campo contraseña es requerido',
+            'password_confirm.required' => 'El campo confirmar contraseña es requerido'
+        ];
+        $this->validate($request,$rules,$message);
+
+        if($request->get('password') != $request->get('password_confirm')){
+            Alert::success('Advetencia', 'Las contraseña no coinciden');
+            return redirect('/usuario/profile');
+        }
+
+        $user = User::find($id);
+        $user->password = Hash::make($request->get('password'));
+        $user->save();
+
+        Alert::success('Exitoso', 'La información se actulizo con exito');
+        return redirect('/usuario/profile');
+    }
+
     public function destroy($id)
     {
         $user = User::find($id);

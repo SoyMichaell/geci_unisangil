@@ -20,9 +20,9 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                     <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('programa/exportpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('programa/exportexcel') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                        title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('programa/create') }}"><i
                                 class="fa fa-plus-circle"></i>

@@ -14,21 +14,14 @@
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
 
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
     <!-- Styles -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
-    <link href="{{ mix('css/app.css') }}" rel="stylesheet">
 
     <!--DataTables -->
     <link rel="stylesheet" type="text/css" href="{{ asset('DataTables/datatables.min.css') }}">
 
     <!--Select2-->
     <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet" />
-
-
 </head>
 
 <body class="app sidebar-mini" style="background-color: var(--bs-gray-200);">
@@ -39,6 +32,9 @@
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
                     aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
+                    <li><a class="dropdown-item" href="/usuario/profile"><i class="fa fa-users fa-lg"></i>
+                            Perfil</a>
+                    </li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"><i class="fa fa-sign-out fa-lg"></i>
                             Salir</a>
@@ -65,26 +61,26 @@
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
             <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
-                        class="app-menu__icon fa-solid fa-gears"></i><span
+                        class="app-menu__icon fa fa-cog"></i><span
                         class="app-menu__label">Configuración</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="{{ url('departamento') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Departamentos</a></li>
                     <li><a class="treeview-item" href="{{ url('municipio') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Municipios</a>
                     </li>
                     <li><a class="treeview-item" href="{{ url('facultad') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Facultades</a>
                     </li>
                     <li><a class="treeview-item" href="{{ url('nivelformacion') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i> Nivel de formación</a>
+                                class="icon fa fa-circle-o"></i> Nivel de formación</a>
                     </li>
                     <li><a class="treeview-item" href="{{ url('metodologia') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Metodologia</a>
                     </li>
                 </ul>
@@ -94,46 +90,46 @@
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="{{ url('programa') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Programas</a></li>
                     <li><a class="treeview-item" href="{{ url('estudiante') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Estudiantes</a></li>
                     <li><a class="treeview-item" href="{{ url('docente') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Docentes</a></li>
                     <li><a class="treeview-item" href="{{ url('prueba') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Pruebas saber</a></li>
                     <li><a class="treeview-item" href="{{ url('trabajo') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Trabajo de grado</a></li>
                     <li><a class="treeview-item" href="{{ url('practica') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Practica Laboral</a></li>
                     <li><a class="treeview-item" href="{{ url('software') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             TIC'S</a></li>
                     <li><a class="treeview-item" href="{{ url('extension') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Extensión e Internacialización</a></li>
                     <li><a class="treeview-item" href="{{ url('red') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Redes acádemicas</a></li>
                     <li><a class="treeview-item" href="{{ url('laboratorio') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Laboratorios</a></li>
                     <li><a class="treeview-item" href="{{ url('movilidad') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Movilidad</a></li>
                     <li><a class="treeview-item" href="{{ url('convenio') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Convenio</a></li>
                     <li><a class="treeview-item" href="{{ url('bienestar') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Bienestar Institucional</a></li>
                     <li><a class="treeview-item" href="{{ url('investigacion') }}"><i
-                                class="icon fa-solid fa-circle-notch"></i>
+                                class="icon fa fa-circle-o"></i>
                             Investigación</a></li>
                 </ul>
             </li>
@@ -158,7 +154,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous">
     </script>
-
+    <script src="https://use.fontawesome.com/6c8ac1ea46.js"></script>
     @yield('scripts')
 
     <script src="{{ asset('js/dataTable.js') }}"></script>

@@ -11,7 +11,7 @@
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <link rel="shortcut icon" href="{{asset('image/favicon.png')}}" type="image/x-icon">
+        <link rel="shortcut icon" href="{{ asset('image/favicon.png') }}" type="image/x-icon">
         <title>{{ 'GECI | Ingreso al sistema' }}</title>
 
         <!-- Scripts -->
@@ -33,117 +33,68 @@
 
         <link rel="stylesheet" type="text/css"
             href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
-        <style>
-            body{
-                background-color: #f5f6fa;
-            }
-            .contenido {
-                width: 70%;
-                height: 100vh;
-                margin: auto;
-            }
-
-            .title-login{
-                font-weight: 900;
-                font-size: 90px;
-                color: #198654;
-            }
-
-            .message-login{
-                font-weight: 300px;
-                font-size: 17px;
-            }
-
-            .message-login span{
-                color: #198654;
-            }
-
-            .form-login {
-                width: 430px;
-                margin: auto;
-            }
-
-            .form-control-custom {
-                width: 100%;
-                padding: 10px;
-                border: none;
-                background-color: #ecf0f0;
-                font-weight: bold;
-            }
-
-            .footer {
-                text-align: center;
-                width: 100%;
-                bottom: 10px;
-                position: fixed;
-            }
-
-        </style>
-
     </head>
 
-    <body>
-        <div class="contenido">
-            <nav class="navbar navbar-expand-lg">
-                <a class="navbar-brand" href="/home"><img src="{{asset('image/banner.jpg')}}" width="200px"></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02"
-                    aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+    <style>
+        .card-login{
+            width: 400px;
+            margin: auto;
+            margin-top: 25%;
+        }
+        .footer {
+            text-align: center;
+            width: 100%;
+            bottom: 10px;
+            position: fixed;
+        }
+    </style>
 
-                <div class="d-flex justify-content-end w-100">
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="/usuario/create">Registrarse</a>
-                </div>
-            </nav>
-            <div class="row mx-auto" style="margin-top:15%;">
-                <div class="col-md-6 mx-auto">
-                    <h1 class="title-login badge badge-light">GICPAC</h1>
-                    <p class="message-login">Plataforma web para la gestión y control de información de procesos académicos y administrativos
-                        del programa ingeniería de sistemas <span>unisangil sede Yopal</span></p>
-                </div>
-                <div class="col-md-6 mx-auto">
-                    <div class="form-login">
-                        <form method="POST" action="{{ route('login') }}">
-                            @csrf
-                            <h3><b>Inicio de sesión</b></h3>
-                            <div class="row mb-3">
-                                <label for="per_correo"
-                                    class="col-md-12 col-form-label text-md-left">{{ __('Correo electronico *') }}</label>
-                                <div class="col-md-12">
-                                    <input id="per_correo" type="email"
-                                        class="form-control @error('per_correo') is-invalid @enderror" name="per_correo"
-                                        value="{{ old('per_correo') }}" autocomplete="per_correo" autofocus>
-                                    @error('per_correo')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+    <body>
+        <div class="container">
+            <div class="row mx-auto">
+                <div class="card-login">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <a class="navbar-brand" href="/home"><img src="{{ asset('image/banner.jpg') }}" width="200px"></a>
+                        <div class="row mb-3">
+                            <label for="per_correo"
+                                class="col-md-12 col-form-label text-md-left">{{ __('Correo electronico *') }}</label>
+                            <div class="col-md-12">
+                                <input id="per_correo" type="email"
+                                    class="form-control @error('per_correo') is-invalid @enderror" name="per_correo"
+                                    value="{{ old('per_correo') }}" autocomplete="per_correo" autofocus>
+                                @error('per_correo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <div class="row mb-3">
-                                <label for="password"
-                                    class="col-md-12 col-form-label text-md-left">{{ __('Contraseña *') }}</label>
-                                <div class="col-md-12">
-                                    <input id="password" type="password"
-                                        class="form-control @error('password') is-invalid @enderror"
-                                        name="password" autocomplete="current-password">
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="password"
+                                class="col-md-12 col-form-label text-md-left">{{ __('Contraseña *') }}</label>
+                            <div class="col-md-12">
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    autocomplete="current-password">
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
-                            <div class="row mb-0">
-                                <div class="col-md-12 offset-md-12">
-                                    <button type="submit" class="btn btn-success w-100">
-                                        {{ __('Iniciar sesión') }}
-                                    </button>
-                                </div>
+                        </div>
+                        <div class="row mb-0">
+                            <div class="col-md-12 offset-md-12">
+                                <button type="submit" class="btn btn-success w-100">
+                                    {{ __('Iniciar sesión') }}
+                                </button>
                             </div>
-                        </form>
+                        </div>
+                    </form>
+                    <br>
+                    <div class="d-flex justify-content-end">
+                        <a href="/usuario/create">Registrarse</a>
                     </div>
                 </div>
             </div>
@@ -153,5 +104,4 @@
     </body>
 
     </html>
-
 @endif

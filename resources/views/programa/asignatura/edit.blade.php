@@ -21,7 +21,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_id_sede">{{ __('Sede *') }}</label>
-                        <select class="form-select" name="asig_id_sede" id="asig_id_sede">
+                        <select class="form-control" name="asig_id_sede" id="asig_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}"
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="asig_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select" name="asig_id_programa" id="asig_id_programa">
+                        <select class="form-control" name="asig_id_programa" id="asig_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}"
@@ -56,7 +56,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_id_plan_estudio">{{ __('Plan de estudio *') }}</label>
-                        <select class="form-select" name="asig_id_plan_estudio" id="asig_id_plan_estudio">
+                        <select class="form-control" name="asig_id_plan_estudio" id="asig_id_plan_estudio">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($plans as $plan)
                                 <option value="{{ $plan->id }}"
@@ -134,7 +134,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="asig_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="asig_estado" id="asig_estado">
+                        <select class="form-control" name="asig_estado" id="asig_estado">
                             <option value="activo" {{ $asignatura->asig_estado == 'activo' ? 'selected' : '' }}>Activo
                             </option>
                             <option value="inactivo" {{ $asignatura->asig_estado == 'inactivo' ? 'selected' : '' }}>

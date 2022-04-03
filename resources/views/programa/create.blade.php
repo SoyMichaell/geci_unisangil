@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile w-100 mx-auto">
-            <h4><i class="fab fa-wpforms"></i> Registro programa</h4>
+            <h4><i class="fa fa-cube"></i> Registro programa</h4>
             <hr>
             <form action="/programa" method="post">
                 @csrf
@@ -23,7 +23,7 @@
                         <label for="pro_estado_programa">{{ __('Estado programa') }}</label>
                         <div class="row">
                             <div class="col-md-12">
-                                <select class="form-select" name="pro_estado_programa" id="pro_estado_programa">
+                                <select class="form-control" name="pro_estado_programa" id="pro_estado_programa">
                                     <option selected>---- SELECCIONE ----</option>
                                     @foreach ($estadoprogramas as $estadoprograma)
                                         <option value="{{ $estadoprograma }}">{{ $estadoprograma }}
@@ -35,54 +35,33 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pro_departamento">{{ __('Departamento') }}</label>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <select class="form-select" name="pro_departamento" id="pro_departamento">
-                                    <option selected>---- SELECCIONE ----</option>
-                                    @foreach ($departamentos as $departamento)
-                                        <option value="{{ $departamento->id }}">{{ $departamento->dep_nombre }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-outline-primary" href="/departamento/create">Agregar</a>
-                            </div>
-                        </div>
+                        <select class="form-control" name="pro_departamento" id="pro_departamento">
+                            <option selected>---- SELECCIONE ----</option>
+                            @foreach ($departamentos as $departamento)
+                                <option value="{{ $departamento->id }}">{{ $departamento->dep_nombre }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pro_municipio">{{ __('Municipio / sede') }}</label>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <select class="form-select" name="pro_municipio" id="pro_municipio">
-                                    <option selected>---- SELECCIONE ----</option>
-                                    @foreach ($municipios as $municipio)
-                                        <option value="{{ $municipio->id }}">{{ $municipio->mun_nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-outline-primary" href="/municipio/create">Agregar</a>
-                            </div>
-                        </div>
+                        <select class="form-control" name="pro_municipio" id="pro_municipio">
+                            <option selected>---- SELECCIONE ----</option>
+                            @foreach ($municipios as $municipio)
+                                <option value="{{ $municipio->id }}">{{ $municipio->mun_nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="pro_facultad">{{ __('Facultad') }}</label>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <select class="form-select" name="pro_facultad" id="pro_facultad">
-                                    <option selected>---- SELECCIONE ----</option>
-                                    @foreach ($facultades as $facultad)
-                                        <option value="{{ $facultad->id }}">{{ $facultad->fac_nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-outline-primary" href="/facultad/create">Agregar</a>
-                            </div>
-                        </div>
+                        <select class="form-control" name="pro_facultad" id="pro_facultad">
+                            <option selected>---- SELECCIONE ----</option>
+                            @foreach ($facultades as $facultad)
+                                <option value="{{ $facultad->id }}">{{ $facultad->fac_nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -160,23 +139,16 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pro_nivel_formacion">{{ __('Nivel de formación ') }}</label>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <select class="form-select" name="pro_nivel_formacion" id="pro_nivel_formacion">
-                                    <option selected>---- SELECCIONE ----</option>
-                                    @foreach ($niveles as $nivel)
-                                        <option value="{{ $nivel->id }}">{{ $nivel->niv_nombre }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-outline-primary" href="/nivelformacion/create">Agregar</a>
-                            </div>
-                        </div>
+                        <select class="form-control" name="pro_nivel_formacion" id="pro_nivel_formacion">
+                            <option selected>---- SELECCIONE ----</option>
+                            @foreach ($niveles as $nivel)
+                                <option value="{{ $nivel->id }}">{{ $nivel->niv_nombre }}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="pro_programa_ciclos">{{ __('Progama por ciclos') }}</label>
-                        <select class="form-select" name="pro_programa_ciclos" id="pro_programa_ciclos">
+                        <select class="form-control" name="pro_programa_ciclos" id="pro_programa_ciclos">
                             <option selected>---- SELECCIONE ----</option>
                             @foreach ($programasCiclo as $programaCiclo)
                                 <option value="{{ $programaCiclo }}">{{ $programaCiclo }}
@@ -188,24 +160,17 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pro_metodologia">{{ __('Metodologia ') }}</label>
-                        <div class="row">
-                            <div class="col-md-10">
-                                <select class="form-select" name="pro_metodologia" id="pro_metodologia">
-                                    <option selected>---- SELECCIONE ----</option>
-                                    @foreach ($metodologias as $metodologia)
-                                        <option value="{{ $metodologia->id }}">{{ $metodologia->met_nombre }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-2">
-                                <a class="btn btn-outline-primary" href="/metodologia/create">Agregar</a>
-                            </div>
-                        </div>
+                        <select class="form-control" name="pro_metodologia" id="pro_metodologia">
+                            <option selected>---- SELECCIONE ----</option>
+                            @foreach ($metodologias as $metodologia)
+                                <option value="{{ $metodologia->id }}">{{ $metodologia->met_nombre }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label for="pro_duraccion">{{ __('Duracción programa (semestres)') }}</label>
-                        <select class="form-select" name="pro_duraccion" id="pro_duraccion">
+                        <select class="form-control" name="pro_duraccion" id="pro_duraccion">
                             <option selected>---- SELECCIONE ----</option>
                             @foreach ($duraccions as $duraccion)
                                 <option value="{{ $duraccion }}">{{ $duraccion }}</option>
@@ -216,7 +181,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pro_periodo">{{ __('Periodo de admisión ') }}</label>
-                        <select class="form-select" name="pro_periodo" id="pro_periodo">
+                        <select class="form-control" name="pro_periodo" id="pro_periodo">
                             <option selected>---- SELECCIONE ----</option>
                             @foreach ($periodoAdmision as $periodo)
                                 <option value="{{ $periodo }}">{{ $periodo }}</option>
@@ -225,8 +190,10 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pro_grupo_referencia">{{ __('Grupo de referencia *') }}</label>
-                        <input id="pro_grupo_referencia" type="text" class="form-control @error('pro_grupo_referencia') is-invalid @enderror"
-                            name="pro_grupo_referencia" value="{{ old('pro_grupo_referencia') }}" autocomplete="pro_grupo_referencia" autofocus>
+                        <input id="pro_grupo_referencia" type="text"
+                            class="form-control @error('pro_grupo_referencia') is-invalid @enderror"
+                            name="pro_grupo_referencia" value="{{ old('pro_grupo_referencia') }}"
+                            autocomplete="pro_grupo_referencia" autofocus>
                         @error('pro_grupo_referencia')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -237,8 +204,10 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pro_grupo_referencia_nbc">{{ __('Grupo de referencia (NBC) *') }}</label>
-                        <input id="pro_grupo_referencia_nbc" type="text" class="form-control @error('pro_grupo_referencia_nbc') is-invalid @enderror"
-                            name="pro_grupo_referencia_nbc" value="{{ old('pro_grupo_referencia_nbc') }}" autocomplete="pro_grupo_referencia_nbc" autofocus>
+                        <input id="pro_grupo_referencia_nbc" type="text"
+                            class="form-control @error('pro_grupo_referencia_nbc') is-invalid @enderror"
+                            name="pro_grupo_referencia_nbc" value="{{ old('pro_grupo_referencia_nbc') }}"
+                            autocomplete="pro_grupo_referencia_nbc" autofocus>
                         @error('pro_grupo_referencia_nbc')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -259,21 +228,14 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="pro_director_programa">{{ __(' Director de programa ') }}</label>
-                        <div class="row">
-                            <div class="col-md-11">
-                                <select class="js-example-placeholder-single form-select" name="pro_director_programa"
-                                    id="pro_director_programa">
-                                    <option selected>---- SELECCIONE ----</option>
-                                    @foreach ($docentes as $docente)
-                                        <option value="{{ $docente->id }}">
-                                            {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="col-md-1">
-                                <a class="btn btn-outline-primary" href="/docente/create">Agregar</a>
-                            </div>
-                        </div>
+                        <select class="js-example-placeholder-single form-control" name="pro_director_programa"
+                            id="pro_director_programa">
+                            <option selected>---- SELECCIONE ----</option>
+                            @foreach ($docentes as $docente)
+                                <option value="{{ $docente->id }}">
+                                    {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
                 <div class="row mb-0">

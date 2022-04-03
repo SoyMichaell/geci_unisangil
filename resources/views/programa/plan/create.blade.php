@@ -14,13 +14,13 @@
 @section('content')
     <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro plan de estudio</h4>
+            <h4 class="titulo"><i class="fa fa-cube"></i> Registro plan de estudio</h4><hr>
             <form action="/programa/registroplan" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pp_id_sede">{{ __('Sede *') }}</label>
-                        <select class="form-select" name="pp_id_sede" id="pp_id_sede">
+                        <select class="form-control @error('pp_id_sede') is-invalid @enderror" name="pp_id_sede" id="pp_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}">{{ $municipio->mun_nombre }}</option>
@@ -34,13 +34,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pp_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select" name="pp_id_programa" id="pp_id_programa">
+                        <select class="form-control @error('pp_id_programa') is-invalid @enderror" name="pp_id_programa" id="pp_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
-                        <small>{{ $programas->count() > 0 ? '' : 'No hay programas, primero registre' }}</small>
+                        <p class="badge badge-danger">{{ $programas->count() > 0 ? '' : 'No exiten registros de programas' }}</p>
                         @error('pp_id_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -86,7 +86,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pp_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="pp_estado" id="pp_estado">
+                        <select class="form-control" name="pp_estado" id="pp_estado">
                             <option value="activo">Activo</option>
                             <option value="inactivo">Inactivo</option>
                         </select>

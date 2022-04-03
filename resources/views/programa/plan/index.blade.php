@@ -21,7 +21,7 @@
                             <h4>Listado plan de estudios</h4>
                         </div>
                         <div class="col-md-5 d-flex justify-content-end align-items-center">
-                            <a class="btn btn-outline-success" href="/programa/crearplan"><i class="fa-solid fa-circle-plus"></i>
+                            <a class="btn btn-outline-success" href="/programa/crearplan"><i class="fa fa-plus-circle"></i>
                                 Nuevo</a>
                         </div>
                     </div>

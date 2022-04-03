@@ -21,7 +21,7 @@
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('programa/crearasignatura') }}"><i
-                                class="fa-solid fa-circle-plus"></i> Nuevo</a>
+                                class="fa fa-plus-circle"></i> Nuevo</a>
                     @endif
 
                 </div>

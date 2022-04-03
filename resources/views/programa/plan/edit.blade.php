@@ -21,7 +21,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pp_id_sede">{{ __('Sede *') }}</label>
-                        <select class="form-select" name="pp_id_sede" id="pp_id_sede">
+                        <select class="form-control" name="pp_id_sede" id="pp_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}"
@@ -37,7 +37,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pp_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select" name="pp_id_programa" id="pp_id_programa">
+                        <select class="form-control" name="pp_id_programa" id="pp_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}"
@@ -91,7 +91,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pp_estado">{{ __('Estado *') }}</label>
-                        <select class="form-select" name="pp_estado" id="pp_estado">
+                        <select class="form-control" name="pp_estado" id="pp_estado">
                             <option value="activo" {{ $plan->pp_estado == 'activo' ? 'selected' : '' }}>Activo</option>
                             <option value="inactivo" {{ $plan->pp_estado == 'inactivo' ? 'selected' : '' }}>Inactivo
                             </option>
