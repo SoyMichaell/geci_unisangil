@@ -6,7 +6,7 @@
         <a href="/extension/{{$servicioextension->id}}/verservicioextension">Vista</a> / <a href="/extension/mostrarservicioextension">Servicios extensión</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Vista de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extseex_year">Año *</label>
@@ -104,7 +104,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="extseex_id_area_extension">Área de extensión *</label>
-                    <select class="form-select" name="extseex_id_area_extension" id="extseex_id_area_extension"
+                    <select class="form-control" name="extseex_id_area_extension" id="extseex_id_area_extension"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($areas as $area)
@@ -202,7 +202,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extseex_costo">¿Tiene costo? *</label>
-                    <select class="form-select" name="extseex_costo" id="extseex_costo" disabled>
+                    <select class="form-control" name="extseex_costo" id="extseex_costo" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="Si" {{ $servicioextension->extseex_costo == 'Si' ? 'selected' : '' }}>Si
                         </option>
@@ -230,7 +230,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extseex_id_area_trabajo">Área de trabajo</label>
-                    <select class="form-select" name="extseex_id_area_trabajo" id="extseex_id_area_trabajo" disabled>
+                    <select class="form-control" name="extseex_id_area_trabajo" id="extseex_id_area_trabajo" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($areastrabajo as $trabajo)
                             <option value="{{ $trabajo->id }}"
@@ -246,7 +246,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="extseex_id_ciclo_vital">Ciclo vital</label>
-                    <select class="form-select" name="extseex_id_ciclo_vital" id="extseex_id_ciclo_vital" disabled>
+                    <select class="form-control" name="extseex_id_ciclo_vital" id="extseex_id_ciclo_vital" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="1" {{ $servicioextension->extseex_id_ciclo_vital == '1' ? 'selected' : '' }}>
                             Primera infancia (0-5 años)</option>
@@ -266,11 +266,11 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Fuente nacional</h4>
             <div class="row mb-3">
-                <h4 class="tile">Fuente nacional</h4>
                 <div class="col-md-4">
                     <label for="extseex_id_entidad_nacional">Entidad nacional</label>
-                    <select class="form-select" name="extseex_id_entidad_nacional" id="extseex_id_entidad_nacional"
+                    <select class="form-control" name="extseex_id_entidad_nacional" id="extseex_id_entidad_nacional"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($entidadesnac as $entidadenac)
@@ -287,7 +287,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="extseex_id_fuente_nacional">Fuente nacional</label>
-                    <select class="form-select" name="extseex_id_fuente_nacional" id="extseex_id_fuente_nacional"
+                    <select class="form-control" name="extseex_id_fuente_nacional" id="extseex_id_fuente_nacional"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($fuentenacionals as $nacional)
@@ -315,11 +315,11 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Fuente internacional</h4>
             <div class="row mb-3">
-                <h4 class="tile">Fuente internacional</h4>
                 <div class="col-md-6">
                     <label for="extseex_id_fuente_internacional">Fuente internacional</label>
-                    <select class="form-select" name="extseex_id_fuente_internacional"
+                    <select class="form-control" name="extseex_id_fuente_internacional"
                         id="extseex_id_fuente_internacional" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($entidadesinter as $entidadinter)
@@ -374,8 +374,8 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Otras entidades</h4>
             <div class="row mb-3">
-                <h4 class="tile">Otras entidades</h4>
                 <div class="col-md-4">
                     <label for="extseex_nombre_otra_entidad">Nombre entidad</label>
                     <input class="form-control @error('extseex_nombre_otra_entidad') is-invalid @enderror"
@@ -390,7 +390,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="extseex_id_sector_otra_entidad">Sector entidad</label>
-                    <select class="form-select" name="extseex_id_sector_otra_entidad"
+                    <select class="form-control" name="extseex_id_sector_otra_entidad"
                         id="extseex_id_sector_otra_entidad" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($sectores as $sector)
@@ -418,11 +418,11 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Población condición</h4>
             <div class="row mb-3">
-                <h4 class="tile">Población condición</h4>
                 <div class="col-md-6">
                     <label for="extseex_id_poblacion_condicion">Tipo población condición</label>
-                    <select class="form-select" name="extseex_id_poblacion_condicion"
+                    <select class="form-control" name="extseex_id_poblacion_condicion"
                         id="extseex_id_poblacion_condicion" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($poblacioncondicions as $poblacioncondicion)
@@ -450,11 +450,11 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Población grupo</h4>
             <div class="row mb-3">
-                <h4 class="tile">Población grupo</h4>
                 <div class="col-md-6">
                     <label for="extseex_id_poblacion_grupo">Tipo población condición</label>
-                    <select class="form-select" name="extseex_id_poblacion_grupo" id="extseex_id_poblacion_grupo"
+                    <select class="form-control" name="extseex_id_poblacion_grupo" id="extseex_id_poblacion_grupo"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($poblaciongrupos as $poblaciongrupo)

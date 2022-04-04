@@ -3,19 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/red/create">Crear</a> / <a href="/red">Redes acádemicas</a>
+        <a href="/red/{{$red->id}}/edit">Editar</a> / <a href="/red">Redes acádemicas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligencie los campos requeridos.</p>
+        <p>Diligencie todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Actualizar información</h4>
-            <hr>
+            <h4 ><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/red/{{$red->id}}/" method="post">
                 @csrf
                 @method('PUT')
@@ -80,7 +79,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="red_alcance">{{ __('Alcance *') }}</label>
-                        <select class="form-select @error('red_alcance') is-invalid @enderror" name="red_alcance"
+                        <select class="form-control @error('red_alcance') is-invalid @enderror" name="red_alcance"
                             id="red_alcance">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="regional" {{$red->red_alcance == 'regional' ? 'selected' : ''}}>Regional</option>
@@ -122,7 +121,7 @@
                             $programax = explode(';',$red->red_id_programa);
                         @endphp
                         <label for="red_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
+                        <select class="form-control js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
                             name="red_id_programa[]" id="red_id_programa" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)

@@ -2,19 +2,23 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+    <a href="/extension/{{$participante->id}}/verparticipante">Vista</a> / <a href="/extension/mostrarparticipante">Participante</a> / <a href="/extension">Extensión - internacionalización</a>  
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="dop_id_docente">Docente</label>
-                    <select class="form-select" name="dop_id_docente" id="dop_id_docente" disabled>
+                    <select class="form-control" name="dop_id_docente" id="dop_id_docente" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($docentes as $docente)
                             <option value="{{ $docente->id }}"
@@ -45,7 +49,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="dop_sexo_biologico">Sexo biologico</label>
-                    <select class="form-select" name="dop_sexo_biologico" id="dop_sexo_biologico" disabled>
+                    <select class="form-control" name="dop_sexo_biologico" id="dop_sexo_biologico" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="1" {{ $participante->dop_sexo_biologico == '1' ? 'selected' : '' }}>Masculino
                         </option>
@@ -60,7 +64,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="dop_estado_civil">Estado civil</label>
-                    <select class="form-select" name="dop_estado_civil" id="dop_estado_civil" disabled>
+                    <select class="form-control" name="dop_estado_civil" id="dop_estado_civil" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="1" {{ $participante->dop_estado_civil == '1' ? 'selected' : '' }}>Soltero
                             (a)</option>

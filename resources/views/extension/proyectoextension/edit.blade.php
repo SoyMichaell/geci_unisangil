@@ -104,7 +104,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extprex_id_area_extension">Área de extensión</label>
-                        <select class="form-select" name="extprex_id_area_extension" id="extprex_id_area_extension">
+                        <select class="form-control" name="extprex_id_area_extension" id="extprex_id_area_extension">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($areas as $area)
                                 <option value="{{ $area->id }}" {{$area->id == $proyectoextension->extprex_id_area_extension ? 'selected' : ''}}>{{ $area->coarex_nombre }}</option>
@@ -143,7 +143,7 @@
                         @enderror
                     </div>
                 </div>
-                <h4 class="tile">Datos contacto</h4>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Datos contacto</h4>
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extprex_nombre_contacto">Nombre (s)</label>
@@ -199,7 +199,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extprex_id_area_trabajo">Área de trabajo</label>
-                        <select class="form-select" name="extprex_id_area_trabajo" id="extprex_id_area_trabajo">
+                        <select class="form-control" name="extprex_id_area_trabajo" id="extprex_id_area_trabajo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($areastrabajo as $trabajo)
                                 <option value="{{ $trabajo->id }}" {{$trabajo->id == $proyectoextension->extprex_id_area_trabajo ? 'selected' : ''}}>{{ $trabajo->coartra_nombre }}</option>
@@ -213,7 +213,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extprex_id_ciclo_vital">Ciclo vital</label>
-                        <select class="form-select" name="extprex_id_ciclo_vital" id="extprex_id_ciclo_vital">
+                        <select class="form-control" name="extprex_id_ciclo_vital" id="extprex_id_ciclo_vital">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$proyectoextension->extprex_id_ciclo_vital == '1' ? 'selected' : ''}}>Primera infancia (0-5 años)</option>
                             <option value="2" {{$proyectoextension->extprex_id_ciclo_vital == '2' ? 'selected' : ''}}>Niñez (6-11 años)</option>
@@ -228,11 +228,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Fuente nacional</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Fuente nacional</h4>
                     <div class="col-md-4">
                         <label for="extprex_id_entidad_nacional">Entidad nacional</label>
-                        <select class="form-select" name="extprex_id_entidad_nacional"
+                        <select class="form-control" name="extprex_id_entidad_nacional"
                             id="extprex_id_entidad_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($entidadesnac as $entidadenac)
@@ -247,7 +247,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="extprex_id_fuente_nacional">Fuente nacional</label>
-                        <select class="form-select" name="extprex_id_fuente_nacional"
+                        <select class="form-control" name="extprex_id_fuente_nacional"
                             id="extprex_id_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionals as $nacional)
@@ -273,11 +273,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Fuente internacional</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Fuente internacional</h4>
                     <div class="col-md-6">
                         <label for="extprex_id_fuente_internacional">Fuente internacional</label>
-                        <select class="form-select" name="extprex_id_fuente_internacional"
+                        <select class="form-control" name="extprex_id_fuente_internacional"
                             id="extprex_id_fuente_internacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($entidadesinter as $entidadinter)
@@ -329,8 +329,8 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Otras entidades</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Otras entidades</h4>
                     <div class="col-md-4">
                         <label for="extprex_nombre_otra_entidad">Nombre entidad</label>
                         <input class="form-control @error('extprex_nombre_otra_entidad') is-invalid @enderror"
@@ -345,7 +345,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="extprex_id_sector_otra_entidad">Sector entidad</label>
-                        <select class="form-select" name="extprex_id_sector_otra_entidad"
+                        <select class="form-control" name="extprex_id_sector_otra_entidad"
                             id="extprex_id_sector_otra_entidad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sectores as $sector)
@@ -371,11 +371,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Población condición</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Población condición</h4>
                     <div class="col-md-6">
                         <label for="extprex_id_poblacion_condicion">Tipo población condición</label>
-                        <select class="form-select" name="extprex_id_poblacion_condicion"
+                        <select class="form-control" name="extprex_id_poblacion_condicion"
                             id="extprex_id_poblacion_condicion">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($poblacioncondicions as $poblacioncondicion)
@@ -401,11 +401,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Población grupo</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Población grupo</h4>
                     <div class="col-md-6">
                         <label for="extprex_id_poblacion_grupo">Tipo población condición</label>
-                        <select class="form-select" name="extprex_id_poblacion_grupo"
+                        <select class="form-control" name="extprex_id_poblacion_grupo"
                             id="extprex_id_poblacion_grupo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($poblaciongrupos as $poblaciongrupo)

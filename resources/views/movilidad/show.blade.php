@@ -2,8 +2,11 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/movilidad/{{$movilidad->id}}">Vista</a> / <a href="/movilidad">Movilidad</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
@@ -11,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Información de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="movi_year">Año</label>
@@ -38,7 +41,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="">Tipo de persona</label>
-                    <select class="form-select @error('tipo_persona_movilidad') is-invalid @enderror"
+                    <select class="form-control @error('tipo_persona_movilidad') is-invalid @enderror"
                         name="tipo_persona_movilidad" id="tipo_persona_movilidad" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="administrativo" {{$movilidad->movi_tipo_persona == 'administrativo' ? 'selected' : ''}}>Administrativo</option>
@@ -53,7 +56,7 @@
                 </div>
                 <div class="col-md-6" id="administrativo">
                     <label for="">Nombre completo</label>
-                    <select class="form-select" name="prac_id_administrativo" id="prac_id_administrativo" disabled>
+                    <select class="form-control" name="prac_id_administrativo" id="prac_id_administrativo" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($administrativos as $administrativo)
                             <option value="{{ $administrativo->id }}" {{$movilidad->movi_id_persona == $administrativo->id ? 'selected' : ''}}>
@@ -63,7 +66,7 @@
                 </div>
                 <div class="col-md-6" id="docente">
                     <label for="">Nombre completo</label>
-                    <select class="form-select" name="prac_id_docente" id="prac_id_docente" disabled>
+                    <select class="form-control" name="prac_id_docente" id="prac_id_docente" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)
                             <option value="{{ $persona->id }}" {{$movilidad->movi_id_persona == $persona->id ? 'selected' : ''}}>
@@ -73,7 +76,7 @@
                 </div>
                 <div class="col-md-6" id="estudiante">
                     <label for="">Nombre completo</label>
-                    <select class="form-select" name="prac_id_estudiante" id="prac_id_estudiante" disabled>
+                    <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
                             <option value="{{ $estudiante->id }}" {{$movilidad->movi_id_persona == $estudiante->id ? 'selected' : ''}}>

@@ -6,21 +6,21 @@
         <a href="/extension/crearmovilidadnacional">Crear</a> / <a href="/extension/mostrarmovilidadnacional">Movilidad nacional</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Registro movilidad nacional</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro movilidad nacional</h4><hr>
             <form action="/extension/registromovilidadnacional" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmona_tipo">Tipo</label>
-                        <select class="form-select @error('exmona_tipo') is-invalid @enderror" name="exmona_tipo"
+                        <select class="form-control @error('exmona_tipo') is-invalid @enderror" name="exmona_tipo"
                             id="exmona_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="entrante">Entrante</option>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmona_rol">Rol</label>
-                        <select class="form-select @error('exmona_rol') is-invalid @enderror" name="exmona_rol"
+                        <select class="form-control @error('exmona_rol') is-invalid @enderror" name="exmona_rol"
                             id="exmona_rol">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="estudiante">Estudiante</option>
@@ -51,7 +51,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmona_id_sede">Sede</label>
-                        <select class="form-select @error('exmona_id_sede') is-invalid @enderror" name="exmona_id_sede" id="exmona_id_sede">
+                        <select class="form-control @error('exmona_id_sede') is-invalid @enderror" name="exmona_id_sede" id="exmona_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
                                 <option value="{{ $sede->id }}">{{ $sede->mun_nombre }}</option>
@@ -65,7 +65,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmona_id_facultad">Facultad</label>
-                        <select class="form-select @error('exmona_id_facultad') is-invalid @enderror" name="exmona_id_facultad" id="exmona_id_facultad">
+                        <select class="form-control @error('exmona_id_facultad') is-invalid @enderror" name="exmona_id_facultad" id="exmona_id_facultad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}">{{ $facultad->fac_nombre }}</option>
@@ -81,7 +81,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmona_id_programa">Programa</label>
-                        <select class="form-select @error('exmona_id_programa') is-invalid @enderror" name="exmona_id_programa" id="exmona_id_programa">
+                        <select class="form-control @error('exmona_id_programa') is-invalid @enderror" name="exmona_id_programa" id="exmona_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6 otros" id="otros">
                         <label for="exmona_id_persona">Persona - Nombre completo</label>
-                        <select class="form-select @error('exmona_id_persona') is-invalid @enderror" name="exmona_id_persona" id="exmona_id_persona">
+                        <select class="form-control @error('exmona_id_persona') is-invalid @enderror" name="exmona_id_persona" id="exmona_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-6 estudiantes" id="estudiantes">
                         <label for="exmona_id_estudiante">Persona - Nombre completo</label>
-                        <select class="form-select @error('exmona_id_estudiante') is-invalid @enderror" name="exmona_id_estudiante" id="exmona_id_estudiante">
+                        <select class="form-control @error('exmona_id_estudiante') is-invalid @enderror" name="exmona_id_estudiante" id="exmona_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">

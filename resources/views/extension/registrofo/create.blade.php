@@ -6,7 +6,7 @@
         <a href="/extension/crearregistrofotografico">Crear</a> / <a href="/extension/mostrarregistrofotografico">Registro fotografico</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Registro fotografico</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro fotografico</h4><hr>
             <form action="/extension/registrofotografico" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
@@ -46,7 +46,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extrefoin_tipo_actividad">Tipo actividad</label>
-                        <select class="form-select @error('extrefoin_tipo_actividad') is-invalid @enderror" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad">
+                        <select class="form-control @error('extrefoin_tipo_actividad') is-invalid @enderror" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="internacionalizacion-curriculo">Internacionalización del curriculo</option>
                             <option value="segundo-idioma">Segundo idioma</option>
@@ -101,7 +101,7 @@
                 <div class="row mb-3">
                     <div class="col-md-4">
                         <label for="extrefoin_tipo_evento">Tipo evento</label>
-                        <select class="form-select @error('extrefoin_tipo_evento') is-invalid @enderror" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento">
+                        <select class="form-control @error('extrefoin_tipo_evento') is-invalid @enderror" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="interno">Interno</option>
                             <option value="externo">Externo</option>
@@ -114,7 +114,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="extrefoin_tipo_modalidad">Tipo de modalidad</label>
-                        <select class="form-select @error('extrefoin_tipo_modalidad') is-invalid @enderror" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad">
+                        <select class="form-control @error('extrefoin_tipo_modalidad') is-invalid @enderror" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>
                             <option value="investigacion">Investigación</option>

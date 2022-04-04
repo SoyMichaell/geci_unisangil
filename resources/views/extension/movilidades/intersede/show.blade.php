@@ -6,19 +6,19 @@
         <a href="/extension/{{$intersede->id}}/vermovilidadintersede">Vista</a> / <a href="/extension/mostrarmovilidadintersede">Movilidad intersede</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Vista de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exmoin_tipo">Tipo</label>
-                    <select class="form-select @error('exmoin_tipo') is-invalid @enderror" name="exmoin_tipo"
+                    <select class="form-control @error('exmoin_tipo') is-invalid @enderror" name="exmoin_tipo"
                         id="exmoin_tipo" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="entrante" {{ $intersede->exmoin_tipo == 'entrante' ? 'selected' : '' }}>Entrante
@@ -34,7 +34,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="exmoin_rol">Rol</label>
-                    <select class="form-select @error('exmoin_rol') is-invalid @enderror" name="exmoin_rol"
+                    <select class="form-control @error('exmoin_rol') is-invalid @enderror" name="exmoin_rol"
                         id="exmoin_rol" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="estudiante" {{ $intersede->exmoin_rol == 'estudiante' ? 'selected' : '' }}>
@@ -54,7 +54,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exmoin_id_sede_or">Sede origen</label>
-                    <select class="form-select @error('exmoin_id_sede_or') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_sede_or') is-invalid @enderror"
                         name="exmoin_id_sede_or" id="exmoin_id_sede_or" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($sedes as $sede)
@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="exmoin_id_facultad_or">Facultad origen</label>
-                    <select class="form-select @error('exmoin_id_facultad_or') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_facultad_or') is-invalid @enderror"
                         name="exmoin_id_facultad_or" id="exmoin_id_facultad_or" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($facultades as $facultad)
@@ -90,7 +90,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exmoin_id_programa_or">Programa origen</label>
-                    <select class="form-select @error('exmoin_id_programa_or') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_programa_or') is-invalid @enderror"
                         name="exmoin_id_programa_or" id="exmoin_id_programa_or" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($programas as $programa)
@@ -107,7 +107,7 @@
                 </div>
                 <div class="col-md-6 otros" id="otros">
                     <label for="exmoin_id_persona">Persona - Nombre completo</label>
-                    <select class="form-select @error('exmoin_id_persona') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_persona') is-invalid @enderror"
                         name="exmoin_id_persona" id="exmoin_id_persona" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)
@@ -124,7 +124,7 @@
                 </div>
                 <div class="col-md-6 estudiantes" id="estudiantes">
                     <label for="exmoin_id_estudiante">Persona - Nombre completo</label>
-                    <select class="form-select @error('exmoin_id_estudiante') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_estudiante') is-invalid @enderror"
                         name="exmoin_id_estudiante" id="exmoin_id_estudiante" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
@@ -144,7 +144,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exmoin_id_sede_des">Sede destino</label>
-                    <select class="form-select @error('exmoin_id_sede_des') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_sede_des') is-invalid @enderror"
                         name="exmoin_id_sede_des" id="exmoin_id_sede_des" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($sedes as $sede)
@@ -161,7 +161,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="exmoin_id_facultad_des">Facultad destino</label>
-                    <select class="form-select @error('exmoin_id_facultad_des') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_facultad_des') is-invalid @enderror"
                         name="exmoin_id_facultad_des" id="exmoin_id_facultad_des" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($facultades as $facultad)
@@ -180,7 +180,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exmoin_id_programa_des">Programa destino</label>
-                    <select class="form-select @error('exmoin_id_programa_des') is-invalid @enderror"
+                    <select class="form-control @error('exmoin_id_programa_des') is-invalid @enderror"
                         name="exmoin_id_programa_des" id="exmoin_id_programa_des" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($programas as $programa)

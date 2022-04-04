@@ -6,7 +6,7 @@
         <a href="/extension/{{$fotografico->id}}/verregistrofotografico">Vista</a> / <a href="/extension/mostrarregistrofotografico">Registro fotografico</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Vista registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extrefoin_year">Año</label>
@@ -42,7 +42,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extrefoin_tipo_actividad">Tipo actividad</label>
-                    <select class="form-select" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad"
+                    <select class="form-control" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="internacionalizacion-curriculo"
@@ -110,7 +110,7 @@
             <div class="row mb-3">
                 <div class="col-md-4">
                     <label for="extrefoin_tipo_evento">Tipo evento</label>
-                    <select class="form-select" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento" disabled>
+                    <select class="form-control" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="interno"
                             {{ $fotografico->extrefoin_tipo_evento == 'interno' ? 'selected' : '' }}>Interno
@@ -127,7 +127,7 @@
                 </div>
                 <div class="col-md-4">
                     <label for="extrefoin_tipo_modalidad">Tipo de modalidad</label>
-                    <select class="form-select" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad"
+                    <select class="form-control" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="formacion"

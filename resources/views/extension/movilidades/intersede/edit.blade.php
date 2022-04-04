@@ -6,22 +6,22 @@
         <a href="/extension/{{$intersede->id}}/editarmovilidadintersede">Editar</a> / <a href="/extension/mostrarmovilidadintersede">Movilidad intersede</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$intersede->id}}/actualizarmovilidadintersede" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmoin_tipo">Tipo</label>
-                        <select class="form-select @error('exmoin_tipo') is-invalid @enderror" name="exmoin_tipo"
+                        <select class="form-control @error('exmoin_tipo') is-invalid @enderror" name="exmoin_tipo"
                             id="exmoin_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="entrante" {{$intersede->exmoin_tipo == 'entrante' ? 'selected' : ''}}>Entrante</option>
@@ -35,7 +35,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmoin_rol">Rol</label>
-                        <select class="form-select @error('exmoin_rol') is-invalid @enderror" name="exmoin_rol"
+                        <select class="form-control @error('exmoin_rol') is-invalid @enderror" name="exmoin_rol"
                             id="exmoin_rol">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="estudiante" {{$intersede->exmoin_rol == 'estudiante' ? 'selected' : ''}}>Estudiante</option>
@@ -52,7 +52,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmoin_id_sede_or">Sede origen</label>
-                        <select class="form-select @error('exmoin_id_sede_or') is-invalid @enderror" name="exmoin_id_sede_or" id="exmoin_id_sede_or">
+                        <select class="form-control @error('exmoin_id_sede_or') is-invalid @enderror" name="exmoin_id_sede_or" id="exmoin_id_sede_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
                                 <option value="{{ $sede->id }}" {{$intersede->exmoin_id_sede_or == $sede->id ? 'selected' : ''}}>{{ $sede->mun_nombre }}</option>
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmoin_id_facultad_or">Facultad origen</label>
-                        <select class="form-select @error('exmoin_id_facultad_or') is-invalid @enderror" name="exmoin_id_facultad_or" id="exmoin_id_facultad_or">
+                        <select class="form-control @error('exmoin_id_facultad_or') is-invalid @enderror" name="exmoin_id_facultad_or" id="exmoin_id_facultad_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}" {{$intersede->exmoin_id_facultad_or == $facultad->id ? 'selected' : ''}}>{{ $facultad->fac_nombre }}</option>
@@ -82,7 +82,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmoin_id_programa_or">Programa origen</label>
-                        <select class="form-select @error('exmoin_id_programa_or') is-invalid @enderror" name="exmoin_id_programa_or" id="exmoin_id_programa_or">
+                        <select class="form-control @error('exmoin_id_programa_or') is-invalid @enderror" name="exmoin_id_programa_or" id="exmoin_id_programa_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}" {{$intersede->exmoin_id_programa_or == $programa->id ? 'selected' : ''}}>{{ $programa->pro_nombre }}</option>
@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6 otros" id="otros">
                         <label for="exmoin_id_persona">Persona - Nombre completo</label>
-                        <select class="form-select @error('exmoin_id_persona') is-invalid @enderror" name="exmoin_id_persona" id="exmoin_id_persona">
+                        <select class="form-control @error('exmoin_id_persona') is-invalid @enderror" name="exmoin_id_persona" id="exmoin_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}" {{$intersede->exmoin_id_persona == $persona->id ? 'selected' : ''}}>
@@ -111,7 +111,7 @@
                     </div>
                     <div class="col-md-6 estudiantes" id="estudiantes">
                         <label for="exmoin_id_estudiante">Persona - Nombre completo</label>
-                        <select class="form-select @error('exmoin_id_estudiante') is-invalid @enderror" name="exmoin_id_estudiante" id="exmoin_id_estudiante">
+                        <select class="form-control @error('exmoin_id_estudiante') is-invalid @enderror" name="exmoin_id_estudiante" id="exmoin_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}" {{$intersede->exmoin_id_estudiante == $estudiante->id ? 'selected' : ''}}>
@@ -129,7 +129,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmoin_id_sede_des">Sede destino</label>
-                        <select class="form-select @error('exmoin_id_sede_des') is-invalid @enderror" name="exmoin_id_sede_des" id="exmoin_id_sede_des">
+                        <select class="form-control @error('exmoin_id_sede_des') is-invalid @enderror" name="exmoin_id_sede_des" id="exmoin_id_sede_des">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
                                 <option value="{{ $sede->id }}" {{$intersede->exmoin_id_sede_des == $sede->id ? 'selected' : ''}}>{{ $sede->mun_nombre }}</option>
@@ -143,7 +143,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmoin_id_facultad_des">Facultad destino</label>
-                        <select class="form-select @error('exmoin_id_facultad_des') is-invalid @enderror" name="exmoin_id_facultad_des" id="exmoin_id_facultad_des">
+                        <select class="form-control @error('exmoin_id_facultad_des') is-invalid @enderror" name="exmoin_id_facultad_des" id="exmoin_id_facultad_des">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}" {{$intersede->exmoin_id_facultad_des == $facultad->id ? 'selected' : ''}}>{{ $facultad->fac_nombre }}</option>
@@ -159,7 +159,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmoin_id_programa_des">Programa destino</label>
-                        <select class="form-select @error('exmoin_id_programa_des') is-invalid @enderror" name="exmoin_id_programa_des" id="exmoin_id_programa_des">
+                        <select class="form-control @error('exmoin_id_programa_des') is-invalid @enderror" name="exmoin_id_programa_des" id="exmoin_id_programa_des">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}" {{$intersede->exmoin_id_programa_des == $programa->id ? 'selected' : ''}}>{{ $programa->pro_nombre }}</option>

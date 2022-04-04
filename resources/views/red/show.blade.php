@@ -6,16 +6,15 @@
         <a href="/red/{{$red->id}}">Vista</a> / <a href="/red">Redes acádemicas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Información de registro</h4>
-            <hr>
+            <h4><i class="fa fa-question-circle"></i> Información de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="red_nombre">{{ __('Nombre red *') }}</label>
@@ -77,7 +76,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="red_alcance">{{ __('Alcance *') }}</label>
-                    <select class="form-select @error('red_alcance') is-invalid @enderror" name="red_alcance"
+                    <select class="form-control @error('red_alcance') is-invalid @enderror" name="red_alcance"
                         id="red_alcance" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="regional" {{ $red->red_alcance == 'regional' ? 'selected' : '' }}>Regional
@@ -122,7 +121,7 @@
                         $programax = explode(';',$red->red_id_programa);
                     @endphp
                     <label for="red_id_programa">{{ __('Programa *') }}</label>
-                    <select class="form-select js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
+                    <select class="form-control js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
                         name="red_id_programa[]" id="red_id_programa" multiple="multiple" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($programas as $programa)

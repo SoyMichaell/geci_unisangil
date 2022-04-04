@@ -12,9 +12,9 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Registro red disciplinarias - organizaciones - asociaciones</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro red disciplinarias - organizaciones - asociaciones</h4><hr>
             <form action="/extension/registrointerorganizacion" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -44,7 +44,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exseor_tipo">Tipo *</label>
-                        <select class="form-select @error('exseor_tipo') is-invalid @enderror" name="exseor_tipo" id="exseor_tipo">
+                        <select class="form-control @error('exseor_tipo') is-invalid @enderror" name="exseor_tipo" id="exseor_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="red">Red</option>
                             <option value="asociación">Asociación</option>
@@ -71,7 +71,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exseor_caracter">Cáracter *</label>
-                        <select class="form-select @error('exseor_caracter') is-invalid @enderror" name="exseor_caracter" id="exseor_caracter">
+                        <select class="form-control @error('exseor_caracter') is-invalid @enderror" name="exseor_caracter" id="exseor_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional">Nacional</option>
                             <option value="internacional">Internacional</option>
@@ -141,7 +141,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exseor_funcion">Función</label>
-                        <select class="form-select" name="exseor_funcion" id="exseor_funcion">
+                        <select class="form-control" name="exseor_funcion" id="exseor_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>
                             <option value="investigacion">Investigación</option>
@@ -172,7 +172,7 @@
                 <div class="row par_wrapper mb-3">
                     <div class="col-md-1">
                         <a class="btn btn-success add_button" href="javascript:void(0);" 
-                            title="Add field"><i class="fa-solid fa-circle-plus"></i></a>
+                            title="Add field"><i class="fa fa-plus-circle"></i></a>
                     </div>
                 </div>
                 <div class="row mb-0">

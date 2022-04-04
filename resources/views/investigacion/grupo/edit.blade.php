@@ -6,21 +6,22 @@
     <a href="/investigacion/editargrupo">Editar</a> / <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Actualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligencie los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/investigacion/{{$grupo->id}}/actualizargrupo" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="inv_id_coordinador">{{ __('Coordinador grupo *') }}</label>
-                        <select class="form-select @error('inv_id_coordinador') is-invalid @enderror" name="inv_id_coordinador" id="inv_id_coordinador">
+                        <select class="form-control @error('inv_id_coordinador') is-invalid @enderror" name="inv_id_coordinador" id="inv_id_coordinador">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}" {{$grupo->inv_id_coordinador == $persona->id ? 'selected' : ''}}>
@@ -149,7 +150,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="inv_sede">{{ __('Sede *') }}</label>
-                        <select class="form-select @error('inv_sede') is-invalid @enderror" name="inv_sede" id="inv_sede">
+                        <select class="form-control @error('inv_sede') is-invalid @enderror" name="inv_sede" id="inv_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
                                 <option value="{{ $sede->id }}" {{$grupo->inv_sede == $sede->id ? 'selected' : ''}}>{{ $sede->mun_nombre }}</option>
@@ -163,7 +164,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inv_facultad">{{ __('Facultad *') }}</label>
-                        <select class="form-select @error('inv_facultad') is-invalid @enderror" name="inv_facultad" id="inv_facultad">
+                        <select class="form-control @error('inv_facultad') is-invalid @enderror" name="inv_facultad" id="inv_facultad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}" {{$grupo->inv_facultad == $facultad->id ? 'selected' : ''}}>{{ $facultad->fac_nombre }}</option>

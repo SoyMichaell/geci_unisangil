@@ -6,7 +6,7 @@
     <a href="/extension/crearcurso">Crear</a> / <a href="/extension/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Registro curso</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro curso</h4><hr>
             <form action="/extension/registrocurso" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
@@ -69,7 +69,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcurso_id_cine">CINE Detallado *</label>
-                        <select class="form-select js-example-placeholder-single @error('extcurso_id_cine') is-invalid @enderror" name="extcurso_id_cine" id="extcurso_id_cine">
+                        <select class="form-control js-example-placeholder-single @error('extcurso_id_cine') is-invalid @enderror" name="extcurso_id_cine" id="extcurso_id_cine">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cines as $cine)
                                 <option value="{{ $cine->id }}">{{ $cine->cocide_nombre }}</option>
@@ -83,7 +83,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcurso_extension">Es curso de extensión? *</label>
-                        <select class="form-select @error('extcurso_extension') is-invalid @enderror" name="extcurso_extension" id="extcurso_extension">
+                        <select class="form-control @error('extcurso_extension') is-invalid @enderror" name="extcurso_extension" id="extcurso_extension">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="S">Si</option>
                             <option value="N">No</option>
@@ -98,7 +98,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcurso_estado">Estado curso activo? *</label>
-                        <select class="form-select @error('extcurso_estado') is-invalid @enderror" name="extcurso_estado" id="extcurso_estado">
+                        <select class="form-control @error('extcurso_estado') is-invalid @enderror" name="extcurso_estado" id="extcurso_estado">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="S">Si</option>
                             <option value="N">No</option>
@@ -124,13 +124,13 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcurso_id_docente">Docente *</label>
-                        <select class="form-select js-example-placeholder-single @error('extcurso_id_docente') is-invalid @enderror" name="extcurso_id_docente" id="extcurso_id_docente">
+                        <select class="form-control js-example-placeholder-single @error('extcurso_id_docente') is-invalid @enderror" name="extcurso_id_docente" id="extcurso_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}">{{$persona->per_nombre.' '.$persona->per_apellido}}</option>
                             @endforeach
                         </select>
-                        <p class="badge badge-danger"><strong>{{$personas->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
+                        <p class="{{$personas->count()<=0 ? 'badge badge-danger' : ''}}"><strong>{{$personas->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
                         @error('extcurso_id_docente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

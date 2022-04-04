@@ -6,7 +6,7 @@
         <a href="/extension/{{ $interredconvenio->id }}/editarinterredconvenio">Editar</a> / <a href="/extension/mostrarinterredconvenio">Redes académicas</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{ $interredconvenio->id }}/actualizarinterredconvenio" method="post">
                 @csrf
                 @method('PUT')
@@ -56,7 +56,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="exsered_caracter">Cáracter</label>
-                        <select class="form-select" name="exsered_caracter" id="exsered_caracter">
+                        <select class="form-control" name="exsered_caracter" id="exsered_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional"
                                 {{ $interredconvenio->exsered_caracter == 'nacional' ? 'selected' : '' }}>Nacional
@@ -118,7 +118,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exsered_funcion">Función</label>
-                        <select class="form-select" name="exsered_funcion" id="exsered_funcion">
+                        <select class="form-control" name="exsered_funcion" id="exsered_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion"
                                 {{ $interredconvenio->exsered_funcion == 'formacion' ? 'selected' : '' }}>Formación
@@ -149,7 +149,7 @@
                                     name="exseredpar_nombre_participante[]" placeholder="Nombre completo"
                                     value="{{ $item->exseredpar_nombre_participante }}" />
                             </div>
-                            <div class="col-md-4"><select class="form-select mt-2"
+                            <div class="col-md-4"><select class="form-control mt-2"
                                     name="exseredpar_rol_participante[]">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="estudiante"

@@ -6,15 +6,15 @@
        <a href="/extension/{{$participacion->id}}/editarparticipacioneventos">Editar</a>  / <a href="/extension/mostrarparticipacioneventos">Participación eventos</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$participacion->id}}/actualizarparticipacioneventos" method="post">
                 @csrf
                 @method('PUT')
@@ -47,7 +47,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="expaev_tipo_evento">Tipo evento</label>
-                        <select class="form-select @error('expaev_tipo_evento') is-invalid @enderror" name="expaev_tipo_evento" id="expaev_tipo_evento">
+                        <select class="form-control @error('expaev_tipo_evento') is-invalid @enderror" name="expaev_tipo_evento" id="expaev_tipo_evento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="taller" {{$participacion->expaev_tipo_evento == 'taller' ? 'selected' : ''}}>Taller</option>
                             <option value="conferencia" {{$participacion->expaev_tipo_evento == 'conferencia' ? 'selected' : ''}}>Conferencia</option>
@@ -107,7 +107,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="expaev_id_persona">Nombre completo participante</label>
-                        <select class="form-select js-example-placeholder-single @error('expaev_id_persona') is-invalid @enderror" name="expaev_id_persona" id="expaev_id_persona">
+                        <select class="form-control js-example-placeholder-single @error('expaev_id_persona') is-invalid @enderror" name="expaev_id_persona" id="expaev_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}" {{$participacion->expaev_id_persona == $persona->id ? 'selected' : ''}}>{{$persona->per_nombre.' '.$persona->per_apellido}}</option>

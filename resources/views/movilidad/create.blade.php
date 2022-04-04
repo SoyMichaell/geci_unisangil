@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/movilidad/create">Crear</a> / <a href="/movilidad">Movilidad</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Registro movilidad</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro movilidad</h4><hr>
             <form action="/movilidad/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -41,7 +44,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="">Tipo de persona</label>
-                        <select class="form-select @error('tipo_persona_movilidad') is-invalid @enderror" name="tipo_persona_movilidad" id="tipo_persona_movilidad">
+                        <select class="form-control @error('tipo_persona_movilidad') is-invalid @enderror" name="tipo_persona_movilidad" id="tipo_persona_movilidad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="administrativo">Administrativo</option>
                             <option value="docente">Docente</option>
@@ -55,7 +58,7 @@
                     </div>
                     <div class="col-md-6" id="administrativo">
                         <label for="">Nombre completo</label>
-                        <select class="form-select" name="prac_id_administrativo" id="prac_id_administrativo">
+                        <select class="form-control" name="prac_id_administrativo" id="prac_id_administrativo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($administrativos as $administrativo)
                                 <option value="{{ $administrativo->id }}">
@@ -65,7 +68,7 @@
                     </div>
                     <div class="col-md-6" id="docente">
                         <label for="">Nombre completo</label>
-                        <select class="form-select" name="prac_id_docente" id="prac_id_docente">
+                        <select class="form-control" name="prac_id_docente" id="prac_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">
@@ -75,7 +78,7 @@
                     </div>
                     <div class="col-md-6" id="estudiante">
                         <label for="">Nombre completo</label>
-                        <select class="form-select" name="prac_id_estudiante" id="prac_id_estudiante">
+                        <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">

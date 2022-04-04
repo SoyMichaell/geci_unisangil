@@ -20,9 +20,9 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                     <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportparticipantepdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportparticipanteexcel') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                        title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('extension/crearparticipante') }}"><i
                                 class="fa fa-plus-circle"></i>
@@ -31,7 +31,7 @@
                 </div>
             </div>
             <div class="table-responsive mt-2">
-                <table class="table table-bordered" id="tables">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -66,14 +66,14 @@
                                             <div class="d-flex">
                                                 <a class="btn btn-sm"
                                                     href="/extension/{{ $participante->id }}/verparticipante"><i
-                                                        class="fa-solid fa-folder-open"></i></a>
+                                                        class="fa fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
                                                     href="/extension/{{ $participante->id }}/editarparticipante"><i
-                                                        class="fa-solid fa-refresh"></i></a>
+                                                        class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     @endif

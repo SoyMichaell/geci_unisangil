@@ -6,7 +6,7 @@
         <a href="/extension/{{$interredorganizacion->id}}/editarinterorganizacion">Editar</a> / <a href="/extension/mostrarinterorganizacion">Red organizaciones</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$interredorganizacion->id}}/actualizarinterorganizacion" method="post">
                 @csrf
                 @method('PUT')
@@ -45,7 +45,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exseor_tipo">Tipo</label>
-                        <select class="form-select" name="exseor_tipo" id="exseor_tipo">
+                        <select class="form-control" name="exseor_tipo" id="exseor_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="red" {{$interredorganizacion->exseor_tipo == 'red' ? 'selected': ''}}>Red</option>
                             <option value="asociación" {{$interredorganizacion->exseor_tipo == 'asociación' ? 'selected': ''}}>Asociación</option>
@@ -72,7 +72,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exseor_caracter">Cáracter</label>
-                        <select class="form-select" name="exseor_caracter" id="exseor_caracter">
+                        <select class="form-control" name="exseor_caracter" id="exseor_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional" {{$interredorganizacion->exseor_caracter == 'nacional' ? 'selected': ''}}>Nacional</option>
                             <option value="internacional" {{$interredorganizacion->exseor_caracter == 'internacional' ? 'selected': ''}}>Internacional</option>
@@ -142,7 +142,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exseor_funcion">Función</label>
-                        <select class="form-select" name="exseor_funcion" id="exseor_funcion">
+                        <select class="form-control" name="exseor_funcion" id="exseor_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion" {{$interredorganizacion->exseor_funcion == 'formacion' ? 'selected': ''}}>Formación</option>
                             <option value="investigacion" {{$interredorganizacion->exseor_funcion == 'investigacion' ? 'selected': ''}}>Investigación</option>
@@ -167,7 +167,7 @@
                                     name="exseorpar_nombre_completo[]" placeholder="Nombre completo"
                                     value="{{ $item->exseorpar_nombre_completo }}" />
                             </div>
-                            <div class="col-md-4"><select class="form-select mt-2"
+                            <div class="col-md-4"><select class="form-control mt-2"
                                     name="exseorpar_rol[]">
                                     <option value="">---- SELECCIONE ----</option>
                                     <option value="estudiante"

@@ -6,7 +6,7 @@
          <a href="/extension/{{ $curriculo->id }}/vercurriculo">Vista</a> / <a href="/extension/mostrarcurriculo">Curriculo</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Extensión</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Listado de registro programas académicos</p>
     @endsection
@@ -35,6 +35,7 @@
 </style>
 @section('content')
     <div class="container">
+        <h4><i class="fa fa-quesiton-circle"></i> Vista de registro</h4><hr>
         <div class="row">
             <div class="col-md-12">
                 <h4 class="fw-bold">Datos asignatura</h4>

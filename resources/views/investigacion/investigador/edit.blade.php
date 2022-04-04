@@ -6,7 +6,7 @@
         <a href="/investigacion/editarintegrante">Editar</a> / <a href="/investigacion/mostrarintegrante">Investigador</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligencie todos los campos requeridos. </p>
     @endsection
@@ -14,14 +14,14 @@
 @section('content')
     <div class="col-md-12">
         <div class="tile w-50">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/investigacion/{{$investigador->id}}/actualizarintegrante" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="inves_id_persona">{{ __('Investigador *') }}</label>
-                        <select class="form-select @error('inves_id_persona') is-invalid @enderror"
+                        <select class="form-control @error('inves_id_persona') is-invalid @enderror"
                             name="inves_id_persona" id="inves_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
@@ -74,7 +74,7 @@
                     </div>
                     <div class="col-md-12">
                         <label for="inves_id_grupo">{{ __('Grupo de investigación *') }}</label>
-                        <select class="form-select @error('inves_id_grupo') is-invalid @enderror"
+                        <select class="form-control @error('inves_id_grupo') is-invalid @enderror"
                             name="inves_id_grupo" id="inves_id_grupo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($grupos as $grupo)

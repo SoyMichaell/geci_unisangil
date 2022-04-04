@@ -6,16 +6,15 @@
         <a href="/laboratorio/create">Crear</a> / <a href="/laboratorio">Laboratorio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de laboratorios</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligencie los campos requeridos.</p>
+        <p>Diligencie todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro laboratorio</h4>
-            <hr>
+            <h4 class="titulo"><i class="fa fa-cube"></i> Registro laboratorio</h4><hr>
             <form action="/laboratorio/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -55,14 +54,14 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_id_docente">{{ __('Docente responsable *') }}</label>
-                        <select class="form-select @error('lab_id_docente') is-invalid @enderror" name="lab_id_docente"
+                        <select class="form-control @error('lab_id_docente') is-invalid @enderror" name="lab_id_docente"
                             id="lab_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}">
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
-                            <p style="font-size: 12px; color:red;"><strong>{{$docentes->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
+                            <p class="{{$docentes->count()<=0 ? 'badge badge-danger' : ''}}">{{$docentes->count()<=0 ? 'No existen registros de docentes' : ''}}</p>
                         </select>
                         @error('lab_id_docente')
                             <span class="invalid-feedback" role="alert">
@@ -85,14 +84,13 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_id_facultad">{{ __('Facultad *') }}</label>
-                        <select class="form-select @error('lab_id_facultad') is-invalid @enderror"
+                        <select class="form-control @error('lab_id_facultad') is-invalid @enderror"
                             name="lab_id_facultad" id="lab_id_facultad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}">{{ $facultad->fac_nombre }}</option>
                             @endforeach
                         </select>
-                        <p style="font-size: 12px; color:red;"><strong>{{$facultades->count()<=0 ? 'No existen registros de facultades' : ''}}</strong></p>
                         @error('lab_id_facultad')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -103,14 +101,14 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="lab_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select @error('lab_id_programa') is-invalid @enderror"
+                        <select class="form-control @error('lab_id_programa') is-invalid @enderror"
                             name="lab_id_programa" id="lab_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
-                        <p style="font-size: 12px; color:red;"><strong>{{$programas->count()<=0 ? 'No existen registros de programas' : ''}}</strong></p>
+                        <p class="{{$programas->count()<=0 ? 'badge badge-danger' : ''}}">{{$programas->count()<=0 ? 'No existen registros de programas' : ''}}</p>
                         @error('lab_id_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -119,7 +117,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_id_practicante">{{ __('Practicante a cargo *') }}</label>
-                        <select class="form-select @error('lab_id_practicante') is-invalid @enderror"
+                        <select class="form-control @error('lab_id_practicante') is-invalid @enderror"
                             name="lab_id_practicante" id="lab_id_practicante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
@@ -127,7 +125,7 @@
                                     {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
-                        <p style="font-size: 12px; color:red;"><strong>{{$estudiantes->count()<=0 ? 'No existen registros de practicantes' : ''}}</strong></p>
+                        <p class="{{$estudiantes->count()<=0 ? 'badge badge-danger' : ''}}">{{$estudiantes->count()<=0 ? 'No existen registros de estudiantes con rol administrativo' : ''}}</p>
                         @error('lab_id_practicante')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -162,14 +160,14 @@
                     </div>
                     <div class="col-md-4">
                         <label for="lab_id_software">{{ __('Software (s) utilizado (s) *') }}</label>
-                        <select class="form-select @error('lab_id_software') is-invalid @enderror"
+                        <select class="form-control @error('lab_id_software') is-invalid @enderror"
                             name="lab_id_software" id="lab_id_software">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($softwares as $software)
                                 <option value="{{ $software->id }}">{{ $software->sof_nombre }}</option>
                             @endforeach
                         </select>
-                        <p style="font-size: 12px; color:red;"><strong>{{$softwares->count()<=0 ? 'No existen registros de software' : ''}}</strong></p>
+                        <p class="{{$softwares->count()<=0 ? 'badge badge-danger' : ''}}">{{$softwares->count()<=0 ? 'No existen registros de software' : ''}}</p>
                         @error('lab_id_software')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

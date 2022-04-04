@@ -6,21 +6,21 @@
         <a href="/extension/crearmovilidadinternacional">Crear</a> / <a href="/extension/mostrarmovilidadinternacional">Movilidad internacional</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Registro movilidad internacional</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro movilidad internacional</h4><hr>
             <form action="/extension/registromovilidadinternacional" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmointer_tipo">Tipo</label>
-                        <select class="form-select @error('exmointer_tipo') is-invalid @enderror" name="exmointer_tipo"
+                        <select class="form-control @error('exmointer_tipo') is-invalid @enderror" name="exmointer_tipo"
                             id="exmointer_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="saliente">Saliente: desde UNISANGIL hacia otro país</option>
@@ -34,7 +34,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmointer_rol">Rol</label>
-                        <select class="form-select @error('exmointer_rol') is-invalid @enderror" name="exmointer_rol"
+                        <select class="form-control @error('exmointer_rol') is-invalid @enderror" name="exmointer_rol"
                             id="exmointer_rol">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="estudiante">Estudiante</option>
@@ -51,7 +51,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmointer_id_sede_or">Sede origen</label>
-                        <select class="form-select @error('exmointer_id_sede_or') is-invalid @enderror"
+                        <select class="form-control @error('exmointer_id_sede_or') is-invalid @enderror"
                             name="exmointer_id_sede_or" id="exmointer_id_sede_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
@@ -66,7 +66,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exmointer_id_facultad_or">Facultad origen</label>
-                        <select class="form-select @error('exmointer_id_facultad_or') is-invalid @enderror"
+                        <select class="form-control @error('exmointer_id_facultad_or') is-invalid @enderror"
                             name="exmointer_id_facultad_or" id="exmointer_id_facultad_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
@@ -83,7 +83,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmointer_id_programa_or">Programa origen</label>
-                        <select class="form-select @error('exmointer_id_programa_or') is-invalid @enderror"
+                        <select class="form-control @error('exmointer_id_programa_or') is-invalid @enderror"
                             name="exmointer_id_programa_or" id="exmointer_id_programa_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-md-6 otros" id="otros">
                         <label for="exmointer_id_persona">Persona - Nombre completo</label>
-                        <select class="form-select @error('exmointer_id_persona') is-invalid @enderror"
+                        <select class="form-control @error('exmointer_id_persona') is-invalid @enderror"
                             name="exmointer_id_persona" id="exmointer_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
@@ -116,7 +116,7 @@
                     </div>
                     <div class="col-md-6 estudiantes" id="estudiantes">
                         <label for="exmointer_id_estudiante">Persona - Nombre completo</label>
-                        <select class="form-select @error('exmointer_id_estudiante') is-invalid @enderror"
+                        <select class="form-control @error('exmointer_id_estudiante') is-invalid @enderror"
                             name="exmointer_id_estudiante" id="exmointer_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)

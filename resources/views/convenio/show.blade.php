@@ -6,7 +6,7 @@
         <a href="/convenio/{{ $convenio->id }}">Vista</a> / <a href="/convenio">Convenio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro</p>
     @endsection
@@ -32,7 +32,7 @@
         <table style="width: 100%">
             <tbody>
                 <tr>
-                    <td colspan="2" class="center">Información convenio</td>
+                    <td colspan="2" class="center"><i class="fa fa-question-circle"></i> Información convenio</td>
                 </tr>
                 <tr>
                     <td colspan="2"><hr></td>

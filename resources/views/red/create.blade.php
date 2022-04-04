@@ -6,16 +6,15 @@
         <a href="/red/create">Crear</a> / <a href="/red">Redes acádemicas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de redes acádemicas</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Listado de registro redes académicas</p>
     @endsection
 @endsection
 @section('content')
     <div class="container col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro red acádemica</h4>
-            <hr>
+            <h4><i class="fa fa-cubes"></i> Registro red acádemica</h4><hr>
             <form action="/red/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -81,7 +80,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="red_alcance">{{ __('Alcance *') }}</label>
-                        <select class="form-select @error('red_alcance') is-invalid @enderror" name="red_alcance"
+                        <select class="form-control @error('red_alcance') is-invalid @enderror" name="red_alcance"
                             id="red_alcance">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="regional">Regional</option>
@@ -120,13 +119,14 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="red_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-select js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
+                        <select class="form-control js-example-placeholder-single @error('red_id_programa') is-invalid @enderror"
                             name="red_id_programa[]" id="red_id_programa" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->pro_nombre }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
+                        <p class="{{$programas->count()<=0 ? 'badge badge-danger' : ''}}">{{$programas->count()<=0 ? 'No existe registro de programas académicos' : ''}}</p>
                         @error('red_id_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

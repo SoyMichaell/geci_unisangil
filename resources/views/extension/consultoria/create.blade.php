@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/extension/crearconsultoria">Crear</a> / <a href="/extension/mostrarconsultoria">Consultoria</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Registro consultoria</h4>
+            <h4><i class="fa fa-cube"></i> Registro consultoria</h4>
             <hr>
             <form action="/extension/registroconsultoria" method="post">
                 @csrf
@@ -66,7 +69,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcon_id_cine_campo">ID CINE Detallado </label>
-                        <select class="form-select @error('extcon_id_cine_campo') is-invalid @enderror"
+                        <select class="form-control @error('extcon_id_cine_campo') is-invalid @enderror"
                             name="extcon_id_cine_campo" id="extcon_id_cine_campo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cinedetallados as $cinedetallado)
@@ -95,7 +98,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="ext_sector_consultoria">Sector consultoria</label>
-                        <select class="form-select @error('ext_sector_consultoria') is-invalid @enderror"
+                        <select class="form-control @error('ext_sector_consultoria') is-invalid @enderror"
                             name="ext_sector_consultoria" id="ext_sector_consultoria">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sectores as $sector)
@@ -148,7 +151,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcon_fuente_nacional">Fuente nacional</label>
-                        <select class="form-select" name="extcon_fuente_nacional" id="extcon_fuente_nacional">
+                        <select class="form-control" name="extcon_fuente_nacional" id="extcon_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionales as $fuentenacional)
                                 <option value="{{ $fuentenacional->id }}">{{ $fuentenacional->cofuna_nombre }}
@@ -189,7 +192,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcon_fuente_internacional">Fuente internacional</label>
-                        <select class="form-select" name="extcon_fuente_internacional"
+                        <select class="form-control" name="extcon_fuente_internacional"
                             id="extcon_fuente_internacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuenteinternacionales as $fuenteinternacional)
@@ -229,11 +232,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-cubes"></i> Registro consultoria recurso humano</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Registro consultoria recurso humano</h4>
                     <div class="col-md-6">
                         <label for="extcon_id_persona">Recurso Humano | Persona</label>
-                        <select class="form-select js-example-placeholder-single" name="extcon_id_persona" id="extcon_id_persona">
+                        <select class="form-control js-example-placeholder-single" name="extcon_id_persona" id="extcon_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}">{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>
@@ -247,7 +250,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcon_id_nivel_estudio">Nivel de estudio</label>
-                        <select class="form-select js-example-placeholder-single" name="extcon_id_nivel_estudio" id="extcon_id_nivel_estudio">
+                        <select class="form-control js-example-placeholder-single" name="extcon_id_nivel_estudio" id="extcon_id_nivel_estudio">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($nivelestudios as $nivel)
                                 <option value="{{$nivel->conies_nombre}}">{{$nivel->conies_nombre}}</option>

@@ -6,19 +6,19 @@
         <a href="/extension/{{$internacional->id}}/vereventosinternacionales">Vista</a> / <a href="/extension/mostrareventosinternacionales">Eventos internacionales </a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Vista de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="exevin_tipo">Alcance</label>
-                    <select class="form-select @error('exevin_tipo') is-invalid @enderror" name="exevin_tipo" id="exevin_tipo" disabled>
+                    <select class="form-control @error('exevin_tipo') is-invalid @enderror" name="exevin_tipo" id="exevin_tipo" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="nacional" {{$internacional->exevin_tipo == 'nacional' ? 'selected' : ''}}>Nacional</option>
                         <option value="internacional" {{$internacional->exevin_tipo == 'internacional' ? 'selected' : ''}}>Internacional</option>

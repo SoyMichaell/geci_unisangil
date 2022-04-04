@@ -6,7 +6,7 @@
     <a href="/investigacion/verintegrante">Vista</a> / <a href="/investigacion/mostrarintegrante">Investigador</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Investigación</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Listado de registro investigadores</p>
     @endsection

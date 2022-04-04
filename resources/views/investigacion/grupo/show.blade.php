@@ -6,7 +6,7 @@
     <a href="/investigacion/vergrupo">Vista</a> / <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información registrada</p>
     @endsection

@@ -6,7 +6,7 @@
     <a href="/extension/{{$curso->id}}/vercurso">Vista</a> / <a href="/extension/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Vista de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcurso_year">Año</label>
@@ -66,7 +66,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcurso_id_cine">CINE Detallado</label>
-                    <select class="form-select" name="extcurso_id_cine" id="extcurso_id_cine" disabled>
+                    <select class="form-control" name="extcurso_id_cine" id="extcurso_id_cine" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($cines as $cine)
                             <option value="{{ $cine->id }}"
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="extcurso_extension">Es curso de extensión?</label>
-                    <select class="form-select" name="extcurso_extension" id="extcurso_extension" disabled>
+                    <select class="form-control" name="extcurso_extension" id="extcurso_extension" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="S" {{ $curso->extcurso_extension == 'S' ? 'selected' : '' }}>Si</option>
                         <option value="N" {{ $curso->extcurso_extension == 'N' ? 'selected' : '' }}>No</option>
@@ -97,7 +97,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcurso_estado">Estado curso activo?</label>
-                    <select class="form-select" name="extcurso_estado" id="extcurso_estado" disabled>
+                    <select class="form-control" name="extcurso_estado" id="extcurso_estado" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="S" {{ $curso->extcurso_extension == 'S' ? 'selected' : '' }}>Si</option>
                         <option value="N" {{ $curso->extcurso_extension == 'N' ? 'selected' : '' }}>No</option>
@@ -123,7 +123,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcurso_id_docente">Docente</label>
-                    <select class="form-select" name="extcurso_id_docente" id="extcurso_id_docente" disabled>
+                    <select class="form-control" name="extcurso_id_docente" id="extcurso_id_docente" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)
                             <option value="{{ $persona->id }}"

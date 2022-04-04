@@ -6,7 +6,7 @@
         <a href="/laboratorio/{{$laboratorio->id}}">Vista</a> / <a href="/laboratorio">Laboratorio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro</p>
     @endsection
@@ -32,7 +32,7 @@
         <table style="width: 100%">
             <tbody>
                 <tr>
-                    <td colspan="2" class="center">Información básica registro laboratorio</td>
+                    <td colspan="2" class="center"><i class="fa fa-question-circle"></i> Información básica registro laboratorio</td>
                 </tr>
                 <tr>
                     <td colspan="2" align="left"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, est natus laborum ad molestiae porro cumque officia culpa inventore itaque, illum esse tenetur, tempore eaque dolorem nobis ducimus magnam neque!</td>

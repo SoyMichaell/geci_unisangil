@@ -6,7 +6,7 @@
          <a href="/extension/crearcurriculo">Crear</a> / <a href="/extension/mostrarcurriculo">Curriculo</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Registro curriculo internacional</h4><hr>
+            <h4><i class="fa fa-cube"></i>Registro curriculo internacional</h4><hr>
             <form action="/extension/registrocurriculo" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -44,7 +44,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exincu_id_asignatura">Asignatura</label>
-                        <select class="form-select @error('exincu_id_asignatura') is-invalid @enderror" name="exincu_id_asignatura" id="exincu_id_asignatura">
+                        <select class="form-control @error('exincu_id_asignatura') is-invalid @enderror" name="exincu_id_asignatura" id="exincu_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{ $asignatura->id }}">{{ $asignatura->asig_nombre }}
@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="exincu_id_docente">Docente</label>
-                        <select class="form-select @error('exincu_id_docente') is-invalid @enderror" name="exincu_id_docente" id="exincu_id_docente">
+                        <select class="form-control @error('exincu_id_docente') is-invalid @enderror" name="exincu_id_docente" id="exincu_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}">

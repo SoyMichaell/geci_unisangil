@@ -6,16 +6,15 @@
         <a href="/bienestar/create">Crear</a> / <a href="/bienestar">Bienestar institucional</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de eventos bienestar</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Registro de eventos bienestar</h1>
     @section('message')
         <p>Diligencie los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro evento o actividad</h4>
-            <hr>
+            <h4><i class="fa fa-cube"></i> Registro evento o actividad</h4><hr>
             <form action="/bienestar/" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">

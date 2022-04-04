@@ -6,7 +6,7 @@
         <a href="/investigacion/creargrupo">Crear</a> / <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de grupo de investigación</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Registro de grupo de investigación</h1>
     @section('message')
         <p>Diligencia todos los campos requeridos. </p>
     @endsection
@@ -14,13 +14,13 @@
 @section('content')
     <div class="container col-md-12">
         <div class="tile">
-            <h4>Registro grupo de investigación</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro grupo de investigación</h4><hr>
             <form action="/investigacion/registrogrupo" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="inv_id_coordinador">{{ __('Coordinador grupo *') }}</label>
-                        <select class="form-select @error('inv_id_coordinador') is-invalid @enderror" name="inv_id_coordinador" id="inv_id_coordinador">
+                        <select class="form-control @error('inv_id_coordinador') is-invalid @enderror" name="inv_id_coordinador" id="inv_id_coordinador">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">
@@ -149,7 +149,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="inv_sede">{{ __('Sede *') }}</label>
-                        <select class="form-select @error('inv_sede') is-invalid @enderror" name="inv_sede" id="inv_sede">
+                        <select class="form-control @error('inv_sede') is-invalid @enderror" name="inv_sede" id="inv_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
                                 <option value="{{ $sede->id }}">{{ $sede->mun_nombre }}</option>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="inv_facultad">{{ __('Facultad *') }}</label>
-                        <select class="form-select @error('inv_facultad') is-invalid @enderror" name="inv_facultad" id="inv_facultad">
+                        <select class="form-control @error('inv_facultad') is-invalid @enderror" name="inv_facultad" id="inv_facultad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
                                 <option value="{{ $facultad->id }}">{{ $facultad->fac_nombre }}</option>

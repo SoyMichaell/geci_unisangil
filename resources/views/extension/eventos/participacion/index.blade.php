@@ -6,7 +6,7 @@
         <a href="/extension/mostrarparticipacioneventos">Participación Eventos </a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i>  Módulo extensión e internacionalización | Participación eventos</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i>  Módulo extensión e internacionalización | Participación eventos</h1>
     @section('message')
         <p>Listado de registro de participaciones a eventos</p>
     @endsection
@@ -20,9 +20,9 @@
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
                     <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportparticipacionpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportparticipacionexcel') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                        title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success" href="{{ url('extension/crearparticipacioneventos') }}"><i
                                 class="fa fa-plus-circle"></i>
@@ -68,14 +68,14 @@
                                             <div class="d-flex">
                                                 <a class="btn btn-sm"
                                                     href="/extension/{{ $participacion->id }}/verparticipacioneventos"><i
-                                                        class="fa-solid fa-folder-open"></i></a>
+                                                        class="fa fa-folder-open"></i></a>
                                                 <a class="btn btn-outline-info btn-sm "
                                                     href="/extension/{{ $participacion->id }}/editarparticipacioneventos"><i
-                                                        class="fa-solid fa-refresh"></i></a>
+                                                        class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     @endif

@@ -6,7 +6,7 @@
         <a href="/investigacion/mostrarintegrante">Investigador</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-users"></i> Módulo Investigación</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Investigación</h1>
     @section('message')
         <p>Lista de registro investigadores</p>
     @endsection
@@ -20,9 +20,9 @@
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" href="{{ url('investigacion/exportpdfintegrante') }}"
-                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa-solid fa-file-pdf"></i></a>
+                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa fa-file-pdf-o"></i></a>
                         <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelintegrante') }}"
-                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa-solid fa-file-excel"></i></a>
+                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa fa-file-excel-o"></i></a>
                     @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                         <a class="btn btn-outline-success " href="{{ url('investigacion/crearintegrante') }}"><i
                                 class="fa fa-plus-circle"></i>
@@ -60,14 +60,14 @@
                                             <div class="d-flex">
                                                 <a class="btn btn-sm"
                                                     href="/investigacion/{{ $investigador->inves_id_persona }}/verintegrante"><i
-                                                        class="fa-solid fa-folder-open "></i></a>
+                                                        class="fa fa-folder-open "></i></a>
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/investigacion/{{ $investigador->id }}/editarintegrante"><i
-                                                        class="fa-solid fa-refresh"></i></a>
+                                                        class="fa fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>

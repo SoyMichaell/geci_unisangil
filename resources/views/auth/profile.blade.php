@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+          <a href="/usuario/profile">Perfil</a>
+    @endsection
     @section('content')
         <div class="container">
             <div class="row">

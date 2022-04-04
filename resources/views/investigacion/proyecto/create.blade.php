@@ -6,21 +6,21 @@
         <a href="/investigacion/crearproyecto">Crear</a> / <a href="/investigacion/mostrarproyecto">Proyecto</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de proyecto</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligencie todos los campos requeridos. </p>
+        <p>Diligencie todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Registro proyecto</h4> <hr>
+            <h4><i class="fa fa-cube"></i> Registro proyecto investigación</h4> <hr>
             <form action="/investigacion/registroproyecto" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="invpro_id_grupo">{{ __('Grupo de investigación *') }}</label>
-                        <select class="form-select @error('invpro_id_grupo') is-invalid @enderror"
+                        <select class="form-control @error('invpro_id_grupo') is-invalid @enderror"
                             name="invpro_id_grupo" id="invpro_id_grupo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($grupos as $grupo)
@@ -105,7 +105,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="invpro_id_integrantes">{{ __('Investigadores *') }}</label>
-                        <select class="form-select js-example-basic-multiple @error('invpro_id_integrantes') is-invalid @enderror" name="invpro_id_integrantes[]" id="invpro_id_integrantes" multiple="multiple">
+                        <select class="form-control js-example-basic-multiple @error('invpro_id_integrantes') is-invalid @enderror" name="invpro_id_integrantes[]" id="invpro_id_integrantes" multiple="multiple">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->per_nombre.' '.$persona->per_apellido}}">{{$persona->per_nombre.' '.$persona->per_apellido}}</option>
@@ -130,7 +130,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="invpro_estado">{{ __('Estado proyecto *') }}</label>
-                        <select class="form-select @error('invpro_estado') is-invalid @enderror" name="invpro_estado" id="invpro_estado">
+                        <select class="form-control @error('invpro_estado') is-invalid @enderror" name="invpro_estado" id="invpro_estado">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="por-iniciar">Por iniciar</option>
                             <option value="en-curso">En curso</option>

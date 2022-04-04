@@ -2,15 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+    <a href="/extension/{{$educacion->id}}/editareducacion">Editar</a> / <a href="/extension/mostrareducacion">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requerido.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="tile">
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$educacion->id}}/actualizareducacion" method="post">
                 @csrf
                 @method('PUT')
@@ -54,7 +58,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extedu_tipo_curso">Tipo de curso</label>
-                        <select class="form-select" name="extedu_tipo_curso" id="extedu_tipo_curso">
+                        <select class="form-control" name="extedu_tipo_curso" id="extedu_tipo_curso">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$educacion->extedu_tipo_curso == '1' ? 'selected' : ''}}>Cursos, cursos especializados (certificaciones)</option>
                             <option value="2" {{$educacion->extedu_tipo_curso == '2' ? 'selected' : ''}}>Talleres</option>
@@ -83,7 +87,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extedu_id_docente">Docente</label>
-                        <select class="form-select" name="extedu_id_docente" id="extedu_id_docente">
+                        <select class="form-control" name="extedu_id_docente" id="extedu_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}" {{$docente->id == $educacion->extedu_id_docente ? 'selected' : ''}}>
@@ -100,7 +104,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extedu_tipo_extension">Tipo beneficio de extensión</label>
-                        <select class="form-select" name="extedu_tipo_extension" id="extedu_tipo_extension">
+                        <select class="form-control" name="extedu_tipo_extension" id="extedu_tipo_extension">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$educacion->extedu_tipo_extension == '1' ? 'selected' : ''}}>Estudiante de la IES</option>
                             <option value="2" {{$educacion->extedu_tipo_extension == '2' ? 'selected' : ''}}>Graduado de la IES</option>

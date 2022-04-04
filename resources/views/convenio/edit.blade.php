@@ -3,18 +3,18 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/convenio/{{$convenio->id}}">Editar</a> / <a href="/convenio">Convenio</a>
+        <a href="/convenio/{{$convenio->id}}/edit">Editar</a> / <a href="/convenio">Convenio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligencie los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/convenio/{{$convenio->id}}" method="post">
                 @csrf
                 @method('PUT')
@@ -31,7 +31,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="con_alcance">{{ __('Alcance *') }}</label>
-                        <select class="form-select" name="con_alcance" id="con_alcance">
+                        <select class="form-control" name="con_alcance" id="con_alcance">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="regional" {{$convenio->con_alcance == 'regional' ? 'selected' : ''}}>Regional</option>
                             <option value="nacional" {{$convenio->con_alcance == 'nacional' ? 'selected' : ''}}>Nacional</option>
@@ -188,7 +188,7 @@
                         @php
                             $conveniox = explode(';',$convenio->con_programa_beneficiado);
                         @endphp
-                        <select class="js-example-placeholder-single form-select @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
+                        <select class="js-example-placeholder-single form-control @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
                             @foreach ($programas as $programa)
                                 <option value="{{$programa->pro_nombre}}" @foreach($conveniox as $x) {{$x == $programa->pro_nombre ? 'selected' : ''}} @endforeach>{{$programa->pro_nombre}}</option>
                             @endforeach

@@ -6,15 +6,15 @@
        <a href="/extension/{{$participacion->id}}/verparticipacioneventos">Vista</a>  / <a href="/extension/mostrarparticipacioneventos">Participación eventos</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Vista de registro</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="expaev_year">Año</label>
@@ -42,7 +42,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="expaev_tipo_evento">Tipo evento</label>
-                    <select class="form-select @error('expaev_tipo_evento') is-invalid @enderror"
+                    <select class="form-control @error('expaev_tipo_evento') is-invalid @enderror"
                         name="expaev_tipo_evento" id="expaev_tipo_evento" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         <option value="taller" {{ $participacion->expaev_tipo_evento == 'taller' ? 'selected' : '' }}>
@@ -112,7 +112,7 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <label for="expaev_id_persona">Nombre completo participante</label>
-                    <select class="form-select @error('expaev_id_persona') is-invalid @enderror"
+                    <select class="form-control @error('expaev_id_persona') is-invalid @enderror"
                         name="expaev_id_persona" id="expaev_id_persona" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)

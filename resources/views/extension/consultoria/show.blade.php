@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/extension/{{$consultoria->id}}">Vista</a> / <a href="/extension/mostrarconsultoria">Consultoria</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Vista registro</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
         <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Visulizar información</h4><hr>
+            <h4><i class="fa fa-question-circle"></i> Vista de registro</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcon_year">Año</label>
@@ -63,7 +66,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcon_id_cine_campo">ID CINE Detallado</label>
-                    <select class="form-select" name="extcon_id_cine_campo" id="extcon_id_cine_campo" disabled>
+                    <select class="form-control" name="extcon_id_cine_campo" id="extcon_id_cine_campo" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($cinedetallados as $cinedetallado)
                             <option value="{{ $cinedetallado->id }}"
@@ -93,7 +96,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="ext_sector_consultoria">Sector consultoria</label>
-                    <select class="form-select" name="ext_sector_consultoria" id="ext_sector_consultoria" disabled>
+                    <select class="form-control" name="ext_sector_consultoria" id="ext_sector_consultoria" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($sectores as $sector)
                             <option value="{{ $sector->id }}"
@@ -147,7 +150,7 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="extcon_fuente_nacional">Fuente nacional</label>
-                    <select class="form-select" name="extcon_fuente_nacional" id="extcon_fuente_nacional" disabled>
+                    <select class="form-control" name="extcon_fuente_nacional" id="extcon_fuente_nacional" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($fuentenacionales as $fuentenacional)
                             <option value="{{ $fuentenacional->id }}"
@@ -189,7 +192,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="extcon_fuente_internacional">Fuente internacional</label>
-                    <select class="form-select" name="extcon_fuente_internacional" id="extcon_fuente_internacional"
+                    <select class="form-control" name="extcon_fuente_internacional" id="extcon_fuente_internacional"
                         disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($fuenteinternacionales as $fuenteinternacional)
@@ -230,11 +233,11 @@
                     @enderror
                 </div>
             </div>
+            <h4 class="tile"><i class="fa fa-question-circle"></i> Consultoria recurso humano</h4>
             <div class="row mb-3">
-                <h4 class="tile">Consultoria recurso humano</h4>
                 <div class="col-md-6">
                     <label for="extcon_id_persona">Recurso Humano | Persona</label>
-                    <select class="form-select js-example-placeholder-single" name="extcon_id_persona"
+                    <select class="form-control js-example-placeholder-single" name="extcon_id_persona"
                         id="extcon_id_persona" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($personas as $persona)
@@ -252,7 +255,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="extcon_id_nivel_estudio">Nivel de estudio</label>
-                    <select class="form-select js-example-placeholder-single" name="extcon_id_nivel_estudio"
+                    <select class="form-control js-example-placeholder-single" name="extcon_id_nivel_estudio"
                         id="extcon_id_nivel_estudio" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($nivelestudios as $nivel)

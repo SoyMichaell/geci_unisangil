@@ -6,7 +6,7 @@
         <a href="/extension/crearinterredconvenio">Crear</a> / <a href="/extension/mostrarinterredconvenio">Redes académicas</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
@@ -14,7 +14,7 @@
 @section('content')
     <div class="container">
         <div class="tile">
-            <h4>Registro red convenio</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro red convenio</h4><hr>
             <form action="/extension/registrointerredconvenio" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="exsered_caracter">Cáracter</label>
-                        <select class="form-select" name="exsered_caracter" id="exsered_caracter">
+                        <select class="form-control" name="exsered_caracter" id="exsered_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional">Nacional</option>
                             <option value="internacional">Internacional</option>
@@ -113,7 +113,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exsered_funcion">Función</label>
-                        <select class="form-select" name="exsered_funcion" id="exsered_funcion">
+                        <select class="form-control" name="exsered_funcion" id="exsered_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>
                             <option value="investigacion">Investigación</option>
@@ -143,8 +143,8 @@
                 </div>
                 <div class="row par_wrapper mb-3">
                     <div class="col-md-1">
-                        <a class="btn btn-success add_button" href="javascript:void(0);" 
-                            title="Add field"><i class="fa-solid fa-circle-plus"></i></a>
+                        <a class="btn btn-info add_button" href="javascript:void(0);" 
+                            title="Add field"><i class="fa fa-plus-circle"></i></a>
                     </div>
                 </div>
                 <div class="row mb-0">

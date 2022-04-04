@@ -6,7 +6,7 @@
         <a href="/investigacion/">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Investigación</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Investigación</h1>
     @section('message')
         <p>Listado de registro proyectos</p>
     @endsection
@@ -34,12 +34,12 @@
 @section('content')
     <div class="container">
         <h3>Proyectos de investigación @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)<a class="btn btn-success btn-sm" href="/investigacion/crearproyecto"><i
-                    class="fa-solid fa-circle-plus"></i> Crear nuevo proyecto</a>@endif
+                    class="fa fa-plus-circle"></i> Crear nuevo proyecto</a>@endif
                     <a class="btn btn-outline-danger"
                 href="{{ url('investigacion/exportpdfproyecto') }}" title="Generar reporte pdf" target="_blank"><i
-                    class="fa-solid fa-file-pdf"></i></a>
+                    class="fa fa-file-pdf-o"></i></a>
             <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelproyecto') }}"
-                title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                title="Generar reporte pdf"><i class="fa fa-file-excel-o"></i></a>
         </h3>
         <hr>
         @if ($proyectos->count() > 0)

@@ -6,15 +6,15 @@
         <a href="/convenio/create">Crear</a> / <a href="/convenio">Convenio</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de convenio</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Registro de convenio</h1>
     @section('message')
         <p>Diligencie los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro convenio</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro convenio</h4><hr>
             <form action="/convenio/" method="post">
                 @csrf
                 <div class="row mb-3">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="con_alcance">{{ __('Alcance *') }}</label>
-                        <select class="form-select" name="con_alcance" id="con_alcance">
+                        <select class="form-control" name="con_alcance" id="con_alcance">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="regional">Regional</option>
                             <option value="nacional">Nacional</option>
@@ -184,7 +184,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="con_programa_beneficiado">{{ __('Programa Beneficiarios *') }}</label>
-                        <select class="js-example-placeholder-single form-select @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
+                        <select class="js-example-placeholder-single form-control @error('con_programa_beneficiado') is-invalid @enderror" name="con_programa_beneficiado[]" id="con_programa_beneficiado" multiple>
                             @foreach ($programas as $programa)
                                 <option value="{{$programa->pro_nombre}}">{{$programa->pro_nombre}}</option>
                             @endforeach

@@ -6,15 +6,15 @@
        <a href="/extension/creareventosvirtuales">Crear</a>  / <a href="/extension/mostrareventosvirtuales">Eventos virtuales</a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Registro evento virtual</h4><hr>
+            <h4><i class="fa fa-cube"></i> Registro evento virtual</h4><hr>
             <form action="/extension/registroeventosvirtuales" method="post">
                 @csrf
                 <div class="row mb-3">

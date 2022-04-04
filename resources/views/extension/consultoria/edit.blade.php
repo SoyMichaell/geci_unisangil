@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/extension/{{$consultoria->id}}/edit">Editar</a> / <a href="/extension/mostrarconsultoria">Consultoria</a> / <a href="/extension">Extension - internacionalización</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$consultoria->id}}/actualizarconsultoria" method="post">
                 @csrf
                 @method('PUT')
@@ -65,7 +68,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcon_id_cine_campo">ID CINE Detallado</label>
-                        <select class="form-select" name="extcon_id_cine_campo" id="extcon_id_cine_campo">
+                        <select class="form-control" name="extcon_id_cine_campo" id="extcon_id_cine_campo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cinedetallados as $cinedetallado)
                                 <option value="{{$cinedetallado->id}}" {{$cinedetallado->id == $consultoria->extcon_id_cine_campo ? 'selected' : ''}}>{{$cinedetallado->cocide_nombre}}</option>
@@ -93,7 +96,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="ext_sector_consultoria">Sector consultoria</label>
-                        <select class="form-select" name="ext_sector_consultoria" id="ext_sector_consultoria">
+                        <select class="form-control" name="ext_sector_consultoria" id="ext_sector_consultoria">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sectores as $sector)
                                 <option value="{{$sector->id}}" {{$sector->id == $consultoria->ext_sector_consultoria ? 'selected' : ''}}>{{$sector->cose_nombre}}</option>
@@ -144,7 +147,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcon_fuente_nacional">Fuente nacional</label>
-                        <select class="form-select" name="extcon_fuente_nacional" id="extcon_fuente_nacional">
+                        <select class="form-control" name="extcon_fuente_nacional" id="extcon_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionales as $fuentenacional)
                                 <option value="{{$fuentenacional->id}}" {{$fuentenacional->id == $consultoria->extcon_fuente_nacional ? 'selected' : ''}}>{{$fuentenacional->cofuna_nombre}}</option>
@@ -182,7 +185,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcon_fuente_internacional">Fuente internacional</label>
-                        <select class="form-select" name="extcon_fuente_internacional" id="extcon_fuente_internacional">
+                        <select class="form-control" name="extcon_fuente_internacional" id="extcon_fuente_internacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuenteinternacionales as $fuenteinternacional)
                                 <option value="{{$fuenteinternacional->id}}" {{$fuenteinternacional->id == $consultoria->extcon_fuente_internacional ? 'selected' : ''}}>{{$fuenteinternacional->cofuin_nombre}}</option>
@@ -219,11 +222,11 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile"><i class="fa fa-pencil"></i>Actualizar consultoria recurso humano</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Actualizar consultoria recurso humano</h4>
                     <div class="col-md-6">
                         <label for="extcon_id_persona">Recurso Humano | Persona</label>
-                        <select class="form-select js-example-placeholder-single" name="extcon_id_persona" id="extcon_id_persona">
+                        <select class="form-control js-example-placeholder-single" name="extcon_id_persona" id="extcon_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}" {{$consultoria->extcon_id_persona == $persona->id ? 'selected' : ''}}>{{Str::ucfirst($persona->per_nombre).' '.Str::ucfirst($persona->per_apellido). ' | '.Str::ucfirst($persona->tip_nombre)}}</option>
@@ -237,7 +240,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extcon_id_nivel_estudio">Nivel de estudio</label>
-                        <select class="form-select js-example-placeholder-single" name="extcon_id_nivel_estudio" id="extcon_id_nivel_estudio">
+                        <select class="form-control js-example-placeholder-single" name="extcon_id_nivel_estudio" id="extcon_id_nivel_estudio">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($nivelestudios as $nivel)
                                 <option value="{{$nivel->conies_nombre}}" {{$consultoria->extcon_id_nivel_estudio == $nivel->conies_nombre ? 'selected' : ''}}>{{$nivel->conies_nombre}}</option>

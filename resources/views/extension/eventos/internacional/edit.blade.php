@@ -6,22 +6,22 @@
         <a href="/extension/{{$internacional->id}}/editareventosinternacionales">Editar</a> / <a href="/extension/mostrareventosinternacionales">Eventos internacionales </a> / <a href="/extension">Extension - internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de edición</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
         <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile">
-            <h4>Actualizar información</h4><hr>
+            <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
             <form action="/extension/{{$internacional->id}}/actualizareventosinternacionales" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exevin_tipo">Alcance</label>
-                        <select class="form-select @error('exevin_tipo') is-invalid @enderror" name="exevin_tipo" id="exevin_tipo">
+                        <select class="form-control @error('exevin_tipo') is-invalid @enderror" name="exevin_tipo" id="exevin_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional" {{$internacional->exevin_tipo == 'nacional' ? 'selected' : ''}}>Nacional</option>
                             <option value="internacional" {{$internacional->exevin_tipo == 'internacional' ? 'selected' : ''}}>Internacional</option>

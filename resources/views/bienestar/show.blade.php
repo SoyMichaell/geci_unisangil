@@ -6,16 +6,15 @@
         <a href="/bienestar/{{ $bienestar->id }}">Vista</a> / <a href="/bienestar">Bienestar institucional</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Módulo bienestar institucional</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligencie los campos requeridos.</p>
+        <p>Informacion de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Visualizar información</h4>
-            <hr>
+            <h4><i class="fa fa-question-circle"></i> Visualizar información</h4><hr>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="bie_fecha">{{ __('Fecha *') }}</label>

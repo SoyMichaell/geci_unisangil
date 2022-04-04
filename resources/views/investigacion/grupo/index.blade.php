@@ -6,7 +6,7 @@
         <a href="/investigacion/mostrargrupo">Grupo</a> / <a href="/investigacion">Investigación</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Investigación</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Investigación</h1>
     @section('message')
         <p>Listado de grupos de investigación</p>
     @endsection
@@ -34,11 +34,11 @@
 @section('content')
     <div class="container">
         <h3>Grupos de investigación @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2) <a class="btn btn-success btn-sm" href="creargrupo"><i
-                    class="fa-solid fa-circle-plus"></i> Crear nuevo grupo</a> @endif
+                    class="fa fa-plus-circle"></i> Crear nuevo grupo</a> @endif
             <a class="btn btn-outline-danger" href="{{ url('investigacion/exportpdfinvestigacion') }}"
-                title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
+                title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
             <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelinvestigacion') }}"
-                title="Generar reporte excel" target="_blank"><i class="fa-solid fa-file-excel"></i></a>
+                title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
         </h3>
         <hr>
         @if ($grupos->count() > 0)
