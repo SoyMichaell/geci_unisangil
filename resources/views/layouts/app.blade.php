@@ -60,7 +60,7 @@
             <li><a class="app-menu__item active" href="{{ url('home') }}"><i class="app-menu__icon fa fa-dashboard"
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
-            @if(auth::user()->per_tipo_usuario == 1)
+            @if(Auth::user()->per_tipo_usuario == 1)
             <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Registro de usuarios</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>

@@ -236,6 +236,7 @@
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
                         </select>
+                        <p class="{{$docentes->count()<=0 ? 'badge badge-danger' : ''}}">{{$docentes->count()<=0 ? 'No existen registro de directores de programa' : ''}}</p>
                     </div>
                 </div>
                 <div class="row mb-0">
