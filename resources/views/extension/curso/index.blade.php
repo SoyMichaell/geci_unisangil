@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-    <a href="/extension/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
+        <a href="/extension/mostrarcurso">Curso</a> / <a href="/extension">Extensión - internacionalización</a>
     @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Curso</h1>
@@ -19,15 +19,15 @@
                     <h4>Lista cursos</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportcursopdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportcursoexcel') }}"
-                        title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearcurso') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('extension/exportcursopdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('extension/exportcursoexcel') }}" title="Generar reporte excel"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('extension/crearcurso') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -42,9 +42,7 @@
                             <th>CINE</th>
                             <th>Docente</th>
                             <th>Estado</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -57,26 +55,22 @@
                                 <td>{{ $curso->extcurso_codigo }}</td>
                                 <td>{{ $curso->extcurso_nombre }}</td>
                                 <td>{{ $curso->cines->cocide_nombre }}</td>
-                                <td>{{ $curso->docentes->per_nombre.' '.$curso->docentes->per_apellido }}</td>
+                                <td>{{ $curso->docentes->per_nombre . ' ' . $curso->docentes->per_apellido }}</td>
                                 <td>{{ $curso->extcurso_estado }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $curso->id }}/eliminarcurso"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm"
-                                                    href="/extension/{{ $curso->id }}/vercurso"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $curso->id }}/editarcurso"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/extension/{{ $curso->id }}/eliminarcurso" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm" href="/extension/{{ $curso->id }}/vercurso"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/extension/{{ $curso->id }}/editarcurso"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -38,11 +38,9 @@
                                 Prestamo</a>
                         </div>
                     </div>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success " href="{{ url('estudiante/create') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-success " href="{{ url('estudiante/create') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <br>
@@ -58,9 +56,7 @@
                             <th>Correo electronico</th>
                             <th>Año de ingreso</th>
                             <th>¿Egresado?</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -33,8 +33,8 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Grupos de investigación @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2) <a class="btn btn-success btn-sm" href="creargrupo"><i
-                    class="fa fa-plus-circle"></i> Crear nuevo grupo</a> @endif
+        <h3>Grupos de investigación<a class="btn btn-success btn-sm" href="creargrupo"><i
+                    class="fa fa-plus-circle"></i> Crear nuevo grupo</a>
             <a class="btn btn-outline-danger" href="{{ url('investigacion/exportpdfinvestigacion') }}"
                 title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
             <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelinvestigacion') }}"

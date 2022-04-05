@@ -3,10 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension/mostraractividad">Actividad cultural</a> / <a href="/extension">Extension - internacionalización</a>
+        <a href="/extension/mostraractividad">Actividad cultural</a> / <a href="/extension">Extension -
+            internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Actividad cultural</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Actividad cultural
+        </h1>
     @section('message')
         <p>Listado de registro actividades culturaless</p>
     @endsection
@@ -19,15 +21,15 @@
                     <h4>Lista de registro</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportactividadculturalpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportactividadculturalexcel') }}"
-                        title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearactividad') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('extension/exportactividadculturalpdf') }}" title="Generar reporte pdf"
+                        target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('extension/exportactividadculturalexcel') }}" title="Generar reporte excel"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('extension/crearactividad') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -43,9 +45,7 @@
                             <th>Fecha final</th>
                             <th>Valor nacional</th>
                             <th>Valor internacional</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,24 +59,23 @@
                                 <td>{{ $actividad->extcul_codigo_actividad }}</td>
                                 <td>{{ $actividad->extcul_fecha_inicio }}</td>
                                 <td>{{ $actividad->extcul_fecha_fin }}</td>
-                                <td>{{ number_format($actividad->extcul_valor_financiacion_nac,0) }}</td>
-                                <td>{{ number_format($actividad->extcul_valor_internacional,0) }}</td>
+                                <td>{{ number_format($actividad->extcul_valor_financiacion_nac, 0) }}</td>
+                                <td>{{ number_format($actividad->extcul_valor_internacional, 0) }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{$actividad->id}}/eliminaractividad" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/extension/{{$actividad->id}}/veractividad"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{$actividad->id}}/editaractividad"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/extension/{{ $actividad->id }}/eliminaractividad" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/extension/{{ $actividad->id }}/veractividad"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/extension/{{ $actividad->id }}/editaractividad"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

@@ -74,7 +74,6 @@ class EstudianteController extends Controller
 
     public function create()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programasPlan = DB::table('programa')
             ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
             ->where('programa_plan_estudio.pp_estado', 'activo')
@@ -108,9 +107,6 @@ class EstudianteController extends Controller
             ->with('estadoprogramas', $estadoprogramas)
             ->with('tiposdocumento', $tiposdocumento)
             ->with('tipousuarios', $tipousuarios);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function store(Request $request)

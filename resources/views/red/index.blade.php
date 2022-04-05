@@ -23,11 +23,9 @@
                         title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
                     <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('red/exportexcel') }}"
                         title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('red/create') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-success" href="{{ url('red/create') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -43,9 +41,7 @@
                             <th>Ciudad</th>
                             <th>Alcance</th>
                             <th>Programa</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,21 +58,18 @@
                                 <td>{{ $red->red_alcance }}</td>
                                 <td>{{ $red->red_id_programa }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="{{ route('red.destroy', $red->id) }}" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/red/{{ $red->id }}"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/red/{{ $red->id }}/edit"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="{{ route('red.destroy', $red->id) }}" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm" href="/red/{{ $red->id }}"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/red/{{ $red->id }}/edit"><i class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

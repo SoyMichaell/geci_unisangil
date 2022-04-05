@@ -3,10 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension/mostrarparticipante">Participante</a> / <a href="/extension">Extension - internacionalización</a>
+        <a href="/extension/mostrarparticipante">Participante</a> / <a href="/extension">Extension -
+            internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización | Participante</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo extensión e internacionalización | Participante
+        </h1>
     @section('message')
         <p>Listado de registro participantes</p>
     @endsection
@@ -19,15 +21,15 @@
                     <h4>Listado de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportparticipantepdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportparticipanteexcel') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearparticipante') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('extension/exportparticipantepdf') }}" title="Generar reporte pdf"
+                        target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('extension/exportparticipanteexcel') }}" title="Generar reporte excel"
+                        target="_blank"><i class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('extension/crearparticipante') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -42,9 +44,7 @@
                             <th>Correo electronico personal</th>
                             <th>Correo electronico institucional</th>
                             <th>Dirección</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,29 +54,28 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $participante->docentes->per_tipo_documento }}</td>
                                 <td>{{ $participante->docentes->per_numero_documento }}</td>
-                                <td>{{ Str::ucfirst($participante->docentes->per_nombre).' '.Str::ucfirst($participante->docentes->per_apellido) }}</td>
+                                <td>{{ Str::ucfirst($participante->docentes->per_nombre) .' ' .Str::ucfirst($participante->docentes->per_apellido) }}
+                                </td>
                                 <td>{{ $participante->docentes->per_telefono }}</td>
                                 <td>{{ $participante->dop_correo_personal }}</td>
-                                <td>{{ $participante->docentes->per_correo}}</td>
+                                <td>{{ $participante->docentes->per_correo }}</td>
                                 <td>{{ $participante->dop_direccion }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $participante->id }}/eliminarparticipante"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm"
-                                                    href="/extension/{{ $participante->id }}/verparticipante"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $participante->id }}/editarparticipante"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/extension/{{ $participante->id }}/eliminarparticipante"
+                                        method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/extension/{{ $participante->id }}/verparticipante"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/extension/{{ $participante->id }}/editarparticipante"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

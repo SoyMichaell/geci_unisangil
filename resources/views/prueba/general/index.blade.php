@@ -43,23 +43,21 @@
                             <td>{{ $resultado->pro_codigosnies }}</td>
                             <td>{{ $resultado->mun_nombre }}</td>
                             <td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <form action="/prueba/{{ $resultado->prurepro_id_programa }}/eliminaresultado"
-                                        method="POST">
-                                        <div class="d-flex justify-content-center">
-                                            <a class="btn btn-sm"
-                                                href="/prueba/{{ $resultado->prurepro_id_programa }}/verresultado"><i
-                                                    class="fa-solid fa-folder-open"></i></a>
-                                            <a class="btn btn-outline-info  btn-sm"
-                                                href="/prueba/{{ $resultado->prurepro_id_programa }}/editarresultado"><i
-                                                    class="fa-solid fa-edit"></i></a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa-solid fa-trash"></i></button>
-                                        </div>
-                                    </form>
-                                @endif
+                                <form action="/prueba/{{ $resultado->prurepro_id_programa }}/eliminaresultado"
+                                    method="POST">
+                                    <div class="d-flex justify-content-center">
+                                        <a class="btn btn-sm"
+                                            href="/prueba/{{ $resultado->prurepro_id_programa }}/verresultado"><i
+                                                class="fa-solid fa-folder-open"></i></a>
+                                        <a class="btn btn-outline-info  btn-sm"
+                                            href="/prueba/{{ $resultado->prurepro_id_programa }}/editarresultado"><i
+                                                class="fa-solid fa-edit"></i></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

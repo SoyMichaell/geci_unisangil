@@ -41,7 +41,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <?php $i=1; ?>
+                            <?php $i = 1; ?>
                             @foreach ($horarios as $horario)
                                 <tr>
                                     <td>{{ $i++ }}</td>
@@ -49,7 +49,8 @@
                                     <td>{{ $horario->pph_semestre }}</td>
                                     <td>{{ $horario->asignaturas->asig_nombre }}</td>
                                     <td>{{ $horario->pph_grupo }}</td>
-                                    <td>{{ $horario->docentes->per_nombre . ' ' . $horario->docentes->per_apellido }}</td>
+                                    <td>{{ $horario->docentes->per_nombre . ' ' . $horario->docentes->per_apellido }}
+                                    </td>
                                     <td>{{ $horario->pph_horario }}</td>
                                     <td>{{ $horario->pph_aula }}</td>
                                     <td>{{ $horario->pph_nro_horas_semana_docencia }}</td>
@@ -57,20 +58,18 @@
                                     <td>{{ $horario->pph_nro_horas_semana_extension }}</td>
                                     <td>{{ $horario->pph_nro_horas_semana_administrativas }}</td>
                                     <td>
-                                        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                            <form action="/programa/{{ $horario->id }}/eliminarhorario" method="POST">
-                                                <div class="d-flex">
-                                                    <a class="btn btn-outline-info btn-sm"
-                                                        href="{{ url('programa/' . $horario->id . '/editarhorario') }}"
-                                                        title="Editar registro"><i
-                                                            class="fa-solid fa-pen-to-square"></i></a>
-                                                            @csrf
-                                                            @method('DELETE')
-                                                    <button class="btn btn-danger btn-sm" type="submit"><i
-                                                            class="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </form>
-                                        @endif
+                                        <form action="/programa/{{ $horario->id }}/eliminarhorario" method="POST">
+                                            <div class="d-flex">
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="{{ url('programa/' . $horario->id . '/editarhorario') }}"
+                                                    title="Editar registro"><i
+                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn btn-danger btn-sm" type="submit"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

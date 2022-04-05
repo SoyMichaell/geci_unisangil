@@ -45,16 +45,12 @@ class DocenteController extends Controller
 
     public function mostrardocente()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
 
         return view('docente.create')
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function registrodocente(Request $request)

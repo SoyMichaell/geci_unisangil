@@ -38,8 +38,7 @@ class ProgramaController extends Controller
     public function create()
     {
 
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-            $departamentos = Departamento::all();
+        $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $facultades = Facultad::all();
         $niveles = NivelFormacion::all();
@@ -73,9 +72,6 @@ class ProgramaController extends Controller
             ->with('programasCiclo', $programasCiclo)
             ->with('duraccions', $duraccions)
             ->with('periodoAdmision', $periodoAdmision);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function store(Request $request)
@@ -154,14 +150,30 @@ class ProgramaController extends Controller
             ->where('per_id_estado', '=', 'activo')
             ->get();
         $programa = DB::table('programa')
-            ->select('programa.id','pro_nombre','per_nombre','per_apellido','pro_grupo_referencia','fac_nombre',
-            'niv_nombre','met_nombre','mun_nombre','pro_duraccion','pro_codigosnies','pro_resolucion',
-            'pro_fecha_ult','pro_fecha_prox','pro_programa_ciclo','pro_periodo_admision','pro_grupo_referencia_nbc')
-            ->join('facultad','programa.pro_facultad','=','facultad.id')
-            ->join('municipio','programa.pro_municipio','=','municipio.id')
-            ->join('nivel_formacion','programa.pro_nivel_formacion','=','nivel_formacion.id')
-            ->join('metodologia','programa.pro_metodologia','=','metodologia.id')
-            ->join('persona','programa.pro_id_director','=','persona.id')
+            ->select(
+                'programa.id',
+                'pro_nombre',
+                'per_nombre',
+                'per_apellido',
+                'pro_grupo_referencia',
+                'fac_nombre',
+                'niv_nombre',
+                'met_nombre',
+                'mun_nombre',
+                'pro_duraccion',
+                'pro_codigosnies',
+                'pro_resolucion',
+                'pro_fecha_ult',
+                'pro_fecha_prox',
+                'pro_programa_ciclo',
+                'pro_periodo_admision',
+                'pro_grupo_referencia_nbc'
+            )
+            ->join('facultad', 'programa.pro_facultad', '=', 'facultad.id')
+            ->join('municipio', 'programa.pro_municipio', '=', 'municipio.id')
+            ->join('nivel_formacion', 'programa.pro_nivel_formacion', '=', 'nivel_formacion.id')
+            ->join('metodologia', 'programa.pro_metodologia', '=', 'metodologia.id')
+            ->join('persona', 'programa.pro_id_director', '=', 'persona.id')
             ->where('programa.id', $id)
             ->first();
         $planes = DB::table('programa_plan_estudio')
@@ -192,39 +204,39 @@ class ProgramaController extends Controller
 
     public function edit($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $departamentos = Departamento::all();
-        $municipios = Municipio::all();
-        $facultades = Facultad::all();
-        $niveles = NivelFormacion::all();
-        $metodologias = Metodologia::all();
-        $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->where('per_id_estado', '=', 'activo')
-            ->orWhere('per_tipo_usuario', 5)
-            ->where('per_id_estado', '=', 'activo')
-            ->get();
-        $programa = Programa::find($id);
-        $estadoprogramas = collect(['Activo', 'Inactivo']);
-        $estadoprogramas->all();
-        $programasCiclo = collect(['Si', 'No']);
-        $programasCiclo->all();
-        $duraccions = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
-        $duraccions->all();
-        $periodoAdmision = collect(['Trimestral', 'Semestral', 'Anual']);
-        $periodoAdmision->all();
-        return view('programa.edit')->with('programa', $programa)
-            ->with('departamentos', $departamentos)
-            ->with('municipios', $municipios)
-            ->with('facultades', $facultades)
-            ->with('estadoprogramas', $estadoprogramas)
-            ->with('niveles', $niveles)
-            ->with('metodologias', $metodologias)
-            ->with('docentes', $docentes)
-            ->with('programasCiclo', $programasCiclo)
-            ->with('duraccions', $duraccions)
-            ->with('periodoAdmision', $periodoAdmision);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $departamentos = Departamento::all();
+            $municipios = Municipio::all();
+            $facultades = Facultad::all();
+            $niveles = NivelFormacion::all();
+            $metodologias = Metodologia::all();
+            $docentes = DB::table('persona')
+                ->where('per_tipo_usuario', 2)
+                ->where('per_id_estado', '=', 'activo')
+                ->orWhere('per_tipo_usuario', 5)
+                ->where('per_id_estado', '=', 'activo')
+                ->get();
+            $programa = Programa::find($id);
+            $estadoprogramas = collect(['Activo', 'Inactivo']);
+            $estadoprogramas->all();
+            $programasCiclo = collect(['Si', 'No']);
+            $programasCiclo->all();
+            $duraccions = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
+            $duraccions->all();
+            $periodoAdmision = collect(['Trimestral', 'Semestral', 'Anual']);
+            $periodoAdmision->all();
+            return view('programa.edit')->with('programa', $programa)
+                ->with('departamentos', $departamentos)
+                ->with('municipios', $municipios)
+                ->with('facultades', $facultades)
+                ->with('estadoprogramas', $estadoprogramas)
+                ->with('niveles', $niveles)
+                ->with('metodologias', $metodologias)
+                ->with('docentes', $docentes)
+                ->with('programasCiclo', $programasCiclo)
+                ->with('duraccions', $duraccions)
+                ->with('periodoAdmision', $periodoAdmision);
+        } else {
             return redirect('/home');
         }
     }
@@ -285,17 +297,17 @@ class ProgramaController extends Controller
 
     public function destroy($id)
     {
-        try{
+        try {
             $programa = Programa::find($id);
             $programa->delete();
 
             Alert::success('Exitoso', 'El programa se ha eliminado con exito');
 
             return redirect('/programa');
-        }catch(\Illuminate\Database\QueryException $e){
+        } catch (\Illuminate\Database\QueryException $e) {
             Alert::error('No se puede eliminar este programa, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
             return redirect()->back();
-        }   
+        }
     }
 
     public function mostrarplan()
@@ -307,13 +319,13 @@ class ProgramaController extends Controller
 
     public function crearplan()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $programas = Programa::all();
-        $municipios = Municipio::all();
-        return view('programa/plan.create')
-            ->with('programas', $programas)
-            ->with('municipios', $municipios);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $programas = Programa::all();
+            $municipios = Municipio::all();
+            return view('programa/plan.create')
+                ->with('programas', $programas)
+                ->with('municipios', $municipios);
+        } else {
             return redirect('/home');
         }
     }
@@ -356,15 +368,15 @@ class ProgramaController extends Controller
 
     public function editarplan($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $programas = Programa::all();
-        $municipios = Municipio::all();
-        $plan = ProgramaPlan::find($id);
-        return view('programa/plan.edit')
-            ->with('programas', $programas)
-            ->with('municipios', $municipios)
-            ->with('plan', $plan);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $programas = Programa::all();
+            $municipios = Municipio::all();
+            $plan = ProgramaPlan::find($id);
+            return view('programa/plan.edit')
+                ->with('programas', $programas)
+                ->with('municipios', $municipios)
+                ->with('plan', $plan);
+        } else {
             return redirect('/home');
         }
     }
@@ -448,15 +460,15 @@ class ProgramaController extends Controller
 
     public function crearasignatura()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $municipios = Municipio::all();
-        $programas = Programa::all();
-        $plans = ProgramaPlan::all();
-        return view('programa/asignatura.create')
-            ->with('municipios', $municipios)
-            ->with('programas', $programas)
-            ->with('plans', $plans);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $municipios = Municipio::all();
+            $programas = Programa::all();
+            $plans = ProgramaPlan::all();
+            return view('programa/asignatura.create')
+                ->with('municipios', $municipios)
+                ->with('programas', $programas)
+                ->with('plans', $plans);
+        } else {
             return redirect('/home');
         }
     }
@@ -508,17 +520,17 @@ class ProgramaController extends Controller
 
     public function editarasignatura($id,)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $municipios = Municipio::all();
-        $programas = Programa::all();
-        $plans = ProgramaPlan::all();
-        $asignatura = ProgramaAsignatura::find($id);
-        return view('programa/asignatura.edit')
-            ->with('municipios', $municipios)
-            ->with('programas', $programas)
-            ->with('plans', $plans)
-            ->with('asignatura', $asignatura);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $municipios = Municipio::all();
+            $programas = Programa::all();
+            $plans = ProgramaPlan::all();
+            $asignatura = ProgramaAsignatura::find($id);
+            return view('programa/asignatura.edit')
+                ->with('municipios', $municipios)
+                ->with('programas', $programas)
+                ->with('plans', $plans)
+                ->with('asignatura', $asignatura);
+        } else {
             return redirect('/home');
         }
     }
@@ -570,15 +582,15 @@ class ProgramaController extends Controller
 
     public function eliminarasignatura($id)
     {
-        try{
+        try {
             $asignatura = ProgramaAsignatura::find($id);
             $asignatura->delete();
             Alert::success('Exitoso', 'La asignatura se elimino correctamente');
             return redirect('programa/mostrarasignatura');
-        }catch(\Illuminate\Database\QueryException $e){
+        } catch (\Illuminate\Database\QueryException $e) {
             Alert::error('No se puede eliminar esta asignatura, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
             return redirect()->back();
-        }      
+        }
     }
 
     public function mostrarhorario()
@@ -590,18 +602,18 @@ class ProgramaController extends Controller
 
     public function crearhorario()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $horarios = ProgramaHorario::all();
-        $asignaturas = ProgramaAsignatura::all();
-        $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
-        return view('programa/horario.create')
-            ->with('asignaturas', $asignaturas)
-            ->with('personas', $personas)
-            ->with('horarios', $horarios);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $horarios = ProgramaHorario::all();
+            $asignaturas = ProgramaAsignatura::all();
+            $personas = DB::table('persona')
+                ->where('per_tipo_usuario', 2)
+                ->orWhere('per_tipo_usuario', 5)
+                ->get();
+            return view('programa/horario.create')
+                ->with('asignaturas', $asignaturas)
+                ->with('personas', $personas)
+                ->with('horarios', $horarios);
+        } else {
             return redirect('/home');
         }
     }
@@ -614,7 +626,7 @@ class ProgramaController extends Controller
             'pph_id_asignatura' => 'required|not_in:0',
             'pph_grupo' => 'required',
             'pph_id_docente' => 'required|not_in:0',
-            
+
         ];
         $message = [
             'pph_year.required' => 'El campo año es requerido',
@@ -645,18 +657,18 @@ class ProgramaController extends Controller
 
     public function editarhorario($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
-        $horario = ProgramaHorario::find($id);
-        $asignaturas = ProgramaAsignatura::all();
-        $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
-        return view('programa/horario.edit')
-            ->with('asignaturas', $asignaturas)
-            ->with('personas', $personas)
-            ->with('horario', $horario);
-        }else{
+        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
+            $horario = ProgramaHorario::find($id);
+            $asignaturas = ProgramaAsignatura::all();
+            $personas = DB::table('persona')
+                ->where('per_tipo_usuario', 2)
+                ->orWhere('per_tipo_usuario', 5)
+                ->get();
+            return view('programa/horario.edit')
+                ->with('asignaturas', $asignaturas)
+                ->with('personas', $personas)
+                ->with('horario', $horario);
+        } else {
             return redirect('/home');
         }
     }
@@ -700,15 +712,15 @@ class ProgramaController extends Controller
 
     public function eliminarhorario($id)
     {
-        try{
+        try {
             $horario = ProgramaHorario::find($id);
             $horario->delete();
             Alert::success('Exitoso', 'Asignación docente y horario eliminada');
             return redirect('programa/mostrarhorario');
-        }catch(\Illuminate\Database\QueryException $e){
+        } catch (\Illuminate\Database\QueryException $e) {
             Alert::error('No se puede eliminar este horario, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
             return redirect()->back();
-        } 
+        }
     }
 
     public function selectivoplan($id)
@@ -716,7 +728,8 @@ class ProgramaController extends Controller
         return DB::table('programa_plan_estudio')->where('pp_id_programa', $id)->get();
     }
 
-    public function editplan($id){
+    public function editplan($id)
+    {
         return DB::table('programa_plan_estudio')->where('pp_id_programa', $id)->first();
     }
 
@@ -728,7 +741,7 @@ class ProgramaController extends Controller
     public function exportpdf()
     {
         $datos = DB::table('programa')
-        ->get();
+            ->get();
         if ($datos->count() <= 0) {
             Alert::warning('No hay registros');
             return redirect('/programa');
@@ -752,5 +765,4 @@ class ProgramaController extends Controller
             return Excel::download(new ProgramaExport, 'programas.xlsx');
         }
     }
-
 }

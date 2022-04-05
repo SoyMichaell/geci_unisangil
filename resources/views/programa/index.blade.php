@@ -13,21 +13,21 @@
 @endsection
 @section('content')
     <div class="container">
-        <div class="col-md-12 tile">            
+        <div class="col-md-12 tile">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('programa/exportpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('programa/exportexcel') }}"
-                        title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('programa/create') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('programa/exportpdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('programa/exportexcel') }}" title="Generar reporte excel" target="_blank"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('programa/create') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -41,9 +41,7 @@
                             <th>Nivel de formación</th>
                             <th>Metodologia</th>
                             <th>Director de programa</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,21 +57,19 @@
                                 <td>{{ Str::ucfirst($programa->directorprograma->per_nombre) .' ' .Str::ucfirst($programa->directorprograma->per_apellido) }}
                                 </td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="{{ route('programa.destroy', $programa->id) }}" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/programa/{{ $programa->id }}"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/programa/{{ $programa->id }}/edit"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="{{ route('programa.destroy', $programa->id) }}" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm" href="/programa/{{ $programa->id }}"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/programa/{{ $programa->id }}/edit"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

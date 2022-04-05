@@ -12,7 +12,8 @@
     <div class="container-fluid">
         <div class="row mb-3">
             <div class="d-flex justify-content-end">
-                <a class="btn btn-success" href="/docente/{{$persona->id}}/crearasignatura"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+                <a class="btn btn-success" href="/docente/{{ $persona->id }}/crearasignatura"><i
+                        class="fa-solid fa-circle-plus"></i> Nuevo</a>
             </div>
         </div>
         <div class="row mb-3">
@@ -29,7 +30,7 @@
                             <a class="btn btn-outline-success" style="border-radius: 100%"
                                 href="{{ url('docente/export') }}" title="Generar reporte excel" target="_blank"><i
                                     class="fa-solid fa-file-excel"></i></a>
-                                    
+
                         </div>
                     </div>
                     <br>
@@ -52,34 +53,32 @@
                         </thead>
                         <tbody>
                             @foreach ($asignaturas as $asignatura)
-                            <tr>
-                                <td>{{$asignatura->id}}</td>
-                                <td>{{$asignatura->doa_year}}</td>
-                                <td>{{$asignatura->doa_semestre}}</td>
-                                <td>{{$asignatura->pas_nombre}}</td>
-                                <td>{{$asignatura->doa_grupo}}</td>
-                                <td>{{$asignatura->mun_nombre}}</td>
-                                <td>{{$asignatura->doa_unidad}}</td>
-                                <td>{{$asignatura->doa_horas_semana_doc}}</td>
-                                <td>{{$asignatura->doa_horas_semana_inv}}</td>
-                                <td>{{$asignatura->doa_horas_extension}}</td>
-                                <td>{{$asignatura->doa_horas_admin}}</td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                <tr>
+                                    <td>{{ $asignatura->id }}</td>
+                                    <td>{{ $asignatura->doa_year }}</td>
+                                    <td>{{ $asignatura->doa_semestre }}</td>
+                                    <td>{{ $asignatura->pas_nombre }}</td>
+                                    <td>{{ $asignatura->doa_grupo }}</td>
+                                    <td>{{ $asignatura->mun_nombre }}</td>
+                                    <td>{{ $asignatura->doa_unidad }}</td>
+                                    <td>{{ $asignatura->doa_horas_semana_doc }}</td>
+                                    <td>{{ $asignatura->doa_horas_semana_inv }}</td>
+                                    <td>{{ $asignatura->doa_horas_extension }}</td>
+                                    <td>{{ $asignatura->doa_horas_admin }}</td>
                                     <td>
                                         <form action="{{ url("asignatura/{$asignatura->id}") }}" method="POST">
                                             <div class="d-flex">
                                                 <a class="btn btn-outline-info btn-sm"
-                                                    href="/docente/{{$persona->id}}/{{$asignatura->id}}/editarasignatura"><i
-                                                    class="fa-solid fa-refresh"></i></a>
+                                                    href="/docente/{{ $persona->id }}/{{ $asignatura->id }}/editarasignatura"><i
+                                                        class="fa-solid fa-refresh"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                        class="fa-solid fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>
-                                @endif
-                            </tr>
+                                </tr>
                             @endforeach
                         </tbody>
                     </table>

@@ -12,7 +12,8 @@
     <div class="container-fluid">
         <div class="tile col-md-12 mt-2">
             <div class="d-flex justify-content-end">
-                <a class="btn btn-outline-success" href="/estudiante/crearreporte"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+                <a class="btn btn-outline-success" href="/estudiante/crearreporte"><i class="fa-solid fa-circle-plus"></i>
+                    Nuevo</a>
             </div>
             <div class="table-responsive mt-4">
                 <table class="table table-bordered" id="tables">
@@ -27,9 +28,7 @@
                             <th>Matriculados antiguos</th>
                             <th>Matriculados Primer Semestre</th>
                             <th>Matriculados total</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -46,24 +45,22 @@
                                 <td>{{ $general->esture_mat_primer_semestre }}</td>
                                 <td>{{ $general->esture_mat_total }}</a>
                                 </td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <td style="width: 10%">
-                                        <form action="/estudiante/{{$general->id}}/eliminarreporte"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/estudiante/{{$general->id}}/verreporte"><i
-                                                        class="fa-solid fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="/estudiante/{{$general->id}}/editarreporte"><i
-                                                        class="fa-solid fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                @endif
+                                <td style="width: 10%">
+                                    <form action="/estudiante/{{ $general->id }}/eliminarreporte" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/estudiante/{{ $general->id }}/verreporte"><i
+                                                    class="fa-solid fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm"
+                                                href="/estudiante/{{ $general->id }}/editarreporte"><i
+                                                    class="fa-solid fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
+                                                    class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

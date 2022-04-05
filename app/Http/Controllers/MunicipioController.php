@@ -23,13 +23,8 @@ class MunicipioController extends Controller
 
     public function create()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $departamentos = Departamento::all();
-
         return view('configuracion/municipio.create')->with("departamentos",$departamentos);
-        }else{
-            return redirect('/home');
-        }
     }
 
 

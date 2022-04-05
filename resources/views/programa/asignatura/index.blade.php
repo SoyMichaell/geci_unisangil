@@ -40,9 +40,7 @@
                             <th>No. Hro semanales</th>
                             <th>No. semestre</th>
                             <th>Estado</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,19 +61,17 @@
                                         class="badge badge-{{ $asignatura->asig_estado == 'activo' ? 'success' : 'danger' }}">{{ $asignatura->asig_estado }}</span>
                                 </td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/programa/{{$asignatura->id}}/eliminarasignatura" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/programa/{{ $asignatura->id }}/editarasignatura"><i
-                                                        class="fa-solid fa-refresh"></i></a>
-                                                        @csrf
-                                                        @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/programa/{{ $asignatura->id }}/eliminarasignatura" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/programa/{{ $asignatura->id }}/editarasignatura"><i
+                                                    class="fa-solid fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

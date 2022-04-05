@@ -16,10 +16,12 @@
                     <h4>Listado pruebas saber 11</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('prueba/exportsaberpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('prueba/exportexcel') }}"
-                        title="Generar reporte excel"><i class="fa-solid fa-file-excel"></i></a>
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('prueba/exportsaberpdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa-solid fa-file-pdf"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('prueba/exportexcel') }}" title="Generar reporte excel"><i
+                            class="fa-solid fa-file-excel"></i></a>
                     <a class="btn btn-outline-success" href="/prueba/crearsaber"><i class="fa-solid fa-circle-plus"></i>
                         Nuevo</a>
                 </div>
@@ -46,22 +48,21 @@
                             <td>{{ $saber->prueba_saber_periodo }}</td>
                             <td>{{ number_format($saber->prueba_saber_puntaje_global, 2) }}</td>
                             <td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <form action="/prueba/{{$saber->prueba_saber_id_estudiante }}/eliminarsaber" method="POST">
-                                        <div class="d-flex justify-content-center">
-                                            <a class="btn btn-sm"
-                                                href="/prueba/{{ $saber->prueba_saber_id_estudiante }}/versaber"><i
-                                                    class="fa-solid fa-folder-open"></i></a>
-                                            <a class="btn btn-outline-info  btn-sm"
-                                                href="/prueba/{{ $saber->prueba_saber_id_estudiante }}/editarsaber"><i
-                                                    class="fa-solid fa-edit"></i></a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa-solid fa-trash"></i></button>
-                                        </div>
-                                    </form>
-                                @endif
+                                <form action="/prueba/{{ $saber->prueba_saber_id_estudiante }}/eliminarsaber"
+                                    method="POST">
+                                    <div class="d-flex justify-content-center">
+                                        <a class="btn btn-sm"
+                                            href="/prueba/{{ $saber->prueba_saber_id_estudiante }}/versaber"><i
+                                                class="fa-solid fa-folder-open"></i></a>
+                                        <a class="btn btn-outline-info  btn-sm"
+                                            href="/prueba/{{ $saber->prueba_saber_id_estudiante }}/editarsaber"><i
+                                                class="fa-solid fa-edit"></i></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

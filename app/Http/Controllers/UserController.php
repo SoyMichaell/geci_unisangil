@@ -21,12 +21,12 @@ class UserController extends Controller
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
-        if(Auth::check()){
+        if(!Auth::check()){
             $tiposusuario = DB::table('tipo_usuario')
             ->Where('id', 2)
             ->orWhere('id', 4)
             ->get();
-        }else if(!Auth::check()){
+        }else if(Auth::check()){
             $tiposusuario = DB::table('tipo_usuario')
             ->Where('id', 1)
             ->orWhere('id', 2)
@@ -204,9 +204,14 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        DB::table('docente')->delete($id);
-        $user = User::find($id)->delete();
-        Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
-        return redirect('/home');
+        try{
+            DB::table('docente')->where('id_persona_docente', $id)->delete();
+            $user = User::find($id)->delete();
+            Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
+            return redirect('/home');
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar este persona, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
     }
 }

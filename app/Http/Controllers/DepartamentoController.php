@@ -20,11 +20,7 @@ class DepartamentoController extends Controller
 
     public function create()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         return view('configuracion/departamento.create');
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function store(Request $request)

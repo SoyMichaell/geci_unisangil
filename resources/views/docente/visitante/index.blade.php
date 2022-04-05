@@ -68,22 +68,20 @@
                                 <td><a
                                         href="{{ asset('datos/visitante/' . $docentevisitante->docvi_url_soporte) }}"><small>{{ $docentevisitante->docvi_url_soporte }}</small></a>
                                 </td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <td>
-                                        <form action="/docente/{{ $docentevisitante->id }}/eliminardocentevisitante"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="/docente/{{ $docentevisitante->id }}/editardocentevisitante"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                @endif
+                                <td>
+                                    <form action="/docente/{{ $docentevisitante->id }}/eliminardocentevisitante"
+                                        method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-outline-info btn-sm"
+                                                href="/docente/{{ $docentevisitante->id }}/editardocentevisitante"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

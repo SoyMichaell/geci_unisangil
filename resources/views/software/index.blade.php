@@ -14,10 +14,8 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-flex">
-            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                <a class="btn btn-success" href="{{ url('software/mostrarrecurso') }}"><i class="fa fa-plus-circle"></i>
-                    Recursos tecnológicos</a>
-            @endif
+            <a class="btn btn-success" href="{{ url('software/mostrarrecurso') }}"><i class="fa fa-plus-circle"></i>
+                Recursos tecnológicos</a>
         </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
@@ -25,15 +23,15 @@
                     <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('software/exportpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('software/exportexcel') }}"
-                        title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('software/create') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('software/exportpdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('software/exportexcel') }}" title="Generar reporte excel"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('software/create') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -48,9 +46,7 @@
                             <th>Año adquisición licencia</th>
                             <th>Año vencimiento licencia</th>
                             <th>Programa</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,23 +60,21 @@
                                 <td>{{ $software->sof_version }}</td>
                                 <td>{{ $software->sof_year_ad_licencia }}</td>
                                 <td>{{ $software->sof_year_ve_licencia }}</td>
-                                <td>{{ $software->sof_id_programa}}</td>
+                                <td>{{ $software->sof_id_programa }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="{{ route('software.destroy', $software->id) }}" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/software/{{ $software->id }}"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/software/{{ $software->id }}/edit"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="{{ route('software.destroy', $software->id) }}" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm" href="/software/{{ $software->id }}"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/software/{{ $software->id }}/edit"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

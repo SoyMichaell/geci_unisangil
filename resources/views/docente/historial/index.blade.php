@@ -49,20 +49,19 @@
                                     <td>{{ $historial->pph_semestre }}</td>
                                     <td>{{ $historial->asig_nombre }}</td>
                                     <td>{{ $historial->pph_grupo }}</td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <td>
-                                            <form action="" method="POST">
-                                                <div class="d-flex">
-                                                    <a class="btn btn-outline-info btn-sm" href="/docente/{{$historial->programa_plan_estudio_asignatura.id}}/crearhistorial"><i
-                                                            class="fa-solid fa-circle-plus"></i></a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    @endif
+                                    <td>
+                                        <form action="" method="POST">
+                                            <div class="d-flex">
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="/docente/{{ $historial->programa_plan_estudio_asignatura . id }}/crearhistorial"><i
+                                                        class="fa-solid fa-circle-plus"></i></a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </div>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

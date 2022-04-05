@@ -20,14 +20,14 @@
                 </div>
                 <div class="col-md-4 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" href="{{ url('investigacion/exportpdfintegrante') }}"
-                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa fa-file-pdf-o"></i></a>
-                        <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelintegrante') }}"
-                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success " href="{{ url('investigacion/crearintegrante') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('investigacion/exportexcelintegrante') }}"
+                        title="Generar reporte pdf" target="_blank" style="border-radius: 100%"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success " href="{{ url('investigacion/crearintegrante') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <br>
@@ -40,9 +40,7 @@
                             <th>Investigador</th>
                             <th>CVLAC</th>
                             <th>Categoria</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,24 +52,22 @@
                                 <td>{{ $investigador->per_nombre . ' ' . $investigador->per_apellido }}</td>
                                 <td>{{ $investigador->inves_enlace_cvlac }}</td>
                                 <td>{{ $investigador->inves_categoria }}</td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <td style="width: 10%">
-                                        <form action="" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm"
-                                                    href="/investigacion/{{ $investigador->inves_id_persona }}/verintegrante"><i
-                                                        class="fa fa-folder-open "></i></a>
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="/investigacion/{{ $investigador->id }}/editarintegrante"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                @endif
+                                <td style="width: 10%">
+                                    <form action="" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/investigacion/{{ $investigador->inves_id_persona }}/verintegrante"><i
+                                                    class="fa fa-folder-open "></i></a>
+                                            <a class="btn btn-outline-info btn-sm"
+                                                href="/investigacion/{{ $investigador->id }}/editarintegrante"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

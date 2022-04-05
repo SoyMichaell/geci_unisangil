@@ -33,8 +33,8 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Proyectos de investigación @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)<a class="btn btn-success btn-sm" href="/investigacion/crearproyecto"><i
-                    class="fa fa-plus-circle"></i> Crear nuevo proyecto</a>@endif
+        <h3>Proyectos de investigación <a class="btn btn-success btn-sm" href="/investigacion/crearproyecto"><i
+                    class="fa fa-plus-circle"></i> Crear nuevo proyecto</a>
                     <a class="btn btn-outline-danger"
                 href="{{ url('investigacion/exportpdfproyecto') }}" title="Generar reporte pdf" target="_blank"><i
                     class="fa fa-file-pdf-o"></i></a>

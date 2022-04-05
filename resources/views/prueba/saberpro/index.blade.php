@@ -16,7 +16,8 @@
                     <h4>Listado pruebas saber pro</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
-                    <a class="btn btn-outline-success" href="/prueba/crearsaberpro"><i class="fa-solid fa-circle-plus"></i>
+                    <a class="btn btn-outline-success" href="/prueba/crearsaberpro"><i
+                            class="fa-solid fa-circle-plus"></i>
                         Nuevo</a>
                 </div>
             </div>
@@ -50,23 +51,21 @@
                             <td>{{ $pro->prsapr_percentil_nacional }}</td>
                             <td>{{ $pro->prsapr_percentil_grupo }}</td>
                             <td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <form action="/prueba/{{ $pro->prsapr_id_estudiante }}/eliminarsaberpro"
-                                        method="POST">
-                                        <div class="d-flex justify-content-center">
-                                            <a class="btn btn-sm"
-                                                href="/prueba/{{ $pro->prsapr_id_estudiante }}/versaberpro"><i
-                                                    class="fa-solid fa-folder-open"></i></a>
-                                            <a class="btn btn-outline-info  btn-sm"
-                                                href="/prueba/{{ $pro->prsapr_id_estudiante }}/editarsaberpro"><i
-                                                    class="fa-solid fa-edit"></i></a>
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa-solid fa-trash"></i></button>
-                                        </div>
-                                    </form>
-                                @endif
+                                <form action="/prueba/{{ $pro->prsapr_id_estudiante }}/eliminarsaberpro"
+                                    method="POST">
+                                    <div class="d-flex justify-content-center">
+                                        <a class="btn btn-sm"
+                                            href="/prueba/{{ $pro->prsapr_id_estudiante }}/versaberpro"><i
+                                                class="fa-solid fa-folder-open"></i></a>
+                                        <a class="btn btn-outline-info  btn-sm"
+                                            href="/prueba/{{ $pro->prsapr_id_estudiante }}/editarsaberpro"><i
+                                                class="fa-solid fa-edit"></i></a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm"><i
+                                                class="fa-solid fa-trash"></i></button>
+                                    </div>
+                                </form>
                             </td>
                         </tr>
                     @endforeach

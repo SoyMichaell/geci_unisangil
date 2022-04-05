@@ -3,10 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension/mostrarservicioextension">Servicios extensión</a> / <a href="/extension">Extension - internacionalización</a>
+        <a href="/extension/mostrarservicioextension">Servicios extensión</a> / <a href="/extension">Extension -
+            internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Servicio extensión</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Servicio extensión
+        </h1>
     @section('message')
         <p>Listado de registro servicios de extensión</p>
     @endsection
@@ -19,15 +21,15 @@
                     <h4>Listado de servicios extensión</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportservicioextensionpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportservicioextensionexcel') }}"
-                        title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearservicioextension') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('extension/exportservicioextensionpdf') }}" title="Generar reporte pdf"
+                        target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('extension/exportservicioextensionexcel') }}" title="Generar reporte excel"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('extension/crearservicioextension') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -46,9 +48,7 @@
                             <th>Nombre contacto</th>
                             <th>Telefono</th>
                             <th>Correo electronico</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,23 +69,21 @@
                                 <td>{{ $servicio->extseex_telefono_contacto }} </td>
                                 <td>{{ $servicio->extseex_correo_contacto }} </td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $servicio->id }}/eliminarservicioextension"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm"
-                                                    href="/extension/{{ $servicio->id }}/verservicioextension"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $servicio->id }}/editarservicioextension"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/extension/{{ $servicio->id }}/eliminarservicioextension"
+                                        method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/extension/{{ $servicio->id }}/verservicioextension"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/extension/{{ $servicio->id }}/editarservicioextension"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

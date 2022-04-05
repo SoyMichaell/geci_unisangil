@@ -11,7 +11,8 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-start">
-            <a class="btn btn-success" href="{{ url('modalidad') }}"><i class="fa fa-plus-circle"></i> Modalidad de grado</a>
+            <a class="btn btn-success" href="{{ url('modalidad') }}"><i class="fa fa-plus-circle"></i> Modalidad de
+                grado</a>
         </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
@@ -19,15 +20,15 @@
                     <h3>Lista de registros</h3><!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-5 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('trabajo/exportpdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('trabajo/exportexcel') }}"
-                        title="Generar reporte excel"s><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success " href="{{ url('trabajo/create') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('trabajo/exportpdf') }}" title="Generar reporte pdf" target="_blank"><i
+                            class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('trabajo/exportexcel') }}" title="Generar reporte excel" s><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success " href="{{ url('trabajo/create') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <br>
@@ -42,9 +43,7 @@
                             <th>Director</th>
                             <th>Codirector</th>
                             <th>Fecha inicio</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,26 +54,25 @@
                                 <td>{{ $trabajo->tra_codigo_proyecto }}</td>
                                 <td>{{ $trabajo->tra_titulo_proyecto }}</td>
                                 <td>{{ $trabajo->tra_id_estudiante }}</td>
-                                <td>{{ $trabajo->directores->per_nombre.' '.$trabajo->directores->per_apellido }}</td>
-                                <td>{{ $trabajo->codirectores->per_nombre.' '.$trabajo->codirectores->per_apellido }}</td>
+                                <td>{{ $trabajo->directores->per_nombre . ' ' . $trabajo->directores->per_apellido }}</td>
+                                <td>{{ $trabajo->codirectores->per_nombre . ' ' . $trabajo->codirectores->per_apellido }}
+                                </td>
                                 <td>{{ $trabajo->tra_fecha_inicio }}</td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <td>
-                                        <form action="{{ route('trabajo.destroy', $trabajo->id) }}" method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm" href="/trabajo/{{ $trabajo->id }}"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="/trabajo/{{ $trabajo->id }}/edit"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                @endif
+                                <td>
+                                    <form action="{{ route('trabajo.destroy', $trabajo->id) }}" method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm" href="/trabajo/{{ $trabajo->id }}"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm"
+                                                href="/trabajo/{{ $trabajo->id }}/edit"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm btn-eye"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>

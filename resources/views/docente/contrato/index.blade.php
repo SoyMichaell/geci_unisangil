@@ -14,7 +14,8 @@
 @section('content')
     <div class="container">
         <div class="row mb-1">
-            <h4>Listado de contratos asociados al docente <strong class="badge badge-primary">{{$persona->per_nombre.' '.$persona->per_apellido}}</strong></h4>
+            <h4>Listado de contratos asociados al docente <strong
+                    class="badge badge-primary">{{ $persona->per_nombre . ' ' . $persona->per_apellido }}</strong></h4>
             <div class="tile p-3 col-md-12">
                 <div class="table-responsive">
                     <table class="table" id="tables">
@@ -47,22 +48,20 @@
                                     <td><span
                                             class="badge badge-{{ $contrato->doco_estado == 'cancelado' ? 'success' : 'danger' }}">{{ $contrato->doco_estado }}</span>
                                     </td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <td>
-                                            <form action="{{ url("docente/{$contrato->id}/eliminarcontrato") }}"
-                                                method="POST">
-                                                <div class="d-flex">
-                                                    <a class="btn btn-outline-info btn-sm"
-                                                        href="/docente/{{ $persona->id }}/{{ $contrato->id }}/editarcontrato"><i
-                                                            class="fa fa-refresh"></i></a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-trash"></i></button>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    @endif
+                                    <td>
+                                        <form action="{{ url("docente/{$contrato->id}/eliminarcontrato") }}"
+                                            method="POST">
+                                            <div class="d-flex">
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="/docente/{{ $persona->id }}/{{ $contrato->id }}/editarcontrato"><i
+                                                        class="fa fa-refresh"></i></a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="fa fa-trash"></i></button>
+                                            </div>
+                                        </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -72,10 +71,12 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-12 tile">
-                <h4><i class="fa fa-cube"></i> Registro contrato docente</h4><hr>
+                <h4><i class="fa fa-cube"></i> Registro contrato docente</h4>
+                <hr>
                 <form action="/docente/registrocontrato" method="post" enctype="multipart/form-data">
                     @csrf
-                    <input type="hidden" name="doe_persona_docente" id="doe_persona_docente" value="{{ $persona->id }}">
+                    <input type="hidden" name="doe_persona_docente" id="doe_persona_docente"
+                        value="{{ $persona->id }}">
                     <div class="row mb-3">
                         <div class="col-md-6">
                             <label for="doco_numero_contrato">{{ __('Número de contrato *') }}</label>
@@ -156,8 +157,9 @@
                         <div class="col-md-4">
                             <label for="doco_url_soporte">{{ __('Cargar contrato .pdf *') }}</label>
                             <input id="doco_url_soporte" type="file"
-                                class="form-control @error('doco_url_soporte') is-invalid @enderror" name="doco_url_soporte"
-                                value="{{ old('doco_url_soporte') }}" autocomplete="doco_url_soporte">
+                                class="form-control @error('doco_url_soporte') is-invalid @enderror"
+                                name="doco_url_soporte" value="{{ old('doco_url_soporte') }}"
+                                autocomplete="doco_url_soporte">
                             @error('doco_url_soporte')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>

@@ -34,15 +34,13 @@
             blanditiis inventore.</p>
         <hr>
         <div class="d-flex justify-content-end">
-            <a class="btn btn-outline-danger" href="{{url('estudiante/exportpdfgeneral')}}" title="Generar reporte pdf" target="_blank"><i
-                    class="fa fa-file-pdf-o"></i></a>
-            <a class="btn btn-outline-success" href="{{url('estudiante/exportexcelgeneral')}}" title="Generar reporte excel" target="_blank"><i
-                    class="fa fa-file-excel-o"></i></a>
-            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                <a class="btn btn-outline-success btn-sm" href="{{ url('estudiante/create') }}"><i
-                        class="fa fa-plus-circle"></i>
-                    Nuevo</a>
-            @endif
+            <a class="btn btn-outline-danger" href="{{ url('estudiante/exportpdfgeneral') }}" title="Generar reporte pdf"
+                target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+            <a class="btn btn-outline-success" href="{{ url('estudiante/exportexcelgeneral') }}"
+                title="Generar reporte excel" target="_blank"><i class="fa fa-file-excel-o"></i></a>
+            <a class="btn btn-outline-success btn-sm" href="{{ url('estudiante/create') }}"><i
+                    class="fa fa-plus-circle"></i>
+                Nuevo</a>
         </div>
         <div class="row mt-3">
             @foreach ($programas as $programa)

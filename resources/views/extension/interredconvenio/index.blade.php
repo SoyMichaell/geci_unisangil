@@ -3,10 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension/mostrarinterredconvenio">Red convenio</a> / <a href="/extension">Extension - internacionalización</a>
+        <a href="/extension/mostrarinterredconvenio">Red convenio</a> / <a href="/extension">Extension -
+            internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Redes académicas</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Redes académicas
+        </h1>
     @section('message')
         <p>Listado de registro programas académicos</p>
     @endsection
@@ -19,15 +21,15 @@
                     <h4>Listado red convenio</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportredacademiapdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportredacademiaexcel') }}"
-                        title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearinterredconvenio') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('extension/exportredacademiapdf') }}" title="Generar reporte pdf"
+                        target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('extension/exportredacademiaexcel') }}" title="Generar reporte excel"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('extension/crearinterredconvenio') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -42,9 +44,7 @@
                             <th>Fecha</th>
                             <th>Función</th>
                             <th>No. Participantes</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -60,23 +60,21 @@
                                 <td>{{ $interredconvenio->exsered_funcion }}</td>
                                 <td>{{ $interredconvenio->exsered_participantes }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $interredconvenio->id }}/eliminarinterredconvenio"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm"
-                                                    href="/extension/{{ $interredconvenio->id }}/verinterredconvenio"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $interredconvenio->id }}/editarinterredconvenio"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/extension/{{ $interredconvenio->id }}/eliminarinterredconvenio"
+                                        method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/extension/{{ $interredconvenio->id }}/verinterredconvenio"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/extension/{{ $interredconvenio->id }}/editarinterredconvenio"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

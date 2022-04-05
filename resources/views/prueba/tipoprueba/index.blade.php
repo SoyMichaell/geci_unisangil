@@ -11,16 +11,14 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="{{Auth::user()->per_tipo_usuario == 4 ? 'col-md-12' : 'col-md-5'}} tile">
+            <div class="{{ Auth::user()->per_tipo_usuario == 4 ? 'col-md-5' : 'col-md-5' }} tile">
                 <h4>Listado tipo de pruebas</h4>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
                             <th>Tipo prueba</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                             <th style="width: 7%">Acciones</th>
-                            @endif
                         </tr>
                     </thead>
                     <tbody>
@@ -29,24 +27,21 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $tipoprueba->tipo_prueba_nombre }}</td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
                                 <td>
-                                        <form action="/prueba/{{$tipoprueba->id}}/eliminartipoprueba" method="POST">
-                                            <div class="d-flex justify-content-center">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
-                                            </div>
-                                        </form>
+                                    <form action="/prueba/{{ $tipoprueba->id }}/eliminartipoprueba" method="POST">
+                                        <div class="d-flex justify-content-center">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa-solid fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
-                                @endif
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             </div>
-            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
             <div class="col-md-7 shadow-sm bg-white p-3">
                 <h4><i class="fab fa-wpforms"></i> Registro tipo pruebas</h4>
                 <form action="/prueba/registrotipoprueba" method="post">
@@ -74,7 +69,6 @@
                     </div>
                 </form>
             </div>
-            @endif
         </div>
     </div>
 @endsection

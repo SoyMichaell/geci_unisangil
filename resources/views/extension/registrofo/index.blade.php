@@ -3,10 +3,12 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/extension/mostrarregistrofotografico">Registro fotografico</a> / <a href="/extension">Extension - internacionalización</a>
+        <a href="/extension/mostrarregistrofotografico">Registro fotografico</a> / <a href="/extension">Extension -
+            internacionalización</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Registro fotografico</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo extensión e internacionalización | Registro
+            fotografico</h1>
     @section('message')
         <p>Listado de registro fotografico</p>
     @endsection
@@ -19,15 +21,15 @@
                     <h4>Listado registro fotografico</h4> <!-- TODO: arreglar botones pdf y excel-->
                 </div>
                 <div class="col-md-6 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-outline-danger" style="border-radius: 100%" href="{{ url('extension/exportfotograficopdf') }}"
-                        title="Generar reporte pdf" target="_blank"><i class="fa fa-file-pdf-o"></i></a>
-                    <a class="btn btn-outline-success" style="border-radius: 100%" href="{{ url('extension/exportfotograficoexcel') }}"
-                        title="Generar reporte excel"><i class="fa fa-file-excel-o"></i></a>
-                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                        <a class="btn btn-outline-success" href="{{ url('extension/crearregistrofotografico') }}"><i
-                                class="fa fa-plus-circle"></i>
-                            Nuevo</a>
-                    @endif
+                    <a class="btn btn-outline-danger" style="border-radius: 100%"
+                        href="{{ url('extension/exportfotograficopdf') }}" title="Generar reporte pdf"
+                        target="_blank"><i class="fa fa-file-pdf-o"></i></a>
+                    <a class="btn btn-outline-success" style="border-radius: 100%"
+                        href="{{ url('extension/exportfotograficoexcel') }}" title="Generar reporte excel"><i
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="{{ url('extension/crearregistrofotografico') }}"><i
+                            class="fa fa-plus-circle"></i>
+                        Nuevo</a>
                 </div>
             </div>
             <div class="table-responsive mt-2">
@@ -44,9 +46,7 @@
                             <th>Tipo evento</th>
                             <th>Tipo modalidad</th>
                             <th>Soporte</th>
-                            @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                <th>Acciones</th>
-                            @endif
+                            <th>Acciones</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -64,23 +64,21 @@
                                 <td>{{ $fotografico->extrefoin_tipo_modalidad }}</td>
                                 <td>{{ $fotografico->extrefoin_soporte }}</td>
                                 <td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                        <form action="/extension/{{ $fotografico->id }}/eliminarregistrofotografico"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-sm"
-                                                    href="/extension/{{ $fotografico->id }}/verregistrofotografico"><i
-                                                        class="fa fa-folder-open"></i></a>
-                                                <a class="btn btn-outline-info btn-sm "
-                                                    href="/extension/{{ $fotografico->id }}/editarregistrofotografico"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    @endif
+                                    <form action="/extension/{{ $fotografico->id }}/eliminarregistrofotografico"
+                                        method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-sm"
+                                                href="/extension/{{ $fotografico->id }}/verregistrofotografico"><i
+                                                    class="fa fa-folder-open"></i></a>
+                                            <a class="btn btn-outline-info btn-sm "
+                                                href="/extension/{{ $fotografico->id }}/editarregistrofotografico"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
                                 </td>
                             </tr>
                         @endforeach

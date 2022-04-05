@@ -13,7 +13,8 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-outline-success" href="{{ url('modalidad/create') }}"><i class="fa-solid fa-circle-plus"></i> Nuevo</a>
+                    <a class="btn btn-outline-success" href="{{ url('modalidad/create') }}"><i
+                            class="fa-solid fa-circle-plus"></i> Nuevo</a>
                 </div>
                 <div class="table-responsive tile mt-2">
                     <table class="table table-borderd" id="tables">
@@ -30,20 +31,17 @@
                                     <td>{{ $modalidad->id }}</td>
                                     <td>{{ $modalidad->mod_nombre }}</td>
                                     <td>
-                                        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                            <form action="{{ route('modalidad.destroy', $modalidad->id) }}"
-                                                method="POST">
-                                                <div class="d-flex text-center">
-                                                    <a class="btn btn-outline-info btn-sm"
-                                                        href="/modalidad/{{ $modalidad->id }}/edit"><i
-                                                            class="fa-solid fa-refresh text-center"></i></a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa-solid fa-trash"></i></button>
-                                                </div>
-                                            </form>
-                                        @endif
+                                        <form action="{{ route('modalidad.destroy', $modalidad->id) }}" method="POST">
+                                            <div class="d-flex text-center">
+                                                <a class="btn btn-outline-info btn-sm"
+                                                    href="/modalidad/{{ $modalidad->id }}/edit"><i
+                                                        class="fa-solid fa-refresh text-center"></i></a>
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"><i
+                                                        class="fa-solid fa-trash"></i></button>
+                                            </div>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

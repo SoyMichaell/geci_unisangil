@@ -44,22 +44,20 @@
                                     <a href="{{ asset('/docente/evaluacion/' . $evaluacion->doe_url_evaluacion) }}"
                                         target="_blank">{{ $evaluacion->doe_url_evaluacion }}</a>
                                 </td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                    <td>
-                                        <form action="{{ url("docente/{$evaluacion->id}/eliminarevaluacion") }}"
-                                            method="POST">
-                                            <div class="d-flex">
-                                                <a class="btn btn-outline-info btn-sm"
-                                                    href="/docente/{{ $persona->id }}/{{ $evaluacion->id }}/editarevaluacion"><i
-                                                        class="fa fa-refresh"></i></a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa fa-trash"></i></button>
-                                            </div>
-                                        </form>
-                                    </td>
-                                @endif
+                                <td>
+                                    <form action="{{ url("docente/{$evaluacion->id}/eliminarevaluacion") }}"
+                                        method="POST">
+                                        <div class="d-flex">
+                                            <a class="btn btn-outline-info btn-sm"
+                                                href="/docente/{{ $persona->id }}/{{ $evaluacion->id }}/editarevaluacion"><i
+                                                    class="fa fa-refresh"></i></a>
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-danger btn-sm"><i
+                                                    class="fa fa-trash"></i></button>
+                                        </div>
+                                    </form>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -68,7 +66,8 @@
         </div>
         <div class="row mb-3">
             <div class="col-md-12 tile">
-                <h4><i class="fa fa-cubes"></i> Registro evaluación docente</h4><hr>
+                <h4><i class="fa fa-cubes"></i> Registro evaluación docente</h4>
+                <hr>
                 <form action="/docente/registroevaluacion" method="post" enctype="multipart/form-data">
                     @csrf
                     <input type="hidden" name="doe_persona_docente" id="doe_persona_docente"

@@ -27,7 +27,6 @@ class TrabajoController extends Controller
 
     public function create()
     {
-
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
