@@ -36,7 +36,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
                             <h4>Estudiantes</h4>
-                            <p><b>({{$estudiantes->count()}})</b></p>
+                            <p><b>({{ $estudiantes->count() }})</b></p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
                             <h4>Docentes</h4>
-                            <p><b>({{$docentes->count()}})</b></p>
+                            <p><b>({{ $docentes->count() }})</b></p>
                         </div>
                     </div>
                 </div>
@@ -52,7 +52,7 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-graduation-cap fa-3x"></i>
                         <div class="info">
                             <h4>Egresados</h4>
-                            <p><b>({{$egresados->count()}})</b></p>
+                            <p><b>({{ $egresados->count() }})</b></p>
                         </div>
                     </div>
                 </div>
@@ -60,8 +60,8 @@
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
                             <h4>Personal administrativo</h4>
-                            <p><b>({{$administrativos->count()}})</b>
-                            
+                            <p><b>({{ $administrativos->count() }})</b>
+
                         </div>
                     </div>
                 </div>
@@ -69,7 +69,8 @@
         @endif
         @if (Auth::user()->per_tipo_usuario == 2)
             <div class="alert alert-primary" role="alert">
-                <strong>Complementar información docente <a href="{{url('docente/'.auth()->user()->id.'/directorcompletar')}}">Completar</a></strong>
+                <strong>Complementar información docente <a
+                        href="{{ url('docente/' . auth()->user()->id . '/directorcompletar') }}">Completar</a></strong>
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 1)
@@ -91,6 +92,7 @@
                                 <th>Correo electronico</th>
                                 <th>Telefono</th>
                                 <th>Tipo de usuario</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -105,6 +107,22 @@
                                     <td>{{ $persona->per_correo }}</td>
                                     <td>{{ $persona->per_telefono }}</td>
                                     <td>{{ $persona->tip_nombre }}</td>
+                                    <td>
+                                        @if(Auth::user()->id == $persona->id)
+                                        <p class="badge badge-success">Activo</p>
+                                        @else
+                                        <form action="{{ url("usuario/{$persona->id}") }}" method="POST">
+                                            <div class="d-flex">
+                                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-danger btn-sm"><i
+                                                            class="fa fa-trash"></i></button>
+                                                @endif
+                                            </div>
+                                        </form>
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

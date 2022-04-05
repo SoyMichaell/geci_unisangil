@@ -140,7 +140,7 @@ class UserController extends Controller
         }
         
     }
-
+    
     public function profile(){
         return view('auth.profile');
     }
@@ -204,8 +204,8 @@ class UserController extends Controller
 
     public function destroy($id)
     {
-        $user = User::find($id);
-        $user->delete();
+        DB::table('docente')->delete($id);
+        $user = User::find($id)->delete();
         Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
         return redirect('/home');
     }
