@@ -7,6 +7,7 @@ use App\Models\Municipio;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -20,10 +21,18 @@ class UserController extends Controller
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
-        $tiposusuario = DB::table('tipo_usuario')
+        if(Auth::check()){
+            $tiposusuario = DB::table('tipo_usuario')
             ->Where('id', 2)
             ->orWhere('id', 4)
             ->get();
+        }else if(!Auth::check()){
+            $tiposusuario = DB::table('tipo_usuario')
+            ->Where('id', 1)
+            ->orWhere('id', 2)
+            ->orWhere('id', 4)
+            ->get();
+        }
         return view('auth.register')
             ->with('tiposdocumento', $tiposdocumento)
             ->with('departamentos', $departamentos)
@@ -121,8 +130,15 @@ class UserController extends Controller
             }
         }
 
-        Alert::success('Exitoso', 'La persona ha sido registrada con exito');
-        return redirect('/login');
+        
+        if(Auth::check()){
+            Alert::success('Exitoso', 'La persona ha sido registrada con exito');
+            return redirect('/home');
+        }else{
+            Alert::success('Exitoso', 'La persona ha sido registrada con exito');
+            return redirect('/login');
+        }
+        
     }
 
     public function profile(){

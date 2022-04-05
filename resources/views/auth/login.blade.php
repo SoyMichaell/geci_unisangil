@@ -12,7 +12,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <link rel="shortcut icon" href="{{ asset('image/favicon.png') }}" type="image/x-icon">
-        <title>{{ 'GECI | Ingreso al sistema' }}</title>
+        <title>{{ 'GICPAC | Ingreso al sistema' }}</title>
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
@@ -36,10 +36,13 @@
     </head>
 
     <style>
+        body{
+            background-color: #f2f3f8;
+        }
         .card-login{
             width: 400px;
             margin: auto;
-            margin-top: 25%;
+            margin-top: 15%;
         }
         .footer {
             text-align: center;
@@ -52,10 +55,12 @@
     <body>
         <div class="container">
             <div class="row mx-auto">
-                <div class="card-login">
+                <div class="card-login tile">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
-                        <a class="navbar-brand" href="/home"><img src="{{ asset('image/banner.jpg') }}" width="200px"></a>
+                        <div class="d-flex justify-content-center">
+                            <a class="navbar-brand" href="/home"><img src="{{ asset('image/logo.jpg') }}" width="300px"></a>
+                        </div>
                         <div class="row mb-3">
                             <label for="per_correo"
                                 class="col-md-12 col-form-label text-md-left">{{ __('Correo electronico *') }}</label>

@@ -51,7 +51,7 @@
         <div class="app-sidebar__user">
             <div>
                 <p class="app-sidebar__user-name">
-                    {{ Str::ucfirst(auth()->user()->per_nombre.' '.auth()->user()->per_apellido) }}
+                    {{ Str::ucfirst(auth()->user()->per_nombre . ' ' . auth()->user()->per_apellido) }}
                 </p>
                 <p class="app-sidebar__user-designation">{{ auth()->user()->tiposusuario->tip_nombre }}</p>
             </div>
@@ -60,73 +60,67 @@
             <li><a class="app-menu__item active" href="{{ url('home') }}"><i class="app-menu__icon fa fa-dashboard"
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
+            @if(auth::user()->per_tipo_usuario == 1)
             <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
-                        class="app-menu__icon fa fa-cog"></i><span
-                        class="app-menu__label">Configuración</span><i
+                        class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Registro de usuarios</span><i
+                        class="treeview-indicator fa fa-angle-right"></i></a>
+                <ul class="treeview-menu">
+                    <li><a class="treeview-item" href="{{ url('usuario/create') }}"><i
+                                class="icon fa fa-circle-o"></i>
+                            Usuarios</a></li>
+                </ul>
+            </li>
+            <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
+                        class="app-menu__icon fa fa-cog"></i><span class="app-menu__label">Configuración</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
                     <li><a class="treeview-item" href="{{ url('departamento') }}"><i
                                 class="icon fa fa-circle-o"></i>
                             Departamentos</a></li>
-                    <li><a class="treeview-item" href="{{ url('municipio') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('municipio') }}"><i class="icon fa fa-circle-o"></i>
                             Municipios</a>
                     </li>
-                    <li><a class="treeview-item" href="{{ url('facultad') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('facultad') }}"><i class="icon fa fa-circle-o"></i>
                             Facultades</a>
                     </li>
                     <li><a class="treeview-item" href="{{ url('nivelformacion') }}"><i
                                 class="icon fa fa-circle-o"></i> Nivel de formación</a>
                     </li>
-                    <li><a class="treeview-item" href="{{ url('metodologia') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('metodologia') }}"><i class="icon fa fa-circle-o"></i>
                             Metodologia</a>
                     </li>
                 </ul>
             </li>
+            @endif
             <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-th-list"></i><span class="app-menu__label">Módulos</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>
                 <ul class="treeview-menu">
-                    <li><a class="treeview-item" href="{{ url('programa') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('programa') }}"><i class="icon fa fa-circle-o"></i>
                             Programas</a></li>
-                    <li><a class="treeview-item" href="{{ url('estudiante') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('estudiante') }}"><i class="icon fa fa-circle-o"></i>
                             Estudiantes</a></li>
-                    <li><a class="treeview-item" href="{{ url('docente') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('docente') }}"><i class="icon fa fa-circle-o"></i>
                             Docentes</a></li>
-                    <li><a class="treeview-item" href="{{ url('prueba') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('prueba') }}"><i class="icon fa fa-circle-o"></i>
                             Pruebas saber</a></li>
-                    <li><a class="treeview-item" href="{{ url('trabajo') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('trabajo') }}"><i class="icon fa fa-circle-o"></i>
                             Trabajo de grado</a></li>
-                    <li><a class="treeview-item" href="{{ url('practica') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('practica') }}"><i class="icon fa fa-circle-o"></i>
                             Practica Laboral</a></li>
-                    <li><a class="treeview-item" href="{{ url('software') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('software') }}"><i class="icon fa fa-circle-o"></i>
                             TIC'S</a></li>
-                    <li><a class="treeview-item" href="{{ url('extension') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('extension') }}"><i class="icon fa fa-circle-o"></i>
                             Extensión e Internacialización</a></li>
-                    <li><a class="treeview-item" href="{{ url('red') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('red') }}"><i class="icon fa fa-circle-o"></i>
                             Redes acádemicas</a></li>
-                    <li><a class="treeview-item" href="{{ url('laboratorio') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('laboratorio') }}"><i class="icon fa fa-circle-o"></i>
                             Laboratorios</a></li>
-                    <li><a class="treeview-item" href="{{ url('movilidad') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('movilidad') }}"><i class="icon fa fa-circle-o"></i>
                             Movilidad</a></li>
-                    <li><a class="treeview-item" href="{{ url('convenio') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('convenio') }}"><i class="icon fa fa-circle-o"></i>
                             Convenio</a></li>
-                    <li><a class="treeview-item" href="{{ url('bienestar') }}"><i
-                                class="icon fa fa-circle-o"></i>
+                    <li><a class="treeview-item" href="{{ url('bienestar') }}"><i class="icon fa fa-circle-o"></i>
                             Bienestar Institucional</a></li>
                     <li><a class="treeview-item" href="{{ url('investigacion') }}"><i
                                 class="icon fa fa-circle-o"></i>

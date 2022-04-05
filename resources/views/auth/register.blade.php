@@ -9,7 +9,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="shortcut icon" href="{{ asset('image/favicon.png') }}" type="image/x-icon">
-    <title>{{ 'GECI | Registrarse' }}</title>
+    <title>{{ 'GICPAC | Registrarse' }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -23,6 +23,9 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
+        body{
+            background-color: #f2f3f8;
+        }
         .card-register{
             width: 550px;
             margin: auto;
@@ -44,9 +47,9 @@
     <div class="container">
         @include('sweetalert::alert')
         <div class="row mx-auto">
-            <div class="card-register">
+            <div class="card-register tile">
                 <h4><i class="fa fa-cube"></i> Registro nuevos usuarios</h4><hr>
-                <form action="/usuario/" method="POST">
+                <form action="/usuario" method="POST">
                     @csrf
                     <div class="row mb-3">
                         <div class="col-md-6">
@@ -225,11 +228,12 @@
                             </button>
                         </div>
                     </div>
-                    <br>
-                    <div class="row mb-3">
-                        <a href="/login">Ya tengo una cuenta</a>
-                    </div>
                 </form>
+                @if(!Auth::check())
+                <div class="row mx-auto d-block text-center mt-2">
+                    <a class="text-center" href="/login">Ya tengo una cuenta</a>
+                </div>
+                @endif
             </div>
         </div>
     </div>
