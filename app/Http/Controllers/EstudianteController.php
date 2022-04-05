@@ -77,6 +77,7 @@ class EstudianteController extends Controller
         if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programasPlan = DB::table('programa')
             ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
+            ->where('programa_plan_estudio.pp_estado', 'activo')
             ->get();
 
         $programas = Programa::all();
@@ -313,7 +314,10 @@ class EstudianteController extends Controller
         $semestres->all();
         $estadoprogramas = collect(['Activo', 'Inactivo']);
         $estadoprogramas->all();
-        $planes = ProgramaPlan::all();
+        $planes = DB::table('programa')
+            ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
+            ->where('programa_plan_estudio.pp_estado', 'activo')
+            ->get();
         return view('estudiante.edit')
             ->with('persona', $persona)
             ->with('programas', $programas)
