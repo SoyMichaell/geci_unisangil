@@ -85,7 +85,7 @@
                                                         class="fa fa-ban"></i></button>
                                             @else
                                                 <button type="submit" class="btn btn-success btn-sm"><i
-                                                        class="fa fa-circle-check"></i></button>
+                                                        class="fa fa-check-circle-o"></i></button>
                                             @endif
                                         </div>
                                     </form>

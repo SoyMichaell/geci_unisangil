@@ -76,7 +76,6 @@ class EstudianteController extends Controller
     {
         $programasPlan = DB::table('programa')
             ->join('programa_plan_estudio', 'programa.id', '=', 'programa_plan_estudio.pp_id_programa')
-            ->where('programa_plan_estudio.pp_estado', 'activo')
             ->get();
 
         $programas = Programa::all();

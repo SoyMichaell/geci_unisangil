@@ -47,8 +47,6 @@ class ProgramaController extends Controller
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->where('per_id_estado', '=', 'activo')
-            ->orWhere('per_tipo_usuario', 5)
-            ->where('per_id_estado', '=', 'activo')
             ->get();
 
         /*collect*/
