@@ -2,7 +2,6 @@
 @section('navegar') <a href="/departamento/create">Crear</a> / <a href="/departamento">Departamento</a> @endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
-    <!--TODO: Validad icono-->
 @section('message')
     <p>Diligencie todos los campos requeridos *.</p>
 @endsection

@@ -3,7 +3,7 @@
     <a href="/municipio/create">Crear</a> / <a href="/municipio">Municipio</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1> <!--TODO: Validad icono-->
+    <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
 @section('message')
     <p>Diligencie todos los campos requeridos *.</p>
 @endsection

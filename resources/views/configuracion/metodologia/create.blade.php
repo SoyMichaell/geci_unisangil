@@ -3,7 +3,7 @@
     <a href="/metodologia/create">Crear</a> / <a href="/metodologia">Metodologia</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1><!--TODO: Validad icono-->
+    <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
 @section('message')
     <p>Diligencie todos los campos requeridos *.</p>
 @endsection

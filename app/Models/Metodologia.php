@@ -18,5 +18,4 @@ class Metodologia extends Model
     public function programas(){
         return $this->hasMany(Programa::class, 'id');
     }
-
 }

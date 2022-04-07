@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\PracticaExport;
-use App\Models\Estudiante;
 use App\Models\Practica;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

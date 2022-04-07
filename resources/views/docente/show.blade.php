@@ -23,7 +23,6 @@
         color: brown;
         font-weight: 900;
     }
-
 </style>
 @section('content')
     <div class="container">

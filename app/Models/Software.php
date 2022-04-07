@@ -35,7 +35,4 @@ class Software extends Model
     public function asignaturas(){
         return $this->belongsTo(ProgramaAsignatura::class, 'sof_asignatura'); 
     }
-
-    
-
 }

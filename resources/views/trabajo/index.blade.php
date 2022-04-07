@@ -17,7 +17,7 @@
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-7">
-                    <h3>Lista de registros</h3><!-- TODO: arreglar botones pdf y excel-->
+                    <h3>Lista de registros</h3>
                 </div>
                 <div class="col-md-5 d-flex justify-content-end align-items-center">
                     <a class="btn btn-outline-danger" style="border-radius: 100%"

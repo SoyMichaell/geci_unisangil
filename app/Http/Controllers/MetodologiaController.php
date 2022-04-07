@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\MetodologiaExports;
 use Illuminate\Http\Request;
 use App\Models\Metodologia;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MetodologiaController extends Controller
@@ -37,8 +34,6 @@ class MetodologiaController extends Controller
         $metodologia->save();
 
         Alert::success('Registro exitoso');
-
-
         return redirect('/metodologia');
     }
 
@@ -72,8 +67,6 @@ class MetodologiaController extends Controller
         $metodologia->save();
 
         Alert::success('Registro Actualizado');
-
-
         return redirect('/metodologia');
     }
 
@@ -82,9 +75,7 @@ class MetodologiaController extends Controller
         try{
             $metodologia = Metodologia::find($id);
             $metodologia->delete();
-
             Alert::success('Registro Eliminado');
-
             return redirect('/metodologia');
         }catch(\Illuminate\Database\QueryException $e){
             Alert::error('No se puede eliminar esta metodologia, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);

@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\DepartamentoExports;
 use App\Models\Departamento;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
 
 class DepartamentoController extends Controller
 {
@@ -81,7 +78,6 @@ class DepartamentoController extends Controller
 
     public function destroy($id)
     {
-
         try{
             Departamento::find($id)->delete();
             Alert::success('Registro Eliminado');
@@ -91,9 +87,5 @@ class DepartamentoController extends Controller
             Alert::error('No se puede eliminar esta categoría, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
             return redirect()->back();
         }
-
-       
-
     }
-
 }

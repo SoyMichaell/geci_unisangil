@@ -12,8 +12,6 @@ use App\Exports\EstudiantePrestamoExport;
 use App\Models\Departamento;
 use App\Models\Municipio;
 use App\Models\Programa;
-use App\Models\Estudiante;
-use App\Models\EstudianteEgresado;
 use App\Models\EstudianteReporte;
 use App\Models\ProgramaPlan;
 use Illuminate\Http\Request;

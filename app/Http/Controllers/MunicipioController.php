@@ -2,13 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\MunicipioExports;
 use Illuminate\Http\Request;
 use App\Models\Municipio;
 use App\Models\Departamento;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class MunicipioController extends Controller
@@ -26,7 +23,6 @@ class MunicipioController extends Controller
         $departamentos = Departamento::all();
         return view('configuracion/municipio.create')->with("departamentos",$departamentos);
     }
-
 
     public function store(Request $request)
     {

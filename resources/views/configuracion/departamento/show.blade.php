@@ -3,7 +3,7 @@
     <a href="/departamento/{{ $departamento->id }}">Vista</a> / <a href="/departamento">Departamento</a>
 @endsection
 @section('title')
-    <h1 class="titulo"><i class="fa fa-book"></i> Visualizar Información</h1> <!-- TODO: validar icono-->
+    <h1 class="titulo"><i class="fa fa-book"></i> Visualizar Información</h1> 
 @section('message')
     <p>Información de registro</p>
 @endsection

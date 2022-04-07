@@ -3,14 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TrabajoGradoExport;
-use App\Exports\TrabajosExport;
 use App\Models\Trabajo;
-use App\Models\Estudiante;
-use App\Models\Docente;
 use App\Models\ModalidadGrado;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 

@@ -22,5 +22,4 @@ class PruebaSaber extends Model
     public function estudiantes(){
         return $this->belongsTo(Estudiante::class, 'prueba_saber_id_estudiante');
     }
-
 }

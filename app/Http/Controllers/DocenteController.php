@@ -7,12 +7,10 @@ use App\Exports\DocenteVinculacionExport;
 use App\Exports\DocenteVisitanteExport;
 use App\Models\Departamento;
 use App\Models\Docente;
-use App\Models\DocenteAsignatura;
 use App\Models\DocenteContrato;
 use App\Models\DocenteEvaluacion;
 use App\Models\DocenteVisitante;
 use App\Models\Municipio;
-use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,7 +21,6 @@ use RealRashid\SweetAlert\Facades\Alert;
 
 class DocenteController extends Controller
 {
-
     public function index()
     {
         $departamentos = Departamento::all();

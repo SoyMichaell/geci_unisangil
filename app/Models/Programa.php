@@ -81,5 +81,4 @@ class Programa extends Model
     public function movilidadinternacional(){
         return $this->hasMany(ExtMovilidadInternacional::class, 'id');
     }
-
 }

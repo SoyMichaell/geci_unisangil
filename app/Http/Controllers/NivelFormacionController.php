@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\NivelFormacionExports;
 use Illuminate\Http\Request;
 use App\Models\NivelFormacion;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Facades\Excel;
 use RealRashid\SweetAlert\Facades\Alert;
 
 
@@ -38,8 +35,6 @@ class NivelFormacionController extends Controller
         $nivelformacion->save();
 
         Alert::success('Registro exitoso');
-
-
         return redirect('/nivelformacion');
     }
 
@@ -73,8 +68,6 @@ class NivelFormacionController extends Controller
         $nivelformacion->save();
 
         Alert::success('Registro Actualizado');
-
-
         return redirect('/nivelformacion');
     }
 
