@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="tile">
             <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
-            <form action="/practica/{{$practica->id}}/" method="post">
+            <form action="/practica/{{$practica->id}}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="seccion1">

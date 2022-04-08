@@ -6,13 +6,13 @@
         <a href="/programa/mostrarasignatura">Asignaturas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Programa</h1>
+        <h1 class="titulo"><i class="fab fa-uncharted"></i>Módulo programa | Listado asignaturas</h1>
     @section('message')
         <p>Listado de asignaturas</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="tile col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-6">
@@ -33,6 +33,8 @@
                             <th>#</th>
                             <th>Sede</th>
                             <th>Programa</th>
+                            <th>Componente</th>
+                            <th>Área</th>
                             <th>Código</th>
                             <th>Asignatura</th>
                             <th>Plan</th>
@@ -48,11 +50,13 @@
                         @foreach ($asignaturas as $asignatura)
                             <tr>
                                 <td>{{ $i++ }}</td>
-                                <td>{{ $asignatura->sedes->mun_nombre }}</td>
-                                <td>{{ $asignatura->programas->pro_nombre }}</td>
+                                <td>{{ $asignatura->mun_nombre }}</td>
+                                <td>{{ $asignatura->pro_nombre }}</td>
+                                <td>{{ $asignatura->cocopa_nombre}}</td>
+                                <td>{{ $asignatura->coarpl_nombre}}</td>
                                 <td>{{ $asignatura->asig_codigo }}</td>
                                 <td>{{ $asignatura->asig_nombre }}</td>
-                                <td>{{ $asignatura->planes->pp_plan }}</td>
+                                <td>{{ $asignatura->pp_plan }}</td>
                                 <td>{{ $asignatura->asig_no_creditos }}</td>
                                 <td>{{ $asignatura->asig_no_semanales }}</td>
                                 <td>{{ $asignatura->asig_no_semestre }}</td>
@@ -65,11 +69,11 @@
                                         <div class="d-flex">
                                             <a class="btn btn-outline-info btn-sm "
                                                 href="/programa/{{ $asignatura->id }}/editarasignatura"><i
-                                                    class="fa-solid fa-refresh"></i></a>
+                                                    class="fa fa-refresh"></i></a>
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                                    class="fa fa-trash"></i></button>
                                         </div>
                                     </form>
                                 </td>

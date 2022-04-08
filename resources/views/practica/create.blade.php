@@ -14,7 +14,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="tile">
-            <form action="/practica/" method="post">
+            <form action="/practica" method="post">
                 @csrf
                 <div class="seccion1">
                     <h4><i class="fa fa-cube"></i> Registro practica laboral</h4>

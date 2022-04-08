@@ -6,9 +6,9 @@
         <a href="/programa/crearasignatura">Crear</a> / <a href="/programa/mostrarasignatura">Asignaturas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Módulo Programa</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Formulario de registro asignatura</p>
+        <p>Diligencie todos los campos requeridos</p>
     @endsection
 @endsection
 @section('content')
@@ -58,6 +58,38 @@
                             @endforeach
                         </select>
                         <p class="badge badge-danger">{{ $plans->count() > 0 ? '' : 'No exiten plan o planes de estudio' }}</p>
+                        @error('asig_id_plan_estudio')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="asig_id_componente">{{ __('Componente *') }}</label>
+                        <select class="form-control @error('asig_id_componente') is-invalid @enderror" name="asig_id_componente" id="asig_id_componente">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($componentes as $componente)
+                                <option value="{{ $componente->id }}">{{ $componente->cocopa_nombre }}</option>
+                            @endforeach
+                        </select>
+                        <p class="badge badge-danger">{{ $componentes->count() > 0 ? '' : 'No existen componentes registrados' }}</p>
+                        @error('asig_id_plan_estudio')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="asig_id_area">{{ __('Área *') }}</label>
+                        <select class="form-control @error('asig_id_area') is-invalid @enderror" name="asig_id_area" id="asig_id_area">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($areas as $area)
+                                <option value="{{ $area->id }}">{{ $area->coarpl_nombre }}</option>
+                            @endforeach
+                        </select>
+                        <p class="badge badge-danger">{{ $areas->count() > 0 ? '' : 'No existen áreas registradas' }}</p>
                         @error('asig_id_plan_estudio')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

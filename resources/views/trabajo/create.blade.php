@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="tile">
             <h4><i class="fa fa-cube"></i> Registro trabajo de grado</h4><hr>
-            <form action="/trabajo/" method="post">
+            <form action="/trabajo" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">

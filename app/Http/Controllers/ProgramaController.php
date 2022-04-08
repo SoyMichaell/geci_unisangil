@@ -445,15 +445,21 @@ class ProgramaController extends Controller
 
     public function mostrarasignatura()
     {
-        $asignaturas = ProgramaAsignatura::all();
-        $plans = ProgramaPlan::all();
-        $programas = Programa::all();
-        $municipios = Municipio::all();
+        $asignaturas = DB::table('programa_plan_estudio_asignatura')
+        ->select('programa_plan_estudio_asignatura.id','mun_nombre','pro_nombre','cocopa_nombre','coarpl_nombre',
+        'asig_codigo','asig_nombre','pp_plan','asig_no_creditos','asig_no_semanales','asig_no_semestre','asig_estado')
+            ->join('municipio','programa_plan_estudio_asignatura.asig_id_sede','=','municipio.id')
+            ->join('programa','programa_plan_estudio_asignatura.asig_id_programa','=','programa.id')
+            ->join('programa_plan_estudio','programa_plan_estudio_asignatura.asig_id_plan_estudio','=','programa_plan_estudio.id')
+            ->join('compl_componente_plan','programa_plan_estudio_asignatura.asig_id_componente','=','compl_componente_plan.id')
+            ->join('compl_area_plan','programa_plan_estudio_asignatura.asig_id_area','=','compl_area_plan.id')
+            ->get();
+        $componentes = DB::table('compl_componente_plan')->get();
+        $areas = DB::table('compl_area_plan')->get();
         return view('programa/asignatura.index')
             ->with('asignaturas', $asignaturas)
-            ->with('plans', $plans)
-            ->with('programas', $programas)
-            ->with('municipios', $municipios);
+            ->with('componentes', $componentes)
+            ->with('areas', $areas);
     }
 
     public function crearasignatura()
@@ -462,10 +468,14 @@ class ProgramaController extends Controller
             $municipios = Municipio::all();
             $programas = Programa::all();
             $plans = ProgramaPlan::all();
+            $componentes = DB::table('compl_componente_plan')->get();
+            $areas = DB::table('compl_area_plan')->get();
             return view('programa/asignatura.create')
                 ->with('municipios', $municipios)
                 ->with('programas', $programas)
-                ->with('plans', $plans);
+                ->with('plans', $plans)
+                ->with('componentes', $componentes)
+                ->with('areas', $areas);
         } else {
             return redirect('/home');
         }
@@ -477,6 +487,8 @@ class ProgramaController extends Controller
             'asig_id_sede' => 'required|not_in:0',
             'asig_id_programa' => 'required|not_in:0',
             'asig_id_plan_estudio' => 'required|not_in:0',
+            'asig_id_componente' => 'required|not_in:0',
+            'asig_id_area' => 'required|not_in:0',
             'asig_codigo' => 'required',
             'asig_nombre' => 'required',
             'asig_no_creditos' => 'required',
@@ -489,6 +501,8 @@ class ProgramaController extends Controller
             'asig_id_sede.required' => 'El campo sede es requerido',
             'asig_id_programa.required' => 'El campo programa es requerido',
             'asig_id_plan_estudio.required' => 'El campo plan de estudio es requerido',
+            'asig_id_componente.required' => 'El campo componente es requerido',
+            'asig_id_area.required' => 'El campo área es requerido',
             'asig_codigo.required' => 'El campo código asignatura es requerido',
             'asig_nombre.required' => 'El campo nombre asignatura es requerido',
             'asig_no_creditos.required' => 'El campo número creditos es requerido',
@@ -503,6 +517,8 @@ class ProgramaController extends Controller
         $asignatura->asig_id_sede = $request->get('asig_id_sede');
         $asignatura->asig_id_programa = $request->get('asig_id_programa');
         $asignatura->asig_id_plan_estudio = $request->get('asig_id_plan_estudio');
+        $asignatura->asig_id_componente = $request->get('asig_id_componente');
+        $asignatura->asig_id_area = $request->get('asig_id_area');
         $asignatura->asig_codigo = $request->get('asig_codigo');
         $asignatura->asig_nombre = $request->get('asig_nombre');
         $asignatura->asig_no_creditos = $request->get('asig_no_creditos');
@@ -523,11 +539,15 @@ class ProgramaController extends Controller
             $programas = Programa::all();
             $plans = ProgramaPlan::all();
             $asignatura = ProgramaAsignatura::find($id);
+            $componentes = DB::table('compl_componente_plan')->get();
+            $areas = DB::table('compl_area_plan')->get();
             return view('programa/asignatura.edit')
                 ->with('municipios', $municipios)
                 ->with('programas', $programas)
                 ->with('plans', $plans)
-                ->with('asignatura', $asignatura);
+                ->with('asignatura', $asignatura)
+                ->with('componentes', $componentes)
+                ->with('areas', $areas);
         } else {
             return redirect('/home');
         }
@@ -539,6 +559,8 @@ class ProgramaController extends Controller
             'asig_id_sede' => 'required|not_in:0',
             'asig_id_programa' => 'required|not_in:0',
             'asig_id_plan_estudio' => 'required|not_in:0',
+            'asig_id_componente' => 'required|not_in:0',
+            'asig_id_area' => 'required|not_in:0',
             'asig_codigo' => 'required',
             'asig_nombre' => 'required',
             'asig_no_creditos' => 'required',
@@ -551,6 +573,8 @@ class ProgramaController extends Controller
             'asig_id_sede.required' => 'El campo sede es requerido',
             'asig_id_programa.required' => 'El campo programa es requerido',
             'asig_id_plan_estudio.required' => 'El campo plan de estudio es requerido',
+            'asig_id_componente.required' => 'El campo componente es requerido',
+            'asig_id_area.required' => 'El campo área es requerido',
             'asig_codigo.required' => 'El campo código asignatura es requerido',
             'asig_nombre.required' => 'El campo nombre asignatura es requerido',
             'asig_no_creditos.required' => 'El campo número creditos es requerido',
@@ -565,6 +589,8 @@ class ProgramaController extends Controller
         $asignatura->asig_id_sede = $request->get('asig_id_sede');
         $asignatura->asig_id_programa = $request->get('asig_id_programa');
         $asignatura->asig_id_plan_estudio = $request->get('asig_id_plan_estudio');
+        $asignatura->asig_id_componente = $request->get('asig_id_componente');
+        $asignatura->asig_id_area = $request->get('asig_id_area');
         $asignatura->asig_codigo = $request->get('asig_codigo');
         $asignatura->asig_nombre = $request->get('asig_nombre');
         $asignatura->asig_no_creditos = $request->get('asig_no_creditos');

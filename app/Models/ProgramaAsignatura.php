@@ -16,6 +16,8 @@ class ProgramaAsignatura extends Model
         'asig_codigo',
         'asig_nombre',
         'asig_id_plan_estudio',
+        'asig_id_componente',
+        'asig_id_area',
         'asig_no_creditos',
         'asig_no_semanales',
         'asig_no_semestre',

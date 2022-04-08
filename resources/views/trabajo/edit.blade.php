@@ -48,7 +48,7 @@
         <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 1 ? 'show active tile p-3' : 'tile p-3' }}"
                 id="fase1" role="tabpanel" aria-labelledby="fase1-tab">
-                <form action="/trabajo/{{ $trabajo->id }}/" method="post">
+                <form action="/trabajo/{{ $trabajo->id }}" method="post">
                     @csrf
                     @method('PUT')
                     <div class="row mb-3">

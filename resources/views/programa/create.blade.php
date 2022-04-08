@@ -77,7 +77,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="pro_codigosnies">{{ __('Codgio SNIES *') }}</label>
+                        <label for="pro_codigosnies">{{ __('Código SNIES *') }}</label>
                         <input id="pro_codigosnies" type="number"
                             class="form-control @error('pro_codigosnies') is-invalid @enderror" name="pro_codigosnies"
                             value="{{ old('pro_codigosnies') }}" autocomplete="pro_codigosnies" autofocus>

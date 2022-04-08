@@ -2,16 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/programa//{{$asignatura->id}}verasignatura">Vista</a> / <a href="/programa/mostrarasignatura">Asignaturas</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Planes de estudio</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
+    <div class="container-fluid">
         <div class="tile">
-            <h4 class="tile title"><i class="fab fa-wpforms"></i> Vista registro</h4>
+            <h4><i class="fa fa-question-circle-o"></i> Vista registro</h4>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="pas_id_municipio">{{ __('Sede *') }}</label>
