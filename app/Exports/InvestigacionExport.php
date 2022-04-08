@@ -16,7 +16,6 @@ class InvestigacionExport implements FromCollection, WithHeadings
         $this->valor = $valor;   
     }
 
-
     public function headings(): array
     {
 

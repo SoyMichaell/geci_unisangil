@@ -47,7 +47,4 @@ class Laboratorio extends Model
     public function softwares(){
         return $this->belongsTo(Software::class, 'lab_id_software');
     }
-
-    
-
 }

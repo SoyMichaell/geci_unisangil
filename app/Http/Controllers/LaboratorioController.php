@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\LaboratorioExport;
-use App\Models\Estudiante;
 use App\Models\Facultad;
 use App\Models\Laboratorio;
 use App\Models\Programa;
