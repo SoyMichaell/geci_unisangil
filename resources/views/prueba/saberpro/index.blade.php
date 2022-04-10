@@ -2,22 +2,25 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/mostrarsaberpro">Saber pro</a> / <a href="/prueba">Prueba</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Módulo pruebas saber Pro</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo pruebas saber Pro</h1>
     @section('message')
         <p>Listado pruebas saber pro</p>
     @endsection
 @endsection
 @section('content')
     <div class="container-fluid">
-        <div class="col-md-12 bg-white p-3">
+        <div class="tile">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Listado pruebas saber pro</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <a class="btn btn-outline-success" href="/prueba/crearsaberpro"><i
-                            class="fa-solid fa-circle-plus"></i>
+                            class="fa fa-plus-circle"></i>
                         Nuevo</a>
                 </div>
             </div>
@@ -44,7 +47,7 @@
                             <td>{{ $i++ }}</td>
                             <td>{{ $pro->prsapr_year }}</td>
                             <td>{{ $pro->prsapr_periodo }}</td>
-                            <td>{{ $pro->estudiantes->estu_nombre . ' ' . $pro->estudiantes->estu_apellido }}</td>
+                            <td>{{ $pro->per_nombre . ' ' . $pro->per_apellido }}</td>
                             <td>{{ $pro->prsapr_numero_registro }}</td>
                             <td>{{ $pro->prsapr_grupo_referencia }}</td>
                             <td>{{ $pro->prsapr_puntaje_global }}</td>
@@ -56,14 +59,14 @@
                                     <div class="d-flex justify-content-center">
                                         <a class="btn btn-sm"
                                             href="/prueba/{{ $pro->prsapr_id_estudiante }}/versaberpro"><i
-                                                class="fa-solid fa-folder-open"></i></a>
+                                                class="fa fa-folder-open"></i></a>
                                         <a class="btn btn-outline-info  btn-sm"
                                             href="/prueba/{{ $pro->prsapr_id_estudiante }}/editarsaberpro"><i
-                                                class="fa-solid fa-edit"></i></a>
+                                                class="fa fa-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa fa-trash"></i></button>
                                     </div>
                                 </form>
                             </td>

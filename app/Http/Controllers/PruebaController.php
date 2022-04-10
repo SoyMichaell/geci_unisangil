@@ -19,9 +19,13 @@ class PruebaController extends Controller
     {
         $tipopruebas = TipoPrueba::all();
         $tipomodulos = TipoModulo::all();
+        $saber11 = PruebaSaber::all();
+        $saberpro = PruebaSaberPro::all();
         return view('prueba.index')
             ->with('tipopruebas', $tipopruebas)
-            ->with('tipomodulos', $tipomodulos);
+            ->with('tipomodulos', $tipomodulos)
+            ->with('saber11', $saber11)
+            ->with('saberpro', $saberpro);
     }
 
     public function mostrarpruebasaber(){
@@ -254,15 +258,19 @@ class PruebaController extends Controller
     }
 
     public function mostrarsaberpro(){
-        $pros = PruebaSaberPro::all();
+        $pros = DB::table('prueba_saber_pro')
+        ->select('prueba_saber_pro.id','prsapr_year','prsapr_periodo','per_nombre','per_apellido','prsapr_numero_registro','prsapr_grupo_referencia'
+        ,'prsapr_puntaje_global','prsapr_percentil_nacional','prsapr_percentil_grupo','prsapr_id_estudiante')
+        ->join('persona','prueba_saber_pro.prsapr_id_estudiante','=','persona.id')
+        ->get();
         return view('prueba/saberpro.index')
             ->with('pros', $pros);
     }
 
     public function crearsaberpro(){
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')->where('per_tipo_usuario', 6)->get();
         $tiposmodulos = DB::table('tipo_modulo')
-            ->where('tipo_modulo_id_prueba', 3)
+            ->where('tipo_modulo_id_prueba', 2)
             ->get();
         return view('prueba/saberpro.create')
             ->with('estudiantes', $estudiantes)
@@ -270,29 +278,6 @@ class PruebaController extends Controller
     }
 
     public function registrosaberpro(Request $request){
-        /*$rules = [
-            'prsapr_year' => 'required',
-            'prsapr_periodo' => 'required',
-            'prsapr_id_estudiante' => 'required|not_in:0',
-            'prsapr_numero_registro' => 'required',
-            'prsapr_grupo_referencia' => 'required',
-            'prsapr_percentil_nacional' => 'required',
-            'prsapr_percentil_grupo' => 'required',
-            'prsapr_novedad' => 'required',
-        ];
-        $message = [
-            'prsapr_year.required' => 'El campo año es requerido',
-            'prsapr_periodo.required' => 'El campo periodo es requerido',
-            'prsapr_id_estudiante.required' => 'El campo estudiante es requerido',
-            'prsapr_numero_registro.required' => 'El campo número de registro es requerido',
-            'prsapr_grupo_referencia.required' => 'El campo grupo de referencia es requerido',
-            'prsapr_percentil_nacional.required' => 'El campo percentil nacional es requerido',
-            'prsapr_percentil_grupo.required' => 'El campo percentil grupo es requerido',
-            'prsapr_novedad.required' => 'El campo novedad es requerido',
-        ];
-        
-        $this->validate($request,$rules,$message);*/
-
         $puntaje_global = 0;
         for ($i=0; $i <count($request->get('prsaprmo_id_modulo')) ; $i++) { 
             DB::table('prueba_saber_pro_modulo')->insert([
@@ -337,7 +322,7 @@ class PruebaController extends Controller
         ->join('prueba_saber_pro_modulo','prueba_saber_pro.prsapr_id_estudiante','=','prueba_saber_pro_modulo.prsaprmo_id_estudiante')
         ->where('prsapr_id_estudiante', $id)
         ->first();
-    $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')->where('per_tipo_usuario', 6)->get();
     return view('prueba/saberpro.edit')
         ->with('estudiantes', $estudiantes)
         ->with('saberes', $saberes)
@@ -353,7 +338,7 @@ class PruebaController extends Controller
         ->join('prueba_saber_pro_modulo','prueba_saber_pro.prsapr_id_estudiante','=','prueba_saber_pro_modulo.prsaprmo_id_estudiante')
         ->where('prsapr_id_estudiante', $id)
         ->first();
-    $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')->where('per_tipo_usuario', 6)->get();
     return view('prueba/saberpro.show')
         ->with('estudiantes', $estudiantes)
         ->with('saberes', $saberes)
@@ -424,7 +409,7 @@ class PruebaController extends Controller
     public function crearresultado(){
         $programas = Programa::all();
         $tiposmodulos = DB::table('tipo_modulo')
-            ->where('tipo_modulo_id_prueba', 3)
+            ->where('tipo_modulo_id_prueba', 2)
             ->get();
         return view('prueba/general.create')
             ->with('programas', $programas)
@@ -432,22 +417,6 @@ class PruebaController extends Controller
     }
 
     public function registroresultado(Request $request){
-        /*$rules = [
-            'prurepro_year' => 'required',
-            'prurepro_global_programa' => 'required',
-            'prurepro_global_institucion' => 'required',
-            'prurepro_global_sede' => 'required',
-            'prurepro_global_grupo_referencia' => 'required'
-        ];
-        $message = [
-            'prurepro_year.required' => 'El campo año es requerido',
-            'prurepro_global_programa.required' => 'El campo resultado global programa es requerido',
-            'prurepro_global_institucion.required' => 'El campo resultado global institución es requerido',
-            'prurepro_global_sede.required' => 'El campo resultado global sede es requerido',
-            'prurepro_global_grupo_referencia.required' => 'El campo resultado global grupo de referencia es requerido'
-        ];
-        $this->validate($request,$rules,$message);*/
-
         for ($i=0; $i <count($request->get('prureprono_id_modulo')) ; $i++) { 
             DB::table('prueba_resultado_programa_modulo')->insert([
                 'prurepromo_id_prueba_programa' => $request->get('prurepromo_id_prueba_programa'),

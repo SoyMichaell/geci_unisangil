@@ -15,11 +15,11 @@
     <div class="container">
         <div class="tile">
             <h4><i class="fa fa-cube"></i> Registro movilidad</h4><hr>
-            <form action="/movilidad/" method="post">
+            <form action="/movilidad" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="movi_year">Año</label>
+                        <label for="movi_year">Año *</label>
                         <input class="form-control @error('movi_year') is-invalid @enderror" name="movi_year"
                             id="movi_year" value="{{ old('movi_year') }}" type="number" autocomplete="movi_year"
                             autofocus>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="movi_periodo">Periodo</label>
+                        <label for="movi_periodo">Periodo *</label>
                         <input class="form-control @error('movi_periodo') is-invalid @enderror" name="movi_periodo"
                             id="movi_periodo" value="{{ old('movi_periodo') }}" type="text" placeholder="2022-1 | 2022-2"
                             autocomplete="movi_periodo" autofocus>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="">Tipo de persona</label>
+                        <label for="">Tipo de persona *</label>
                         <select class="form-control @error('tipo_persona_movilidad') is-invalid @enderror" name="tipo_persona_movilidad" id="tipo_persona_movilidad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="administrativo">Administrativo</option>
@@ -89,7 +89,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="movi_tipo_movilidad">Tipo de movilidad</label>
+                        <label for="movi_tipo_movilidad">Tipo de movilidad *</label>
                         <input class="form-control @error('movi_tipo_movilidad') is-invalid @enderror" name="movi_tipo_movilidad"
                             id="movi_tipo_movilidad" value="{{ old('movi_tipo_movilidad') }}" type="text" autocomplete="movi_tipo_movilidad"
                             autofocus>
@@ -100,7 +100,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="movi_evento">Nombre evento o actividades</label>
+                        <label for="movi_evento">Nombre evento o actividades *</label>
                         <input class="form-control @error('movi_evento') is-invalid @enderror" name="movi_evento"
                             id="movi_evento" value="{{ old('movi_evento') }}" type="text"
                             autocomplete="movi_evento" autofocus>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="movi_pais">País</label>
+                        <label for="movi_pais">País *</label>
                         <input class="form-control @error('movi_pais') is-invalid @enderror" name="movi_pais"
                             id="movi_pais" value="{{ old('movi_pais') }}" type="text" autocomplete="movi_pais"
                             autofocus>
@@ -124,7 +124,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="movi_ciudad">Ciudad</label>
+                        <label for="movi_ciudad">Ciudad *</label>
                         <input class="form-control @error('movi_ciudad') is-invalid @enderror" name="movi_ciudad"
                             id="movi_ciudad" value="{{ old('movi_ciudad') }}" type="text"
                             autocomplete="movi_ciudad" autofocus>
@@ -137,7 +137,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="movi_observacion">Observaciones</label>
+                        <label for="movi_observacion">Observaciones *</label>
                         <input class="form-control @error('movi_observacion') is-invalid @enderror" name="movi_observacion"
                             id="movi_observacion" value="{{ old('movi_observacion') }}" type="text"
                             autocomplete="movi_observacion" autofocus>

@@ -2,18 +2,21 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/mostratipoprueba">Tipo prueba</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="{{ Auth::user()->per_tipo_usuario == 4 ? 'col-md-5' : 'col-md-5' }} tile">
+            <div class="{{ Auth::user()->per_tipo_usuario == 4 ? 'col-md-12' : 'col-md-12' }} tile">
                 <h4>Listado tipo de pruebas</h4>
-                <table class="table table-bordered">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -33,7 +36,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                                    class="fa fa-trash"></i></button>
                                         </div>
                                     </form>
                                 </td>
@@ -42,8 +45,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-7 shadow-sm bg-white p-3">
-                <h4><i class="fab fa-wpforms"></i> Registro tipo pruebas</h4>
+            <div class="col-md-12 tile">
+                <h4><i class="fa fa-cube"></i> Registro tipo pruebas</h4><hr>
                 <form action="/prueba/registrotipoprueba" method="post">
                     @csrf
                     <div class="row mb-3">

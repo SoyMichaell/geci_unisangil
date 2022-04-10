@@ -2,14 +2,19 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/{{ $resultado->id }}/verrresultado">Vista</a> / <a href="/prueba/mostrarresultado">Resultado
+            programa</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
-    <div class="container bg-white p-3">
+    <div class="container tile">
+        <h4><i class="fa fa-question-circle-o"></i> Vista de registro</h4><hr>
         <table class="table table-bordered">
             <tr>
                 <th>Programa: </th>

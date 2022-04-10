@@ -3,10 +3,10 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-        <a href="/prueba">Pruebas saber</a>
+        <a href="/prueba">Prueba</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i> Módulo Pruebas Saber</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo Pruebas Saber</h1>
     @section('message')
         <p>Menu principal módulo pruebas saber </p>
     @endsection
@@ -31,16 +31,13 @@
             <div class="col-md-12">
                 <table class="table">
                     <tr>
-                        <td>Registro tipo pruebas</td> <td><a href="/prueba/mostratipoprueba">Enlace</a> ({{$tipopruebas->count()}})</td>
-                    </tr>
-                    <tr>
                         <td>Registro tipo módulo</td> <td><a href="/prueba/mostrartipomodulo">Enlace</a> ({{$tipomodulos->count()}})</td>
                     </tr>
                     <tr>
-                        <td>Registro prueba saber 11</td> <td><a href="/prueba/mostrarsaber">Enlace</a></td>
+                        <td>Registro prueba saber 11</td> <td><a href="/prueba/mostrarsaber">Enlace</a> ({{$saber11->count()}})</td>
                     </tr>
                     <tr>
-                        <td>Registro prueba saber pro</td> <td><a href="/prueba/mostrarsaberpro">Enlace</a></td>
+                        <td>Registro prueba saber pro</td> <td><a href="/prueba/mostrarsaberpro">Enlace</a> ({{$saberpro->count()}})</td>
                     </tr>
                     <tr>
                         <td>Resultados generales de programa</td> <td><a href="/prueba/mostrarresultado">Enlace</a></td>

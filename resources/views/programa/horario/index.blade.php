@@ -3,7 +3,8 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Horarios asignatura</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Horarios asignatura</h1>
+        <p>Listado horario asignaturas</p>
     @section('message')
     @endsection
 @endsection

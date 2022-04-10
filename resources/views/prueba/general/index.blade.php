@@ -2,10 +2,13 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/mostrarresultado">Resultado programa</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo prueba | resultados generales programa</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del docente.</p>
+        <p>Listado de resultados.</p>
     @endsection
 @endsection
 @section('content')
@@ -13,16 +16,16 @@
         <div class="col-md-12 tile">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Listado módulos</h4>
+                    <h4>Listado de resultados</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <a class="btn btn-outline-success" href="/prueba/crearresultado"><i
-                            class="fa-solid fa-circle-plus"></i>
+                            class="fa fa-plus-circle"></i>
                         Nuevo</a>
                 </div>
             </div>
             <br>
-            <table class="table table-bordered" id="tables">
+            <table class="table" id="tables">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -48,14 +51,14 @@
                                     <div class="d-flex justify-content-center">
                                         <a class="btn btn-sm"
                                             href="/prueba/{{ $resultado->prurepro_id_programa }}/verresultado"><i
-                                                class="fa-solid fa-folder-open"></i></a>
+                                                class="fa fa-folder-open"></i></a>
                                         <a class="btn btn-outline-info  btn-sm"
                                             href="/prueba/{{ $resultado->prurepro_id_programa }}/editarresultado"><i
-                                                class="fa-solid fa-edit"></i></a>
+                                                class="fa fa-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa fa-trash"></i></button>
                                     </div>
                                 </form>
                             </td>

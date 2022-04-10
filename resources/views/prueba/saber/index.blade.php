@@ -2,15 +2,18 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/mostratipoprueba">Saber 11</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Módulo pruebas saber 11</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo pruebas saber 11</h1>
     @section('message')
         <p>Listado pruebas saber 11.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
-        <div class="col-md-12 bg-white p-3">
+        <div class="tile">
             <div class="row">
                 <div class="col-md-6">
                     <h4>Listado pruebas saber 11</h4>
@@ -18,11 +21,11 @@
                 <div class="col-md-6 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" style="border-radius: 100%"
                         href="{{ url('prueba/exportsaberpdf') }}" title="Generar reporte pdf" target="_blank"><i
-                            class="fa-solid fa-file-pdf"></i></a>
+                            class="fa fa-file-pdf-o"></i></a>
                     <a class="btn btn-outline-success" style="border-radius: 100%"
                         href="{{ url('prueba/exportexcel') }}" title="Generar reporte excel"><i
-                            class="fa-solid fa-file-excel"></i></a>
-                    <a class="btn btn-outline-success" href="/prueba/crearsaber"><i class="fa-solid fa-circle-plus"></i>
+                            class="fa fa-file-excel-o"></i></a>
+                    <a class="btn btn-outline-success" href="/prueba/crearsaber"><i class="fa fa-plus-circle"></i>
                         Nuevo</a>
                 </div>
             </div>
@@ -53,14 +56,14 @@
                                     <div class="d-flex justify-content-center">
                                         <a class="btn btn-sm"
                                             href="/prueba/{{ $saber->prueba_saber_id_estudiante }}/versaber"><i
-                                                class="fa-solid fa-folder-open"></i></a>
+                                                class="fa fa-folder-open"></i></a>
                                         <a class="btn btn-outline-info  btn-sm"
                                             href="/prueba/{{ $saber->prueba_saber_id_estudiante }}/editarsaber"><i
-                                                class="fa-solid fa-edit"></i></a>
+                                                class="fa fa-edit"></i></a>
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm"><i
-                                                class="fa-solid fa-trash"></i></button>
+                                                class="fa fa-trash"></i></button>
                                     </div>
                                 </form>
                             </td>

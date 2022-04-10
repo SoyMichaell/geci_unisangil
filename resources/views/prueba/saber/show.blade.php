@@ -2,27 +2,29 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/{{$saber->id}}/versaber">Vista</a> / <a href="/prueba/mostrarsaber">Saber 11</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Visualizar información</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Campos registrados.</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 <style>
-    ul{
+    #prueba-saber-ul{
         list-style: none;
     }
-    ul li {
+    #prueba-saber-ul li {
         font-size: 18px;
     }
 </style>
 @section('content')
     <div class="container bg-white p-3">
-        <h5>Información prueba saber 11</h5>
-        <hr>
+        <h5><i class="fa fa-question-circle-o"></i> Información prueba saber 11</h5><hr>
         <div class="row">
             <div class="col-md-5">
-                <ul>
+                <ul id="prueba-saber-ul">
                     <li><strong>Nombre completo: </strong>{{ $saber->per_nombre . ' ' . $saber->per_apellido }}</li>
                     <li><strong>Año de presentación: </strong>{{ $saber->prueba_saber_year }}</li>
                     <li><strong>Periodo: </strong>{{ $saber->prueba_saber_periodo }}</li>

@@ -15,7 +15,7 @@
     <div class="col-md-12">
         <div class="tile">
             <h4 class="titulo"><i class="fa fa-cube"></i> Registro de software</h4><hr>
-            <form action="/software/" method="post">
+            <form action="/software" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">

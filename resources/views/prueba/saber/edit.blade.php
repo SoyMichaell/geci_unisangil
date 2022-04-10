@@ -2,22 +2,26 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+    <a href="/prueba/{{$saber->id}}/editarsaber">Editar</a> / <a href="/prueba/mostrarsaber">Saber 11</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de actualización</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
-        <div class="bg-white p-3">
+        <div class="tile">
             <form action="/prueba/{{$saber->prueba_saber_id_estudiante}}/actualizarsaber" method="post">
                 @csrf
                 @method('PUT')
+                <h4><i class="fa fa-pencil"></i> Actualizar información</h4><hr>
                 <div class="row mb-3">
                     <div class="col-md-6 mb-3">
-                        <label for="prueba_saber_id_estudiante">Estudiante</label>
-                        <select class="form-select" name="prueba_saber_id_estudiante" id="prueba_saber_id_estudiante" disabled>
+                        <label for="prueba_saber_id_estudiante">Estudiante *</label>
+                        <select class="form-control" name="prueba_saber_id_estudiante" id="prueba_saber_id_estudiante" disabled>
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}" {{$estudiante->id == $saber->prueba_saber_id_estudiante ? 'selected' : ''}}>
@@ -26,7 +30,7 @@
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="prueba_saber_year">Año</label>
+                        <label for="prueba_saber_year">Año *</label>
                         <input class="form-control @error('prueba_saber_year') is-invalid @enderror"
                             name="prueba_saber_year" id="prueba_saber_year" value="{{$saber->prueba_saber_year}}"
                             type="number" autocomplete="prueba_saber_year" autofocus>
@@ -39,7 +43,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12 mb-3">
-                        <label for="prueba_saber_periodo">Periodo</label>
+                        <label for="prueba_saber_periodo">Periodo *</label>
                         <input class="form-control @error('prueba_saber_periodo') is-invalid @enderror"
                             name="prueba_saber_periodo" id="prueba_saber_periodo"
                             value="{{$saber->prueba_saber_periodo}}" type="text" autocomplete="prueba_saber_periodo"
@@ -52,7 +56,6 @@
                     </div>
                     @foreach ($saberes as $saberx)
                         <div class="col-md-6 mb-3">
-                            <label for="prsamo_id_modulo">Módulo {{$saberx->tipo_modulo_nombre}}</label>
                             <input class="form-control @error('prsamo_id_modulo') is-invalid @enderror"
                                 name="prsamo_id_modulo[]" id="prsamo_id_modulo" value="{{ $saberx->prsamo_id_modulo}}"
                                 type="hidden" autocomplete="prsamo_id_modulo" autofocus readonly>
@@ -62,8 +65,8 @@
                                 </span>
                             @enderror
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="prsamo_puntaje">Puntaje</label>
+                        <div class="col-md-12 mb-3">
+                            <label for="prsamo_id_modulo">{{$saberx->tipo_modulo_nombre}}</label> | <label for="prsamo_puntaje">Puntaje *</label>
                             <input class="form-control @error('prsamo_puntaje') is-invalid @enderror"
                                 name="prsamo_puntaje[]" id="prsamo_puntaje" value="{{$saberx->prsamo_puntaje}}"
                                 type="number" autocomplete="prsamo_puntaje" autofocus>

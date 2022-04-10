@@ -2,15 +2,22 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/{{ $saber->prsapr_id_estudiante }}/versaberpro">Vista</a> / <a
+            href="/prueba/mostrarsaberpro">Saber pro</a> /
+        <a href="/prueba">Prueba</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos, para el debido registro del trabajo de grado.</p>
+        <p>Información de registro.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container-fluid">
         <div class="tile">
+            <h4><i class="fa fa-question-circle-o"></i> Vista de registro</h4>
+            <hr>
             <div class="row mb-3">
                 <div class="col-md-6 mb-3">
                     <label for="prsapr_year">Año</label>
@@ -34,14 +41,16 @@
                         </span>
                     @enderror
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-6 mb-3">
                     <label for="prsapr_id_estudiante">Estudiante</label>
-                    <select class="form-select" name="prsapr_id_estudiante" id="prsapr_id_estudiante" disabled>
+                    <select class="form-control" name="prsapr_id_estudiante" id="prsapr_id_estudiante" disabled>
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
                             <option value="{{ $estudiante->id }}"
                                 {{ $estudiante->id == $saber->prsapr_id_estudiante ? 'selected' : '' }}>
-                                {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -57,6 +66,8 @@
                         </span>
                     @enderror
                 </div>
+            </div>
+            <div class="row mb-3">
                 <div class="col-md-4 mb-3">
                     <label for="prsapr_grupo_referencia">Grupo de referencia</label>
                     <input class="form-control @error('prsapr_grupo_referencia') is-invalid @enderror"
@@ -93,9 +104,11 @@
                         </span>
                     @enderror
                 </div>
-                <h4>Puntajes por módulos</h4>
-                @foreach ($saberes as $saberx)
-                    <h5>{{ $saberx->tipo_modulo_nombre }}</h5>
+            </div>
+            @foreach ($saberes as $saberx)
+                <h5>{{ $saberx->tipo_modulo_nombre }}</h5>
+                <hr>
+                <div class="row mb-3">
                     <div class="col-md-3 mb-3 d-none">
                         <input class="form-control @error('prsaprmo_id_modulo') is-invalid @enderror"
                             name="prsaprmo_id_modulo[]" id="prsaprmo_id_modulo"
@@ -154,7 +167,9 @@
                             </span>
                         @enderror
                     </div>
-                @endforeach
+                </div>
+            @endforeach
+            <div class="row mb-3">
                 <div class="col-md-12 mb-3">
                     <label for="prsapr_novedad">Novedades</label>
                     <textarea class="form-control" name="prsapr_novedad" id="prsapr_novedad" cols="30" rows="10"

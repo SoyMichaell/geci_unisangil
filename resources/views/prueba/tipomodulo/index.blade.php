@@ -2,18 +2,21 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/prueba/mostrartipomodulo">Tipo módulo</a> / <a href="/prueba">Pruebas saber</a>
+    @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-plus-square-o"></i> Formulario de registro</h1>
+        <h1 class="titulo"><i class="fa fa-cubes"></i> Formulario de registro</h1>
     @section('message')
-        <p>Diligenciar los campos requeridos.</p>
+        <p>Diligenciar todos los campos requeridos.</p>
     @endsection
 @endsection
 @section('content')
     <div class="container">
         <div class="row">
-            <div class=" {{ Auth::user()->per_tipo_usuario == 4 ? 'col-md-5' : 'col-md-5' }} tile">
+            <div class=" {{ Auth::user()->per_tipo_usuario == 4 ? 'col-md-12' : 'col-md-12' }} tile">
                 <h4>Listado módulos</h4>
-                <table class="table table-bordered" id="tables">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -35,7 +38,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="btn btn-danger btn-sm"><i
-                                                    class="fa-solid fa-trash"></i></button>
+                                                    class="fa fa-trash"></i></button>
                                         </div>
                                     </form>
                                 </td>
@@ -44,8 +47,8 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-md-7 shadow-sm bg-white p-3">
-                <h4><i class="fab fa-wpforms"></i> Registro módulos pruebas</h4>
+            <div class="col-md-12 tile">
+                <h4><i class="fa fa-cube"></i> Registro módulos pruebas</h4>
                 <form action="/prueba/registrotipomodulo" method="post">
                     @csrf
                     <div class="row mb-3">
@@ -63,13 +66,14 @@
                         </div>
                         <div class="col-md-12 mt-2">
                             <label for="tipo_modulo_id_prueba">{{ __('Nombre tipo módulo *') }}</label>
-                            <select class="form-select @error('tipo_modulo_id_prueba') is-invalid @enderror"
+                            <select class="form-control @error('tipo_modulo_id_prueba') is-invalid @enderror"
                                 name="tipo_modulo_id_prueba" id="tipo_modulo_id_prueba">
                                 <option value="">---- SELECCIONE ----</option>
                                 @foreach ($tipospruebas as $prueba)
                                     <option value="{{ $prueba->id }}">{{ $prueba->tipo_prueba_nombre }}</option>
                                 @endforeach
                             </select>
+                            <p class="{{$tipospruebas->count()<=0 ? 'badge badge-danger' : ''}}">{{$tipospruebas->count()<=0 ? 'No existen registros de pruebas' : ''}}</p>
                             @error('tipo_modulo_id_prueba')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
