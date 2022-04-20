@@ -13,10 +13,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="d-flex justify-content-end">
-                    <a class="btn btn-outline-success" href="{{ url('modalidad/create') }}"><i
-                            class="fa-solid fa-circle-plus"></i> Nuevo</a>
+                    <a class="btn btn-success" href="{{ url('modalidad/create') }}"><i
+                            class="fa fa-plus-circle"></i> Nuevo</a>
                 </div>
                 <div class="table-responsive tile mt-2">
+                    <h4>Listado modalidad de grado</h4><hr>
                     <table class="table table-borderd" id="tables">
                         <thead>
                             <tr>
@@ -35,11 +36,11 @@
                                             <div class="d-flex text-center">
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="/modalidad/{{ $modalidad->id }}/edit"><i
-                                                        class="fa-solid fa-refresh text-center"></i></a>
+                                                        class="fa fa-refresh text-center"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>

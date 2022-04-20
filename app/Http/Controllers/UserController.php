@@ -28,9 +28,12 @@ class UserController extends Controller
             ->get();
         }else if(Auth::check()){
             $tiposusuario = DB::table('tipo_usuario')
-            ->Where('id', 1)
-            ->orWhere('id', 2)
+            ->where('id',1)
+            ->orWhere('id', 10)
+            ->orWhere('id', 9)
             ->orWhere('id', 4)
+            ->orWhere('id', 2)
+            ->orderBy('tip_nombre')
             ->get();
         }
         return view('auth.register')
@@ -94,43 +97,71 @@ class UserController extends Controller
         }
 
         //Validación roles 
-
-        DB::table('persona')->insert(
-            [
-                'per_tipo_documento' => $request->get('per_tipo_documento'),
-                'per_numero_documento' =>  $request->get('per_numero_documento'),
-                'per_nombre' => $request->get('per_nombre'),
-                'per_apellido' => $request->get('per_apellido'),
-                'per_telefono' => $request->get('per_telefono'),
-                'per_correo' => $request->get('per_correo'),
-                'password' => Hash::make(($request->get('password'))),
-                'per_departamento' => $request->get('per_departamento'),
-                'per_ciudad' => $request->get('per_ciudad'),
-                'per_tipo_usuario' => implode(';',$request->get('per_tipo_usuario')),
-                'per_id_estado' => 'activo',
-            ]
-        );
-
-        $id = DB::getPdo()->lastInsertId();
-
-        $tipoDocente = DB::table('persona')
-            ->where('id', $id)
-            ->first();
-
-        $rol = explode(';',$tipoDocente->per_tipo_usuario);
-
-        foreach($rol as $r){
-            if($r == '2' || $r == '3'){
-                DB::table('docente')->insert(
-                    [
-                        'id_persona_docente' => $id,
-                        'id_proceso' => 1,
-                    ]
-                );
-            }
+        
+        if($request->get('per_tipo_usuario') == '1' || $request->get('per_tipo_usuario') == '4'){
+            DB::table('persona')->insert(
+                [
+                    'per_tipo_documento' => $request->get('per_tipo_documento'),
+                    'per_numero_documento' =>  $request->get('per_numero_documento'),
+                    'per_nombre' => $request->get('per_nombre'),
+                    'per_apellido' => $request->get('per_apellido'),
+                    'per_telefono' => $request->get('per_telefono'),
+                    'per_correo' => $request->get('per_correo'),
+                    'password' => Hash::make(($request->get('password'))),
+                    'per_departamento' => $request->get('per_departamento'),
+                    'per_ciudad' => $request->get('per_ciudad'),
+                    'per_tipo_usuario' => $request->get('per_tipo_usuario'),
+                    'per_id_estado' => 'activo',
+                ]
+            );
+        }else if($request->get('per_tipo_usuario') == '10' || $request->get('per_tipo_usuario') == '2'){
+            DB::table('persona')->insert(
+                [
+                    'per_tipo_documento' => $request->get('per_tipo_documento'),
+                    'per_numero_documento' =>  $request->get('per_numero_documento'),
+                    'per_nombre' => $request->get('per_nombre'),
+                    'per_apellido' => $request->get('per_apellido'),
+                    'per_telefono' => $request->get('per_telefono'),
+                    'per_correo' => $request->get('per_correo'),
+                    'password' => Hash::make(($request->get('password'))),
+                    'per_departamento' => $request->get('per_departamento'),
+                    'per_ciudad' => $request->get('per_ciudad'),
+                    'per_tipo_usuario' => $request->get('per_tipo_usuario'),
+                    'per_id_estado' => 'activo',
+                ]
+            );
+            $id = DB::getPdo()->lastInsertId();
+            DB::table('docente')->insert(
+                [
+                    'id_persona_docente' => $id,
+                    'id_proceso' => 1,
+                ]
+            );
+        }else if($request->get('per_tipo_usuario') == '9'){
+            DB::table('persona')->insert(
+                [
+                    'per_tipo_documento' => $request->get('per_tipo_documento'),
+                    'per_numero_documento' =>  $request->get('per_numero_documento'),
+                    'per_nombre' => $request->get('per_nombre'),
+                    'per_apellido' => $request->get('per_apellido'),
+                    'per_telefono' => $request->get('per_telefono'),
+                    'per_correo' => $request->get('per_correo'),
+                    'password' => Hash::make(($request->get('password'))),
+                    'per_departamento' => $request->get('per_departamento'),
+                    'per_ciudad' => $request->get('per_ciudad'),
+                    'per_tipo_usuario' => $request->get('per_tipo_usuario'),
+                    'per_id_estado' => 'activo',
+                ]
+            );
+            $id = DB::getPdo()->lastInsertId();
+            DB::table('estudiante')->insert(
+                [
+                    'estu_id_estudiante' => $id,
+                    'estu_programa' => '1',
+                ]
+            );
         }
 
-        
         if(Auth::check()){
             Alert::success('Exitoso', 'La persona ha sido registrada con exito');
             return redirect('/home');
@@ -139,6 +170,23 @@ class UserController extends Controller
             return redirect('/login');
         }
         
+    }
+
+    public function actualizarestado($id){
+        $estado = DB::table('persona')->where('id',$id)->first();
+        if($estado->per_id_estado == 'activo'){
+            DB::table('persona')->where('id', $id)->update([
+                'per_id_estado' => 'inactivo'
+            ]);
+            Alert::success('Exitoso', 'Estado actualizado');
+            return redirect('/home');
+        }else{
+            DB::table('persona')->where('id', $id)->update([
+                'per_id_estado' => 'activo'
+            ]);
+            Alert::success('Exitoso', 'Estado actualizado');
+            return redirect('/home');
+        }
     }
     
     public function profile(){

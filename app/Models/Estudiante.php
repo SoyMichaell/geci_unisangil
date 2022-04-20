@@ -22,7 +22,8 @@ class Estudiante extends Model
             'estu_telefono1',
             'estu_telefono2',
             'estu_direccion',
-            'estu_correo',
+            'estu_correo_personal',
+            'estu_colegio',
             'estu_estrato',
             'estu_departamento',
             'estu_ciudad',
@@ -46,7 +47,9 @@ class Estudiante extends Model
             'estu_cargo',
             'estu_dependencia',
             'estu_fecha_ingreso',
-            'estu_no_contrato',  
+            'estu_no_contrato',
+            'estu_fecha_final',  
+            'estu_estado_cargo'
     ];
 
     public function trabajos(){

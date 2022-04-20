@@ -34,6 +34,7 @@ class LaboratorioController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->where('per_tipo_usuario', 6)
         ->where('estudiante.estu_administrativo', 'Si')
+        ->where('estudiante.estu_estado_cargo', 'activo')
         ->get();
         $softwares = Software::all();
 

@@ -106,8 +106,6 @@
                             Pruebas saber</a></li>
                     <li><a class="treeview-item" href="{{ url('trabajo') }}"><i class="icon fa fa-circle-o"></i>
                             Trabajo de grado</a></li>
-                    <li><a class="treeview-item" href="{{ url('practica') }}"><i class="icon fa fa-circle-o"></i>
-                            Practica Laboral</a></li>
                     <li><a class="treeview-item" href="{{ url('software') }}"><i class="icon fa fa-circle-o"></i>
                             TIC'S</a></li>
                     <li><a class="treeview-item" href="{{ url('extension') }}"><i class="icon fa fa-circle-o"></i>

@@ -128,6 +128,31 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
+                        <label for="asig_semestre">{{ __('Semestre *') }}</label>
+                        <select class="form-control" name="asig_semestre" id="asig_semestre">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="1" {{$asignatura->asig_semestre == '1' ? 'selected' : ''}}>1</option>
+                            <option value="2" {{$asignatura->asig_semestre == '2' ? 'selected' : ''}}>2</option>
+                            <option value="3" {{$asignatura->asig_semestre == '3' ? 'selected' : ''}}>3</option>
+                            <option value="4" {{$asignatura->asig_semestre == '4' ? 'selected' : ''}}>4</option>
+                            <option value="5" {{$asignatura->asig_semestre == '5' ? 'selected' : ''}}>5</option>
+                            <option value="6" {{$asignatura->asig_semestre == '6' ? 'selected' : ''}}>6</option>
+                            <option value="7" {{$asignatura->asig_semestre == '7' ? 'selected' : ''}}>7</option>
+                            <option value="8" {{$asignatura->asig_semestre == '8' ? 'selected' : ''}}>8</option>
+                            <option value="9" {{$asignatura->asig_semestre == '9' ? 'selected' : ''}}>9</option>
+                            <option value="10" {{$asignatura->asig_semestre == '10' ? 'selected' : ''}}>10</option>
+                            <option value="11" {{$asignatura->asig_semestre == '11' ? 'selected' : ''}}>11</option>
+                            <option value="12" {{$asignatura->asig_semestre == '12' ? 'selected' : ''}}>12</option>
+                        </select>
+                        @error('asig_semestre')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
                         <label for="asig_no_creditos">{{ __('Número de creditos *') }}</label>
                         <input id="asig_no_creditos" type="number"
                             class="form-control @error('asig_no_creditos') is-invalid @enderror" name="asig_no_creditos"
@@ -138,8 +163,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_no_semanales">{{ __('Número de horas semanales *') }}</label>
                         <input id="asig_no_semanales" type="number"
@@ -152,6 +175,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_no_semestre">{{ __('Número de horas semestre *') }}</label>
                         <input id="asig_no_semestre" type="number"
@@ -163,9 +188,7 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="asig_estado">{{ __('Estado *') }}</label>
                         <select class="form-control" name="asig_estado" id="asig_estado">
                             <option value="activo" {{ $asignatura->asig_estado == 'activo' ? 'selected' : '' }}>Activo

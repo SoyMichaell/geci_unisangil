@@ -21,12 +21,14 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_programa">{{ __('Programa *') }}</label>
-                        <select class="form-control @error('estu_programa') is-invalid @enderror" name="estu_programa" id="estu_programa">
+                        <select class="form-control @error('estu_programa') is-invalid @enderror" name="estu_programa"
+                            id="estu_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
                                 <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}</option>
                             @endforeach
                         </select>
+                        <p class="{{ $programa->count() <= 0 ? 'badge badge-danger' : '' }}">{{ $programa->count() <= 0 ? 'No existen registros dee programas' : '' }}</p>
                         @error('estu_programa')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -35,14 +37,15 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_programa_plan">{{ __('Plan de estudio *') }}</label>
-                        <select class="form-control @error('estu_programa_plan') is-invalid @enderror" name="estu_programa_plan" id="estu_programa_plan">
+                        <select class="form-control @error('estu_programa_plan') is-invalid @enderror"
+                            name="estu_programa_plan" id="estu_programa_plan">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programasPlan as $plan)
                                 <option value="{{ $plan->id }}">
-                                    {{ $plan->pro_nombre.' '.$plan->pp_plan }}</option>
+                                    {{ $plan->pro_nombre . ' ' . $plan->pp_plan }}</option>
                             @endforeach
                         </select>
-                        <p class="badge badge-danger">{{$programasPlan->count()<=0 ? 'No existen registros de plan de estudio' : ''}}</p>
+                        <p class="{{ $programasPlan->count() <= 0 ? 'badge badge-danger' : '' }}">{{ $programasPlan->count() <= 0 ? 'No existen registros de plan de estudio' : '' }}</p>
                         @error('estu_programa_plan')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -53,7 +56,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_tipo_documento">{{ __('Tipo Documento *') }}</label>
-                        <select class="form-control @error('estu_tipo_documento') is-invalid @enderror" name="estu_tipo_documento" id="estu_tipo_documento">
+                        <select class="form-control @error('estu_tipo_documento') is-invalid @enderror"
+                            name="estu_tipo_documento" id="estu_tipo_documento">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($tiposdocumento as $tipo)
                                 <option value="{{ $tipo }}">{{ $tipo }}</option>
@@ -128,7 +132,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_direccion">{{ __('Dirección *') }}</label>
+                        <label for="estu_direccion">{{ __('Dirección (Opcional)') }}</label>
                         <input id="estu_direccion" type="text"
                             class="form-control @error('estu_direccion') is-invalid @enderror" name="estu_direccion"
                             value="{{ old('estu_direccion') }}" autocomplete="estu_direccion" autofocus>
@@ -139,7 +143,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_correo">{{ __('Correo electronico *') }}</label>
+                        <label for="estu_correo">{{ __('Correo electronico institucional *') }}</label>
                         <input id="estu_correo" type="email"
                             class="form-control @error('estu_correo') is-invalid @enderror" name="estu_correo"
                             value="{{ old('estu_correo') }}" autocomplete="estu_correo" autofocus>
@@ -152,7 +156,31 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_estrato">{{ __('Estrato *') }}</label>
+                        <label for="estu_correo_personal">{{ __('Correo electronico personal (Opcional)') }}</label>
+                        <input id="estu_correo_personal" type="email"
+                            class="form-control @error('estu_correo_personal') is-invalid @enderror" name="estu_correo_personal"
+                            value="{{ old('estu_correo_personal') }}" autocomplete="estu_correo_personal" autofocus>
+                        @error('estu_correo_personal')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estu_colegio">{{ __('Institución educativa secundaría (Opcional)') }}</label>
+                        <input id="estu_colegio" type="text"
+                            class="form-control @error('estu_colegio') is-invalid @enderror" name="estu_colegio"
+                            value="{{ old('estu_colegio') }}" autocomplete="estu_colegio" autofocus>
+                        @error('estu_colegio')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="estu_estrato">{{ __('Estrato (Opcional)') }}</label>
                         <input id="estu_estrato" type="text"
                             class="form-control @error('estu_estrato') is-invalid @enderror" name="estu_estrato"
                             value="{{ old('estu_estrato') }}" autocomplete="estu_estrato" autofocus>
@@ -163,8 +191,9 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_departamento">{{ __('Departamento *') }}</label>
-                        <select class="form-control @error('estu_departamento') is-invalid @enderror" name="estu_departamento" id="estu_departamento">
+                        <label for="estu_departamento">{{ __('Departamento procedencia (Opcional)') }}</label>
+                        <select class="form-control @error('estu_departamento') is-invalid @enderror"
+                            name="estu_departamento" id="estu_departamento">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($departamentos as $departamento)
                                 <option value="{{ $departamento->id }}">{{ $departamento->dep_nombre }}
@@ -180,8 +209,9 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
-                        <select class="form-control @error('estu_ciudad') is-invalid @enderror" name="estu_ciudad" id="estu_ciudad">
+                        <label for="estu_ciudad">{{ __('Municipio de procedencia (Opcional)') }}</label>
+                        <select class="form-control @error('estu_ciudad') is-invalid @enderror" name="estu_ciudad"
+                            id="estu_ciudad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
                                 <option value="{{ $municipio->id }}">
@@ -196,7 +226,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
+                        <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento (Opcional)') }}</label>
                         <input id="estu_fecha_nacimiento" type="date"
                             class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
                             name="estu_fecha_nacimiento" value="{{ old('estu_fecha_nacimiento') }}"
@@ -210,7 +240,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  *') }}</label>
+                        <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  (Opcional)') }}</label>
                         <input id="estu_fecha_expedicion" type="date"
                             class="form-control @error('estu_fecha_expedicion') is-invalid @enderror"
                             name="estu_fecha_expedicion" value="{{ old('estu_fecha_expedicion') }}"
@@ -222,8 +252,9 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
-                        <select class="form-control @error('estu_sexo') is-invalid @enderror" name="estu_sexo" id="estu_sexo">
+                        <label for="estu_sexo">{{ __('Sexo Biológico (Opcional)') }}</label>
+                        <select class="form-control @error('estu_sexo') is-invalid @enderror" name="estu_sexo"
+                            id="estu_sexo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="M">Masculino</option>
                             <option value="F">Femenino</option>
@@ -237,8 +268,9 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
-                        <select class="form-control  @error('estu_estado_civil') is-invalid @enderror" name="estu_estado_civil" id="estu_estado_civil">
+                        <label for="estu_estado_civil">{{ __('Estado civil (Opcional)') }}</label>
+                        <select class="form-control  @error('estu_estado_civil') is-invalid @enderror"
+                            name="estu_estado_civil" id="estu_estado_civil">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="soltero(a)">Soltero (a)</option>
                             <option value="casado(s)">Casado (a)</option>
@@ -255,7 +287,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
+                        <label for="estu_ingreso">{{ __('Año de ingreso (Opcional)') }}</label>
                         <input id="estu_ingreso" type="text"
                             class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
                             value="{{ old('estu_ingreso') }}" autocomplete="estu_ingreso" autofocus>
@@ -268,7 +300,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
+                        <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso (Opcional)') }}</label>
                         <input id="estu_periodo_ingreso" type="text"
                             class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
                             name="estu_periodo_ingreso" value="{{ old('estu_periodo_ingreso') }}"
@@ -280,7 +312,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_ult_matricula">{{ __('Ultimo periodo matriculado *') }}</label>
+                        <label for="estu_ult_matricula">{{ __('Ultimo periodo matriculado (Opcional)') }}</label>
                         <input id="estu_ult_matricula" type="text"
                             class="form-control @error('estu_ult_matricula') is-invalid @enderror"
                             name="estu_ult_matricula" value="{{ old('estu_ult_matricula') }}"
@@ -295,7 +327,8 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="estu_semestre">{{ __('Semestre *') }}</label>
-                        <select class="form-control @error('estu_semestre') is-invalid @enderror" name="estu_semestre" id="estu_semestre">
+                        <select class="form-control @error('estu_semestre') is-invalid @enderror" name="estu_semestre"
+                            id="estu_semestre">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1">1</option>
                             <option value="2">2</option>
@@ -315,8 +348,9 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_financiamiento">{{ __('Tipo de financiamiento *') }}</label>
-                        <select class="form-control @error('estu_financiamiento') is-invalid @enderror" name="estu_financiamiento" id="estu_financiamiento">
+                        <label for="estu_financiamiento">{{ __('Tipo de financiamiento (Opcional)') }}</label>
+                        <select class="form-control @error('estu_financiamiento') is-invalid @enderror"
+                            name="estu_financiamiento" id="estu_financiamiento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="beca">Beca</option>
                             <option value="de-contado">De contado</option>
@@ -344,7 +378,8 @@
                     </div>
                     <div class="col-md-6">
                         <label for="estu_estado">{{ __('Estado *') }}</label>
-                        <select class="form-control @error('estu_estado') is-invalid @enderror" name="estu_estado" id="estu_estado">
+                        <select class="form-control @error('estu_estado') is-invalid @enderror" name="estu_estado"
+                            id="estu_estado">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="activo">Activo</option>
                             <option value="inactivo">Inactivo</option>
@@ -364,8 +399,9 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
-                        <select class="form-control @error('estu_tipo_matricula') is-invalid @enderror" name="estu_tipo_matricula" id="estu_tipo_matricula">
+                        <label for="estu_tipo_matricula">{{ __('Tipo de matricula (Opcional)') }}</label>
+                        <select class="form-control @error('estu_tipo_matricula') is-invalid @enderror"
+                            name="estu_tipo_matricula" id="estu_tipo_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="movilidad-interna">Movilidad Interna</option>
                             <option value="nuevo-transferencias-interna">Nuevo Transferencias Interna</option>
@@ -387,8 +423,9 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_matricula">{{ __('Matricula *') }}</label>
-                        <select class="form-control @error('estu_matricula') is-invalid @enderror" name="estu_matricula" id="estu_matricula">
+                        <label for="estu_matricula">{{ __('Matricula (Opcional)') }}</label>
+                        <select class="form-control @error('estu_matricula') is-invalid @enderror"
+                            name="estu_matricula" id="estu_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="pendiente">Pendiente</option>
                             <option value="pagado">Pagado</option>
@@ -428,7 +465,8 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_administrativo">{{ __('¿Es personal administrativo de unisangil? ') }}</label>
+                        <label
+                            for="estu_administrativo">{{ __('¿Es personal administrativo de unisangil? ') }}</label>
                         <div class="row">
                             <div class="col-md-12">
                                 <select class="form-control" name="estu_administrativo" id="estu_administrativo">
@@ -439,35 +477,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3" id="administrativo-estudiante">
-                    <h4>Datos administrativos</h4>
-                    <div class="col-md-6">
-                        <label for="admin_cargo">{{ __('Cargo') }}</label>
-                        <input id="admin_cargo" type="text"
-                            class="form-control @error('admin_cargo') is-invalid @enderror"
-                            name="admin_cargo" value="{{ old('admin_cargo') }}"
-                            autocomplete="admin_cargo" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="admin_dependencia">{{ __('Dependencia') }}</label>
-                        <input id="admin_dependencia" type="text"
-                            class="form-control @error('admin_dependencia') is-invalid @enderror"
-                            name="admin_dependencia" value="{{ old('admin_dependencia') }}"
-                            autocomplete="admin_dependencia" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="admin_fecha_ingreso">{{ __('Fecha de ingreso') }}</label>
-                        <input id="admin_fecha_ingreso" type="date"
-                            class="form-control @error('admin_fecha_ingreso') is-invalid @enderror"
-                            name="admin_fecha_ingreso" value="{{ old('admin_fecha_ingreso') }}"
-                            autocomplete="admin_fecha_ingreso" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="admin_no_contrato">{{ __('No. contrato') }}</label>
-                        <input id="admin_no_contrato" type="date"
-                            class="form-control @error('admin_no_contrato') is-invalid @enderror"
-                            name="admin_no_contrato" value="{{ old('admin_no_contrato') }}"
-                            autocomplete="admin_no_contrato" autofocus>
+
+                <div class="mb-3" id="administrativo-estudiante">
+                    <h4>Datos administrativos</h4><hr>
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <label for="admin_cargo">{{ __('Cargo') }}</label>
+                            <input id="admin_cargo" type="text"
+                                class="form-control @error('admin_cargo') is-invalid @enderror" name="admin_cargo"
+                                value="{{ old('admin_cargo') }}" autocomplete="admin_cargo" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="admin_dependencia">{{ __('Dependencia') }}</label>
+                            <input id="admin_dependencia" type="text"
+                                class="form-control @error('admin_dependencia') is-invalid @enderror"
+                                name="admin_dependencia" value="{{ old('admin_dependencia') }}"
+                                autocomplete="admin_dependencia" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="admin_fecha_ingreso">{{ __('Fecha de ingreso') }}</label>
+                            <input id="admin_fecha_ingreso" type="date"
+                                class="form-control @error('admin_fecha_ingreso') is-invalid @enderror"
+                                name="admin_fecha_ingreso" value="{{ old('admin_fecha_ingreso') }}"
+                                autocomplete="admin_fecha_ingreso" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="admin_no_contrato">{{ __('No. contrato') }}</label>
+                            <input id="admin_no_contrato" type="text"
+                                class="form-control @error('admin_no_contrato') is-invalid @enderror"
+                                name="admin_no_contrato" value="{{ old('admin_no_contrato') }}"
+                                autocomplete="admin_no_contrato" autofocus>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-0">

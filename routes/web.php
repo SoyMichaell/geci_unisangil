@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     if (Auth::check()) {
         $personas = DB::table('persona')
+            ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido','per_correo','per_telefono','tip_nombre','per_id_estado')
             ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
             ->where('per_tipo_usuario',1)
             ->orWhere('per_tipo_usuario',2)
@@ -246,6 +247,7 @@ Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
 /*Rutas usuario*/
 Route::get('usuario/profile', [App\Http\Controllers\UserController::class, 'profile']);
+Route::get('usuario/{id}/actualizarestado', [App\Http\Controllers\UserController::class, 'actualizarestado']);
 Route::put('usuario/{id}/actualizar_password', [App\Http\Controllers\UserController::class, 'actualizar_password']);
 Route::resource('usuario', App\Http\Controllers\UserController::class);
 

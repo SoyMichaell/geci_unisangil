@@ -1994,13 +1994,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         return view('extension/movilidades/nacional.create')
             ->with('roles', $roles)
@@ -2064,13 +2068,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         $nacional = ExtMovilidadNacional::find($id);
         return view('extension/movilidades/nacional.edit')
@@ -2088,14 +2096,18 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
-        $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 3)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
-            ->get();
+        $estudiantes = DB::table('persona')
+        ->where('per_tipo_usuario', 6)
+        ->orWhere('per_tipo_usuario', 9)
+        ->get();
+    $personas = DB::table('persona')
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 10)
+        ->orWhere('per_tipo_usuario', 9)
+        ->orWhere('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 4)
+        ->get();
         $nacional = ExtMovilidadNacional::find($id);
         return view('extension/movilidades/nacional.show')
             ->with('roles', $roles)
@@ -2177,13 +2189,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         return view('extension/movilidades/intersede.create')
             ->with('roles', $roles)
@@ -2254,13 +2270,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         $intersede = ExtMovilidadIntersede::find($id);
         return view('extension/movilidades/intersede.edit')
@@ -2278,13 +2298,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         $intersede = ExtMovilidadIntersede::find($id);
         return view('extension/movilidades/intersede.show')
@@ -2375,13 +2399,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         return view('extension/movilidades/internacional.create')
             ->with('roles', $roles)
@@ -2452,13 +2480,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         $internacional = ExtMovilidadInternacional::find($id);
         return view('extension/movilidades/internacional.edit')
@@ -2476,13 +2508,17 @@ class ExtensionController extends Controller
         $sedes = Municipio::all();
         $facultades = Facultad::all();
         $programas = Programa::all();
-        $estudiantes = Estudiante::all();
+        $estudiantes = DB::table('persona')
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
+            ->get();
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 10)
+            ->orWhere('per_tipo_usuario', 9)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
             ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->orWhere('per_tipo_usuario', 7)
             ->get();
         $internacional = ExtMovilidadInternacional::find($id);
         return view('extension/movilidades/internacional.show')

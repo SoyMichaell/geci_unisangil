@@ -6,8 +6,6 @@
         $fecha = date('Y-m-d');
         echo 'FECHA: '.$fecha;
     @endphp <br>MÓDULO: BIENESTAR INSTITUCIONAL</p>
-    <br>
-    <hr>
     <table class="table">
         <thead>
             <tr>

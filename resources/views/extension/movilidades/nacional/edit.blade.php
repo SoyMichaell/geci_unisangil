@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6 otros" id="otros">
                         <label for="exmona_id_persona">Persona - Nombre completo</label>
-                        <select class="form-control @error('exmona_id_persona') is-invalid @enderror" name="exmona_id_persona" id="exmona_id_persona">
+                        <select class="js-example-placeholder-single form-control @error('exmona_id_persona') is-invalid @enderror" name="exmona_id_persona" id="exmona_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}" {{$persona->id == $nacional->exmona_id_persona ? 'selected' : ''}}>
@@ -111,13 +111,14 @@
                     </div>
                     <div class="col-md-6 estudiantes" id="estudiantes">
                         <label for="exmona_id_estudiante">Persona - Nombre completo</label>
-                        <select class="form-control @error('exmona_id_estudiante') is-invalid @enderror" name="exmona_id_estudiante" id="exmona_id_estudiante">
+                        <select class="js-example-placeholder-single form-control @error('exmona_id_estudiante') is-invalid @enderror" name="exmona_id_estudiante" id="exmona_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
-                                <option value="{{ $estudiante->id }}" {{$estudiante->id == $nacional->exmona_id_estudiante ? 'selected' : ''}}>
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                <option value="{{ $estudiante->id }}" {{$estudiante->id == $nacional->exmona_id_persona ? 'selected' : ''}}>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_nombre}}</option>
                             @endforeach
                         </select>
+                        
                         {{$estudiantes->count()<=0 ? 'No hay estudiantes en plataforma' : ''}}
                         @error('exmona_id_estudiante')
                             <span class="invalid-feedback" role="alert">
@@ -347,5 +348,5 @@
 @endsection
 @endif
 @section('scripts')
-<script src="/js/admin/programa_plan_estudio.js"></script>
+<script src="/js/admin/movilidad_nacional.js"></script>
 @endsection

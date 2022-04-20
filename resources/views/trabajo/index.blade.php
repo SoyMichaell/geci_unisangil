@@ -11,8 +11,8 @@
 @section('content')
     <div class="container">
         <div class="d-flex justify-content-start">
-            <a class="btn btn-success" href="{{ url('modalidad') }}"><i class="fa fa-plus-circle"></i> Modalidad de
-                grado</a>
+            <a class="btn btn-info btn-sm" href="{{ url('modalidad') }}"><i class="fa fa-plus-circle"></i> Registro modalidad de grado</a>
+            <a class="btn btn-info btn-sm" href="{{ url('practica') }}"><i class="fa fa-plus-circle"></i> Registro practica laboral</a>
         </div>
         <div class="tile col-md-12 mt-2">
             <div class="row">
@@ -39,7 +39,7 @@
                             <th>N°</th>
                             <th>Código proyecto</th>
                             <th>Titulo de proyecto</th>
-                            <th>Autores</th>
+                            <th>Autor (es)</th>
                             <th>Director</th>
                             <th>Codirector</th>
                             <th>Fecha inicio</th>

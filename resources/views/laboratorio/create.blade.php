@@ -54,7 +54,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_id_docente">{{ __('Docente responsable *') }}</label>
-                        <select class="form-control @error('lab_id_docente') is-invalid @enderror" name="lab_id_docente"
+                        <select class="js-example-placeholder-single form-control @error('lab_id_docente') is-invalid @enderror" name="lab_id_docente"
                             id="lab_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
@@ -101,7 +101,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="lab_id_programa">{{ __('Programa *') }}</label>
-                        <select class="form-control @error('lab_id_programa') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('lab_id_programa') is-invalid @enderror"
                             name="lab_id_programa" id="lab_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
@@ -117,7 +117,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_id_practicante">{{ __('Practicante a cargo *') }}</label>
-                        <select class="form-control @error('lab_id_practicante') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('lab_id_practicante') is-invalid @enderror"
                             name="lab_id_practicante" id="lab_id_practicante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
@@ -160,7 +160,7 @@
                     </div>
                     <div class="col-md-4">
                         <label for="lab_id_software">{{ __('Software (s) utilizado (s) *') }}</label>
-                        <select class="form-control @error('lab_id_software') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('lab_id_software') is-invalid @enderror"
                             name="lab_id_software" id="lab_id_software">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($softwares as $software)

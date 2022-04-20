@@ -447,7 +447,7 @@ class ProgramaController extends Controller
     {
         $asignaturas = DB::table('programa_plan_estudio_asignatura')
         ->select('programa_plan_estudio_asignatura.id','mun_nombre','pro_nombre','cocopa_nombre','coarpl_nombre',
-        'asig_codigo','asig_nombre','pp_plan','asig_no_creditos','asig_no_semanales','asig_no_semestre','asig_estado')
+        'asig_codigo','asig_nombre','pp_plan','asig_no_creditos','asig_no_semanales','asig_semestre','asig_no_semestre','asig_estado')
             ->join('municipio','programa_plan_estudio_asignatura.asig_id_sede','=','municipio.id')
             ->join('programa','programa_plan_estudio_asignatura.asig_id_programa','=','programa.id')
             ->join('programa_plan_estudio','programa_plan_estudio_asignatura.asig_id_plan_estudio','=','programa_plan_estudio.id')
@@ -491,6 +491,7 @@ class ProgramaController extends Controller
             'asig_id_area' => 'required|not_in:0',
             'asig_codigo' => 'required',
             'asig_nombre' => 'required',
+            'asig_semestre' => 'required|not_in:0',
             'asig_no_creditos' => 'required',
             'asig_no_semanales' => 'required',
             'asig_no_semestre' => 'required',
@@ -505,6 +506,7 @@ class ProgramaController extends Controller
             'asig_id_area.required' => 'El campo área es requerido',
             'asig_codigo.required' => 'El campo código asignatura es requerido',
             'asig_nombre.required' => 'El campo nombre asignatura es requerido',
+            'asig_semestre.required' => 'El campo semestre es requerido',
             'asig_no_creditos.required' => 'El campo número creditos es requerido',
             'asig_no_semanales.required' => 'El campo horas semanales es requerido',
             'asig_no_semestre.required' => 'El campo horas semestre es requerido',
@@ -521,6 +523,7 @@ class ProgramaController extends Controller
         $asignatura->asig_id_area = $request->get('asig_id_area');
         $asignatura->asig_codigo = $request->get('asig_codigo');
         $asignatura->asig_nombre = $request->get('asig_nombre');
+        $asignatura->asig_semestre = $request->get('asig_semestre');
         $asignatura->asig_no_creditos = $request->get('asig_no_creditos');
         $asignatura->asig_no_semanales = $request->get('asig_no_semanales');
         $asignatura->asig_no_semestre = $request->get('asig_no_semestre');
@@ -563,6 +566,7 @@ class ProgramaController extends Controller
             'asig_id_area' => 'required|not_in:0',
             'asig_codigo' => 'required',
             'asig_nombre' => 'required',
+            'asig_semestre' => 'required|not_in:0',
             'asig_no_creditos' => 'required',
             'asig_no_semanales' => 'required',
             'asig_no_semestre' => 'required',
@@ -577,6 +581,7 @@ class ProgramaController extends Controller
             'asig_id_area.required' => 'El campo área es requerido',
             'asig_codigo.required' => 'El campo código asignatura es requerido',
             'asig_nombre.required' => 'El campo nombre asignatura es requerido',
+            'asig_semestre.required' => 'El campo semestre es requerido',
             'asig_no_creditos.required' => 'El campo número creditos es requerido',
             'asig_no_semanales.required' => 'El campo horas semanales es requerido',
             'asig_no_semestre.required' => 'El campo horas semestre es requerido',
@@ -593,6 +598,7 @@ class ProgramaController extends Controller
         $asignatura->asig_id_area = $request->get('asig_id_area');
         $asignatura->asig_codigo = $request->get('asig_codigo');
         $asignatura->asig_nombre = $request->get('asig_nombre');
+        $asignatura->asig_semestre = $request->get('asig_semestre');
         $asignatura->asig_no_creditos = $request->get('asig_no_creditos');
         $asignatura->asig_no_semanales = $request->get('asig_no_semanales');
         $asignatura->asig_no_semestre = $request->get('asig_no_semestre');

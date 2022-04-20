@@ -37,6 +37,7 @@
                             <th>Área</th>
                             <th>Código</th>
                             <th>Asignatura</th>
+                            <th>Semestre</th>
                             <th>Plan</th>
                             <th>No. Hro creditos</th>
                             <th>No. Hro semanales</th>
@@ -55,7 +56,8 @@
                                 <td>{{ $asignatura->cocopa_nombre}}</td>
                                 <td>{{ $asignatura->coarpl_nombre}}</td>
                                 <td>{{ $asignatura->asig_codigo }}</td>
-                                <td>{{ $asignatura->asig_nombre }}</td>
+                                <td>{{ Str::upper($asignatura->asig_nombre) }}</td>
+                                <td>{{ $asignatura->asig_semestre }}</td>
                                 <td>{{ $asignatura->pp_plan }}</td>
                                 <td>{{ $asignatura->asig_no_creditos }}</td>
                                 <td>{{ $asignatura->asig_no_semanales }}</td>

@@ -212,7 +212,7 @@
                             <label class=" ml-3" for="per_tipo_usuario">Tipo de usuario</label>
                             @foreach ($tiposusuario as $tipousuario)
                                 <div class="form-check ml-3">
-                                    <input class="form-check-input" name="per_tipo_usuario[]" type="radio"
+                                    <input class="form-check-input" name="per_tipo_usuario" type="radio"
                                         value="{{ $tipousuario->id }}" id="flexCheckDefault">
                                     <label class="form-check-label" for="flexCheckDefault">
                                         {{ $tipousuario->tip_nombre }}

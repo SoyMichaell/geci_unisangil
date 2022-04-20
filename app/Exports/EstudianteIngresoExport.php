@@ -104,6 +104,7 @@ class EstudianteIngresoExport implements FromCollection, WithHeadings
             ->where('persona.per_tipo_usuario', 6)
             ->where('estudiante.estu_programa', $this->programa)
             ->where('estudiante.estu_ingreso', $this->ingreso)
+            ->orWhere('persona.per_tipo_usuario', 9)
             ->get();
         return $estudiantes;
     }

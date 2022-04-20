@@ -32,6 +32,7 @@ class DocenteController extends Controller
             ->join('tipo_usuario', 'persona.per_tipo_usuario', '=', 'tipo_usuario.id')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('docente.index')
             ->with('departamentos', $departamentos)

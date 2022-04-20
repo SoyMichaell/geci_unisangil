@@ -96,7 +96,7 @@
                     </div>
                     <div class="col-md-6 otros" id="otros">
                         <label for="exmoin_id_persona">Persona - Nombre completo</label>
-                        <select class="form-control @error('exmoin_id_persona') is-invalid @enderror" name="exmoin_id_persona" id="exmoin_id_persona">
+                        <select class="js-example-placeholder-single form-control @error('exmoin_id_persona') is-invalid @enderror" name="exmoin_id_persona" id="exmoin_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">
@@ -112,7 +112,7 @@
                     </div>
                     <div class="col-md-6 estudiantes" id="estudiantes">
                         <label for="exmoin_id_estudiante">Persona - Nombre completo</label>
-                        <select class="form-control @error('exmoin_id_estudiante') is-invalid @enderror" name="exmoin_id_estudiante" id="exmoin_id_estudiante">
+                        <select class="js-example-placeholder-single form-control @error('exmoin_id_estudiante') is-invalid @enderror" name="exmoin_id_estudiante" id="exmoin_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
@@ -377,5 +377,5 @@
 @endsection
 @endif
 @section('scripts')
-<script src="/js/admin/programa_plan_estudio.js"></script>
+<script src="/js/admin/movilidad_intersede.js"></script>
 @endsection

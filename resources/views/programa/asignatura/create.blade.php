@@ -121,6 +121,31 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
+                        <label for="asig_semestre">{{ __('Semestre *') }}</label>
+                        <select class="form-control" name="asig_semestre" id="asig_semestre">
+                            <option value="">---- SELECCIONE ----</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                        </select>
+                        @error('asig_semestre')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
                         <label for="asig_no_creditos">{{ __('Número de creditos *') }}</label>
                         <input id="asig_no_creditos" type="number"
                             class="form-control @error('asig_no_creditos') is-invalid @enderror"
@@ -132,8 +157,6 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_no_semanales">{{ __('Número de horas semanales *') }}</label>
                         <input id="asig_no_semanales" type="number"
@@ -146,6 +169,8 @@
                             </span>
                         @enderror
                     </div>
+                </div>
+                <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="asig_no_semestre">{{ __('Número de horas semestre *') }}</label>
                         <input id="asig_no_semestre" type="number"
@@ -158,9 +183,7 @@
                             </span>
                         @enderror
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="asig_estado">{{ __('Estado *') }}</label>
                         <select class="form-control" name="asig_estado" id="asig_estado">
                             <option value="activo">Activo</option>

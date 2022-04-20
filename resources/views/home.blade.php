@@ -108,19 +108,42 @@
                                     <td>{{ $persona->per_telefono }}</td>
                                     <td>{{ $persona->tip_nombre }}</td>
                                     <td>
-                                        @if(Auth::user()->id == $persona->id)
-                                        <p class="badge badge-success">Activo</p>
+                                        @if (Auth::user()->id == $persona->id)
+                                            <p class="badge badge-success">Activo</p>
                                         @else
-                                        <form action="{{ url("usuario/{$persona->id}") }}" method="POST">
-                                            <div class="d-flex">
-                                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-trash"></i></button>
-                                                @endif
-                                            </div>
-                                        </form>
+                                            <form action="{{ url("usuario/{$persona->id}") }}" method="POST">
+                                                <div class="d-flex">
+                                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                                        @if ($persona->per_id_estado == 'activo')
+                                                            <a class="btn btn-info"
+                                                                href="usuario/{{ $persona->id }}/actualizarestado">Inactivar</a>
+                                                        @else
+                                                            <a class="btn btn-success btn-sm"
+                                                                href="usuario/{{ $persona->id }}/actualizarestado">Activar</a>
+                                                        @endif
+                                                        <form action="" method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <div class="col-md-8">
+                                                                <select class="form-control" name="per_tipo_usuario"
+                                                                    id="per_tipo_usuario">
+                                                                    <option value="">Cambiar rol</option>
+                                                                    @foreach ($tipousuarios as $tipousuario)
+                                                                        <option value="{{$tipousuario->id}}" {{$persona->per_tipo_usuario == $tipousuario->id ? 'selected' : ''}}>
+                                                                            {{ $tipousuario->tip_nombre }}
+                                                                        </option>
+                                                                    @endforeach
+                                                                </select>
+                                                                
+                                                            </div>
+                                                        </form>
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger"><i
+                                                                class="fa fa-trash"></i></button>
+                                                    @endif
+                                                </div>
+                                            </form>
                                         @endif
                                     </td>
                                 </tr>

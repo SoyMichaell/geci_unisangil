@@ -99,7 +99,7 @@
                     </div>
                     <div class="col-md-6 otros" id="otros">
                         <label for="exmointer_id_persona">Persona - Nombre completo</label>
-                        <select class="form-control @error('exmointer_id_persona') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('exmointer_id_persona') is-invalid @enderror"
                             name="exmointer_id_persona" id="exmointer_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
@@ -116,12 +116,12 @@
                     </div>
                     <div class="col-md-6 estudiantes" id="estudiantes">
                         <label for="exmointer_id_estudiante">Persona - Nombre completo</label>
-                        <select class="form-control @error('exmointer_id_estudiante') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('exmointer_id_estudiante') is-invalid @enderror"
                             name="exmointer_id_estudiante" id="exmointer_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
-                                    {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                    {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                             @endforeach
                         </select>
                         {{ $estudiantes->count() <= 0 ? 'No hay estudiantes en plataforma' : '' }}
@@ -376,5 +376,5 @@
 @endsection
 @endif
 @section('scripts')
-<script src="/js/admin/programa_plan_estudio.js"></script>
+<script src="/js/admin/movilidad_internacional.js"></script>
 @endsection

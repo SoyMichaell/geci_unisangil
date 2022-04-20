@@ -57,7 +57,8 @@
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($tiposdocumento as $tipo)
                                 <option value="{{ $tipo }}"
-                                    {{ $tipo == $persona->per_tipo_documento ? 'selected' : '' }}>{{ $tipo }}
+                                    {{ $tipo == $persona->per_tipo_documento ? 'selected' : '' }}>
+                                    {{ $tipo }}
                                 </option>
                             @endforeach
                         </select>
@@ -130,7 +131,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_direccion">{{ __('Dirección *') }}</label>
+                        <label for="estu_direccion">{{ __('Dirección (Opcional)') }}</label>
                         <input id="estu_direccion" type="text"
                             class="form-control @error('estu_direccion') is-invalid @enderror" name="estu_direccion"
                             value="{{ $persona->estu_direccion }}" autocomplete="estu_direccion" autofocus>
@@ -141,7 +142,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_correo">{{ __('Correo electronico *') }}</label>
+                        <label for="estu_correo">{{ __('Correo electronico institucional *') }}</label>
                         <input id="estu_correo" type="email"
                             class="form-control @error('estu_correo') is-invalid @enderror" name="estu_correo"
                             value="{{ $persona->per_correo }}" autocomplete="estu_correo" autofocus>
@@ -154,7 +155,31 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_estrato">{{ __('Estrato *') }}</label>
+                        <label for="estu_correo_personal">{{ __('Correo electronico personal (Opcional)') }}</label>
+                        <input id="estu_correo_personal" type="email"
+                            class="form-control @error('estu_correo_personal') is-invalid @enderror" name="estu_correo_personal"
+                            value="{{ $persona->estu_correo_personal }}" autocomplete="estu_correo_personal" autofocus>
+                        @error('estu_correo_personal')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="estu_colegio">{{ __('Institución educativa secundaría (Opcional)') }}</label>
+                        <input id="estu_colegio" type="text"
+                            class="form-control @error('estu_colegio') is-invalid @enderror" name="estu_colegio"
+                            value="{{ $persona->estu_colegio }}" autocomplete="estu_colegio" autofocus>
+                        @error('estu_colegio')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label for="estu_estrato">{{ __('Estrato (Opcional)') }}</label>
                         <input id="estu_estrato" type="text"
                             class="form-control @error('estu_estrato') is-invalid @enderror" name="estu_estrato"
                             value="{{ $persona->estu_estrato }}" autocomplete="estu_estrato" autofocus>
@@ -165,7 +190,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_departamento">{{ __('Departamento *') }}</label>
+                        <label for="estu_departamento">{{ __('Departamento procendencia (Opcional)') }}</label>
                         <select class="form-control" name="estu_departamento" id="estu_departamento">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($departamentos as $departamento)
@@ -184,7 +209,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_ciudad">{{ __('Municipio / sede *') }}</label>
+                        <label for="estu_ciudad">{{ __('Municipio procendencia (Opcional)') }}</label>
                         <select class="form-control" name="estu_ciudad" id="estu_ciudad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($municipios as $municipio)
@@ -201,7 +226,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento *') }}</label>
+                        <label for="estu_fecha_nacimiento">{{ __('Fecha de Nacimiento (Opcional)') }}</label>
                         <input id="estu_fecha_nacimiento" type="date"
                             class="form-control @error('estu_fecha_nacimiento') is-invalid @enderror"
                             name="estu_fecha_nacimiento" value="{{ $persona->estu_fecha_nacimiento }}"
@@ -215,7 +240,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  *') }}</label>
+                        <label for="estu_fecha_expedicion">{{ __('Fecha de Expedición  (Opcional)') }}</label>
                         <input id="estu_fecha_expedicion" type="date"
                             class="form-control @error('estu_fecha_expedicion') is-invalid @enderror"
                             name="estu_fecha_expedicion" value="{{ $persona->estu_fecha_expedicion }}"
@@ -227,7 +252,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_sexo">{{ __('Sexo Biológico *') }}</label>
+                        <label for="estu_sexo">{{ __('Sexo Biológico (Opcional)') }}</label>
                         <select class="form-control" name="estu_sexo" id="estu_sexo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="M" {{ $persona->estu_sexo == 'M' ? 'selected' : '' }}>Masculino</option>
@@ -242,7 +267,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_estado_civil">{{ __('Estado civil *') }}</label>
+                        <label for="estu_estado_civil">{{ __('Estado civil (Opcional)') }}</label>
                         <select class="form-control" name="estu_estado_civil" id="estu_estado_civil">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="soltero(a)"
@@ -251,14 +276,16 @@
                             <option value="casado(a)" {{ $persona->estu_estado_civil == 'F' ? 'casado(a)' : '' }}>
                                 Casado (a)</option>
                             <option value="divorciado(a)"
-                                {{ $persona->estu_estado_civil == 'F' ? 'divorciado(a)' : '' }}>Divorciado (a)</option>
+                                {{ $persona->estu_estado_civil == 'F' ? 'divorciado(a)' : '' }}>Divorciado (a)
+                            </option>
                             <option value="viudo(a)" {{ $persona->estu_estado_civil == 'F' ? 'viudo(a)' : '' }}>Viudo
                                 (a)</option>
                             <option value="unionlibre" {{ $persona->estu_estado_civil == 'F' ? 'unionlibre' : '' }}>
                                 Unión libre</option>
                             <option value="religioso(a)"
                                 {{ $persona->estu_estado_civil == 'F' ? 'religioso(a)' : '' }}>Religioso (a)</option>
-                            <option value="separado(a)" {{ $persona->estu_estado_civil == 'F' ? 'separado(a)' : '' }}>
+                            <option value="separado(a)"
+                                {{ $persona->estu_estado_civil == 'F' ? 'separado(a)' : '' }}>
                                 Separado (a)</option>
                         </select>
                         @error('estu_estado_civil')
@@ -268,7 +295,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_ingreso">{{ __('Año de ingreso *') }}</label>
+                        <label for="estu_ingreso">{{ __('Año de ingreso (Opcional)') }}</label>
                         <input id="estu_ingreso" type="text"
                             class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
                             value="{{ $persona->estu_ingreso }}" autocomplete="estu_ingreso" autofocus>
@@ -281,7 +308,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso *') }}</label>
+                        <label for="estu_periodo_ingreso">{{ __('Periodo de ingreso (Opcional)') }}</label>
                         <input id="estu_periodo_ingreso" type="text"
                             class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
                             name="estu_periodo_ingreso" value="{{ $persona->estu_periodo_ingreso }}"
@@ -293,7 +320,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_ult_matricula">{{ __('Ultimo periodo matriculado *') }}</label>
+                        <label for="estu_ult_matricula">{{ __('Ultimo periodo matriculado (Opcional)') }}</label>
                         <input id="estu_ult_matricula" type="text"
                             class="form-control @error('estu_ult_matricula') is-invalid @enderror"
                             name="estu_ult_matricula" value="{{ $persona->estu_ult_matricula }}"
@@ -328,7 +355,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_financiamiento">{{ __('Tipo de financiamiento *') }}</label>
+                        <label for="estu_financiamiento">{{ __('Tipo de financiamiento (Opcional)') }}</label>
                         <select class="form-control" name="estu_financiamiento" id="estu_financiamiento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="beca" {{ $persona->estu_financiamiento == 'beca' ? 'selected' : '' }}>Beca
@@ -389,11 +416,12 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="estu_tipo_matricula">{{ __('Tipo de matricula *') }}</label>
+                        <label for="estu_tipo_matricula">{{ __('Tipo de matricula (Opcional)') }}</label>
                         <select class="form-control" name="estu_tipo_matricula" id="estu_tipo_matricula">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="movilidad-interna"
-                                {{ $persona->estu_tipo_matricula == 'movilidad-interna' ? 'selected' : '' }}>Movilidad
+                                {{ $persona->estu_tipo_matricula == 'movilidad-interna' ? 'selected' : '' }}>
+                                Movilidad
                                 Interna</option>
                             <option value="nuevo-transferencias-interna"
                                 {{ $persona->estu_tipo_matricula == 'nuevo-transferencias-interna' ? 'selected' : '' }}>
@@ -405,7 +433,8 @@
                                 {{ $persona->estu_tipo_matricula == 'estudiante-movilidad-academica' ? 'selected' : '' }}>
                                 Estudiante de Movilidad Académica</option>
                             <option value="movilidad-externa"
-                                {{ $persona->estu_tipo_matricula == 'movilidad-externa' ? 'selected' : '' }}>Movilidad
+                                {{ $persona->estu_tipo_matricula == 'movilidad-externa' ? 'selected' : '' }}>
+                                Movilidad
                                 Externa</option>
                             <option value="nuevo-transferencia-externa"
                                 {{ $persona->estu_tipo_matricula == 'nuevo-transferencia-externa' ? 'selected' : '' }}>
@@ -416,15 +445,18 @@
                                 {{ $persona->estu_tipo_matricula == 'transferencia-obligatoria' ? 'selected' : '' }}>
                                 Transferencia Obligatoria</option>
                             <option value="desertor"
-                                {{ $persona->estu_tipo_matricula == 'desertor' ? 'selected' : '' }}>Desertor</option>
+                                {{ $persona->estu_tipo_matricula == 'desertor' ? 'selected' : '' }}>Desertor
+                            </option>
                             <option value="nuevo-regular"
-                                {{ $persona->estu_tipo_matricula == 'nuevo-regular' ? 'selected' : '' }}>Nuevo Regular
+                                {{ $persona->estu_tipo_matricula == 'nuevo-regular' ? 'selected' : '' }}>Nuevo
+                                Regular
                             </option>
                             <option value="continuidad-academica"
                                 {{ $persona->estu_tipo_matricula == 'continuidad-academica' ? 'selected' : '' }}>
                                 Continuidad Académica</option>
                             <option value="egresado"
-                                {{ $persona->estu_tipo_matricula == 'egresado' ? 'selected' : '' }}>Egresado</option>
+                                {{ $persona->estu_tipo_matricula == 'egresado' ? 'selected' : '' }}>Egresado
+                            </option>
                         </select>
                         @error('estu_tipo_matricula')
                             <span class="invalid-feedback" role="alert">
@@ -433,12 +465,14 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="estu_matricula">{{ __('Matricula *') }}</label>
+                        <label for="estu_matricula">{{ __('Matricula (Opcional)') }}</label>
                         <select class="form-control" name="estu_matricula" id="estu_matricula">
                             <option value="">---- SELECCIONE ----</option>
-                            <option value="pendiente" {{ $persona->estu_matricula == 'pendiente' ? 'selected' : '' }}>
+                            <option value="pendiente"
+                                {{ $persona->estu_matricula == 'pendiente' ? 'selected' : '' }}>
                                 Pendiente</option>
-                            <option value="pagado" {{ $persona->estu_matricula == 'pagado' ? 'selected' : '' }}>Pagado
+                            <option value="pagado" {{ $persona->estu_matricula == 'pagado' ? 'selected' : '' }}>
+                                Pagado
                             </option>
                             <option value="sin-liquidar"
                                 {{ $persona->estu_matricula == 'sin-liquidar' ? 'selected' : '' }}>Sin liquidar
@@ -471,6 +505,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <select class="form-control" name="estu_egresado" id="estu_egresado">
+                                    <option value="">---- SELECCIONE ----</option>
                                     <option value="Si" {{ $persona->estu_egresado == 'Si' ? 'selected' : '' }}>Si
                                     </option>
                                     <option value="No" {{ $persona->estu_egresado == 'No' ? 'selected' : '' }}>No
@@ -485,43 +520,64 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <select class="form-control" name="estu_administrativo" id="estu_administrativo">
-                                    <option value="Si" {{ $persona->estu_administrativo == 'Si' ? 'selected' : '' }}>Si
+                                    <option value="">---- SELECCIONE ----</option>
+                                    <option value="Si"
+                                        {{ $persona->estu_administrativo == 'Si' ? 'selected' : '' }}>Si
                                     </option>
-                                    <option value="No" {{ $persona->estu_administrativo == 'No' ? 'selected' : '' }}>No
+                                    <option value="No"
+                                        {{ $persona->estu_administrativo == 'No' ? 'selected' : '' }}>No
                                     </option>
                                 </select>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row mb-3" id="administrativo-estudiante">
+                <div class="mb-3" id="administrativo-estudiante">
                     <h4>Datos administrativos</h4>
-                    <div class="col-md-6">
-                        <label for="estu_cargo">{{ __('Cargo') }}</label>
-                        <input id="estu_cargo" type="text"
-                            class="form-control @error('estu_cargo') is-invalid @enderror" name="estu_cargo"
-                            value="{{$persona->estu_cargo}}" autocomplete="estu_cargo" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="estu_dependencia">{{ __('Dependencia') }}</label>
-                        <input id="estu_dependencia" type="text"
-                            class="form-control @error('estu_dependencia') is-invalid @enderror"
-                            name="estu_dependencia" value="{{$persona->estu_dependencia}}"
-                            autocomplete="estu_dependencia" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="estu_fecha_ingreso">{{ __('Fecha de ingreso') }}</label>
-                        <input id="estu_fecha_ingreso" type="date"
-                            class="form-control @error('estu_fecha_ingreso') is-invalid @enderror"
-                            name="estu_fecha_ingreso" value="{{$persona->estu_fecha_ingreso}}"
-                            autocomplete="estu_fecha_ingreso" autofocus>
-                    </div>
-                    <div class="col-md-6">
-                        <label for="estu_no_contrato">{{ __('No. contrato') }}</label>
-                        <input id="estu_no_contrato" type="text"
-                            class="form-control @error('estu_no_contrato') is-invalid @enderror"
-                            name="estu_no_contrato" value="{{$persona->estu_no_contrato}}"
-                            autocomplete="estu_no_contrato" autofocus>
+                        <hr>
+                    <div class="row">
+                        <div class="col-md-6 mt-2">
+                            <label for="estu_cargo">{{ __('Cargo') }}</label>
+                            <input id="estu_cargo" type="text"
+                                class="form-control @error('estu_cargo') is-invalid @enderror" name="estu_cargo"
+                                value="{{ $persona->estu_cargo }}" autocomplete="estu_cargo" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="estu_dependencia">{{ __('Dependencia') }}</label>
+                            <input id="estu_dependencia" type="text"
+                                class="form-control @error('estu_dependencia') is-invalid @enderror"
+                                name="estu_dependencia" value="{{ $persona->estu_dependencia }}"
+                                autocomplete="estu_dependencia" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="estu_fecha_ingreso">{{ __('Fecha de ingreso') }}</label>
+                            <input id="estu_fecha_ingreso" type="date"
+                                class="form-control @error('estu_fecha_ingreso') is-invalid @enderror"
+                                name="estu_fecha_ingreso" value="{{ $persona->estu_fecha_ingreso }}"
+                                autocomplete="estu_fecha_ingreso" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="estu_no_contrato">{{ __('No. contrato') }}</label>
+                            <input id="estu_no_contrato" type="text"
+                                class="form-control @error('estu_no_contrato') is-invalid @enderror"
+                                name="estu_no_contrato" value="{{ $persona->estu_no_contrato }}"
+                                autocomplete="estu_no_contrato" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="estu_fecha_final">{{ __('Fecha de finalización') }}</label>
+                            <input id="estu_fecha_final" type="date"
+                                class="form-control @error('estu_fecha_final') is-invalid @enderror"
+                                name="estu_fecha_final" value="{{ $persona->estu_fecha_final }}"
+                                autocomplete="estu_fecha_final" autofocus>
+                        </div>
+                        <div class="col-md-6 mt-2">
+                            <label for="estu_estado_cargo">{{ __('Estado cargo') }}</label>
+                            <select class="form-control" name="estu_estado_cargo" id="estu_estado_cargo">
+                                <option value="" >---- SELECCIONE ----</option>
+                                <option value="activo" {{$persona->estu_estado_cargo == 'activo' ? 'selected' : ''}}>Activo</option>
+                                <option value="inactivo" {{$persona->estu_estado_cargo == 'inactivo' ? 'selected' : ''}}>Inactivo</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="row mb-0">

@@ -9,8 +9,8 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container">
-        <div class="tile col-md-12 mt-2 p-3">
+    <div class="container-fluid">
+        <div class="tile col-md-12 mt-2 p-4">
             <div class="row">
                 <div class="col-md-8">
                     <h4>Listado estudiantes</h4>
@@ -97,64 +97,63 @@
             </div>
         </div>
         <hr>
-        <div class="col-md-6 mt-3 tile">
-            <h4><i class="fa fa-files-o"></i> Reporte por año de ingreso</h4>
-            <hr>
-            <form action="/estudiante/{{ $programax }}/listadoingreso" method="post">
-                @csrf
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label>Listado por año de ingreso: </label>
-                        <select class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
-                            id="estu_ingreso">
-                            <option value="">---- SELECCIONE ----</option>
-                            @foreach ($ingresos as $ingreso)
-                                <option value="{{ $ingreso->estu_ingreso }}">{{ $ingreso->estu_ingreso }}</option>
-                            @endforeach
-                        </select>
-                        @error('estu_ingreso')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+        <div class="row">
+            <div class="mt-3 tile" style="width: 600px; margin-left: 15px;">
+                <h4><i class="fa fa-files-o"></i> Reporte por año de ingreso</h4><hr>
+                <form action="/estudiante/{{ $programax }}/listadoingreso" method="post">
+                    @csrf
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label>Listado por año de ingreso: </label>
+                            <select class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
+                                id="estu_ingreso">
+                                <option value="">---- SELECCIONE ----</option>
+                                @foreach ($ingresos as $ingreso)
+                                    <option value="{{ $ingreso->estu_ingreso }}">{{ $ingreso->estu_ingreso }}</option>
+                                @endforeach
+                            </select>
+                            @error('estu_ingreso')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <div class="col-md-12 mt-3">
+                            <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
+                </form>
+            </div>
+            <div class=" mt-3 tile" style="width: 600px; margin-left: 15px;">
+                <h4><i class="fa fa-files-o"></i> Reporte por periodo académico</h4>
+                <hr>
+                <form action="/estudiante/{{ $programax }}/listadoperiodoingreso" method="post">
+                    @csrf
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <label>Listado por periodo académico: </label>
+                            <select class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
+                                name="estu_periodo_ingreso" id="estu_periodo_ingreso">
+                                <option value="">---- SELECCIONE ----</option>
+                                @foreach ($periodos as $periodo)
+                                    <option value="{{ $periodo->estu_periodo_ingreso }}">
+                                        {{ $periodo->estu_periodo_ingreso }}</option>
+                                @endforeach
+                            </select>
+                            @error('estu_periodo_ingreso')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        <div class="col-md-6 mt-3 tile">
-            <h4><i class="fa fa-files-o"></i> Reporte por periodo académico</h4>
-            <hr>
-            <form action="/estudiante/{{ $programax }}/listadoperiodoingreso" method="post">
-                @csrf
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <label>Listado por periodo académico: </label>
-                        <select class="form-control @error('estu_periodo_ingreso') is-invalid @enderror"
-                            name="estu_periodo_ingreso" id="estu_periodo_ingreso">
-                            <option value="">---- SELECCIONE ----</option>
-                            @foreach ($periodos as $periodo)
-                                <option value="{{ $periodo->estu_periodo_ingreso }}">
-                                    {{ $periodo->estu_periodo_ingreso }}</option>
-                            @endforeach
-                        </select>
-                        @error('estu_periodo_ingreso')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
+                        </div>
                     </div>
-                </div>
-                <div class="row mb-3">
-                    <div class="col-md-12">
-                        <button type="submit" class="btn btn-success mb-2">Generar reporte</button>
-                    </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 @endsection

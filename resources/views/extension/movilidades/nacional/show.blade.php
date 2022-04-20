@@ -130,8 +130,8 @@
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
                             <option value="{{ $estudiante->id }}"
-                                {{ $estudiante->id == $nacional->exmona_id_estudiante ? 'selected' : '' }}>
-                                {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                {{ $estudiante->id == $nacional->exmona_id_persona ? 'selected' : '' }}>
+                                {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                         @endforeach
                     </select>
                     {{ $estudiantes->count() <= 0 ? 'No hay estudiantes en plataforma' : '' }}
@@ -226,7 +226,7 @@
                         </div>
                         <div class="form-check">
                             <input class="form-check-input" name="exmona_tipo_movilidad[]" type="checkbox"
-                                value="Semestre acádemico de intercambio" id="flexCheckChecked">
+                                value="Semestre acádemico de intercambio" id="flexCheckChecked" disabled>
                             <label class="form-check-label" for="flexCheckChecked"
                                 @foreach ($tipom as $m) {{ $m == 'Semestre acádemico de intercambio' ? 'checked' : '' }} @endforeach
                                 disabled>
@@ -394,5 +394,5 @@
 @endsection
 @endif
 @section('scripts')
-<script src="/js/admin/programa_plan_estudio.js"></script>
+<script src="/js/admin/movilidad_nacional.js"></script>
 @endsection

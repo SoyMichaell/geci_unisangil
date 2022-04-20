@@ -33,7 +33,7 @@
                 </div>
             </div>
             <div class="table-responsive mt-2">
-                <table class="table table-bordered" id="tables">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -68,9 +68,6 @@
                                     <form action="/extension/{{ $internacional->id }}/eliminarmovilidadinternacional"
                                         method="POST">
                                         <div class="d-flex">
-                                            <a class="btn btn-sm"
-                                                href="/extension/{{ $internacional->id }}/vermovilidadinternacional"><i
-                                                    class="fa fa-folder-open"></i></a>
                                             <a class="btn btn-outline-info btn-sm "
                                                 href="/extension/{{ $internacional->id }}/editarmovilidadinternacional"><i
                                                     class="fa fa-refresh"></i></a>

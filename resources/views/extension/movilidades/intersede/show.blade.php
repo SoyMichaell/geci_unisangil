@@ -129,8 +129,8 @@
                         <option value="">---- SELECCIONE ----</option>
                         @foreach ($estudiantes as $estudiante)
                             <option value="{{ $estudiante->id }}"
-                                {{ $intersede->exmoin_id_estudiante == $estudiante->id ? 'selected' : '' }}>
-                                {{ $estudiante->estu_nombre . ' ' . $estudiante->estu_apellido }}</option>
+                                {{ $intersede->exmoin_id_persona == $estudiante->id ? 'selected' : '' }}>
+                                {{ $estudiante->per_nombre . ' ' . $estudiante->per_apellido }}</option>
                         @endforeach
                     </select>
                     {{ $estudiantes->count() <= 0 ? 'No hay estudiantes en plataforma' : '' }}
@@ -431,5 +431,5 @@
 @endsection
 @endif
 @section('scripts')
-<script src="/js/admin/programa_plan_estudio.js"></script>
+<script src="/js/admin/movilidad_intersede.js"></script>
 @endsection

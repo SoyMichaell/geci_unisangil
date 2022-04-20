@@ -58,7 +58,6 @@ class EstudianteController extends Controller
             'per_correo','estu_ingreso','estu_egresado')
             ->join('persona','estudiante.estu_id_estudiante','=','persona.id')
             ->join('programa','estudiante.estu_programa','=','programa.id')
-            ->where('programa.id', $programa)
             ->get();
         $programax = $programa;
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->distinct()->where('estu_programa', $programa)->get();
@@ -116,23 +115,9 @@ class EstudianteController extends Controller
             'estu_nombre' => 'required',
             'estu_apellido' => 'required',
             'estu_telefono1' => 'required',
-            'estu_direccion' => 'required',
             'estu_correo' => 'required',
-            'estu_estrato' => 'required',
-            'estu_departamento' => 'required|not_in:0',
-            'estu_ciudad' => 'required|not_in:0',
-            'estu_fecha_nacimiento' => 'required',
-            'estu_fecha_expedicion' => 'required',
-            'estu_sexo' => 'required|not_in:0',
-            'estu_estado_civil' => 'required|not_in:0',
-            'estu_ult_matricula' => 'required',
             'estu_semestre' => 'required|not_in:0',
-            'estu_financiamiento' => 'required|not_in:0',
-            'estu_ingreso' => 'required',
-            'estu_periodo_ingreso' => 'required',
             'estu_estado' => 'required|not_in:0',
-            'estu_tipo_matricula' => 'required|not_in:0',
-            'estu_matricula' => 'required|not_in:0'
         ];
 
         $messages = [
@@ -143,23 +128,8 @@ class EstudianteController extends Controller
             'estu_nombre.required' => 'El campo nombre es requerido',
             'estu_apellido.required' => 'El campo apellido es requerido',
             'estu_telefono1.required' => 'El campo telefono 1 es requerido',
-            'estu_direccion.required' => 'El campo dirección es requerido',
             'estu_correo.required' => 'El campo correo es requerido',
-            'estu_estrato.required' => 'El campo estrato es requerido',
-            'estu_departamento.required' => 'El campo departamento es requerido',
-            'estu_ciudad.required' => 'El campo sede es requerido',
-            'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
-            'estu_fecha_expedicion.required' => 'El campo fecha de expedición es requerido',
-            'estu_sexo.required' => 'El campo fecha de sexo biológico es requerido',
-            'estu_estado_civil.required' => 'El campo estado civil es requerido',
-            'estu_ult_matricula.required' => 'El campo ultimo periodo matriculado es requerido',
-            'estu_semestre.required' => 'El campo semestre es requerido',
-            'estu_financiamiento.required' => 'El campo tipo financiamiento es requerido',
-            'estu_ingreso.required' => 'El campo año de ingreso es requerido',
-            'estu_periodo_ingreso.required' => 'El campo periodo de ingreso es requerido',
             'estu_estado.required' => 'El campo estado es requerido',
-            'estu_tipo_matricula.required' => 'El campo tipo matricula es requerido',
-            'estu_matricula.required' => 'El campo matricula es requerido',
         ];
 
         $this->validate($request, $rules, $messages);
@@ -200,6 +170,8 @@ class EstudianteController extends Controller
                     'estu_programa_plan' =>  $request->get('estu_programa_plan'),
                     'estu_telefono2' => $request->get('estu_telefono1'),
                     'estu_direccion' => $request->get('estu_direccion'),
+                    'estu_correo_personal' => $request->get('estu_correo_personal'),
+                    'estu_colegio' => $request->get('estu_colegio'),
                     'estu_estrato' => $request->get('estu_estrato'),
                     'estu_fecha_nacimiento' => $request->get('estu_fecha_nacimiento'),
                     'estu_fecha_expedicion' => $request->get('estu_fecha_expedicion'),
@@ -249,7 +221,7 @@ class EstudianteController extends Controller
             'estu_ingreso','estu_periodo_ingreso','estu_ult_matricula','estu_semestre',
             'estu_financiamiento','estu_entidad','estu_estado','estu_tipo_matricula',
             'estu_matricula','estu_pga','estu_reconocimiento','estu_egresado','estu_administrativo',
-            'estu_cargo','estu_dependencia','estu_fecha_ingreso','estu_no_contrato')
+            'estu_cargo','estu_dependencia','estu_fecha_ingreso','estu_no_contrato','estu_colegio','estu_correo_personal')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
             ->where('per_tipo_usuario', 6)
             ->where('persona.id', $id)
@@ -290,9 +262,8 @@ class EstudianteController extends Controller
             'estu_ingreso','estu_periodo_ingreso','estu_ult_matricula','estu_semestre',
             'estu_financiamiento','estu_entidad','estu_estado','estu_tipo_matricula',
             'estu_matricula','estu_pga','estu_reconocimiento','estu_egresado','estu_administrativo',
-            'estu_cargo','estu_dependencia','estu_fecha_ingreso','estu_no_contrato')
+            'estu_cargo','estu_dependencia','estu_fecha_ingreso','estu_no_contrato','estu_colegio','estu_correo_personal','estu_fecha_final','estu_estado_cargo')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
-            ->where('per_tipo_usuario', 6)
             ->where('persona.id', $id)
             ->first();
         $programas = Programa::all();
@@ -300,9 +271,6 @@ class EstudianteController extends Controller
         $municipios = Municipio::all();
         $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
         $tiposdocumento->all();
-
-        $tipos = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
-        $tipos->all();
         $semestres = collect([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]);
         $semestres->all();
         $estadoprogramas = collect(['Activo', 'Inactivo']);
@@ -314,7 +282,6 @@ class EstudianteController extends Controller
         return view('estudiante.edit')
             ->with('persona', $persona)
             ->with('programas', $programas)
-            ->with('tipos', $tipos)
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios)
             ->with('semestres', $semestres)
@@ -336,23 +303,9 @@ class EstudianteController extends Controller
             'estu_nombre' => 'required',
             'estu_apellido' => 'required',
             'estu_telefono1' => 'required',
-            'estu_direccion' => 'required',
             'estu_correo' => 'required',
-            'estu_estrato' => 'required',
-            'estu_departamento' => 'required|not_in:0',
-            'estu_ciudad' => 'required|not_in:0',
-            'estu_fecha_nacimiento' => 'required',
-            'estu_fecha_expedicion' => 'required',
-            'estu_sexo' => 'required|not_in:0',
-            'estu_estado_civil' => 'required|not_in:0',
-            'estu_ult_matricula' => 'required',
             'estu_semestre' => 'required|not_in:0',
-            'estu_financiamiento' => 'required|not_in:0',
-            'estu_ingreso' => 'required',
-            'estu_periodo_ingreso' => 'required',
             'estu_estado' => 'required|not_in:0',
-            'estu_tipo_matricula' => 'required|not_in:0',
-            'estu_matricula' => 'required|not_in:0'
         ];
 
         $messages = [
@@ -363,28 +316,51 @@ class EstudianteController extends Controller
             'estu_nombre.required' => 'El campo nombre es requerido',
             'estu_apellido.required' => 'El campo apellido es requerido',
             'estu_telefono1.required' => 'El campo telefono 1 es requerido',
-            'estu_direccion.required' => 'El campo dirección es requerido',
             'estu_correo.required' => 'El campo correo es requerido',
-            'estu_estrato.required' => 'El campo estrato es requerido',
-            'estu_departamento.required' => 'El campo departamento es requerido',
-            'estu_ciudad.required' => 'El campo sede es requerido',
-            'estu_fecha_nacimiento.required' => 'El campo fecha de nacimiento es requerido',
-            'estu_fecha_expedicion.required' => 'El campo fecha de expedición es requerido',
-            'estu_sexo.required' => 'El campo fecha de sexo biológico es requerido',
-            'estu_estado_civil.required' => 'El campo estado civil es requerido',
-            'estu_ult_matricula.required' => 'El campo ultimo periodo matriculado es requerido',
-            'estu_semestre.required' => 'El campo semestre es requerido',
-            'estu_financiamiento.required' => 'El campo tipo financiamiento es requerido',
-            'estu_ingreso.required' => 'El campo año de ingreso es requerido',
-            'estu_periodo_ingreso.required' => 'El campo periodo de ingreso es requerido',
             'estu_estado.required' => 'El campo estado es requerido',
-            'estu_tipo_matricula.required' => 'El campo tipo matricula es requerido',
-            'estu_matricula.required' => 'El campo matricula es requerido',
         ];
 
         $this->validate($request, $rules, $messages);
 
-        DB::table('persona')
+        $existeRegistroEstudiante = DB::table('estudiante')->where('estu_id_estudiante', $id)->first();
+
+        if($existeRegistroEstudiante == 'ok'){
+            DB::table('estudiante')
+            ->where('estu_id_estudiante', $id)
+            ->update(
+        [
+            'estu_programa' => $request->get('estu_programa'),
+            'estu_programa_plan' =>  $request->get('estu_programa_plan'),
+            'estu_telefono2' => $request->get('estu_telefono1'),
+            'estu_direccion' => $request->get('estu_direccion'),
+            'estu_estrato' => $request->get('estu_estrato'),
+            'estu_fecha_nacimiento' => $request->get('estu_fecha_nacimiento'),
+            'estu_fecha_expedicion' => $request->get('estu_fecha_expedicion'),
+            'estu_sexo' => $request->get('estu_sexo'),
+            'estu_estado_civil' => $request->get('estu_estado_civil'),
+            'estu_ingreso' => $request->get('estu_ingreso'),
+            'estu_periodo_ingreso' => $request->get('estu_periodo_ingreso'),
+            'estu_ult_matricula' => $request->get('estu_ult_matricula'),
+            'estu_semestre' => $request->get('estu_semestre'),
+            'estu_financiamiento' => $request->get('estu_financiamiento'),
+            'estu_entidad' => $request->get('estu_entidad'),
+            'estu_tipo_matricula' => $request->get('estu_tipo_matricula'),
+            'estu_estado' => $request->get('estu_estado'),
+            'estu_matricula' => $request->get('estu_matricula'),
+            'estu_pga' => $request->get('estu_pga'),
+            'estu_reconocimiento' => $request->get('estu_reconocimiento'),
+            'estu_egresado' => $request->get('estu_egresado'),
+            'estu_administrativo' => $request->get('estu_administrativo'),
+            'estu_cargo' => $request->get('estu_cargo'),
+            'estu_dependencia' => $request->get('estu_dependencia'),
+            'estu_fecha_ingreso' => $request->get('estu_fecha_ingreso'),
+            'estu_no_contrato' => $request->get('estu_no_contrato'),
+            'estu_fecha_final' => $request->get('estu_fecha_final'),
+            'estu_estado_cargo' => $request->get('estu_estado_cargo'),
+        ]
+        );
+        }else{
+            DB::table('persona')
             ->where('id', $id)
             ->update([
             'per_tipo_documento' => $request->get('estu_tipo_documento'),
@@ -429,8 +405,11 @@ class EstudianteController extends Controller
             'estu_dependencia' => $request->get('estu_dependencia'),
             'estu_fecha_ingreso' => $request->get('estu_fecha_ingreso'),
             'estu_no_contrato' => $request->get('estu_no_contrato'),
+            'estu_fecha_final' => $request->get('estu_fecha_final'),
+            'estu_estado_cargo' => $request->get('estu_estado_cargo'),
         ]
         );
+        }
 
         if($request->get('estu_egresado') == 'Si'){
             DB::table('estudiante_egresado')
