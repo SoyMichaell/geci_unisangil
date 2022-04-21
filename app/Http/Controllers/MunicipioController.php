@@ -58,15 +58,11 @@ class MunicipioController extends Controller
 
     public function edit($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $municipio = Municipio::find($id);
         $departamentos = Departamento::all();
         return view('configuracion/municipio.edit')
             ->with('municipio', $municipio)
             ->with('departamentos', $departamentos);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function update(Request $request, $id)

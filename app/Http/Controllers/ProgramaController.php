@@ -202,7 +202,6 @@ class ProgramaController extends Controller
 
     public function edit($id)
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $departamentos = Departamento::all();
             $municipios = Municipio::all();
             $facultades = Facultad::all();
@@ -234,9 +233,6 @@ class ProgramaController extends Controller
                 ->with('programasCiclo', $programasCiclo)
                 ->with('duraccions', $duraccions)
                 ->with('periodoAdmision', $periodoAdmision);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function update(Request $request, $id)
@@ -317,15 +313,11 @@ class ProgramaController extends Controller
 
     public function crearplan()
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $programas = Programa::all();
             $municipios = Municipio::all();
             return view('programa/plan.create')
                 ->with('programas', $programas)
                 ->with('municipios', $municipios);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function registroplan(Request $request)
@@ -366,7 +358,6 @@ class ProgramaController extends Controller
 
     public function editarplan($id)
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $programas = Programa::all();
             $municipios = Municipio::all();
             $plan = ProgramaPlan::find($id);
@@ -374,9 +365,6 @@ class ProgramaController extends Controller
                 ->with('programas', $programas)
                 ->with('municipios', $municipios)
                 ->with('plan', $plan);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function actualizarplan(Request $request, $id)
@@ -464,7 +452,6 @@ class ProgramaController extends Controller
 
     public function crearasignatura()
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $municipios = Municipio::all();
             $programas = Programa::all();
             $plans = ProgramaPlan::all();
@@ -476,9 +463,6 @@ class ProgramaController extends Controller
                 ->with('plans', $plans)
                 ->with('componentes', $componentes)
                 ->with('areas', $areas);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function registroasignatura(Request $request)
@@ -537,7 +521,6 @@ class ProgramaController extends Controller
 
     public function editarasignatura($id,)
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $municipios = Municipio::all();
             $programas = Programa::all();
             $plans = ProgramaPlan::all();
@@ -551,9 +534,6 @@ class ProgramaController extends Controller
                 ->with('asignatura', $asignatura)
                 ->with('componentes', $componentes)
                 ->with('areas', $areas);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function actualizarasignatura(Request $request, $id)
@@ -632,7 +612,6 @@ class ProgramaController extends Controller
 
     public function crearhorario()
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $horarios = ProgramaHorario::all();
             $asignaturas = ProgramaAsignatura::all();
             $personas = DB::table('persona')
@@ -643,9 +622,6 @@ class ProgramaController extends Controller
                 ->with('asignaturas', $asignaturas)
                 ->with('personas', $personas)
                 ->with('horarios', $horarios);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function registrohorario(Request $request)
@@ -687,7 +663,6 @@ class ProgramaController extends Controller
 
     public function editarhorario($id)
     {
-        if (Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2') {
             $horario = ProgramaHorario::find($id);
             $asignaturas = ProgramaAsignatura::all();
             $personas = DB::table('persona')
@@ -698,9 +673,6 @@ class ProgramaController extends Controller
                 ->with('asignaturas', $asignaturas)
                 ->with('personas', $personas)
                 ->with('horario', $horario);
-        } else {
-            return redirect('/home');
-        }
     }
 
     public function actualizarhorario(Request $request, $id)

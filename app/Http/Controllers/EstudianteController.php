@@ -58,6 +58,7 @@ class EstudianteController extends Controller
             'per_correo','estu_ingreso','estu_egresado')
             ->join('persona','estudiante.estu_id_estudiante','=','persona.id')
             ->join('programa','estudiante.estu_programa','=','programa.id')
+            ->where('programa.id', $programa)
             ->get();
         $programax = $programa;
         $ingresos = DB::table('estudiante')->select('estu_ingreso')->distinct()->where('estu_programa', $programa)->get();
@@ -253,7 +254,6 @@ class EstudianteController extends Controller
 
     public function edit($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $persona = DB::table('persona')
             ->select('persona.id','estu_programa','estu_programa_plan','per_tipo_documento',
             'per_numero_documento','per_nombre','per_apellido','per_telefono','estu_telefono2',
@@ -288,9 +288,6 @@ class EstudianteController extends Controller
             ->with('estadoprogramas', $estadoprogramas)
             ->with('tiposdocumento', $tiposdocumento)
             ->with('planes', $planes);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function update(Request $request, $id)
@@ -449,14 +446,10 @@ class EstudianteController extends Controller
 
     public function crearegresado($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $estudiante = DB::table('estudiante_egresado')
             ->where('este_id_estudiante', $id)
             ->first();
         return view('estudiante.egresado')->with('estudiante', $estudiante);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function actualizaregresado(Request $request)
@@ -534,13 +527,9 @@ class EstudianteController extends Controller
 
     public function crearreporte()
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programas = Programa::all();
         return view('estudiante/general.create')
             ->with('programas', $programas);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function registroreporte(Request $request)
@@ -624,15 +613,11 @@ class EstudianteController extends Controller
 
     public function editarreporte($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $programas = Programa::all();
         $general = EstudianteReporte::find($id);
         return view('estudiante/general.edit')
             ->with('programas', $programas)
             ->with('general', $general);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function actualizarreporte(Request $request, $id)

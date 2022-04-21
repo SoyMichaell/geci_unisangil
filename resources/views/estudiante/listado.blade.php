@@ -73,7 +73,7 @@
                                 <td>{{ $persona->estu_egresado }} <a class="badge badge-info"
                                         href="/estudiante/{{ $persona->id }}/crearegresado">{{ $persona->estu_egresado == 'Si' ? 'Completar datos egresado' : '' }}</a>
                                 </td>
-                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
                                     <td style="width: 10%">
                                         <form action="{{ route('estudiante.destroy', $persona->id) }}" method="POST">
                                             <div class="d-flex">
@@ -103,7 +103,7 @@
                 <form action="/estudiante/{{ $programax }}/listadoingreso" method="post">
                     @csrf
                     <div class="row mb-3">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <label>Listado por año de ingreso: </label>
                             <select class="form-control @error('estu_ingreso') is-invalid @enderror" name="estu_ingreso"
                                 id="estu_ingreso">

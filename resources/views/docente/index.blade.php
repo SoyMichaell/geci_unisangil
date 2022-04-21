@@ -35,7 +35,7 @@
                 </div>
             </div>
             <div class="table-responsive mt-2">
-                <table class="table table-bordered" id="tables">
+                <table class="table" id="tables">
                     <thead>
                         <tr>
                             <th>N°</th>

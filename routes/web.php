@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,11 +20,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     if (Auth::check()) {
         $personas = DB::table('persona')
-            ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido','per_correo','per_telefono','tip_nombre','per_id_estado')
+            ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido','per_correo','per_telefono','tip_nombre','per_id_estado','per_tipo_usuario')
             ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
             ->where('per_tipo_usuario',1)
+            ->orWhere('per_tipo_usuario',10)
+            ->orWhere('per_tipo_usuario',9)
             ->orWhere('per_tipo_usuario',2)
             ->orWhere('per_tipo_usuario',4)
+            ->get();
+        $directores = DB::table('persona')
+            ->where('per_tipo_usuario',2)
             ->get();
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario',2)
@@ -32,6 +38,7 @@ Route::get('/', function () {
             $estudiantes = DB::table('persona')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
             ->where('per_tipo_usuario',6)
+            ->orWhere('per_tipo_usuario',9)
             ->get();
             $egresados = DB::table('persona')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
@@ -43,12 +50,15 @@ Route::get('/', function () {
             ->where('per_tipo_usuario',6)
             ->where('estu_administrativo', 'Si')
             ->get();
+            $tipousuarios = TipoUsuario::all();
         return view('home')
         ->with('personas', $personas)
         ->with('docentes', $docentes)
         ->with('estudiantes', $estudiantes)
         ->with('egresados', $egresados)
-        ->with('administrativos', $administrativos);
+        ->with('administrativos', $administrativos)
+        ->with('tipousuarios', $tipousuarios)
+        ->with('directores', $directores);
     } else {
         return view('auth/login');
     }
@@ -80,12 +90,6 @@ Route::resource('/nivelformacion', App\Http\Controllers\NivelFormacionController
 Route::get('metodologia/pdf',[App\Http\Controllers\MetodologiaController::class, 'pdf']);
 Route::get('metodologia/export',[App\Http\Controllers\MetodologiaController::class, 'export']);
 Route::resource('/metodologia', App\Http\Controllers\MetodologiaController::class);
-
-
-
-
-
-
 
 /*Rutas Estudiantes*/
 Route::get('/estudiante/{programa}/verestudiantes', [App\Http\Controllers\EstudianteController::class, 'verestudiantes']);
@@ -246,9 +250,10 @@ Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
 
 /*Rutas usuario*/
-Route::get('usuario/profile', [App\Http\Controllers\UserController::class, 'profile']);
+Route::get('usuario/{id}/profile', [App\Http\Controllers\UserController::class, 'profile']);
 Route::get('usuario/{id}/actualizarestado', [App\Http\Controllers\UserController::class, 'actualizarestado']);
 Route::put('usuario/{id}/actualizar_password', [App\Http\Controllers\UserController::class, 'actualizar_password']);
+Route::put('usuario/{id}/tipousuariocambio', [App\Http\Controllers\UserController::class, 'tipousuariocambio']);
 Route::resource('usuario', App\Http\Controllers\UserController::class);
 
 

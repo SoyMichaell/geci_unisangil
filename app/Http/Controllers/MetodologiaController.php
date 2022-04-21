@@ -45,12 +45,8 @@ class MetodologiaController extends Controller
 
     public function edit($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $metodologia = Metodologia::find($id);
         return view('configuracion/metodologia.edit')->with('metodologia', $metodologia);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function update(Request $request, $id)

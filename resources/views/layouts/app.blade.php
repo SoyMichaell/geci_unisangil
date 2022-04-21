@@ -32,7 +32,7 @@
             <li class="dropdown"><a class="app-nav__item" href="#" data-toggle="dropdown"
                     aria-label="Open Profile Menu"><i class="fa fa-user fa-lg"></i></a>
                 <ul class="dropdown-menu settings-menu dropdown-menu-right">
-                    <li><a class="dropdown-item" href="/usuario/profile"><i class="fa fa-users fa-lg"></i>
+                    <li><a class="dropdown-item" href="/usuario/{{auth()->user()->id}}/profile"><i class="fa fa-users fa-lg"></i>
                             Perfil</a>
                     </li>
                     <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -60,7 +60,7 @@
             <li><a class="app-menu__item active" href="{{ url('home') }}"><i class="app-menu__icon fa fa-dashboard"
                         data-toggle="modal" data-target="#roles"></i><span class="app-menu__label">Dashboard</span></a>
             </li>
-            @if(Auth::user()->per_tipo_usuario == 1)
+            @if(Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
             <li class="treeview"><a class="app-menu__item" href="" data-toggle="treeview"><i
                         class="app-menu__icon fa fa-users"></i><span class="app-menu__label">Registro de usuarios</span><i
                         class="treeview-indicator fa fa-angle-right"></i></a>

@@ -28,10 +28,8 @@
 </style>
 @section('content')
     <div class="container">
-        <h3>Listado de estudiantes registrados por programa académico</h3>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur accusamus enim eius quaerat? Consectetur
-            esse, explicabo obcaecati libero iste et vero ratione, eius voluptates cupiditate dolore illum? Repudiandae,
-            blanditiis inventore.</p>
+        <h4><i class="fa fa-table"></i> Listado de estudiantes registrados por programa académico</h4>
+        <p></p>
         <hr>
         <div class="d-flex justify-content-end">
             <a class="btn btn-outline-danger" href="{{ url('estudiante/exportpdfgeneral') }}" title="Generar reporte pdf"
@@ -44,8 +42,8 @@
         </div>
         <div class="row mt-3">
             @foreach ($programas as $programa)
-                <a class="bg-white p-3 col-md-4" id="card-programa"
-                    href="estudiante/{{ $programa->id }}/verestudiantes">
+                <a class="tile p-3 col-md-4"
+                    href="estudiante/{{ $programa->id }}/verestudiantes" style="margin-left: 20px; text-decoration: none;">
                     <ul style="list-style: none">
                         <h5 class="fw-bold">{{ $programa->pro_nombre }}</h5>
                         <li>{{ $programa->per_nombre . ' ' . $programa->per_apellido }}</li>

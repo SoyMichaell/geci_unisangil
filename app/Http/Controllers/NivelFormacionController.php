@@ -46,12 +46,8 @@ class NivelFormacionController extends Controller
 
     public function edit($id)
     {
-        if(Auth::user()->per_tipo_usuario == '1' || Auth::user()->per_tipo_usuario == '2'){
         $nivelformacion = NivelFormacion::find($id);
         return view('configuracion/nivelformacion.edit')->with('nivelformacion', $nivelformacion);
-        }else{
-            return redirect('/home');
-        }
     }
 
     public function update(Request $request, $id)

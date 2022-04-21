@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container-fluid ">
-        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
             <div class="row mb-3">
                 <div class="col-md-4 col-lg-3">
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-book fa-3x"></i>
@@ -43,6 +43,14 @@
                 <div class="col-md-4 col-lg-3">
                     <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
                         <div class="info">
+                            <h4>Director de programa</h4>
+                            <p><b>({{ $directores->count() }})</b></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 col-lg-3">
+                    <div class="widget-small info coloured-icon"><i class="icon fa fa-user fa-3x"></i>
+                        <div class="info">
                             <h4>Docentes</h4>
                             <p><b>({{ $docentes->count() }})</b></p>
                         </div>
@@ -73,7 +81,7 @@
                         href="{{ url('docente/' . auth()->user()->id . '/directorcompletar') }}">Completar</a></strong>
             </div>
         @endif
-        @if (Auth::user()->per_tipo_usuario == 1)
+        @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
             <div class="tile col-md-12 mt-2">
                 <div class="row">
                     <div class="col-md-6">
@@ -113,33 +121,20 @@
                                         @else
                                             <form action="{{ url("usuario/{$persona->id}") }}" method="POST">
                                                 <div class="d-flex">
-                                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
+                                                        <a class="btn btn-info btn-sm"
+                                                            href="usuario/{{ $persona->id }}/profile"><i
+                                                                class="fa fa-edit"></i></a>
                                                         @if ($persona->per_id_estado == 'activo')
-                                                            <a class="btn btn-info"
+                                                            <a class="btn btn-danger btn-sm"
                                                                 href="usuario/{{ $persona->id }}/actualizarestado">Inactivar</a>
                                                         @else
                                                             <a class="btn btn-success btn-sm"
                                                                 href="usuario/{{ $persona->id }}/actualizarestado">Activar</a>
                                                         @endif
-                                                        <form action="" method="POST">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="col-md-8">
-                                                                <select class="form-control" name="per_tipo_usuario"
-                                                                    id="per_tipo_usuario">
-                                                                    <option value="">Cambiar rol</option>
-                                                                    @foreach ($tipousuarios as $tipousuario)
-                                                                        <option value="{{$tipousuario->id}}" {{$persona->per_tipo_usuario == $tipousuario->id ? 'selected' : ''}}>
-                                                                            {{ $tipousuario->tip_nombre }}
-                                                                        </option>
-                                                                    @endforeach
-                                                                </select>
-                                                                
-                                                            </div>
-                                                        </form>
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger"><i
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i
                                                                 class="fa fa-trash"></i></button>
                                                     @endif
                                                 </div>

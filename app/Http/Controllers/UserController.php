@@ -17,7 +17,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadanía', 'Cédula de extranjeria']);
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
@@ -188,9 +188,30 @@ class UserController extends Controller
             return redirect('/home');
         }
     }
+
+    public function tipousuariocambio(Request $request , $id){
+        $rol = DB::table('persona')->where('id', $id)->first();
+        DB::table('persona')
+            ->where('id', $id)
+            ->update([
+                'per_tipo_usuario' => $request->get('per_tipo_usuario')
+            ]);
+            Alert::success('Exitoso', 'Tipo de usuario actualizado');
+            return redirect('/home');
+    }
     
-    public function profile(){
-        return view('auth.profile');
+    public function profile($id){
+        try{
+            $tipousuarios = TipoUsuario::all();
+            $persona = DB::table('persona')->where('id', $id)->first();
+            return view('auth.profile')
+                ->with('persona',$persona)
+                ->with('tipousuarios', $tipousuarios);
+        }catch(\Illuminate\Database\QueryException $e){
+            Alert::error('No se puede eliminar este persona, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
+            return redirect()->back();
+        }
+        
     }
 
     public function update(Request $request, $id){

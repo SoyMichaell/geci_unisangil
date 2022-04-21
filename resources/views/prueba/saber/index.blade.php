@@ -30,7 +30,7 @@
                 </div>
             </div>
             <br>
-            <table class="table table-bordered" id="tables">
+            <table class="table" id="tables">
                 <thead>
                     <tr>
                         <th>#</th>

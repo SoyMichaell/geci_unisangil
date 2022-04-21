@@ -35,6 +35,9 @@ class HomeController extends Controller
             ->orWhere('per_tipo_usuario',2)
             ->orWhere('per_tipo_usuario',4)
             ->get();
+        $directores = DB::table('persona')
+            ->where('per_tipo_usuario',2)
+            ->get();
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario',2)
             ->orWhere('per_tipo_usuario',3)
@@ -42,6 +45,7 @@ class HomeController extends Controller
             $estudiantes = DB::table('persona')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
             ->where('per_tipo_usuario',6)
+            ->orWhere('per_tipo_usuario',9)
             ->get();
             $egresados = DB::table('persona')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
@@ -60,6 +64,7 @@ class HomeController extends Controller
         ->with('estudiantes', $estudiantes)
         ->with('egresados', $egresados)
         ->with('tipousuarios', $tipousuarios)
-        ->with('administrativos', $administrativos);
+        ->with('administrativos', $administrativos)
+        ->with('directores', $directores);
     }
 }
