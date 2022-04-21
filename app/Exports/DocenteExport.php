@@ -64,9 +64,11 @@ class DocenteExport implements FromCollection, WithHeadings
             ->join('docente','persona.id','=','docente.id_persona_docente')
             ->join('departamento','persona.per_departamento','=','departamento.id')
             ->join('municipio','persona.per_ciudad','=','municipio.id')
-            ->where('persona.per_tipo_usuario', 3)
+            ->where(function($q){
+                $q->where('persona.per_tipo_usuario', 3)
             ->orWhere('persona.per_tipo_usuario', 2)
-            ->get();
+            ->orWhere('persona.per_tipo_usuario', 10);
+            })->get();
         return $docentes;
     }
 }

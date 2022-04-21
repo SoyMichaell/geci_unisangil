@@ -64,9 +64,11 @@ class EstudianteGeneralExport implements FromCollection, WithHeadings
             ->join('programa','estudiante.estu_programa','=','programa.id')
             ->join('departamento','persona.per_departamento','=','departamento.id')
             ->join('municipio','persona.per_ciudad','=','municipio.id')
-            ->join('programa_plan_estudio','estudiante.estu_programa_plan','=','programa_plan_estudio.id')
-            ->where('persona.per_tipo_usuario', 6)
-            ->get();
+            ->leftJoin('programa_plan_estudio','estudiante.estu_programa_plan','=','programa_plan_estudio.id')
+            ->where(function($q){
+                $q->where('persona.per_tipo_usuario', 6)
+                ->orWhere('persona.per_tipo_usuario', 9);
+            })->get();
         return $estudiantes;
     }
 }

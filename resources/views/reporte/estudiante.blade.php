@@ -1,13 +1,14 @@
 @extends('reporte.app')
 @section('title_report')<p>ESTUDIANTES</p>@endsection
 @section('content')
-<img src="{{ public_path('image/logo.jpg') }}">
+<img src="{{ asset('image/logo.jpg') }}">
 <p class="header_right">UNISANGIL <br>@php
     $fecha = date('Y-m-d');
     echo 'FECHA: '.$fecha;
 @endphp <br>MÓDULO: ESTUDIANTES</p>
 @if ($nombre_datos != '' || $nombre_datos != null)
-    <p class="titulo__header">Estudiantes: {{ $nombre_datos->pro_nombre }} </p>
+    <br>
+    <p>Estudiantes: {{ $nombre_datos->pro_nombre }} </p>
 @endif
 <table class="table">
     <thead>

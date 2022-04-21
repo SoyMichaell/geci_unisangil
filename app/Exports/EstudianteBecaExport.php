@@ -64,15 +64,17 @@ class EstudianteBecaExport implements FromCollection, WithHeadings
                 'estu_tipo_matricula','estu_matricula','estu_pga','estu_reconocimiento','estu_egresado','estu_administrativo','estu_cargo','estu_dependencia',
                 'estu_fecha_ingreso','estu_no_contrato'
             )
-            ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
-            ->join('programa','estudiante.estu_programa','=','programa.id')
-            ->join('departamento','persona.per_departamento','=','departamento.id')
-            ->join('municipio','persona.per_ciudad','=','municipio.id')
-            ->join('programa_plan_estudio','estudiante.estu_programa_plan','=','programa_plan_estudio.id')
-            ->where('persona.per_tipo_usuario', 6)
+            ->leftJoin('estudiante','persona.id','=','estudiante.estu_id_estudiante')
+            ->leftJoin('programa','estudiante.estu_programa','=','programa.id')
+            ->leftJoin('departamento','persona.per_departamento','=','departamento.id')
+            ->leftJoin('municipio','persona.per_ciudad','=','municipio.id')
+            ->leftJoin('programa_plan_estudio','estudiante.estu_programa_plan','=','programa_plan_estudio.id')
             ->where('estudiante.estu_programa', $this->programa)
             ->where('estudiante.estu_financiamiento', 'beca')
-            ->get();
+            ->where(function($q){
+                $q->where('persona.per_tipo_usuario', 6)
+                ->orWhere('persona.per_tipo_usuario', 9);
+            })->get();
         return $estudiantes;
     }
 }

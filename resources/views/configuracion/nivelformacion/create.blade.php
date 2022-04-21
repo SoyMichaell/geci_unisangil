@@ -16,7 +16,7 @@
             @csrf
             <div class="row mb-3">
                 <div class="col-md-12">
-                    <label for="niv_nombre">{{ __('Nivel Formación *') }}</label>s
+                    <label for="niv_nombre">{{ __('Nivel Formación *') }}</label>
                     <input id="niv_nombre" type="text" class="form-control @error('niv_nombre') is-invalid @enderror"
                         name="niv_nombre" value="{{ old('niv_nombre') }}" autocomplete="niv_nombre" autofocus>
                     @error('niv_nombre')

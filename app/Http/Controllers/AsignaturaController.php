@@ -15,6 +15,7 @@ class AsignaturaController extends Controller
 {
     public function index()
     {
+       
         $asignaturas = ProgramaAsignatura::all();
         $programas = Programa::all();
         $facultades = Facultad::all();

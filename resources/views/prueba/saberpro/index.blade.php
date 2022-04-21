@@ -16,7 +16,7 @@
         <div class="tile">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Listado pruebas saber pro</h4>
+                    <h4>Listado pruebas saber PRO</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <a class="btn btn-outline-success" href="/prueba/crearsaberpro"><i

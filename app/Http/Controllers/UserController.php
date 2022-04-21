@@ -194,13 +194,29 @@ class UserController extends Controller
 
     public function tipousuariocambio(Request $request , $id){
         $rol = DB::table('persona')->where('id', $id)->first();
-        DB::table('persona')
+        if($request->get('per_tipo_usuario') == '9'){
+            DB::table('persona')
+            ->where('id', $id)
+            ->update([
+                'per_tipo_usuario' => $request->get('per_tipo_usuario')
+            ]);
+            DB::table('estudiante')
+            ->insert([
+                'estu_id_estudiante' => $id,
+                'estu_programa' => '1',
+            ]);
+            Alert::success('Exitoso', 'Tipo de usuario actualizado');
+            return redirect('/home');
+        }else{
+            DB::table('persona')
             ->where('id', $id)
             ->update([
                 'per_tipo_usuario' => $request->get('per_tipo_usuario')
             ]);
             Alert::success('Exitoso', 'Tipo de usuario actualizado');
             return redirect('/home');
+        }
+        
     }
     
     public function profile($id){

@@ -24,13 +24,15 @@ class TrabajoController extends Controller
     public function create()
     {
         $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
+            ->where('per_tipo_usuario', 1)
+            ->orWhere('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
-            ->orWhere('per_tipo_usuario', 7)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
 
         $estudiantes = DB::table('persona')
         ->Where('per_tipo_usuario', 6)
+        ->orWhere('per_tipo_usuario', 9)
         ->get();
 
         $modalidades = ModalidadGrado::all();

@@ -321,7 +321,7 @@ class EstudianteController extends Controller
 
         $existeRegistroEstudiante = DB::table('estudiante')->where('estu_id_estudiante', $id)->first();
 
-        if($existeRegistroEstudiante == 'ok'){
+        if(!is_null($existeRegistroEstudiante)){
             DB::table('estudiante')
             ->where('estu_id_estudiante', $id)
             ->update(
@@ -704,6 +704,7 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('programa','estudiante.estu_programa','=','programa.id')
         ->where('per_tipo_usuario', 6)
+        ->orWhere('per_tipo_usuario', 9)
         ->orderByDesc('pro_nombre')
         ->get();
         $nombre_datos = "";
@@ -725,8 +726,10 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No hay registros');
             return redirect('/estudiante');
@@ -740,9 +743,11 @@ class EstudianteController extends Controller
         $datos = DB::table('persona')
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('programa','estudiante.estu_programa','=','programa.id')
-        ->where('per_tipo_usuario', 6)
         ->where('estu_programa', $id)
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         $nombre_datos = DB::table('programa')
             ->where('id', $id)
             ->first();
@@ -764,9 +769,11 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
         ->where('estudiante.estu_programa', $id)
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No hay registros');
             return redirect('/estudiante');
@@ -780,10 +787,12 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
         ->where('estudiante.estu_programa', $id)
         ->where('estudiante.estu_financiamiento', 'beca')
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No existen estudiantes con financiamiento tipo beca');
             return redirect('/estudiante/'.$id.'/verestudiantes');
@@ -797,10 +806,12 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
         ->where('estudiante.estu_programa', $id)
         ->where('estudiante.estu_financiamiento', 'de-contado')
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No existen estudiantes con financiamiento de contado');
             return redirect('/estudiante/'.$id.'/verestudiantes');
@@ -814,10 +825,12 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
         ->where('estudiante.estu_programa', $id)
         ->where('estudiante.estu_financiamiento', 'prestamo')
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No existen estudiantes con financiamiento tipo prestamo');
             return redirect('/estudiante/'.$id.'/verestudiantes');
@@ -838,10 +851,12 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
         ->where('estudiante.estu_programa', $id)
         ->where('estudiante.estu_ingreso', $request->get('estu_ingreso'))
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No existen estudiantes registrados durante ese año');
             return redirect('/estudiante/'.$id.'/verestudiantes');
@@ -862,10 +877,12 @@ class EstudianteController extends Controller
         ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
         ->join('departamento','persona.per_departamento','=','departamento.id')
         ->join('municipio','persona.per_ciudad','=','municipio.id')
-        ->where('persona.per_tipo_usuario', 6)
         ->where('estudiante.estu_programa', $id)
         ->where('estudiante.estu_periodo_ingreso', $request->get('estu_periodo_ingreso'))
-        ->get();
+        ->where(function($q){
+            $q->where('persona.per_tipo_usuario', 6)
+            ->orWhere('persona.per_tipo_usuario', 9);
+        })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No existen estudiantes registrados en ese periodo de tiempo');
             return redirect('/estudiante/'.$id.'/verestudiantes');

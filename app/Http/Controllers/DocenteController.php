@@ -577,7 +577,6 @@ class DocenteController extends Controller
         return view('docente/contrato.index')
             ->with('persona', $persona)
             ->with('contratos', $contratos);
-        }
     }
 
     public function registrocontrato(Request $request)
@@ -994,9 +993,11 @@ class DocenteController extends Controller
         ->join('docente','persona.id','=','docente.id_persona_docente')
             ->join('departamento','persona.per_departamento','=','departamento.id')
             ->join('municipio','persona.per_ciudad','=','municipio.id')
-            ->where('persona.per_tipo_usuario', 3)
+            ->where(function($q){
+                $q->where('persona.per_tipo_usuario', 3)
             ->orWhere('persona.per_tipo_usuario', 2)
-            ->get();
+            ->orWhere('persona.per_tipo_usuario', 10);
+            })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No hay registros de docentes');
             return redirect('/docente');
@@ -1015,9 +1016,11 @@ class DocenteController extends Controller
         ->join('docente','persona.id','=','docente.id_persona_docente')
             ->join('departamento','persona.per_departamento','=','departamento.id')
             ->join('municipio','persona.per_ciudad','=','municipio.id')
-            ->where('persona.per_tipo_usuario', 3)
+            ->where(function($q){
+                $q->where('persona.per_tipo_usuario', 3)
             ->orWhere('persona.per_tipo_usuario', 2)
-            ->get();
+            ->orWhere('persona.per_tipo_usuario', 10);
+            })->get();
         if ($datos->count() <= 0) {
             Alert::warning('Advertencia','No hay registros de docentes');
             return redirect('/docente');
@@ -1036,7 +1039,6 @@ class DocenteController extends Controller
             $pdf = \App::make('dompdf.wrapper');
             $pdf->setPaper('A4', 'landscape');
             $pdf->loadHTML($view);
-
             return $pdf->stream('reporte.pdf');
         }
     }

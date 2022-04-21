@@ -1,7 +1,7 @@
 @extends('reporte.app')
 @section('title_report')<p>PROGRAMA</p>@endsection
 @section('content')
-<img src="{{ public_path('image/logo.jpg') }}">
+<img src="{{ asset('image/logo.jpg') }}">
 <p class="header_right">UNISANGIL <br>@php
     $fecha = date('Y-m-d');
     echo 'FECHA: '.$fecha;
