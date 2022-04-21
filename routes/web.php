@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Programa;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;

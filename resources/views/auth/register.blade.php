@@ -23,15 +23,17 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <style>
-        body{
+        body {
             background-color: #f2f3f8;
         }
-        .card-register{
+
+        .card-register {
             width: 550px;
             margin: auto;
             margin-top: 10%;
             padding: 15px;
         }
+
         .footer {
             text-align: center;
             width: 100%;
@@ -48,7 +50,8 @@
         @include('sweetalert::alert')
         <div class="row mx-auto">
             <div class="card-register tile">
-                <h4><i class="fa fa-cube"></i> Registro nuevos usuarios</h4><hr>
+                <h4><i class="fa fa-cube"></i> Registro nuevos usuarios</h4>
+                <hr>
                 <form action="/usuario" method="POST">
                     @csrf
                     <div class="row mb-3">
@@ -207,18 +210,44 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row mb-3" id="administrador-estudiante">
+                        <div class="col-md-12">
+                            <label class="col-md-12">Programa</label>
+                            <div class="col-md-12">
+                                <select class="form-control  @error('estu_programa') is-invalid @enderror" name="estu_programa"
+                                id="estu_programa">
+                                <option value="">---- SELECCIONE ----</option>
+                                @foreach ($programas as $programa)
+                                    <option value="{{ $programa->id }}">{{ $programa->pro_nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('estu_programa')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
+                        </div>
+                    </div>
                     <div class="row mb-3">
                         <div class="col-md-12">
-                            <label class=" ml-3" for="per_tipo_usuario">Tipo de usuario</label>
-                            @foreach ($tiposusuario as $tipousuario)
-                                <div class="form-check ml-3">
-                                    <input class="form-check-input" name="per_tipo_usuario" type="radio"
-                                        value="{{ $tipousuario->id }}" id="flexCheckDefault">
-                                    <label class="form-check-label" for="flexCheckDefault">
-                                        {{ $tipousuario->tip_nombre }}
-                                    </label>
-                                </div>
-                            @endforeach
+                            <label class="col-md-12">Tipo de usuario</label>
+                            <div class="col-md-12">
+                                <select class="form-control  @error('per_tipo_usuario') is-invalid @enderror" name="per_tipo_usuario"
+                                id="per_tipo_usuario">
+                                <option value="">---- SELECCIONE ----</option>
+                                @foreach ($tiposusuario as $tipousuario)
+                                    <option value="{{ $tipousuario->id }}">{{ $tipousuario->tip_nombre }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('per_tipo_usuario')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                            </div>
                         </div>
                     </div>
                     <div class="row mb-0 mx-auto">
@@ -229,10 +258,10 @@
                         </div>
                     </div>
                 </form>
-                @if(!Auth::check())
-                <div class="row mx-auto d-block text-center mt-2">
-                    <a class="text-center" href="/login">Ya tengo una cuenta</a>
-                </div>
+                @if (!Auth::check())
+                    <div class="row mx-auto d-block text-center mt-2">
+                        <a class="text-center" href="/login">Ya tengo una cuenta</a>
+                    </div>
                 @endif
             </div>
         </div>
@@ -240,6 +269,7 @@
     <p class="footer">Copyright &copy 2022. Todos los derechos reservados</p>
     <script src="https://use.fontawesome.com/6c8ac1ea46.js"></script>
     <script src="{{ asset('js/jquery.js') }}"></script>
+    <script src="{{asset('js/admin/ocultar_rol.js')}}"></script>
 
 </body>
 

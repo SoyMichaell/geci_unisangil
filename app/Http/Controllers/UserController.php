@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Departamento;
 use App\Models\Municipio;
+use App\Models\Programa;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -21,6 +22,7 @@ class UserController extends Controller
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
+        $programas = Programa::all();
         if(!Auth::check()){
             $tiposusuario = DB::table('tipo_usuario')
             ->Where('id', 2)
@@ -40,7 +42,8 @@ class UserController extends Controller
             ->with('tiposdocumento', $tiposdocumento)
             ->with('departamentos', $departamentos)
             ->with('municipios', $municipios)
-            ->with('tiposusuario', $tiposusuario);
+            ->with('tiposusuario', $tiposusuario)
+            ->with('programas', $programas);
     }
 
 
@@ -157,7 +160,7 @@ class UserController extends Controller
             DB::table('estudiante')->insert(
                 [
                     'estu_id_estudiante' => $id,
-                    'estu_programa' => '1',
+                    'estu_programa' => $request->get('estu_programa'),
                 ]
             );
         }
