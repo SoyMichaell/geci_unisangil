@@ -214,7 +214,7 @@ class UserController extends Controller
         
     }
 
-    public function update(Request $request, $id){
+    public function actualizardato(Request $request, $id){
         $rules = [
             'per_tipo_documento' => 'required|not_in:0',
             'per_numero_documento' => 'required',
@@ -243,7 +243,7 @@ class UserController extends Controller
         $user->save();
 
         Alert::success('Exitoso', 'La información se actulizo con exito');
-        return redirect('/usuario/profile');
+        return redirect('usuario/'.$id.'/profile');
 
     }
 
@@ -260,7 +260,7 @@ class UserController extends Controller
 
         if($request->get('password') != $request->get('password_confirm')){
             Alert::success('Advetencia', 'Las contraseña no coinciden');
-            return redirect('/usuario/profile');
+            return redirect('usuario/'.$id.'/profile');
         }
 
         $user = User::find($id);
@@ -268,7 +268,7 @@ class UserController extends Controller
         $user->save();
 
         Alert::success('Exitoso', 'La información se actulizo con exito');
-        return redirect('/usuario/profile');
+        return redirect('usuario/'.$id.'/profile');
     }
 
     public function destroy($id)

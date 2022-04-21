@@ -251,6 +251,7 @@ Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
 /*Rutas usuario*/
 Route::get('usuario/{id}/profile', [App\Http\Controllers\UserController::class, 'profile']);
+Route::put('usuario/{id}/actualizardato', [App\Http\Controllers\UserController::class, 'actualizardato']);
 Route::get('usuario/{id}/actualizarestado', [App\Http\Controllers\UserController::class, 'actualizarestado']);
 Route::put('usuario/{id}/actualizar_password', [App\Http\Controllers\UserController::class, 'actualizar_password']);
 Route::put('usuario/{id}/tipousuariocambio', [App\Http\Controllers\UserController::class, 'tipousuariocambio']);

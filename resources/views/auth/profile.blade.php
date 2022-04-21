@@ -10,7 +10,7 @@
             <div class="row">
                 <div class="tile col-md-8">
                     <h4><i class="fa fa-cube"></i> Información básica</h4><hr>
-                    <form action="/usuario/{{$persona->id}}" method="post">
+                    <form action="/usuario/{{$persona->id}}/actualizardato" method="post">
                         @csrf
                         @method('PUT')
                         <div class="row mb-3">
