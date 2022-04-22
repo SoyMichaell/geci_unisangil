@@ -23,11 +23,6 @@ Route::get('/', function () {
         $personas = DB::table('persona')
             ->select('persona.id','per_tipo_documento','per_numero_documento','per_nombre','per_apellido','per_correo','per_telefono','tip_nombre','per_id_estado','per_tipo_usuario')
             ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
-            ->where('per_tipo_usuario',1)
-            ->orWhere('per_tipo_usuario',10)
-            ->orWhere('per_tipo_usuario',9)
-            ->orWhere('per_tipo_usuario',2)
-            ->orWhere('per_tipo_usuario',4)
             ->get();
         $directores = DB::table('persona')
             ->where('per_tipo_usuario',2)
@@ -249,7 +244,6 @@ Route::put('software/{recurso}/actualizarrecurso', [App\Http\Controllers\Softwar
 Route::delete('software/{recurso}/eliminarrecurso', [App\Http\Controllers\SoftwareController::class, 'eliminarrecurso']);
 Route::resource('software', App\Http\Controllers\SoftwareController::class);
 
-
 /*Rutas usuario*/
 Route::get('usuario/{id}/profile', [App\Http\Controllers\UserController::class, 'profile']);
 Route::put('usuario/{id}/actualizardato', [App\Http\Controllers\UserController::class, 'actualizardato']);
@@ -257,7 +251,6 @@ Route::get('usuario/{id}/actualizarestado', [App\Http\Controllers\UserController
 Route::put('usuario/{id}/actualizar_password', [App\Http\Controllers\UserController::class, 'actualizar_password']);
 Route::put('usuario/{id}/tipousuariocambio', [App\Http\Controllers\UserController::class, 'tipousuariocambio']);
 Route::resource('usuario', App\Http\Controllers\UserController::class);
-
 
 /*Rutas extensión*/
 //Rutas actividad
@@ -290,6 +283,7 @@ Route::get('extension/{curso}/editarcurso', [App\Http\Controllers\ExtensionContr
 Route::get('extension/{curso}/vercurso', [App\Http\Controllers\ExtensionController::class, 'vercurso']);
 Route::put('extension/{curso}/actualizarcurso', [App\Http\Controllers\ExtensionController::class, 'actualizarcurso']);
 Route::delete('extension/{curso}/eliminarcurso', [App\Http\Controllers\ExtensionController::class, 'eliminarcurso']);
+
 //Rutas educación continua
 Route::get('extension/exporteducacionpdf', [App\Http\Controllers\ExtensionController::class, 'exporteducacionpdf']);
 Route::get('extension/exporteducacionexcel', [App\Http\Controllers\ExtensionController::class, 'exporteducacionexcel']);
@@ -440,16 +434,6 @@ Route::get('/red/exportpdf', [App\Http\Controllers\RedAcademicaController::class
 Route::get('/red/exportexcel', [App\Http\Controllers\RedAcademicaController::class, 'exportexcel']);
 Route::resource('red', App\Http\Controllers\RedAcademicaController::class);
 
-
-//Rutas Practicas Laborales
-Route::get('/practica/exportpdf', [App\Http\Controllers\PracticaController::class, 'exportpdf']);
-Route::get('/practica/exportdocentepdf', [App\Http\Controllers\PracticaController::class, 'exportdocentepdf']);
-Route::get('/practica/exportestudiantepdf', [App\Http\Controllers\PracticaController::class, 'exportestudiantepdf']);
-Route::get('/practica/exportexcel', [App\Http\Controllers\PracticaController::class, 'exportexcel']);
-Route::get('/practica/exportdocenteexcel', [App\Http\Controllers\PracticaController::class, 'exportdocenteexcel']);
-Route::get('/practica/exportestudianteexcel', [App\Http\Controllers\PracticaController::class, 'exportestudianteexcel']);
-Route::resource('practica', App\Http\Controllers\PracticaController::class);
-
 //Rutas laboratorios
 Route::get('/laboratorio/exportpdf', [App\Http\Controllers\LaboratorioController::class, 'exportpdf']);
 Route::get('/laboratorio/exportexcel', [App\Http\Controllers\LaboratorioController::class, 'exportexcel']);
@@ -505,3 +489,5 @@ Route::get('investigacion/{proyecto}/editarproyecto', [App\Http\Controllers\Inve
 Route::put('investigacion/{proyecto}/actualizarproyecto', [App\Http\Controllers\InvestigacionController::class, 'actualizarproyecto']);
 Route::delete('investigacion/{proyecto}/eliminarproyecto', [App\Http\Controllers\InvestigacionController::class, 'eliminarproyecto']);
 Route::resource('investigacion', App\Http\Controllers\InvestigacionController::class);
+
+Route::resource('empresa', App\Http\Controllers\EmpresaController::class);

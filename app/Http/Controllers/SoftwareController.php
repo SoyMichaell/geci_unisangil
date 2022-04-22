@@ -187,6 +187,7 @@ class SoftwareController extends Controller
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $asignaturas = ProgramaAsignatura::all();
         return view('software/recurso.create')
@@ -228,6 +229,7 @@ class SoftwareController extends Controller
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $asignaturas = ProgramaAsignatura::all();
         $recurso = SoftwareRecurso::find($id);
@@ -241,6 +243,7 @@ class SoftwareController extends Controller
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $asignaturas = ProgramaAsignatura::all();
         $recurso = SoftwareRecurso::find($id);

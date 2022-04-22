@@ -66,8 +66,8 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $persona->per_tipo_documento }}</td>
                                 <td>{{ $persona->per_numero_documento }}</td>
-                                <td>{{ $persona->per_nombre }}</td>
-                                <td>{{ $persona->per_apellido }}</td>
+                                <td>{{ str::upper($persona->per_nombre) }}</td>
+                                <td>{{ Str::upper($persona->per_apellido) }}</td>
                                 <td>{{ $persona->per_correo }}</td>
                                 <td>{{ $persona->estu_ingreso }}</td>
                                 <td>{{ $persona->estu_egresado }} <a class="badge badge-info"

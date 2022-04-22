@@ -53,7 +53,7 @@
                         <option value="">---- SELECCIONE ----</option>
                         <option value="1" {{ $participante->dop_sexo_biologico == '1' ? 'selected' : '' }}>Masculino
                         </option>
-                        <option value="2" {{ $participante->dop_sexo_biologico == '1' ? 'selected' : '' }}>Femenino
+                        <option value="2" {{ $participante->dop_sexo_biologico == '2' ? 'selected' : '' }}>Femenino
                         </option>
                     </select>
                     @error('extedu_numero_horas')

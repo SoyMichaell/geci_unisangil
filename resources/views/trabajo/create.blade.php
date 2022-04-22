@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="tra_codigo_proyecto">Codigo proyecto</label>
+                        <label for="tra_codigo_proyecto">Codigo proyecto o practica</label>
                         <input class="form-control @error('tra_codigo_proyecto') is-invalid @enderror"
                             name="tra_codigo_proyecto" id="tra_codigo_proyecto"
                             value="{{ old('tra_codigo_proyecto') }}" type="text" autocomplete="tra_codigo_proyecto"
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="tra_titulo_proyecto">Titulo proyecto de grado</label>
+                        <label for="tra_titulo_proyecto">Titulo proyecto de grado o practica laboral</label>
                         <input class="form-control @error('tra_titulo_proyecto') is-invalid @enderror"
                             name="tra_titulo_proyecto" id="tra_titulo_proyecto"
                             value="{{ old('tra_titulo_proyecto') }}" type="text" autocomplete="tra_titulo_proyecto"
@@ -80,10 +80,39 @@
                             id="tra_modalidad_grado">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($modalidades as $modalidad)
-                                <option value="{{ $modalidad->id }}">{{ $modalidad->mod_nombre }}</option>
+                                <option value="{{$modalidad->id}}">{{$modalidad->mod_nombre}}</option>
                             @endforeach
                         </select>
                         @error('tra_modalidad_grado')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3" id="practica-laboral">
+                    <div class="col-md-6">
+                        <label for="tra_id_empresa">Empresa</label>
+                        <select class="form-control" name="tra_id_empresa"
+                            id="tra_id_empresa">
+                            <option value="">---- SELECCIONE ----</option>
+                            @foreach ($empresas as $empresa)
+                                <option value="{{ $empresa->id }}">
+                                    {{$empresa->razon_social }}</option>
+                            @endforeach
+                        </select>
+                        @error('tra_id_empresa')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                    <div class="col-md-6">
+                        <label for="tra_cargo">Cargo</label>
+                        <input class="form-control @error('tra_cargo') is-invalid @enderror"
+                            name="tra_cargo" id="tra_cargo" value="{{ old('tra_cargo') }}"
+                            type="text" autocomplete="tra_cargo" autofocus>
+                        @error('tra_cargo')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -136,3 +165,6 @@
     </div>
 @endsection
 @endif
+@section('scripts')
+<script src="/js/admin/modalidad_grado.js"></script>
+@endsection

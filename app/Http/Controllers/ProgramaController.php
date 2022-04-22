@@ -616,7 +616,8 @@ class ProgramaController extends Controller
             $asignaturas = ProgramaAsignatura::all();
             $personas = DB::table('persona')
                 ->where('per_tipo_usuario', 2)
-                ->orWhere('per_tipo_usuario', 5)
+                ->orWhere('per_tipo_usuario', 3)
+                ->orWhere('per_tipo_usuario', 10)
                 ->get();
             return view('programa/horario.create')
                 ->with('asignaturas', $asignaturas)
@@ -666,8 +667,9 @@ class ProgramaController extends Controller
             $horario = ProgramaHorario::find($id);
             $asignaturas = ProgramaAsignatura::all();
             $personas = DB::table('persona')
-                ->where('per_tipo_usuario', 2)
-                ->orWhere('per_tipo_usuario', 5)
+            ->where('per_tipo_usuario', 2)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
                 ->get();
             return view('programa/horario.edit')
                 ->with('asignaturas', $asignaturas)

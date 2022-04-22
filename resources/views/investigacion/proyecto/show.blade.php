@@ -30,9 +30,8 @@
 </style>
 @section('content')
     <div class="container">
+        <h4>Información proyecto</h4><hr>
         <div class="row mb-3">
-            <h4 style="float: right">Información proyecto</h4>
-            <hr>
             <div class="col-md-8">
                 <h5>Grupo de investigación</h5>
                 <ul>

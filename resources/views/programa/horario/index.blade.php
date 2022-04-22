@@ -64,11 +64,11 @@
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="{{ url('programa/' . $horario->id . '/editarhorario') }}"
                                                     title="Editar registro"><i
-                                                        class="fa-solid fa-pen-to-square"></i></a>
+                                                        class="fa fa-pen-to-square"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="submit"><i
-                                                        class="fa-solid fa-trash"></i></button>
+                                                        class="fa fa-trash"></i></button>
                                             </div>
                                         </form>
                                     </td>

@@ -31,6 +31,7 @@ class InvestigacionController extends Controller
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $sedes = Municipio::all();
         $facultades = Facultad::all();
@@ -97,6 +98,7 @@ class InvestigacionController extends Controller
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $grupo = InvGrupoInvestigacion::find($id);
         $integrantes = DB::table('inv_investigador')
@@ -115,6 +117,7 @@ class InvestigacionController extends Controller
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
             $sedes = Municipio::all();
             $facultades = Facultad::all();
@@ -197,9 +200,6 @@ class InvestigacionController extends Controller
         ->join('persona','persona.id','=','inv_investigador.inves_id_persona')
         ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
         ->join('inv_grupo_investigacion','inv_grupo_investigacion.id','=','inv_investigador.inves_id_grupo')
-        ->where('per_tipo_usuario', 2)
-        ->orWhere('per_tipo_usuario', 3)
-        ->orWhere('per_tipo_usuario', 6)
         ->orderBy('inv_nombre_grupo', 'DESC')
         ->get();
         return view('investigacion/investigador.index')
@@ -208,9 +208,6 @@ class InvestigacionController extends Controller
 
     public function crearintegrante(){
         $personas = DB::table('persona')
-        ->where('per_tipo_usuario', 2)
-        ->orWhere('per_tipo_usuario', 3)
-        ->orWhere('per_tipo_usuario', 6)
         ->get();
         $grupos = InvGrupoInvestigacion::all();
         return view('investigacion/investigador.create')
@@ -265,7 +262,7 @@ class InvestigacionController extends Controller
         ->join('persona','inv_investigador.inves_id_persona','=','persona.id')
         ->join('inv_grupo_investigacion','inv_investigador.inves_id_grupo','=','inv_grupo_investigacion.id')
         ->join('tipo_usuario','persona.per_tipo_usuario','=','tipo_usuario.id')
-        ->join('docente','persona.id','=','docente.id_persona_docente')
+        ->leftJoin('docente','persona.id','=','docente.id_persona_docente')
         ->where('persona.id', $id)
         ->first();
         return view('investigacion/investigador.show')
@@ -274,9 +271,6 @@ class InvestigacionController extends Controller
 
     public function editarintegrante($id){
         $personas = DB::table('persona')
-        ->where('per_tipo_usuario', 2)
-        ->orWhere('per_tipo_usuario', 3)
-        ->orWhere('per_tipo_usuario', 6)
         ->get();
         $grupos = InvGrupoInvestigacion::all();
         $investigador = InvInvestigador::find($id);

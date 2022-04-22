@@ -89,6 +89,9 @@
                     <li><a class="treeview-item" href="{{ url('metodologia') }}"><i class="icon fa fa-circle-o"></i>
                             Metodologia</a>
                     </li>
+                    <li><a class="treeview-item" href="{{ url('empresa') }}"><i class="icon fa fa-circle-o"></i>
+                            Empresas</a>
+                    </li>
                 </ul>
             </li>
             @endif

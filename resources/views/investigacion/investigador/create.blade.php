@@ -12,15 +12,15 @@
     @endsection
 @endsection
 @section('content')
-    <div class="col-md-12">
-        <div class="tile w-50">
+    <div class="container ">
+        <div class="tile col-md-12">
             <h4><i class="fa fa-cube"></i> Registro investigador</h4><hr>
             <form action="/investigacion/registrointegrante" method="post">
                 @csrf
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="inves_id_persona">{{ __('Investigador *') }}</label>
-                        <select class="form-control @error('inves_id_persona') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('inves_id_persona') is-invalid @enderror"
                             name="inves_id_persona" id="inves_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
@@ -34,7 +34,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-12 mt-2">
+                    <div class="col-md-6">
                         <label for="inves_enlace_cvlac">{{ __('Enlace CVLAC ') }}</label>
                         <input id="inves_enlace_cvlac" type="url"
                             class="form-control @error('inves_enlace_cvlac') is-invalid @enderror" name="inves_enlace_cvlac"
@@ -47,7 +47,7 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <label for="inves_tipo_vinculacion">{{ __('Tipo de vinculación *') }}</label>
                         <input id="inves_tipo_vinculacion" type="text"
                             class="form-control @error('inves_tipo_vinculacion') is-invalid @enderror"
@@ -59,7 +59,7 @@
                             </span>
                         @enderror
                     </div>
-                    <div class="col-md-12 mt-2">
+                    <div class="col-md-6">
                         <label for="inves_categoria">{{ __('Categoría') }}</label>
                         <input id="inves_categoria" type="text"
                             class="form-control @error('inves_categoria') is-invalid @enderror"
@@ -73,7 +73,7 @@
                     </div>
                     <div class="col-md-12 mt-2">
                         <label for="inves_id_grupo">{{ __('Grupo de investigación *') }}</label>
-                        <select class="form-control @error('inves_id_grupo') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('inves_id_grupo') is-invalid @enderror"
                             name="inves_id_grupo" id="inves_id_grupo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($grupos as $grupo)

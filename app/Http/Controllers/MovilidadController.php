@@ -26,10 +26,12 @@ class MovilidadController extends Controller
         ->select('persona.id','per_nombre','per_apellido')
         ->where('per_tipo_usuario', 2)
         ->orWhere('per_tipo_usuario',3)
+        ->orWhere('per_tipo_usuario',10)
         ->get();
         $estudiantes = DB::table('persona')
         ->select('persona.id','per_nombre','per_apellido')
         ->where('per_tipo_usuario',6)
+        ->orWhere('per_tipo_usuario',9)
         ->get();
         $administrativos = DB::table('persona')
         ->select('persona.id','per_nombre','per_apellido')

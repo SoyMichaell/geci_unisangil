@@ -18,6 +18,8 @@ class Trabajo extends Model
         'tra_id_estudiante',
         'tra_fecha_inicio',
         'tra_modalidad_grado',
+        'tra_id_empresa',
+        'tra_cargo',
         'tra_id_director',
         'tra_id_codirector',
         'tra_id_externo',

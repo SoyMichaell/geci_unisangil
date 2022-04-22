@@ -55,8 +55,8 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $persona->per_tipo_documento }}</td>
                                 <td>{{ $persona->per_numero_documento }}</td>
-                                <td>{{ Str::ucfirst($persona->per_nombre) }}</td>
-                                <td>{{ Str::ucfirst($persona->per_apellido) }}</td>
+                                <td>{{ Str::upper($persona->per_nombre)}}</td>
+                                <td>{{ Str::upper($persona->per_apellido) }}</td>
                                 <td>{{ $persona->per_correo }}</td>
                                 <td>{{ $persona->tip_nombre }}</td>
                                 <td style="width: 10%;">

@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.4.20-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.4.17-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win64
 -- HeidiSQL Versión:             11.3.0.6295
 -- --------------------------------------------------------
@@ -11,11 +11,6 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
-
--- Volcando estructura de base de datos para proyecto
-CREATE DATABASE IF NOT EXISTS `proyecto` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `proyecto`;
 
 -- Volcando estructura para tabla proyecto.bienestar_institucional
 CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
@@ -36,9 +31,7 @@ CREATE TABLE IF NOT EXISTS `bienestar_institucional` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.bienestar_institucional: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `bienestar_institucional` DISABLE KEYS */;
-/*!40000 ALTER TABLE `bienestar_institucional` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_area_extension
 CREATE TABLE IF NOT EXISTS `compl_area_extension` (
@@ -49,13 +42,7 @@ CREATE TABLE IF NOT EXISTS `compl_area_extension` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_area_extension: ~3 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_area_extension` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_area_extension` (`id`, `coarex_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Servicio social', '2022-03-09 15:36:24', NULL),
-	(2, 'Gestión tecnológica', '2022-03-09 15:36:38', NULL),
-	(3, 'Programas interdisciplinarios', '2022-03-09 15:36:55', NULL);
-/*!40000 ALTER TABLE `compl_area_extension` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_area_plan
 CREATE TABLE IF NOT EXISTS `compl_area_plan` (
@@ -69,14 +56,7 @@ CREATE TABLE IF NOT EXISTS `compl_area_plan` (
   CONSTRAINT `FK_compl_area_plan_compl_componente_plan` FOREIGN KEY (`coarpl_id_componente`) REFERENCES `compl_componente_plan` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_area_plan: ~4 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_area_plan` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_area_plan` (`id`, `coarpl_nombre`, `coarpl_id_componente`, `created_at`, `updated_at`) VALUES
-	(1, 'Ingeniería Aplicada', 1, '2022-04-07 20:21:32', '2022-04-07 20:21:07'),
-	(2, 'Básicas de Ingeniería', 1, '2022-04-07 20:21:35', '2022-04-07 20:21:28'),
-	(3, 'Ciencias Básicas', 2, '2022-04-07 20:21:58', '2022-04-07 20:21:54'),
-	(4, 'Formación Complementaria', 3, '2022-04-07 20:22:18', '2022-04-07 20:22:12');
-/*!40000 ALTER TABLE `compl_area_plan` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_area_trabajo
 CREATE TABLE IF NOT EXISTS `compl_area_trabajo` (
@@ -87,20 +67,7 @@ CREATE TABLE IF NOT EXISTS `compl_area_trabajo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_area_trabajo: ~10 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_area_trabajo` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_area_trabajo` (`id`, `coartra_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Educación', '2022-03-09 15:32:14', '2022-03-09 15:32:14'),
-	(2, 'Salud', '2022-03-09 15:32:18', '2022-03-09 15:32:18'),
-	(3, 'Habitat', '2022-03-09 15:32:24', '2022-03-09 15:32:24'),
-	(4, 'Movilidad y espacio público', '2022-03-09 15:32:36', '2022-03-09 15:32:37'),
-	(5, 'Desarrollo productivo y generación de ingresos en microempresas', '2022-03-09 15:33:15', '2022-03-09 15:33:16'),
-	(6, 'Desarrollo productivo y generación de ingresos en pequeñas empresas', '2022-03-09 15:33:40', NULL),
-	(7, 'Desarrollo productivo y generación de ingresos en medianas empresas', '2022-03-09 15:33:54', NULL),
-	(8, 'Desarrollo productivo y generación de ingresos en famiempresas', '2022-03-09 15:34:07', NULL),
-	(9, 'Desarrollo productivo y generación de ingresos en otro tipo de empresas', '2022-03-09 15:34:21', NULL),
-	(10, 'Medio ambiente y recursos naturales', '2022-03-09 15:34:34', NULL);
-/*!40000 ALTER TABLE `compl_area_trabajo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_cine_detallado
 CREATE TABLE IF NOT EXISTS `compl_cine_detallado` (
@@ -111,90 +78,7 @@ CREATE TABLE IF NOT EXISTS `compl_cine_detallado` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_cine_detallado: ~80 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_cine_detallado` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_cine_detallado` (`id`, `cocide_nombre`, `created_at`, `updated_at`) VALUES
-	(11, 'Programas y certificaciones basicas', NULL, NULL),
-	(21, 'Alfabetizacion y aritmetica elemental', NULL, NULL),
-	(31, 'Competencias personales y desarrollo', NULL, NULL),
-	(111, 'Ciencias de la educacion', NULL, NULL),
-	(112, 'Formacion para docentes de educacion pre-primaria', NULL, NULL),
-	(113, 'Formacion para docentes sin asignatura de especializacion', NULL, NULL),
-	(114, 'Formacion para docentes con asignatura de especializacion', NULL, NULL),
-	(211, 'Tecnicas audiovisuales y produccion para medios de comunicacion', NULL, NULL),
-	(212, 'Dise?o industrial, de modas e interiores', NULL, NULL),
-	(213, 'Bellas artes', NULL, NULL),
-	(214, 'Artesanias', NULL, NULL),
-	(215, 'Musica y artes escenicas', NULL, NULL),
-	(221, 'Religion y Teologia', NULL, NULL),
-	(222, 'Historia y arqueologia', NULL, NULL),
-	(223, 'Filosofia y etica', NULL, NULL),
-	(231, 'Adquisicion del lenguaje', NULL, NULL),
-	(232, 'Literatura y ling?istica', NULL, NULL),
-	(311, 'Economia', NULL, NULL),
-	(312, 'Ciencias politicas y educacion civica', NULL, NULL),
-	(313, 'Psicologia', NULL, NULL),
-	(314, 'Sociologia y estudios culturales', NULL, NULL),
-	(321, 'Periodismo y reportajes', NULL, NULL),
-	(322, 'Bibliotecologia, informacion y archivologia', NULL, NULL),
-	(411, 'Contabilidad e impuestos', NULL, NULL),
-	(412, 'Gestion financiera, administracion bancaria y seguros', NULL, NULL),
-	(413, 'Gestion y administracion', NULL, NULL),
-	(414, 'Mercadotecnia y publicidad', NULL, NULL),
-	(415, 'Secretariado y trabajo de oficina', NULL, NULL),
-	(416, 'Ventas al por mayor y al por menor', NULL, NULL),
-	(417, 'Competencias laborales', NULL, NULL),
-	(421, 'Derecho', NULL, NULL),
-	(511, 'Biologia', NULL, NULL),
-	(512, 'Bioquimica', NULL, NULL),
-	(521, 'Ciencias del medio ambiente', NULL, NULL),
-	(522, 'Medio ambiente natural y vida silvestre', NULL, NULL),
-	(531, 'Quimica', NULL, NULL),
-	(532, 'Ciencias de la tierra', NULL, NULL),
-	(533, 'Fisica', NULL, NULL),
-	(541, 'Matematicas', NULL, NULL),
-	(542, 'Estadistica', NULL, NULL),
-	(611, 'Uso de computadores', NULL, NULL),
-	(612, 'Dise?o y administracion de redes y bases de datos', NULL, NULL),
-	(613, 'Desarrollo y analisis de software y aplicaciones', NULL, NULL),
-	(711, 'Ingenieria y procesos quimicos', NULL, NULL),
-	(712, 'Tecnologia de proteccion del medio ambiente', NULL, NULL),
-	(713, 'Electricidad y energia', NULL, NULL),
-	(714, 'Electronica y automatizacion', NULL, NULL),
-	(715, 'Mecanica y profesiones afines a la metalisteria', NULL, NULL),
-	(716, 'Vehiculos, barcos y aeronaves motorizadas', NULL, NULL),
-	(721, 'Procesamiento de alimentos', NULL, NULL),
-	(722, 'Materiales (vidrio, papel, plastico y madera)', NULL, NULL),
-	(723, 'Produccion textiles (ropa, calzado y articulos de cuero)', NULL, NULL),
-	(724, 'Mineria y extraccion', NULL, NULL),
-	(731, 'Arquitectura y urbanismo', NULL, NULL),
-	(732, 'Construccion e ingenieria civil', NULL, NULL),
-	(811, 'Produccion agricola y ganadera', NULL, NULL),
-	(812, 'Horticultura', NULL, NULL),
-	(821, 'Silvicultura', NULL, NULL),
-	(831, 'Pesca', NULL, NULL),
-	(841, 'Veterinaria', NULL, NULL),
-	(911, 'Odontologia', NULL, NULL),
-	(912, 'Medicina', NULL, NULL),
-	(913, 'Enfermeria y parteria', NULL, NULL),
-	(914, 'Tecnologia de diagnostico y tratamiento medico', NULL, NULL),
-	(915, 'Terapia y rehabilitacion', NULL, NULL),
-	(916, 'Farmacia', NULL, NULL),
-	(917, 'Medicina y terapia tradicional y complementaria', NULL, NULL),
-	(921, 'Asistencia a adultos mayores y discapacitados', NULL, NULL),
-	(922, 'Asistencia a la infancia y servicios para jovenes', NULL, NULL),
-	(923, 'Trabajo social y orientacion', NULL, NULL),
-	(1011, 'Servicios domesticos', NULL, NULL),
-	(1012, 'Peluqueria y tratamientos de belleza', NULL, NULL),
-	(1013, 'Hoteleria, restaurantes y servicios de banquetes', NULL, NULL),
-	(1014, 'Deportes', NULL, NULL),
-	(1015, 'Viajes, turismo y actividades recreativas', NULL, NULL),
-	(1021, 'Saneamiento de la comunidad', NULL, NULL),
-	(1022, 'Salud y proteccion laboral', NULL, NULL),
-	(1031, 'Educacion militar y de defensa', NULL, NULL),
-	(1032, 'Proteccion de las personas y de la propiedad', NULL, NULL),
-	(1041, 'Servicios de transporte', NULL, NULL);
-/*!40000 ALTER TABLE `compl_cine_detallado` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_componente_plan
 CREATE TABLE IF NOT EXISTS `compl_componente_plan` (
@@ -205,13 +89,7 @@ CREATE TABLE IF NOT EXISTS `compl_componente_plan` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_componente_plan: ~3 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_componente_plan` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_componente_plan` (`id`, `cocopa_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Disciplinar', '2022-04-07 20:19:37', '2022-04-07 20:19:37'),
-	(2, 'Básico', '2022-04-07 20:19:50', '2022-04-07 20:19:50'),
-	(3, 'Genérico', '2022-04-07 20:20:02', '2022-04-07 20:20:02');
-/*!40000 ALTER TABLE `compl_componente_plan` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_empresa
 CREATE TABLE IF NOT EXISTS `compl_empresa` (
@@ -229,11 +107,9 @@ CREATE TABLE IF NOT EXISTS `compl_empresa` (
   `created_at` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `updated_at` timestamp NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_empresa: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_empresa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `compl_empresa` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_entidad_nacional
 CREATE TABLE IF NOT EXISTS `compl_entidad_nacional` (
@@ -244,25 +120,7 @@ CREATE TABLE IF NOT EXISTS `compl_entidad_nacional` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_entidad_nacional: ~15 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_entidad_nacional` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_entidad_nacional` (`id`, `coenna_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Consejería presidencial para la equidad de la mujer', '2022-03-09 15:52:23', NULL),
-	(2, 'Defenosoría del pueblo', '2022-03-09 15:52:35', NULL),
-	(3, 'ICBF - Instituto colombiano de bienestar familiar', '2022-03-09 15:53:04', NULL),
-	(4, 'SENA - Servicio nacional de aprendizaje', '2022-03-09 15:53:19', NULL),
-	(5, 'Superintendencia de notariado y registro público', '2022-03-09 15:53:43', NULL),
-	(6, 'Universidad nacional de colombia', '2022-03-09 15:53:57', NULL),
-	(7, 'Unidad ejecutiva de servicios públicos', '2022-03-09 15:54:54', NULL),
-	(8, 'Superintendencia de subsidio familiar', '2022-03-09 15:55:15', NULL),
-	(9, 'ACCI - Agenda colombiana de cooperación internacional', '2022-03-09 15:55:42', NULL),
-	(10, 'Colombia jóven', '2022-03-09 15:55:49', NULL),
-	(11, 'Colciencias', '2022-03-09 15:56:02', NULL),
-	(12, 'Ministerio de interior y justicia', '2022-03-09 15:56:18', NULL),
-	(13, 'Ministerio de relaciones exteriores', '2022-03-09 15:56:33', NULL),
-	(14, 'Ministerio de hacienda y crédito público', '2022-03-09 15:56:50', NULL),
-	(15, 'Ministerior de defensa nacional', '2022-03-09 15:57:05', NULL);
-/*!40000 ALTER TABLE `compl_entidad_nacional` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_fuente_internacional
 CREATE TABLE IF NOT EXISTS `compl_fuente_internacional` (
@@ -273,18 +131,7 @@ CREATE TABLE IF NOT EXISTS `compl_fuente_internacional` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_fuente_internacional: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_fuente_internacional` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_fuente_internacional` (`id`, `cofuin_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Sector empresarial', NULL, NULL),
-	(2, 'Sector administración pública', NULL, NULL),
-	(3, 'Centros de investigación y desarrollo tecnológico', NULL, NULL),
-	(4, 'Hospitales y clinicas', NULL, NULL),
-	(5, 'Instituciones privadas sin ánimo de lucro', NULL, NULL),
-	(6, 'Instituciones de educación superior', NULL, NULL),
-	(7, 'Organismo multilateral', NULL, NULL),
-	(8, 'Otra', NULL, NULL);
-/*!40000 ALTER TABLE `compl_fuente_internacional` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_fuente_nacional
 CREATE TABLE IF NOT EXISTS `compl_fuente_nacional` (
@@ -295,18 +142,7 @@ CREATE TABLE IF NOT EXISTS `compl_fuente_nacional` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_fuente_nacional: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_fuente_nacional` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_fuente_nacional` (`id`, `cofuna_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Recursos IES', NULL, NULL),
-	(2, 'Recursos públicos nacionales', NULL, NULL),
-	(3, 'Recursos públicos departamental', NULL, NULL),
-	(4, 'Recursos públicos municipales o distritales', NULL, NULL),
-	(5, 'Recursos privados', NULL, NULL),
-	(6, 'Recursos de organizaciones sin ánimo de lucro', NULL, NULL),
-	(7, 'Otras entidades', NULL, NULL),
-	(8, 'Recursos propios personales', NULL, NULL);
-/*!40000 ALTER TABLE `compl_fuente_nacional` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_nivel_estudio
 CREATE TABLE IF NOT EXISTS `compl_nivel_estudio` (
@@ -317,22 +153,7 @@ CREATE TABLE IF NOT EXISTS `compl_nivel_estudio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_nivel_estudio: ~12 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_nivel_estudio` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_nivel_estudio` (`id`, `conies_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Postdoctorado', '2022-02-28 20:31:25', NULL),
-	(2, 'Doctorado', '2022-02-28 20:31:31', NULL),
-	(3, 'Maestría', '2022-02-28 20:31:40', NULL),
-	(4, 'Especialización universitaria', '2022-02-28 20:32:00', NULL),
-	(5, 'Especialización técnico profesional', '2022-02-28 20:32:14', NULL),
-	(6, 'Especialización tecnológica', '2022-02-28 20:32:31', NULL),
-	(7, 'Universitaria', '2022-02-28 20:32:43', NULL),
-	(8, 'Tecnológica', '2022-02-28 20:32:49', NULL),
-	(9, 'Formación técnica profesional', '2022-02-28 20:33:03', NULL),
-	(10, 'Estudiante pregrado', '2022-02-28 20:33:11', NULL),
-	(11, 'Especialización médico quirúrgica', '2022-02-28 20:33:26', NULL),
-	(12, 'Sin titulo', NULL, NULL);
-/*!40000 ALTER TABLE `compl_nivel_estudio` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_poblacion_condicion
 CREATE TABLE IF NOT EXISTS `compl_poblacion_condicion` (
@@ -343,26 +164,7 @@ CREATE TABLE IF NOT EXISTS `compl_poblacion_condicion` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_poblacion_condicion: ~16 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_poblacion_condicion` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_poblacion_condicion` (`id`, `copoco_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Vulnerabilidad social - Violencia intrafamiliar', '2022-03-09 15:59:06', NULL),
-	(2, 'Vulnerabilidad social - Violencia sexual', '2022-03-09 15:59:25', NULL),
-	(3, 'Vulnerabilidad social - Riesgo o abandono', '2022-03-09 15:59:42', NULL),
-	(4, 'Vulnerabilidad social - Habitante de calle', '2022-03-09 15:59:52', NULL),
-	(5, 'Vulnerabilidad social - Mujeres cabeza de familiar', '2022-03-09 16:00:07', NULL),
-	(6, 'Vulnerabilidad social - Otro', '2022-03-09 16:00:14', NULL),
-	(7, 'Vulnerabilidad económica - Desempleo', '2022-03-09 16:00:39', NULL),
-	(8, 'Vulnerabilidad económica - Explotación laboral', '2022-03-09 16:00:53', NULL),
-	(9, 'Vulnerabilidad económica - Trafico de personas', '2022-03-09 16:01:07', NULL),
-	(10, 'Vulnerabilidad económica - Prostitución', '2022-03-09 16:01:18', NULL),
-	(11, 'Vulnerabilidad económica - Otro', '2022-03-09 16:01:27', NULL),
-	(12, 'Reclusión', '2022-03-09 16:01:34', NULL),
-	(13, 'Consumo de sustancias psicoactivas', '2022-03-09 16:01:53', NULL),
-	(14, 'Necesidades educativas especiales - personas en condición de discapacidad', '2022-03-09 16:02:18', NULL),
-	(15, 'Necesidades educativas especiales - personas con talentos excepcionales ', NULL, NULL),
-	(16, 'Habitantes de frotera', '2022-03-09 16:02:59', NULL);
-/*!40000 ALTER TABLE `compl_poblacion_condicion` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_poblacion_grupo
 CREATE TABLE IF NOT EXISTS `compl_poblacion_grupo` (
@@ -373,21 +175,7 @@ CREATE TABLE IF NOT EXISTS `compl_poblacion_grupo` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_poblacion_grupo: ~11 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_poblacion_grupo` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_poblacion_grupo` (`id`, `copogr_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Familia', '2022-03-09 16:03:21', NULL),
-	(2, 'Géneros', '2022-03-09 16:03:28', NULL),
-	(3, 'Profesionales', '2022-03-09 16:03:37', NULL),
-	(4, 'Grupos étnicos', '2022-03-09 16:03:51', NULL),
-	(5, 'Campesinos', '2022-03-09 16:04:01', NULL),
-	(6, 'Mujeres', '2022-03-09 16:04:09', NULL),
-	(7, 'Empleados', '2022-03-09 16:04:09', NULL),
-	(8, 'Comunidades', '2022-03-09 16:04:47', NULL),
-	(9, 'Empresas, Mypimes', '2022-03-09 16:04:47', NULL),
-	(10, 'Entidades gubernamentales', '2022-03-09 16:04:46', NULL),
-	(11, 'Otro', '2022-03-09 16:04:53', NULL);
-/*!40000 ALTER TABLE `compl_poblacion_grupo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.compl_sector
 CREATE TABLE IF NOT EXISTS `compl_sector` (
@@ -398,18 +186,7 @@ CREATE TABLE IF NOT EXISTS `compl_sector` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.compl_sector: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `compl_sector` DISABLE KEYS */;
-INSERT IGNORE INTO `compl_sector` (`id`, `cose_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Sector empresarial', '2022-02-28 17:51:47', NULL),
-	(2, 'Sector administración pública', '2022-02-28 17:52:05', NULL),
-	(3, 'Centros de investigación y desarrollo tecnológico', '2022-02-28 17:52:23', NULL),
-	(4, 'Hospitales y clinicas', '2022-02-28 17:52:36', '2022-02-28 17:52:36'),
-	(5, 'Instituciones privadas sin ánimo de lucro', '2022-02-28 17:52:57', NULL),
-	(6, 'Instituciones de educación', '2022-02-28 17:53:10', NULL),
-	(7, 'Comunidad', '2022-02-28 17:53:17', NULL),
-	(8, 'Otro', '2022-02-28 17:53:21', NULL);
-/*!40000 ALTER TABLE `compl_sector` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.convenio
 CREATE TABLE IF NOT EXISTS `convenio` (
@@ -438,11 +215,7 @@ CREATE TABLE IF NOT EXISTS `convenio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.convenio: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `convenio` DISABLE KEYS */;
-INSERT IGNORE INTO `convenio` (`id`, `con_numero`, `con_alcance`, `con_tipo`, `con_institucion`, `con_nit`, `con_direccion`, `con_ciudad`, `con_pais`, `con_contacto`, `con_correo`, `con_telefono`, `con_objeto`, `con_logro_resultado`, `con_vigencia`, `con_programa_beneficiado`, `con_actividad_year_programa`, `con_fecha_inicio`, `con_fecha_final`, `con_observacion`, `created_at`, `updated_at`) VALUES
-	(1, '123456', 'regional', '123', 'adas', '2121', 'asdas', 'Yopal', 'Colombia', 'Michael rodriguez', 'maicolr62@gmail.com', '3223342408', 'sin comentarios', 'asas', '2022', 'Ingeniera de sistemas', 'sin comentarios', '2022-04-20', '2022-04-20', 'sin comentarios', '2022-04-20 19:39:23', '2022-04-20 19:39:23');
-/*!40000 ALTER TABLE `convenio` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.departamento
 CREATE TABLE IF NOT EXISTS `departamento` (
@@ -453,11 +226,7 @@ CREATE TABLE IF NOT EXISTS `departamento` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.departamento: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
-INSERT IGNORE INTO `departamento` (`id`, `dep_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Casanare', '2022-02-19 19:47:47', '2022-02-21 06:04:13');
-/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.docente
 CREATE TABLE IF NOT EXISTS `docente` (
@@ -502,13 +271,7 @@ CREATE TABLE IF NOT EXISTS `docente` (
   CONSTRAINT `FK_docente_persona` FOREIGN KEY (`id_persona_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `docente` DISABLE KEYS */;
-INSERT IGNORE INTO `docente` (`id`, `id_persona_docente`, `ciudad_procedencia`, `correo_personal`, `dedicacion`, `tipo_contratacion`, `fecha_vinculacion`, `eps`, `institucion_esp`, `certificado_esp`, `institucion_dip`, `certificado_dip`, `titulo_pregrado`, `institucion_pre`, `titulo_especializacion`, `institucion_espe`, `titulo_maestria`, `institucion_mae`, `titulo_doctorado`, `institucion_doc`, `area_conocimiento`, `maximo_nivel_formacion`, `titulo_maximo_nivel`, `institucion_maximo_nivel`, `modalidad_programa`, `riesgo`, `caja_compensacion`, `banco`, `no_cuenta`, `pension`, `estado`, `soporte_hoja_vida`, `documentos_compl`, `id_proceso`, `created_at`, `updated_at`) VALUES
-	(1, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
-	(2, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL),
-	(3, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL);
-/*!40000 ALTER TABLE `docente` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.docente_asignatura
 CREATE TABLE IF NOT EXISTS `docente_asignatura` (
@@ -528,9 +291,7 @@ CREATE TABLE IF NOT EXISTS `docente_asignatura` (
   CONSTRAINT `FK_docente_asignatura_programa_plan_estudio_asignatura` FOREIGN KEY (`docasi_id_asignatura`) REFERENCES `programa_plan_estudio_asignatura` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente_asignatura: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `docente_asignatura` DISABLE KEYS */;
-/*!40000 ALTER TABLE `docente_asignatura` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.docente_contrato
 CREATE TABLE IF NOT EXISTS `docente_contrato` (
@@ -551,9 +312,7 @@ CREATE TABLE IF NOT EXISTS `docente_contrato` (
   CONSTRAINT `FK_docente_contrato_persona` FOREIGN KEY (`doco_persona_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente_contrato: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `docente_contrato` DISABLE KEYS */;
-/*!40000 ALTER TABLE `docente_contrato` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.docente_evaluacion
 CREATE TABLE IF NOT EXISTS `docente_evaluacion` (
@@ -574,9 +333,7 @@ CREATE TABLE IF NOT EXISTS `docente_evaluacion` (
   CONSTRAINT `FK_docente_evaluacion_persona` FOREIGN KEY (`doe_persona_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente_evaluacion: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `docente_evaluacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `docente_evaluacion` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.docente_visitante
 CREATE TABLE IF NOT EXISTS `docente_visitante` (
@@ -607,9 +364,7 @@ CREATE TABLE IF NOT EXISTS `docente_visitante` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.docente_visitante: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `docente_visitante` DISABLE KEYS */;
-/*!40000 ALTER TABLE `docente_visitante` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.estudiante
 CREATE TABLE IF NOT EXISTS `estudiante` (
@@ -654,14 +409,9 @@ CREATE TABLE IF NOT EXISTS `estudiante` (
   CONSTRAINT `FK_estudiante_persona` FOREIGN KEY (`estu_id_estudiante`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_estudiante_programa` FOREIGN KEY (`estu_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_estudiante_programa_plan_estudio` FOREIGN KEY (`estu_programa_plan`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.estudiante: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `estudiante` DISABLE KEYS */;
-INSERT IGNORE INTO `estudiante` (`id`, `estu_id_estudiante`, `estu_programa`, `estu_programa_plan`, `estu_telefono2`, `estu_direccion`, `estu_correo_personal`, `estu_colegio`, `estu_estrato`, `estu_fecha_nacimiento`, `estu_fecha_expedicion`, `estu_sexo`, `estu_estado_civil`, `estu_ingreso`, `estu_periodo_ingreso`, `estu_ult_matricula`, `estu_semestre`, `estu_financiamiento`, `estu_entidad`, `estu_estado`, `estu_tipo_matricula`, `estu_matricula`, `estu_pga`, `estu_reconocimiento`, `estu_egresado`, `estu_administrativo`, `estu_cargo`, `estu_dependencia`, `estu_fecha_ingreso`, `estu_no_contrato`, `estu_fecha_final`, `estu_estado_cargo`, `created_at`, `updated_at`) VALUES
-	(10, 16, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(11, 1, 1, 1, '3223342408', NULL, NULL, NULL, NULL, '2000-11-26', NULL, NULL, NULL, '2017', '2017-1', NULL, 10, '', NULL, 'egresado-no-graduado', NULL, NULL, NULL, NULL, 'No', 'No', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
-/*!40000 ALTER TABLE `estudiante` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.estudiante_egresado
 CREATE TABLE IF NOT EXISTS `estudiante_egresado` (
@@ -683,9 +433,7 @@ CREATE TABLE IF NOT EXISTS `estudiante_egresado` (
   CONSTRAINT `FK_estudiante_egresado_persona` FOREIGN KEY (`este_id_estudiante`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.estudiante_egresado: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `estudiante_egresado` DISABLE KEYS */;
-/*!40000 ALTER TABLE `estudiante_egresado` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.estudiante_reporte_general
 CREATE TABLE IF NOT EXISTS `estudiante_reporte_general` (
@@ -715,9 +463,7 @@ CREATE TABLE IF NOT EXISTS `estudiante_reporte_general` (
   CONSTRAINT `FK_estudiante_reporte_general_programa` FOREIGN KEY (`esture_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.estudiante_reporte_general: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `estudiante_reporte_general` DISABLE KEYS */;
-/*!40000 ALTER TABLE `estudiante_reporte_general` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_actividad_cultural
 CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
@@ -747,11 +493,9 @@ CREATE TABLE IF NOT EXISTS `ext_actividad_cultural` (
   CONSTRAINT `FK_ext_actividad_cultural_compl_fuente_internacional` FOREIGN KEY (`extcul_fuente_internacional`) REFERENCES `compl_fuente_internacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_actividad_cultural_compl_fuente_nacional` FOREIGN KEY (`extcul_fuente_nacional`) REFERENCES `compl_fuente_nacional` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_actividad_cultural_persona` FOREIGN KEY (`extcul_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_actividad_cultural: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_actividad_cultural` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_actividad_cultural` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_consultoria
 CREATE TABLE IF NOT EXISTS `ext_consultoria` (
@@ -787,9 +531,7 @@ CREATE TABLE IF NOT EXISTS `ext_consultoria` (
   CONSTRAINT `FK_ext_consultoria_compl_sector` FOREIGN KEY (`ext_sector_consultoria`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_consultoria: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_consultoria` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_consultoria` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_curso
 CREATE TABLE IF NOT EXISTS `ext_curso` (
@@ -803,7 +545,7 @@ CREATE TABLE IF NOT EXISTS `ext_curso` (
   `extcurso_estado` varchar(1) COLLATE utf8mb4_unicode_ci NOT NULL,
   `extcurso_fecha` date NOT NULL,
   `extcurso_id_docente` int(11) NOT NULL DEFAULT 0,
-  `extcurso_url_soporte` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `extcurso_url_soporte` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -811,11 +553,9 @@ CREATE TABLE IF NOT EXISTS `ext_curso` (
   KEY `FK_ext_curso_compl_cine_detallado` (`extcurso_id_cine`),
   CONSTRAINT `FK_ext_curso_compl_cine_detallado` FOREIGN KEY (`extcurso_id_cine`) REFERENCES `compl_cine_detallado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_curso_persona` FOREIGN KEY (`extcurso_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_curso: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_curso` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_curso` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_educacion_continua
 CREATE TABLE IF NOT EXISTS `ext_educacion_continua` (
@@ -836,11 +576,9 @@ CREATE TABLE IF NOT EXISTS `ext_educacion_continua` (
   KEY `FK_ext_educacion_continua_compl_area_extension` (`extedu_tipo_extension`),
   CONSTRAINT `FK_ext_educacion_continua_compl_area_extension` FOREIGN KEY (`extedu_tipo_extension`) REFERENCES `compl_area_extension` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_ext_educacion_continua_persona` FOREIGN KEY (`extedu_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_educacion_continua: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_educacion_continua` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_educacion_continua` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_eventos_nac_inter
 CREATE TABLE IF NOT EXISTS `ext_eventos_nac_inter` (
@@ -862,9 +600,7 @@ CREATE TABLE IF NOT EXISTS `ext_eventos_nac_inter` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_eventos_nac_inter: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_eventos_nac_inter` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_eventos_nac_inter` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_eventos_virtuales
 CREATE TABLE IF NOT EXISTS `ext_eventos_virtuales` (
@@ -883,9 +619,7 @@ CREATE TABLE IF NOT EXISTS `ext_eventos_virtuales` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_eventos_virtuales: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_eventos_virtuales` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_eventos_virtuales` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_internacionalizacion_curriculo
 CREATE TABLE IF NOT EXISTS `ext_internacionalizacion_curriculo` (
@@ -908,9 +642,7 @@ CREATE TABLE IF NOT EXISTS `ext_internacionalizacion_curriculo` (
   CONSTRAINT `FK_ext_internacionalizacion_curriculo_persona` FOREIGN KEY (`exincu_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_internacionalizacion_curriculo: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_internacionalizacion_curriculo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_internacionalizacion_curriculo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_movilidad_internacional
 CREATE TABLE IF NOT EXISTS `ext_movilidad_internacional` (
@@ -941,9 +673,7 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_internacional` (
   CONSTRAINT `FK_ext_movilidad_internacional_programa` FOREIGN KEY (`exmointer_id_programa_or`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_movilidad_internacional: ~1 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_movilidad_internacional` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_movilidad_internacional` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_movilidad_intersede
 CREATE TABLE IF NOT EXISTS `ext_movilidad_intersede` (
@@ -980,9 +710,7 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_intersede` (
   CONSTRAINT `FK_ext_movilidad_intersede_programa_2` FOREIGN KEY (`exmoin_id_programa_des`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_movilidad_intersede: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_movilidad_intersede` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_movilidad_intersede` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_movilidad_nacional
 CREATE TABLE IF NOT EXISTS `ext_movilidad_nacional` (
@@ -1011,9 +739,7 @@ CREATE TABLE IF NOT EXISTS `ext_movilidad_nacional` (
   CONSTRAINT `FK_ext_movilidad_nacional_programa` FOREIGN KEY (`exmona_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_movilidad_nacional: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_movilidad_nacional` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_movilidad_nacional` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_participacion_eventos
 CREATE TABLE IF NOT EXISTS `ext_participacion_eventos` (
@@ -1032,9 +758,7 @@ CREATE TABLE IF NOT EXISTS `ext_participacion_eventos` (
   CONSTRAINT `FK_ext_participacion_eventos_persona` FOREIGN KEY (`expaev_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_participacion_eventos: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_participacion_eventos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_participacion_eventos` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_participante
 CREATE TABLE IF NOT EXISTS `ext_participante` (
@@ -1054,9 +778,7 @@ CREATE TABLE IF NOT EXISTS `ext_participante` (
   CONSTRAINT `FK_docente_participante_persona` FOREIGN KEY (`dop_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_participante: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_participante` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_participante` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_proyecto_extension
 CREATE TABLE IF NOT EXISTS `ext_proyecto_extension` (
@@ -1113,9 +835,7 @@ CREATE TABLE IF NOT EXISTS `ext_proyecto_extension` (
   CONSTRAINT `FK_ext_proyecto_extension_compl_sector` FOREIGN KEY (`extprex_id_sector_otra_entidad`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_proyecto_extension: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_proyecto_extension` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_proyecto_extension` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_registro_fotografico_inter
 CREATE TABLE IF NOT EXISTS `ext_registro_fotografico_inter` (
@@ -1134,9 +854,7 @@ CREATE TABLE IF NOT EXISTS `ext_registro_fotografico_inter` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_registro_fotografico_inter: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_registro_fotografico_inter` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_registro_fotografico_inter` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_sector_externo_organizaciones
 CREATE TABLE IF NOT EXISTS `ext_sector_externo_organizaciones` (
@@ -1158,9 +876,7 @@ CREATE TABLE IF NOT EXISTS `ext_sector_externo_organizaciones` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_sector_externo_organizaciones: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_sector_externo_organizaciones` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_sector_externo_organizaciones` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_sector_externo_organizaciones_part
 CREATE TABLE IF NOT EXISTS `ext_sector_externo_organizaciones_part` (
@@ -1176,9 +892,7 @@ CREATE TABLE IF NOT EXISTS `ext_sector_externo_organizaciones_part` (
   CONSTRAINT `FK_ext_sector_externo_organizaciones` FOREIGN KEY (`exseorpar_id_organizacion`) REFERENCES `ext_sector_externo_organizaciones` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_sector_externo_organizaciones_part: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_sector_externo_organizaciones_part` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_sector_externo_organizaciones_part` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_sector_externo_red_academia_convenio
 CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio` (
@@ -1198,9 +912,7 @@ CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_sector_externo_red_academia_convenio: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_sector_externo_red_academia_convenio_participantes
 CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio_participantes` (
@@ -1216,9 +928,7 @@ CREATE TABLE IF NOT EXISTS `ext_sector_externo_red_academia_convenio_participant
   CONSTRAINT `FK_ext_sector_externo_red_academia` FOREIGN KEY (`exseredpar_id_red_academica`) REFERENCES `ext_sector_externo_red_academia_convenio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_sector_externo_red_academia_convenio_participantes: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio_participantes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_sector_externo_red_academia_convenio_participantes` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.ext_servicio_extension
 CREATE TABLE IF NOT EXISTS `ext_servicio_extension` (
@@ -1277,9 +987,7 @@ CREATE TABLE IF NOT EXISTS `ext_servicio_extension` (
   CONSTRAINT `FK_ext_servicio_extension_compl_sector` FOREIGN KEY (`extseex_id_sector_otra_entidad`) REFERENCES `compl_sector` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.ext_servicio_extension: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `ext_servicio_extension` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ext_servicio_extension` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.facultad
 CREATE TABLE IF NOT EXISTS `facultad` (
@@ -1290,14 +998,7 @@ CREATE TABLE IF NOT EXISTS `facultad` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.facultad: ~4 rows (aproximadamente)
-/*!40000 ALTER TABLE `facultad` DISABLE KEYS */;
-INSERT IGNORE INTO `facultad` (`id`, `fac_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Ciencias Económicas y Administrativas', '2022-03-16 03:15:32', '2022-03-16 03:15:32'),
-	(2, 'Ciencias Jurídicas y Políticas', '2022-03-16 03:15:58', '2022-03-16 03:15:58'),
-	(3, 'Ciencias de la Educación y de la Salud', '2022-03-16 03:16:21', '2022-03-16 03:16:21'),
-	(4, 'Ciencias básicas e ingenieras', '2022-04-03 17:44:00', '2022-04-03 17:44:00');
-/*!40000 ALTER TABLE `facultad` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.failed_jobs
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
@@ -1312,9 +1013,7 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
   UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.failed_jobs: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `failed_jobs` DISABLE KEYS */;
-/*!40000 ALTER TABLE `failed_jobs` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.inv_grupo_investigacion
 CREATE TABLE IF NOT EXISTS `inv_grupo_investigacion` (
@@ -1343,11 +1042,9 @@ CREATE TABLE IF NOT EXISTS `inv_grupo_investigacion` (
   CONSTRAINT `FK_inv_grupo_investigacion_facultad` FOREIGN KEY (`inv_facultad`) REFERENCES `facultad` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_inv_grupo_investigacion_municipio` FOREIGN KEY (`inv_sede`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_inv_grupo_investigacion_persona` FOREIGN KEY (`inv_id_coordinador`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_grupo_investigacion: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `inv_grupo_investigacion` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inv_grupo_investigacion` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.inv_investigador
 CREATE TABLE IF NOT EXISTS `inv_investigador` (
@@ -1364,11 +1061,9 @@ CREATE TABLE IF NOT EXISTS `inv_investigador` (
   KEY `FK_inv_investigador_persona` (`inves_id_persona`),
   CONSTRAINT `FK_inv_investigador_inv_grupo_investigacion` FOREIGN KEY (`inves_id_grupo`) REFERENCES `inv_grupo_investigacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_inv_investigador_persona` FOREIGN KEY (`inves_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_investigador: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `inv_investigador` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inv_investigador` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.inv_proyecto
 CREATE TABLE IF NOT EXISTS `inv_proyecto` (
@@ -1388,11 +1083,9 @@ CREATE TABLE IF NOT EXISTS `inv_proyecto` (
   PRIMARY KEY (`id`),
   KEY `FK_inv_proyecto_inv_grupo_investigacion` (`invpro_id_grupo`),
   CONSTRAINT `FK_inv_proyecto_inv_grupo_investigacion` FOREIGN KEY (`invpro_id_grupo`) REFERENCES `inv_grupo_investigacion` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.inv_proyecto: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `inv_proyecto` DISABLE KEYS */;
-/*!40000 ALTER TABLE `inv_proyecto` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.laboratorio
 CREATE TABLE IF NOT EXISTS `laboratorio` (
@@ -1423,9 +1116,7 @@ CREATE TABLE IF NOT EXISTS `laboratorio` (
   CONSTRAINT `FK_laboratorio_software` FOREIGN KEY (`lab_id_software`) REFERENCES `software` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.laboratorio: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `laboratorio` DISABLE KEYS */;
-/*!40000 ALTER TABLE `laboratorio` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.metodologia
 CREATE TABLE IF NOT EXISTS `metodologia` (
@@ -1436,12 +1127,7 @@ CREATE TABLE IF NOT EXISTS `metodologia` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.metodologia: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `metodologia` DISABLE KEYS */;
-INSERT IGNORE INTO `metodologia` (`id`, `met_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Presencial', '2022-02-21 06:21:38', '2022-02-21 06:21:38'),
-	(2, 'Virtual', '2022-02-21 06:21:48', '2022-02-21 06:21:48');
-/*!40000 ALTER TABLE `metodologia` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.migrations
 CREATE TABLE IF NOT EXISTS `migrations` (
@@ -1451,80 +1137,7 @@ CREATE TABLE IF NOT EXISTS `migrations` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=89 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.migrations: ~70 rows (aproximadamente)
-/*!40000 ALTER TABLE `migrations` DISABLE KEYS */;
-INSERT IGNORE INTO `migrations` (`id`, `migration`, `batch`) VALUES
-	(1, '2014_10_12_000000_create_users_table', 1),
-	(2, '2014_10_12_100000_create_password_resets_table', 1),
-	(3, '2019_08_19_000000_create_failed_jobs_table', 1),
-	(4, '2022_02_19_183917_departamento', 1),
-	(5, '2022_02_19_212717_tipousuario', 2),
-	(6, '2022_02_19_233257_docente', 3),
-	(7, '2022_02_19_233422_niveles', 4),
-	(8, '2022_02_20_000859_metodologia', 4),
-	(9, '2022_02_20_002610_facultad', 5),
-	(10, '2022_02_20_002828_municipio', 6),
-	(11, '2022_02_20_201157_programa', 7),
-	(12, '2022_02_21_235050_plan_estudio', 8),
-	(13, '2022_02_22_010626_programa_asignatura', 9),
-	(14, '2022_02_22_045104_docente_asignatura', 10),
-	(15, '2022_02_22_203840_docente_evaluacion', 11),
-	(16, '2022_02_22_225609_docente_contrato', 12),
-	(17, '2022_02_24_190409_estudiante', 13),
-	(18, '2022_02_25_021021_trabajo_grado', 14),
-	(19, '2022_02_25_023226_modalidad_grado', 15),
-	(20, '2022_02_25_214923_tipo_prueba', 16),
-	(21, '2022_02_25_215006_tipo_modulo', 16),
-	(22, '2022_02_25_215231_saber_11', 16),
-	(23, '2022_02_25_215427_estu_saber_once', 16),
-	(33, '2022_02_28_015853_unidad_organizadora', 17),
-	(34, '2022_02_28_022324_actividad_cultural', 17),
-	(35, '2022_02_28_024350_consultoria', 17),
-	(36, '2022_02_28_025123_consultoria_recurso_humano', 17),
-	(37, '2022_02_28_144843_cursos', 17),
-	(41, '2022_02_28_150442_extension_participante', 17),
-	(42, '2022_02_28_171406_fuentenacional', 18),
-	(43, '2022_02_28_171456_fuenteninternacional', 18),
-	(44, '2022_02_28_223510_compl_cine_detallado', 19),
-	(45, '2022_02_28_225023_sector', 20),
-	(47, '2022_03_01_012502_nivel_estudio', 21),
-	(48, '2022_02_28_145215_educacion_continua', 22),
-	(49, '2022_03_02_222218_docente_participantex', 23),
-	(50, '2022_03_03_162600_redes', 24),
-	(51, '2022_03_03_195310_practicas', 25),
-	(52, '2022_03_04_004419_estudiante_egresado', 26),
-	(53, '2022_03_04_033004_recursotecnologicos', 27),
-	(54, '2022_03_04_133437_estudiante_reporte_generals', 28),
-	(56, '2022_03_04_205154_docente_asignatura', 29),
-	(57, '2022_03_05_151234_docente_visitante', 30),
-	(58, '2022_03_05_172000_tipo_prueba', 31),
-	(59, '2022_03_05_172014_tipo_modulo', 31),
-	(60, '2022_03_05_172044_prueba_saber', 31),
-	(61, '2022_03_05_172517_prueba_saber_modulo', 31),
-	(62, '2022_03_06_021442_prueba_saber_pro', 32),
-	(63, '2022_03_06_022010_prueba_saber_pro_modulo', 32),
-	(65, '2022_03_08_013328_resultado_prueba', 33),
-	(66, '2022_03_08_014241_resultado_prueba_modulo', 33),
-	(67, '2022_03_08_143956_laboratorio', 34),
-	(68, '2022_03_08_214905_registro_fotografico', 35),
-	(69, '2022_03_09_151233_proyectoextension', 36),
-	(70, '2022_03_09_152913_complareaextension', 36),
-	(71, '2022_03_09_153017_complareatrabajo', 36),
-	(72, '2022_03_09_153133_complsectorentidad', 36),
-	(73, '2022_03_09_153232_complpoblacioncondicion', 36),
-	(74, '2022_03_09_153256_complpoblaciongrupo', 36),
-	(75, '2022_03_09_160717_complentidadnacional', 37),
-	(76, '2022_03_09_213335_servicioextension', 38),
-	(80, '2022_03_10_042421_sector_externo_red_academica_convenio', 39),
-	(81, '2022_03_10_042712_sector_externo_red_academica_convenio_participantes', 39),
-	(82, '2022_03_13_025154_sector_externo_organizaciones', 39),
-	(83, '2022_03_13_025424_sector_externo_organizaciones_participante', 39),
-	(84, '2022_03_13_042354_ext_internacionalizacion_curriculo', 40),
-	(85, '2022_03_14_143024_ext_movilidad_nacionals', 41),
-	(86, '2022_03_16_022630_ext_movilidad_intersedess', 42),
-	(87, '2022_03_16_192336_extmovilidadinternacionals', 43),
-	(88, '2022_03_17_035028_movilidads', 44);
-/*!40000 ALTER TABLE `migrations` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.modalidad_grado
 CREATE TABLE IF NOT EXISTS `modalidad_grado` (
@@ -1535,18 +1148,7 @@ CREATE TABLE IF NOT EXISTS `modalidad_grado` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.modalidad_grado: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `modalidad_grado` DISABLE KEYS */;
-INSERT IGNORE INTO `modalidad_grado` (`id`, `mod_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Desarrollo tecnológico', '2022-02-25 02:42:55', '2022-02-25 02:45:14'),
-	(2, 'Investigación formulación', '2022-03-26 05:28:32', '2022-03-26 05:28:32'),
-	(3, 'Investigación ejecución', '2022-03-26 05:28:48', '2022-03-26 05:28:48'),
-	(4, 'Desarrollo Tecnológico curricular', '2022-03-26 05:29:01', '2022-03-26 05:29:01'),
-	(5, 'Desarrollo Tecnológico dirigido', '2022-03-26 05:29:11', '2022-03-26 05:29:11'),
-	(6, 'Desarrollo Tecnológico para una empresa', '2022-03-26 05:29:21', '2022-03-26 05:29:21'),
-	(7, 'Autogestión empresarial', '2022-03-26 05:29:38', '2022-03-26 05:29:38'),
-	(10, 'Practica laboral', '2022-04-21 22:41:10', '2022-04-21 22:41:10');
-/*!40000 ALTER TABLE `modalidad_grado` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.movilidad
 CREATE TABLE IF NOT EXISTS `movilidad` (
@@ -1567,9 +1169,7 @@ CREATE TABLE IF NOT EXISTS `movilidad` (
   CONSTRAINT `FK_movilidad_persona` FOREIGN KEY (`movi_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.movilidad: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `movilidad` DISABLE KEYS */;
-/*!40000 ALTER TABLE `movilidad` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.municipio
 CREATE TABLE IF NOT EXISTS `municipio` (
@@ -1583,11 +1183,7 @@ CREATE TABLE IF NOT EXISTS `municipio` (
   CONSTRAINT `FK_municipio_departamento` FOREIGN KEY (`mun_departamento`) REFERENCES `departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.municipio: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `municipio` DISABLE KEYS */;
-INSERT IGNORE INTO `municipio` (`id`, `mun_nombre`, `mun_departamento`, `created_at`, `updated_at`) VALUES
-	(5, 'Yopal', 1, '2022-04-02 04:08:16', '2022-04-02 04:08:16');
-/*!40000 ALTER TABLE `municipio` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.nivel_formacion
 CREATE TABLE IF NOT EXISTS `nivel_formacion` (
@@ -1598,12 +1194,7 @@ CREATE TABLE IF NOT EXISTS `nivel_formacion` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.nivel_formacion: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `nivel_formacion` DISABLE KEYS */;
-INSERT IGNORE INTO `nivel_formacion` (`id`, `niv_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Presencial', '2022-04-04 21:07:58', NULL),
-	(2, 'Virtual', NULL, NULL);
-/*!40000 ALTER TABLE `nivel_formacion` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.password_resets
 CREATE TABLE IF NOT EXISTS `password_resets` (
@@ -1613,9 +1204,7 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
   KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.password_resets: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `password_resets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `password_resets` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.persona
 CREATE TABLE IF NOT EXISTS `persona` (
@@ -1641,17 +1230,9 @@ CREATE TABLE IF NOT EXISTS `persona` (
   KEY `FK_persona_tipo_usuario` (`per_tipo_usuario`),
   CONSTRAINT `FK_persona_departamento` FOREIGN KEY (`per_departamento`) REFERENCES `departamento` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_persona_tipo_usuario` FOREIGN KEY (`per_tipo_usuario`) REFERENCES `tipo_usuario` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.persona: ~5 rows (aproximadamente)
-/*!40000 ALTER TABLE `persona` DISABLE KEYS */;
-INSERT IGNORE INTO `persona` (`id`, `per_tipo_documento`, `per_numero_documento`, `per_nombre`, `per_apellido`, `per_telefono`, `per_correo`, `password`, `per_departamento`, `per_ciudad`, `per_tipo_usuario`, `per_id_estado`, `email_verified_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-	(1, 'Cédula de ciudadania', '1006450866', 'Michael', 'Rodriguez', '3223342408', 'michaelrodriguezhernandez@unisangil.edu.co', '$2y$10$gju0wcWFhOH7rPfojakZB.kzLxKtEP0aW9mMCBvNPLcecit4d1vjG', 1, 5, 9, 'activo', NULL, NULL, NULL, '2022-04-21 19:11:18'),
-	(2, 'Cédula de ciudadanía', '74825033', 'Edwin', 'Rodriguez', '3108585194', 'eroher@unisangil.edu.co', '$2y$10$QfeTJEGncnTG7P7yrKtd/Oxbaw1/1KgREARzaUwphu6F87aJdwP42', 1, 5, 2, 'activo', NULL, NULL, NULL, NULL),
-	(9, 'Cédula de ciudadanía', '47426505', 'Yadira', 'Hernandez', '3142174211', 'yadira@unisangil.edu.co', '$2y$10$BhGFEn.t0ywRypXDUzxCqebU7CLmifxcfBE4KLpshZ0r27KJM/sRm', 1, 5, 2, 'activo', NULL, NULL, NULL, NULL),
-	(11, 'Cédula de ciudadanía', '111111', 'administrador', 'docente', '3108585194', 'administradordoc@unisangil.edu.co', '$2y$10$7z2QqLh4YArxi7bu0QrTFuxoJQSUqtKR68HIV5lKzVIPT02URvFU6', 1, 5, 10, 'activo', NULL, NULL, NULL, NULL),
-	(16, 'Cédula de ciudadanía', '333333', 'administrador', 'estudiante', '3223342408', 'administradorestu@unisangil.edu.co', '$2y$10$X6BhRVX.OpUNVpLdQYmlxeDaAZR6tIfssgCyLHcQvgsnJGvfQ.XSi', 1, 5, 9, 'activo', NULL, NULL, NULL, NULL);
-/*!40000 ALTER TABLE `persona` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.practica_laboral
 CREATE TABLE IF NOT EXISTS `practica_laboral` (
@@ -1677,9 +1258,7 @@ CREATE TABLE IF NOT EXISTS `practica_laboral` (
   CONSTRAINT `FK_practica_laboral_persona` FOREIGN KEY (`prac_id_persona`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.practica_laboral: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `practica_laboral` DISABLE KEYS */;
-/*!40000 ALTER TABLE `practica_laboral` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.programa
 CREATE TABLE IF NOT EXISTS `programa` (
@@ -1710,11 +1289,7 @@ CREATE TABLE IF NOT EXISTS `programa` (
   CONSTRAINT `FK_programa_persona` FOREIGN KEY (`pro_id_director`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `programa` DISABLE KEYS */;
-INSERT IGNORE INTO `programa` (`id`, `pro_nombre`, `pro_estado`, `pro_departamento`, `pro_municipio`, `pro_facultad`, `pro_titulo`, `pro_codigosnies`, `pro_resolucion`, `pro_fecha_ult`, `pro_fecha_prox`, `pro_nivel_formacion`, `pro_programa_ciclo`, `pro_metodologia`, `pro_duraccion`, `pro_periodo_admision`, `pro_grupo_referencia`, `pro_grupo_referencia_nbc`, `pro_tipo_norma`, `pro_id_director`, `created_at`, `updated_at`) VALUES
-	(1, 'Ingeniera de sistemas', 'Activo', 1, 5, 4, 'Ingeniero de sistemas', '7415', 'Resolución  Número 2488 de Enero 25 del 2015. Con una vigencia de (7) siete años.', '2022-04-07', '2022-04-07', 1, 'Si', 1, 10, 'Semestral', 'Ingeniería', 'Ingeniería de sistemas, electrónica y afines', 'xx', 2, '2022-04-08 01:38:14', '2022-04-08 01:38:14');
-/*!40000 ALTER TABLE `programa` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.programa_asignatura_horario
 CREATE TABLE IF NOT EXISTS `programa_asignatura_horario` (
@@ -1739,9 +1314,7 @@ CREATE TABLE IF NOT EXISTS `programa_asignatura_horario` (
   CONSTRAINT `FK_programa_plan_asignatura_horario_persona` FOREIGN KEY (`pph_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa_asignatura_horario: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `programa_asignatura_horario` DISABLE KEYS */;
-/*!40000 ALTER TABLE `programa_asignatura_horario` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.programa_plan_estudio
 CREATE TABLE IF NOT EXISTS `programa_plan_estudio` (
@@ -1761,11 +1334,7 @@ CREATE TABLE IF NOT EXISTS `programa_plan_estudio` (
   CONSTRAINT `FK_programa_plan_estudio_programa` FOREIGN KEY (`pp_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa_plan_estudio: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `programa_plan_estudio` DISABLE KEYS */;
-INSERT IGNORE INTO `programa_plan_estudio` (`id`, `pp_id_sede`, `pp_id_programa`, `pp_plan`, `pp_creditos`, `pp_no_asignaturas`, `pp_estado`, `created_at`, `updated_at`) VALUES
-	(1, 5, 1, '2016', 164, 54, 'activo', '2022-04-08 01:38:39', '2022-04-08 01:38:39');
-/*!40000 ALTER TABLE `programa_plan_estudio` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.programa_plan_estudio_asignatura
 CREATE TABLE IF NOT EXISTS `programa_plan_estudio_asignatura` (
@@ -1795,11 +1364,9 @@ CREATE TABLE IF NOT EXISTS `programa_plan_estudio_asignatura` (
   CONSTRAINT `FK_programa_plan_estudio_asignatura_municipio` FOREIGN KEY (`asig_id_sede`) REFERENCES `municipio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_programa_plan_estudio_asignatura_programa` FOREIGN KEY (`asig_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_programa_plan_estudio_asignatura_programa_plan_estudio` FOREIGN KEY (`asig_id_plan_estudio`) REFERENCES `programa_plan_estudio` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.programa_plan_estudio_asignatura: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `programa_plan_estudio_asignatura` DISABLE KEYS */;
-/*!40000 ALTER TABLE `programa_plan_estudio_asignatura` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.prueba_resultado_programa
 CREATE TABLE IF NOT EXISTS `prueba_resultado_programa` (
@@ -1815,11 +1382,9 @@ CREATE TABLE IF NOT EXISTS `prueba_resultado_programa` (
   PRIMARY KEY (`id`),
   KEY `FK_prueba_resultado_programa_programa` (`prurepro_id_programa`),
   CONSTRAINT `FK_prueba_resultado_programa_programa` FOREIGN KEY (`prurepro_id_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_resultado_programa: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `prueba_resultado_programa` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prueba_resultado_programa` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.prueba_resultado_programa_modulo
 CREATE TABLE IF NOT EXISTS `prueba_resultado_programa_modulo` (
@@ -1837,11 +1402,9 @@ CREATE TABLE IF NOT EXISTS `prueba_resultado_programa_modulo` (
   KEY `FK_prueba_resultado_programa_modulo_programa` (`prurepromo_id_prueba_programa`),
   CONSTRAINT `FK_prueba_resultado_programa_modulo_programa` FOREIGN KEY (`prurepromo_id_prueba_programa`) REFERENCES `programa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_prueba_resultado_programa_modulo_tipo_modulo` FOREIGN KEY (`prureprono_id_modulo`) REFERENCES `tipo_modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_resultado_programa_modulo: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `prueba_resultado_programa_modulo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prueba_resultado_programa_modulo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.prueba_saber
 CREATE TABLE IF NOT EXISTS `prueba_saber` (
@@ -1857,11 +1420,7 @@ CREATE TABLE IF NOT EXISTS `prueba_saber` (
   CONSTRAINT `FK_prueba_saber_persona` FOREIGN KEY (`prueba_saber_id_estudiante`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_saber: ~1 rows (aproximadamente)
-/*!40000 ALTER TABLE `prueba_saber` DISABLE KEYS */;
-INSERT IGNORE INTO `prueba_saber` (`id`, `prueba_saber_year`, `prueba_saber_periodo`, `prueba_saber_id_estudiante`, `prueba_saber_puntaje_global`, `created_at`, `updated_at`) VALUES
-	(5, '2022', '2', 1, 79, NULL, NULL);
-/*!40000 ALTER TABLE `prueba_saber` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.prueba_saber_modulo
 CREATE TABLE IF NOT EXISTS `prueba_saber_modulo` (
@@ -1878,11 +1437,7 @@ CREATE TABLE IF NOT EXISTS `prueba_saber_modulo` (
   CONSTRAINT `FK_prueba_saber_modulo_tipo_modulo` FOREIGN KEY (`prsamo_id_modulo`) REFERENCES `tipo_modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_saber_modulo: ~1 rows (aproximadamente)
-/*!40000 ALTER TABLE `prueba_saber_modulo` DISABLE KEYS */;
-INSERT IGNORE INTO `prueba_saber_modulo` (`id`, `prsamo_id_estudiante`, `prsamo_id_modulo`, `prsamo_puntaje`, `created_at`, `updated_at`) VALUES
-	(5, 1, 1, 79, NULL, NULL);
-/*!40000 ALTER TABLE `prueba_saber_modulo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.prueba_saber_pro
 CREATE TABLE IF NOT EXISTS `prueba_saber_pro` (
@@ -1903,9 +1458,7 @@ CREATE TABLE IF NOT EXISTS `prueba_saber_pro` (
   CONSTRAINT `FK_prueba_saber_pro_persona` FOREIGN KEY (`prsapr_id_estudiante`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_saber_pro: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `prueba_saber_pro` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prueba_saber_pro` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.prueba_saber_pro_modulo
 CREATE TABLE IF NOT EXISTS `prueba_saber_pro_modulo` (
@@ -1925,9 +1478,7 @@ CREATE TABLE IF NOT EXISTS `prueba_saber_pro_modulo` (
   CONSTRAINT `FK_prueba_saber_pro_modulo_tipo_modulo` FOREIGN KEY (`prsaprmo_id_modulo`) REFERENCES `tipo_modulo` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.prueba_saber_pro_modulo: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `prueba_saber_pro_modulo` DISABLE KEYS */;
-/*!40000 ALTER TABLE `prueba_saber_pro_modulo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.red_academica
 CREATE TABLE IF NOT EXISTS `red_academica` (
@@ -1947,9 +1498,7 @@ CREATE TABLE IF NOT EXISTS `red_academica` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.red_academica: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `red_academica` DISABLE KEYS */;
-/*!40000 ALTER TABLE `red_academica` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.software
 CREATE TABLE IF NOT EXISTS `software` (
@@ -1971,11 +1520,9 @@ CREATE TABLE IF NOT EXISTS `software` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- Volcando datos para la tabla proyecto.software: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `software` DISABLE KEYS */;
-/*!40000 ALTER TABLE `software` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.software_recurso_tecnologico
 CREATE TABLE IF NOT EXISTS `software_recurso_tecnologico` (
@@ -1990,11 +1537,9 @@ CREATE TABLE IF NOT EXISTS `software_recurso_tecnologico` (
   PRIMARY KEY (`id`),
   KEY `FK_software_recurso_tecnologico_persona` (`sofrete_id_docente`),
   CONSTRAINT `FK_software_recurso_tecnologico_persona` FOREIGN KEY (`sofrete_id_docente`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.software_recurso_tecnologico: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `software_recurso_tecnologico` DISABLE KEYS */;
-/*!40000 ALTER TABLE `software_recurso_tecnologico` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.tipo_modulo
 CREATE TABLE IF NOT EXISTS `tipo_modulo` (
@@ -2006,14 +1551,9 @@ CREATE TABLE IF NOT EXISTS `tipo_modulo` (
   PRIMARY KEY (`id`),
   KEY `FK_tipo_modulo_tipo_prueba` (`tipo_modulo_id_prueba`),
   CONSTRAINT `FK_tipo_modulo_tipo_prueba` FOREIGN KEY (`tipo_modulo_id_prueba`) REFERENCES `tipo_prueba` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.tipo_modulo: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `tipo_modulo` DISABLE KEYS */;
-INSERT IGNORE INTO `tipo_modulo` (`id`, `tipo_modulo_nombre`, `tipo_modulo_id_prueba`, `created_at`, `updated_at`) VALUES
-	(1, 'Lectura crítica', 1, '2022-04-21 22:50:36', '2022-04-21 22:50:36'),
-	(2, 'Lectura crítica', 2, '2022-04-21 23:02:15', '2022-04-21 23:02:15');
-/*!40000 ALTER TABLE `tipo_modulo` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.tipo_prueba
 CREATE TABLE IF NOT EXISTS `tipo_prueba` (
@@ -2024,12 +1564,7 @@ CREATE TABLE IF NOT EXISTS `tipo_prueba` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.tipo_prueba: ~2 rows (aproximadamente)
-/*!40000 ALTER TABLE `tipo_prueba` DISABLE KEYS */;
-INSERT IGNORE INTO `tipo_prueba` (`id`, `tipo_prueba_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Prueba saber 11', NULL, NULL),
-	(2, 'Prueba saber PRO', NULL, NULL);
-/*!40000 ALTER TABLE `tipo_prueba` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.tipo_usuario
 CREATE TABLE IF NOT EXISTS `tipo_usuario` (
@@ -2040,17 +1575,7 @@ CREATE TABLE IF NOT EXISTS `tipo_usuario` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.tipo_usuario: ~8 rows (aproximadamente)
-/*!40000 ALTER TABLE `tipo_usuario` DISABLE KEYS */;
-INSERT IGNORE INTO `tipo_usuario` (`id`, `tip_nombre`, `created_at`, `updated_at`) VALUES
-	(1, 'Administrador', '2022-03-17 10:41:16', NULL),
-	(2, 'Director programa - docente', '2022-03-17 10:41:23', NULL),
-	(3, 'Docente', '2022-03-17 10:41:28', NULL),
-	(4, 'Auxiliar o Administrativo', '2022-03-17 10:41:37', NULL),
-	(6, 'Estudiante', '2022-03-17 10:41:54', NULL),
-	(9, 'Administrador estudiante', NULL, NULL),
-	(10, 'Administrador docente', NULL, NULL);
-/*!40000 ALTER TABLE `tipo_usuario` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 -- Volcando estructura para tabla proyecto.trabajo_grado
 CREATE TABLE IF NOT EXISTS `trabajo_grado` (
@@ -2060,6 +1585,8 @@ CREATE TABLE IF NOT EXISTS `trabajo_grado` (
   `tra_id_estudiante` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `tra_fecha_inicio` date NOT NULL,
   `tra_modalidad_grado` int(11) NOT NULL,
+  `tra_id_empresa` int(11) DEFAULT NULL,
+  `tra_cargo` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tra_id_director` int(11) NOT NULL,
   `tra_id_codirector` int(11) NOT NULL,
   `tra_id_externo` int(11) DEFAULT NULL,
@@ -2083,19 +1610,17 @@ CREATE TABLE IF NOT EXISTS `trabajo_grado` (
   KEY `FK_trabajo_grado_persona_3` (`tra_id_externo`),
   KEY `FK_trabajo_grado_persona_4` (`tra_id_jurado1`),
   KEY `FK_trabajo_grado_persona_5` (`tra_id_jurado2`),
+  KEY `FK_trabajo_grado_compl_empresa` (`tra_id_empresa`),
+  CONSTRAINT `FK_trabajo_grado_compl_empresa` FOREIGN KEY (`tra_id_empresa`) REFERENCES `compl_empresa` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trabajo_grado_modalidad_grado` FOREIGN KEY (`tra_modalidad_grado`) REFERENCES `modalidad_grado` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trabajo_grado_persona` FOREIGN KEY (`tra_id_director`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trabajo_grado_persona_2` FOREIGN KEY (`tra_id_codirector`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trabajo_grado_persona_3` FOREIGN KEY (`tra_id_externo`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trabajo_grado_persona_4` FOREIGN KEY (`tra_id_jurado1`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `FK_trabajo_grado_persona_5` FOREIGN KEY (`tra_id_jurado2`) REFERENCES `persona` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Volcando datos para la tabla proyecto.trabajo_grado: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `trabajo_grado` DISABLE KEYS */;
-INSERT IGNORE INTO `trabajo_grado` (`id`, `tra_codigo_proyecto`, `tra_titulo_proyecto`, `tra_id_estudiante`, `tra_fecha_inicio`, `tra_modalidad_grado`, `tra_id_director`, `tra_id_codirector`, `tra_id_externo`, `tra_estado_propuesta`, `tra_estado_proyecto`, `tra_id_jurado1`, `tra_id_jurado2`, `tra_numero_acta_sustentacion`, `tra_acta_sustentacion_soporte`, `tra_numero_acta_grado`, `tra_acta_grado_soporte`, `tra_fecha_finalizacion`, `tra_observacion`, `tra_id_proceso`, `created_at`, `updated_at`) VALUES
-	(1, '8638-2021', 'La Nueva Realidad', 'Kenny Jose Rodriguez Hernaandez', '2022-04-07', 2, 2, 9, NULL, 'aprobada', 'aprobado-director', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 3, '2022-04-08 01:49:14', '2022-04-20 16:44:11');
-/*!40000 ALTER TABLE `trabajo_grado` ENABLE KEYS */;
+-- La exportación de datos fue deseleccionada.
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

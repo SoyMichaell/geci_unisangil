@@ -15,13 +15,13 @@
     <div class="container">
         <div class="mt-2">
             <div class="row mx-auto">
-                <a class="tile" style="width: 350px; margin-left: 10px;" href="/investigacion/mostrargrupo">
+                <a class="tile" style="width: 350px; margin-left: 10px;font-size:18px" href="/investigacion/mostrargrupo">
                     Grupo de investigación
                 </a>
-                <a class="tile" style="width: 350px; margin-left: 10px;" href="/investigacion/mostrarintegrante">
+                <a class="tile" style="width: 350px; margin-left: 10px;font-size:18px" href="/investigacion/mostrarintegrante">
                     Investigadores
                 </a>
-                <a class="tile" style="width: 350px; margin-left: 10px;" href="/investigacion/mostrarproyecto">
+                <a class="tile" style="width: 350px; margin-left: 10px;font-size:18px" href="/investigacion/mostrarproyecto">
                     Proyectos
                 </a>
             </div>

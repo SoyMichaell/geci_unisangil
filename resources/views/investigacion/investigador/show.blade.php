@@ -29,9 +29,9 @@
 </style>
 @section('content')
     <div class="container">
+        <h4><i class="fa fa-user-circle"></i> Información investigador</h4><hr>
         <div class="row mb-3">
-            <h4><i class="fa-solid fa-user-circle"></i> Información investigador</h4>
-            <hr>
+            
             <div class="col-md-8">
                 <h5>Información general</h5>
                 <ul>
@@ -50,11 +50,6 @@
                     <li id="li"><strong>Especialización</strong> <br> {{$investigador->titulo_especializacion == "" ? 'Sin registro' : $investigador->titulo_especializacion}} <br> Institución educativa: {{$investigador->institucion_espe == "" ? 'Sin registro' : $investigador->institucion_espe}}</li>
                     <li id="li"><strong>Maestría</strong> <br> {{$investigador->titulo_maestria == "" ? 'Sin registro' : $investigador->titulo_maestria}} <br> Institución educativa: {{$investigador->institucion_mae == "" ? 'Sin registro' : $investigador->institucion_mae}}</li>
                     <li id="li"><strong>Doctorado</strong> <br> {{$investigador->titulo_doctorado == "" ? 'Sin registro' : $investigador->titulo_doctorado}} <br> Institución educativa: {{$investigador->institucion_doc == "" ? 'Sin registro' : $investigador->institucion_doc}}</li>
-                </ul>
-                <h5>Proyectos</h5>
-                <ul>
-                    <li id="li">La Nueva Realidad Fase I <br> Estado proyecto: Finalizado</li>
-                    <li id="li">La Nueva Realidad Fase II <br> Estado proyecto: En curso</li>
                 </ul>
             </div>
             <div class="col-md-4">

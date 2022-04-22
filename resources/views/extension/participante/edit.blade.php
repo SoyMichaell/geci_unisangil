@@ -54,7 +54,7 @@
                         <select class="form-control" name="dop_sexo_biologico" id="dop_sexo_biologico">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$participante->dop_sexo_biologico == '1' ? 'selected' : ''}}>Masculino</option>
-                            <option value="2" {{$participante->dop_sexo_biologico == '1' ? 'selected' : ''}}>Femenino</option>
+                            <option value="2" {{$participante->dop_sexo_biologico == '2' ? 'selected' : ''}}>Femenino</option>
                         </select>
                         @error('extedu_numero_horas')
                             <span class="invalid-feedback" role="alert">

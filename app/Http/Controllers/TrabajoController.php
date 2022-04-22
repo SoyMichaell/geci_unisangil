@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\TrabajoGradoExport;
+use App\Models\Empresa;
 use App\Models\Trabajo;
 use App\Models\ModalidadGrado;
 use RealRashid\SweetAlert\Facades\Alert;
@@ -16,7 +17,6 @@ class TrabajoController extends Controller
     {
 
         $trabajos = Trabajo::all();
-
         return view('trabajo.index')
             ->with('trabajos', $trabajos);
     }
@@ -37,10 +37,13 @@ class TrabajoController extends Controller
 
         $modalidades = ModalidadGrado::all();
 
+        $empresas = Empresa::all();
+
         return view('trabajo.create')
             ->with('estudiantes', $estudiantes)
             ->with('personas', $personas)
-            ->with('modalidades', $modalidades);
+            ->with('modalidades', $modalidades)
+            ->with('empresas', $empresas);
     }
 
     public function store(Request $request)
@@ -52,8 +55,6 @@ class TrabajoController extends Controller
             'tra_id_estudiante' => 'required',
             'tra_fecha_inicio' => 'required',
             'tra_modalidad_grado' => 'required',
-            'tra_id_director' => 'required',
-            'tra_id_codirector' => 'required',
         ];
 
         $message = [
@@ -62,18 +63,37 @@ class TrabajoController extends Controller
             'tra_id_estudiante.required' => 'El campo estudiante (s) es requerido',
             'tra_fecha_inicio.required' => 'El campo fecha de inicio es requerido',
             'tra_modalidad_grado.required' => 'El campo modalidad de grado es requerido',
-            'tra_id_director.required' => 'El campo director es requerido',
-            'tra_id_codirector.required' => 'El campo codirector es requerido',
         ];
 
         $this->validate($request, $rules, $message);
 
-        $trabajos = new Trabajo();
-        $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
-        $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
-        $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
-        $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
-        $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
+        if($request->get('tra_modalidad_grado') == '10'){
+            $trabajos = new Trabajo();
+            $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
+            $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
+            $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
+            $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
+            $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
+            $trabajos->tra_id_empresa = $request->get('tra_id_empresa');
+            $trabajos->tra_cargo = $request->get('tra_cargo');
+            if ($request->get('tra_id_director') == $request->get('tra_id_codirector')) {
+                Alert::warning('Advertencia', 'El director y codirector no puede ser el mismo docente');
+                return back()->withInput();
+            }
+    
+            $trabajos->tra_id_director = $request->get('tra_id_director');
+            $trabajos->tra_id_codirector = $request->get('tra_id_codirector');
+            $trabajos->tra_id_proceso = 1;
+            $trabajos->save();
+            Alert::success('Registro Exitoso');
+            return redirect('/trabajo');
+        }else{
+            $trabajos = new Trabajo();
+            $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
+            $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
+            $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
+            $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
+            $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
 
 
         if ($request->get('tra_id_director') == $request->get('tra_id_codirector')) {
@@ -87,6 +107,7 @@ class TrabajoController extends Controller
         $trabajos->save();
         Alert::success('Registro Exitoso');
         return redirect('/trabajo');
+        }
     }
 
 
@@ -126,10 +147,13 @@ class TrabajoController extends Controller
                         ->first();
         }
 
-        
-
         $trabajo = DB::table('trabajo_grado')
+            ->select('trabajo_grado.id','tra_codigo_proyecto','tra_titulo_proyecto','tra_id_estudiante','tra_modalidad_grado',
+            'tra_fecha_inicio','mod_nombre','razon_social','nit','pais','departamento','ciudad','direccion','telefono',
+            'url','correo','area','tra_cargo','tra_estado_propuesta','tra_estado_proyecto','tra_numero_acta_sustentacion','tra_acta_sustentacion_soporte',
+            'tra_numero_acta_grado','tra_acta_grado_soporte','tra_fecha_finalizacion','tra_observacion')
             ->join('modalidad_grado','trabajo_grado.tra_modalidad_grado','=','modalidad_grado.id')
+            ->leftJoin('compl_empresa','trabajo_grado.tra_id_empresa','=','compl_empresa.id')
             ->where('trabajo_grado.id', $id)
             ->first();
         
@@ -154,6 +178,7 @@ class TrabajoController extends Controller
 
         $estudiantes = DB::table('persona')
         ->Where('per_tipo_usuario', 6)
+        ->orWhere('per_tipo_usuario', 9)
         ->get();
 
         $trabajon = DB::table('trabajo_grado')->get();
@@ -183,7 +208,7 @@ class TrabajoController extends Controller
 
         $trabajo = Trabajo::find($id);
         $modalidades = ModalidadGrado::all();
-
+        $empresas = Empresa::all();
         return view('trabajo.edit')
             ->with('estudiantes', $estudiantes)
             ->with('personas', $personas)
@@ -191,7 +216,8 @@ class TrabajoController extends Controller
             ->with('modalidades', $modalidades)
             ->with('contratos', $contratos)
             ->with('jurado1', $jurado1)
-            ->with('jurado2', $jurado2);
+            ->with('jurado2', $jurado2)
+            ->with('empresas', $empresas);
     }
 
     public function update(Request $request, $id)
@@ -219,21 +245,47 @@ class TrabajoController extends Controller
 
         $this->validate($request, $rules, $message);
 
-        $trabajos = Trabajo::find($id);
-        $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
-        $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
-        $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
-        $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
-        $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
+        if($request->get('tra_modalidad_grado') == '10'){
+            $trabajos = Trabajo::find($id);
+            $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
+            $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
+            $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
+            $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
+            $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
+            $trabajos->tra_id_empresa = $request->get('tra_id_empresa');
+            $trabajos->tra_cargo = $request->get('tra_cargo');
+            if ($request->get('tra_id_director') == $request->get('tra_id_codirector')) {
+                Alert::warning('Advertencia', 'El director y codirector no puede ser el mismo docente');
+                return back()->withInput();
+            }
+            $trabajos->tra_id_director = $request->get('tra_id_director');
+            $trabajos->tra_id_codirector = $request->get('tra_id_codirector');
+            $trabajos->tra_id_proceso = 1;
+            $trabajos->save();
+            Alert::success('Registro Exitoso');
+            return redirect('/trabajo');
+        }else{
+            $trabajos = Trabajo::find($id);
+            $trabajos->tra_codigo_proyecto = $request->get('tra_codigo_proyecto');
+            $trabajos->tra_titulo_proyecto = $request->get('tra_titulo_proyecto');
+            $trabajos->tra_id_estudiante = implode(';',$request->get('tra_id_estudiante'));
+            $trabajos->tra_fecha_inicio = $request->get('tra_fecha_inicio');
+            $trabajos->tra_modalidad_grado = $request->get('tra_modalidad_grado');
+            $trabajos->tra_id_empresa = null;
+            $trabajos->tra_cargo = null;
+
+        if ($request->get('tra_id_director') == $request->get('tra_id_codirector')) {
+            Alert::warning('Advertencia', 'El director y codirector no puede ser el mismo docente');
+            return back()->withInput();
+        }
+
         $trabajos->tra_id_director = $request->get('tra_id_director');
         $trabajos->tra_id_codirector = $request->get('tra_id_codirector');
-        $trabajos->tra_id_proceso = 1;
-
+        $trabajos->tra_id_proceso = 2;
         $trabajos->save();
-
-        Alert::success('Registro Actualizado');
-
-        return redirect('trabajo/' . $id . '/edit');
+        Alert::success('Registro Exitoso');
+        return redirect('/trabajo');
+        }
     }
 
     public function faseestado(Request $request, $id)

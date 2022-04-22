@@ -14,7 +14,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-flex">
-            <a class="btn btn-success" href="{{ url('software/mostrarrecurso') }}"><i class="fa fa-plus-circle"></i>
+            <a class="btn btn-info btn-sm" href="{{ url('software/mostrarrecurso') }}"><i class="fa fa-plus-circle"></i>
                 Recursos tecnológicos</a>
         </div>
         <div class="tile col-md-12 mt-2">

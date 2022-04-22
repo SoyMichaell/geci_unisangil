@@ -49,7 +49,7 @@
                                     <td>{{ $plan->pp_creditos }}</td>
                                     <td>{{ $plan->pp_no_asignaturas }}</td>
                                     <td>{{ Str::ucfirst($plan->pp_estado) }}</td>
-                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2)
+                                    @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 2 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
                                         <td>
                                             <form action="/programa/{{ $plan->id }}/estado" method="POST">
                                                 <div class="d-flex text-center">

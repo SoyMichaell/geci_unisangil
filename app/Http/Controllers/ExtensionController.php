@@ -424,6 +424,7 @@ class ExtensionController extends Controller
         $personas = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('extension/curso.create')
             ->with('cines', $cines)
@@ -442,7 +443,6 @@ class ExtensionController extends Controller
             'extcurso_estado' => 'required',
             'extcurso_fecha' => 'required',
             'extcurso_id_docente' => 'required|not_in:0',
-            'extcurso_url_soporte' => 'required',
         ];
         $message = [
             'extcurso_year.required' => 'El campo año es requerido',
@@ -454,7 +454,6 @@ class ExtensionController extends Controller
             'extcurso_estado.required' => 'El campo estado activo es requerido',
             'extcurso_fecha.required' => 'El campo fecha curso es requerido',
             'extcurso_id_docente.required' => 'El campo docente es requerido',
-            'extcurso_url_soporte.required' => 'El campo url soporte es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -494,8 +493,9 @@ class ExtensionController extends Controller
     {
         $cines = CineDetallado::all();
         $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 3)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
             ->get();
         $curso = ExtCurso::find($id);
         return view('extension/curso.edit')
@@ -508,9 +508,9 @@ class ExtensionController extends Controller
     {
         $cines = CineDetallado::all();
         $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
             ->get();
         $curso = ExtCurso::find($id);
         return view('extension/curso.show')
@@ -775,8 +775,8 @@ class ExtensionController extends Controller
         $participantes = ExtParticipante::all();
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('extension/participante.index')
             ->with('participantes', $participantes)
@@ -786,9 +786,9 @@ class ExtensionController extends Controller
     public function crearparticipante()
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('extension/participante.create')
             ->with('docentes', $docentes);
@@ -837,9 +837,9 @@ class ExtensionController extends Controller
     public function editarparticipante($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
             ->get();
         $participante = ExtParticipante::find($id);
         return view('extension/participante.edit')
@@ -850,9 +850,9 @@ class ExtensionController extends Controller
     public function verparticipante($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
             ->get();
         $participante = ExtParticipante::find($id);
         return view('extension/participante.show')
@@ -1869,8 +1869,8 @@ class ExtensionController extends Controller
         $asignaturas = ProgramaAsignatura::all();
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('extension/curriculo.create')
             ->with('asignaturas', $asignaturas)
@@ -1916,9 +1916,9 @@ class ExtensionController extends Controller
         $curriculo = ExtInternacionalizacionCurriculo::find($id);
         $asignaturas = ProgramaAsignatura::all();
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('extension/curriculo.edit')
             ->with('asignaturas', $asignaturas)

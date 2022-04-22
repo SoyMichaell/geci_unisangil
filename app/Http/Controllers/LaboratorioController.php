@@ -26,6 +26,7 @@ class LaboratorioController extends Controller
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $facultades = Facultad::all();
         $programas = Programa::all();

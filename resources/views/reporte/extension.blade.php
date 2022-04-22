@@ -161,7 +161,7 @@
                     <td>{{ $educacion->extedu_numero_horas }}</td>
                     <td>{{ $educacion->extedu_tipo_curso }}</td>
                     <td>{{ $educacion->extedu_valor_curso }}</td>
-                    <td>{{ $educacion->per_nombre . ' ' . $curso->per_apellido }}</td>
+                    <td>{{ $educacion->per_nombre . ' ' . $educacion->per_apellido }}</td>
                     <td>{{ $educacion->coarex_nombre }}</td>
                     <td>{{ $educacion->extedu_cantidad }}</td>
                 </tr>
