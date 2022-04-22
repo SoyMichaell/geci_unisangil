@@ -615,10 +615,12 @@ class ProgramaController extends Controller
             $horarios = ProgramaHorario::all();
             $asignaturas = ProgramaAsignatura::all();
             $personas = DB::table('persona')
-                ->where('per_tipo_usuario', 2)
-                ->orWhere('per_tipo_usuario', 3)
-                ->orWhere('per_tipo_usuario', 10)
-                ->get();
+                ->where('per_id_estado','activo')
+                ->where(function($q){
+                    $q->where('per_tipo_usuario', 2)
+                    ->orWhere('per_tipo_usuario', 3)
+                ->orWhere('per_tipo_usuario', 10);
+                })->get();
             return view('programa/horario.create')
                 ->with('asignaturas', $asignaturas)
                 ->with('personas', $personas)
@@ -667,10 +669,12 @@ class ProgramaController extends Controller
             $horario = ProgramaHorario::find($id);
             $asignaturas = ProgramaAsignatura::all();
             $personas = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 3)
-            ->orWhere('per_tipo_usuario', 10)
-                ->get();
+                ->where('per_id_estado','activo')
+                ->where(function($q){
+                    $q->where('per_tipo_usuario', 2)
+                    ->orWhere('per_tipo_usuario', 3)
+                ->orWhere('per_tipo_usuario', 10);
+                })->get();
             return view('programa/horario.edit')
                 ->with('asignaturas', $asignaturas)
                 ->with('personas', $personas)

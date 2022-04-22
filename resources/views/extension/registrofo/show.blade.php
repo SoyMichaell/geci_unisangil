@@ -157,8 +157,7 @@
                     <input class="form-control @error('extrefoin_soporte') is-invalid @enderror"
                         name="extrefoin_soporte" id="extrefoin_soporte" value="{{ $fotografico->extrefoin_soporte }}"
                         type="file" autocomplete="extrefoin_soporte" autofocus disabled>
-                    <p><small><a
-                                href="{{ asset('datos/registro-fotografico/' . $fotografico->extrefoin_soporte) }}">{{ $fotografico->extrefoin_soporte }}</a></small>
+                    <p><small><a>{{ $fotografico->extrefoin_soporte }}</a></small>
                     </p>
                     @error('extrefoin_soporte')
                         <span class="invalid-feedback" role="alert">

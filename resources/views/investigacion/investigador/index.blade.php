@@ -12,8 +12,8 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container">
-        <div class="bg-white p-3 col-md-12 mt-2">
+    <div class="container-fluid">
+        <div class="tile p-3 col-md-12 mt-2">
             <div class="row">
                 <div class="col-md-8">
                     <h4>Listado investigadores</h4>
@@ -33,7 +33,7 @@
             <br>
             <div class="table-responsive">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>N°</th>
                             <th>Grupo de investigación</th>

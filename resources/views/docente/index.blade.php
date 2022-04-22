@@ -14,7 +14,7 @@
 @section('content')
     <div class="container-fluid">
         <div class="d-flex">
-            <a class="btn btn-success" href="/docente/mostrardocentevisitante"><i class="fa fa-plus-circle"></i> Registro
+            <a class="btn btn-info btn-sm" href="/docente/mostrardocentevisitante"><i class="fa fa-plus-circle"></i> Registro
                 docentes visitantes</a>
         </div>
         <div class="tile col-md-12 mt-2 p-3">
@@ -36,7 +36,7 @@
             </div>
             <div class="table-responsive mt-2">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>N°</th>
                             <th>Tipo Documento</th>
@@ -56,7 +56,7 @@
                                 <td>{{ $persona->per_tipo_documento }}</td>
                                 <td>{{ $persona->per_numero_documento }}</td>
                                 <td>{{ Str::upper($persona->per_nombre)}}</td>
-                                <td>{{ Str::upper($persona->per_apellido) }}</td>
+                                    <td>{{ Str::upper($persona->per_apellido) }}</td>
                                 <td>{{ $persona->per_correo }}</td>
                                 <td>{{ $persona->tip_nombre }}</td>
                                 <td style="width: 10%;">

@@ -3,15 +3,15 @@
 @else
     @extends('layouts.app')
     @section('title')
-        <h1 class="titulo"><i class="fas fa-vector-square"></i> Registro de asignaturas</h1>
+        <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
     @section('message')
-        <p>Programas acádemicos </p>
+        <p>Diligenciar todos los campos requeridos *.</p>
     @endsection
 @endsection
 @section('content')
     <div class="col-md-12">
         <div class="tile">
-            <h4 class="titulo"><i class="fab fa-wpforms"></i> Registro de asignación materia / horario / aula</h4>
+            <h4 class="titulo"><i class="fa fa-pencil"></i> Registro de asignación materia / horario / aula</h4><hr>
             <form action="/programa/{{$horario->id}}/actualizarhorario" method="post">
                 @csrf
                 @method('PUT')
@@ -28,7 +28,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pph_semestre">{{ __('Semestre *') }}</label>
-                        <select class="form-control @error('pph_semestre') is-invalid @enderror" name="pph_semestre"
+                        <select class="js-example-placeholder-single form-control @error('pph_semestre') is-invalid @enderror" name="pph_semestre"
                             id="pph_semestre">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$horario->pph_semestre == '1' ? 'selected' : ''}}>1</option>
@@ -41,6 +41,8 @@
                             <option value="8" {{$horario->pph_semestre == '8' ? 'selected' : ''}}>8</option>
                             <option value="9" {{$horario->pph_semestre == '9' ? 'selected' : ''}}>9</option>
                             <option value="10" {{$horario->pph_semestre == '10' ? 'selected' : ''}}>10</option>
+                            <option value="11" {{$horario->pph_semestre == '11' ? 'selected' : ''}}>10</option>
+                            <option value="12" {{$horario->pph_semestre == '12' ? 'selected' : ''}}>10</option>
                         </select>
                         @error('pph_semestre')
                             <span class="invalid-feedback" role="alert">
@@ -52,7 +54,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pph_id_asignatura">{{ __('Asignatura *') }}</label>
-                        <select class="form-control @error('pph_id_asignatura') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('pph_id_asignatura') is-invalid @enderror"
                             name="pph_id_asignatura" id="pph_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
@@ -79,12 +81,12 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pph_id_docente">{{ __('Docente *') }}</label>
-                        <select class="form-control @error('pph_id_docente') is-invalid @enderror" name="pph_id_docente"
+                        <select class="js-example-placeholder-single form-control @error('pph_id_docente') is-invalid @enderror" name="pph_id_docente"
                             id="pph_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}" {{$persona->id == $horario->pph_id_docente ? 'selected' : ''}}>
-                                    {{ $persona->per_nombre . ' ' . $persona->per_apellido }}</option>
+                                    {{ Str::upper($persona->per_nombre . ' ' . $persona->per_apellido) }}</option>
                             @endforeach
                         </select>
                         @error('asig_id_sede')

@@ -6,7 +6,7 @@
         <a href="/prueba/mostrarsaberpro">Saber pro</a> / <a href="/prueba">Prueba</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-table"></i> Módulo pruebas saber Pro</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo pruebas saber PRO</h1>
     @section('message')
         <p>Listado pruebas saber pro</p>
     @endsection
@@ -26,7 +26,7 @@
             </div>
             <br>
             <table class="table" id="tables">
-                <thead>
+                <thead class="bg-light">
                     <tr>
                         <th>#</th>
                         <th>Año presentación</th>

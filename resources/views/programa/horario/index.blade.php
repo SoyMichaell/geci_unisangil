@@ -23,8 +23,8 @@
                                 Nuevo</a>
                         </div>
                     </div>
-                    <table class="table table-bordered" id="tables">
-                        <thead>
+                    <table class="table" id="tables">
+                        <thead class="bg-light">
                             <tr>
                                 <th>#</th>
                                 <th>Año</th>
@@ -50,7 +50,7 @@
                                     <td>{{ $horario->pph_semestre }}</td>
                                     <td>{{ $horario->asignaturas->asig_nombre }}</td>
                                     <td>{{ $horario->pph_grupo }}</td>
-                                    <td>{{ $horario->docentes->per_nombre . ' ' . $horario->docentes->per_apellido }}
+                                    <td>{{ Str::upper($horario->docentes->per_nombre . ' ' . $horario->docentes->per_apellido) }}
                                     </td>
                                     <td>{{ $horario->pph_horario }}</td>
                                     <td>{{ $horario->pph_aula }}</td>
@@ -64,7 +64,7 @@
                                                 <a class="btn btn-outline-info btn-sm"
                                                     href="{{ url('programa/' . $horario->id . '/editarhorario') }}"
                                                     title="Editar registro"><i
-                                                        class="fa fa-pen-to-square"></i></a>
+                                                        class="fa fa-pencil-square-o"></i></a>
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger btn-sm" type="submit"><i

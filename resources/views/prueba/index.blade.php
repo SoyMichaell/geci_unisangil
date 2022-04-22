@@ -25,25 +25,27 @@
 
 </style>
 @section('content')
-    <div class="container bg-white p-3">
-        <h4 class="fw-bold">Módulo pruebas saber</h4>
+    <div class="container tile">
+        <h4>Módulo pruebas saber</h4>
         <div class="row">
-            <div class="col-md-12">
-                <table class="table">
-                    <tr>
-                        <td>Registro tipo módulo</td> <td><a href="/prueba/mostrartipomodulo">Enlace</a> ({{$tipomodulos->count()}})</td>
-                    </tr>
-                    <tr>
-                        <td>Registro prueba saber 11</td> <td><a href="/prueba/mostrarsaber">Enlace</a> ({{$saber11->count()}})</td>
-                    </tr>
-                    <tr>
-                        <td>Registro prueba saber pro</td> <td><a href="/prueba/mostrarsaberpro">Enlace</a> ({{$saberpro->count()}})</td>
-                    </tr>
-                    <tr>
-                        <td>Resultados generales de programa</td> <td><a href="/prueba/mostrarresultado">Enlace</a></td>
-                    </tr>
-                </table>
-            </div>
+            <table class="table">
+                <tr style="width: 80%">
+                    <td>Registro tipo módulo <small>(Registrar todos los módulos vigentes para las pruebas saber 11 y pruebas saber pro)</small></td>
+                    <td><a href="/prueba/mostrartipomodulo">Enlace</a> ({{ $tipomodulos->count() }})</td>
+                </tr>
+                <tr style="width: 80%">
+                    <td>Saber once (11)</td>
+                    <td><a href="/prueba/mostrarsaber">Enlace</a> ({{ $saber11->count() }})</td>
+                </tr>
+                <tr style="width: 80%">
+                    <td>Saber PRO</td>
+                    <td><a href="/prueba/mostrarsaberpro">Enlace</a> ({{ $saberpro->count() }})</td>
+                </tr>
+                <tr style="width: 80%">
+                    <td>Resultados generales de programa</td>
+                    <td><a href="/prueba/mostrarresultado">Enlace</a></td>
+                </tr>
+            </table>
         </div>
     </div>
 @endsection

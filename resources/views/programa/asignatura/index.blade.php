@@ -6,7 +6,7 @@
         <a href="/programa/mostrarasignatura">Asignaturas</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fab fa-uncharted"></i>Módulo programa | Listado asignaturas</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo programa | Listado asignaturas</h1>
     @section('message')
         <p>Listado de asignaturas</p>
     @endsection
@@ -27,8 +27,8 @@
                 </div>
             </div>
             <div class="table-responsive mt-2">
-                <table class="table table-bordered" id="tables">
-                    <thead>
+                <table class="table" id="tables">
+                    <thead class="bg-light">
                         <tr>
                             <th>#</th>
                             <th>Sede</th>

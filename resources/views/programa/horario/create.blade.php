@@ -27,7 +27,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="pph_semestre">{{ __('Semestre *') }}</label>
-                        <select class="form-control @error('pph_semestre') is-invalid @enderror" name="pph_semestre"
+                        <select class="js-example-placeholder-single form-control @error('pph_semestre') is-invalid @enderror" name="pph_semestre"
                             id="pph_semestre">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1">1</option>
@@ -40,6 +40,8 @@
                             <option value="8">8</option>
                             <option value="9">9</option>
                             <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
                         </select>
                         @error('pph_semestre')
                             <span class="invalid-feedback" role="alert">
@@ -51,11 +53,11 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pph_id_asignatura">{{ __('Asignatura *') }}</label>
-                        <select class="js-example-placeholder-single  form-control @error('pph_id_asignatura') is-invalid @enderror"
+                        <select class="js-example-placeholder-single form-control @error('pph_id_asignatura') is-invalid @enderror"
                             name="pph_id_asignatura" id="pph_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
-                                <option value="{{ $asignatura->id }}">{{ $asignatura->asig_nombre }}</option>
+                                <option value="{{ $asignatura->id }}">{{ Str::upper($asignatura->asig_nombre) }}</option>
                             @endforeach
                         </select>
                         <p class="badge badge-danger">{{ $asignaturas->count() > 0 ? '' : 'No exiten asignaturas' }}</p>
@@ -79,12 +81,12 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="pph_id_docente">{{ __('Docente *') }}</label>
-                        <select class="js-example-placeholder-single  form-control @error('pph_id_docente') is-invalid @enderror" name="pph_id_docente"
+                        <select class="js-example-placeholder-single form-control @error('pph_id_docente') is-invalid @enderror" name="pph_id_docente"
                             id="pph_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">
-                                    {{ $persona->per_nombre . ' ' . $persona->per_apellido }}</option>
+                                    {{ Str::upper($persona->per_nombre . ' ' . $persona->per_apellido) }}</option>
                             @endforeach
                         </select>
                         <p class="badge badge-danger">{{ $personas->count() > 0 ? '' : 'No existen docentes' }}</p>

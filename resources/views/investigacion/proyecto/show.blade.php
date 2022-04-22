@@ -13,7 +13,7 @@
 @endsection
 <style>
     h4 {
-        color: brown;
+        color: rgb(1, 76, 141);
         font-weight: 900;
     }
 
@@ -30,7 +30,7 @@
 </style>
 @section('content')
     <div class="container">
-        <h4>Información proyecto</h4><hr>
+        <h4>INFORMACIÓN PROYECTO</h4><hr>
         <div class="row mb-3">
             <div class="col-md-8">
                 <h5>Grupo de investigación</h5>

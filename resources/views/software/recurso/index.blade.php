@@ -32,7 +32,7 @@
             </div>
             <div class="table-responsive mt-2">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>#</th>
                             <th>Año</th>
@@ -51,7 +51,7 @@
                                 <td>{{ $recurso->sofrete_year }}</td>
                                 <td>{{ $recurso->sofrete_periodo }}</td>
                                 <td>{{ $recurso->sofrete_tipo_recurso }}</td>
-                                <td>{{ $recurso->docentes->per_nombre . ' ' . $recurso->docentes->per_apellido }}</td>
+                                <td>{{ Str::upper($recurso->docentes->per_nombre . ' ' . $recurso->docentes->per_apellido) }}</td>
                                 <td>{{ $recurso->asignaturas->asig_nombre }}</td>
                                 <td>
                                     <form action="/software/{{ $recurso->id }}/eliminarrecurso" method="POST">

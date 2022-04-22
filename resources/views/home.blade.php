@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('navegar')
+        <a href="/home">Dashboard</a>
+    @endsection
 @section('title')
     <h1 class="titulo"><i class="fa fa-tachometer"></i> Bienvenido (a),
         {{ Str::ucfirst(auth()->user()->per_nombre . ' ' . auth()->user()->per_apellido) }} </h1>
@@ -82,15 +85,15 @@
             </div>
         @endif
         @if (Auth::user()->per_tipo_usuario == 1 || Auth::user()->per_tipo_usuario == 9 || Auth::user()->per_tipo_usuario == 10)
-            <div class="tile col-md-12 mt-2">
+            <div class="tile col-md-12">
                 <div class="row">
                     <div class="col-md-6">
                         <h4 class="titulo">Usuarios en plataforma</h4>
                     </div>
                 </div>
                 <div class="table-responsive mt-3">
-                    <table class="table table-bordered" id="tables">
-                        <thead>
+                    <table class="table" id="tables">
+                        <thead class="bg-light">
                             <tr>
                                 <th>N°</th>
                                 <th>Tipo documento</th>
@@ -133,9 +136,6 @@
                                                                 href="usuario/{{ $persona->id }}/actualizarestado">Activar</a>
                                                         @endif
                                                         @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-outline-danger btn-sm"><i
-                                                                class="fa fa-trash"></i></button>
                                                     @endif
                                                 </div>
                                             </form>

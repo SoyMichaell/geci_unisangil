@@ -17,7 +17,7 @@
             <div class="col-md-12 tile">
                 <h4>Lista de registros</h4> <!-- TODO: arreglar botones pdf y excel-->
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>Año</th>
                             <th>Semestre</th>
@@ -41,8 +41,7 @@
                                 <td>{{ $evaluacion->doe_total_pro }}</td>
                                 <td>{{ $evaluacion->doe_observacion }}</td>
                                 <td>
-                                    <a href="{{ asset('/docente/evaluacion/' . $evaluacion->doe_url_evaluacion) }}"
-                                        target="_blank">{{ $evaluacion->doe_url_evaluacion }}</a>
+                                    <a>{{ $evaluacion->doe_url_evaluacion }}</a>
                                 </td>
                                 <td>
                                     <form action="{{ url("docente/{$evaluacion->id}/eliminarevaluacion") }}"

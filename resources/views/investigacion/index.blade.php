@@ -11,17 +11,37 @@
         <p>Módulo investigación Unisangil, Grupo de investigación , Investigadores y Proyectos</p>
     @endsection
 @endsection
+<style>
+    .content__investigacion{
+        margin-top: 10%;
+    }
+    .card__investigacion {
+        width: 350px;
+        height: 250px;
+        margin-left: 10px;
+        line-height: 200px;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+    }
+    .card__investigacion:hover{
+        color: #fff;
+        text-decoration: none;
+        background-color: rgb(1, 76, 141);
+    }
+
+</style>
 @section('content')
     <div class="container">
-        <div class="mt-2">
+        <div class="content__investigacion">
             <div class="row mx-auto">
-                <a class="tile" style="width: 350px; margin-left: 10px;font-size:18px" href="/investigacion/mostrargrupo">
+                <a class="tile card__investigacion" href="/investigacion/mostrargrupo">
                     Grupo de investigación
                 </a>
-                <a class="tile" style="width: 350px; margin-left: 10px;font-size:18px" href="/investigacion/mostrarintegrante">
+                <a class="tile card__investigacion" href="/investigacion/mostrarintegrante">
                     Investigadores
                 </a>
-                <a class="tile" style="width: 350px; margin-left: 10px;font-size:18px" href="/investigacion/mostrarproyecto">
+                <a class="tile card__investigacion" href="/investigacion/mostrarproyecto">
                     Proyectos
                 </a>
             </div>

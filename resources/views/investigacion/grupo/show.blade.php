@@ -13,7 +13,7 @@
 @endsection
 <style>
     h4 {
-        color: brown;
+        color: rgb(1, 76, 141);
         font-weight: 900;
     }
 
@@ -35,10 +35,10 @@
     <div class="container">
         <div class="row mb-3">
             <div class="col-md-8">
-                <h4 class="fw-bold">Coordinador</h4>
+                <h4 class="fw-bold">COORDINADOR</h4>
                 <p>{{ $grupo->personas->per_nombre . ' ' . $grupo->personas->per_apellido }}</p>
                 <hr>
-                <h4 class="fw-bold">Información general</h4>
+                <h4 class="fw-bold">INFORMACIÓN GENERAL</h4>
                 <ul>
                     <li id="li"><strong>Grupo</strong> <br> {{ $grupo->inv_nombre_grupo }}</li>
                     <li id="li"><strong>Correo institucional</strong> <br> {{ $grupo->inv_correo_institucional_grupo }}</li>
@@ -73,7 +73,7 @@
                 <div class="d-flex justify-content-end">
                     <a class="btn btn-success btn-sm" href="/investigacion/{{$grupo->id}}/editargrupo">Editar grupo</a>
                 </div>
-                <h4 class="fw-bold text-right">Integrantes</h4>
+                <h4 class="fw-bold text-right">INTEGRANTES</h4>
                 <ul class="text-right">
                     @foreach ($integrantes as $integrante)
                         <li><a href="/investigacion/{{$integrante->id}}/verintegrante" id="integrantes">[{{$integrante->per_nombre.' '.$integrante->per_apellido}} | {{$grupo->inv_id_coordinador == $integrante->inves_id_persona ? 'Coordinador' : $integrante->tip_nombre}}]</a></li>

@@ -136,7 +136,7 @@
                         <input class="form-control @error('extedu_url_soporte') is-invalid @enderror"
                             name="extedu_url_soporte" id="extedu_url_soporte" value="{{$educacion->extedu_url_soporte}}"
                             type="file" autocomplete="extedu_url_soporte" autofocus>
-                            <p><small><a href="{{asset('datos/educacion/'.$educacion->extedu_url_soporte)}}" target="_blank">{{$educacion->extedu_url_soporte}}</a></small></p>
+                            <p><small><a>{{$educacion->extedu_url_soporte}}</a></small></p>
                         @error('extedu_url_soporte')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

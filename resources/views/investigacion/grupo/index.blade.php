@@ -13,11 +13,12 @@
 @endsection
 <style>
     #card-investigacion {
+        border: none;
         text-decoration: none;
     }
 
     #card-investigacion h4 {
-        color: brown;
+        color: rgb(1, 76, 141);
         font-weight: 900;
     }
 

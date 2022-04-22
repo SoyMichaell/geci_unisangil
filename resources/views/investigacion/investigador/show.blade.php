@@ -13,7 +13,7 @@
 @endsection
 <style>
     h4 {
-        color: brown;
+        color: rgb(1, 76, 141);
         font-weight: 900;
     }
 
@@ -29,7 +29,7 @@
 </style>
 @section('content')
     <div class="container">
-        <h4><i class="fa fa-user-circle"></i> Información investigador</h4><hr>
+        <h4><i class="fa fa-user-circle"></i> INFORMACIÓN INVESTIGADOR</h4><hr>
         <div class="row mb-3">
             
             <div class="col-md-8">

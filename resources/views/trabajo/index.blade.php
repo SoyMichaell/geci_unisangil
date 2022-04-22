@@ -33,7 +33,7 @@
             <br>
             <div class="table-responsive">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>N°</th>
                             <th>Código proyecto</th>

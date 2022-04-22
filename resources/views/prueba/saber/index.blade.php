@@ -6,7 +6,7 @@
         <a href="/prueba/mostratipoprueba">Saber 11</a> / <a href="/prueba">Pruebas saber</a>
     @endsection
     @section('title')
-        <h1 class="titulo"><i class="fa fa-table"></i> Módulo pruebas saber 11</h1>
+        <h1 class="titulo"><i class="fa fa-table"></i> Módulo pruebas saber once (11)</h1>
     @section('message')
         <p>Listado pruebas saber 11.</p>
     @endsection
@@ -16,7 +16,7 @@
         <div class="tile">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Listado pruebas saber 11</h4>
+                    <h4>Listado pruebas saber once (11)</h4>
                 </div>
                 <div class="col-md-6 d-flex justify-content-end">
                     <a class="btn btn-outline-danger" style="border-radius: 100%"
@@ -31,7 +31,7 @@
             </div>
             <br>
             <table class="table" id="tables">
-                <thead>
+                <thead class="bg-light">
                     <tr>
                         <th>#</th>
                         <th>Año presentación</th>
@@ -47,7 +47,7 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>{{ $saber->prueba_saber_year }}</td>
-                            <td>{{ $saber->per_nombre . ' ' . $saber->per_apellido }}</td>
+                            <td>{{ Str::upper($saber->per_nombre . ' ' . $saber->per_apellido) }}</td>
                             <td>{{ $saber->prueba_saber_periodo }}</td>
                             <td>{{ number_format($saber->prueba_saber_puntaje_global, 2) }}</td>
                             <td>

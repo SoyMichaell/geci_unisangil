@@ -143,13 +143,6 @@ class PruebaController extends Controller
 
     public function registrosaber(Request $request)
     {
-
-        $RegistroExiste = DB::table('prueba_saber')->where('id', $request->get('prueba_saber_id_estudiante'))->first();
-
-        if ($RegistroExiste->id == $request->get('prueba_saber_id_estudiante')) {
-            Alert::warning('Advertencia', 'El estudiante ya registra prueba');
-            return redirect('/prueba/mostrarsaber');
-        } else {
             $puntaje_global = 0;
             for ($i = 0; $i < count($request->get('prsamo_id_modulo')); $i++) {
                 DB::table('prueba_saber_modulo')->insert([
@@ -175,7 +168,6 @@ class PruebaController extends Controller
 
             Alert::success('Exitoso', 'Prueba saber registrada con exito');
             return redirect('/prueba/mostrarsaber');
-        }
     }
 
     public function versaber($id)

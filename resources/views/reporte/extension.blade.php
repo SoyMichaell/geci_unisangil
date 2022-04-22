@@ -43,9 +43,6 @@
         echo 'MÓDULO: EXTENSIÓN | MOVILIDAD INTERNACIONAL';
     }
     ?></p>
-
-<br>
-<hr>
 @if ($valor == 'actividadcultural')
     <table class="table">
         <thead>
@@ -227,6 +224,7 @@
                     <td>{{ $proyecto->extprex_codigo_pr }}</td>
                     <td>{{ $proyecto->extprex_nombre_pr }}</td>
                     <td>{{ number_format($proyecto->extprex_valor_pr, 2) }}</td>
+                    <td>{{ $proyecto->extprex_id_area_extension}}</td>
                     <td>{{ $proyecto->extprex_fecha_inicio }}</td>
                     <td>{{ $proyecto->extprex_fecha_final }}</td>
                     <td>{{ $proyecto->extprex_nombre_contacto . ' ' . $proyecto->extprex_apellido_contacto }}</td>
@@ -264,6 +262,7 @@
                     <td>{{ $servicio->extseex_codigo_ser }}</td>
                     <td>{{ $servicio->extseex_nombre_ser }}</td>
                     <td>{{ number_format($servicio->extseex_valor_ser, 2) }}</td>
+                    <td>{{ $servicio->extseex_id_area_extension}}</td>
                     <td>{{ $servicio->extseex_fecha_inicio }}</td>
                     <td>{{ $servicio->extseex_fecha_final }}</td>
                     <td>{{ $servicio->extseex_nombre_contacto . ' ' . $servicio->extseex_apellido_contacto }}</td>

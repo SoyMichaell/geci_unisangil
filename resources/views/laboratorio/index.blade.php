@@ -32,7 +32,7 @@
             </div>
             <div class="table-responsive mt-2">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>#</th>
                             <th>Fecha</th>
@@ -53,7 +53,7 @@
                                 <td>{{ $laboratorio->lab_fecha }}</td>
                                 <td>{{ $laboratorio->lab_nombre }}</td>
                                 <td>{{ $laboratorio->lab_ubicacion }}</td>
-                                <td>{{ $laboratorio->docentes->per_nombre . ' ' . $laboratorio->docentes->per_apellido }}
+                                <td>{{ Str::upper($laboratorio->docentes->per_nombre . ' ' . $laboratorio->docentes->per_apellido) }}
                                 </td>
                                 <td>{{ $laboratorio->facultades->fac_nombre }}</td>
                                 <td>{{ $laboratorio->programas->pro_nombre }}</td>

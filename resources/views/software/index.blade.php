@@ -36,7 +36,7 @@
             </div>
             <div class="table-responsive mt-2">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>#</th>
                             <th>Tipo software</th>

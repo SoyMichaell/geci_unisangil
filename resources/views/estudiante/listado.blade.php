@@ -2,6 +2,9 @@
     @include('home')
 @else
     @extends('layouts.app')
+    @section('navegar')
+        <a href="/estudiante/{{$programax}}/verestudiantes">Listado Estudiante</a> / <a href="/estudiante">Estudiante</a>
+    @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-table"></i> Módulo Estudiantes</h1>
     @section('message')
@@ -46,7 +49,7 @@
             <br>
             <div class="table-responsive">
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>N°</th>
                             <th>Tipo Documento</th>
@@ -66,7 +69,7 @@
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $persona->per_tipo_documento }}</td>
                                 <td>{{ $persona->per_numero_documento }}</td>
-                                <td>{{ str::upper($persona->per_nombre) }}</td>
+                                <td>{{ Str::upper($persona->per_nombre) }}</td>
                                 <td>{{ Str::upper($persona->per_apellido) }}</td>
                                 <td>{{ $persona->per_correo }}</td>
                                 <td>{{ $persona->estu_ingreso }}</td>

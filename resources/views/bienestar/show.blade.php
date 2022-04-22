@@ -127,7 +127,7 @@
                 <div class="col-md-6">
                     <label
                         for="bie_soporte">{{ __('Cargar soporte * (Si es una sola evidencia cargar en formato .pdf, si son más cargar en .zip o .rar)') }}</label>
-                    <a href="{{asset('datos/bienestar/'.$bienestar->bie_soporte)}}" target="_blank">{{ $bienestar->bie_soporte }}</a>
+                    <a>{{ $bienestar->bie_soporte }}</a>
                     @error('bie_soporte')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

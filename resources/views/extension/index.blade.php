@@ -12,8 +12,14 @@
     @endsection
 @endsection
 <style>
+
+
+    .tile__title{
+        border-bottom: 1px solid rgb(1, 76, 141);
+    }
+
     .card__extension {
-        width: 297px !important;
+        width: 342px !important;
         height: 100%;
         border: 1px solid #cccc;
         padding: 15px;
@@ -24,11 +30,13 @@
         margin-left: 25px;
         margin-top: 10px !important;
         text-decoration: none !important;
-        border-bottom: 5px solid green;
+        border-bottom: 5px solid rgb(1, 76, 141);
     }
 
     .card__extension:hover{
-        color: green;
+        border-top: 5px solid rgb(1, 76, 141);
+        border-bottom: none;
+        color: rgb(1, 76, 141);
         transition: .2s;
         -webkit-box-shadow: 0px 10px 13px -7px #000000, -6px -5px 15px 7px rgba(0, 0, 0, 0);
         box-shadow: 0px 10px 13px -7px #000000, -6px -5px 15px 7px rgba(0, 0, 0, 0);
@@ -36,83 +44,80 @@
 
 </style>
 @section('content')
-    <div class="container mb-3 p-3">
-        <h4 class="ml-3">Extensión</h4>
-        <hr>
-        <div class="row mb-3">
-            <a class="card__extension" href="/extension/mostraractividad">
+    <div class="container p-3">
+        <h4 class="tile">Extensión</h4>
+        <div class="row mb-3 mx-auto">
+            <a class="card__extension tile" href="/extension/mostraractividad">
                 <i class="fa fa-map-o fa-4x"></i>
                 <h4 class="mt-2">Actividad cultural</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarconsultoria">
+            <a class="card__extension tile" href="/extension/mostrarconsultoria">
                 <i class="fa fa-search fa-4x"></i>
                 <h4 class="mt-2">Consultoria</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarcurso">
+            <a class="card__extension tile" href="/extension/mostrarcurso">
                 <i class="fa fa-book fa-4x"></i>
                 <h4 class="mt-2">Curso</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrareducacion">
+            <a class="card__extension tile" href="/extension/mostrareducacion">
                 <i class="fa fa-window-restore fa-4x"></i>
                 <h4 class="mt-2">Educación continua</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarparticipante">
+            <a class="card__extension tile" href="/extension/mostrarparticipante">
                 <i class="fa fa-users fa-4x"></i>
                 <h4 class="mt-2">Participante</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarproyectoextension">
+            <a class="card__extension tile" href="/extension/mostrarproyectoextension">
                 <i class="fa fa-external-link-square fa-4x"></i>
                 <h4 class="mt-2">Proyecto de extensión</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarservicioextension">
+            <a class="card__extension tile" href="/extension/mostrarservicioextension">
                 <i class="fa fa-external-link-square fa-4x"></i>
                 <h4 class="mt-2">Servicio de extensión</h4>
             </a>
         </div>
-        <h4 class="ml-3">Internacionalización</h4>
-        <hr>
+        <h4 class="tile">Internacionalización</h4>
         <div class="row mb-3">
-            <a class="card__extension" href="/extension/mostrarregistrofotografico">
+            <a class="card__extension tile" href="/extension/mostrarregistrofotografico">
                 <i class="fa fa-camera fa-4x"></i>
                 <h4 class="mt-2">Registro fotografico actividades</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarinterredconvenio">
+            <a class="card__extension tile" href="/extension/mostrarinterredconvenio">
                 <i class="fa fa-microchip fa-4x"></i>
                 <h4 class="mt-2">Redes acádemicas</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarinterorganizacion">
+            <a class="card__extension tile" href="/extension/mostrarinterorganizacion">
                 <i class="fa fa-sitemap fa-4x"></i>
                 <h4 class="mt-2">Redes disciplinarias - asociaciones - organizaciones</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarcurriculo">
+            <a class="card__extension tile" href="/extension/mostrarcurriculo">
                 <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Internacionalización de curriculo (asignauturas)</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrareventosvirtuales">
+            <a class="card__extension tile" href="/extension/mostrareventosvirtuales">
                 <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Eventos virtuales</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarparticipacioneventos">
+            <a class="card__extension tile" href="/extension/mostrarparticipacioneventos">
                 <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Participación eventos</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrareventosinternacionales">
+            <a class="card__extension tile" href="/extension/mostrareventosinternacionales">
                 <i class="fa fa-globe fa-4x"></i>
                 <h4 class="mt-2">Eventos internacionales</h4>
             </a>
         </div>
-        <h4 class="ml-3 mt-3">Movilidad</h4>
-        <hr>
+        <h4 class="tile">Movilidad</h4>
         <div class="row mb-3">
-            <a class="card__extension" href="/extension/mostrarmovilidadnacional">
+            <a class="card__extension tile" href="/extension/mostrarmovilidadnacional">
                 <i class="fa fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Nacional</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarmovilidadintersede">
+            <a class="card__extension tile" href="/extension/mostrarmovilidadintersede">
                 <i class="fa fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Intersedes</h4>
             </a>
-            <a class="card__extension" href="/extension/mostrarmovilidadinternacional">
+            <a class="card__extension tile" href="/extension/mostrarmovilidadinternacional">
                 <i class="fa fa-plane fa-4x"></i>
                 <h4 class="mt-2">Movilidad Internacional</h4>
             </a>

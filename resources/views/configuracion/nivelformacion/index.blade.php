@@ -26,7 +26,7 @@
         </div>
         <br>
         <div class="table-responsive">
-            <table class="table table-bordered" id="tables">
+            <table class="table" id="tables">
                 <thead>
                     <tr>
                         <th>N°</th>

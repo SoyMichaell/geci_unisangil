@@ -17,7 +17,7 @@
             <div class=" {{ Auth::user()->per_tipo_usuario == 4 ? 'col-md-12' : 'col-md-12' }} tile">
                 <h4>Listado módulos</h4>
                 <table class="table" id="tables">
-                    <thead>
+                    <thead class="bg-light">
                         <tr>
                             <th>#</th>
                             <th>Módulo</th>

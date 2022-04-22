@@ -19,7 +19,7 @@
             <div class="tile p-3 col-md-12">
                 <div class="table-responsive">
                     <table class="table" id="tables">
-                        <thead>
+                        <thead class="bg-light">
                             <tr>
                                 <th>No. contrato</th>
                                 <th>Objeto</th>
@@ -42,8 +42,7 @@
                                     <td>{{ $contrato->doco_fecha_fin }}</td>
                                     <td>{{ $contrato->doco_rol }}</td>
                                     <td>
-                                        <a href="{{ asset('/datos/contrato/' . $contrato->doco_url_soporte) }}"
-                                            target="_blank">{{ $contrato->doco_url_soporte }}</a>
+                                        <a>{{ $contrato->doco_url_soporte }}</a>
                                     </td>
                                     <td><span
                                             class="badge badge-{{ $contrato->doco_estado == 'cancelado' ? 'success' : 'danger' }}">{{ $contrato->doco_estado }}</span>

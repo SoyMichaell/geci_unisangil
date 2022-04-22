@@ -26,8 +26,8 @@
                     </div>
                 </div>
                 <br>
-                <table class="table table-bordered" id="tables">
-                    <thead>
+                <table class="table" id="tables">
+                    <thead class="bg-light">
                         <tr>
                             <th>#</th>
                             <th>Docente</th>

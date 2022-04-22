@@ -26,7 +26,7 @@
             </div>
             <br>
             <table class="table" id="tables">
-                <thead>
+                <thead class="bg-light">
                     <tr>
                         <th>#</th>
                         <th>Año</th>

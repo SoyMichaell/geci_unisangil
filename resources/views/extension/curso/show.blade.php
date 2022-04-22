@@ -143,8 +143,7 @@
                         name="extcurso_url_soporte" id="extcurso_url_soporte"
                         value="{{ $curso->extcurso_url_soporte }}" type="file" autocomplete="extcurso_url_soporte"
                         autofocus disabled>
-                    <p><small><a href="{{ asset('datos/curso/' . $curso->extcurso_url_soporte) }}"
-                                target="_blank">{{ $curso->extcurso_url_soporte }}</a></small></p>
+                    <p><small><a>{{ $curso->extcurso_url_soporte }}</a></small></p>
                     @error('extcurso_url_soporte')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

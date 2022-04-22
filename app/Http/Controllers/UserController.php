@@ -23,20 +23,20 @@ class UserController extends Controller
         $departamentos = Departamento::all();
         $municipios = Municipio::all();
         $programas = Programa::all();
-        if(!Auth::check()){
+        if (!Auth::check()) {
             $tiposusuario = DB::table('tipo_usuario')
-            ->Where('id', 2)
-            ->orWhere('id', 4)
-            ->get();
-        }else if(Auth::check()){
+                ->Where('id', 2)
+                ->orWhere('id', 4)
+                ->get();
+        } else if (Auth::check()) {
             $tiposusuario = DB::table('tipo_usuario')
-            ->where('id',1)
-            ->orWhere('id', 10)
-            ->orWhere('id', 9)
-            ->orWhere('id', 4)
-            ->orWhere('id', 2)
-            ->orderBy('tip_nombre')
-            ->get();
+                ->where('id', 1)
+                ->orWhere('id', 10)
+                ->orWhere('id', 9)
+                ->orWhere('id', 4)
+                ->orWhere('id', 2)
+                ->orderBy('tip_nombre')
+                ->get();
         }
         return view('auth.register')
             ->with('tiposdocumento', $tiposdocumento)
@@ -100,8 +100,8 @@ class UserController extends Controller
         }
 
         //Validación roles 
-        
-        if($request->get('per_tipo_usuario') == '1' || $request->get('per_tipo_usuario') == '4'){
+
+        if ($request->get('per_tipo_usuario') == '1' || $request->get('per_tipo_usuario') == '4') {
             DB::table('persona')->insert(
                 [
                     'per_tipo_documento' => $request->get('per_tipo_documento'),
@@ -117,7 +117,7 @@ class UserController extends Controller
                     'per_id_estado' => 'activo',
                 ]
             );
-        }else if($request->get('per_tipo_usuario') == '10' || $request->get('per_tipo_usuario') == '2'){
+        } else if ($request->get('per_tipo_usuario') == '10' || $request->get('per_tipo_usuario') == '2') {
             DB::table('persona')->insert(
                 [
                     'per_tipo_documento' => $request->get('per_tipo_documento'),
@@ -140,7 +140,7 @@ class UserController extends Controller
                     'id_proceso' => 1,
                 ]
             );
-        }else if($request->get('per_tipo_usuario') == '9'){
+        } else if ($request->get('per_tipo_usuario') == '9') {
             DB::table('persona')->insert(
                 [
                     'per_tipo_documento' => $request->get('per_tipo_documento'),
@@ -165,25 +165,25 @@ class UserController extends Controller
             );
         }
 
-        if(Auth::check()){
+        if (Auth::check()) {
             Alert::success('Exitoso', 'La persona ha sido registrada con exito');
             return redirect('/home');
-        }else{
+        } else {
             Alert::success('Exitoso', 'La persona ha sido registrada con exito');
             return redirect('/login');
         }
-        
     }
 
-    public function actualizarestado($id){
-        $estado = DB::table('persona')->where('id',$id)->first();
-        if($estado->per_id_estado == 'activo'){
+    public function actualizarestado($id)
+    {
+        $estado = DB::table('persona')->where('id', $id)->first();
+        if ($estado->per_id_estado == 'activo') {
             DB::table('persona')->where('id', $id)->update([
                 'per_id_estado' => 'inactivo'
             ]);
             Alert::success('Exitoso', 'Estado actualizado');
             return redirect('/home');
-        }else{
+        } else {
             DB::table('persona')->where('id', $id)->update([
                 'per_id_estado' => 'activo'
             ]);
@@ -192,112 +192,70 @@ class UserController extends Controller
         }
     }
 
-    public function tipousuariocambio(Request $request , $id){
-        $rol = DB::table('persona')->where('id', $id)->first();
-        if($request->get('per_tipo_usuario') == '9'){
-            DB::table('persona')
-            ->where('id', $id)
-            ->update([
-                'per_tipo_usuario' => $request->get('per_tipo_usuario')
-            ]);
-            DB::table('estudiante')
-            ->insert([
-                'estu_id_estudiante' => $id,
-                'estu_programa' => '1',
-            ]);
-            Alert::success('Exitoso', 'Tipo de usuario actualizado');
-            return redirect('/home');
-        }else{
-            DB::table('persona')
-            ->where('id', $id)
-            ->update([
-                'per_tipo_usuario' => $request->get('per_tipo_usuario')
-            ]);
-            Alert::success('Exitoso', 'Tipo de usuario actualizado');
-            return redirect('/home');
-        }
-        
-    }
-    
-    public function profile($id){
-        try{
-            $tipousuarios = TipoUsuario::all();
+    public function profile($id)
+    {
+        try {
+            $tipousuarios = DB::table('tipo_usuario')->orderBy('tip_nombre')->get();
             $persona = DB::table('persona')->where('id', $id)->first();
             return view('auth.profile')
-                ->with('persona',$persona)
+                ->with('persona', $persona)
                 ->with('tipousuarios', $tipousuarios);
-        }catch(\Illuminate\Database\QueryException $e){
+        } catch (\Illuminate\Database\QueryException $e) {
             Alert::error('No se puede eliminar este persona, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
             return redirect()->back();
         }
-        
     }
 
-    public function actualizardato(Request $request, $id){
-        $rules = [
-            'per_tipo_documento' => 'required|not_in:0',
-            'per_numero_documento' => 'required',
-            'per_nombre' => 'required',
-            'per_apellido' => 'required',
-            'per_telefono' => 'required',
-            'per_correo' => 'required'
-        ];
-        $message = [
-            'per_tipo_documento.required' => 'El campo tipo documento es requerido',
-            'per_numero_documento.required' => 'El campo número documento es requerido',
-            'per_nombre.required' => 'El campo nombre (s) es requerido',
-            'per_apellido.required' => 'El campo apellido (s) es requerido',
-            'per_telefono.required' => 'El campo telefono es requerido',
-            'per_correo.required' => 'El campo correo es requerido'
-        ];
-        $this->validate($request,$rules,$message);
+    public function actualizardato(Request $request, $id)
+    {
 
-        $user = User::find($id);
-        $user->per_tipo_documento = $request->get('per_tipo_documento');
-        $user->per_numero_documento = $request->get('per_numero_documento');
-        $user->per_nombre = $request->get('per_nombre');
-        $user->per_apellido = $request->get('per_apellido');
-        $user->per_telefono = $request->get('per_telefono');
-        $user->per_correo = $request->get('per_correo');
-        $user->save();
-
-        Alert::success('Exitoso', 'La información se actulizo con exito');
-        return redirect('usuario/'.$id.'/profile');
-
-    }
-
-    public function actualizar_password(Request $request, $id){
-        $rules = [
-            'password' => 'required',
-            'password_confirm' => 'required',
-        ];
-        $message = [
-            'password.required' => 'El campo contraseña es requerido',
-            'password_confirm.required' => 'El campo confirmar contraseña es requerido'
-        ];
-        $this->validate($request,$rules,$message);
-
-        if($request->get('password') != $request->get('password_confirm')){
-            Alert::success('Advetencia', 'Las contraseña no coinciden');
-            return redirect('usuario/'.$id.'/profile');
+        if($request->get('per_tipo_usuario') == '6' || $request->get('per_tipo_usuario') == '3'){
+            DB::table('persona')->where('id', $id)
+            ->update([
+                'per_tipo_documento' => $request->get('per_tipo_documento'),
+                'per_numero_documento' => $request->get('per_numero_documento'),
+                'per_nombre' => $request->get('per_nombre'),
+                'per_apellido' => $request->get('per_apellido'),
+                'per_correo' => $request->get('per_correo'),
+                'password' => "",
+                'per_tipo_usuario' => $request->get('per_tipo_usuario')
+            ]);
+        }else{
+            DB::table('persona')->where('id', $id)
+            ->update([
+                'per_tipo_documento' => $request->get('per_tipo_documento'),
+                'per_numero_documento' => $request->get('per_numero_documento'),
+                'per_nombre' => $request->get('per_nombre'),
+                'per_apellido' => $request->get('per_apellido'),
+                'per_correo' => $request->get('per_correo'),
+                'password' => Hash::make($request->get('password')),
+                'per_tipo_usuario' => $request->get('per_tipo_usuario')
+            ]);
         }
-
-        $user = User::find($id);
-        $user->password = Hash::make($request->get('password'));
-        $user->save();
-
         Alert::success('Exitoso', 'La información se actulizo con exito');
-        return redirect('usuario/'.$id.'/profile');
+        return redirect('usuario/' . $id . '/profile');
     }
 
     public function destroy($id)
     {
-        try{
-            DB::table('docente')->where('id_persona_docente', $id)->delete();
-            $user = User::find($id)->delete();
-            Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
-            return redirect('/home');
-        }catch(\Illuminate\Database\QueryException $e){
+        $user = DB::table('persona')->where('id', $id)->first();
+        try {
+            if ($user->per_tipo_usuario == 9 || $user->per_tipo_usuario == 2 || $user->per_tipo_usuario == 3) {
+                DB::table('docente')->where('id_persona_docente', $id)->delete();
+                DB::table('persona')->where('id', $id)->delete();
+                Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
+                return redirect('/home');
+            } else if ($user->per_tipo_usuario == '6' || $user->per_tipo_usuario == '9') {
+                DB::table('persona')->where('id', $id)->delete();
+                DB::table('estudiante')->where('estu_id_estudiante', $id)->delete();
+                Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
+                return redirect('/home');
+            } else {
+                DB::table('persona')->where('id', $id)->delete();
+                Alert::success('Exitoso', 'El usuario se ha eliminado con exito');
+                return redirect('/home');
+            }
+        } catch (\Illuminate\Database\QueryException $e) {
             Alert::error('No se puede eliminar este persona, porque está relacionada a una entidad', 'Error al eliminar')->autoclose(6000);
             return redirect()->back();
         }
