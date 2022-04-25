@@ -18,7 +18,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $tiposdocumento = collect(['Tarjeta de identidad', 'Cédula de ciudadania', 'Cédula de extranjeria']);
+        $tiposdocumento = collect(['Tarjeta de identidad', 'Cedula de ciudadania', 'Cédula de extranjeria']);
         $tiposdocumento->all();
         $departamentos = Departamento::all();
         $municipios = Municipio::all();

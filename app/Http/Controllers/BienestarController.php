@@ -34,8 +34,6 @@ class BienestarController extends Controller
             'bie_egresados' => 'required',
             'bie_particulares' => 'required',
             'bie_codigo_snies' => 'required',
-            'bie_soporte' => 'required',
-            'bie_observacion' => 'required'
         ];
         $message = [
             'bie_fecha.required' => 'El campo fecha es requerido',
@@ -47,8 +45,6 @@ class BienestarController extends Controller
             'bie_egresados.required' => 'El campo # egresados es requerido',
             'bie_particulares.required' => 'El campo # particulares es requerido',
             'bie_codigo_snies.required' => 'El campo código snies es requerido',
-            'bie_soporte.required' => 'El campo soporte es requerido',
-            'bie_observacion.required' => 'El campo observación es requerido'
         ];
         $this->validate($request, $rules, $message);
 
@@ -116,8 +112,6 @@ class BienestarController extends Controller
             'bie_egresados' => 'required',
             'bie_particulares' => 'required',
             'bie_codigo_snies' => 'required',
-            'bie_soporte' => 'required',
-            'bie_observacion' => 'required'
         ];
         $message = [
             'bie_fecha.required' => 'El campo fecha es requerido',
@@ -129,8 +123,6 @@ class BienestarController extends Controller
             'bie_egresados.required' => 'El campo # egresados es requerido',
             'bie_particulares.required' => 'El campo # particulares es requerido',
             'bie_codigo_snies.required' => 'El campo código snies es requerido',
-            'bie_soporte.required' => 'El campo soporte es requerido',
-            'bie_observacion.required' => 'El campo observación es requerido'
         ];
         $this->validate($request, $rules, $message);
 

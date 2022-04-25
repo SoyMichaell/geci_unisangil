@@ -30,6 +30,7 @@ class ConvenioController extends Controller
     {
         $rules = [
             'con_numero' => 'required',
+            'con_alcance' => 'required|not_in:0',
             'con_tipo' => 'required',
             'con_institucion' => 'required',
             'con_nit' => 'required',
@@ -47,8 +48,10 @@ class ConvenioController extends Controller
             'con_fecha_inicio' => 'required',
             'con_fecha_final' => 'required'
         ];
+        
         $message = [
             'con_numero.required' => 'El campo no. contrato es requerido',
+            'con_alcance.required' => 'El campo alcance es requerido',
             'con_tipo.required' => 'El campo tipo es requerido',
             'con_institucion.required' => 'El campo institución es requerido',
             'con_nit.required' => 'El campo nit es requerido',
@@ -64,8 +67,9 @@ class ConvenioController extends Controller
             'con_programa_beneficiado.required' => 'El campo programa beneficiario es requerido',
             'con_actividad_year_programa.required' => 'El campo actividad o actividades es requerido',
             'con_fecha_inicio.required' => 'El campo fecha inicio es requerido',
-            'con_fecha_final.required' => 'El campo fecha final es requerido',
+            'con_fecha_final.required' => 'El campo fecha final es requerido'
         ];
+        
         $this->validate($request,$rules,$message);
 
         $convenio = new Convenio();
@@ -89,6 +93,7 @@ class ConvenioController extends Controller
         $convenio->con_fecha_final = $request->get('con_fecha_final');
         $convenio->con_observacion = $request->get('con_observacion');
         $convenio->save();
+        
         Alert::success('Exitoso','Los datos se han registrado con exito');
         return redirect('/convenio');
     }

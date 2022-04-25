@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmoin_tipo">Tipo</label>
+                        <label for="exmoin_tipo">Tipo *</label>
                         <select class="form-control @error('exmoin_tipo') is-invalid @enderror" name="exmoin_tipo"
                             id="exmoin_tipo">
                             <option value="">---- SELECCIONE ----</option>
@@ -33,7 +33,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmoin_rol">Rol</label>
+                        <label for="exmoin_rol">Rol *</label>
                         <select class="form-control @error('exmoin_rol') is-invalid @enderror" name="exmoin_rol"
                             id="exmoin_rol">
                             <option value="">---- SELECCIONE ----</option>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmoin_id_sede_or">Sede origen</label>
+                        <label for="exmoin_id_sede_or">Sede origen *</label>
                         <select class="form-control @error('exmoin_id_sede_or') is-invalid @enderror" name="exmoin_id_sede_or" id="exmoin_id_sede_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
@@ -64,7 +64,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmoin_id_facultad_or">Facultad origen</label>
+                        <label for="exmoin_id_facultad_or">Facultad origen ¨*</label>
                         <select class="form-control @error('exmoin_id_facultad_or') is-invalid @enderror" name="exmoin_id_facultad_or" id="exmoin_id_facultad_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
@@ -80,7 +80,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmoin_id_programa_or">Programa origen</label>
+                        <label for="exmoin_id_programa_or">Programa origen *</label>
                         <select class="form-control @error('exmoin_id_programa_or') is-invalid @enderror" name="exmoin_id_programa_or" id="exmoin_id_programa_or">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
@@ -129,7 +129,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmoin_id_sede_des">Sede destino</label>
+                        <label for="exmoin_id_sede_des">Sede destino *</label>
                         <select class="form-control @error('exmoin_id_sede_des') is-invalid @enderror" name="exmoin_id_sede_des" id="exmoin_id_sede_des">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
@@ -143,7 +143,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmoin_id_facultad_des">Facultad destino</label>
+                        <label for="exmoin_id_facultad_des">Facultad destino *</label>
                         <select class="form-control @error('exmoin_id_facultad_des') is-invalid @enderror" name="exmoin_id_facultad_des" id="exmoin_id_facultad_des">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
@@ -329,7 +329,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exmoin_descripcion">Descripción de la movilidad. Amplíe la información. Si se trata
-                            de un evento académico por favor indique el nombre completo del evento, sin siglas.</label>
+                            de un evento académico por favor indique el nombre completo del evento, sin siglas. *</label>
                         <textarea class="form-control @error('exmoin_descripcion') is-invalid @enderror" name="exmoin_descripcion" id="exmoin_descripcion" cols="30" rows="10"></textarea>
                         @error('exmoin_descripcion')
                             <span class="invalid-feedback" role="alert">
@@ -340,7 +340,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmoin_fecha_inicio">Fecha de inicio</label>
+                        <label for="exmoin_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('exmoin_fecha_inicio') is-invalid @enderror"
                             name="exmoin_fecha_inicio" id="exmoin_fecha_inicio"
                             value="{{ old('exmoin_fecha_inicio') }}" type="date"
@@ -352,7 +352,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmoin_fecha_final">Fecha final</label>
+                        <label for="exmoin_fecha_final">Fecha final *</label>
                         <input class="form-control @error('exmoin_fecha_final') is-invalid @enderror"
                             name="exmoin_fecha_final" id="exmoin_fecha_final"
                             value="{{ old('exmoin_fecha_final') }}" type="date"

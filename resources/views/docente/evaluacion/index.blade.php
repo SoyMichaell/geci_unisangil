@@ -41,7 +41,7 @@
                                 <td>{{ $evaluacion->doe_total_pro }}</td>
                                 <td>{{ $evaluacion->doe_observacion }}</td>
                                 <td>
-                                    <a>{{ $evaluacion->doe_url_evaluacion }}</a>
+                                    <a href="{{asset('datos/docente/evaluacion/'.$evaluacion->doe_url_evaluacion)}}" target="_blank">{{ $evaluacion->doe_url_evaluacion }}</a>
                                 </td>
                                 <td>
                                     <form action="{{ url("docente/{$evaluacion->id}/eliminarevaluacion") }}"

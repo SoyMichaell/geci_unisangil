@@ -495,8 +495,8 @@
                         </span>
                     @enderror
                 </div>
-                <a
-                    href="{{ asset('datos/servicio-extension/' . $servicioextension->extseex_soporte) }}"><small>{{ $servicioextension->extseex_soporte }}</small></a>
+                <small><a
+                    href="{{ asset('datos/extension-internacionalizacion/servicio/' . $servicioextension->extseex_soporte) }}">{{ $servicioextension->extseex_soporte }}</a></small>
             </div>
         </div>
     </div>

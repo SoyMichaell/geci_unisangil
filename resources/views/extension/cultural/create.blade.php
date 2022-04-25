@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_year">Año</label>
+                        <label for="extcul_year">Año *</label>
                         <input class="form-control @error('extcul_year') is-invalid @enderror" name="extcul_year"
                             id="extcul_year" value="{{ old('extcul_year') }}" type="number" autocomplete="extcul_year"
                             autofocus>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_semestre">Semestre</label>
+                        <label for="extcul_semestre">Semestre *</label>
                         <input class="form-control @error('extcul_semestre') is-invalid @enderror" name="extcul_semestre"
                             id="extcul_semestre" value="{{ old('extcul_semestre') }}" type="number"
                             autocomplete="extcul_semestre" autofocus>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_codigo_unidad_org">Código unidad organizacional</label>
+                        <label for="extcul_codigo_unidad_org">Código unidad organizacional *</label>
                         <input class="form-control @error('extcul_codigo_unidad_org') is-invalid @enderror"
                             name="extcul_codigo_unidad_org" id="extcul_codigo_unidad_org"
                             value="{{ old('extcul_codigo_unidad_org') }}" type="text"
@@ -55,7 +55,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_codigo_actividad">Código actividad</label>
+                        <label for="extcul_codigo_actividad">Código actividad *</label>
                         <input class="form-control @error('extcul_codigo_actividad') is-invalid @enderror"
                             name="extcul_codigo_actividad" id="extcul_codigo_actividad"
                             value="{{ old('extcul_codigo_actividad') }}" type="text"
@@ -69,7 +69,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_descripcion_actividad">Descripción actividad</label>
+                        <label for="extcul_descripcion_actividad">Descripción actividad *</label>
                         <textarea class="form-control @error('extcul_descripcion_actividad') is-invalid @enderror" name="extcul_descripcion_actividad"
                             id="extcul_descripcion_actividad" cols="30" rows="10"></textarea>
                         @error('extcul_descripcion_actividad')
@@ -79,7 +79,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_tipo_actividad">Tipo de actividad</label>
+                        <label for="extcul_tipo_actividad">Tipo de actividad *</label>
                         <select class="form-control @error('extcul_tipo_actividad') is-invalid @enderror" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1">1. Medio de comunicación</option>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_fecha_inicio">Fecha de inicio</label>
+                        <label for="extcul_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('extcul_fecha_inicio') is-invalid @enderror"
                             name="extcul_fecha_inicio" id="extcul_fecha_inicio"
                             value="{{ old('extcul_fecha_inicio') }}" type="date" autocomplete="extcul_fecha_inicio"
@@ -109,7 +109,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_fecha_fin">Fecha fin</label>
+                        <label for="extcul_fecha_fin">Fecha fin *</label>
                         <input class="form-control @error('extcul_fecha_fin') is-invalid @enderror"
                             name="extcul_fecha_fin" id="extcul_fecha_fin" value="{{ old('extcul_fecha_fin') }}"
                             type="date" autocomplete="extcul_fecha_fin" autofocus>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="extcul_fuente_nacional">Fuente nacional</label>
+                        <label for="extcul_fuente_nacional">Fuente nacional *</label>
                         <select class="form-control @error('extcul_fuente_nacional') is-invalid @enderror" name="extcul_fuente_nacional" id="extcul_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionales as $nacionales)
@@ -136,7 +136,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="extcul_valor_financiacion_nac">Valor financiación nacional</label>
+                        <label for="extcul_valor_financiacion_nac">Valor financiación nacional (Opcional)</label>
                         <input class="form-control @error('extcul_valor_financiacion_nac') is-invalid @enderror"
                             name="extcul_valor_financiacion_nac" id="extcul_valor_financiacion_nac" value="{{ old('extcul_valor_financiacion_nac') }}"
                             type="number" autocomplete="extcul_valor_financiacion_nac" autofocus>
@@ -147,7 +147,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="extcul_nombre_institucion">Nombre institución</label>
+                        <label for="extcul_nombre_institucion">Nombre institución (Opcional)</label>
                         <input class="form-control @error('extcul_nombre_institucion') is-invalid @enderror"
                             name="extcul_nombre_institucion" id="extcul_nombre_institucion" value="{{ old('extcul_nombre_institucion') }}"
                             type="text" autocomplete="extcul_nombre_institucion" autofocus>

@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-    <a href="/extension/{{$educacion->id}}/vereducacion">Vista</a> / <a href="/extension/mostrareducacion">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
+    <a href="/extension/{{$educacion->id}}/vereducacion">Vista</a> / <a href="/extension/mostrareducacion">Educación continua</a> / <a href="/extension">Extensión - internacionalización</a>  
     @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-book"></i> Visualizar información.</h1>
@@ -145,7 +145,7 @@
                     <input class="form-control @error('extedu_url_soporte') is-invalid @enderror"
                         name="extedu_url_soporte" id="extedu_url_soporte" value="{{$educacion->extedu_url_soporte}}"
                         type="file" autocomplete="extedu_url_soporte" autofocus disabled>
-                        <p><small><a>{{$educacion->extedu_url_soporte}}</a></small></p>
+                        <p><small><a href="{{asset('datos/extension-internacionalizacion/educacion/'.$educacion->extedu_url_soporte)}}">{{$educacion->extedu_url_soporte == 'null' ? '' : $educacion->extedu_url_soporte}}</a></small></p>
                     @error('extedu_url_soporte')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

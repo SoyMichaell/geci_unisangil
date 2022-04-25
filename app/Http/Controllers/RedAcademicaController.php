@@ -35,11 +35,10 @@ class RedAcademicaController extends Controller
             'red_pais' => 'required',
             'red_ciudad' => 'required',
             'red_alcance' => 'required|not_in:0',
-            'red_accion' => 'required',
             'red_year' => 'required',
             'red_id_programa' => 'required|not_in:0',
-            'red_observacion' => 'required',
         ];
+        
         $message = [
             'red_nombre.required' => 'El campo nombre red es requerido',
             'red_nombre_contacto.required' => 'El campo nombre contacto es requerido',
@@ -47,11 +46,10 @@ class RedAcademicaController extends Controller
             'red_pais.required' => 'El campo país es requerido',
             'red_ciudad.required' => 'El campo ciudad es requerido',
             'red_alcance.required' => 'El campo alcance es requerido',
-            'red_accion.required' => 'El campo acción es requerido',
             'red_year.required' => 'El campo año es requerido',
             'red_id_programa.required' => 'El campo programa es requerido',
-            'red_observacion.required' => 'El campo observaciones es requerido',
         ];
+        
         $this->validate($request,$rules,$message);
 
         $redes = new RedAcademica();
@@ -70,7 +68,6 @@ class RedAcademicaController extends Controller
 
         Alert::success('Exitoso','El registro de la red ha sido exitoso');
         return redirect('/red');
-
     }
 
     public function show($id)

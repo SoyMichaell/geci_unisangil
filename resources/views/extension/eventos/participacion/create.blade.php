@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="expaev_year">Año</label>
+                        <label for="expaev_year">Año *</label>
                         <input class="form-control @error('expaev_year') is-invalid @enderror"
                             name="expaev_year" id="expaev_year"
                             value="{{ old('expaev_year') }}" type="text" autocomplete="expaev_year"
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="expaev_periodo">Periodo</label>
+                        <label for="expaev_periodo">Periodo *</label>
                         <input class="form-control @error('expaev_periodo') is-invalid @enderror"
                             name="expaev_periodo" id="expaev_periodo"
                             value="{{ old('expaev_periodo') }}" type="text" autocomplete="expaev_periodo"
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="expaev_tipo_evento">Tipo evento</label>
+                        <label for="expaev_tipo_evento">Tipo evento *</label>
                         <select class="form-control @error('expaev_tipo_evento') is-invalid @enderror" name="expaev_tipo_evento" id="expaev_tipo_evento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="taller">Taller</option>
@@ -65,7 +65,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="expaev_nombre_evento">Nombre evento</label>
+                        <label for="expaev_nombre_evento">Nombre evento *</label>
                         <input class="form-control @error('expaev_nombre_evento') is-invalid @enderror"
                             name="expaev_nombre_evento" id="expaev_nombre_evento"
                             value="{{ old('expaev_nombre_evento') }}" type="text"
@@ -79,7 +79,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="expaev_fecha">Fecha</label>
+                        <label for="expaev_fecha">Fecha *</label>
                         <input class="form-control @error('expaev_fecha') is-invalid @enderror"
                             name="expaev_fecha" id="expaev_fecha"
                             value="{{ old('expaev_fecha') }}" type="date" autocomplete="expaev_fecha"
@@ -91,7 +91,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="expaev_organizador">Organizador</label>
+                        <label for="expaev_organizador">Organizador *</label>
                         <input class="form-control @error('expaev_organizador') is-invalid @enderror"
                             name="expaev_organizador" id="expaev_organizador"
                             value="{{ old('expaev_organizador') }}" type="text" autocomplete="expaev_organizador"
@@ -105,14 +105,14 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="expaev_id_persona">Nombre completo participante</label>
+                        <label for="expaev_id_persona">Nombre completo participante *</label>
                         <select class="form-control js-example-placeholder-single @error('expaev_id_persona') is-invalid @enderror" name="expaev_id_persona" id="expaev_id_persona">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{$persona->id}}">{{$persona->per_nombre.' '.$persona->per_apellido}}</option>
                             @endforeach
                         </select>
-                        <p class="badge badge-danger"><strong>{{$personas->count()<=0 ? 'No existen registros de participantes' : ''}}</strong></p>
+                        <p class="{{$personas->count()<=0 ? 'badge badge-danger' : ''}}"><strong>{{$personas->count()<=0 ? 'No existen registros de participantes' : ''}}</strong></p>
                         @error('expaev_id_persona')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

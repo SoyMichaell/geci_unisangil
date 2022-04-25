@@ -140,7 +140,7 @@
                             <td>Soporte</td>
                             <td>
                                 {{ $trabajo->tra_acta_sustentacion_soporte == '' ? 'Sin registro' : '' }} <a
-                                    href="{{ url('datos/acta/actasustentancion/' . $trabajo->tra_acta_sustentacion_soporte) }}">{{ $trabajo->tra_acta_sustentacion_soporte != '' ? $trabajo->tra_acta_sustentacion_soporte : '' }}</a>
+                                    href="{{ asset('datos/trabajo/acta/' . $trabajo->tra_acta_sustentacion_soporte) }}">{{ $trabajo->tra_acta_sustentacion_soporte != '' ? $trabajo->tra_acta_sustentacion_soporte : '' }}</a>
                             </td>
                         </tr>
                         <tr>
@@ -154,7 +154,7 @@
                             <td>
                                 {{ $trabajo->tra_acta_grado_soporte == '' ? 'Sin registro' : '' }}
                                 <a
-                                    href="{{ url('datos/acta/actasustentancion/' . $trabajo->tra_acta_grado_soporte) }}">{{ $trabajo->tra_acta_grado_soporte != '' ? $trabajo->tra_acta_grado_soporte : '' }}</a>
+                                    href="{{ asset('datos/trabajo/acta/' . $trabajo->tra_acta_grado_soporte) }}">{{ $trabajo->tra_acta_grado_soporte != '' ? $trabajo->tra_acta_grado_soporte : '' }}</a>
                             </td>
                         </tr>
                         <tr>

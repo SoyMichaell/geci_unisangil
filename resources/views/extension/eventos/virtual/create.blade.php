@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exevir_nombre_evento">Nombre evento</label>
+                        <label for="exevir_nombre_evento">Nombre evento *</label>
                         <input class="form-control @error('exevir_nombre_evento') is-invalid @enderror" name="exevir_nombre_evento"
                             id="exevir_nombre_evento" value="{{ old('exevir_nombre_evento') }}" type="text"
                             autocomplete="exevir_nombre_evento" autofocus>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exevir_fecha_inicio">Fecha inicio</label>
+                        <label for="exevir_fecha_inicio">Fecha inicio *</label>
                         <input class="form-control @error('exevir_fecha_inicio') is-invalid @enderror" name="exevir_fecha_inicio"
                             id="exevir_fecha_inicio" value="{{ old('exevir_fecha_inicio') }}" type="date"
                             autocomplete="exevir_fecha_inicio" autofocus>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exevir_fecha_fin">Fecha fin</label>
+                        <label for="exevir_fecha_fin">Fecha fin *</label>
                         <input class="form-control @error('exevir_fecha_fin') is-invalid @enderror" name="exevir_fecha_fin"
                             id="exevir_fecha_fin" value="{{ old('exevir_fecha_fin') }}" type="date"
                             autocomplete="exevir_fecha_fin" autofocus>
@@ -54,7 +54,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exevir_enlace_ingreso">Enlace de ingreso</label>
+                        <label for="exevir_enlace_ingreso">Enlace de ingreso *</label>
                         <input class="form-control @error('exevir_enlace_ingreso') is-invalid @enderror" name="exevir_enlace_ingreso"
                             id="exevir_enlace_ingreso" value="{{ old('exevir_enlace_ingreso') }}" type="text"
                             autocomplete="exevir_enlace_ingreso" autofocus>

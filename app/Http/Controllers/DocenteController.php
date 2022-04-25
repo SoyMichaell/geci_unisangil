@@ -208,7 +208,7 @@ class DocenteController extends Controller
             $file = $request->file('certificado_esp');
             $name_certificado_esp = $persona->id . '_' . $persona->per_nombre . '_especializacion' . '.' . $file->extension();
 
-            $ruta = public_path('estudios/' . $name_certificado_esp);
+            $ruta = public_path('datos/docente/estudios/' . $name_certificado_esp);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -224,7 +224,7 @@ class DocenteController extends Controller
             $file = $request->file('certificado_dip');
             $name_certificado_dip = $persona->id . '_' . $persona->per_nombre . '_diplomado' . '.' . $file->extension();
 
-            $ruta = public_path('estudios/' . $name_certificado_dip);
+            $ruta = public_path('datos/docente/estudios/' . $name_certificado_dip);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -240,7 +240,7 @@ class DocenteController extends Controller
             $file = $request->file('soporte_hoja_vida');
             $name_certificado_sop = $persona->id . '_' . $persona->per_nombre . '_soporte_hoja_vida' . '.' . $file->extension();
 
-            $ruta = public_path('estudios/' . $name_certificado_sop);
+            $ruta = public_path('datos/docente/estudios/' . $name_certificado_sop);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -297,7 +297,7 @@ class DocenteController extends Controller
             $file = $request->file('documentos_compl');
             $name_documentos_compl = $persona->id . '_' . $persona->per_nombre . '_comprimido' . '.' . $file->extension();
 
-            $ruta = public_path('datos/zip/' . $name_documentos_compl);
+            $ruta = public_path('datos/docente/zip/' . $name_documentos_compl);
 
             if ($file->extension() == 'zip') {
                 copy($file, $ruta);
@@ -451,7 +451,7 @@ class DocenteController extends Controller
             $file = $request->file('doe_url_evaluacion');
             $name_evaluacion = $request->get('doe_year') . '_' . $request->get('doe_semestre') . '_' . $persona->per_nombre . '_' . $persona->per_apellido . '_evaluacion' . '.' . $file->extension();
 
-            $ruta = public_path('datos/evaluacion/' . $name_evaluacion);
+            $ruta = public_path('datos/docente/evaluacion/' . $name_evaluacion);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -524,7 +524,7 @@ class DocenteController extends Controller
             $file = $request->file('doe_url_evaluacion');
             $name_evaluacion = $request->get('doe_year') . '_' . $request->get('doe_semestre') . '_' . $personax->per_nombre . '_' . $personax->per_apellido . '_evaluacion' . '.' . $file->extension();
 
-            $ruta = public_path('datos/evaluacion/' . $name_evaluacion);
+            $ruta = public_path('datos/docente/evaluacion/' . $name_evaluacion);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -614,7 +614,7 @@ class DocenteController extends Controller
             $file = $request->file('doco_url_soporte');
             $name_contrato = $request->get('doco_fecha_inicio') . '_' . $request->get('doco_numero_contrato') . '_' . $persona->per_nombre . '_' . $persona->per_apellido . '_contrato' . '.' . $file->extension();
 
-            $ruta = public_path('datos/contrato/' . $name_contrato);
+            $ruta = public_path('datos/docente/contrato/' . $name_contrato);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -688,7 +688,7 @@ class DocenteController extends Controller
             $file = $request->file('doco_url_soporte');
             $name_contrato = $request->get('doco_fecha_inicio') . '_' . $request->get('doco_numero_contrato') . '_' . $persona->per_nombre . '_' . $persona->per_apellido . 'contrato' . '.' . $file->extension();
 
-            $ruta = public_path('datos/contrato/' . $name_contrato);
+            $ruta = public_path('datos/docente/contrato/' . $name_contrato);
 
             if ($file->extension() == 'pdf') {
                 copy($file, $ruta);
@@ -867,7 +867,7 @@ class DocenteController extends Controller
             $file = $request->file('docvi_url_soporte');
             $name_soporte = $request->get('docvi_nombre').'_'.$request->get('docvi_apellido').'_'.$request->get('docvi_year').'.'.$file->extension();
 
-            $ruta = public_path('datos/visitante/' . $name_soporte);
+            $ruta = public_path('datos/docente/visitante/' . $name_soporte);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -962,7 +962,7 @@ class DocenteController extends Controller
                 $file = $request->file('docvi_url_soporte');
                 $name_soporte = $request->get('docvi_nombre').'_'.$request->get('docvi_apellido').'_'.$request->get('docvi_year').'.'.$file->extension();
     
-                $ruta = public_path('datos/visitante/' . $name_soporte);
+                $ruta = public_path('datos/docente/visitante/' . $name_soporte);
     
                 if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                     copy($file, $ruta);

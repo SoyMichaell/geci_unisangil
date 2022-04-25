@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmona_tipo">Tipo</label>
+                        <label for="exmona_tipo">Tipo *</label>
                         <select class="form-control @error('exmona_tipo') is-invalid @enderror" name="exmona_tipo"
                             id="exmona_tipo">
                             <option value="">---- SELECCIONE ----</option>
@@ -34,7 +34,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmona_rol">Rol</label>
+                        <label for="exmona_rol">Rol *</label>
                         <select class="form-control @error('exmona_rol') is-invalid @enderror" name="exmona_rol"
                             id="exmona_rol">
                             <option value="">---- SELECCIONE ----</option>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmona_id_sede">Sede</label>
+                        <label for="exmona_id_sede">Sede *</label>
                         <select class="form-control @error('exmona_id_sede') is-invalid @enderror" name="exmona_id_sede" id="exmona_id_sede">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sedes as $sede)
@@ -65,7 +65,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmona_id_facultad">Facultad</label>
+                        <label for="exmona_id_facultad">Facultad *</label>
                         <select class="form-control @error('exmona_id_facultad') is-invalid @enderror" name="exmona_id_facultad" id="exmona_id_facultad">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($facultades as $facultad)
@@ -81,7 +81,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmona_id_programa">Programa</label>
+                        <label for="exmona_id_programa">Programa *</label>
                         <select class="form-control @error('exmona_id_programa') is-invalid @enderror" name="exmona_id_programa" id="exmona_id_programa">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($programas as $programa)
@@ -130,7 +130,7 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="exmona_institucion_proviene">Institución educativa, organización o entidad de donde
-                            proviene la movilidad. Por favor indique el nombre completo, sin siglas.</label>
+                            proviene la movilidad. Por favor indique el nombre completo, sin siglas. *</label>
                         <input class="form-control @error('exmona_institucion_proviene') is-invalid @enderror"
                             name="exmona_institucion_proviene" id="exmona_institucion_proviene"
                             value="{{$nacional->exmona_institucion_proviene}}" type="text"
@@ -300,7 +300,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exmona_descripcion">Descripción de la movilidad. Amplíe la información. Si se trata
-                            de un evento académico por favor indique el nombre completo del evento, sin siglas.</label>
+                            de un evento académico por favor indique el nombre completo del evento, sin siglas. *</label>
                         <textarea class="form-control @error('exmona_descripcion') is-invalid @enderror" name="exmona_descripcion" id="exmona_descripcion" cols="30" rows="10">{{$nacional->exmona_descripcion}}</textarea>
                         @error('exmona_descripcion')
                             <span class="invalid-feedback" role="alert">
@@ -311,7 +311,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmona_fecha_inicio">Fecha de inicio</label>
+                        <label for="exmona_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('exmona_fecha_inicio') is-invalid @enderror"
                             name="exmona_fecha_inicio" id="exmona_fecha_inicio"
                             value="{{$nacional->exmona_fecha_inicio}}" type="date"
@@ -323,7 +323,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmona_fecha_final">Fecha final</label>
+                        <label for="exmona_fecha_final">Fecha final *</label>
                         <input class="form-control @error('exmona_fecha_final') is-invalid @enderror"
                             name="exmona_fecha_final" id="exmona_fecha_final"
                             value="{{$nacional->exmona_fecha_final}}" type="date"

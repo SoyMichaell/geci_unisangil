@@ -42,7 +42,7 @@
                                     <td>{{ $contrato->doco_fecha_fin }}</td>
                                     <td>{{ $contrato->doco_rol }}</td>
                                     <td>
-                                        <a>{{ $contrato->doco_url_soporte }}</a>
+                                        <a href="{{asset('datos/docente/contrato/'.$contrato->doco_url_soporte)}}" target="_blank">{{ $contrato->doco_url_soporte }}</a>
                                     </td>
                                     <td><span
                                             class="badge badge-{{ $contrato->doco_estado == 'cancelado' ? 'success' : 'danger' }}">{{ $contrato->doco_estado }}</span>

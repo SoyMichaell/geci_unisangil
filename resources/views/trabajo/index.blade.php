@@ -9,7 +9,7 @@
     @endsection
 @endsection
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="d-flex justify-content-start">
             <a class="btn btn-info btn-sm" href="{{ url('modalidad') }}"><i class="fa fa-plus-circle"></i> Registro modalidad de grado</a>
         </div>
@@ -51,10 +51,10 @@
                             <tr>
                                 <td>{{ $i++ }}</td>
                                 <td>{{ $trabajo->tra_codigo_proyecto }}</td>
-                                <td>{{ $trabajo->tra_titulo_proyecto }}</td>
-                                <td>{{ $trabajo->tra_id_estudiante }}</td>
-                                <td>{{ $trabajo->directores->per_nombre . ' ' . $trabajo->directores->per_apellido }}</td>
-                                <td>{{ $trabajo->codirectores->per_nombre . ' ' . $trabajo->codirectores->per_apellido }}
+                                <td>{{ Str::upper($trabajo->tra_titulo_proyecto) }}</td>
+                                <td>{{ Str::upper($trabajo->tra_id_estudiante) }}</td>
+                                <td>{{ Str::upper($trabajo->directores->per_nombre . ' ' . $trabajo->directores->per_apellido) }}</td>
+                                <td>{{ Str::upper($trabajo->codirectores->per_nombre . ' ' . $trabajo->codirectores->per_apellido) }}
                                 </td>
                                 <td>{{ $trabajo->tra_fecha_inicio }}</td>
                                 <td>

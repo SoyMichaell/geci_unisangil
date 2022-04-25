@@ -46,7 +46,7 @@
 @section('content')
     <div class="container p-3">
         <h4 class="tile">Extensión</h4>
-        <div class="row mb-3 mx-auto">
+        <div class="row mb-3">
             <a class="card__extension tile" href="/extension/mostraractividad">
                 <i class="fa fa-map-o fa-4x"></i>
                 <h4 class="mt-2">Actividad cultural</h4>
@@ -104,7 +104,7 @@
             </a>
             <a class="card__extension tile" href="/extension/mostrareventosinternacionales">
                 <i class="fa fa-globe fa-4x"></i>
-                <h4 class="mt-2">Eventos internacionales</h4>
+                <h4 class="mt-2">Eventos nacionales e internacionales</h4>
             </a>
         </div>
         <h4 class="tile">Movilidad</h4>

@@ -224,8 +224,9 @@ class EstudianteController extends Controller
             'estu_matricula','estu_pga','estu_reconocimiento','estu_egresado','estu_administrativo',
             'estu_cargo','estu_dependencia','estu_fecha_ingreso','estu_no_contrato','estu_colegio','estu_correo_personal')
             ->join('estudiante','persona.id','=','estudiante.estu_id_estudiante')
-            ->where('per_tipo_usuario', 6)
             ->where('persona.id', $id)
+            ->where('per_tipo_usuario', 6)
+            ->orWhere('per_tipo_usuario', 9)
             ->first();
         $programas = Programa::all();
         $departamentos = Departamento::all();

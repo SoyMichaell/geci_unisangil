@@ -481,102 +481,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="row mb-0 mt-2">
-                                <div class="col-md-12 offset-md-12">
-                                    <button type="submit" class="btn btn-success">
-                                        {{ __('Siguiente') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 4 ? 'show active tile p-3' : 'tile p-3' }}"
-                    id="faseacta" role="tabpanel" aria-labelledby="faseacta-tab">
-                    <div class="mt-2 p-2">
-                        <form action="/trabajo/{{ $trabajo->id }}/faseacta" method="post"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('PUT')
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="">Acta de sustentación</label>
-                                    <input
-                                        class="form-control w-100 @error('tra_acta_sustentacion') is-invalid @enderror"
-                                        name="tra_acta_sustentacion" id="tra_acta_sustentacion"
-                                        value="{{ $trabajo->tra_numero_acta_sustentacion }}" type="number"
-                                        autocomplete="tra_acta_sustentacion" placeholder="Número acta de sustentación"
-                                        autofocus>
-                                    @error('tra_acta_sustentacion')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label
-                                        for=""><span><small>{{ $trabajo->tra_acta_sustentacion_soporte }}</small></span>
-                                        <span><small>Cargar los 2 soporte de actas en un archivo .zip o
-                                                .rar</small></span></label>
-                                    <input class="form-control" type="file" name="tra_acta_sustentacion_soporte"
-                                        id="tra_acta_sustentacion_soporte" multiple>
-
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row mb-3">
-                                <div class="col-md-6">
-                                    <label for="">Acta de grado</label>
-                                    <input class="form-control w-100 @error('tra_acta_grado') is-invalid @enderror"
-                                        name="tra_acta_grado" id="tra_acta_grado"
-                                        value="{{ $trabajo->tra_numero_acta_grado }}" type="number"
-                                        autocomplete="tra_acta_grado" placeholder="Número acta de grado" autofocus>
-                                    @error('tra_acta_grado')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="col-md-6">
-                                    <label for=""><small>{{ $trabajo->tra_acta_grado_soporte }}</small>
-                                        <span><small>Cargar los 2 soporte de actas en un archivo .zip o
-                                                .rar</small></span></label>
-                                    <input class="form-control" type="file" name="tra_acta_grado_soporte"
-                                        id="tra_acta_grado_soporte" multiple>
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="mb-3 form-inline">
-                                <div class="form-group col-md-2">
-                                    <label for="tra_fecha_finalizacion">Fecha finalización</label>
-                                </div>
-                                <div class="form-group col-md-10">
-                                    <input
-                                        class="form-control w-100 @error('tra_fecha_finalizacion') is-invalid @enderror"
-                                        name="tra_fecha_finalizacion" id="tra_fecha_finalizacion"
-                                        value="{{ $trabajo->tra_fecha_finalizacion }}" type="date"
-                                        autocomplete="tra_fecha_finalizacion" autofocus>
-                                    @error('tra_fecha_finalizacion')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                            </div>
-                            <hr>
-                            <div class="row mb-0 mt-4">
-                                <div class="col-md-12 offset-md-12">
-                                    <button type="submit" class="btn btn-success">
-                                        {{ __('Siguiente') }}
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 5 ? 'show active tile p-3' : 'tile p-3' }}"
-                    id="fasecontrato" role="tabpanel" aria-labelledby="fasecontrato-tab">
-                    @if ($contratos->count() > 0)
+                            @if ($contratos->count() > 0)
                         <div class="row">
                             <div class="col-md-12">
                                 <h4>Listado contratos asociados a los jurados asignados</h4>
@@ -632,6 +537,99 @@
                             <strong>Los jurados no registran contratos</strong>
                         </div>
                     @endif
+                            <div class="row mb-0 mt-2">
+                                <div class="col-md-12 offset-md-12">
+                                    <button type="submit" class="btn btn-success">
+                                        {{ __('Siguiente') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 4 ? 'show active tile p-3' : 'tile p-3' }}"
+                    id="faseacta" role="tabpanel" aria-labelledby="faseacta-tab">
+                    <div class="mt-2 p-2">
+                        <form action="/trabajo/{{ $trabajo->id }}/faseacta" method="post"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="">Acta de sustentación</label>
+                                    <input
+                                        class="form-control w-100 @error('tra_acta_sustentacion') is-invalid @enderror"
+                                        name="tra_acta_sustentacion" id="tra_acta_sustentacion"
+                                        value="{{ $trabajo->tra_numero_acta_sustentacion }}" type="number"
+                                        autocomplete="tra_acta_sustentacion" placeholder="Número acta de sustentación"
+                                        autofocus>
+                                    @error('tra_acta_sustentacion')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label
+                                        for=""><span><small>{{ $trabajo->tra_acta_sustentacion_soporte }}</small></span>
+                                        <span><small>Cargar los 2 soporte de actas en un archivo .zip o
+                                                .rar</small></span></label>
+                                    <input class="form-control" type="file" name="tra_acta_sustentacion_soporte"
+                                        id="tra_acta_sustentacion_soporte">
+                                    <a href="{{asset('datos/trabajo/acta/'.$trabajo->tra_acta_sustentacion_soporte)}}">{{ $trabajo->tra_acta_sustentacion_soporte }}</a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-3">
+                                <div class="col-md-6">
+                                    <label for="">Acta de grado</label>
+                                    <input class="form-control w-100 @error('tra_acta_grado') is-invalid @enderror"
+                                        name="tra_acta_grado" id="tra_acta_grado"
+                                        value="{{ $trabajo->tra_numero_acta_grado }}" type="number"
+                                        autocomplete="tra_acta_grado" placeholder="Número acta de grado" autofocus>
+                                    @error('tra_acta_grado')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <div class="col-md-6">
+                                    <label for=""><small>{{ $trabajo->tra_acta_grado_soporte }}</small>
+                                        <span><small>Cargar los 2 soporte de actas en un archivo .zip o
+                                                .rar</small></span></label>
+                                    <input class="form-control" type="file" name="tra_acta_grado_soporte"
+                                        id="tra_acta_grado_soporte">
+                                    <a href="{{asset('datos/trabajo/acta/'.$trabajo->tra_acta_grado_soporte)}}">{{ $trabajo->tra_acta_grado_soporte }}</a>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="mb-3 form-inline">
+                                <div class="form-group col-md-2">
+                                    <label for="tra_fecha_finalizacion">Fecha finalización</label>
+                                </div>
+                                <div class="form-group col-md-10">
+                                    <input
+                                        class="form-control w-100 @error('tra_fecha_finalizacion') is-invalid @enderror"
+                                        name="tra_fecha_finalizacion" id="tra_fecha_finalizacion"
+                                        value="{{ $trabajo->tra_fecha_finalizacion }}" type="date"
+                                        autocomplete="tra_fecha_finalizacion" autofocus>
+                                    @error('tra_fecha_finalizacion')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row mb-0 mt-4">
+                                <div class="col-md-12 offset-md-12">
+                                    <button type="submit" class="btn btn-success">
+                                        {{ __('Siguiente') }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
                 <div class="tab-pane fade {{ $trabajo->tra_id_proceso == 6 ? 'show active tile p-3' : 'tile p-3' }}"
                     id="fasefinal" role="tabpanel" aria-labelledby="fasefinal-tab">
@@ -642,7 +640,7 @@
                             <div class="col-md-12">
                                 <label for="tra_obsevacion">Observación</label>
                                 <textarea class="form-control" name="tra_observacion" id="tra_observacion" cols="30"
-                                    rows="10">{{ old('tra_obsevacion') }}</textarea>
+                                    rows="10">{{$trabajo->tra_observacion}}</textarea>
                             </div>
                         </div>
                         <div class="row mb-0 ">

@@ -83,7 +83,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_fecha">Fecha</label>
+                        <label for="exseor_fecha">Fecha *</label>
                         <input class="form-control @error('exseor_fecha') is-invalid @enderror" name="exseor_fecha"
                             id="exseor_fecha" value="{{ old('exseor_fecha') }}" type="date"
                             autocomplete="exseor_fecha" autofocus>
@@ -96,7 +96,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_actividades">Actividad (s)</label>
+                        <label for="exseor_actividades">Actividad (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_actividades" id="exseor_actividades" cols="30"
                             rows="10"></textarea>
                         @error('exseor_actividades')
@@ -106,7 +106,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_logros">Logro (s)</label>
+                        <label for="exseor_logros">Logro (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_logros" id="exseor_logros" cols="30"
                             rows="10"></textarea>
                         @error('exseor_logros')
@@ -118,7 +118,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_resultados">Resultado (s)</label>
+                        <label for="exseor_resultados">Resultado (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_resultados" id="exseor_resultados" cols="30"
                             rows="10"></textarea>
                         @error('exseor_resultados')
@@ -128,7 +128,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_productos">Producto (s)</label>
+                        <label for="exseor_productos">Producto (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_productos" id="exseor_productos" cols="30"
                             rows="10"></textarea>
                         @error('exseor_productos')
@@ -140,7 +140,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="exseor_funcion">Función</label>
+                        <label for="exseor_funcion">Función (Opcional</label>
                         <select class="form-control" name="exseor_funcion" id="exseor_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>

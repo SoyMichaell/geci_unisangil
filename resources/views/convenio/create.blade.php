@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="tile">
             <h4><i class="fa fa-cube"></i> Registro convenio</h4><hr>
-            <form action="/convenio/" method="post">
+            <form action="/convenio" method="post">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="con_alcance">{{ __('Alcance *') }}</label>
-                        <select class="form-control" name="con_alcance" id="con_alcance">
+                        <select class="form-control @error('con_alcance') is-invalid @enderror" name="con_alcance" id="con_alcance">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="regional">Regional</option>
                             <option value="nacional">Nacional</option>
@@ -231,7 +231,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="con_observacion">{{ __('Observaciones ') }}</label>
+                        <label for="con_observacion">{{ __('Observaciones (Opcional)') }}</label>
                         <textarea class="form-control @error('con_observacion') is-invalid @enderror" name="con_observacion" id="con_observacion" cols="30" rows="10"></textarea>
                         @error('con_observacion')
                             <span class="invalid-feedback" role="alert">

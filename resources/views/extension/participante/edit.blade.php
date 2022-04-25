@@ -20,8 +20,8 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="dop_id_docente">Docente</label>
-                        <select class="form-control" name="dop_id_docente" id="dop_id_docente">
+                        <label for="dop_id_docente">Docente *</label>
+                        <select class="form-control js-example-placeholder-single @error('dop_id_docente') is-invalid @enderror" name="dop_id_docente" id="dop_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}" {{ $docente->id == $participante->dop_id_docente  ? 'selected' : ''}}>
@@ -36,7 +36,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_fecha_expedicion">Fecha expedición</label>
+                        <label for="dop_fecha_expedicion">Fecha expedición *</label>
                         <input class="form-control @error('dop_fecha_expedicion') is-invalid @enderror"
                             name="dop_fecha_expedicion" id="dop_fecha_expedicion"
                             value="{{$participante->dop_fecha_expedicion}}" type="date" autocomplete="dop_fecha_expedicion"
@@ -50,8 +50,8 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="dop_sexo_biologico">Sexo biologico</label>
-                        <select class="form-control" name="dop_sexo_biologico" id="dop_sexo_biologico">
+                        <label for="dop_sexo_biologico">Sexo biologico *</label>
+                        <select class="form-control @error('dop_sexo_biologico') is-invalid @enderror" name="dop_sexo_biologico" id="dop_sexo_biologico">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$participante->dop_sexo_biologico == '1' ? 'selected' : ''}}>Masculino</option>
                             <option value="2" {{$participante->dop_sexo_biologico == '2' ? 'selected' : ''}}>Femenino</option>
@@ -63,8 +63,8 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_estado_civil">Estado civil</label>
-                        <select class="form-control" name="dop_estado_civil" id="dop_estado_civil">
+                        <label for="dop_estado_civil">Estado civil *</label>
+                        <select class="form-control @error('dop_estado_civil') is-invalid @enderror" name="dop_estado_civil" id="dop_estado_civil">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$participante->dop_estado_civil == '1' ? 'selected' : ''}}>Soltero (a)</option>
                             <option value="2" {{$participante->dop_estado_civil == '2' ? 'selected' : ''}}>Casado (a)</option>
@@ -95,7 +95,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_id_municipio">ID Municipio</label>
+                        <label for="dop_id_municipio">ID Municipio *</label>
                         <input class="form-control @error('dop_id_municipio') is-invalid @enderror"
                             name="dop_id_municipio" id="dop_id_municipio" value="{{$participante->dop_id_municipio}}"
                             type="number" autocomplete="dop_id_municipio" autofocus>
@@ -108,7 +108,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="dop_correo_personal">Correo personal</label>
+                        <label for="dop_correo_personal">Correo personal (Opcional)</label>
                         <input class="form-control @error('dop_correo_personal') is-invalid @enderror"
                             name="dop_correo_personal" id="dop_correo_personal"
                             value="{{$participante->dop_correo_personal}}" type="email" autocomplete="dop_correo_personal"
@@ -120,7 +120,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_direccion">Dirección</label>
+                        <label for="dop_direccion">Dirección (Opcional)</label>
                         <input class="form-control @error('dop_direccion') is-invalid @enderror" name="dop_direccion"
                             id="dop_direccion" value="{{$participante->dop_direccion}}" type="text"
                             autocomplete="dop_direccion" autofocus>

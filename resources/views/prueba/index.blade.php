@@ -43,7 +43,7 @@
                 </tr>
                 <tr style="width: 80%">
                     <td>Resultados generales de programa</td>
-                    <td><a href="/prueba/mostrarresultado">Enlace</a></td>
+                    <td><a href="/prueba/mostrarresultado">Enlace</a> ({{$general->count()}})</td>
                 </tr>
             </table>
         </div>

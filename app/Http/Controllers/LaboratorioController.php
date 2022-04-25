@@ -61,8 +61,6 @@ class LaboratorioController extends Controller
             'lab_nombre_practica' => 'required',
             'lab_cantidad_estudiante' => 'required',
             'lab_id_software' => 'required|not_in:0',
-            'lab_material' => 'required',
-            'lab_observaciones' => 'required',
         ];
         $message = [
             'lab_fecha.required' => 'El campo fecha es requerido',
@@ -76,8 +74,6 @@ class LaboratorioController extends Controller
             'lab_nombre_practica.required' => 'El campo nombre practicante es requerido',
             'lab_cantidad_estudiante.required' => 'El campo cantidad estudiantes es requerido',
             'lab_id_software.required' => 'El campo software es requerido',
-            'lab_material.required' => 'El campo materiales es requerido',
-            'lab_observaciones.required' => 'El campo observaciónes es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -106,6 +102,7 @@ class LaboratorioController extends Controller
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
             ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $facultades = Facultad::all();
         $programas = Programa::all();
@@ -130,7 +127,8 @@ class LaboratorioController extends Controller
     {
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         $facultades = Facultad::all();
         $programas = Programa::all();
@@ -165,8 +163,6 @@ class LaboratorioController extends Controller
             'lab_nombre_practica' => 'required',
             'lab_cantidad_estudiante' => 'required',
             'lab_id_software' => 'required|not_in:0',
-            'lab_material' => 'required',
-            'lab_observaciones' => 'required',
         ];
         $message = [
             'lab_fecha.required' => 'El campo fecha es requerido',
@@ -180,8 +176,6 @@ class LaboratorioController extends Controller
             'lab_nombre_practica.required' => 'El campo nombre practicante es requerido',
             'lab_cantidad_estudiante.required' => 'El campo cantidad estudiantes es requerido',
             'lab_id_software.required' => 'El campo software es requerido',
-            'lab_material.required' => 'El campo materiales es requerido',
-            'lab_observaciones.required' => 'El campo observaciónes es requerido',
         ];
         $this->validate($request, $rules, $message);
         

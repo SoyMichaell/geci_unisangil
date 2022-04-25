@@ -3,7 +3,7 @@
 @else
     @extends('layouts.app')
     @section('navegar')
-    <a href="/extension/{{$educacion->id}}/editareducacion">Editar</a> / <a href="/extension/mostrareducacion">Curso</a> / <a href="/extension">Extensión - internacionalización</a>  
+    <a href="/extension/{{$educacion->id}}/editareducacion">Editar</a> / <a href="/extension/mostrareducacion">Educación continua</a> / <a href="/extension">Extensión - internacionalización</a>  
     @endsection
     @section('title')
         <h1 class="titulo"><i class="fa fa-pencil-square-o"></i> Formulario de edición</h1>
@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extedu_semestre">Semestre</label>
+                        <label for="extedu_semestre">Semestre *</label>
                         <input class="form-control @error('extedu_semestre') is-invalid @enderror" name="extedu_semestre"
                             id="extedu_semestre" value="{{$educacion->extedu_semestre}}" type="number"
                             autocomplete="extedu_semestre" autofocus>
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extedu_codigo_curso">Código curso</label>
+                        <label for="extedu_codigo_curso">Código curso *</label>
                         <input class="form-control @error('extedu_codigo_curso') is-invalid @enderror"
                             name="extedu_codigo_curso" id="extedu_codigo_curso"
                             value="{{$educacion->extedu_codigo_curso}}" type="text" autocomplete="extedu_codigo_curso"
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extedu_numero_horas">Número de horas</label>
+                        <label for="extedu_numero_horas">Número de horas *</label>
                         <input class="form-control @error('extedu_numero_horas') is-invalid @enderror"
                             name="extedu_numero_horas" id="extedu_numero_horas"
                             value="{{$educacion->extedu_numero_horas}}" type="number" autocomplete="extedu_numero_horas"
@@ -57,8 +57,8 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extedu_tipo_curso">Tipo de curso</label>
-                        <select class="form-control" name="extedu_tipo_curso" id="extedu_tipo_curso">
+                        <label for="extedu_tipo_curso">Tipo de curso *</label>
+                        <select class="form-control @error('extedu_tipo_curso') is-invalid @enderror" name="extedu_tipo_curso" id="extedu_tipo_curso">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$educacion->extedu_tipo_curso == '1' ? 'selected' : ''}}>Cursos, cursos especializados (certificaciones)</option>
                             <option value="2" {{$educacion->extedu_tipo_curso == '2' ? 'selected' : ''}}>Talleres</option>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extedu_valor_curso">Valor del curso</label>
+                        <label for="extedu_valor_curso">Valor del curso *</label>
                         <input class="form-control @error('extedu_valor_curso') is-invalid @enderror"
                             name="extedu_valor_curso" id="extedu_valor_curso" value="{{$educacion->extedu_valor_curso}}"
                             type="number" autocomplete="extedu_valor_curso" autofocus>
@@ -86,8 +86,8 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extedu_id_docente">Docente</label>
-                        <select class="form-control" name="extedu_id_docente" id="extedu_id_docente">
+                        <label for="extedu_id_docente">Docente *</label>
+                        <select class="form-control js-example-placeholder-single @error('extedu_id_docente') is-invalid @enderror" name="extedu_id_docente" id="extedu_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}" {{$docente->id == $educacion->extedu_id_docente ? 'selected' : ''}}>
@@ -103,8 +103,8 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extedu_tipo_extension">Tipo beneficio de extensión</label>
-                        <select class="form-control" name="extedu_tipo_extension" id="extedu_tipo_extension">
+                        <label for="extedu_tipo_extension">Tipo beneficio de extensión *</label>
+                        <select class="form-control @error('extedu_tipo_extension') is-invalid @enderror" name="extedu_tipo_extension" id="extedu_tipo_extension">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$educacion->extedu_tipo_extension == '1' ? 'selected' : ''}}>Estudiante de la IES</option>
                             <option value="2" {{$educacion->extedu_tipo_extension == '2' ? 'selected' : ''}}>Graduado de la IES</option>
@@ -119,7 +119,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extedu_cantidad">Cantidad de beneficiados</label>
+                        <label for="extedu_cantidad">Cantidad de beneficiados *</label>
                         <input class="form-control @error('extedu_cantidad') is-invalid @enderror"
                             name="extedu_cantidad" id="extedu_cantidad" value="{{$educacion->extedu_cantidad}}"
                             type="number" autocomplete="extedu_cantidad" autofocus>
@@ -136,7 +136,7 @@
                         <input class="form-control @error('extedu_url_soporte') is-invalid @enderror"
                             name="extedu_url_soporte" id="extedu_url_soporte" value="{{$educacion->extedu_url_soporte}}"
                             type="file" autocomplete="extedu_url_soporte" autofocus>
-                            <p><small><a>{{$educacion->extedu_url_soporte}}</a></small></p>
+                            <p><small><a href="{{asset('datos/extension-internacionalizacion/educacion/'.$educacion->extedu_url_soporte)}}">{{$educacion->extedu_url_soporte == 'null' ? '' : $educacion->extedu_url_soporte}}</a></small></p>
                         @error('extedu_url_soporte')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

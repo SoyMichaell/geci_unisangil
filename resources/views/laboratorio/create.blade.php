@@ -177,7 +177,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="lab_material">{{ __('Materiales *') }}</label>
+                        <label for="lab_material">{{ __('Materiales (Opcional)') }}</label>
                         <textarea class="form-control @error('lab_material') is-invalid @enderror" name="lab_material" id="lab_material" cols="30"
                             rows="10"></textarea>
                         @error('lab_material')
@@ -187,7 +187,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="lab_observaciones">{{ __('Observaciones *') }}</label>
+                        <label for="lab_observaciones">{{ __('Observaciones (Opcional)') }}</label>
                         <textarea class="form-control @error('lab_observaciones') is-invalid @enderror" name="lab_observaciones" id="lab_observaciones" cols="30"
                             rows="10"></textarea>
                         @error('lab_observaciones')

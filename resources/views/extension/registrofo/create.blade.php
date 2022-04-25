@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extrefoin_year">Año</label>
+                        <label for="extrefoin_year">Año *</label>
                         <input class="form-control @error('extrefoin_year') is-invalid @enderror"
                             name="extrefoin_year" id="extrefoin_year"
                             value="{{ old('extrefoin_year') }}" type="number" autocomplete="extrefoin_year"
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extrefoin_periodo">Periodo</label>
+                        <label for="extrefoin_periodo">Periodo *</label>
                         <input class="form-control @error('extrefoin_periodo') is-invalid @enderror"
                             name="extrefoin_periodo" id="extrefoin_periodo"
                             value="{{ old('extrefoin_periodo') }}" type="text" autocomplete="extrefoin_periodo"
@@ -45,7 +45,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extrefoin_tipo_actividad">Tipo actividad</label>
+                        <label for="extrefoin_tipo_actividad">Tipo actividad *</label>
                         <select class="form-control @error('extrefoin_tipo_actividad') is-invalid @enderror" name="extrefoin_tipo_actividad" id="extrefoin_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="internacionalizacion-curriculo">Internacionalización del curriculo</option>
@@ -62,7 +62,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extrefoin_actividad">Actividad</label>
+                        <label for="extrefoin_actividad">Actividad *</label>
                         <input class="form-control @error('extrefoin_actividad') is-invalid @enderror"
                             name="extrefoin_actividad" id="extrefoin_actividad"
                             value="{{ old('extrefoin_actividad') }}" type="text" autocomplete="extrefoin_actividad"
@@ -76,7 +76,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extrefoin_ente_organizador">Ente organizador</label>
+                        <label for="extrefoin_ente_organizador">Ente organizador*</label>
                         <input class="form-control @error('extrefoin_ente_organizador') is-invalid @enderror" name="extrefoin_ente_organizador"
                             id="extrefoin_ente_organizador" value="{{ old('extrefoin_ente_organizador') }}" type="text" autocomplete="extrefoin_ente_organizador"
                             autofocus>
@@ -87,7 +87,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extrefoin_fecha">Fecha</label>
+                        <label for="extrefoin_fecha">Fecha *</label>
                         <input class="form-control @error('extrefoin_fecha') is-invalid @enderror"
                             name="extrefoin_fecha" id="extrefoin_fecha" value="{{ old('extrefoin_fecha') }}"
                             type="date" autocomplete="extrefoin_fecha" autofocus>
@@ -100,7 +100,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="extrefoin_tipo_evento">Tipo evento</label>
+                        <label for="extrefoin_tipo_evento">Tipo evento *</label>
                         <select class="form-control @error('extrefoin_tipo_evento') is-invalid @enderror" name="extrefoin_tipo_evento" id="extrefoin_tipo_evento">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="interno">Interno</option>
@@ -113,7 +113,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="extrefoin_tipo_modalidad">Tipo de modalidad</label>
+                        <label for="extrefoin_tipo_modalidad">Tipo de modalidad *</label>
                         <select class="form-control @error('extrefoin_tipo_modalidad') is-invalid @enderror" name="extrefoin_tipo_modalidad" id="extrefoin_tipo_modalidad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>
@@ -129,7 +129,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="extrefoin_soporte">Soporte</label>
+                        <label for="extrefoin_soporte">Soporte (Opcional)</label>
                         <input class="form-control @error('extrefoin_soporte') is-invalid @enderror"
                             name="extrefoin_soporte" id="extrefoin_soporte" value="{{ old('extrefoin_soporte') }}"
                             type="file" autocomplete="extrefoin_soporte" autofocus>

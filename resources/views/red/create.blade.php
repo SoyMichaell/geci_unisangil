@@ -96,7 +96,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="red_accion">{{ __('Acción red acádemica *') }}</label>
+                        <label for="red_accion">{{ __('Acción red acádemica (Opcional)') }}</label>
                         <textarea class="form-control" name="red_accion" id="red_accion" cols="30" rows="10"></textarea>
                         @error('red_accion')
                             <span class="invalid-feedback" role="alert">
@@ -134,7 +134,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="red_observacion">{{ __('Observaciones *') }}</label>
+                        <label for="red_observacion">{{ __('Observaciones (Opcional)') }}</label>
                         <textarea class="form-control" name="red_observacion" id="red_observacion" cols="30" rows="10"></textarea>
                         @error('red_observacion')
                             <span class="invalid-feedback" role="alert">

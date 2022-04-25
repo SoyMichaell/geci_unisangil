@@ -55,7 +55,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="lab_id_docente">{{ __('Docente responsable *') }}</label>
-                        <select class="form-control @error('lab_id_docente') is-invalid @enderror" name="lab_id_docente"
+                        <select class="js-example-placeholder-single form-control @error('lab_id_docente') is-invalid @enderror" name="lab_id_docente"
                             id="lab_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
@@ -174,7 +174,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="lab_material">{{ __('Materiales *') }}</label>
+                        <label for="lab_material">{{ __('Materiales (Opcional)') }}</label>
                         <textarea class="form-control" name="lab_material" id="lab_material" cols="30"
                             rows="10">{{$laboratorio->lab_material}}</textarea>
                         @error('lab_material')
@@ -184,7 +184,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="lab_observaciones">{{ __('Observaciones *') }}</label>
+                        <label for="lab_observaciones">{{ __('Observaciones (Opcional)') }}</label>
                         <textarea class="form-control" name="lab_observaciones" id="lab_observaciones" cols="30"
                             rows="10">{{$laboratorio->lab_observaciones}}</textarea>
                         @error('lab_observaciones')

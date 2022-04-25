@@ -80,7 +80,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extseex_descripcion_ser">Descripción *</label>
+                        <label for="extseex_descripcion_ser">Descripción (Opcional)</label>
                         <textarea class="form-control" name="extseex_descripcion_ser" id="extseex_descripcion_ser"
                             cols="30" rows="10">{{$servicioextension->extseex_descripcion_ser}}</textarea>
                         @error('extseex_descripcion_ser')
@@ -92,7 +92,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extseex_valor_ser">Valor servicio *</label>
+                        <label for="extseex_valor_ser">Valor servicio (Opcional)</label>
                         <input class="form-control @error('extseex_valor_ser') is-invalid @enderror"
                             name="extseex_valor_ser" id="extseex_valor_ser" value="{{$servicioextension->extseex_valor_ser}}"
                             type="text" autocomplete="extseex_valor_ser" autofocus>
@@ -198,7 +198,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extseex_costo">¿Tiene costo? *</label>
+                        <label for="extseex_costo">¿Tiene costo?</label>
                         <select class="form-control" name="extseex_costo" id="extseex_costo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="Si" {{$servicioextension->extseex_costo == 'Si' ? 'selected' : ''}}>Si</option>
@@ -355,8 +355,8 @@
                         @enderror
                     </div>
                 </div>
+                <h4 class="tile">Otras entidades</h4>
                 <div class="row mb-3">
-                    <h4 class="tile">Otras entidades</h4>
                     <div class="col-md-4">
                         <label for="extseex_nombre_otra_entidad">Nombre entidad</label>
                         <input class="form-control @error('extseex_nombre_otra_entidad') is-invalid @enderror"
@@ -471,7 +471,8 @@
                             </span>
                         @enderror
                     </div>
-                    <p><small>{{$servicioextension->extseex_soporte}}</small></p>
+                    <small><a
+                        href="{{ asset('datos/extension-internacionalizacion/servicio/' . $servicioextension->extseex_soporte) }}">{{ $servicioextension->extseex_soporte }}</a></small>
                 </div>
                 <div class="row mb-0">
                     <div class="col-md-12 offset-md-12">

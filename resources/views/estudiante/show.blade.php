@@ -378,6 +378,7 @@
                             <option value="egresado-no-graduado"
                                 {{ $persona->estu_estado == 'egresado-no-graduado' ? 'selected' : '' }}>Egresado no
                                 Graduado</option>
+                                <option value="no-aplica" {{ $persona->estu_estado == 'no-aplica' ? 'selected' : '' }}>No aplica</option>
                         </select>
                         @error('estu_estado')
                             <span class="invalid-feedback" role="alert">

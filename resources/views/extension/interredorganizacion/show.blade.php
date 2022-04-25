@@ -23,7 +23,9 @@
         margin-left: 25px;
     }
     #content-convenio{
-       font-size: 18px;
+       text-decoration: none;
+       list-style: none;
+       font-size: 16px;
        font-weight: 300px; 
     }
 

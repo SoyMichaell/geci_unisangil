@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exincu_year">Año</label>
+                        <label for="exincu_year">Año *</label>
                         <input class="form-control @error('exincu_year') is-invalid @enderror" name="exincu_year"
                             id="exincu_year" value="{{ old('exincu_year') }}" type="number" autocomplete="exincu_year"
                             autofocus>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exincu_periodo">Periodo</label>
+                        <label for="exincu_periodo">Periodo *</label>
                         <input class="form-control @error('exincu_periodo') is-invalid @enderror" name="exincu_periodo"
                             id="exincu_periodo" value="{{ old('exincu_periodo') }}" type="text"
                             autocomplete="exincu_periodo" autofocus>
@@ -43,15 +43,15 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exincu_id_asignatura">Asignatura</label>
-                        <select class="form-control @error('exincu_id_asignatura') is-invalid @enderror" name="exincu_id_asignatura" id="exincu_id_asignatura">
+                        <label for="exincu_id_asignatura">Asignatura *</label>
+                        <select class="form-control js-example-placeholder-single @error('exincu_id_asignatura') is-invalid @enderror" name="exincu_id_asignatura" id="exincu_id_asignatura">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($asignaturas as $asignatura)
                                 <option value="{{ $asignatura->id }}">{{ $asignatura->asig_nombre }}
                                 </option>
                             @endforeach
                         </select>
-                        <p class="badge badge-danger"><strong>{{$asignaturas->count()<=0 ? 'No existen registros de asignaturas' : ''}}</strong></p>
+                        <p class="{{$asignaturas->count()<=0 ? 'badge badge-danger' : ''}}"><strong>{{$asignaturas->count()<=0 ? 'No existen registros de asignaturas' : ''}}</strong></p>
                         @error('exincu_id_asignatura')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -59,15 +59,15 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exincu_id_docente">Docente</label>
-                        <select class="form-control @error('exincu_id_docente') is-invalid @enderror" name="exincu_id_docente" id="exincu_id_docente">
+                        <label for="exincu_id_docente">Docente *</label>
+                        <select class="form-control js-example-placeholder-single @error('exincu_id_docente') is-invalid @enderror" name="exincu_id_docente" id="exincu_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}">
                                     {{ $docente->per_nombre . ' ' . $docente->per_apellido }}</option>
                             @endforeach
                         </select>
-                        <p class="badge badge-danger"><strong>{{$docentes->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
+                        <p class="{{$docentes->count()<=0 ? 'badge badge-danger' : ''}}"><strong>{{$docentes->count()<=0 ? 'No existen registros de docentes' : ''}}</strong></p>
                         @error('exincu_id_docente')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -179,7 +179,7 @@
                 
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="ext_movilidad_estudiante">Movilidad estudiante</label>
+                        <label for="ext_movilidad_estudiante">Movilidad estudiante (Opcional)</label>
                         <input class="form-control @error('ext_movilidad_estudiante') is-invalid @enderror"
                             name="ext_movilidad_estudiante" id="ext_movilidad_estudiante"
                             value="{{ old('ext_movilidad_estudiante') }}" type="number"
@@ -192,7 +192,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="ext_otra_actividad">Otra actividad? ¿Cual?</label>
+                        <label for="ext_otra_actividad">Otra actividad? ¿Cual? (Opcional)</label>
                         <textarea class="form-control" name="ext_otra_actividad" id="ext_otra_actividad" cols="30"
                             rows="10"></textarea>
                         @error('ext_otra_actividad')

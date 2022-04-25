@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Programa;
+use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -54,6 +55,7 @@ class HomeController extends Controller
             ->where('estu_administrativo', 'Si')
             ->get();
         $tipousuarios = TipoUsuario::all();
+        $asignaturas = ProgramaAsignatura::all();
         return view('home')
         ->with('personas', $personas)
         ->with('docentes', $docentes)
@@ -61,6 +63,7 @@ class HomeController extends Controller
         ->with('egresados', $egresados)
         ->with('tipousuarios', $tipousuarios)
         ->with('administrativos', $administrativos)
-        ->with('directores', $directores);
+        ->with('directores', $directores)
+        ->with('asignaturas', $asignaturas);
     }
 }

@@ -24,7 +24,7 @@
                         Nuevo</a>
                 </div>
             </div>
-            <br>
+            <div class="mt-2"></div>
             <table class="table" id="tables">
                 <thead class="bg-light">
                     <tr>

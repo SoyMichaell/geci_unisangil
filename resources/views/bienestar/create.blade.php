@@ -15,7 +15,7 @@
     <div class="container-fluid">
         <div class="tile">
             <h4><i class="fa fa-cube"></i> Registro evento o actividad</h4><hr>
-            <form action="/bienestar/" method="post" enctype="multipart/form-data">
+            <form action="/bienestar" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
@@ -115,7 +115,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="bie_soporte">{{ __('Cargar soporte * (Si es una sola evidencia cargar en formato .pdf, si son más cargar en .zip o .rar)') }}</label>
+                        <label for="bie_soporte">{{ __('Cargar soporte (Si es una sola evidencia cargar en formato .pdf, si son más cargar en .zip o .rar)') }}</label>
                         <input id="bie_soporte" type="file" class="form-control @error('bie_soporte') is-invalid @enderror"
                             name="bie_soporte" value="{{ old('bie_soporte') }}" autocomplete="bie_soporte" autofocus>
                         @error('bie_soporte')
@@ -127,7 +127,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="bie_observacion">{{ __('Observación *') }}</label>
+                        <label for="bie_observacion">{{ __('Observación ') }}</label>
                         <textarea class="form-control @error('bie_observacion') is-invalid @enderror" name="bie_observacion" id="bie_observacion" cols="30" rows="10">{{ old('bie_observacion') }}</textarea>
                         @error('bie_observacion')
                             <span class="invalid-feedback" role="alert">

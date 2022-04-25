@@ -56,18 +56,17 @@ class MovilidadController extends Controller
             'movi_evento' => 'required',
             'movi_pais' => 'required',
             'movi_ciudad' => 'required',
-            'movi_observacion' => 'required',
         ];
         $message = [
-            'movi_year.requried' => 'El campo año es requerido',
-            'movi_periodo.requried' => 'El campo periodo es requerido',
-            'tipo_persona_movilidad.requried' => 'El campo tipo persona es requerido',
-            'movi_tipo_movilidad.requried' => 'El campo tipo movilidad es requerido',
-            'movi_evento.requried' => 'El campo evento es requerido',
-            'movi_pais.requried' => 'El campo país es requerido',
-            'movi_ciudad.requried' => 'El campo ciudad es requerido',
-            'movi_observacion.requried' => 'El campo observación es requerido',
+            'movi_year.required' => 'El campo año es requerido',
+            'movi_periodo.required' => 'El campo periodo es requerido',
+            'tipo_persona_movilidad.required' => 'El campo tipo persona es requerido',
+            'movi_tipo_movilidad.required' => 'El campo tipo movilidad es requerido',
+            'movi_evento.required' => 'El campo evento es requerido',
+            'movi_pais.required' => 'El campo país es requerido',
+            'movi_ciudad.required' => 'El campo ciudad es requerido',
         ];
+        
         $this->validate($request,$rules,$message);
         
         $movilidad = new Movilidad();
@@ -100,10 +99,12 @@ class MovilidadController extends Controller
         ->select('persona.id','per_nombre','per_apellido')
         ->where('per_tipo_usuario', 2)
         ->orWhere('per_tipo_usuario',3)
+        ->orWhere('per_tipo_usuario',10)
         ->get();
         $estudiantes = DB::table('persona')
         ->select('persona.id','per_nombre','per_apellido')
         ->where('per_tipo_usuario',6)
+        ->orWhere('per_tipo_usuario',9)
         ->get();
         $administrativos = DB::table('persona')
         ->select('persona.id','per_nombre','per_apellido')
@@ -125,10 +126,12 @@ class MovilidadController extends Controller
         ->select('persona.id','per_nombre','per_apellido')
         ->where('per_tipo_usuario', 2)
         ->orWhere('per_tipo_usuario',3)
+        ->orWhere('per_tipo_usuario',10)
         ->get();
         $estudiantes = DB::table('persona')
         ->select('persona.id','per_nombre','per_apellido')
         ->where('per_tipo_usuario',6)
+        ->orWhere('per_tipo_usuario',9)
         ->get();
         $administrativos = DB::table('persona')
         ->select('persona.id','per_nombre','per_apellido')
@@ -154,18 +157,17 @@ class MovilidadController extends Controller
             'movi_evento' => 'required',
             'movi_pais' => 'required',
             'movi_ciudad' => 'required',
-            'movi_observacion' => 'required',
         ];
         $message = [
-            'movi_year.requried' => 'El campo año es requerido',
-            'movi_periodo.requried' => 'El campo periodo es requerido',
-            'tipo_persona_movilidad.requried' => 'El campo tipo persona es requerido',
-            'movi_tipo_movilidad.requried' => 'El campo tipo movilidad es requerido',
-            'movi_evento.requried' => 'El campo evento es requerido',
-            'movi_pais.requried' => 'El campo país es requerido',
-            'movi_ciudad.requried' => 'El campo ciudad es requerido',
-            'movi_observacion.requried' => 'El campo observación es requerido',
+            'movi_year.required' => 'El campo año es requerido',
+            'movi_periodo.required' => 'El campo periodo es requerido',
+            'tipo_persona_movilidad.required' => 'El campo tipo persona es requerido',
+            'movi_tipo_movilidad.required' => 'El campo tipo movilidad es requerido',
+            'movi_evento.required' => 'El campo evento es requerido',
+            'movi_pais.required' => 'El campo país es requerido',
+            'movi_ciudad.required' => 'El campo ciudad es requerido',
         ];
+        
         $this->validate($request,$rules,$message);
         
         $movilidad = Movilidad::find($id);

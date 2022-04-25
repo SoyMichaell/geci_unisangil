@@ -24,8 +24,8 @@
                                     <option value="Tarjeta de identidad"
                                         {{ $persona->per_tipo_documento == 'Tarjeta de identidad' ? 'selected' : '' }}>
                                         Tarjeta de identidad</option>
-                                    <option value="Cédula de ciudadania"
-                                        {{ $persona->per_tipo_documento == 'Cédula de ciudadania' ? 'selected' : '' }}>
+                                    <option value="Cedula de ciudadania"
+                                        {{ $persona->per_tipo_documento == 'Cedula de ciudadania' ? 'selected' : '' }}>
                                         Cédula de ciudadania</option>
                                     <option value="Cédula de extranjeria"
                                         {{ $persona->per_tipo_documento == 'Cédula de extranjeria' ? 'selected' : '' }}>

@@ -204,8 +204,6 @@ class TrabajoController extends Controller
                         ->first();
         }
 
-        
-
         $trabajo = Trabajo::find($id);
         $modalidades = ModalidadGrado::all();
         $empresas = Empresa::all();
@@ -260,7 +258,6 @@ class TrabajoController extends Controller
             }
             $trabajos->tra_id_director = $request->get('tra_id_director');
             $trabajos->tra_id_codirector = $request->get('tra_id_codirector');
-            $trabajos->tra_id_proceso = 1;
             $trabajos->save();
             Alert::success('Registro Exitoso');
             return redirect('/trabajo');
@@ -284,7 +281,7 @@ class TrabajoController extends Controller
         $trabajos->tra_id_proceso = 2;
         $trabajos->save();
         Alert::success('Registro Exitoso');
-        return redirect('/trabajo');
+        return redirect('trabajo/'.$id.'/edit');
         }
     }
 
@@ -304,11 +301,6 @@ class TrabajoController extends Controller
 
         $this->validate($request, $rules, $message);
 
-        $ValiProceso = DB::table('trabajo_grado')
-            ->where('trabajo_grado.id', $id)
-            ->first();
-
-        if ($ValiProceso->tra_id_proceso == 2) {
             $trabajos = Trabajo::find($id);
             $trabajos->tra_estado_propuesta = $request->get('tra_estado_propuesta');
             $trabajos->tra_estado_proyecto = $request->get('tra_estado_proyecto');
@@ -317,10 +309,6 @@ class TrabajoController extends Controller
 
             Alert::success('Exitoso', 'Se ha registrado la información con exito');
             return redirect('trabajo/' . $id . '/edit');
-        } else {
-            Alert::warning('Advertencia', 'Por favor completar las fases anteriores antes de finalizar la observación');
-            return redirect('trabajo/' . $id . '/edit');
-        }
     }
 
     public function fasejurado(Request $request, $id)
@@ -337,11 +325,6 @@ class TrabajoController extends Controller
 
         $this->validate($request, $rules, $message);
 
-        $ValiProceso = DB::table('trabajo_grado')
-            ->where('trabajo_grado.id', $id)
-            ->first();
-
-        if ($ValiProceso->tra_id_proceso == 3) {
             if ($request->get('tra_id_jurado1') == $request->get('tra_id_jurado2')) {
                 Alert::warning('Advertencia', 'El jurado 1 y Jurado 2 no puede ser el mismo docente');
                 return back()->withInput();
@@ -366,76 +349,55 @@ class TrabajoController extends Controller
 
             Alert::success('Exitoso', 'Se ha registrado la información con exito');
             return redirect('trabajo/' . $id . '/edit');
-        } else {
-            Alert::warning('Advertencia', 'Por favor completar las fases anteriores antes de finalizar la observación');
-            return redirect('trabajo/' . $id . '/edit');
-        }
     }
 
     public function faseacta(Request $request, $id)
     {
         $rules = [
             'tra_acta_sustentacion' => 'required',
-            'tra_acta_sustentacion_soporte' => 'required',
             'tra_acta_grado' => 'required',
-            'tra_acta_grado_soporte' => 'required',
             'tra_fecha_finalizacion' => 'required',
         ];
 
         $message = [
             'tra_acta_sustentacion.required' => 'El campo acta de sustentación es requerido',
-            'tra_acta_sustentacion_soporte.required' => 'El campo soporte acta es requerido',
             'tra_acta_grado.required' => 'El campo acta de grado es requerido',
-            'tra_acta_grado_soporte.required' => 'El campo soporte grado es requerido',
             'tra_fecha_finalizacion.required' => 'El campo fecha finalización es requerido',
         ];
 
         $this->validate($request, $rules, $message);
 
-        $ValiProceso = DB::table('trabajo_grado')
-            ->where('trabajo_grado.id', $id)
-            ->first();
-
-        if ($ValiProceso->tra_id_proceso == 4) {
             $trabajos = Trabajo::find($id);
 
             //Soporte sustentación
             if ($request->file('tra_acta_sustentacion_soporte')) {
                 $file1 = $request->file('tra_acta_sustentacion_soporte');
-                $cont1 = 0;
-                foreach ($file1 as $file) {
-                    $cont1++;
-                    $soporte_acta_sustentacion = $trabajos->tra_codigo_proyecto . '_' . $trabajos->tra_fecha_inicio . '_acta_grado' . $cont1 . '.' . $file->extension();
+                    $soporte_acta_sustentacion = $trabajos->tra_codigo_proyecto . '_' . $trabajos->tra_fecha_inicio . '_acta_sustentacion' .'.' . $file1->extension();
 
-                    $ruta = public_path('datos/acta/' . $soporte_acta_sustentacion);
+                    $ruta = public_path('datos/trabajo/acta/' . $soporte_acta_sustentacion);
 
-                    if ($file->extension() == 'zip' || $file->extension() == 'rar') {
-                        copy($file, $ruta);
+                    if ($file1->extension() == 'zip' || $file1->extension() == 'rar') {
+                        copy($file1, $ruta);
                         $trabajos->tra_acta_sustentacion_soporte = $soporte_acta_sustentacion;
                     } else {
                         Alert::warning('Advertencia', 'Los formatos admitidos son .zip o .rar');
                         return back()->withInput();
                     }
-                }
             }
             //Soporte grado
             if ($request->file('tra_acta_grado_soporte')) {
                 $file2 = $request->file('tra_acta_grado_soporte');
-                $cont2 = 0;
-                foreach ($file2 as $file) {
-                    $cont2++;
-                    $soporte_acta_grado = $trabajos->tra_codigo_proyecto . '_' . $trabajos->tra_fecha_inicio . '_acta_sustentacion' . $cont2 . '.' . $file->extension();
+                    $soporte_acta_grado = $trabajos->tra_codigo_proyecto . '_' . $trabajos->tra_fecha_inicio . '_acta_grado' .'.' . $file2->extension();
 
-                    $ruta = public_path('datos/acta/' . $soporte_acta_sustentacion);
+                    $ruta = public_path('datos/trabajo/acta/' . $soporte_acta_grado);
 
-                    if ($file->extension() == 'zip' || $file->extension() == 'rar') {
-                        copy($file, $ruta);
+                    if ($file2->extension() == 'zip' || $file2->extension() == 'rar') {
+                        copy($file2, $ruta);
                         $trabajos->tra_acta_grado_soporte = $soporte_acta_grado;
                     } else {
                         Alert::warning('Advertencia', 'Los formatos admitidos son .zip o .rar');
                         return back()->withInput();
                     }
-                }
             }
 
             $trabajos->tra_numero_acta_sustentacion = $request->get('tra_acta_sustentacion');
@@ -446,10 +408,6 @@ class TrabajoController extends Controller
 
             Alert::success('Exitoso', 'Se ha registrado la información con exito');
             return redirect('trabajo/' . $id . '/edit');
-        } else {
-            Alert::warning('Advertencia', 'Por favor completar las fases anteriores antes de finalizar la observación');
-            return redirect('trabajo/' . $id . '/edit');
-        }
     }
 
     public function registroobservacion(Request $request, $id)
@@ -458,14 +416,13 @@ class TrabajoController extends Controller
         $message = ['tra_observacion.required' => 'El campo observación es requerido'];
         $this->validate($request, $rules, $message);
 
-        $ValiProceso = DB::table('trabajo_grado')
-            ->where('trabajo_grado.id', $id)
-            ->first();
+        $trabajos = Trabajo::find($id);
+        $trabajos->tra_observacion = $request->get('tra_observacion'); 
+        $trabajos->tra_id_proceso = 6;
+        $trabajos->save();
 
-        if ($ValiProceso->tra_id_proceso != 6) {
-            Alert::warning('Advertencia', 'Por favor completar las fases anteriores antes de finalizar la observación');
-            return redirect('trabajo/' . $id . '/edit');
-        }
+        Alert::success('Exitoso', 'Se ha registrado la información con exito');
+        return redirect('/trabajo');
     }
 
     public function destroy($id)

@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exsered_year">Año</label>
+                        <label for="exsered_year">Año *</label>
                         <input class="form-control @error('exsered_year') is-invalid @enderror" name="exsered_year"
                             id="exsered_year" value="{{ old('exsered_year') }}" type="number"
                             autocomplete="exsered_year" autofocus>
@@ -30,7 +30,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exsered_periodo">Periodo</label>
+                        <label for="exsered_periodo">Periodo *</label>
                         <input class="form-control @error('exsered_periodo') is-invalid @enderror" name="exsered_periodo"
                             id="exsered_periodo" value="{{ old('exsered_periodo') }}" type="text"
                             autocomplete="exsered_periodo" autofocus>
@@ -43,7 +43,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="exsered_ies">IES</label>
+                        <label for="exsered_ies">IES *</label>
                         <input class="form-control @error('exsered_ies') is-invalid @enderror" name="exsered_ies"
                             id="exsered_ies" value="{{ old('exsered_ies') }}" type="text" autocomplete="exsered_ies"
                             autofocus>
@@ -54,8 +54,8 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="exsered_caracter">Cáracter</label>
-                        <select class="form-control" name="exsered_caracter" id="exsered_caracter">
+                        <label for="exsered_caracter">Cáracter *</label>
+                        <select class="form-control @error('exsered_caracter') is-invalid @enderror" name="exsered_caracter" id="exsered_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional">Nacional</option>
                             <option value="internacional">Internacional</option>
@@ -67,7 +67,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="exsered_fecha">Fecha</label>
+                        <label for="exsered_fecha">Fecha *</label>
                         <input class="form-control @error('exsered_fecha') is-invalid @enderror" name="exsered_fecha"
                             id="exsered_fecha" value="{{ old('exsered_fecha') }}" type="date"
                             autocomplete="exsered_fecha" autofocus>
@@ -80,7 +80,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="exsered_logros">Logro (s)</label>
+                        <label for="exsered_logros">Logro (s) (Opcional)</label>
                         <textarea class="form-control" name="exsered_logros" id="exsered_logros" cols="30"
                             rows="10"></textarea>
                         @error('exsered_logros')
@@ -90,7 +90,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="exsered_resultados">Resultado (s)</label>
+                        <label for="exsered_resultados">Resultado (s) (Opcional)</label>
                         <textarea class="form-control" name="exsered_resultados" id="exsered_resultados" cols="30"
                             rows="10"></textarea>
                         @error('exsered_resultados')
@@ -100,7 +100,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="exsered_productos">Producto (s)</label>
+                        <label for="exsered_productos">Producto (s) (Opcional)</label>
                         <textarea class="form-control" name="exsered_productos" id="exsered_productos" cols="30"
                             rows="10"></textarea>
                         @error('exsered_productos')
@@ -112,7 +112,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="exsered_funcion">Función</label>
+                        <label for="exsered_funcion">Función (Opcional)</label>
                         <select class="form-control" name="exsered_funcion" id="exsered_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion">Formación</option>

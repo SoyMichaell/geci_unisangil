@@ -139,7 +139,7 @@
                             <label for="prsaprmo_nivel_desempeno">Nivel desempeño</label>
                             <input class="form-control @error('prsaprmo_nivel_desempeno') is-invalid @enderror"
                                 name="prsaprmo_nivel_desempeno[]" id="prsaprmo_nivel_desempeno"
-                                value="{{ $saberx->prsaprmo_nivel_desempeno }}" type="number"
+                                value="{{ $saberx->prsaprmo_nivel_desempeno }}" type="text"
                                 autocomplete="prsaprmo_nivel_desempeno" autofocus>
                             @error('prsaprmo_nivel_desempeno')
                                 <span class="invalid-feedback" role="alert">

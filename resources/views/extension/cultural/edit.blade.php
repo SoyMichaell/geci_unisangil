@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_year">Año</label>
+                        <label for="extcul_year">Año *</label>
                         <input class="form-control @error('extcul_year') is-invalid @enderror" name="extcul_year"
                             id="extcul_year" value="{{$actividad->extcul_year}}" type="number" autocomplete="extcul_year"
                             autofocus>
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_semestre">Semestre</label>
+                        <label for="extcul_semestre">Semestre *</label>
                         <input class="form-control @error('extcul_semestre') is-invalid @enderror" name="extcul_semestre"
                             id="extcul_semestre" value="{{$actividad->extcul_semestre}}" type="number"
                             autocomplete="extcul_semestre" autofocus>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_codigo_unidad_org">Código unidad organizacional</label>
+                        <label for="extcul_codigo_unidad_org">Código unidad organizacional *</label>
                         <input class="form-control @error('extcul_codigo_unidad_org') is-invalid @enderror"
                             name="extcul_codigo_unidad_org" id="extcul_codigo_unidad_org"
                             value="{{$actividad->extcul_codigo_unidad_org}}" type="text"
@@ -56,7 +56,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_codigo_actividad">Código actividad</label>
+                        <label for="extcul_codigo_actividad">Código actividad *</label>
                         <input class="form-control @error('extcul_codigo_actividad') is-invalid @enderror"
                             name="extcul_codigo_actividad" id="extcul_codigo_actividad"
                             value="{{$actividad->extcul_codigo_actividad}}" type="text"
@@ -70,7 +70,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_descripcion_actividad">Descripción actividad</label>
+                        <label for="extcul_descripcion_actividad">Descripción actividad *</label>
                         <textarea class="form-control" name="extcul_descripcion_actividad"
                             id="extcul_descripcion_actividad" cols="30" rows="10">{{$actividad->extcul_descripcion_actividad}}</textarea>
                         @error('extcul_descripcion_actividad')
@@ -80,7 +80,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_tipo_actividad">Tipo de actividad</label>
+                        <label for="extcul_tipo_actividad">Tipo de actividad *</label>
                         <select class="form-control" name="extcul_tipo_actividad" id="extcul_tipo_actividad">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1" {{$actividad->extcul_tipo_actividad == '1' ? 'selected' : ''}}>1. Medio de comunicación</option>
@@ -98,7 +98,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcul_fecha_inicio">Fecha de inicio</label>
+                        <label for="extcul_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('extcul_fecha_inicio') is-invalid @enderror"
                             name="extcul_fecha_inicio" id="extcul_fecha_inicio"
                             value="{{$actividad->extcul_fecha_inicio}}" type="date" autocomplete="extcul_fecha_inicio"
@@ -110,7 +110,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcul_fecha_fin">Fecha fin</label>
+                        <label for="extcul_fecha_fin">Fecha fin *</label>
                         <input class="form-control @error('extcul_fecha_fin') is-invalid @enderror"
                             name="extcul_fecha_fin" id="extcul_fecha_fin" value="{{$actividad->extcul_fecha_fin}}"
                             type="date" autocomplete="extcul_fecha_fin" autofocus>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">
-                        <label for="extcul_fuente_nacional">Fuente nacional</label>
+                        <label for="extcul_fuente_nacional">Fuente nacional *</label>
                         <select class="form-control" name="extcul_fuente_nacional" id="extcul_fuente_nacional">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($fuentenacionales as $nacionales)

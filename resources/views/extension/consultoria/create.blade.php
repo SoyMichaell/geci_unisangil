@@ -69,11 +69,11 @@
                 <div class="row mb-3">
                     <div class="col-md-6">
                         <label for="extcon_id_cine_campo">ID CINE Detallado </label>
-                        <select class="form-control @error('extcon_id_cine_campo') is-invalid @enderror"
+                        <select class="form-control js-example-placeholder-single @error('extcon_id_cine_campo') is-invalid @enderror"
                             name="extcon_id_cine_campo" id="extcon_id_cine_campo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cinedetallados as $cinedetallado)
-                                <option value="{{ $cinedetallado->id }}">{{ $cinedetallado->cocide_nombre }}</option>
+                                <option value="{{ $cinedetallado->id }}">{{ $cinedetallado->id.'. '.$cinedetallado->cocide_nombre }}</option>
                             @endforeach
                         </select>
                         @error('extcon_id_cine_campo')

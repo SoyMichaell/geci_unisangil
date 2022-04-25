@@ -19,8 +19,8 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="dop_id_docente">Docente</label>
-                        <select class="form-control" name="dop_id_docente" id="dop_id_docente">
+                        <label for="dop_id_docente">Docente *</label>
+                        <select class="form-control js-example-placeholder-single @error('dop_id_docente') is-invalid @enderror" name="dop_id_docente" id="dop_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($docentes as $docente)
                                 <option value="{{ $docente->id }}">
@@ -34,7 +34,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_fecha_expedicion">Fecha expedición</label>
+                        <label for="dop_fecha_expedicion">Fecha expedición  *</label>
                         <input class="form-control @error('dop_fecha_expedicion') is-invalid @enderror"
                             name="dop_fecha_expedicion" id="dop_fecha_expedicion"
                             value="{{ old('dop_fecha_expedicion') }}" type="date" autocomplete="dop_fecha_expedicion"
@@ -48,21 +48,21 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="dop_sexo_biologico">Sexo biologico</label>
-                        <select class="form-control" name="dop_sexo_biologico" id="dop_sexo_biologico">
+                        <label for="dop_sexo_biologico">Sexo biologico *</label>
+                        <select class="form-control @error('dop_sexo_biologico') is-invalid @enderror" name="dop_sexo_biologico" id="dop_sexo_biologico">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1">Masculino</option>
                             <option value="2">Femenino</option>
                         </select>
-                        @error('extedu_numero_horas')
+                        @error('dop_sexo_biologico')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_estado_civil">Estado civil</label>
-                        <select class="form-control" name="dop_estado_civil" id="dop_estado_civil">
+                        <label for="dop_estado_civil">Estado civil *</label>
+                        <select class="form-control @error('dop_estado_civil') is-invalid @enderror" name="dop_estado_civil" id="dop_estado_civil">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="1">Soltero (a)</option>
                             <option value="2">Casado (a)</option>
@@ -83,7 +83,7 @@
                     <div class="col-md-6">
                         <label for="dop_id_pais">ID País (El código 170 es para colombia, si desea otro país consultar lista de paises según ISO 3166-1</label>
                         <input class="form-control @error('dop_id_pais') is-invalid @enderror"
-                            name="dop_id_pais" id="dop_id_pais" value="{{ old('dop_id_pais') }}"
+                            name="dop_id_pais" id="dop_id_pais" value="170"
                             type="number" autocomplete="dop_id_pais" autofocus>
                         @error('dop_id_pais')
                             <span class="invalid-feedback" role="alert">
@@ -92,7 +92,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_id_municipio">ID Municipio</label>
+                        <label for="dop_id_municipio">ID Municipio(Consultar código)</label>
                         <input class="form-control @error('dop_id_municipio') is-invalid @enderror"
                             name="dop_id_municipio" id="dop_id_municipio" value="{{ old('dop_id_municipio') }}"
                             type="number" autocomplete="dop_id_municipio" autofocus>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="dop_correo_personal">Correo personal</label>
+                        <label for="dop_correo_personal">Correo personal (Opcional)</label>
                         <input class="form-control @error('dop_correo_personal') is-invalid @enderror"
                             name="dop_correo_personal" id="dop_correo_personal" value="{{ old('dop_correo_personal') }}"
                             type="email" autocomplete="dop_correo_personal" autofocus>
@@ -116,7 +116,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="dop_direccion">Dirección</label>
+                        <label for="dop_direccion">Dirección (Opcional)</label>
                         <input class="form-control @error('dop_direccion') is-invalid @enderror"
                             name="dop_direccion" id="dop_direccion" value="{{ old('dop_direccion') }}"
                             type="text" autocomplete="dop_direccion" autofocus>

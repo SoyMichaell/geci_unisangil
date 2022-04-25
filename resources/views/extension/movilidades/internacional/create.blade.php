@@ -19,7 +19,7 @@
                 @csrf
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmointer_tipo">Tipo</label>
+                        <label for="exmointer_tipo">Tipo *</label>
                         <select class="form-control @error('exmointer_tipo') is-invalid @enderror" name="exmointer_tipo"
                             id="exmointer_tipo">
                             <option value="">---- SELECCIONE ----</option>
@@ -33,7 +33,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmointer_rol">Rol</label>
+                        <label for="exmointer_rol">Rol *</label>
                         <select class="form-control @error('exmointer_rol') is-invalid @enderror" name="exmointer_rol"
                             id="exmointer_rol">
                             <option value="">---- SELECCIONE ----</option>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmointer_id_sede_or">Sede origen</label>
+                        <label for="exmointer_id_sede_or">Sede origen *</label>
                         <select class="form-control @error('exmointer_id_sede_or') is-invalid @enderror"
                             name="exmointer_id_sede_or" id="exmointer_id_sede_or">
                             <option value="">---- SELECCIONE ----</option>
@@ -65,7 +65,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmointer_id_facultad_or">Facultad origen</label>
+                        <label for="exmointer_id_facultad_or">Facultad origen *</label>
                         <select class="form-control @error('exmointer_id_facultad_or') is-invalid @enderror"
                             name="exmointer_id_facultad_or" id="exmointer_id_facultad_or">
                             <option value="">---- SELECCIONE ----</option>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmointer_id_programa_or">Programa origen</label>
+                        <label for="exmointer_id_programa_or">Programa origen *</label>
                         <select class="form-control @error('exmointer_id_programa_or') is-invalid @enderror"
                             name="exmointer_id_programa_or" id="exmointer_id_programa_or">
                             <option value="">---- SELECCIONE ----</option>
@@ -134,7 +134,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmointer_pais_des">País destino</label>
+                        <label for="exmointer_pais_des">País destino *</label>
                         <input class="form-control @error('exmointer_pais_des') is-invalid @enderror"
                             name="exmointer_pais_des" id="exmointer_pais_des" value="{{ old('exmointer_pais_des') }}"
                             type="text" autocomplete="exmointer_pais_des" autofocus>
@@ -145,7 +145,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmointer_ciudad_des">Ciudad destino</label>
+                        <label for="exmointer_ciudad_des">Ciudad destino *</label>
                         <input class="form-control @error('exmointer_ciudad_des') is-invalid @enderror"
                             name="exmointer_ciudad_des" id="exmointer_ciudad_des"
                             value="{{ old('exmointer_ciudad_des') }}" type="text" autocomplete="exmointer_ciudad_des"
@@ -161,7 +161,7 @@
                     <div class="col-md-6">
                         <label for="exmointer_institucion_nombre">Institución educativa (fuera de Colombia) de donde
                             proviene la movilidad a UNISANGIL o hacia donde se dirige el miembro de la comunidad
-                            académica de UNISANGIL. Por favor escriba el nombre completo, sin siglas.</label>
+                            académica de UNISANGIL. Por favor escriba el nombre completo, sin siglas. *</label>
                         <input class="form-control @error('exmointer_institucion_nombre') is-invalid @enderror"
                             name="exmointer_institucion_nombre" id="exmointer_institucion_nombre"
                             value="{{ old('exmointer_institucion_nombre') }}" type="text"
@@ -328,7 +328,7 @@
                 <div class="row mb-3">
                     <div class="col-md-12">
                         <label for="exmointer_descripcion">Descripción de la movilidad. Amplíe la información. Si se trata
-                            de un evento académico por favor indique el nombre completo del evento, sin siglas.</label>
+                            de un evento académico por favor indique el nombre completo del evento, sin siglas. *</label>
                         <textarea class="form-control @error('exmointer_descripcion') is-invalid @enderror" name="exmointer_descripcion"
                             id="exmointer_descripcion" cols="30" rows="10"></textarea>
                         @error('exmointer_descripcion')
@@ -340,7 +340,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exmointer_fecha_inicio">Fecha de inicio</label>
+                        <label for="exmointer_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('exmointer_fecha_inicio') is-invalid @enderror"
                             name="exmointer_fecha_inicio" id="exmointer_fecha_inicio"
                             value="{{ old('exmointer_fecha_inicio') }}" type="date" autocomplete="exmointer_fecha_inicio"
@@ -352,7 +352,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exmointer_fecha_final">Fecha final</label>
+                        <label for="exmointer_fecha_final">Fecha final *</label>
                         <input class="form-control @error('exmointer_fecha_final') is-invalid @enderror"
                             name="exmointer_fecha_final" id="exmointer_fecha_final" value="{{ old('exmointer_fecha_final') }}"
                             type="date" autocomplete="exmointer_fecha_final" autofocus>

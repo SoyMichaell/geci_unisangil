@@ -464,7 +464,7 @@
                         name="extprex_soporte" id="extprex_soporte"
                         value="{{ old('extprex_soporte') }}" type="file"
                         autocomplete="extprex_soporte" autofocus disabled>
-                    <p><small>Soporte: {{$proyectoextension->extprex_soporte}}</small></p>
+                    <p><small>Soporte: <a href="{{asset('datos/extension-internacionalizacion/proyecto/'.$proyectoextension->extprex_soporte)}}">{{$proyectoextension->extprex_soporte}}</a></small></p>
                     @error('extprex_soporte')
                         <span extprex_semestre="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

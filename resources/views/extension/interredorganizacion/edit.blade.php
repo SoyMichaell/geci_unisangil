@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_year">Año</label>
+                        <label for="exseor_year">Año *</label>
                         <input class="form-control @error('exseor_year') is-invalid @enderror" name="exseor_year"
                             id="exseor_year" value="{{$interredorganizacion->exseor_year}}" type="number"
                             autocomplete="exsered_year" autofocus>
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_periodo">Periodo</label>
+                        <label for="exseor_periodo">Periodo *</label>
                         <input class="form-control @error('exseor_periodo') is-invalid @enderror" name="exseor_periodo"
                             id="exseor_periodo" value="{{$interredorganizacion->exseor_periodo}}" type="text"
                             autocomplete="exseor_periodo" autofocus>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_tipo">Tipo</label>
+                        <label for="exseor_tipo">Tipo *</label>
                         <select class="form-control" name="exseor_tipo" id="exseor_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="red" {{$interredorganizacion->exseor_tipo == 'red' ? 'selected': ''}}>Red</option>
@@ -58,7 +58,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_nombre">Nombre</label>
+                        <label for="exseor_nombre">Nombre *</label>
                         <input class="form-control @error('exseor_nombre') is-invalid @enderror" name="exseor_nombre"
                             id="exseor_nombre" value="{{$interredorganizacion->exseor_nombre}}" type="text" autocomplete="exseor_nombre"
                             autofocus>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_caracter">Cáracter</label>
+                        <label for="exseor_caracter">Cáracter *</label>
                         <select class="form-control" name="exseor_caracter" id="exseor_caracter">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional" {{$interredorganizacion->exseor_caracter == 'nacional' ? 'selected': ''}}>Nacional</option>
@@ -84,7 +84,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_fecha">Fecha</label>
+                        <label for="exseor_fecha">Fecha *</label>
                         <input class="form-control @error('exseor_fecha') is-invalid @enderror" name="exseor_fecha"
                             id="exseor_fecha" value="{{$interredorganizacion->exseor_fecha}}" type="date"
                             autocomplete="exseor_fecha" autofocus>
@@ -97,7 +97,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_actividades">Actividad (s)</label>
+                        <label for="exseor_actividades">Actividad (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_actividades" id="exseor_actividades" cols="30"
                             rows="10">{{$interredorganizacion->exseor_actividades}}</textarea>
                         @error('exseor_actividades')
@@ -107,7 +107,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_logros">Logro (s)</label>
+                        <label for="exseor_logros">Logro (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_logros" id="exseor_logros" cols="30"
                             rows="10">{{$interredorganizacion->exseor_logros}}</textarea>
                         @error('exseor_logros')
@@ -119,7 +119,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exseor_resultados">Resultado (s)</label>
+                        <label for="exseor_resultados">Resultado (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_resultados" id="exseor_resultados" cols="30"
                             rows="10">{{$interredorganizacion->exseor_resultados}}</textarea>
                         @error('exseor_resultados')
@@ -129,7 +129,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exseor_productos">Producto (s)</label>
+                        <label for="exseor_productos">Producto (s) (Opcional)</label>
                         <textarea class="form-control" name="exseor_productos" id="exseor_productos" cols="30"
                             rows="10">{{$interredorganizacion->exseor_productos}}</textarea>
                         @error('exseor_productos')
@@ -141,7 +141,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="exseor_funcion">Función</label>
+                        <label for="exseor_funcion">Función (Opcional)</label>
                         <select class="form-control" name="exseor_funcion" id="exseor_funcion">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="formacion" {{$interredorganizacion->exseor_funcion == 'formacion' ? 'selected': ''}}>Formación</option>

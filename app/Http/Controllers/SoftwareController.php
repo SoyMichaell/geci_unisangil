@@ -44,8 +44,6 @@ class SoftwareController extends Controller
             'sof_cantidad' => 'required',
             'sof_id_programa' => 'required|not_in:0',
             'sof_valor_unitario' => 'required',
-            'sof_fecha_actualizar' => 'required',
-            'sof_fecha_instalacion' => 'required',
         ];
         $message = [
             'sof_tipo.required' => 'El campo tipo de software es requerido',
@@ -59,8 +57,6 @@ class SoftwareController extends Controller
             'sof_cantidad.required' => 'El campo cantidad licencia es requerido',
             'sof_id_programa.required' => 'El campo programa es requerido',
             'sof_valor_unitario.required' => 'El campo valor unitario es requerido',
-            'sof_fecha_actualizar.required' => 'El campo fecha ultima actualización es requerido',
-            'sof_fecha_instalacion.required' => 'El campo fecha instalación es requerido',
         ];
         $this->validate($request,$rules,$message);
 
@@ -122,8 +118,6 @@ class SoftwareController extends Controller
             'sof_cantidad' => 'required',
             'sof_id_programa' => 'required|not_in:0',
             'sof_valor_unitario' => 'required',
-            'sof_fecha_actualizar' => 'required',
-            'sof_fecha_instalacion' => 'required',
         ];
         $message = [
             'sof_tipo.required' => 'El campo tipo de software es requerido',
@@ -137,8 +131,6 @@ class SoftwareController extends Controller
             'sof_cantidad.required' => 'El campo cantidad licencia es requerido',
             'sof_id_programa.required' => 'El campo programa es requerido',
             'sof_valor_unitario.required' => 'El campo valor unitario es requerido',
-            'sof_fecha_actualizar.required' => 'El campo fecha ultima actualización es requerido',
-            'sof_fecha_instalacion.required' => 'El campo fecha instalación es requerido',
         ];
         $this->validate($request,$rules,$message);
 

@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exevin_tipo">Alcance</label>
+                        <label for="exevin_tipo">Alcance *</label>
                         <select class="form-control @error('exevin_tipo') is-invalid @enderror" name="exevin_tipo" id="exevin_tipo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="nacional" {{$internacional->exevin_tipo == 'nacional' ? 'selected' : ''}}>Nacional</option>
@@ -33,7 +33,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exevin_year">Año</label>
+                        <label for="exevin_year">Año *</label>
                         <input class="form-control @error('exevin_year') is-invalid @enderror"
                             name="exevin_year" id="exevin_year"
                             value="{{$internacional->exevin_year}}" type="number" autocomplete="exevin_year"
@@ -47,7 +47,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exevin_periodo">Periodo</label>
+                        <label for="exevin_periodo">Periodo *</label>
                         <input class="form-control @error('exevin_periodo') is-invalid @enderror"
                             name="exevin_periodo" id="exevin_periodo"
                             value="{{$internacional->exevin_periodo}}" type="text" autocomplete="exevin_periodo"
@@ -59,7 +59,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exevin_nombre_evento">Nombre del evento</label>
+                        <label for="exevin_nombre_evento">Nombre del evento*</label>
                         <input class="form-control @error('exevin_nombre_evento') is-invalid @enderror"
                             name="exevin_nombre_evento" id="exevin_nombre_evento" value="{{$internacional->exevin_nombre_evento}}"
                             type="text" autocomplete="exevin_nombre_evento" autofocus>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exevin_fecha_inicio">Fecha inicio</label>
+                        <label for="exevin_fecha_inicio">Fecha inicio *</label>
                         <input class="form-control @error('exevin_fecha_inicio') is-invalid @enderror"
                             name="exevin_fecha_inicio" id="exevin_fecha_inicio"
                             value="{{$internacional->exevin_fecha_inicio}}" type="date"
@@ -84,7 +84,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exevin_fecha_final">Fecha fin</label>
+                        <label for="exevin_fecha_final">Fecha fin *</label>
                         <input class="form-control @error('exevin_fecha_final') is-invalid @enderror"
                             name="exevin_fecha_final" id="exevin_fecha_final"
                             value="{{$internacional->exevin_fecha_final}}" type="date"
@@ -98,7 +98,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="exevin_lugar">Lugar</label>
+                        <label for="exevin_lugar">Lugar *</label>
                         <input class="form-control @error('exevin_lugar') is-invalid @enderror"
                             name="exevin_lugar" id="exevin_lugar"
                             value="{{$internacional->exevin_lugar}}" type="text"
@@ -110,7 +110,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="exevin_sede">Sede</label>
+                        <label for="exevin_sede">Sede *</label>
                         <input class="form-control @error('exevin_sede') is-invalid @enderror"
                             name="exevin_sede" id="exevin_sede"
                             value="{{$internacional->exevin_sede}}" type="text"

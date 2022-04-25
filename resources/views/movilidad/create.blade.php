@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-md-6" id="administrativo">
                         <label for="">Nombre completo</label>
-                        <select class="form-control" name="prac_id_administrativo" id="prac_id_administrativo">
+                        <select class="form-control js-example-placeholder-single" name="prac_id_administrativo" id="prac_id_administrativo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($administrativos as $administrativo)
                                 <option value="{{ $administrativo->id }}">
@@ -68,7 +68,7 @@
                     </div>
                     <div class="col-md-6" id="docente">
                         <label for="">Nombre completo</label>
-                        <select class="form-control" name="prac_id_docente" id="prac_id_docente">
+                        <select class="form-control js-example-placeholder-single" name="prac_id_docente" id="prac_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}">
@@ -78,7 +78,7 @@
                     </div>
                     <div class="col-md-6" id="estudiante">
                         <label for="">Nombre completo</label>
-                        <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante">
+                        <select class="form-control js-example-placeholder-single" name="prac_id_estudiante" id="prac_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}">
@@ -137,7 +137,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="movi_observacion">Observaciones *</label>
+                        <label for="movi_observacion">Observaciones (Opcional)</label>
                         <input class="form-control @error('movi_observacion') is-invalid @enderror" name="movi_observacion"
                             id="movi_observacion" value="{{ old('movi_observacion') }}" type="text"
                             autocomplete="movi_observacion" autofocus>

@@ -78,8 +78,6 @@ class ExtensionController extends Controller
             'extcul_fecha_inicio' => 'required',
             'extcul_fecha_fin' => 'required',
             'extcul_fuente_nacional' => 'required|not_in:0',
-            'extcul_valor_financiacion_nac' => 'required',
-            'extcul_nombre_institucion' => 'required',
         ];
         $message = [
             'extcul_year.required' => 'El campo año es requerido',
@@ -91,8 +89,6 @@ class ExtensionController extends Controller
             'extcul_fecha_inicio.required' => 'El campo fecha inicio es requerido',
             'extcul_fecha_fin.required' => 'El campo fecha fin es requerido',
             'extcul_fuente_nacional.required' => 'El campo fuente nacional es requerido',
-            'extcul_valor_financiacion_nac.required' => 'El campo valor financiación nacional es requerido',
-            'extcul_nombre_institucion.required' => 'El campo nombre institución es requerido',
         ];
 
         $this->validate($request, $rules, $message);
@@ -151,8 +147,6 @@ class ExtensionController extends Controller
             'extcul_fecha_inicio' => 'required',
             'extcul_fecha_fin' => 'required',
             'extcul_fuente_nacional' => 'required|not_in:0',
-            'extcul_valor_financiacion_nac' => 'required',
-            'extcul_nombre_institucion' => 'required',
         ];
         $message = [
             'extcul_year.required' => 'El campo año es requerido',
@@ -164,8 +158,6 @@ class ExtensionController extends Controller
             'extcul_fecha_inicio.required' => 'El campo fecha inicio es requerido',
             'extcul_fecha_fin.required' => 'El campo fecha fin es requerido',
             'extcul_fuente_nacional.required' => 'El campo fuente nacional es requerido',
-            'extcul_valor_financiacion_nac.required' => 'El campo valor financiación nacional es requerido',
-            'extcul_nombre_institucion.required' => 'El campo nombre institución es requerido',
         ];
 
         $this->validate($request, $rules, $message);
@@ -261,7 +253,6 @@ class ExtensionController extends Controller
             'extcon_descripcion' => 'required',
             'extcon_id_cine_campo' => 'required|not_in:0',
             'ext_sector_consultoria' => 'required',
-            'extcon_valor' => 'required',
             'extcon_fecha_inicio' => 'required',
             'extcon_fecha_fin' => 'required'
         ];
@@ -272,7 +263,6 @@ class ExtensionController extends Controller
             'extcon_descripcion.required' => 'El campo descripción es requerido',
             'extcon_id_cine_campo.required' => 'El campo CINE Detallado es requerido',
             'ext_sector_consultoria.required' => 'El campo sector consultoria es requerido',
-            'extcon_valor.required' => 'El campo valor consultoria es requerido',
             'extcon_fecha_inicio.required' => 'El campo fecha de inicio es requerido',
             'extcon_fecha_fin.required' => 'El campo fecha fin es requerido',
         ];
@@ -358,7 +348,6 @@ class ExtensionController extends Controller
             'extcon_descripcion' => 'required',
             'extcon_id_cine_campo' => 'required|not_in:0',
             'ext_sector_consultoria' => 'required',
-            'extcon_valor' => 'required',
             'extcon_fecha_inicio' => 'required',
         ];
         $message = [
@@ -368,7 +357,6 @@ class ExtensionController extends Controller
             'extcon_descripcion.required' => 'El campo descripción es requerido',
             'extcon_id_cine_campo.required' => 'El campo CINE Detallado es requerido',
             'ext_sector_consultoria.required' => 'El campo sector consultoria es requerido',
-            'extcon_valor.required' => 'El campo valor consultoria es requerido',
             'extcon_fecha_inicio.required' => 'El campo fecha de inicio es requerido',
         ];
         $this->validate($request, $rules, $message);
@@ -461,8 +449,8 @@ class ExtensionController extends Controller
             $file = $request->file('extcurso_url_soporte');
             $name_curso = $request->get('extcurso_year') . '_' . $request->get('extcurso_nombre') . '_' . $request->get('extcurso_fecha') . '.' . $file->extension();
 
-            $ruta = public_path('datos/curso/' . $name_curso);
-
+            $ruta = public_path('datos/extension-internacionalizacion/curso/' . $name_curso);
+            
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
             } else {
@@ -557,7 +545,7 @@ class ExtensionController extends Controller
             $titulo_curso = str_replace(' ', '-', $request->get('extcurso_nombre'));
             $name_curso = $request->get('extcurso_year') . '_' . $titulo_curso . '_' . $request->get('extcurso_fecha') . '.' . $file->extension();
 
-            $ruta = public_path('datos/curso/' . $name_curso);
+            $ruta = public_path('datos/extension-internacionalizacion/curso/' . $name_curso);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -611,8 +599,8 @@ class ExtensionController extends Controller
     {
         $docentes = DB::table('persona')
             ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
+            ->orWhere('per_tipo_usuario', 3)
+            ->orWhere('per_tipo_usuario', 10)
             ->get();
         return view('extension/educacion.create')
             ->with('docentes', $docentes);
@@ -631,22 +619,23 @@ class ExtensionController extends Controller
             'extedu_cantidad' => 'required',
         ];
         $message = [
-            'extedu_semestre' => 'El campo semestre es requerido',
-            'extedu_codigo_curso' => 'El campo código curso es requerido',
-            'extedu_numero_horas' => 'El campo número de horas es requerido',
-            'extedu_tipo_curso' => 'El campo tipo curso es requerido',
-            'extedu_valor_curso' => 'El campo valor curso es requerido',
-            'extedu_id_docente' => 'El campo docente es requerido',
-            'extedu_tipo_extension' => 'El campo tipo extensión es requerido',
-            'extedu_cantidad' => 'El campo cantidad beneficiados es requerido',
+            'extedu_semestre.required' => 'El campo semestre es requerido',
+            'extedu_codigo_curso.required' => 'El campo código curso es requerido',
+            'extedu_numero_horas.required' => 'El campo número de horas es requerido',
+            'extedu_tipo_curso.required' => 'El campo tipo curso es requerido',
+            'extedu_valor_curso.required' => 'El campo valor curso es requerido',
+            'extedu_id_docente.required' => 'El campo docente es requerido',
+            'extedu_tipo_extension.required' => 'El campo tipo extensión es requerido',
+            'extedu_cantidad.required' => 'El campo cantidad beneficiados es requerido'
         ];
+        
         $this->validate($request, $rules, $message);
 
         if ($request->file('extedu_url_soporte')) {
             $file = $request->file('extedu_url_soporte');
             $name_educacion = $request->get('extedu_codigo_curso') . '_' . $request->get('extedu_tipo_curso') . '.' . $file->extension();
 
-            $ruta = public_path('datos/educacion/' . $name_educacion);
+            $ruta = public_path('datos/extension-internacionalizacion/educacion/' . $name_educacion);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -654,6 +643,8 @@ class ExtensionController extends Controller
                 Alert::warning('Los formatos admitidos son .zip y .rar');
                 return back()->withInput();
             }
+        }else{
+            $name_educacion = "null";
         }
 
         $educacion = new ExtEducacionContinua();
@@ -675,10 +666,10 @@ class ExtensionController extends Controller
     public function vereducacion($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
+        ->get();
         $educacion = ExtEducacionContinua::find($id);
         return view('extension/educacion.show')
             ->with('docentes', $docentes)
@@ -688,10 +679,10 @@ class ExtensionController extends Controller
     public function editareducacion($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
+        ->get();
         $educacion = ExtEducacionContinua::find($id);
         return view('extension/educacion.edit')
             ->with('docentes', $docentes)
@@ -712,15 +703,16 @@ class ExtensionController extends Controller
             'extedu_cantidad' => 'required',
         ];
         $message = [
-            'extedu_semestre' => 'El campo semestre es requerido',
-            'extedu_codigo_curso' => 'El campo código curso es requerido',
-            'extedu_numero_horas' => 'El campo número de horas es requerido',
-            'extedu_tipo_curso' => 'El campo tipo curso es requerido',
-            'extedu_valor_curso' => 'El campo valor curso es requerido',
-            'extedu_id_docente' => 'El campo docente es requerido',
-            'extedu_tipo_extension' => 'El campo tipo extensión es requerido',
-            'extedu_cantidad' => 'El campo cantidad beneficiados es requerido',
+            'extedu_semestre.required' => 'El campo semestre es requerido',
+            'extedu_codigo_curso.required' => 'El campo código curso es requerido',
+            'extedu_numero_horas.required' => 'El campo número de horas es requerido',
+            'extedu_tipo_curso.required' => 'El campo tipo curso es requerido',
+            'extedu_valor_curso.required' => 'El campo valor curso es requerido',
+            'extedu_id_docente.required' => 'El campo docente es requerido',
+            'extedu_tipo_extension.required' => 'El campo tipo extensión es requerido',
+            'extedu_cantidad.required' => 'El campo cantidad beneficiados es requerido',
         ];
+        
         $this->validate($request, $rules, $message);
 
         $educacionx = DB::table('ext_educacion_continua')
@@ -731,7 +723,7 @@ class ExtensionController extends Controller
             $file = $request->file('extedu_url_soporte');
             $name_educacion = $request->get('extedu_codigo_curso') . '_' . $request->get('extedu_tipo_curso') . '.' . $file->extension();
 
-            $ruta = public_path('datos/educacion/' . $name_educacion);
+            $ruta = public_path('datos/extension-internacionalizacion/educacion/' . $name_educacion);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -776,10 +768,10 @@ class ExtensionController extends Controller
     {
         $participantes = ExtParticipante::all();
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
+        ->get();
         return view('extension/participante.index')
             ->with('participantes', $participantes)
             ->with('docentes', $docentes);
@@ -788,10 +780,10 @@ class ExtensionController extends Controller
     public function crearparticipante()
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
+        ->get();
         return view('extension/participante.create')
             ->with('docentes', $docentes);
     }
@@ -805,8 +797,6 @@ class ExtensionController extends Controller
             'dop_estado_civil' => 'required',
             'dop_id_pais' => 'required',
             'dop_id_municipio' => 'required',
-            'dop_correo_personal' => 'required',
-            'dop_direccion' => 'required',
         ];
         $message = [
             'dop_id_docente.required' => 'El campo docente es requerido',
@@ -815,8 +805,6 @@ class ExtensionController extends Controller
             'dop_estado_civil.required' => 'El campo estado civil es requerido',
             'dop_id_pais.required' => 'El campo país es requerido',
             'dop_id_municipio.required' => 'El campo municipio es requerido',
-            'dop_correo_personal.required' => 'El campo correo personal es requerido',
-            'dop_direccion.required' => 'El campo dirección es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -839,10 +827,10 @@ class ExtensionController extends Controller
     public function editarparticipante($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
+        ->get();
         $participante = ExtParticipante::find($id);
         return view('extension/participante.edit')
             ->with('docentes', $docentes)
@@ -852,10 +840,10 @@ class ExtensionController extends Controller
     public function verparticipante($id)
     {
         $docentes = DB::table('persona')
-            ->where('per_tipo_usuario', 2)
-            ->orWhere('per_tipo_usuario', 4)
-            ->orWhere('per_tipo_usuario', 5)
-            ->get();
+        ->where('per_tipo_usuario', 2)
+        ->orWhere('per_tipo_usuario', 3)
+        ->orWhere('per_tipo_usuario', 10)
+        ->get();
         $participante = ExtParticipante::find($id);
         return view('extension/participante.show')
             ->with('docentes', $docentes)
@@ -871,8 +859,6 @@ class ExtensionController extends Controller
             'dop_estado_civil' => 'required',
             'dop_id_pais' => 'required',
             'dop_id_municipio' => 'required',
-            'dop_correo_personal' => 'required',
-            'dop_direccion' => 'required',
         ];
         $message = [
             'dop_id_docente.required' => 'El campo docente es requerido',
@@ -881,8 +867,6 @@ class ExtensionController extends Controller
             'dop_estado_civil.required' => 'El campo estado civil es requerido',
             'dop_id_pais.required' => 'El campo país es requerido',
             'dop_id_municipio.required' => 'El campo municipio es requerido',
-            'dop_correo_personal.required' => 'El campo correo personal es requerido',
-            'dop_direccion.required' => 'El campo dirección es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -951,8 +935,6 @@ class ExtensionController extends Controller
             'extprex_codigo_organizacional' => 'required',
             'extprex_codigo_pr' => 'required',
             'extprex_nombre_pr' => 'required',
-            'extprex_descripcion_pr' => 'required',
-            'extprex_valor_pr' => 'required',
             'extprex_id_area_extension' => 'required|not_in:0',
             'extprex_fecha_inicio' => 'required',
             'extprex_fecha_final' => 'required',
@@ -967,8 +949,6 @@ class ExtensionController extends Controller
             'extprex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
             'extprex_codigo_pr.required' => 'El campo código proyecto es requerido',
             'extprex_nombre_pr.required' => 'El campo nombre proyecto es requerido',
-            'extprex_descripcion_pr.required' => 'El campo descripción es requerido',
-            'extprex_valor_pr.required' => 'El campo valor proyecto es requerido',
             'extprex_id_area_extension.required' => 'El campo area extensión es requerido',
             'extprex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
             'extprex_fecha_final.required' => 'El campo fecha final es requerido',
@@ -1014,7 +994,7 @@ class ExtensionController extends Controller
             $file = $request->file('extprex_soporte');
             $evidencia_proyecto_extension = $request->get('extprex_fecha_inicio').'_'.$request->get('extprex_nombre_pr').'.' . $file->extension();
 
-            $ruta = public_path('datos/proyecto-extension/' . $evidencia_proyecto_extension);
+            $ruta = public_path('datos/extension-internacionalizacion/proyecto/' . $evidencia_proyecto_extension);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -1023,7 +1003,7 @@ class ExtensionController extends Controller
                 return back()->withInput();
             }
         } 
-        $proyectoextension->extprex_soporte = $request->get('extprex_soporte');
+        $proyectoextension->extprex_soporte = $evidencia_proyecto_extension;
 
         $proyectoextension->save();
         Alert::success('Exitoso', 'El proyecto de extensión se ha registrado con exito');
@@ -1084,8 +1064,6 @@ class ExtensionController extends Controller
             'extprex_codigo_organizacional' => 'required',
             'extprex_codigo_pr' => 'required',
             'extprex_nombre_pr' => 'required',
-            'extprex_descripcion_pr' => 'required',
-            'extprex_valor_pr' => 'required',
             'extprex_id_area_extension' => 'required|not_in:0',
             'extprex_fecha_inicio' => 'required',
             'extprex_fecha_final' => 'required',
@@ -1100,8 +1078,6 @@ class ExtensionController extends Controller
             'extprex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
             'extprex_codigo_pr.required' => 'El campo código proyecto es requerido',
             'extprex_nombre_pr.required' => 'El campo nombre proyecto es requerido',
-            'extprex_descripcion_pr.required' => 'El campo descripción es requerido',
-            'extprex_valor_pr.required' => 'El campo valor proyecto es requerido',
             'extprex_id_area_extension.required' => 'El campo area extensión es requerido',
             'extprex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
             'extprex_fecha_final.required' => 'El campo fecha final es requerido',
@@ -1147,11 +1123,12 @@ class ExtensionController extends Controller
         $proyectoextension->extprex_cantidad_condicion = $request->get('extprex_cantidad_condicion');
         $proyectoextension->extprex_id_poblacion_grupo = $request->get('extprex_id_poblacion_grupo');
         $proyectoextension->extprex_cantidad_grupo = $request->get('extprex_cantidad_grupo');
+
         if ($request->file('extprex_soporte')) {
             $file = $request->file('extprex_soporte');
             $evidencia_proyecto_extension = $request->get('extprex_fecha_inicio').'_'.$request->get('extprex_nombre_pr').'.' . $file->extension();
 
-            $ruta = public_path('datos/proyecto-extension/' . $evidencia_proyecto_extension);
+            $ruta = public_path('datos/extension-internacionalizacion/proyecto/' . $evidencia_proyecto_extension);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -1162,7 +1139,8 @@ class ExtensionController extends Controller
         }else{
             $evidencia_proyecto_extension = $proyectoext->extprex_soporte;
         }
-        $proyectoextension->extprex_soporte = $request->get('extprex_soporte');
+
+        $proyectoextension->extprex_soporte = $evidencia_proyecto_extension;
 
         $proyectoextension->save();
         Alert::success('Exitoso', 'El proyecto de extensión se ha actualizado con exito');
@@ -1202,8 +1180,6 @@ class ExtensionController extends Controller
             'extseex_codigo_organizacional' => 'required',
             'extseex_codigo_ser' => 'required',
             'extseex_nombre_ser' => 'required',
-            'extseex_descripcion_ser' => 'required',
-            'extseex_valor_ser' => 'required',
             'extseex_id_area_extension' => 'required|not_in:0',
             'extseex_fecha_inicio' => 'required',
             'extseex_fecha_final' => 'required',
@@ -1218,8 +1194,6 @@ class ExtensionController extends Controller
             'extseex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
             'extseex_codigo_ser.required' => 'El campo código proyecto es requerido',
             'extseex_nombre_ser.required' => 'El campo nombre proyecto es requerido',
-            'extseex_descripcion_ser.required' => 'El campo descripción es requerido',
-            'extseex_valor_ser.required' => 'El campo valor proyecto es requerido',
             'extseex_id_area_extension.required' => 'El campo area extensión es requerido',
             'extseex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
             'extseex_fecha_final.required' => 'El campo fecha final es requerido',
@@ -1267,7 +1241,7 @@ class ExtensionController extends Controller
             $file = $request->file('extseex_soporte');
             $evidencia_servicio_extension = $request->get('extseex_fecha_inicio').'_'.$request->get('extseex_nombre_ser').'.' . $file->extension();
 
-            $ruta = public_path('datos/servicio-extension/' . $evidencia_servicio_extension);
+            $ruta = public_path('datos/extension-internacionalizacion/servicio/' . $evidencia_servicio_extension);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -1275,8 +1249,10 @@ class ExtensionController extends Controller
                 Alert::warning('Los formatos admitidos son .zip y .rar');
                 return back()->withInput();
             }
+        }else{
+            $evidencia_servicio_extension = "";
         } 
-        $servicioextension->extseex_soporte = $request->get('extseex_soporte');
+        $servicioextension->extseex_soporte = $evidencia_servicio_extension;
 
         $servicioextension->save();
         Alert::success('Exitoso', 'El servicio de extensión se ha registrado con exito');
@@ -1333,8 +1309,6 @@ class ExtensionController extends Controller
             'extseex_codigo_organizacional' => 'required',
             'extseex_codigo_ser' => 'required',
             'extseex_nombre_ser' => 'required',
-            'extseex_descripcion_ser' => 'required',
-            'extseex_valor_ser' => 'required',
             'extseex_id_area_extension' => 'required|not_in:0',
             'extseex_fecha_inicio' => 'required',
             'extseex_fecha_final' => 'required',
@@ -1349,8 +1323,6 @@ class ExtensionController extends Controller
             'extseex_codigo_organizacional.required' => 'El campo código organizacional es requerido',
             'extseex_codigo_ser.required' => 'El campo código proyecto es requerido',
             'extseex_nombre_ser.required' => 'El campo nombre proyecto es requerido',
-            'extseex_descripcion_ser.required' => 'El campo descripción es requerido',
-            'extseex_valor_ser.required' => 'El campo valor proyecto es requerido',
             'extseex_id_area_extension.required' => 'El campo area extensión es requerido',
             'extseex_fecha_inicio.required' => 'El campo fecha inicio es requerido',
             'extseex_fecha_final.required' => 'El campo fecha final es requerido',
@@ -1402,7 +1374,7 @@ class ExtensionController extends Controller
             $file = $request->file('extseex_soporte');
             $evidencia_servicio_extension = $request->get('extseex_fecha_inicio').'_'.$request->get('extseex_nombre_ser').'.' . $file->extension();
 
-            $ruta = public_path('datos/servicio-extension/' . $evidencia_servicio_extension);
+            $ruta = public_path('datos/extension-internacionalizacion/servicio/' . $evidencia_servicio_extension);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -1443,7 +1415,6 @@ class ExtensionController extends Controller
             'extrefoin_tipo_evento' => 'required|not_in:0',
             'extrefoin_tipo_modalidad' => 'required|not_in:0',
             'extrefoin_fecha' => 'required',
-            'extrefoin_soporte' => 'required',
         ];
         $message = [
             'extrefoin_year.required' => 'El campo año es requerido',
@@ -1454,7 +1425,6 @@ class ExtensionController extends Controller
             'extrefoin_tipo_evento.required' => 'El campo tipo evento es requerido',
             'extrefoin_tipo_modalidad.required' => 'El campo tipo modalidad es requerido',
             'extrefoin_fecha.required' => 'El campo fecha es requerido',
-            'extrefoin_soporte.required' => 'El campo soporte es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -1472,7 +1442,7 @@ class ExtensionController extends Controller
             $file = $request->file('extrefoin_soporte');
             $name_registro = $request->get('extrefoin_year') . '_' . $request->get('extrefoin_actividad') . '.' . $file->extension();
 
-            $ruta = public_path('datos/registro-fotografico/' . $name_registro);
+            $ruta = public_path('datos/extension-internacionalizacion/registro-fotografico/' . $name_registro);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -1513,7 +1483,6 @@ class ExtensionController extends Controller
             'extrefoin_tipo_evento' => 'required|not_in:0',
             'extrefoin_tipo_modalidad' => 'required|not_in:0',
             'extrefoin_fecha' => 'required',
-            'extrefoin_soporte' => 'required',
         ];
         $message = [
             'extrefoin_year.required' => 'El campo año es requerido',
@@ -1524,7 +1493,6 @@ class ExtensionController extends Controller
             'extrefoin_tipo_evento.required' => 'El campo tipo evento es requerido',
             'extrefoin_tipo_modalidad.required' => 'El campo tipo modalidad es requerido',
             'extrefoin_fecha.required' => 'El campo fecha es requerido',
-            'extrefoin_soporte.required' => 'El campo soporte es requerido',
         ];
         $this->validate($request, $rules, $message);
 
@@ -1546,7 +1514,7 @@ class ExtensionController extends Controller
             $file = $request->file('extrefoin_soporte');
             $name_registro = $request->get('extrefoin_year') . '_' . $request->get('extrefoin_actividad') . '.' . $file->extension();
 
-            $ruta = public_path('datos/registro-fotografico/' . $name_registro);
+            $ruta = public_path('datos/extension-internacionalizacion/registro-fotografico/' . $name_registro);
 
             if ($file->extension() == 'zip' || $file->extension() == 'rar') {
                 copy($file, $ruta);
@@ -1579,12 +1547,14 @@ class ExtensionController extends Controller
             'exsered_year' => 'required',
             'exsered_periodo' => 'required',
             'exsered_ies' => 'required',
+            'exsered_caracter' => 'required|not_in:0',
             'exsered_fecha' => 'required',
         ];
         $message = [
             'exsered_year.required' => 'El campo año es requerido',
             'exsered_periodo.required' => 'El campo periodo es requerido',
             'exsered_ies.required' => 'El campo IES es requerido',
+            'exsered_caracter.required' => 'El campo cáracter es requerido',
             'exsered_fecha.required' => 'El campo fecha es requerido',
         ];
         $this->validate($request,$rules,$message);
@@ -1645,12 +1615,14 @@ class ExtensionController extends Controller
             'exsered_year' => 'required',
             'exsered_periodo' => 'required',
             'exsered_ies' => 'required',
+            'exsered_caracter' => 'required|not_in:0',
             'exsered_fecha' => 'required',
         ];
         $message = [
             'exsered_year.required' => 'El campo año es requerido',
             'exsered_periodo.required' => 'El campo periodo es requerido',
             'exsered_ies.required' => 'El campo IES es requerido',
+            'exsered_caracter.required' => 'El campo cáracter es requerido',
             'exsered_fecha.required' => 'El campo fecha es requerido',
         ];
 
@@ -1726,13 +1698,17 @@ class ExtensionController extends Controller
         $rules = [
             'exseor_year' => 'required',
             'exseor_periodo' => 'required',
+            'exseor_tipo' => 'required|not_in:0',
             'exseor_nombre' => 'required',
+            'exseor_caracter' => 'required|not_in:0',
             'exseor_fecha' => 'required',
         ];
         $message = [
             'exseor_year.required' => 'El campo año es requerido',
             'exseor_periodo.required' => 'El campo periodo es requerido',
+            'exseor_tipo.required' => 'El campo tipo es requerido',
             'exseor_nombre.required' => 'El campo nombre es requerido',
+            'exseor_caracter.required' => 'El campo cáracter es requerido',
             'exseor_fecha.required' => 'El campo fecha es requerido',
         ];
         $this->validate($request,$rules,$message);
@@ -1883,10 +1859,14 @@ class ExtensionController extends Controller
         $rules = [
             'exincu_year' => 'required',
             'exincu_periodo' => 'required',
+            'exincu_id_asignatura' => 'required|not_in:0',
+            'exincu_id_docente' => 'required|not_in:0',
         ];
         $message = [
             'exincu_year.required' => 'El campo año es requerido',
             'exincu_periodo.required' => 'El campo periodo es requerido',
+            'exincu_id_asignatura.required' => 'El campo asignatura es requerido',
+            'exincu_id_docente.required' => 'El campo docente es requerido',
         ];
         $this->validate($request,$rules,$message);
 
@@ -1942,10 +1922,14 @@ class ExtensionController extends Controller
         $rules = [
             'exincu_year' => 'required',
             'exincu_periodo' => 'required',
+            'exincu_id_asignatura' => 'required|not_in:0',
+            'exincu_id_docente' => 'required|not_in:0',
         ];
         $message = [
             'exincu_year.required' => 'El campo año es requerido',
             'exincu_periodo.required' => 'El campo periodo es requerido',
+            'exincu_id_asignatura.required' => 'El campo asignatura es requerido',
+            'exincu_id_docente.required' => 'El campo docente es requerido',
         ];
         $this->validate($request,$rules,$message);
 

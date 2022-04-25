@@ -60,7 +60,7 @@
                     </div>
                     <div class="col-md-6" id="administrativo">
                         <label for="">Nombre completo</label>
-                        <select class="form-control" name="prac_id_administrativo" id="prac_id_administrativo">
+                        <select class="js-example-placeholder-single form-control" name="prac_id_administrativo" id="prac_id_administrativo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($administrativos as $administrativo)
                                 <option value="{{ $administrativo->id }}" {{$movilidad->movi_id_persona == $administrativo->id ? 'selected' : ''}}>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="col-md-6" id="docente">
                         <label for="">Nombre completo</label>
-                        <select class="form-control" name="prac_id_docente" id="prac_id_docente">
+                        <select class="js-example-placeholder-single form-control" name="prac_id_docente" id="prac_id_docente">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($personas as $persona)
                                 <option value="{{ $persona->id }}" {{$movilidad->movi_id_persona == $persona->id ? 'selected' : ''}}>
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-md-6" id="estudiante">
                         <label for="">Nombre completo</label>
-                        <select class="form-control" name="prac_id_estudiante" id="prac_id_estudiante">
+                        <select class="js-example-placeholder-single form-control" name="prac_id_estudiante" id="prac_id_estudiante">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($estudiantes as $estudiante)
                                 <option value="{{ $estudiante->id }}" {{$movilidad->movi_id_persona == $estudiante->id ? 'selected' : ''}}>
@@ -140,7 +140,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <label for="movi_observacion">Observaciones *</label>
+                        <label for="movi_observacion">Observaciones (Opcional)</label>
                         <input class="form-control @error('movi_observacion') is-invalid @enderror"
                             name="movi_observacion" id="movi_observacion" value="{{$movilidad->movi_observacion}}"
                             type="text" autocomplete="movi_observacion" autofocus>

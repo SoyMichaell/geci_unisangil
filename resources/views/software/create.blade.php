@@ -161,7 +161,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="sof_fecha_actualizar">{{ __('Fecha ultima actualización *') }}</label>
+                        <label for="sof_fecha_actualizar">{{ __('Fecha ultima actualización (Opcional)') }}</label>
                         <input id="sof_fecha_actualizar" type="date"
                             class="form-control @error('sof_fecha_actualizar') is-invalid @enderror" name="sof_fecha_actualizar"
                             value="{{ old('sof_fecha_actualizar') }}" autocomplete="sof_fecha_actualizar" autofocus>
@@ -172,7 +172,7 @@
                         @enderror
                     </div>
                     <div class="col-md-4">
-                        <label for="sof_fecha_instalacion">{{ __('Fecha instalación *') }}</label>
+                        <label for="sof_fecha_instalacion">{{ __('Fecha instalación (Opcional)') }}</label>
                         <input id="sof_fecha_instalacion" type="date"
                             class="form-control @error('sof_fecha_instalacion') is-invalid @enderror" name="sof_fecha_instalacion"
                             value="{{ old('sof_fecha_instalacion') }}" autocomplete="sof_fecha_instalacion" autofocus>

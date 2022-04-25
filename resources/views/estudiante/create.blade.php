@@ -389,6 +389,7 @@
                             <option value="egresado">Egresado</option>
                             <option value="egresado-no-graduado">Egresado no Graduado</option>
                             <option value="no-renovacion-matricula">No renovación matricula</option>
+                            <option value="no-aplica">No aplica</option>
                         </select>
                         @error('estu_estado')
                             <span class="invalid-feedback" role="alert">

@@ -224,7 +224,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->certificado_esp == "" ? '' : asset('estudios/'.$docente->certificado_esp) ) : asset('estudios/'.$docente->certificado_esp) }}">ver. {{$docente->certificado_esp}}</a>
+                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->certificado_esp == "" ? '' : asset('datos/docente/estudios/'.$docente->certificado_esp) ) : asset('datos/docente/estudios/'.$docente->certificado_esp) }}">ver. {{$docente->certificado_esp}}</a>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -252,7 +252,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->certificado_dip == "" ? '' : asset('estudios/'.$docente->certificado_dip) ) : asset('estudios/'.$docente->certificado_dip) }}">ver. {{$docente->certificado_dip}}</a>
+                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->certificado_dip == "" ? '' : asset('datos/docente/estudios/'.$docente->certificado_dip) ) : asset('estudios/'.$docente->certificado_dip) }}">ver. {{$docente->certificado_dip}}</a>
                         </div>
                     </div>
                     <div class="row mb-3">
@@ -438,7 +438,7 @@
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
-                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->soporte_hoja_vida == "" ? '' : asset('estudios/'.$docente->soporte_hoja_vida) ) : asset('estudios/'.$docente->soporte_hoja_vida) }}">ver. {{$docente->soporte_hoja_vida}}</a>
+                            <a target="_blank" href="{{$cuenta > 0 ? ($docente->soporte_hoja_vida == "" ? '' : asset('datos/docente/estudios/'.$docente->soporte_hoja_vida) ) : asset('datos/docente/estudios/'.$docente->soporte_hoja_vida) }}">ver. {{$docente->soporte_hoja_vida}}</a>
                         </div>
                     </div>
                     <div class="row mb-0">

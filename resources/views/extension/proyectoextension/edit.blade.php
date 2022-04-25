@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_year">Año</label>
+                        <label for="extprex_year">Año *</label>
                         <input class="form-control @error('extprex_year') is-invalid @enderror" name="extprex_year"
                             id="extprex_year" value="{{$proyectoextension->extprex_year}}" type="number"
                             autocomplete="extprex_year" autofocus>
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_semestre">Semestre</label>
+                        <label for="extprex_semestre">Semestre *</label>
                         <input class="form-control @error('extprex_semestre') is-invalid @enderror"
                             name="extprex_semestre" id="extprex_semestre" value="{{$proyectoextension->extprex_semestre}}"
                             type="number" autocomplete="extprex_semestre" autofocus>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_codigo_organizacional">Código unidad organizacional</label>
+                        <label for="extprex_codigo_organizacional">Código unidad organizacional *</label>
                         <input class="form-control @error('extprex_codigo_organizacional') is-invalid @enderror"
                             name="extprex_codigo_organizacional" id="extprex_codigo_organizacional"
                             value="{{$proyectoextension->extprex_codigo_organizacional}}" type="text"
@@ -56,7 +56,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_codigo_pr">Código proyecto</label>
+                        <label for="extprex_codigo_pr">Código proyecto *</label>
                         <input class="form-control @error('extprex_codigo_pr') is-invalid @enderror"
                             name="extprex_codigo_pr" id="extprex_codigo_pr" value="{{$proyectoextension->extprex_codigo_pr}}"
                             type="text" autocomplete="extprex_codigo_pr" autofocus>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_nombre_pr">Nombre proyecto</label>
+                        <label for="extprex_nombre_pr">Nombre proyecto *</label>
                         <input class="form-control @error('extprex_nombre_pr') is-invalid @enderror"
                             name="extprex_nombre_pr" id="extprex_nombre_pr" value="{{$proyectoextension->extprex_nombre_pr}}"
                             type="text" autocomplete="extprex_nombre_pr" autofocus>
@@ -80,7 +80,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_descripcion_pr">Descripción</label>
+                        <label for="extprex_descripcion_pr">Descripción (Opcional)</label>
                         <textarea class="form-control" name="extprex_descripcion_pr" id="extprex_descripcion_pr"
                             cols="30" rows="10">{{$proyectoextension->extprex_descripcion_pr}}</textarea>
                         @error('extprex_descripcion_pr')
@@ -92,7 +92,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_valor_pr">Valor proyecto</label>
+                        <label for="extprex_valor_pr">Valor proyecto (Opcional)</label>
                         <input class="form-control @error('extprex_valor_pr') is-invalid @enderror"
                             name="extprex_valor_pr" id="extprex_valor_pr" value="{{$proyectoextension->extprex_valor_pr}}"
                             type="text" autocomplete="extprex_valor_pr" autofocus>
@@ -103,7 +103,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_id_area_extension">Área de extensión</label>
+                        <label for="extprex_id_area_extension">Área de extensión *</label>
                         <select class="form-control" name="extprex_id_area_extension" id="extprex_id_area_extension">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($areas as $area)
@@ -119,7 +119,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_fecha_inicio">Fecha inicio</label>
+                        <label for="extprex_fecha_inicio">Fecha inicio *</label>
                         <input class="form-control @error('extprex_fecha_inicio') is-invalid @enderror"
                             name="extprex_fecha_inicio" id="extprex_fecha_inicio"
                             value="{{$proyectoextension->extprex_fecha_inicio}}" type="date" autocomplete="extprex_fecha_inicio"
@@ -131,7 +131,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_fecha_final">Fecha final</label>
+                        <label for="extprex_fecha_final">Fecha final *</label>
                         <input class="form-control @error('extprex_fecha_final') is-invalid @enderror"
                             name="extprex_fecha_final" id="extprex_fecha_final"
                             value="{{$proyectoextension->extprex_fecha_final}}" type="date" autocomplete="extprex_fecha_final"
@@ -146,7 +146,7 @@
                 <h4 class="tile"><i class="fa fa-cubes"></i> Datos contacto</h4>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_nombre_contacto">Nombre (s)</label>
+                        <label for="extprex_nombre_contacto">Nombre (s) *</label>
                         <input class="form-control @error('extprex_nombre_contacto') is-invalid @enderror"
                             name="extprex_nombre_contacto" id="extprex_nombre_contacto"
                             value="{{$proyectoextension->extprex_nombre_contacto}}" type="text"
@@ -158,7 +158,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_apellido_contacto">Apellido (s)</label>
+                        <label for="extprex_apellido_contacto">Apellido (s) *</label>
                         <input class="form-control @error('extprex_apellido_contacto') is-invalid @enderror"
                             name="extprex_apellido_contacto" id="extprex_apellido_contacto"
                             value="{{$proyectoextension->extprex_apellido_contacto}}" type="text"
@@ -172,7 +172,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extprex_telefono_contacto">Telefono</label>
+                        <label for="extprex_telefono_contacto">Telefono *</label>
                         <input class="form-control @error('extprex_telefono_contacto') is-invalid @enderror"
                             name="extprex_telefono_contacto" id="extprex_telefono_contacto"
                             value="{{$proyectoextension->extprex_telefono_contacto}}" type="number"
@@ -184,7 +184,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extprex_correo_contacto">Correo electronico</label>
+                        <label for="extprex_correo_contacto">Correo electronico *</label>
                         <input class="form-control @error('extprex_correo_contacto') is-invalid @enderror"
                             name="extprex_correo_contacto" id="extprex_correo_contacto"
                             value="{{$proyectoextension->extprex_correo_contacto}}" type="email"
@@ -438,7 +438,7 @@
                             name="extprex_soporte" id="extprex_soporte"
                             value="{{ old('extprex_soporte') }}" type="file"
                             autocomplete="extprex_soporte" autofocus>
-                        <p><small>Soporte: {{$proyectoextension->extprex_soporte}}</small></p>
+                        <p><small>Soporte: <a href="{{asset('datos/extension-internacionalizacion/proyecto/'.$proyectoextension->extprex_soporte)}}">{{$proyectoextension->extprex_soporte}}</a></small></p>
                         @error('extprex_soporte')
                             <span extprex_semestre="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

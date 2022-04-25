@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Programa;
+use App\Models\ProgramaAsignatura;
 use App\Models\TipoUsuario;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -47,6 +48,7 @@ Route::get('/', function () {
             ->where('estu_administrativo', 'Si')
             ->get();
             $tipousuarios = TipoUsuario::all();
+            $asignaturas = ProgramaAsignatura::all();
         return view('home')
         ->with('personas', $personas)
         ->with('docentes', $docentes)
@@ -54,7 +56,8 @@ Route::get('/', function () {
         ->with('egresados', $egresados)
         ->with('administrativos', $administrativos)
         ->with('tipousuarios', $tipousuarios)
-        ->with('directores', $directores);
+        ->with('directores', $directores)
+        ->with('asignaturas', $asignaturas);
     } else {
         return view('auth/login');
     }

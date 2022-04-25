@@ -79,7 +79,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extseex_descripcion_ser">Descripción *</label>
+                        <label for="extseex_descripcion_ser">Descripción (Opcional)</label>
                         <textarea class="form-control" name="extseex_descripcion_ser" id="extseex_descripcion_ser"
                             cols="30" rows="10"></textarea>
                         @error('extseex_descripcion_ser')
@@ -91,7 +91,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extseex_valor_ser">Valor servicio *</label>
+                        <label for="extseex_valor_ser">Valor servicio (Opcional)</label>
                         <input class="form-control @error('extseex_valor_ser') is-invalid @enderror"
                             name="extseex_valor_ser" id="extseex_valor_ser" value="{{ old('extseex_valor_ser') }}"
                             type="text" autocomplete="extseex_valor_ser" autofocus>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-md-6">
                         <label for="extseex_id_area_extension">Área de extensión *</label>
-                        <select class="form-control" name="extseex_id_area_extension" id="extseex_id_area_extension">
+                        <select class="form-control @error('extseex_id_area_extension') is-invalid @enderror" name="extseex_id_area_extension" id="extseex_id_area_extension">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($areas as $area)
                                 <option value="{{ $area->id }}">{{ $area->coarex_nombre }}</option>
@@ -197,7 +197,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extseex_costo">¿Tiene costo? *</label>
+                        <label for="extseex_costo">¿Tiene costo?</label>
                         <select class="form-control" name="extseex_costo" id="extseex_costo">
                             <option value="">---- SELECCIONE ----</option>
                             <option value="Si">Si</option>
@@ -210,7 +210,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extseex_criterio_elegibilidad">Criterio de elegibilidad *</label>
+                        <label for="extseex_criterio_elegibilidad">Criterio de elegibilidad</label>
                         <textarea class="form-control" name="extseex_criterio_elegibilidad" id="extseex_criterio_elegibilidad" cols="30" rows="10"></textarea>
                         @error('extseex_criterio_elegibilidad')
                             <span class="invalid-feedback" role="alert">

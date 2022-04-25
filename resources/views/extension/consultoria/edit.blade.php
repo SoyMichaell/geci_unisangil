@@ -20,7 +20,7 @@
                 @method('PUT')
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_year">Año</label>
+                        <label for="extcon_year">Año *</label>
                         <input class="form-control @error('extcon_year') is-invalid @enderror" name="extcon_year"
                             id="extcon_year" value="{{$consultoria->extcon_year}}" type="number" autocomplete="extcon_year"
                             autofocus>
@@ -31,7 +31,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_semestre">Semestre</label>
+                        <label for="extcon_semestre">Semestre *</label>
                         <input class="form-control @error('extcon_semestre') is-invalid @enderror" name="extcon_semestre"
                             id="extcon_semestre" value="{{$consultoria->extcon_semestre}}" type="number"
                             autocomplete="extcon_semestre" autofocus>
@@ -44,7 +44,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_codigo_consultoria">Código consultoria</label>
+                        <label for="extcon_codigo_consultoria">Código consultoria *</label>
                         <input class="form-control @error('extcon_codigo_consultoria') is-invalid @enderror"
                             name="extcon_codigo_consultoria" id="extcon_codigo_consultoria"
                             value="{{$consultoria->extcon_codigo_consultoria}}" type="text"
@@ -56,7 +56,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_descripcion">Descripción</label>
+                        <label for="extcon_descripcion">Descripción *</label>
                         <textarea class="form-control" name="extcon_descripcion" id="extcon_descripcion" cols="30" rows="10">{{$consultoria->extcon_descripcion}}</textarea>
                         @error('extcon_descripcion')
                             <span class="invalid-feedback" role="alert">
@@ -67,11 +67,11 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_id_cine_campo">ID CINE Detallado</label>
-                        <select class="form-control" name="extcon_id_cine_campo" id="extcon_id_cine_campo">
+                        <label for="extcon_id_cine_campo">ID CINE Detallado *</label>
+                        <select class="form-control js-example-placeholder-single" name="extcon_id_cine_campo" id="extcon_id_cine_campo">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($cinedetallados as $cinedetallado)
-                                <option value="{{$cinedetallado->id}}" {{$cinedetallado->id == $consultoria->extcon_id_cine_campo ? 'selected' : ''}}>{{$cinedetallado->cocide_nombre}}</option>
+                                <option value="{{$cinedetallado->id}}" {{$cinedetallado->id == $consultoria->extcon_id_cine_campo ? 'selected' : ''}}>{{$cinedetallado->id.'. '.$cinedetallado->cocide_nombre}}</option>
                             @endforeach
                         </select>
                         @error('extcon_id_cine_campo')
@@ -81,7 +81,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_nombre_entidad">Nombre entidad</label>
+                        <label for="extcon_nombre_entidad">Nombre entidad </label>
                         <input class="form-control @error('extcon_nombre_entidad') is-invalid @enderror"
                             name="extcon_nombre_entidad" id="extcon_nombre_entidad"
                             value="{{$consultoria->extcon_nombre_entidad}}" type="text"
@@ -95,7 +95,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="ext_sector_consultoria">Sector consultoria</label>
+                        <label for="ext_sector_consultoria">Sector consultoria </label>
                         <select class="form-control" name="ext_sector_consultoria" id="ext_sector_consultoria">
                             <option value="">---- SELECCIONE ----</option>
                             @foreach ($sectores as $sector)
@@ -122,7 +122,7 @@
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-6">
-                        <label for="extcon_fecha_inicio">Fecha de inicio</label>
+                        <label for="extcon_fecha_inicio">Fecha de inicio *</label>
                         <input class="form-control @error('extcon_fecha_inicio') is-invalid @enderror"
                             name="extcon_fecha_inicio" id="extcon_fecha_inicio" value="{{$consultoria->extcon_fecha_inicio}}"
                             type="date" autocomplete="extcon_fecha_inicio" autofocus>
@@ -133,7 +133,7 @@
                         @enderror
                     </div>
                     <div class="col-md-6">
-                        <label for="extcon_fecha_fin">Fecha fin</label>
+                        <label for="extcon_fecha_fin">Fecha fin *</label>
                         <input class="form-control @error('extcon_fecha_fin') is-invalid @enderror"
                             name="extcon_fecha_fin" id="extcon_fecha_fin" value="{{$consultoria->extcon_fecha_fin}}"
                             type="date" autocomplete="extcon_fecha_fin" autofocus>
